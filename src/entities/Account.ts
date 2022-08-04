@@ -1,3 +1,7 @@
+export type GetAccountControllerInput = {
+  id: string;
+};
+
 export type GetAccountControllerOutput = {
   id: string;
   name: string;
