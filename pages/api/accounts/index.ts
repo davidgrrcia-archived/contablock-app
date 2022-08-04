@@ -1,26 +1,18 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import * as accountUseCase from "../../../src/usecases";
-
-type AccountOutput = {
-  name: string;
-};
-
-type ListAccountsOutput = {
-  accounts: AccountOutput[];
-};
-
-type DataError = {
-  statusCode: number;
-  message: string;
-};
+import * as entities from "../../../src/entities/Account";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ListAccountsOutput | AccountOutput | DataError>
+  res: NextApiResponse<
+    | entities.ListAccountsControllerOutput
+    | entities.DataError
+  >
 ) {
   switch (req.method) {
-   
+    case "GET":
+      return listAccounts(req, res);
     default:
       return res
         .status(400)
@@ -30,15 +22,22 @@ export default async function handler(
 
 const listAccounts = async (
   req: NextApiRequest,
-  res: NextApiResponse<ListAccountsOutput | DataError>
+  res: NextApiResponse<
+    entities.ListAccountsControllerOutput | entities.DataError
+  >
 ) => {
   try {
     const accounts = await accountUseCase.listAccounts();
-    const items: AccountOutput[] = accounts.map((account) => ({
-      name: account.name,
-    }));
+    const items: entities.GetAccountControllerOutput[] = accounts.map(
+      (account) => ({
+        id: account.id,
+        name: account.name,
+        type: account.type,
+        kind: account.kind,
+      })
+    ); //todo: think if do this in the controller or the usecase
 
-    return res.status(200).send({ accounts: items });
+    return res.status(200).send({ items: items });
   } catch (err: any) {
     return res.status(500).json({ statusCode: 500, message: err.message });
   }

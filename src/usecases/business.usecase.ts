@@ -11,17 +11,17 @@ export const ListBusinessUseCase = (businessRepository: BusinessRepository) => a
   return business;
 };
 
-export const CreateBusinessUseCase = (businessRepository: BusinessRepository) => async (businessInput: businessEntities.Business) => {
+export const CreateBusinessUseCase = (businessRepository: BusinessRepository) => async (createBusinessControllerInput: businessEntities.CreateBusinessControllerInput) => {
   
   // TODO add validators and check if the business already exists
   
-  if (businessInput.id === "" || businessInput.id === undefined) {
-    businessInput.id = uid();
+  if (createBusinessControllerInput.id === "" || createBusinessControllerInput.id === undefined) {
+    createBusinessControllerInput.id = uid();
   }
-  businessInput.state = "CREATED";
-  businessInput.creationDate = new Date();
-  businessInput.lastUpdate =  businessInput.creationDate
-  const business: businessEntities.BusinessOutput = await businessRepository.create(businessInput);
+  createBusinessControllerInput.state = "CREATED";
+  createBusinessControllerInput.creationDate = new Date();
+  createBusinessControllerInput.lastUpdate =  createBusinessControllerInput.creationDate
+  const business: businessEntities.BusinessOutput = await businessRepository.create(createBusinessControllerInput);
   
   return business;
 };
