@@ -17,7 +17,7 @@ const entryRepository = new EntryPostgres();
 const transactionRepository = new TransactionPostgres();
 
 // UseCases
-export const getAccount = account.GetAccountUseCase(accountRepository);
+export const getAccountUseCase = account.GetAccountUseCase(accountRepository);
 export const listAccountsUseCase =
   account.ListAccountsUseCase(accountRepository);
 

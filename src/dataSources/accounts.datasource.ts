@@ -1,70 +1,44 @@
-import Account from "../entities/Account";
+import * as entities from "../entities/Account";
 import AccountRepository from "../repositories/account.repository";
 import { promisePool } from "../database";
 
 export default class AccountPostgres implements AccountRepository {
-  public async get(id: string): Promise<Account> {
+  public async get(
+    input: entities.GetAccountStorageInput
+  ): Promise<entities.GetAccountStorageOutput> {
     try {
       const sqlQuery = "SELECT * FROM accounts WHERE id = ?";
-      const [rows] = await promisePool.query(sqlQuery, [id]);
-      const result=Object.values(rows);
+      const [rows] = await promisePool.query(sqlQuery, [input.id]);
+      const result = Object.values(rows);
 
-      const account: Account = {
+      const getAccountStorageOutput: entities.GetAccountStorageOutput = {
         id: result[0]["id"],
         name: result[0]["name"],
         type: result[0]["type"],
         kind: result[0]["kind"],
       };
 
-      return account;
+      return getAccountStorageOutput;
     } catch (e) {
       throw e;
     }
   }
 
-  public async list(): Promise<Account[]> {
+  public async list(): Promise<entities.ListAccountsStorageOutput> {
     try {
       const sqlQuery = "SELECT * FROM accounts";
       const [rows] = await promisePool.query(sqlQuery);
-      const result=Object.values(rows);
+      const result = Object.values(rows);
 
-      let accounts: Account[] = [];
+      const listAccountsStorageOutput: entities.ListAccountsStorageOutput = {
+        items: result.map((item) => ({
+          id: item["id"],
+          name: item["name"],
+          type: item["type"],
+          kind: item["kind"],
+        })),
 
-      for (let i = 0; i < result.length; i++) {
-        let a: Account = {
-          id: result[i]["id"],
-          name: result[i]["name"],
-          type: result[i]["type"],
-          kind: result[i]["kind"],
-        };
-        accounts.push(a);
-      }
-
-      return accounts;
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  public async listByType(type: string): Promise<Account[]> {
-    try {
-      const sqlQuery = "SELECT * FROM accounts WHERE type = ?";
-      const [rows] = await promisePool.query(sqlQuery, [type]);
-      const result=Object.values(rows);
-
-      let accounts: Account[] = [];
-
-      for (let i = 0; i < result.length; i++) {
-        let a: Account = {
-          id: result[i]["id"],
-          name: result[i]["name"],
-          type: result[i]["type"],
-          kind: result[i]["kind"],
-        };
-        accounts.push(a);
-      }
-
-      return accounts;
+      return listAccountsStorageOutput;
     } catch (e) {
       throw e;
     }

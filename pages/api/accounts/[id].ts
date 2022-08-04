@@ -4,9 +4,7 @@ import * as entities from "../../../src/entities/Account";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<
-    entities.GetAccountControllerOutput | entities.DataError
-  >
+  res: NextApiResponse<entities.GetAccountControllerOutput | entities.DataError>
 ) {
   switch (req.method) {
     case "GET":
@@ -20,30 +18,28 @@ export default async function handler(
 
 const getAccountController = async (
   req: NextApiRequest,
-  res: NextApiResponse<
-    entities.GetAccountControllerOutput | entities.DataError
-  >
+  res: NextApiResponse<entities.GetAccountControllerOutput | entities.DataError>
 ) => {
   try {
-    const { id } = req.query;
 
-    if (id !== undefined) {
-      const getAccountControllerInput: entities.GetAccountControllerInput = {
-        id: id[0],
-      };
+    const id: string = req.query.id
+    ? req.query.id as string
+    : "";
+
+    const getAccountUseCaseInput: entities.GetAccountUseCaseInput = {
+      id: id
     }
 
-    const getAccountUseCaseOutput = await accountUseCase.getAccount(getAccountControllerInput);
+    const getAccountUseCaseOutput = await accountUseCase.getAccountUseCase(
+      getAccountUseCaseInput
+    );
 
-    const getAccountControllerOutput: entities.GetAccountControllerOutput =
-      {
-        items: getAccountUseCaseOutput.map((item) => ({
-            id: item.id,
-            name: item.name,
-            type: item.type,
-            kind: item.kind,
-        })),
-      };
+    const getAccountControllerOutput: entities.GetAccountControllerOutput = {
+      id: getAccountUseCaseOutput.id,
+      name: getAccountUseCaseOutput.name,
+      type: getAccountUseCaseOutput.type,
+      kind: getAccountUseCaseOutput.kind,
+    };
 
     return res.status(200).send(getAccountControllerOutput);
   } catch (err: any) {

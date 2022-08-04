@@ -1,7 +1,6 @@
-import Account from "../entities/Account";
+import * as entities from "../entities/Account";
 
 export default interface AccountRepository {
-  get(id: string): Promise<Account>;
-  list(): Promise<Account[]>;
-  listByType(type: string): Promise<Account[]>;
+  get(input: entities.GetAccountStorageInput): Promise<entities.GetAccountStorageOutput>;
+  list(): Promise<entities.ListAccountsStorageOutput>;
 }
