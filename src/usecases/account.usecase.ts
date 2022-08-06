@@ -1,10 +1,11 @@
-import AccountRepository from "../repositories/account.repository";
+import { AccountUseCaseInterface } from "../entities/Account";
 import * as entities from "../entities/Account";
+import AccountStorage from "../dataSources/accounts.datasource";
 
-//TODO: define functions output type
+const accountRepository = new AccountStorage();
 
-export function GetAccountUseCase(accountRepository: AccountRepository) {
-  return async (input: entities.GetAccountUseCaseInput) => {
+export default class AccountUseCase implements AccountUseCaseInterface {
+  public async GetAccountUseCase(input: entities.GetAccountUseCaseInput) {
     if (input.id === "") {
       throw new Error("id is required");
     }
@@ -24,11 +25,9 @@ export function GetAccountUseCase(accountRepository: AccountRepository) {
     };
 
     return getAccountUseCaseOutput;
-  };
-}
+  }
 
-export function ListAccountsUseCase(accountRepository: AccountRepository) {
-  return async () => {
+  public async ListAccountsUseCase() {
     const storedAccounts: entities.ListAccountsStorageOutput =
       await accountRepository.list();
 
@@ -42,5 +41,5 @@ export function ListAccountsUseCase(accountRepository: AccountRepository) {
     };
 
     return listAccountsUseCaseOutput;
-  };
+  }
 }

@@ -1,15 +1,17 @@
-import * as businessEntities from "../entities/Business";
-import BusinessRepository from "../repositories/business.repository";
+import * as entities from "../entities/Business";
+import { BusinessStorageInterface } from "../entities/Business";
 import { promisePool } from "../database";
 
-export default class BusinessPostgres implements BusinessRepository {
-  public async get(id: string): Promise<businessEntities.BusinessOutput> {
+export default class BusinessStorage implements BusinessStorageInterface {
+  public async get(
+    input: entities.GetBusinessStorageInput
+  ): Promise<entities.GetBusinessStorageOutput> {
     try {
       const sqlQuery = "SELECT * FROM business WHERE id = ?";
-      const [rows] = await promisePool.query(sqlQuery, [id]);
+      const [rows] = await promisePool.query(sqlQuery, [input.id]);
       const result = Object.values(rows);
 
-      const business: businessEntities.BusinessOutput = {
+      const getBusinessStorageOutput: entities.GetBusinessStorageOutput = {
         id: result[0]["id"],
         name: result[0]["name"],
         shortDescription: result[0]["short_description"],
@@ -30,51 +32,50 @@ export default class BusinessPostgres implements BusinessRepository {
         lastUpdate: result[0]["last_update"],
       };
 
-      return business;
+      return getBusinessStorageOutput;
     } catch (e) {
       throw e;
     }
   }
 
-  public async list(): Promise<businessEntities.BusinessOutput[]> {
+  public async list(): Promise<entities.ListBusinessStorageOutput> {
     try {
       const sqlQuery = "SELECT * FROM business";
       const [rows] = await promisePool.query(sqlQuery);
       const result = Object.values(rows);
 
-      let business: businessEntities.BusinessOutput[] = [];
+      const listBusinessStorageOutput: entities.ListBusinessStorageOutput = {
+        items: result.map((item) => ({
+          id: item["id"],
+          name: item["name"],
+          shortDescription: item["short_description"],
+          longDescription: item["long_description"],
+          logo: item["logo"],
+          stockPrice: item["stock_price"],
+          urlWebsite: item["url_website"],
+          ceoName: item["ceo_name"],
+          numberOfEmployees: item["number_of_employees"],
+          country: item["country"],
+          nif: item["nif"],
+          fiscalName: item["fiscal_name"],
+          address: item["address"],
+          phone: item["phone"],
+          email: item["email"],
+          state: item["state"],
+          creationDate: item["creation_date"],
+          lastUpdate: item["last_update"],
+        })),
+      };
 
-      for (let i = 0; i < result.length; i++) {
-        let b: businessEntities.BusinessOutput = {
-          id: result[i]["id"],
-          name: result[i]["name"],
-          shortDescription: result[i]["short_description"],
-          longDescription: result[i]["long_description"],
-          logo: result[i]["logo"],
-          stockPrice: result[i]["stock_price"],
-          urlWebsite: result[i]["url_website"],
-          ceoName: result[i]["ceo_name"],
-          numberOfEmployees: result[i]["number_of_employees"],
-          country: result[i]["country"],
-          nif: result[i]["nif"],
-          fiscalName: result[i]["fiscal_name"],
-          address: result[i]["address"],
-          phone: result[i]["phone"],
-          email: result[i]["email"],
-          state: result[i]["state"],
-          creationDate: result[i]["creation_date"],
-          lastUpdate: result[i]["last_update"],
-        };
-        business.push(b);
-      }
-
-      return business;
+      return listBusinessStorageOutput;
     } catch (e) {
       throw e;
     }
   }
 
-  public async create(businessInput: businessEntities.Business): Promise<businessEntities.BusinessOutput> {
+  public async create(
+    input: entities.CreateBusinessStorageInput
+  ): Promise<entities.CreateBusinessStorageOutput> {
     try {
       const sqlQuery =
         "INSERT INTO business (" +
@@ -100,35 +101,41 @@ export default class BusinessPostgres implements BusinessRepository {
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
       await promisePool.query(sqlQuery, [
-        businessInput.id,
-        businessInput.name,
-        businessInput.shortDescription,
-        businessInput.longDescription,
-        businessInput.logo,
-        businessInput.stockPrice,
-        businessInput.urlWebsite,
-        businessInput.ceoName,
-        businessInput.numberOfEmployees,
-        businessInput.country,
-        businessInput.nif,
-        businessInput.fiscalName,
-        businessInput.address,
-        businessInput.phone,
-        businessInput.email,
-        businessInput.state,
-        businessInput.creationDate,
-        businessInput.lastUpdate,
+        input.id,
+        input.name,
+        input.shortDescription,
+        input.longDescription,
+        input.logo,
+        input.stockPrice,
+        input.urlWebsite,
+        input.ceoName,
+        input.numberOfEmployees,
+        input.country,
+        input.nif,
+        input.fiscalName,
+        input.address,
+        input.phone,
+        input.email,
+        input.state,
+        input.creationDate,
+        input.lastUpdate,
       ]);
 
-      const businessOutput: businessEntities.BusinessOutput = await this.get(businessInput.id!);
+      const getBusinessStorageInput: entities.GetBusinessStorageInput = {
+        id: input.id,
+      };
+      const createBusinessStorageOutput: entities.CreateBusinessStorageOutput =
+        await this.get(getBusinessStorageInput);
 
-      return businessOutput;
+      return createBusinessStorageOutput;
     } catch (e) {
       throw e;
     }
   }
 
-  public async update(businessInput: businessEntities.Business): Promise<businessEntities.BusinessOutput> {
+  public async update(
+    input: entities.UpdateBusinessStorageInput
+  ): Promise<entities.UpdateBusinessStorageOutput> {
     try {
       const sqlQuery =
         "UPDATE business SET " +
@@ -147,47 +154,55 @@ export default class BusinessPostgres implements BusinessRepository {
         "phone = ?," +
         "email = ?," +
         "state = ?," +
-        "creation_date = ?," +
         "last_update = ?" +
         " WHERE id = ?";
 
       await promisePool.query(sqlQuery, [
-        businessInput.name,
-        businessInput.shortDescription,
-        businessInput.longDescription,
-        businessInput.logo,
-        businessInput.stockPrice,
-        businessInput.urlWebsite,
-        businessInput.ceoName,
-        businessInput.numberOfEmployees,
-        businessInput.country,
-        businessInput.nif,
-        businessInput.fiscalName,
-        businessInput.address,
-        businessInput.phone,
-        businessInput.email,
-        businessInput.state,
-        businessInput.creationDate,
-        businessInput.lastUpdate,
-        businessInput.id,
+        input.name,
+        input.shortDescription,
+        input.longDescription,
+        input.logo,
+        input.stockPrice,
+        input.urlWebsite,
+        input.ceoName,
+        input.numberOfEmployees,
+        input.country,
+        input.nif,
+        input.fiscalName,
+        input.address,
+        input.phone,
+        input.email,
+        input.state,
+        input.lastUpdate,
+        input.id,
       ]);
 
-      const businessOutput: businessEntities.BusinessOutput = await this.get(businessInput.id!);
+      const getBusinessStorageInput: entities.GetBusinessStorageInput = {
+        id: input.id,
+      };
+      const updateBusinessStorageOutput: entities.UpdateBusinessStorageOutput =
+        await this.get(getBusinessStorageInput);
 
-      return businessOutput;
+      return updateBusinessStorageOutput;
     } catch (e) {
       throw e;
     }
   }
 
-  public async delete(id: string): Promise<businessEntities.BusinessOutput> {
+  public async delete(
+    input: entities.DeleteBusinessStorageInput
+  ): Promise<entities.DeleteBusinessStorageOutput> {
     try {
-      const businessOutput: businessEntities.BusinessOutput = await this.get(id);
+      const getBusinessStorageInput: entities.GetBusinessStorageInput = {
+        id: input.id,
+      };
+      const deleteBusinessStorageOutput: entities.DeleteBusinessStorageOutput =
+        await this.get(getBusinessStorageInput);
 
       const sqlQuery = "DELETE FROM business WHERE id = ?";
-      await promisePool.query(sqlQuery, [id]);
+      await promisePool.query(sqlQuery, [input.id]);
 
-      return businessOutput;
+      return deleteBusinessStorageOutput;
     } catch (e) {
       throw e;
     }

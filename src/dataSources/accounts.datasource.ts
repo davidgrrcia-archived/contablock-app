@@ -1,8 +1,8 @@
 import * as entities from "../entities/Account";
-import AccountRepository from "../repositories/account.repository";
+import {AccountStorageInterface} from "../entities/Account";
 import { promisePool } from "../database";
 
-export default class AccountPostgres implements AccountRepository {
+export default class AccountStorage implements AccountStorageInterface {
   public async get(
     input: entities.GetAccountStorageInput
   ): Promise<entities.GetAccountStorageOutput> {
@@ -35,8 +35,9 @@ export default class AccountPostgres implements AccountRepository {
           id: item["id"],
           name: item["name"],
           type: item["type"],
-          kind: item["kind"],
+          kind: item["kind"]
         })),
+      };
 
       return listAccountsStorageOutput;
     } catch (e) {

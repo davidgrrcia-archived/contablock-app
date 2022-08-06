@@ -1,0 +1,908 @@
+1,FINANCIACIÓN BÁSICA,Grupo,
+10,CAPITAL,Subgrupo,PATRIMONIO NETO
+100,Capital social,Cuenta,PATRIMONIO NETO
+101,Fondo social,Cuenta,PATRIMONIO NETO
+102,Capital,Cuenta,PATRIMONIO NETO
+103,Socios por desembolsos no exigidos,Cuenta,PATRIMONIO NETO
+1030,"Socios por desembolsos no exigidos, capital social",Subcuenta,PATRIMONIO NETO
+1034,"Socios por desembolsos no exigidos, capital pendiente de inscripción",Subcuenta,PATRIMONIO NETO
+104,Socios por aportaciones no dinerarias pendientes,Cuenta,PATRIMONIO NETO
+1040,"Socios por aportaciones no dinerarias pendientes, capital social",Subcuenta,PATRIMONIO NETO
+1044,"Socios por aportaciones no dinerarias pendientes, capital pendiente de inscripción",Subcuenta,PATRIMONIO NETO
+108,Acciones o participaciones propias en situaciones especiales,Cuenta,PATRIMONIO NETO
+109,Acciones o participaciones propias para reducción de capital,Cuenta,PATRIMONIO NETO
+11,RESERVAS Y OTROS INSTRUMENTOS DE PATRIMONIO,Subgrupo,PATRIMONIO NETO
+110,Prima de emisión o asunción,Cuenta,PATRIMONIO NETO
+111,Otros instrumentos de patrimonio neto,Cuenta,PATRIMONIO NETO
+1110,Patrimonio neto por emisión de instrumentos financieros compuestos,Subcuenta,PATRIMONIO NETO
+1111,Resto de instrumentos de patrimonio neto,Subcuenta,PATRIMONIO NETO
+112,Reserva legal,Cuenta,PATRIMONIO NETO
+113,Reservas voluntarias,Cuenta,PATRIMONIO NETO
+114,Reservas especiales,Cuenta,PATRIMONIO NETO
+1140,Reservas para acciones o participaciones de la sociedad dominante,Subcuenta,PATRIMONIO NETO
+1141,Reservas estatutarias,Subcuenta,PATRIMONIO NETO
+1142,Reserva por capital amortizado,Subcuenta,PATRIMONIO NETO
+1143,Reserva por fondo de comercio,Subcuenta,PATRIMONIO NETO
+1144,Reservas por acciones propias aceptadas en garantía,Subcuenta,PATRIMONIO NETO
+115,Reservas por pérdidas y ganancias actuariales y otros ajustes,Cuenta,PATRIMONIO NETO
+118,Aportaciones de socios o propietarios,Cuenta,PATRIMONIO NETO
+119,Diferencias por ajuste del capital a euros,Cuenta,PATRIMONIO NETO
+12,RESULTADOS PENDIENTES DE APLICACIÓN,Subgrupo,PATRIMONIO NETO
+120,Remanente,Cuenta,PATRIMONIO NETO
+121,Resultados negativos de ejercicios anteriores,Cuenta,PATRIMONIO NETO
+129,Resultado del ejercicio,Cuenta,PATRIMONIO NETO
+13,"SUBVENCIONES, DONACIONES Y AJUSTES POR CAMBIOS DE VALOR",Subgrupo,PATRIMONIO NETO
+130,Subvenciones oficiales de capital,Cuenta,PATRIMONIO NETO
+131,Donaciones y legados de capital,Cuenta,PATRIMONIO NETO
+132,"Otras subvenciones, donaciones y legados",Cuenta,PATRIMONIO NETO
+133,Ajustes por valoración en activos financieros disponibles para la venta,Cuenta,PATRIMONIO NETO
+134,Operaciones de cobertura,Cuenta,PATRIMONIO NETO
+1340,Cobertura de flujos de efectivo,Subcuenta,PATRIMONIO NETO
+1341,Cobertura de una inversión neta en un negocio en el extranjero,Subcuenta,PATRIMONIO NETO
+135,Diferencias de conversión,Cuenta,PATRIMONIO NETO
+136,"Ajustes por valoración en activos no corrientes y grupos enajenables de elementos, mantenidos para la venta",Cuenta,PATRIMONIO NETO
+137,Ingresos fiscales a distribuir en varios ejercicios,Cuenta,PATRIMONIO NETO
+1370,Ingresos fiscales por diferencias permanentes a distribuir en varios ejercicios,Subcuenta,PATRIMONIO NETO
+1371,Ingresos fiscales por deducciones y bonificaciones a distribuir en varios ejercicios,Subcuenta,PATRIMONIO NETO
+14,PROVISIONES,Subgrupo,PASIVO NO CORRIENTE
+140,Provisión por retribuciones a largo plazo al personal,Cuenta,PASIVO NO CORRIENTE
+141,Provisión para impuestos,Cuenta,PASIVO NO CORRIENTE
+142,Provisión para otras responsabilidades,Cuenta,PASIVO NO CORRIENTE
+143,"Provisión por desmantelamiento, retiro o rehabilitación del inmovilizado",Cuenta,PASIVO NO CORRIENTE
+145,Provisión para actuaciones medioambientales,Cuenta,PASIVO NO CORRIENTE
+146,Provisión para reestructuraciones,Cuenta,PASIVO NO CORRIENTE
+147,Provisión por transacciones con pagos basados en instrumentos de patrimonio,Cuenta,PASIVO NO CORRIENTE
+15,DEUDAS A LARGO PLAZO CON CARACTERÍSTICAS ESPECIALES,Subgrupo,PASIVO NO CORRIENTE
+150,Acciones o participaciones a largo plazo consideradas como pasivos financieros,Cuenta,PASIVO NO CORRIENTE
+153,Desembolsos no exigidos por acciones o participaciones consideradas como pasivos financieros,Cuenta,PASIVO NO CORRIENTE
+1533,"Desembolsos no exigidos, empresas del grupo",Subcuenta,PASIVO NO CORRIENTE
+1534,"Desembolsos no exigidos, empresas asociadas",Subcuenta,PASIVO NO CORRIENTE
+1535,"Desembolsos no exigidos, otras partes vinculadas",Subcuenta,PASIVO NO CORRIENTE
+1536,Otros desembolsos no exigidos,Subcuenta,PASIVO NO CORRIENTE
+154,Aportaciones no dinerarias pendientes por acciones o participaciones consideradas como pasivos financieros,Cuenta,PASIVO NO CORRIENTE
+1543,"Aportaciones no dinerarias pendientes, empresas del grupo",Subcuenta,PASIVO NO CORRIENTE
+1544,"Aportaciones no dinerarias pendientes, empresas asociadas",Subcuenta,PASIVO NO CORRIENTE
+1545,"Aportaciones no dinerarias pendientes, otras partes vinculadas",Subcuenta,PASIVO NO CORRIENTE
+1546,Otras aportaciones no dinerarias pendientes,Subcuenta,PASIVO NO CORRIENTE
+16,DEUDAS A LARGO PLAZO CON PARTES VINCULADAS,Subgrupo,PASIVO NO CORRIENTE
+160,Deudas a largo plazo con entidades de crédito vinculadas,Cuenta,PASIVO NO CORRIENTE
+1603,"Deudas a largo plazo con entidades de crédito, empresas del grupo",Subcuenta,PASIVO NO CORRIENTE
+1604,"Deudas a largo plazo con entidades de crédito, empresas asociadas",Subcuenta,PASIVO NO CORRIENTE
+1605,Deudas a largo plazo con otras entidades de crédito vinculadas,Subcuenta,PASIVO NO CORRIENTE
+161,"Proveedores de inmovilizado a largo plazo, partes vinculadas",Cuenta,PASIVO NO CORRIENTE
+1613,"Proveedores de inmovilizado a largo plazo, empresas del grupo",Subcuenta,PASIVO NO CORRIENTE
+1614,"Proveedores de inmovilizado a largo plazo, empresas asociadas",Subcuenta,PASIVO NO CORRIENTE
+1615,"Proveedores de inmovilizado a largo plazo, otras partes vinculadas",Subcuenta,PASIVO NO CORRIENTE
+162,"Acreedores por arrendamiento financiero a largo plazo, partes vinculadas",Cuenta,PASIVO NO CORRIENTE
+1623,"Acreedores por arrendamiento financiero a largo plazo, empresas de grupo",Subcuenta,PASIVO NO CORRIENTE
+1624,"Acreedores por arrendamiento financiero a largo plazo, empresas asociadas",Subcuenta,PASIVO NO CORRIENTE
+1625,"Acreedores por arrendamiento financiero a largo plazo, otras partes vinculadas",Subcuenta,PASIVO NO CORRIENTE
+163,Otras deudas a largo plazo con partes vinculadas,Cuenta,PASIVO NO CORRIENTE
+1633,"Otras deudas a largo plazo, empresas del grupo",Subcuenta,PASIVO NO CORRIENTE
+1634,"Otras deudas a largo plazo, empresas asociadas",Subcuenta,PASIVO NO CORRIENTE
+1635,"Otras deudas a largo plazo, con otras partes vinculadas",Subcuenta,PASIVO NO CORRIENTE
+17,"DEUDAS A LARGO PLAZO POR PRÉSTAMOS RECIBIDOS, EMPRÉSTITOS Y OTROS CONCEPTOS",Subgrupo,PASIVO NO CORRIENTE
+170,Deudas a largo plazo con entidades de crédito,Cuenta,PASIVO NO CORRIENTE
+171,Deudas a largo plazo,Cuenta,PASIVO NO CORRIENTE
+172,"Deudas a largo plazo transformables en subvenciones, donaciones y legados",Cuenta,PASIVO NO CORRIENTE
+173,Proveedores de inmovilizado a largo plazo,Cuenta,PASIVO NO CORRIENTE
+174,Acreedores por arrendamiento financiero a largo plazo,Cuenta,PASIVO NO CORRIENTE
+175,Efectos a pagar a largo plazo,Cuenta,PASIVO NO CORRIENTE
+176,Pasivos por derivados financieros a largo plazo,Cuenta,PASIVO NO CORRIENTE
+1765,"Pasivos por derivados financieros a largo plazo, cartera de negociación",Subcuenta,PASIVO NO CORRIENTE
+1768,"Pasivos por derivados financieros a largo plazo, instrumentos de cobertura",Subcuenta,PASIVO NO CORRIENTE
+177,Obligaciones y bonos,Cuenta,PASIVO NO CORRIENTE
+178,Obligaciones y bonos convertibles,Cuenta,PASIVO NO CORRIENTE
+179,Deudas representadas en otros valores negociables,Cuenta,PASIVO NO CORRIENTE
+18,"PASIVOS POR FIANZAS, GARANTÍAS Y OTROS CONCEPTOS A LARGO PLAZO",Subgrupo,
+180,Fianzas recibidas a largo plazo,Cuenta,
+181,Anticipos recibidos por ventas o prestaciones de servicios a largo plazo,Cuenta,
+185,Depósitos recibidos a largo plazo,Cuenta,
+189,Garantías financieras a largo plazo,Cuenta,
+19,SITUACIONES TRANSITORIAS DE FINANCIACIÓN,Subgrupo,
+190,Acciones o participaciones emitidas,Cuenta,
+192,Suscriptores de acciones,Cuenta,
+194,Capital emitido pendiente de inscripción,Cuenta,
+195,Acciones o participaciones emitidas consideradas como pasivos financieros,Cuenta,
+197,Suscriptores de acciones consideradas como pasivos financieros,Cuenta,
+199,Acciones o participaciones emitidas consideradas como pasivos financieros pendientes de inscripción,Cuenta,
+2,ACTIVO NO CORRIENTE,Grupo,
+20,INMOVILIZACIONES INTANGIBLES,Subgrupo,
+200,Investigación,Cuenta,
+201,Desarrollo,Cuenta,
+202,Concesiones administrativas,Cuenta,
+203,Propiedad industrial,Cuenta,
+204,Fondo de comercio,Cuenta,
+205,Derechos de traspaso,Cuenta,
+206,Aplicaciones informáticas,Cuenta,
+209,Anticipos para inmovilizaciones intangibles,Cuenta,
+21,INMOVILIZACIONES MATERIALES,Subgrupo,
+210,Terrenos y bienes naturales,Cuenta,
+211,Construcciones,Cuenta,
+212,Instalaciones técnicas,Cuenta,
+213,Maquinaria,Cuenta,
+214,Utillaje,Cuenta,
+215,Otras instalaciones,Cuenta,
+216,Mobiliario,Cuenta,
+217,Equipos para procesos de información,Cuenta,
+218,Elementos de transporte,Cuenta,
+219,Otro inmovilizado material,Cuenta,
+22,INVERSIONES INMOBILIARIAS,Subgrupo,
+220,Inversiones en terrenos y bienes naturales,Cuenta,
+221,Inversiones en construcciones,Cuenta,
+23,INMOVILIZACIONES MATERIALES EN CURSO,Subgrupo,
+230,Adaptación de terrenos y bienes naturales,Cuenta,
+231,Construcciones en curso,Cuenta,
+232,Instalaciones técnicas en montaje,Cuenta,
+233,Maquinaria en montaje,Cuenta,
+237,Equipos para procesos de información en montaje,Cuenta,
+239,Anticipos para inmovilizaciones materiales,Cuenta,
+24,INVERSIONES FINANCIERAS A LARGO PLAZO EN PARTES VINCULADAS,Subgrupo,
+240,Participaciones a largo plazo en partes vinculadas,Cuenta,
+2403,Participaciones a largo plazo en empresas del grupo,Subcuenta,
+2404,Participaciones a largo plazo en empresas asociadas,Subcuenta,
+2405,Participaciones a largo plazo en otras partes vinculadas,Subcuenta,
+241,Valores representativos de deuda a largo plazo de partes vinculadas,Cuenta,
+2413,Valores representativos de deuda a largo plazo de empresas del grupo,Subcuenta,
+2414,Valores representativos de deuda a largo plazo de empresas asociadas,Subcuenta,
+2415,Valores representativos de deuda a largo plazo de otras partes vinculadas,Subcuenta,
+242,Créditos a largo plazo a partes vinculadas,Cuenta,
+2423,Créditos a largo plazo a empresas del grupo,Subcuenta,
+2424,Créditos a largo plazo a empresas asociadas,Subcuenta,
+2425,Créditos a largo plazo a otras partes vinculadas,Subcuenta,
+249,Desembolsos pendientes sobre participaciones a largo plazo en partes vinculadas,Cuenta,
+2493,Desembolsos pendientes sobre participaciones a largo plazo en empresas del grupo,Subcuenta,
+2494,Desembolsos pendientes sobre participaciones a largo plazo en empresas asociadas,Subcuenta,
+2495,Desembolsos pendientes sobre participaciones a largo plazo en otras partes vinculadas,Subcuenta,
+25,OTRAS INVERSIONES FINANCIERAS A LARGO PLAZO,Subgrupo,
+250,Inversiones financieras a largo plazo en instrumentos de patrimonio,Cuenta,
+251,Valores representativos de deuda a largo plazo,Cuenta,
+252,Créditos a largo plazo,Cuenta,
+253,Créditos a largo plazo por enajenación de in movilizado,Cuenta,
+254,Créditos a largo plazo al personal,Cuenta,
+255,Activos por derivados financieros a largo plazo,Cuenta,
+2550,"Activos por derivados financieros a largo plazo, cartera de negociación",Subcuenta,
+2553,"Activos por derivados financieros a largo plazo, instrumentos de cobertura",Subcuenta,
+257,Derechos de reembolso derivados de contratos de seguro relativos a retribuciones a largo plazo al personal,Cuenta,
+258,Imposiciones a largo plazo,Cuenta,
+259,Desembolsos pendientes sobre participaciones en el patrimonio neto a largo plazo,Cuenta,
+26,FIANZAS Y DEPÓSITOS CONSTITUIDOS A LARGO PLAZO,Subgrupo,
+260,Fianzas constituidas a largo plazo,Cuenta,
+265,Depósitos constituidos a largo plazo,Cuenta,
+28,AMORTIZACIÓN ACUMULADA DEL INMOVILIZADO,Subgrupo,
+280,Amortización acumulada del inmovilizado intangible,Cuenta,
+2800,Amortización acumulada de investigación,Subcuenta,
+2801,Amortización acumulada de desarrollo,Subcuenta,
+2802,Amortización acumulada de concesiones administrativas,Subcuenta,
+2803,Amortización acumulada de propiedad industrial,Subcuenta,
+2805,Amortización acumulada de derechos de traspaso,Subcuenta,
+2806,Amortización acumulada de aplicaciones informáticas,Subcuenta,
+281,Amortización acumulada del inmovilizado material,Cuenta,
+2811,Amortización acumulada de construcciones,Subcuenta,
+2812,Amortización acumulada de instalaciones técnicas,Subcuenta,
+2813,Amortización acumulada de maquinaria,Subcuenta,
+2814,Amortización acumulada de utillaje,Subcuenta,
+2815,Amortización acumulada de otras instalaciones,Subcuenta,
+2816,Amortización acumulada de mobiliario,Subcuenta,
+2817,Amortización acumulada de equipos para procesos de información,Subcuenta,
+2818,Amortización acumulada de elementos de transporte,Subcuenta,
+2819,Amortización acumulada de otro inmovilizado material,Subcuenta,
+282,Amortización acumulada de las inversiones inmobiliarias,Cuenta,
+29,DETERIORO DE VALOR DE ACTIVOS NO CORRIENTES,Subgrupo,
+290,Deterioro de valor del inmovilizado intangible,Cuenta,
+2900,Deterioro de valor de investigación,Subcuenta,
+2901,Deterioro del valor de desarrollo,Subcuenta,
+2902,Deterioro de valor de concesiones administrativas,Subcuenta,
+2903,Deterioro de valor de propiedad industrial,Subcuenta,
+2905,Deterioro de valor de derechos de traspaso,Subcuenta,
+2906,Deterioro de valor de aplicaciones informáticas,Subcuenta,
+291,Deterioro de valor del inmovilizado materia l,Cuenta,
+2910,Deterioro de valor de terrenos y bienes naturales,Subcuenta,
+2911,Deterioro de valor de construcciones,Subcuenta,
+2912,Deterioro de valor de instalaciones técnicas,Subcuenta,
+2913,Deterioro de valor de maquinaria,Subcuenta,
+2914,Deterioro de valor de utillaje,Subcuenta,
+2915,Deterioro de valor de otras instalaciones,Subcuenta,
+2916,Deterioro de valor de mobiliario,Subcuenta,
+2917,Deterioro de valor de equipos para procesos de información,Subcuenta,
+2918,Deterioro de valor de elementos de transporte,Subcuenta,
+2919,Deterioro de valor de otro inmovilizado material,Subcuenta,
+292,Deterioro de valor de las inversiones inmobiliarias,Cuenta,
+2920,Deterioro de valor de los terrenos y bienes naturales,Subcuenta,
+2921,Deterioro de valor de construcciones,Subcuenta,
+293,Deterioro de valor de participaciones a largo plazo en partes vinculadas,Cuenta,
+2933,Deterioro de valor de participaciones a largo plazo en empresas del grupo,Subcuenta,
+2934,Deterioro de valor de participaciones a largo plazo en empresas asociadas,Subcuenta,
+294,Deterioro de valor de valores representativos de deuda a largo plazo de partes vinculadas,Cuenta,
+2943,Deterioro de valor de valores representativos de deuda a largo plazo de empresas del grupo,Subcuenta,
+2944,Deterioro de valor de valores representativos de deuda a largo plazo de empresas asociadas,Subcuenta,
+2945,Deterioro de valor de valores representativos de deuda a largo plazo de otras partes vinculadas,Subcuenta,
+295,Deterioro de valor de créditos a largo plazo a partes vinculadas,Cuenta,
+2953,Deterioro de valor de créditos a largo plazo a empresas del grupo,Subcuenta,
+2954,Deterioro de valor de créditos a largo plazo a empresas asociadas,Subcuenta,
+2955,Deterioro de valor de créditos a largo plazo a otras partes vinculadas,Subcuenta,
+297,Deterioro de valor de valores representativos de deuda a largo plazo,Cuenta,
+298,Deterioro de valor de créditos a largo plazo,Cuenta,
+3,EXISTENCIAS,Grupo,
+30,COMERCIALES,Subgrupo,
+300,Mercaderías A,Cuenta,
+301,Mercaderías B,Cuenta,
+31,MATERIAS PRIMAS,Subgrupo,
+310,Materias primas A,Cuenta,
+311,Materias primas B,Cuenta,
+32,OTROS APROVISIONAMIENTOS,Subgrupo,
+320,Elementos y conjuntos incorporables,Cuenta,
+321,Combustibles,Cuenta,
+322,Repuestos,Cuenta,
+325,Materiales diversos,Cuenta,
+326,Embalajes,Cuenta,
+327,Envases,Cuenta,
+328,Material de oficina,Cuenta,
+33,PRODUCTOS EN CURSO,Subgrupo,
+330,Productos en curso A,Cuenta,
+331,Productos en curso B,Cuenta,
+34,PRODUCTOS SEMITERMINADOS,Subgrupo,
+340,Productos semiterminados A,Cuenta,
+341,Productos semiterminados B,Cuenta,
+35,PRODUCTOS TERMINADOS,Subgrupo,
+350,Productos terminados A,Cuenta,
+351,Productos terminados B,Cuenta,
+36,"SUBPRODUCTOS, RESIDUOS Y MATERIALES RECUPERADOS",Subgrupo,
+360,Subproductos A,Cuenta,
+361,Subproductos B,Cuenta,
+365,Residuos A,Cuenta,
+366,Residuos B,Cuenta,
+368,Materiales recuperados A,Cuenta,
+369,Materiales recuperados B,Cuenta,
+39,DETERIORO DE VALOR DE LAS EXISTENCIAS,Subgrupo,
+390,Deterioro de valor de las mercaderías,Cuenta,
+391,Deterioro de valor de las materias primas,Cuenta,
+392,Deterioro de valor de otros aprovi sionamientos,Cuenta,
+393,Deterioro de valor de los productos en curso,Cuenta,
+394,Deterioro de valor de los productos semiterminados,Cuenta,
+395,Deterioro de valor de los productos terminados,Cuenta,
+396,"Deterioro de valor de los subproductos, residuos y materiales recuperados",Cuenta,
+4,ACREEDORES Y DEUDORES POR OPERACIONES COMERCIALES,Grupo,
+40,PROVEEDORES,Subgrupo,
+400,Proveedores,Cuenta,
+4000,Proveedores (euros),Subcuenta,
+4004,Proveedores (moneda extranjera),Subcuenta,
+4009,"Proveedores, facturas pendientes de recibir o de formalizar",Subcuenta,
+401,"Proveedores, efectos comerciales a pagar",Cuenta,
+403,"Proveedores, empresas del grupo",Cuenta,
+4030,"Proveedores, empresas del grupo (euros)",Subcuenta,
+4031,"Efectos comerciales a pagar, empresas del grupo",Subcuenta,
+4034,"Proveedores, empresas del grupo (moneda extranjera)",Subcuenta,
+4036,"Envases y embalajes a devolver a proveedores, empresas del grupo",Subcuenta,
+4039,"Proveedores, empresas del grupo, facturas pendientes de recibir o de formalizar",Subcuenta,
+404,"Proveedores, empresas asociadas",Cuenta,
+405,"Proveedores, otras partes vinculadas",Cuenta,
+406,Envases y embalajes a devolver a proveedores,Cuenta,
+407,Anticipos a proveedores,Cuenta,
+41,ACREEDORES VARIOS,Subgrupo,
+410,Acreedores por prestaciones de servicios,Cuenta,
+4100,Acreedores por prestaciones de servicios (euros),Subcuenta,
+4104,"Acreedores por prestaciones de servicios, (moneda extranjera)",Subcuenta,
+4109,"Acreedores por prestaciones de servicios, facturas pendientes de recibir o de formalizar",Subcuenta,
+411,"Acreedores, efectos comerciales a pagar",Cuenta,
+419,Acreedores por operaciones en común,Cuenta,
+43,CLIENTES,Subgrupo,
+430,Clientes,Cuenta,
+4300,Clientes (euros),Subcuenta,
+4304,Clientes (moneda extranjera),Subcuenta,
+4309,"Clientes, facturas pendientes de formalizar",Subcuenta,
+431,"Clientes, efectos comerciales a cobrar",Cuenta,
+4310,Efectos comerciales en cartera,Subcuenta,
+4311,Efectos comerciales descontados,Subcuenta,
+4312,Efectos comerciales en gestión de cobro,Subcuenta,
+4315,Efectos comerciales impagados,Subcuenta,
+432,"Clientes, operaciones de “factoring”",Cuenta,
+433,"Clientes, empresas del grupo",Cuenta,
+4330,Clientes empresas del grupo (euros),Subcuenta,
+4331,"Efectos comerciales a cobrar, empresas del grupo",Subcuenta,
+4332,"Clientes empresas del grupo, operaciones de “factoring”",Subcuenta,
+4334,Clientes empresas del grupo (moneda extranjera),Subcuenta,
+4336,Clientes empresas del grupo de dudoso cobro,Subcuenta,
+4337,"Envases y embalajes a devolver a clientes, empresas del grupo",Subcuenta,
+4339,"Clientes empresas del grupo, facturas pendientes de formalizar",Subcuenta,
+434,"Clientes, empresas asociadas",Cuenta,
+435,"Clientes, otras partes vinculadas",Cuenta,
+436,Clientes de dudoso cobro,Cuenta,
+437,Envases y embalajes a devolver por clientes,Cuenta,
+438,Anticipos de clientes,Cuenta,
+44,DEUDORES VARIOS,Subgrupo,
+440,Deudores,Cuenta,
+4400,Deudores (euros),Subcuenta,
+4404,Deudores (moneda extranjera),Subcuenta,
+4409,"Deudores, facturas pendientes de formalizar",Subcuenta,
+441,"Deudores, efectos comerciales a cobrar",Cuenta,
+4410,"Deudores, efectos comerciales en cartera",Subcuenta,
+4411,"Deudores, efectos comerciales descontados",Subcuenta,
+4412,"Deudores, efectos comerciales en gestión de cobro",Subcuenta,
+4415,"Deudores, efectos comerciales impagados",Subcuenta,
+446,Deudores de dudoso cobro,Cuenta,
+449,Deudores por operaciones en común,Cuenta,
+46,PERSONAL,Subgrupo,
+460,Anticipos de remuneraciones,Cuenta,
+465,Remuneraciones pendientes de pago,Cuenta,
+466,Remuneraciones mediante sistemas de aportación definida pendientes de pago,Cuenta,
+47,ADMINISTRACIONES PÚBLICAS,Subgrupo,
+470,"Hacienda Pública, deudora por diversos conceptos",Cuenta,
+4700,"Hacienda Pública, deudora por IVA",Subcuenta,
+4708,"Hacienda Pública, deudora por subvenciones concedidas",Subcuenta,
+4709,"Hacienda Pública, deudora por devolución de impuestos",Subcuenta,
+471,"Organismos de la Seguridad Social, deudores",Cuenta,
+472,"Hacienda Pública, IVA soportado",Cuenta,
+473,"Hacienda Pública, retenciones y pagos a cuenta",Cuenta,
+474,Activos por impuesto diferido,Cuenta,
+4740,Activos por diferencias temporarias deducibles,Subcuenta,
+4742,Derechos por deducciones y bonificaciones pendientes de aplicar,Subcuenta,
+4745,Crédito por pérdidas a compensar del ejercicio,Subcuenta,
+475,"Hacienda Pública, acreedora por conceptos fiscales",Cuenta,
+4750,"Hacienda Pública, acreedora por IVA",Subcuenta,
+4751,"Hacienda Pública, acreedora por retenciones practicadas",Subcuenta,
+4752,"Hacienda Pública, acreedora por impuesto sobre sociedades",Subcuenta,
+4758,"Hacienda Pública, acreedora por subvenciones a reintegrar",Subcuenta,
+476,"Organismos de la Seguridad Social, acreedores",Cuenta,
+477,"Hacienda Pública, IVA repercutido",Cuenta,
+479,Pasivos por diferencias temporarias imponibles,Cuenta,
+48,AJUSTES POR PERIODIFICACIÓN,Subgrupo,
+480,Gastos anticipados,Cuenta,
+485,Ingresos anticipados,Cuenta,
+49,DETERIORO DE VALOR DE CRÉDITOS COMERCIALES Y PROVISIONES A CORTO PLAZO,Subgrupo,
+490,Deterioro de valor de créditos por operaciones comerciales,Cuenta,
+493,Deterioro de valor de créditos por operaciones comerciales con partes vinculadas,Cuenta,
+4933,Deterioro de valor de créditos por operaciones comerciales con empresas del grupo,Subcuenta,
+4934,Deterioro de valor de créditos por operaciones comerciales con empresas asociadas,Subcuenta,
+4935,Deterioro de valor de créditos por operaciones comerciales con otras partes vinculadas,Subcuenta,
+499,Provisiones por operaciones comerciales,Cuenta,
+4994,Provisión por contratos onerosos,Subcuenta,
+4999,Provisión para otras operaciones comerciales,Subcuenta,
+5,CUENTAS FINANCIERAS,Grupo,
+50,"EMPRÉSTITOS, DEUDAS CON CARÁCTERÍSTICAS ESPECIALES Y OTRAS EMISIONES ANÁLOGAS A CORTO PLAZO",Subgrupo,
+500,Obligaciones y bonos a corto plazo,Cuenta,
+501,Obligaciones y bonos convertibles a corto plazo,Cuenta,
+502,Acciones o participaciones a corto plazo consideradas como pasivos financieros,Cuenta,
+505,Deudas representadas en otros valores negociables a corto plazo,Cuenta,
+506,Intereses a corto plazo de empréstitos y otras emisiones análogas,Cuenta,
+507,Dividendos de acciones o participaciones consideradas como pasivos financieros,Cuenta,
+509,Valores negociables amortizados,Cuenta,
+5090,Obligaciones y bonos amortizados,Subcuenta,
+5091,Obligaciones y bonos convertibles amortizados,Subcuenta,
+5095,Otros valores negociables amortizados,Subcuenta,
+51,DEUDAS A CORTO PLAZO CON PARTES VINCULADAS,Subgrupo,
+510,Deudas a corto plazo con entidades de crédito vinculadas,Cuenta,
+5103,"Deudas a corto plazo con entidades de crédito, empresas del grupo",Subcuenta,
+5104,"Deudas a corto plazo con entidades de crédito, empresas asociadas",Subcuenta,
+5105,Deudas a corto plazo con otras entidades de crédito vinculadas,Subcuenta,
+511,"Proveedores de inmovilizado a corto plazo, partes vinculadas",Cuenta,
+5113,"Proveedores de inmovilizado a corto plazo, empresas del grupo",Subcuenta,
+5114,"Proveedores de inmovilizado a corto plazo, empresas asociadas",Subcuenta,
+5115,"Proveedores de inmovilizado a corto plazo, otras partes vinculadas",Subcuenta,
+512,"Acreedores por arrendamiento financiero a corto plazo, partes vinculadas",Cuenta,
+5123,"Acreedores por arrendamiento financiero a corto plazo, empresas del grupo",Subcuenta,
+5124,"Acreedores por arrendamiento financiero a corto plazo, empresas asociadas",Subcuenta,
+5125,"Acreedores por arrendamiento financiero a corto plazo, otras partes vinculadas",Subcuenta,
+513,Otras deudas a corto plazo con partes vinculadas,Cuenta,
+5133,Otras deudas a corto plazo con empresas del grupo,Subcuenta,
+5134,Otras deudas a corto plazo con empresas asociadas,Subcuenta,
+5135,Otras deudas a corto plazo con otras partes vinculadas,Subcuenta,
+514,Intereses a corto plazo de deudas con partes vinculadas,Cuenta,
+5143,"Intereses a corto plazo de deudas, empresas del grupo",Subcuenta,
+5144,"Intereses a corto plazo de deudas, empresas asociadas",Subcuenta,
+5145,"Intereses a corto plazo de deudas, otras partes vinculadas",Subcuenta,
+52,DEUDAS A CORTO PLAZO POR PRÉSTAMOS RECIBIDOS Y OTROS CONCEPTOS,Subgrupo,
+520,Deudas a corto plazo con entidades de crédito,Cuenta,
+5200,Préstamos a corto plazo de entidades de crédito,Subcuenta,
+5201,Deudas a corto plazo por crédito dispuesto,Subcuenta,
+5208,Deudas por efectos descontados,Subcuenta,
+5209,Deudas por operaciones de “factoring”,Subcuenta,
+521,Deudas a corto plazo,Cuenta,
+522,"Deudas a corto plazo transformables en subvenciones, donaciones y legados",Cuenta,
+523,Proveedores de inmovilizado a corto plazo,Cuenta,
+524,Acreedores por arrendamiento financiero a corto plazo,Cuenta,
+525,Efectos a pagar a corto plazo,Cuenta,
+526,Dividendo activo a pagar,Cuenta,
+527,Intereses a corto plazo de deudas con entidades de crédito,Cuenta,
+528,Intereses a corto plazo de deudas,Cuenta,
+529,Provisiones a corto plazo,Cuenta,
+5290,Provisión a corto plazo por retribuciones al personal,Subcuenta,
+5291,Provisión a corto plazo para impuestos,Subcuenta,
+5292,Provisión a corto plazo para otras responsabilidades,Subcuenta,
+5293,"Provisión a corto plazo por desmantelamiento, retiro o rehabilitación del inmovilizado",Subcuenta,
+5295,Provisión a corto plazo para actuaciones Medioambientales,Subcuenta,
+5296,Provisión a corto plazo para reestructuraciones,Subcuenta,
+5297,Provisión a corto plazo por transacciones con pagos basados en instrumentos de patrimonio,Subcuenta,
+53,INVERSIONES FINANCIERAS A CORTO PLAZO EN PARTES VINCULADAS,Subgrupo,
+530,Participaciones a corto plazo en partes vinculadas,Cuenta,
+5303,"Participaciones a corto plazo, en empresas del grupo",Subcuenta,
+5304,"Participaciones a corto plazo, en empresas asociadas",Subcuenta,
+5305,"Participaciones a corto plazo, en otras partes vinculadas",Subcuenta,
+531,Valores representativos de deuda a corto plazo de partes vinculadas,Cuenta,
+5313,Valores representativos de deuda a corto plazo de empresas del grupo,Subcuenta,
+5314,Valores representativos de deuda a corto plazo de empresas asociadas,Subcuenta,
+5315,Valores representativos de deuda a corto plazo de otras partes vinculadas,Subcuenta,
+532,Créditos a corto plazo a partes vinculadas,Cuenta,
+5323,Créditos a corto plazo a empresas del grupo,Subcuenta,
+5324,Créditos a corto plazo a empresas asociadas,Subcuenta,
+5325,Créditos a corto plazo a otras partes vinculadas,Subcuenta,
+533,Intereses a corto plazo de valores representativos de deuda de partes vinculadas,Cuenta,
+5333,Intereses a corto plazo de valores representativos de deuda de empresas del grupo,Subcuenta,
+5334,Intereses a corto plazo de valores representativos de deuda de empresas asociadas,Subcuenta,
+5335,Intereses a corto plazo de valores representativos de deuda de otras partes vinculadas,Subcuenta,
+534,Intereses a corto plazo de créditos a partes vinculadas,Cuenta,
+5343,Intereses a corto plazo de créditos a empresas del grupo,Subcuenta,
+5344,Intereses a corto plazo de créditos a empresas asociadas,Subcuenta,
+5345,Intereses a corto plazo de créditos a otras partes vinculadas,Subcuenta,
+535,Dividendo a cobrar de inversiones financieras en partes vinculadas,Cuenta,
+5353,Dividendo a cobrar de empresas de grupo,Subcuenta,
+5354,Dividendo a cobrar de empresas asociadas,Subcuenta,
+5355,Dividendo a cobrar de otras partes vinculadas,Subcuenta,
+539,Desembolsos pendientes sobre participaciones a corto plazo en partes vinculadas,Cuenta,
+5393,Desembolsos pendientes sobre participaciones a corto plazo en empresas del grupo,Subcuenta,
+5394,Desembolsos pendientes sobre participaciones a corto plazo en empresas asociadas,Subcuenta,
+5395,Desembolsos pendientes sobre participaciones a corto plazo en otras partes vinculadas,Subcuenta,
+54,OTRAS INVERSIONES FINANCIERAS A CORTO PLAZO,Subgrupo,
+540,Inversiones financieras a corto plazo en instrumentos de patrimonio,Cuenta,
+541,Valores representativos de deuda a corto plazo,Cuenta,
+542,Créditos a corto plazo,Cuenta,
+543,Créditos a corto plazo por enajenación de in movilizado,Cuenta,
+544,Créditos a corto plazo al personal,Cuenta,
+545,Dividendo a cobrar,Cuenta,
+546,Intereses a corto plazo de valores representativos de deudas,Cuenta,
+547,Intereses a corto plazo de créditos,Cuenta,
+548,Imposiciones a corto plazo,Cuenta,
+549,Desembolsos pendientes sobre participaciones en el patrimonio neto a corto plazo,Cuenta,
+55,OTRAS CUENTAS NO BANCARIAS,Subgrupo,
+550,Titular de la explotación,Cuenta,
+551,Cuenta corriente con socios y ad ministradores,Cuenta,
+552,Cuenta corriente con otras personas y entidades vinculadas,Cuenta,
+5523,Cuenta corriente con empresas del grupo,Subcuenta,
+5524,Cuenta corriente con empresas asociadas,Subcuenta,
+5525,Cuenta corriente con otras partes vinculadas,Subcuenta,
+553,Cuentas corrientes en fusiones y escisiones,Cuenta,
+5530,Socios de sociedad disuelta,Subcuenta,
+5531,"Socios, cuenta de fusión",Subcuenta,
+5532,Socios de sociedad escindida,Subcuenta,
+5533,"Socios, cuenta de escisión",Subcuenta,
+554,Cuenta corriente con uniones temporales de empresas y comunidades de bienes,Cuenta,
+555,Partidas pendientes de aplicación,Cuenta,
+556,Desembolsos exigidos sobre participaciones en el patrimonio neto,Cuenta,
+5563,"Desembolsos exigidos sobre participaciones, empresas del grupo",Subcuenta,
+5564,"Desembolsos exigidos sobre participaciones, empresas asociadas",Subcuenta,
+5565,"Desembolsos exigidos sobre participaciones, otras partes vinculadas",Subcuenta,
+5566,Desembolsos exigidos sobre participaciones de otras empresas,Subcuenta,
+557,Dividendo activo a cuenta,Cuenta,
+558,Socios por desembolsos exigidos,Cuenta,
+5580,Socios por desembolsos exigidos sobre acciones o participaciones ordinarias,Subcuenta,
+5585,Socios por desembolsos exigidos sobre acciones o participaciones consideradas como pasivos financieros,Subcuenta,
+559,Derivados financieros a corto plazo,Cuenta,
+5590,"Activos por derivados financieros a corto plazo, cartera de negociación",Subcuenta,
+5593,"Activos por derivados financieros a corto plazo, instrumentos de cobertura",Subcuenta,
+5595,"Pasivos por derivados financieros a corto plazo, cartera de negociación",Subcuenta,
+5598,"Pasivos por derivados financieros a corto plazo, instrumentos de cobertura",Subcuenta,
+56,FIANZAS Y DEPÓSITOS RECIBIDOS Y CONSTITUIDOS A COR TO PLAZO Y AJUSTES POR PERIODIFICACIÓN,Subgrupo,
+560,Fianzas recibidas a corto plazo,Cuenta,
+561,Depósitos recibidos a corto plazo,Cuenta,
+565,Fianzas constituidas a corto plazo,Cuenta,
+566,Depósitos constituidos a corto plazo,Cuenta,
+567,Intereses pagados por anticipado,Cuenta,
+568,Intereses cobrados por anticipado,Cuenta,
+569,Garantías financieras a corto plazo,Cuenta,
+57,TESORERÍA,Subgrupo,
+570,"Caja, euros",Cuenta,
+571,"Caja, moneda extranjera",Cuenta,
+572,"Bancos e instituciones de crédito c/c vista, euros",Cuenta,
+573,"Bancos e instituciones de crédito c/c vista, moneda extranjera",Cuenta,
+574,"Bancos e instituciones de crédito, cuentas de ahorro, euros",Cuenta,
+575,"Bancos e instituciones de crédito, cuentas de ahorro, moneda extranjera",Cuenta,
+576,Inversiones a corto plazo de gran liquidez,Cuenta,
+58,ACTIVOS NO CORRIENTES MANTENIDOS PARA LA VENTA Y ACTIVOS Y PASIVOS ASOCIADOS,Subgrupo,
+580,Inmovilizado,Cuenta,
+581,Inversiones con personas y entidades vinculadas,Cuenta,
+582,Inversiones financieras,Cuenta,
+583,"Existencias, deudores comerciales y otras cuentas a cobrar",Cuenta,
+584,Otros activos,Cuenta,
+585,Provisiones,Cuenta,
+586,Deudas con características especiales,Cuenta,
+587,Deudas con personas y entidades vinculadas,Cuenta,
+588,Acreedores comerciales y otras cuentas a pagar,Cuenta,
+589,Otros pasivos,Cuenta,
+59,DETERIORO DEL VALOR DE INVERSIONES FINANCIERAS A CORTO PLAZO Y DE ACTIVOS NO CORRIENTES MANTENIDOS PARA LA VENTA,Subgrupo,
+593,Deterioro de valor de participaciones a corto plazo en partes vinculadas,Cuenta,
+5933,Deterioro de valor de participaciones a corto plazo en empresas del grupo,Subcuenta,
+5934,Deterioro de valor de participaciones a corto plazo en empresas asociadas,Subcuenta,
+594,Deterioro de valor de valores representativos de deuda a corto plazo de partes vinculadas,Cuenta,
+5943,Deterioro de valor de valores representativos de deuda a corto plazo de empresas del grupo,Subcuenta,
+5944,Deterioro de valor de valores representativos de deuda a corto plazo de empresas asociadas,Subcuenta,
+5945,Deterioro de valor de valores representativos de deuda a corto plazo de otras partes vinculadas,Subcuenta,
+595,Deterioro de valor de créditos a corto plazo a partes vinculadas,Cuenta,
+5953,Deterioro de valor de créditos a corto plazo a empresas del grupo,Subcuenta,
+5954,Deterioro de valor de créditos a corto plazo a empresas asociadas,Subcuenta,
+5955,Deterioro de valor de créditos a corto plazo a otras partes vinculadas,Subcuenta,
+597,Deterioro de valor de valores representativos de deuda a corto plazo,Cuenta,
+598,Deterioro de valor de créditos a corto plazo,Cuenta,
+599,Deterioro de valor de activos no corrientes mantenidos para la venta,Cuenta,
+5990,Deterioro de valor de inmovilizado no corriente mantenido para la venta,Subcuenta,
+5991,Deterioro de valor de inversiones con personas y entidades vinculadas no corrientes mantenidas para la venta,Subcuenta,
+5992,Deterioro de valor de inversiones financieras no corrientes mantenidas para la venta,Subcuenta,
+5993,"Deterioro de valor de existencias, deudores comerciales y otras cuentas a cobrar integrados en un grupo enajenable mantenido para la venta",Subcuenta,
+5994,Deterioro de valor de otros activos mantenidos para la venta,Subcuenta,
+6,COMPRAS Y GASTOS,Grupo,Gasto
+60,COMPRAS,Subgrupo,Gasto
+600,Compras de mercaderías,Cuenta,Gasto
+601,Compras de materias primas,Cuenta,Gasto
+602,Compras de otros aprovisionamientos,Cuenta,Gasto
+606,Descuentos sobre compras por pronto pago,Cuenta,Gasto
+6060,Descuentos sobre compras por pronto pago de mercaderías,Subcuenta,Gasto
+6061,Descuentos sobre compras por pronto pago de materias primas,Subcuenta,Gasto
+6062,Descuentos sobre compras por pronto pago de otros aprovisionamientos,Subcuenta,Gasto
+607,Trabajos realizados por otras empresas,Cuenta,Gasto
+608,Devoluciones de compras y operaciones similares,Cuenta,Gasto
+6080,Devoluciones de compras de mercaderías,Subcuenta,Gasto
+6081,Devoluciones de compras de materias primas,Subcuenta,Gasto
+6082,Devoluciones de compras de otros aprovisionamientos,Subcuenta,Gasto
+609,“Rappels” por compras,Cuenta,Gasto
+6090,“Rappels” por compras de mercaderías,Subcuenta,Gasto
+6091,“Rappels” por compras de materias primas,Subcuenta,Gasto
+6092,“Rappels” por compras de otros aprovisionamientos,Subcuenta,Gasto
+61,VARIACIÓN DE EXISTENCIAS,Subgrupo,Gasto
+610,Variación de existencias de mercaderías,Cuenta,Gasto
+611,Variación de existencias de materias primas,Cuenta,Gasto
+612,Variación de existencias de otros aprovisionamientos,Cuenta,Gasto
+62,SERVICIOS EXTERIORES,Subgrupo,Gasto
+620,Gastos en investigación y desarrollo del ejercicio,Cuenta,Gasto
+621,Arrendamientos y cánones,Cuenta,Gasto
+622,Reparaciones y conservación,Cuenta,Gasto
+623,Servicios de profesionales independientes,Cuenta,Gasto
+624,Transportes,Cuenta,Gasto
+625,Primas de seguros,Cuenta,Gasto
+626,Servicios bancarios y similares,Cuenta,Gasto
+627,"Publicidad, propaganda y relaciones públicas",Cuenta,Gasto
+628,Suministros,Cuenta,Gasto
+629,Otros servicios,Cuenta,Gasto
+63,TRIBUTOS,Subgrupo,Gasto
+630,Impuesto sobre beneficios,Cuenta,Gasto
+6300,Impuesto corriente,Subcuenta,Gasto
+6301,Impuesto diferido,Subcuenta,Gasto
+631,Otros tributos,Cuenta,Gasto
+633,Ajustes negativos en la imposición sobre beneficios,Cuenta,Gasto
+634,Ajustes negativos en la imposición indirecta,Cuenta,Gasto
+6341,Ajustes negativos en IVA de activo corriente,Subcuenta,Gasto
+6342,Ajustes negativos en IVA de inversiones,Subcuenta,Gasto
+636,Devolución de impuestos,Cuenta,Gasto
+638,Ajustes positivos en la imposición sobre beneficios,Cuenta,Gasto
+639,Ajustes positivos en la imposición indirecta,Cuenta,Gasto
+6391,Ajustes positivos en IVA de activo corriente,Subcuenta,Gasto
+6392,Ajustes positivos en IVA de inversiones,Subcuenta,Gasto
+64,GASTOS DE PERSONAL,Subgrupo,Gasto
+640,Sueldos y salarios,Cuenta,Gasto
+641,Indemnizaciones,Cuenta,Gasto
+642,Seguridad Social a cargo de la empresa,Cuenta,Gasto
+643,Retribuciones a largo plazo mediante sistemas de aportación definida,Cuenta,Gasto
+644,Retribuciones a largo plazo mediante sistemas de prestación definida,Cuenta,Gasto
+6440,Contribuciones anuales,Subcuenta,Gasto
+6442,Otros costes,Subcuenta,Gasto
+645,Retribuciones al personal mediante instrumentos de patrimonio,Cuenta,Gasto
+6450,Retribuciones al personal liquidados con instrumentos de patrimonio,Subcuenta,Gasto
+6457,Retribuciones al personal liquidados en efectivo basado en instrumentos de patrimonio,Subcuenta,Gasto
+649,Otros gastos sociales,Cuenta,Gasto
+65,OTROS GASTOS DE GESTIÓN,Subgrupo,Gasto
+650,Pérdidas de créditos comerciales incobrables,Cuenta,Gasto
+651,Resultados de operaciones en común,Cuenta,Gasto
+6510,Beneficio transferido (gestor),Subcuenta,Gasto
+6511,Pérdida soportada (partícipe o asociado no gestor),Subcuenta,Gasto
+659,Otras pérdidas en gestión corriente,Cuenta,Gasto
+66,GASTOS FINANCIEROS,Subgrupo,Gasto
+660,Gastos financieros por actualización de provisiones,Cuenta,Gasto
+661,Intereses de obligaciones y bonos,Cuenta,Gasto
+6610,"Intereses de obligaciones y bonos a largo plazo, empresas del grupo",Subcuenta,Gasto
+6611,"Intereses de obligaciones y bonos a largo plazo, empresas asociadas",Subcuenta,Gasto
+6612,"Intereses de obligaciones y bonos a largo plazo, otras partes vinculadas",Subcuenta,Gasto
+6613,"Intereses de obligaciones y bonos a largo plazo, otras empresas",Subcuenta,Gasto
+6615,"Intereses de obligaciones y bonos a corto plazo, empresas del grupo",Subcuenta,Gasto
+6616,"Intereses de obligaciones y bonos a corto plazo, empresas asociadas",Subcuenta,Gasto
+6617,"Intereses de obligaciones y bonos a corto plazo, otras partes vinculadas",Subcuenta,Gasto
+6618,"Intereses de obligaciones y bonos a corto plazo, otras empresas",Subcuenta,Gasto
+662,Intereses de deudas,Cuenta,Gasto
+6620,"Intereses de deudas, empresas del grupo",Subcuenta,Gasto
+6621,"Intereses de deudas, empresas asociadas",Subcuenta,Gasto
+6622,"Intereses de deudas, otras partes vinculadas",Subcuenta,Gasto
+6623,Intereses de deudas con entidades de crédito,Subcuenta,Gasto
+6624,"Intereses de deudas, otras empresas",Subcuenta,Gasto
+663,Pérdidas por valoración de instrumentos financieros por su valor razonable,Cuenta,Gasto
+6630,Pérdidas de cartera de negociación,Subcuenta,Gasto
+6631,Pérdidas de designados por la empresa,Subcuenta,Gasto
+6632,Pérdidas de disponibles para la venta,Subcuenta,Gasto
+6633,Pérdidas de instrumentos de cobertura,Subcuenta,Gasto
+664,Dividendos de acciones o participaciones consideradas como pasivos financieros,Cuenta,Gasto
+6640,"Dividendos de pasivos, empresas del grupo",Subcuenta,Gasto
+6641,"Dividendos de pasivos, empresas asociadas",Subcuenta,Gasto
+6642,"Dividendos de pasivos, otras partes vinculadas",Subcuenta,Gasto
+6643,"Dividendos de pasivos, otras empresas",Subcuenta,Gasto
+665,Intereses por descuento de efectos y operaciones de “factoring”,Cuenta,Gasto
+6650,Intereses por descuento de efectos en entidades de crédito del grupo,Subcuenta,Gasto
+6651,Intereses por descuento de efectos en entidades de crédito asociadas,Subcuenta,Gasto
+6652,Intereses por descuento de efectos en otras entidades de crédito vinculadas,Subcuenta,Gasto
+6653,Intereses por descuento de efectos en otras entidades de crédito,Subcuenta,Gasto
+6654,Intereses por operaciones de “factoring” con entidades de crédito del grupo,Subcuenta,Gasto
+6655,Intereses por operaciones de “factoring” con entidades de crédito asociadas,Subcuenta,Gasto
+6656,Intereses por operaciones de “factoring” con otras entidades de crédito vinculadas,Subcuenta,Gasto
+6657,Intereses por operaciones de “factoring” con otras entidades de crédito,Subcuenta,Gasto
+666,Pérdidas en participaciones y valores representativos de deuda,Cuenta,Gasto
+6660,"Pérdidas en valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,Gasto
+6661,"Pérdidas en valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,Gasto
+6662,"Pérdidas en valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,Gasto
+6663,"Pérdidas en participaciones y valores representativos de deuda a largo plazo, otras empresas",Subcuenta,Gasto
+6665,"Pérdidas en participaciones y valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,Gasto
+6666,"Pérdidas en participaciones y valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,Gasto
+6667,"Pérdidas en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,Gasto
+6668,"Pérdidas en valores representativos de deuda a corto plazo, otras empresas",Subcuenta,Gasto
+667,Pérdidas de créditos no comerciales,Cuenta,Gasto
+6670,"Pérdidas de créditos a largo plazo, empresas del grupo",Subcuenta,Gasto
+6671,"Pérdidas de créditos a largo plazo, empresas asociadas",Subcuenta,Gasto
+6672,"Pérdidas de créditos a largo plazo, otras partes vinculadas",Subcuenta,Gasto
+6673,"Pérdidas de créditos a largo plazo, otras empresas",Subcuenta,Gasto
+6675,"Pérdidas de créditos a corto plazo, empresas del grupo",Subcuenta,Gasto
+6676,"Pérdidas de créditos a corto plazo, empresas asociadas",Subcuenta,Gasto
+6677,"Pérdidas de créditos a corto plazo, otras partes vinculadas",Subcuenta,Gasto
+6678,"Pérdidas de créditos a corto plazo, otras empresas",Subcuenta,Gasto
+668,Diferencias negativas de cambio,Cuenta,Gasto
+669,Otros gastos financieros,Cuenta,Gasto
+67,PÉRDIDAS PROCEDENTES DE ACTIVOS NO CORRIENTES Y GASTOS EXCEPCIONALES,Subgrupo,Gasto
+670,Pérdidas procedentes del inmovilizado intangible,Cuenta,Gasto
+671,Pérdidas procedentes del inmovilizado material,Cuenta,Gasto
+672,Pérdidas procedentes de las inversiones inmobiliarias,Cuenta,Gasto
+673,Pérdidas procedentes de participaciones a largo plazo en partes vinculadas,Cuenta,Gasto
+6733,"Pérdidas procedentes de participaciones a largo plazo, empresas del grupo",Subcuenta,Gasto
+6734,"Pérdidas procedentes de participaciones a largo plazo, empresas asociadas",Subcuenta,Gasto
+6735,"Pérdidas procedentes de participaciones a largo plazo, otras partes vinculadas",Subcuenta,Gasto
+675,Pérdidas por operaciones con obligaciones propias,Cuenta,Gasto
+678,Gastos excepcionales,Cuenta,Gasto
+68,DOTACIONES PARA AMORTIZACIONES,Subgrupo,Gasto
+680,Amortización del inmovilizado intangible,Cuenta,Gasto
+681,Amortización del inmovilizado material,Cuenta,Gasto
+682,Amortización de las inversiones inmobiliarias,Cuenta,Gasto
+69,PÉRDIDAS POR DETERIORO Y OTRAS DOTACIONES,Subgrupo,Gasto
+690,Pérdidas por deterioro del inmovilizado intangible,Cuenta,Gasto
+691,Pérdidas por deterioro del inmovilizado material,Cuenta,Gasto
+692,Pérdidas por deterioro de las inversiones inmobiliarias,Cuenta,Gasto
+693,Pérdidas por deterioro de existencias,Cuenta,Gasto
+6930,Pérdidas por deterioro de productos terminados y en curso de fabricación,Subcuenta,Gasto
+6931,Pérdidas por deterioro de mercaderías,Subcuenta,Gasto
+6932,Pérdidas por deterioro de materias primas,Subcuenta,Gasto
+6933,Pérdidas por deterioro de otros aprovisionamientos,Subcuenta,Gasto
+694,Pérdidas por deterioro de créditos por operaciones comerciales,Cuenta,Gasto
+695,Dotación a la provisión por operaciones comerciales,Cuenta,Gasto
+6954,Dotación a la provisión por contratos onerosos,Subcuenta,Gasto
+6959,Dotación a la provisión para otras operaciones comerciales,Subcuenta,Gasto
+696,Pérdidas por deterioro de participaciones y valores representativos de deuda a largo plazo,Cuenta,Gasto
+6960,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del grupo",Subcuenta,Gasto
+6961,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas asociadas",Subcuenta,Gasto
+6962,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, otras partes vinculadas",Subcuenta,Gasto
+6963,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, otras empresas",Subcuenta,Gasto
+6965,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,Gasto
+6966,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,Gasto
+6967,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,Gasto
+6968,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, de otras empresas",Subcuenta,Gasto
+697,Pérdidas por deterioro de créditos a largo plazo,Cuenta,Gasto
+6970,"Pérdidas por deterioro de créditos a largo plazo, empresas del grupo",Subcuenta,Gasto
+6971,"Pérdidas por deterioro de créditos a largo plazo, empresas asociadas",Subcuenta,Gasto
+6972,"Pérdidas por deterioro de créditos a largo plazo, otras partes vinculadas",Subcuenta,Gasto
+6973,"Pérdidas por deterioro de créditos a largo plazo, otras empresas",Subcuenta,Gasto
+698,Pérdidas por deterioro de participaciones y valores representativos de deuda a corto plazo,Cuenta,Gasto
+6980,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del grupo",Subcuenta,Gasto
+6981,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas asociadas",Subcuenta,Gasto
+6985,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,Gasto
+6986,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,Gasto
+6987,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,Gasto
+6988,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, de otras empresas",Subcuenta,Gasto
+699,Pérdidas por deterioro de créditos a corto plazo,Cuenta,Gasto
+6990,"Pérdidas por deterioro de créditos a corto plazo, empresas del grupo",Subcuenta,Gasto
+6991,"Pérdidas por deterioro de créditos a corto plazo, empresas asociadas",Subcuenta,Gasto
+6992,"Pérdidas por deterioro de créditos a corto plazo, otras partes vinculadas",Subcuenta,Gasto
+6993,"Pérdidas por deterioro de créditos a corto plazo, otras empresas",Subcuenta,Gasto
+7,VENTAS E INGRESOS,Grupo,Ingreso
+70,"VENTAS DE MERCADERÍAS, DE PRODUCCIÓN PROPIA, DE SERVICIOS, ETC",Subgrupo,Ingreso
+700,Ventas de mercaderías,Cuenta,Ingreso
+701,Ventas de productos terminados,Cuenta,Ingreso
+702,Ventas de productos semiterminados,Cuenta,Ingreso
+703,Ventas de subproductos y residuos,Cuenta,Ingreso
+704,Ventas de envases y embalajes,Cuenta,Ingreso
+705,Prestaciones de servicios,Cuenta,Ingreso
+706,Descuentos sobre ventas por pronto pago,Cuenta,Ingreso
+7060,Descuentos sobre ventas por pronto pago de mercaderías,Subcuenta,Ingreso
+7061,Descuentos sobre ventas por pronto pago de productos terminados,Subcuenta,Ingreso
+7062,Descuentos sobre ventas por pronto pago de productos semiterminados,Subcuenta,Ingreso
+7063,Descuentos sobre ventas por pronto pago de subproductos y residuos,Subcuenta,Ingreso
+708,Devoluciones de ventas y operaciones similares,Cuenta,Ingreso
+7080,Devoluciones de ventas de mercaderías,Subcuenta,Ingreso
+7081,Devoluciones de ventas de productos terminados,Subcuenta,Ingreso
+7082,Devoluciones de ventas de productos semiterminados,Subcuenta,Ingreso
+7083,Devoluciones de ventas de subproductos y residuos,Subcuenta,Ingreso
+7084,Devoluciones de ventas de envases y embalajes,Subcuenta,Ingreso
+709,“Rappels” sobre ventas,Cuenta,Ingreso
+7090,«Rappels» sobre ventas de mercaderías,Subcuenta,Ingreso
+7091,“Rappels” sobre ventas de productos terminados,Subcuenta,Ingreso
+7092,“Rappels” sobre ventas de productos semiterminados,Subcuenta,Ingreso
+7093,“Rappels” sobre ventas de subproductos y residuos,Subcuenta,Ingreso
+7094,“Rappels” sobre ventas de envases y embalajes,Subcuenta,Ingreso
+71,VARIACIÓN DE EXISTENCIAS,Subgrupo,Ingreso
+710,Variación de existencias de productos en curso,Cuenta,Ingreso
+711,Variación de existencias de productos semiterminados,Cuenta,Ingreso
+712,Variación de existencias de productos terminados,Cuenta,Ingreso
+713,"Variación de existencias de subproductos, residuos y materiales recuperados",Cuenta,Ingreso
+73,TRABAJOS REALIZADOS PARA LA EMPRESA,Subgrupo,Ingreso
+730,Trabajos realizados para el inmovilizado intangible,Cuenta,Ingreso
+731,Trabajos realizados para el inmovilizado material,Cuenta,Ingreso
+732,Trabajos realizados en inversiones inmobiliarias,Cuenta,Ingreso
+733,Trabajos realizados para el inmovilizado material en curso,Cuenta,Ingreso
+74,"SUBVENCIONES, DONACIONES Y LEGADOS",Subgrupo,Ingreso
+740,"Subvenciones, donaciones y legados a la explotación",Cuenta,Ingreso
+746,"Subvenciones, donaciones y legados de capital transferidos al resultado del ejercicio",Cuenta,Ingreso
+747,"Otras subvenciones, donaciones y legados transferidos al resultado del ejercicio",Cuenta,Ingreso
+75,OTROS INGRESOS DE GESTIÓN,Subgrupo,Ingreso
+751,Resultados de operaciones en común,Cuenta,Ingreso
+7510,Pérdida transferida (gestor),Subcuenta,Ingreso
+7511,Beneficio atribuido (partícipe o asociado no gestor),Subcuenta,Ingreso
+752,Ingresos por arrendamientos,Cuenta,Ingreso
+753,Ingresos de propiedad industrial cedida en explotación,Cuenta,Ingreso
+754,Ingresos por comisiones,Cuenta,Ingreso
+755,Ingresos por servicios al personal,Cuenta,Ingreso
+759,Ingresos por servicios diversos,Cuenta,Ingreso
+76,INGRESOS FINANCIEROS,Subgrupo,Ingreso
+760,Ingresos de participaciones en instrumentos de patrimonio,Cuenta,Ingreso
+7600,"Ingresos de participaciones en instrumentos de patrimonio, empresas del grupo",Subcuenta,Ingreso
+7601,"Ingresos de participaciones en instrumentos de patrimonio, empresas asociadas",Subcuenta,Ingreso
+7602,"Ingresos de participaciones en instrumentos de patrimonio, otras partes vinculadas",Subcuenta,Ingreso
+7603,"Ingresos de participaciones en instrumentos de patrimonio, otras empresas",Subcuenta,Ingreso
+761,Ingresos de valores representativos de deuda,Cuenta,Ingreso
+7610,"Ingresos de valores representativos de deuda, empresas del grupo",Subcuenta,Ingreso
+7611,"Ingresos de valores representativos de deuda, empresas asociadas",Subcuenta,Ingreso
+7612,"Ingresos de valores representativos de deuda, otras partes vinculadas",Subcuenta,Ingreso
+7613,"Ingresos de valores representativos de deuda, otras empresas",Subcuenta,Ingreso
+762,Ingresos de créditos,Cuenta,Ingreso
+7620,Ingresos de créditos a largo plazo,Subcuenta,Ingreso
+76200,"Ingresos de créditos a largo plazo, empresas del grupo",Subcuenta,Ingreso
+76201,"Ingresos de créditos a largo plazo, empresas asociadas",Subcuenta,Ingreso
+76202,"Ingresos de créditos a largo plazo, otras partes vinculadas",Subcuenta,Ingreso
+76203,"Ingresos de créditos a largo plazo, otras empresas",Subcuenta,Ingreso
+7621,Ingresos de créditos a corto plazo,Subcuenta,Ingreso
+76210,"Ingresos de créditos a corto plazo, empresas del grupo",Subcuenta,Ingreso
+76211,"Ingresos de créditos a corto plazo, empresas asociadas",Subcuenta,Ingreso
+76212,"Ingresos de créditos a corto plazo, otras partes vinculadas",Subcuenta,Ingreso
+76213,"Ingresos de créditos a corto plazo, otras empresas",Subcuenta,Ingreso
+763,Beneficios por valoración de instrumentos financieros por su valor razonable,Cuenta,Ingreso
+7630,Beneficios de cartera de negociación,Subcuenta,Ingreso
+7631,Beneficios de designados por la empresa,Subcuenta,Ingreso
+7632,Beneficios de disponibles para la venta,Subcuenta,Ingreso
+7633,Beneficios de instrumentos de cobertura,Subcuenta,Ingreso
+766,Beneficios en participaciones y valores representativos de deuda,Cuenta,Ingreso
+7660,"Beneficios en valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,Ingreso
+7661,"Beneficios en valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,Ingreso
+7662,"Beneficios en valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,Ingreso
+7663,"Beneficios en participaciones y valores representativos de deuda a largo plazo, otras empresas",Subcuenta,Ingreso
+7665,"Beneficios en participaciones y valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,Ingreso
+7666,"Beneficios en participaciones y valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,Ingreso
+7667,"Beneficios en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,Ingreso
+7668,"Beneficios en valores representativos de deuda a corto plazo, otras empresas",Subcuenta,Ingreso
+767,Ingresos de activos afectos y de derechos de reembolso relativos a retribuciones a largo plazo,Cuenta,Ingreso
+768,Diferencias positivas de cambio,Cuenta,Ingreso
+769,Otros ingresos financieros,Cuenta,Ingreso
+77,BENEFICIOS PROCEDENTES DE ACTIVOS NO CORRIENTES E INGRESOS EXCEPCIONALES,Subgrupo,Ingreso
+770,Beneficios procedentes del inmovilizado intangible,Cuenta,Ingreso
+771,Beneficios procedentes del inmovilizado material,Cuenta,Ingreso
+772,Beneficios procedentes de las inversiones inmobiliarias,Cuenta,Ingreso
+773,Beneficios procedentes de participaciones a largo plazo en partes vinculadas,Cuenta,Ingreso
+7733,"Beneficios procedentes de participaciones a largo plazo, empresas del grupo",Subcuenta,Ingreso
+7734,"Beneficios procedentes de participaciones a largo plazo, empresas asociadas",Subcuenta,Ingreso
+7735,"Beneficios procedentes de participaciones a largo plazo, otras partes vinculadas",Subcuenta,Ingreso
+774,Diferencia negativa en combinaciones de negocios,Cuenta,Ingreso
+775,Beneficios por operaciones con obligaciones propias,Cuenta,Ingreso
+778,Ingresos excepcionales,Cuenta,Ingreso
+79,EXCESOS Y APLICACIONES DE PROVISIONES Y DE PÉRDIDAS POR DETERIORO,Subgrupo,Ingreso
+790,Reversión del deterioro del inmovilizado intangible,Cuenta,Ingreso
+791,Reversión del deterioro del inmovilizado material,Cuenta,Ingreso
+792,Reversión del deterioro de las inversiones inmobiliarias,Cuenta,Ingreso
+793,Reversión del deterioro de existencias,Cuenta,Ingreso
+7930,Reversión del deterioro de productos terminados y en curso de fabricación,Subcuenta,Ingreso
+7931,Reversión del deterioro de mercaderías,Subcuenta,Ingreso
+7932,Reversión del deterioro de materias primas,Subcuenta,Ingreso
+7933,Reversión del deterioro de otros aprovisionamientos,Subcuenta,Ingreso
+794,Reversión del deterioro de créditos por operaciones comerciales,Cuenta,Ingreso
+795,Exceso de provisiones,Cuenta,Ingreso
+7950,Exceso de provisión por retribuciones al personal,Subcuenta,Ingreso
+7951,Exceso de provisión para impuestos,Subcuenta,Ingreso
+7952,Exceso de provisión para otras responsabilidades,Subcuenta,Ingreso
+7954,Exceso de provisión por operaciones comerciales,Subcuenta,Ingreso
+79544,Exceso de provisión por contratos onerosos,Subcuenta,Ingreso
+79549,Exceso de provisión para otras operaciones comerciales,Subcuenta,Ingreso
+7955,Exceso de provisión para actuaciones medioambientales,Subcuenta,Ingreso
+7956,Exceso de provisión para reestructuraciones,Subcuenta,Ingreso
+7957,Exceso de provisión por transacciones con pagos basados en instrumentos de patrimonio,Subcuenta,Ingreso
+796,Reversión del deterioro de participaciones y valores representativos de deuda a largo plazo,Cuenta,Ingreso
+7960,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del grupo",Subcuenta,Ingreso
+7961,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas asociadas",Subcuenta,Ingreso
+7965,"Reversión del deterioro de valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,Ingreso
+7966,"Reversión del deterioro de valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,Ingreso
+7967,"Reversión del deterioro de valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,Ingreso
+7968,"Reversión del deterioro de valores representativos de deuda a largo plazo, otras empresas",Subcuenta,Ingreso
+797,Reversión del deterioro de créditos a largo plazo,Cuenta,Ingreso
+7970,"Reversión del deterioro de créditos a largo plazo, empresas del grupo",Subcuenta,Ingreso
+7971,"Reversión del deterioro de créditos a largo plazo, empresas asociadas",Subcuenta,Ingreso
+7972,"Reversión del deterioro de créditos a largo plazo, otras partes vinculadas",Subcuenta,Ingreso
+7973,"Reversión del deterioro de créditos a largo plazo, otras empresas",Subcuenta,Ingreso
+798,Reversión del deterioro de participaciones y valores representativos de deuda a corto plazo,Cuenta,Ingreso
+7980,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del grupo",Subcuenta,Ingreso
+7981,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas asociadas",Subcuenta,Ingreso
+7985,"Reversión del deterioro en valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,Ingreso
+7986,"Reversión del deterioro en valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,Ingreso
+7987,"Reversión del deterioro en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,Ingreso
+7988,"Reversión del deterioro en valores representativos de deuda a corto plazo, otras empresas",Subcuenta,Ingreso
+799,Reversión del deterioro de créditos a corto plazo,Cuenta,Ingreso
+7990,"Reversión del deterioro de créditos a corto plazo, empresas del grupo",Subcuenta,Ingreso
+7991,"Reversión del deterioro de créditos a corto plazo, empresas asociadas",Subcuenta,Ingreso
+7992,"Reversión del deterioro de créditos a corto plazo, otras partes vinculadas",Subcuenta,Ingreso
+7993,"Reversión del deterioro de créditos a corto plazo, otras empresas",Subcuenta,Ingreso
+8,GASTOS IMPUTADOS AL PATRIMONIO NETO,Grupo,
+80,GASTOS FINANCIEROS POR VALORACIÓN DE ACTIVOS Y PASIVOS,Subgrupo,
+800,Pérdidas en activos financieros disponibles para la venta,Cuenta,
+802,Transferencia de beneficios en activos financieros disponibles para la venta,Cuenta,
+81,GASTOS EN OPERACIONES DE COBERTURA,Subgrupo,
+810,Pérdidas por coberturas de flujos de efectivo,Cuenta,
+811,Pérdidas por coberturas de inversiones netas en un negocio en el extranjero,Cuenta,
+812,Transferencia de beneficios por coberturas de flujos de efectivo,Cuenta,
+813,Transferencia de beneficios por coberturas de inversiones netas en un negocio en el extranjero,Cuenta,
+82,GASTOS POR DIFERENCIAS DE CONVERSIÓN,Subgrupo,
+820,Diferencias de conversión negativas,Cuenta,
+821,Transferencia de diferencias de conversión positivas,Cuenta,
+83,IMPUESTO SOBRE BENEFICIOS,Subgrupo,
+830,Impuesto sobre beneficios,Cuenta,
+8300,Impuesto corriente,Subcuenta,
+8301,Impuesto diferido,Subcuenta,
+833,Ajustes negativos en la imposición sobre Beneficios,Cuenta,
+834,Ingresos fiscales por diferencias permanentes,Cuenta,
+835,Ingresos fiscales por deducciones y bonificaciones,Cuenta,
+836,Transferencia de diferencias permanentes,Cuenta,
+837,Transferencia de deducciones y bonificaciones,Cuenta,
+838,Ajustes positivos en la imposición sobre beneficios,Cuenta,
+84,"TRANSFERENCIAS DE SUBVENCIONES, DONACIONES Y LEGADOS",Subgrupo,
+840,Transferencia de subvenciones oficiales de capital,Cuenta,
+841,Transferencia de donaciones y legados de capital,Cuenta,
+842,"Transferencia de otras subvenciones, donaciones y legados",Cuenta,
+85,GASTOS POR PÉRDIDAS ACTUARIALES Y AJUSTES EN LOS ACTIVOS POR RETRIBUCIONES A LARGO PLAZO DE PRESTACIÓN DEFINIDA,Subgrupo,
+850,Pérdidas actuariales,Cuenta,
+851,Ajustes negativos en activos por retribuciones a largo plazo de prestación definida,Cuenta,
+86,GASTOS POR ACTIVOS NO CORRIENTES EN VENTA,Subgrupo,
+860,Pérdidas en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
+862,Transferencia de beneficios en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
+89,GASTOS DE PARTICIPACIONES EN EMPRESAS DEL GRUPO O ASOCIADAS CON AJUSTES VALORATIVOS POSITIVOS PREVIOS,Subgrupo,
+891,"Deterioro de participaciones en el patrimonio, empresas del grupo",Cuenta,
+892,"Deterioro de participaciones en el patrimonio, empresas asociadas",Cuenta,
+9,INGRESOS IMPUTADOS AL PATRIMONIO NETO,Grupo,
+90,INGRESOS FINANCIEROS POR VALORACIÓN DE ACTIVOS Y PASIVOS,Subgrupo,
+900,Beneficios en activos financieros disponibles para la venta,Cuenta,
+902,Transferencia de pérdidas de activos financieros disponibles para la venta,Cuenta,
+91,INGRESOS EN OPERACIONES DE COBERTURA,Subgrupo,
+910,Beneficios por coberturas de flujos de efectivo,Cuenta,
+911,Beneficios por coberturas de una inversión neta en un negocio en el extranjero,Cuenta,
+912,Transferencia de pérdidas por coberturas de flujos de efectivo,Cuenta,
+913,Transferencia de pérdidas por coberturas de una inversión neta en un negocio en el extranjero,Cuenta,
+92,INGRESOS POR DIFERENCIAS DE CONVERSIÓN,Subgrupo,
+920,Diferencias de conversión positivas,Cuenta,
+921,Transferencia de diferencias de conversión negativas,Cuenta,
+94,"INGRESOS POR SUBVENCIONES, DONACIONES Y LEGADOS",Subgrupo,
+940,Ingresos de subvenciones oficiales de capital,Cuenta,
+941,Ingresos de donaciones y legados de capital,Cuenta,
+942,"Ingresos de otras subvenciones, donaciones y legados",Cuenta,
+95,INGRESOS POR GANANCIAS ACTUARIALES Y AJUSTES EN LOS ACTIVOS POR RETRIBUCIONES A LARGO PLAZO DE PRESTACIÓN DEFINIDA,Subgrupo,
+950,Ganancias actuariales,Cuenta,
+951,Ajustes positivos en activos por retribuciones a largo plazo de prestación definida,Cuenta,
+96,INGRESOS POR ACTIVOS NO CORRIENTES EN VENTA,Subgrupo,
+960,Beneficios en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
+962,Transferencia de pérdidas en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
+99,INGRESOS DE PARTICIPACIONES EN EMPRESAS DEL GRUPO O ASOCIADAS CON AJUSTES VALORATIVOS NEGATIVOS PREVIOS,Subgrupo,
+991,"Recuperación de ajustes valorativos negativos previos, empresas del grupo",Cuenta,
+992,"Recuperación de ajustes valorativos negativos previos, empresas asociadas",Cuenta,
+993,"Transferencia por deterioro de ajustes valorativos negativos previos, empresas del grupo",Cuenta,
+994,"Transferencia por deterioro de ajustes valorativos negativos previos, empresas asociadas",Cuenta,

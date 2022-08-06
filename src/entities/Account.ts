@@ -1,3 +1,47 @@
+// STORAGE
+
+export interface AccountStorageInterface {
+  get(input: GetAccountStorageInput): Promise<GetAccountStorageOutput>;
+  list(): Promise<ListAccountsStorageOutput>;
+}
+
+export type GetAccountStorageInput = {
+  id: string;
+};
+
+export type GetAccountStorageOutput = {
+  id: string;
+  name: string;
+  type: string;
+  kind: string;
+};
+
+export type ListAccountsStorageOutput = {
+  items: GetAccountStorageOutput[];
+};
+
+// USE CASE
+
+export interface AccountUseCaseInterface {
+  GetAccountUseCase(input: GetAccountUseCaseInput): Promise<GetAccountUseCaseOutput>;
+  ListAccountsUseCase(): Promise<ListAccountsUseCaseOutput>;
+}
+
+export type GetAccountUseCaseInput = {
+  id: string;
+};
+
+export type GetAccountUseCaseOutput = {
+  id: string;
+  name: string;
+  type: string;
+  kind: string;
+};
+
+export type ListAccountsUseCaseOutput = {
+  items: GetAccountUseCaseOutput[];
+};
+
 // CONTROLLER
 
 export type GetAccountControllerOutput = {
@@ -9,41 +53,6 @@ export type GetAccountControllerOutput = {
 
 export type ListAccountsControllerOutput = {
   items: GetAccountControllerOutput[];
-};
-
-// USE CASE
-
-export type GetAccountUseCaseInput = {
-  id: string;
-};
-
-export type GetAccountUseCaseOutput = {
-  [x: string]: any;
-  id: string;
-  name: string;
-  type: string;
-  kind: string;
-};
-
-export type ListAccountsUseCaseOutput = {
-  items: GetAccountUseCaseOutput[];
-};
-
-// STORAGE
-
-export type GetAccountStorageInput = {
-  id: string;
-};
-
-export type GetAccountStorageOutput = {
-  id: string;
-  name: string;
-  type: string;
-  kind: string;
-}
-
-export type ListAccountsStorageOutput = {
-  items: GetAccountStorageOutput[];
 };
 
 // UTILS

@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import * as accountUseCase from "../../../src/usecases";
 import * as entities from "../../../src/entities/Account";
+import AccountUseCase from "../../../src/usecases/account.usecase";
+
+const accountUseCase = new AccountUseCase();
 
 export default async function handler(
   req: NextApiRequest,
@@ -25,20 +27,22 @@ const listAccountsController = async (
   >
 ) => {
   try {
-    const listAccountsUseCaseOutput = await accountUseCase.listAccountsUseCase();
+    const listAccountsUseCaseOutput =
+      await accountUseCase.ListAccountsUseCase();
 
     const listAccountsControllerOutput: entities.ListAccountsControllerOutput =
       {
-        items: listAccountsUseCaseOutput.map((item) => ({
-            id: item.id,
-            name: item.name,
-            type: item.type,
-            kind: item.kind,
+        items: listAccountsUseCaseOutput.items.map((item) => ({
+          id: item.id,
+          name: item.name,
+          type: item.type,
+          kind: item.kind,
         })),
       };
 
     return res.status(200).send(listAccountsControllerOutput);
   } catch (err: any) {
+    console.log(err);
     return res.status(500).json({ statusCode: 500, message: err.message });
   }
 };

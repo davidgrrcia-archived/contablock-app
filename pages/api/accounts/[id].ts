@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import * as accountUseCase from "../../../src/usecases";
 import * as entities from "../../../src/entities/Account";
+import AccountUseCase from "../../../src/usecases/account.usecase";
+
+const accountUseCase = new AccountUseCase();
 
 export default async function handler(
   req: NextApiRequest,
@@ -30,7 +32,7 @@ const getAccountController = async (
       id: id
     }
 
-    const getAccountUseCaseOutput = await accountUseCase.getAccountUseCase(
+    const getAccountUseCaseOutput = await accountUseCase.GetAccountUseCase(
       getAccountUseCaseInput
     );
 
@@ -43,6 +45,7 @@ const getAccountController = async (
 
     return res.status(200).send(getAccountControllerOutput);
   } catch (err: any) {
+    console.log(err);
     return res.status(500).json({ statusCode: 500, message: err.message });
   }
 };

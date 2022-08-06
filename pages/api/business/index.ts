@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import * as businessUseCase from "../../../src/usecases";
 import * as entities from "../../../src/entities/Business";
+import BusinessUseCase from "../../../src/usecases/business.usecase";
+
+const businessUseCase = new BusinessUseCase();
 
 export default async function handler(
   req: NextApiRequest,
@@ -29,11 +31,11 @@ const listBusiness = async (
   >
 ) => {
   try {
-    const listBusinessUseCaseOutput = await businessUseCase.listBusiness();
+    const listBusinessUseCaseOutput = await businessUseCase.ListBusinessUseCase();
 
     const listBusinessControllerOutput: entities.ListBusinessControllerOutput =
       {
-        items: listBusinessUseCaseOutput.map((item) => ({
+        items: listBusinessUseCaseOutput.items.map((item) => ({
           id: item.id,
           name: item.name,
           shortDescription: item.shortDescription,
@@ -68,7 +70,7 @@ const createBusiness = async (
   >
 ) => {
   try {
-    const createBusinessControllerInput: entities.CreateBusinessControllerInput =
+    const createBusinessControllerInput: entities.CreateBusinessUseCaseInput =
       {
         id: req.body.id,
         name: req.body.name,
@@ -87,7 +89,7 @@ const createBusiness = async (
         email: req.body.email,
       };
 
-    const createBusinessUseCaseOutput = await businessUseCase.createBusiness(
+    const createBusinessUseCaseOutput = await businessUseCase.CreateBusinessUseCase(
       createBusinessControllerInput
     );
 

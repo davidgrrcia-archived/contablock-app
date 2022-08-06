@@ -3,3 +3,14 @@ up-migrations:
 
 down-migrations:
 	docker exec -i mysql mysql -uroot -proot db_accounting < ./database/database-down.sql
+
+clean: 
+	docker stop $$(docker ps -aq)
+	docker rm $$(docker ps -aq)
+	docker system prune 
+
+provision: 
+	docker-compose up -d
+
+start: 
+	npm run dev

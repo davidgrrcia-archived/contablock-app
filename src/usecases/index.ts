@@ -1,34 +1,16 @@
-import AccountPostgres from "../dataSources/accounts.datasource";
-import BusinessPostgres from "../dataSources/business.datasource";
+
 import UserPostgres from "../dataSources/user.datasource";
 import EntryPostgres from "../dataSources/entry.datasource";
 import TransactionPostgres from "../dataSources/transaction.datasource";
-import * as account from "./account.usecase";
-import * as business from "./business.usecase";
 import * as user from "./user.usecase";
 import * as entry from "./entry.usecase";
 import * as transaction from "./transaction.usecase";
 
 // Repositories
-const accountRepository = new AccountPostgres();
-const businessRepository = new BusinessPostgres();
+
 const userRepository = new UserPostgres();
 const entryRepository = new EntryPostgres();
 const transactionRepository = new TransactionPostgres();
-
-// UseCases
-export const getAccountUseCase = account.GetAccountUseCase(accountRepository);
-export const listAccountsUseCase =
-  account.ListAccountsUseCase(accountRepository);
-
-export const getBusiness = business.GetBusinessUseCase(businessRepository);
-export const listBusiness = business.ListBusinessUseCase(businessRepository);
-export const createBusiness =
-  business.CreateBusinessUseCase(businessRepository);
-export const updateBusiness =
-  business.UpdateBusinessUseCase(businessRepository);
-export const deleteBusiness =
-  business.DeleteBusinessUseCase(businessRepository);
 
 export const getUser = user.GetUserUseCase(userRepository);
 export const listUser = user.ListUserUseCase(userRepository);
