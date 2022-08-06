@@ -1,6 +1,6 @@
 CREATE TABLE
     business(
-        id VARCHAR(20) NOT NULL,
+        id VARCHAR(64) NOT NULL,
         name VARCHAR(64) NOT NULL,
         short_description VARCHAR(300) NOT NULL,
         long_description TEXT NOT NULL,
@@ -23,8 +23,8 @@ CREATE TABLE
 
 CREATE TABLE
     users(
-        id VARCHAR(20) NOT NULL,
-        business_id VARCHAR(20) REFERENCES business,
+        id VARCHAR(64) NOT NULL,
+        business_id VARCHAR(64) REFERENCES business,
         name VARCHAR(64),
         email VARCHAR(64) NOT NULL,
         password VARCHAR(64) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE
 
 CREATE TABLE
     accounts(
-        id VARCHAR(20) NOT NULL,
+        id VARCHAR(64) NOT NULL,
         name VARCHAR(256) NOT NULL,
         type VARCHAR (64) NOT NULL,
         kind VARCHAR(20),
@@ -48,8 +48,8 @@ CREATE TABLE
 
 CREATE TABLE
     entries(
-        id VARCHAR(20) NOT NULL,
-        business_id VARCHAR(20) NOT NULL,
+        id VARCHAR(64) NOT NULL,
+        business_id VARCHAR(64) NOT NULL,
         currency VARCHAR(3) NOT NULL,
         description TEXT NOT NULL,
         participant VARCHAR(64),
@@ -68,8 +68,8 @@ CREATE TABLE
 
 CREATE TABLE
     transactions(
-        id VARCHAR(20) NOT NULL,
-        business_id VARCHAR(20) NOT NULL,
+        id VARCHAR(64) NOT NULL,
+        business_id VARCHAR(64) NOT NULL,
         entry_id VARCHAR(20) NOT NULL,
         account_id VARCHAR(20) NOT NULL,
         type VARCHAR (64) NOT NULL,

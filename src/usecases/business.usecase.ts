@@ -75,7 +75,7 @@ export default class BusinessUseCase implements BusinessUseCaseInterface {
   public async CreateBusinessUseCase(
     input: entities.CreateBusinessUseCaseInput
   ) {
-    if (input.id === "") {
+    if (input.id === "" || input.id === undefined) {
       input.id = uuidv4();
     }
 
