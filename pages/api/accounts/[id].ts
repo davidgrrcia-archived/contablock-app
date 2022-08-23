@@ -23,14 +23,11 @@ const getAccountController = async (
   res: NextApiResponse<entities.GetAccountControllerOutput | entities.DataError>
 ) => {
   try {
-
-    const id: string = req.query.id
-    ? req.query.id as string
-    : "";
+    const id: string = req.query.id ? (req.query.id as string) : "";
 
     const getAccountUseCaseInput: entities.GetAccountUseCaseInput = {
-      id: id
-    }
+      id: id,
+    };
 
     const getAccountUseCaseOutput = await accountUseCase.GetAccountUseCase(
       getAccountUseCaseInput

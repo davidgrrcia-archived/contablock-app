@@ -72,35 +72,6 @@ const createBusinessController = async (
   >
 ) => {
   try {
-
-    if (req.body.name === undefined || req.body.name === "") {
-      throw new Error("Name is required");
-    }
-    if (req.body.shortDescription === undefined || req.body.shortDescription === "") {
-      throw new Error("Short description is required");
-    }
-    if (req.body.longDescription === undefined || req.body.longDescription === "") {
-      throw new Error("Long description is required");
-    }
-    if (req.body.logo === undefined || req.body.logo === "") {
-      throw new Error("Logo is required");
-    }
-    if(req.body.nif === undefined || req.body.nif === "") {
-      throw new Error("NIF is required");
-    }
-    if(req.body.fiscalName === undefined || req.body.fiscalName === "") {
-      throw new Error("Fiscal name is required");
-    }
-    if(req.body.address === undefined || req.body.address === "") {
-      throw new Error("Address is required");
-    }
-    if(req.body.phone === undefined || req.body.phone === "") {
-      throw new Error("Phone is required");
-    }
-    if(req.body.email === undefined || req.body.email === "") {
-      throw new Error("Email is required");
-    }
-
     const createBusinessControllerInput: entities.CreateBusinessUseCaseInput = {
       id: req.body.id,
       name: req.body.name,

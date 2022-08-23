@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Sat Aug  6 18:47:14 2022
+# Make data base, printed on Tue Aug 23 20:32:54 2022
 
 # Variables
 
@@ -68,11 +68,11 @@ HOME = /Users/david
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/david/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
+VSCODE_CODE_CACHE_PATH = /Users/david/Library/Application Support/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
 # environment
 LOGNAME = david
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 ZSH = /Users/david/.oh-my-zsh
 # environment
@@ -116,7 +116,7 @@ TMPDIR = /var/folders/nz/fm96zs8n1492g_mz93nj1fcc0000gn/T/
 # environment
 PATH_TO_PROJECTS = /Users/david/Documents/github-projects
 # environment
-VSCODE_IPC_HOOK = /Users/david/Library/Application Support/Code/1.69.2-main.sock
+VSCODE_IPC_HOOK = /Users/david/Library/Application Support/Code/1.70.2-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -126,7 +126,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.36972542.36972548
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.40164719.40164726
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
@@ -158,7 +158,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 14340
+VSCODE_PID = 69944
 # variable set hash-table stats:
 # Load=74/1024=7%, Rehash=0, Collisions=1/98=1%
 
@@ -168,9 +168,9 @@ VSCODE_PID = 14340
 
 # Directories
 
-# . (device 16777220, inode 37773333): 22 files, no impossibilities.
+# . (device 16777220, inode 37773333): 24 files, no impossibilities.
 
-# 22 files, no impossibilities in 1 directories.
+# 24 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -196,11 +196,19 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-05 00:07:37
+#  Last modified 2022-08-06 19:12:38
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+start:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 16):
+	npm run dev
+	
 
 # Not a target:
 .DEFAULT:
@@ -216,6 +224,24 @@ down-migrations:
 	docker exec -i mysql mysql -uroot -proot db_accounting < ./database/database-down.sql
 	
 
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 8):
+	docker stop $$(docker ps -aq)
+	docker rm $$(docker ps -aq)
+	docker system prune 
+	
+
+provision:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 13):
+	docker-compose up -d
+	
+
 up-migrations:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -225,7 +251,7 @@ up-migrations:
 	
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/18=0%
+# Load=9/1024=1%, Rehash=0, Collisions=0/21=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -237,7 +263,7 @@ up-migrations:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sat Aug  6 18:47:14 2022
+# Finished Make data base on Tue Aug 23 20:32:54 2022
 
  
 make: *** No rule to make target `all'.  Stop.

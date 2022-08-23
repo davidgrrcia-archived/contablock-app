@@ -3,7 +3,7 @@ import * as entities from "../entities/Business";
 import BusinessStorage from "../dataSources/business.datasource";
 import { v4 as uuidv4 } from "uuid";
 
-const businessRepository = new BusinessStorage(); //TODO inside the class or constructor?
+const businessRepository = new BusinessStorage();
 
 export default class BusinessUseCase implements BusinessUseCaseInterface {
   public async GetBusinessUseCase(input: entities.GetBusinessUseCaseInput) {
@@ -75,8 +75,35 @@ export default class BusinessUseCase implements BusinessUseCaseInterface {
   public async CreateBusinessUseCase(
     input: entities.CreateBusinessUseCaseInput
   ) {
-    if (input.id === "" || input.id === undefined) {
+    if (input.id === undefined || input.id === "") {
       input.id = uuidv4();
+    }
+    if (input.name === undefined || input.name === "") {
+      throw new Error("Name is required");
+    }
+    if (input.shortDescription === undefined || input.shortDescription === "") {
+      throw new Error("Short description is required");
+    }
+    if (input.longDescription === undefined || input.longDescription === "") {
+      throw new Error("Long description is required");
+    }
+    if (input.logo === undefined || input.logo === "") {
+      throw new Error("Logo is required");
+    }
+    if (input.nif === undefined || input.nif === "") {
+      throw new Error("NIF is required");
+    }
+    if (input.fiscalName === undefined || input.fiscalName === "") {
+      throw new Error("Fiscal name is required");
+    }
+    if (input.address === undefined || input.address === "") {
+      throw new Error("Address is required");
+    }
+    if (input.phone === undefined || input.phone === "") {
+      throw new Error("Phone is required");
+    }
+    if (input.email === undefined || input.email === "") {
+      throw new Error("Email is required");
     }
 
     const state = "CREATED";
@@ -146,43 +173,20 @@ export default class BusinessUseCase implements BusinessUseCaseInterface {
       getBusinessUseCaseInput
     );
 
-    const name = input.name !== undefined ? input.name : storedBusiness.name;
-    const shortDescription =
-      input.shortDescription !== undefined
-        ? input.shortDescription
-        : storedBusiness.shortDescription;
-    const longDescription =
-      input.longDescription !== undefined
-        ? input.longDescription
-        : storedBusiness.longDescription;
-    const logo = input.logo !== undefined ? input.logo : storedBusiness.logo;
-    const stockPrice =
-      input.stockPrice !== undefined
-        ? input.stockPrice
-        : storedBusiness.stockPrice;
-    const urlWebsite =
-      input.urlWebsite !== undefined
-        ? input.urlWebsite
-        : storedBusiness.urlWebsite;
-    const ceoName =
-      input.ceoName !== undefined ? input.ceoName : storedBusiness.ceoName;
-    const numberOfEmployees =
-      input.numberOfEmployees !== undefined
-        ? input.numberOfEmployees
-        : storedBusiness.numberOfEmployees;
-    const country =
-      input.country !== undefined ? input.country : storedBusiness.country;
-    const nif = input.nif !== undefined ? input.nif : storedBusiness.nif;
-    const fiscalName =
-      input.fiscalName !== undefined
-        ? input.fiscalName
-        : storedBusiness.fiscalName;
-    const address =
-      input.address !== undefined ? input.address : storedBusiness.address;
-    const phone =
-      input.phone !== undefined ? input.phone : storedBusiness.phone;
-    const email =
-      input.email !== undefined ? input.email : storedBusiness.email;
+    const name = checkNotEmptyUpdate(input.name, storedBusiness.name);
+    const shortDescription = checkNotEmptyUpdate(input.shortDescription, storedBusiness.shortDescription);
+    const longDescription = checkNotEmptyUpdate(input.longDescription, storedBusiness.longDescription);
+    const logo = checkNotEmptyUpdate(input.logo, storedBusiness.logo);
+    const stockPrice = checkNotEmptyUpdate(input.stockPrice, storedBusiness.stockPrice);
+    const urlWebsite = checkNotEmptyUpdate(input.urlWebsite, storedBusiness.urlWebsite);
+    const ceoName = checkNotEmptyUpdate(input.ceoName, storedBusiness.ceoName);
+    const numberOfEmployees = checkNotEmptyUpdate(input.numberOfEmployees, storedBusiness.numberOfEmployees);
+    const country = checkNotEmptyUpdate(input.country, storedBusiness.country);
+    const nif = checkNotEmptyUpdate(input.nif, storedBusiness.nif);
+    const fiscalName = checkNotEmptyUpdate(input.fiscalName, storedBusiness.fiscalName);
+    const address = checkNotEmptyUpdate(input.address, storedBusiness.address);
+    const phone = checkNotEmptyUpdate(input.phone, storedBusiness.phone);
+    const email = checkNotEmptyUpdate(input.email, storedBusiness.email);
     const state = "UPDATED";
     const lastUpdate = new Date();
 
@@ -272,4 +276,11 @@ export default class BusinessUseCase implements BusinessUseCaseInterface {
 
     return deleteBusinessUseCaseOutput;
   }
+}
+
+function checkNotEmptyUpdate(input: any, stored: any) {
+  if (input === "" || input === undefined) {
+    return stored;
+  }
+  return input;
 }

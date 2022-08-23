@@ -1,3 +1,4 @@
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/david/Documents/tfg/tfg-informatica-nextjs'
 docker exec -i mysql mysql -uroot -proot db_accounting < ./database/database-up.sql
 make: Leaving directory `/Users/david/Documents/tfg/tfg-informatica-nextjs'

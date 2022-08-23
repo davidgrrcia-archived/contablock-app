@@ -136,7 +136,6 @@ export type UpdateBusinessUseCaseInput = {
   phone?: string;
   email?: string;
   state?: string;
-  lastUpdate?: Date;
 };
 export type UpdateBusinessUseCaseOutput = GetBusinessUseCaseOutput;
 
