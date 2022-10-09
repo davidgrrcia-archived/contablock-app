@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor contable
+actor supervisor
+actor empresario
+
+rectangle sistema_de_registro_contable {
+
+  contable --> (registrar asientos contables)
+  contable --> (modificación valor de asiento)
+  contable --> (eliminar asiento)
+  contable --> (presentar cuentas anuales)
+  contable --> (consultar informes y movimientos)
+  supervisor --> (consultar informes y movimientos)
+  supervisor --> (validar cuentas anuales)
+  empresario --> (consultar informes y movimientos)
+   
+
+  (registrar asientos contables) ..> (iniciar sesión) : include
+  (modificación valor de asiento) ..> (iniciar sesión) : include
+  (eliminar asiento) ..> (iniciar sesión) : include
+
+  (presentar cuentas anuales) ..> (iniciar sesión) : include
+
+  (validar cuentas anuales) ..> (iniciar sesión) : include
+  (validar cuentas anuales) ..> (presentar cuentas anuales) : include
+
+  (consultar informes y movimientos) ..> (iniciar sesión) : include
+  
+}
+@enduml
