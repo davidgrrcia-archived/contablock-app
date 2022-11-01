@@ -1,6 +1,4 @@
 
-DROP TABLE transactions CASCADE;
 DROP TABLE entries CASCADE;
-DROP TABLE users CASCADE;
 DROP TABLE business;
 DROP TABLE accounts;

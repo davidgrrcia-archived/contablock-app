@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import * as entities from "../../../../../src/entities/Entry";
-import EntryUseCase from "../../../../../src/usecases/entry.usecase";
+import * as entities from "../../../src/entities/Entry";
+import EntryUseCase from "../../../src/usecases/entry.usecase";
 
 const entryUseCase = new EntryUseCase();
 

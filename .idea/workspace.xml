@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4e066e13-966e-4d6c-9c63-43b481da9d41" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/database/database-down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/database-down.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/database-up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/database-up.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/AspectoLibreOffice.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/CrossReference.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/EncuadernacionBarata.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/EncuadernacionCara.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/Presentacion.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/estilista.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/logoURJC.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/main.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/refs.bib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/tocstyle.sty" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/business/[businessId]/entries/[id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/entries/[id].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/business/[businessId]/entries/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/entries/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/business/[businessId]/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/business/[id].ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2FqXP8sbzcX2vpgyXbbGjwmlNTz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "last_opened_file_path": "/Users/david/Documents/tfg/tfg-informatica-nextjs",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.firsttimeinforever.intellij.pdf.viewer.settings.PdfViewerConfigurable",
+    "ts.external.directory.path": "/Users/david/Documents/tfg/tfg-informatica-nextjs/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pages/api/business" />
+      <recent name="$PROJECT_DIR$/pages/api" />
+      <recent name="$PROJECT_DIR$/docs" />
+    </key>
+  </component>
+  <component name="RunManager" selected="LaTeX.main">
+    <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify-bibtex>
+        <compiler />
+        <compiler-path />
+        <compiler-arguments />
+        <envs />
+        <main-file>/</main-file>
+        <aux-dir>/</aux-dir>
+      </texify-bibtex>
+      <method v="2" />
+    </configuration>
+    <configuration name="main bibliography" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify-bibtex>
+        <compiler>BIBER</compiler>
+        <compiler-path />
+        <compiler-arguments />
+        <envs />
+        <main-file>$PROJECT_DIR$/docs/tfg-ade/main.tex</main-file>
+        <aux-dir>$PROJECT_DIR$/auxil</aux-dir>
+      </texify-bibtex>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify>
+        <compiler>PDFLATEX</compiler>
+        <compiler-path />
+        <sumatra-path />
+        <pdf-viewer>NONE</pdf-viewer>
+        <viewer-command />
+        <compiler-arguments />
+        <envs />
+        <main-file />
+        <output-path>{projectDir}/out</output-path>
+        <auxil-path>{projectDir}/auxil</auxil-path>
+        <compile-twice>false</compile-twice>
+        <output-format>PDF</output-format>
+        <latex-distribution>MIKTEX</latex-distribution>
+        <has-been-run>false</has-been-run>
+        <bib-run-config>[]</bib-run-config>
+        <makeindex-run-config>[]</makeindex-run-config>
+      </texify>
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
+      <texify>
+        <compiler>XELATEX</compiler>
+        <compiler-path />
+        <sumatra-path />
+        <pdf-viewer>NONE</pdf-viewer>
+        <viewer-command />
+        <compiler-arguments />
+        <envs />
+        <main-file>$PROJECT_DIR$/docs/tfg-ade/main.tex</main-file>
+        <output-path>$PROJECT_DIR$/out</output-path>
+        <auxil-path>$PROJECT_DIR$/auxil</auxil-path>
+        <compile-twice>false</compile-twice>
+        <output-format>PDF</output-format>
+        <latex-distribution>MIKTEX</latex-distribution>
+        <has-been-run>true</has-been-run>
+        <bib-run-config>[BibTeX.main bibliography]</bib-run-config>
+        <makeindex-run-config>[Makeindex.main makeindex]</makeindex-run-config>
+      </texify>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="MAKEINDEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify-makeindex>
+        <program>MAKEINDEX</program>
+        <main-file />
+        <command-line-args />
+        <work-dir />
+      </texify-makeindex>
+      <method v="2" />
+    </configuration>
+    <configuration name="main makeindex" type="MAKEINDEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify-makeindex>
+        <program>MAKEINDEX</program>
+        <main-file>$PROJECT_DIR$/docs/tfg-ade/main.tex</main-file>
+        <command-line-args />
+        <work-dir>$PROJECT_DIR$/auxil</work-dir>
+      </texify-makeindex>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="BibTeX.main bibliography" />
+      <item itemvalue="LaTeX.main" />
+      <item itemvalue="Makeindex.main makeindex" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="LaTeX.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4e066e13-966e-4d6c-9c63-43b481da9d41" name="Changes" comment="" />
+      <created>1665220560859</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1665220560859</updated>
+      <workItem from="1665220563032" duration="851000" />
+      <workItem from="1665221535852" duration="839000" />
+      <workItem from="1665223182788" duration="7427000" />
+      <workItem from="1665333323800" duration="1502000" />
+      <workItem from="1667312297748" duration="3563000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

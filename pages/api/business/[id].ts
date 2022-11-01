@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import * as entities from "../../../../src/entities/Business";
-import BusinessUseCase from "../../../../src/usecases/business.usecase";
+import * as entities from "../../../src/entities/Business";
+import BusinessUseCase from "../../../src/usecases/business.usecase";
 
 const businessUseCase = new BusinessUseCase();
 
