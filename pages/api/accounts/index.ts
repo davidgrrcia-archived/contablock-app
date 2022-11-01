@@ -35,8 +35,8 @@ const listAccountsController = async (
         items: listAccountsUseCaseOutput.items.map((item) => ({
           id: item.id,
           name: item.name,
-          type: item.type,
-          kind: item.kind,
+          group: item.group,
+          category: item.category,
         })),
       };
 

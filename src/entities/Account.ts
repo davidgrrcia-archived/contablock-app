@@ -12,8 +12,8 @@ export type GetAccountStorageInput = {
 export type GetAccountStorageOutput = {
   id: string;
   name: string;
-  type: string;
-  kind: string;
+  group: number;
+  category: string;
 };
 
 export type ListAccountsStorageOutput = {
@@ -34,8 +34,8 @@ export type GetAccountUseCaseInput = {
 export type GetAccountUseCaseOutput = {
   id: string;
   name: string;
-  type: string;
-  kind: string;
+  group: number;
+  category: string;
 };
 
 export type ListAccountsUseCaseOutput = {
@@ -47,8 +47,8 @@ export type ListAccountsUseCaseOutput = {
 export type GetAccountControllerOutput = {
   id: string;
   name: string;
-  type: string;
-  kind: string;
+  group: number;
+  category: string;
 };
 
 export type ListAccountsControllerOutput = {

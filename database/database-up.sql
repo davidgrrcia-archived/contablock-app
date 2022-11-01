@@ -26,7 +26,7 @@ CREATE TABLE
         quarter INTEGER NOT NULL,
         debit_balance DECIMAL NOT NULL,
         credit_balance DECIMAL NOT NULL,
-        last_total_balance DECIMAL NOT NULL,
+        total_balance DECIMAL NOT NULL,
         state VARCHAR(64) NOT NULL,
         creation_date DATETIME NOT NULL,
         last_update DATETIME NOT NULL,

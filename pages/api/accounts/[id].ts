@@ -36,8 +36,8 @@ const getAccountController = async (
     const getAccountControllerOutput: entities.GetAccountControllerOutput = {
       id: getAccountUseCaseOutput.id,
       name: getAccountUseCaseOutput.name,
-      type: getAccountUseCaseOutput.type,
-      kind: getAccountUseCaseOutput.kind,
+      group: getAccountUseCaseOutput.group,
+      category: getAccountUseCaseOutput.category,
     };
 
     return res.status(200).send(getAccountControllerOutput);

@@ -2,21 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e066e13-966e-4d6c-9c63-43b481da9d41" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/database/database-down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/database-down.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/business.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/business.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/database-up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/database-up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/AspectoLibreOffice.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/CrossReference.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/EncuadernacionBarata.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/EncuadernacionCara.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/Presentacion.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/estilista.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/Figs/logoURJC.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/main.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/refs.bib" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tfg-ade/tocstyle.sty" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/business/[businessId]/entries/[id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/entries/[id].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/business/[businessId]/entries/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/entries/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/business/[businessId]/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/business/[id].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/accounts/[id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/accounts/[id].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/accounts/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/accounts/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/business/[id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/business/[id].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/business/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/business/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/entries/[id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/entries/[id].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/entries/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/entries/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Account.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Account.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Business.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Business.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Entry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Entry.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Transaction.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/User.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +161,7 @@
       <workItem from="1665221535852" duration="839000" />
       <workItem from="1665223182788" duration="7427000" />
       <workItem from="1665333323800" duration="1502000" />
-      <workItem from="1667312297748" duration="3563000" />
+      <workItem from="1667312297748" duration="5334000" />
     </task>
     <servers />
   </component>
