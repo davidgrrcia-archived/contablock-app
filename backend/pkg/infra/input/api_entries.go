@@ -1,0 +1,107 @@
+package input
+
+import (
+	"context"
+	"encoding/json"
+	"errors"
+	input "github.com/davidevloper/HoldContract-go/pkg/adapters/input/http/entry"
+	"github.com/davidevloper/HoldContract-go/pkg/infra/utils"
+
+	"net/http"
+
+	"github.com/gorilla/mux"
+)
+
+func NewDefaultEntriesHttpHandler(options DefaultEntriesHttpHandlerOptions) (*DefaultEntriesHttpHandler, error) {
+	if options.Adapter == nil {
+		return nil, errors.New("invalid options infra")
+	}
+
+	return &DefaultEntriesHttpHandler{
+		adapter: options.Adapter,
+	}, nil
+
+}
+
+type DefaultEntriesHttpHandler struct {
+	adapter input.EntryInputAdapter
+}
+
+type DefaultEntriesHttpHandlerOptions struct {
+	Adapter input.EntryInputAdapter
+}
+
+func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
+	//register endpoints
+	r.HandleFunc("/entries", func(w http.ResponseWriter, r *http.Request) {
+		var ctx = context.Background()
+		var inputPayload input.CreateEntryRequest
+
+		err := json.NewDecoder(r.Body).Decode(&inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+		}
+		outputPayload, err := handler.adapter.AdaptCreateEntry(ctx, inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+		}
+
+		utils.Success(w, outputPayload.CreateEntryResponse)
+	}).Methods("POST")
+
+	r.HandleFunc("/entries", func(w http.ResponseWriter, r *http.Request) {
+		var ctx = context.Background()
+		outputPayload, err := handler.adapter.AdaptListEntries(ctx, input.ListEntryRequest{})
+		if err != nil {
+			utils.Failure(w, err)
+		}
+		utils.Success(w, outputPayload.ListEntryResponse)
+	}).Methods("GET")
+
+	r.HandleFunc("/entries/{id}", func(w http.ResponseWriter, r *http.Request) {
+		var ctx = context.Background()
+
+		vars := mux.Vars(r)
+		var inputPayload input.DescribeEntryRequest
+		inputPayload.ID = vars["id"]
+
+		entry, err := handler.adapter.AdaptDescribeEntry(ctx, inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+		}
+		utils.Success(w, entry)
+	}).Methods("GET")
+
+	r.HandleFunc("/entries/{id}", func(w http.ResponseWriter, r *http.Request) {
+		var ctx = context.Background()
+		var inputPayload input.UpdateEntryRequest
+
+		err := json.NewDecoder(r.Body).Decode(&inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+		}
+
+		vars := mux.Vars(r)
+		inputPayload.ID = vars["id"]
+
+		outputPayload, err := handler.adapter.AdaptUpdateEntry(ctx, inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+		}
+		utils.Success(w, outputPayload.UpdateEntryResponse)
+	}).Methods("PUT")
+
+	r.HandleFunc("/entries/{id}", func(w http.ResponseWriter, r *http.Request) {
+		var ctx = context.Background()
+
+		vars := mux.Vars(r)
+		var inputPayload input.DeleteEntryRequest
+		inputPayload.ID = vars["id"]
+
+		entry, err := handler.adapter.AdaptDeleteEntry(ctx, inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+		}
+		utils.Success(w, entry.DeleteEntryResponse)
+	}).Methods("DELETE")
+}
