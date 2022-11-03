@@ -1,0 +1,39 @@
+### CREATE GAME
+POST http://localhost:8080/games
+Content-Type: application/json
+
+{
+  "id": "11",
+  "name": "game1",
+  "owner-user-id": "1"
+}
+
+### DESCRIBE GAME
+GET http://localhost:8080/games/11
+Accept: application/json
+
+### LIST ALL GAMES
+GET http://localhost:8080/games
+Accept: */*
+Cache-Control: no-cache
+
+### UPDATE GAME
+PUT http://localhost:8080/games/11
+Content-Type: application/json
+
+{
+  "name": "game1-updated",
+  "owner-user-id": "1"
+}
+
+### DELETE USER
+DELETE http://localhost:8080/games/11
+Content-Type: application/json
+
+### JOIN GAME
+POST http://localhost:8080/games/11:join
+Content-Type: application/json
+
+{
+  "user-id": "2"
+}

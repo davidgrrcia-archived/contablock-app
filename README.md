@@ -1,34 +1,91 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# HoldContract
 
-## Getting Started
+# Ganache Mnemonic
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
+```jsx
+electric
+gift
+gold
+bitter
+boring
+surface
+stumble
+swift
+peanut
+adult
+horse
+dish
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Deploy contracts
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Install truffle
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```
+npm install -g truffle
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Move to the smart contracts directory
 
-## Learn More
+```jsx
+cd
+smart - contracts
+```
 
-To learn more about Next.js, take a look at the following resources:
+- Deploy the Smart Contracts with truffle
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```jsx
+truffle
+deploy--
+reset--
+network
+development
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Generate the necessary files of Geth
 
-## Deploy on Vercel
+```
+abigen --abi=./build/contracts/HoldContract.abi --bin=./build/contracts/HoldContract.bin --pkg=holdContract --out=../eth-gateway/holdContract/holdContract.go
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Interacting with endpoints
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    //users
+	//  { id, email, ... }
+	//	POST /users (creates a new user)
+	// 	GET /users (lists all users)
+	// 	GET /users/{id} (obtains the detail of a specific user)
+	// 	PUT /users/{id} (replaces a specific user)
+	// 	DELETE /users/{id} (removes a specific user)
+
+	//  user wallets
+	//	{ id, balance, ..., userId }
+	//  POST /users/{userId}/wallets
+	//  GET /users/{userId}/wallets
+	//  GET /users/{userId}/wallets/{walletId}
+	//  ...
+
+	//  games
+	//  { id, participants, ... }
+	// 	POST /games
+	// 	GET /games
+	// 	GET /games/{id}
+	// 	PUT /games/{id}
+	// 	DELETE /games/{id}
+	//  POST /games/{id}:join
+	//
+
+	//  bets
+	//  { id, gameId, userId, amount, ... }
+	//  GET /bets?userId&gameId
+	//  GET /bets/{id}
+
+```
+HTTP req (GET /users) ->
+		HTTP infra/framework (== mux) ->
+		input infra (== DefaultUsersHttpHandler) ->
+			input adapter (== UserInputAdapter) ->
+				use case (== user.UseCase) ->
+			output adapter (== InMemoryUserStorage) -->
+		output infra
+```

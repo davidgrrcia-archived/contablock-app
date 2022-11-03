@@ -3,19 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4e066e13-966e-4d6c-9c63-43b481da9d41" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/business.csv" beforeDir="false" afterPath="$PROJECT_DIR$/database/business.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database-up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/database-up.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/accounts/[id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/accounts/[id].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/accounts/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/accounts/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/business/[id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/business/[id].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/business/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/business/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/entries/[id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/entries/[id].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/entries/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/entries/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Account.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Account.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Business.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Business.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Entry.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Entry.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Transaction.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/User.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,21 +20,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "full.screen.before.presentation.mode": "false",
-    "last_opened_file_path": "/Users/david/Documents/tfg/tfg-informatica-nextjs",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.firsttimeinforever.intellij.pdf.viewer.settings.PdfViewerConfigurable",
-    "ts.external.directory.path": "/Users/david/Documents/tfg/tfg-informatica-nextjs/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/david/Documents/tfg/tfg-informatica-nextjs&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.firsttimeinforever.intellij.pdf.viewer.settings.PdfViewerConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/david/Documents/tfg/tfg-informatica-nextjs/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/pages/api/business" />
@@ -55,7 +42,7 @@
       <recent name="$PROJECT_DIR$/docs" />
     </key>
   </component>
-  <component name="RunManager" selected="LaTeX.main">
+  <component name="RunManager">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
         <compiler />
@@ -64,17 +51,6 @@
         <envs />
         <main-file>/</main-file>
         <aux-dir>/</aux-dir>
-      </texify-bibtex>
-      <method v="2" />
-    </configuration>
-    <configuration name="main bibliography" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
-      <texify-bibtex>
-        <compiler>BIBER</compiler>
-        <compiler-path />
-        <compiler-arguments />
-        <envs />
-        <main-file>$PROJECT_DIR$/docs/tfg-ade/main.tex</main-file>
-        <aux-dir>$PROJECT_DIR$/auxil</aux-dir>
       </texify-bibtex>
       <method v="2" />
     </configuration>
@@ -99,6 +75,26 @@
       </texify>
       <method v="2" />
     </configuration>
+    <configuration default="true" type="MAKEINDEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify-makeindex>
+        <program>MAKEINDEX</program>
+        <main-file />
+        <command-line-args />
+        <work-dir />
+      </texify-makeindex>
+      <method v="2" />
+    </configuration>
+    <configuration name="main bibliography" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify-bibtex>
+        <compiler>BIBER</compiler>
+        <compiler-path />
+        <compiler-arguments />
+        <envs />
+        <main-file>$PROJECT_DIR$/docs/tfg-ade/main.tex</main-file>
+        <aux-dir>$PROJECT_DIR$/auxil</aux-dir>
+      </texify-bibtex>
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
       <texify>
         <compiler>XELATEX</compiler>
@@ -120,15 +116,6 @@
       </texify>
       <method v="2" />
     </configuration>
-    <configuration default="true" type="MAKEINDEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
-      <texify-makeindex>
-        <program>MAKEINDEX</program>
-        <main-file />
-        <command-line-args />
-        <work-dir />
-      </texify-makeindex>
-      <method v="2" />
-    </configuration>
     <configuration name="main makeindex" type="MAKEINDEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-makeindex>
         <program>MAKEINDEX</program>
@@ -138,16 +125,6 @@
       </texify-makeindex>
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="BibTeX.main bibliography" />
-      <item itemvalue="LaTeX.main" />
-      <item itemvalue="Makeindex.main makeindex" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="LaTeX.main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -161,7 +138,7 @@
       <workItem from="1665221535852" duration="839000" />
       <workItem from="1665223182788" duration="7427000" />
       <workItem from="1665333323800" duration="1502000" />
-      <workItem from="1667312297748" duration="5334000" />
+      <workItem from="1667312297748" duration="5802000" />
     </task>
     <servers />
   </component>

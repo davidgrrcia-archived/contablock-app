@@ -1,0 +1,36 @@
+### CREATE USER
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "id": "3",
+  "username": "sergio",
+  "password": "123",
+  "email": "test@test.com"
+}
+
+### DESCRIBE USER
+GET http://localhost:8080/users/1
+Accept: application/json
+
+### LIST ALL USERS
+GET http://localhost:8080/users
+Accept: */*
+Cache-Control: no-cache
+
+### UPDATE USER
+PUT http://localhost:8080/users/3
+Content-Type: application/json
+
+{
+  "username": "sergio23",
+  "password": "123456",
+  "email": "test@test.com"
+}
+
+### DELETE USER
+DELETE http://localhost:8080/users/3
+Content-Type: application/json
+
+
+
