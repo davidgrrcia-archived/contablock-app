@@ -9,11 +9,11 @@ import (
 )
 
 type EntryUseCase interface {
-	CreateEntryUseCase(ctx context.Context, input CreateEntryUseCaseInput) (*CreateEntryUseCaseOutput, error)
-	DescribeEntryUseCase(ctx context.Context, input DescribeEntryUseCaseInput) (*DescribeEntryUseCaseOutput, error)
-	ListEntryUseCase(ctx context.Context, input ListEntryUseCaseInput) (*ListEntryUseCaseOutput, error)
-	UpdateEntryUseCase(ctx context.Context, input UpdateEntryUseCaseInput) (*UpdateEntryUseCaseOutput, error)
-	RemoveEntryUseCase(ctx context.Context, input RemoveEntryUseCaseInput) (*RemoveEntryUseCaseOutput, error)
+	CreateEntry(ctx context.Context, input CreateEntryInput) (*CreateEntryOutput, error)
+	DescribeEntry(ctx context.Context, input DescribeEntryInput) (*DescribeEntryOutput, error)
+	ListEntries(ctx context.Context, input ListEntryInput) (*ListEntryOutput, error)
+	UpdateEntry(ctx context.Context, input UpdateEntryInput) (*UpdateEntryOutput, error)
+	RemoveEntry(ctx context.Context, input RemoveEntryInput) (*RemoveEntryOutput, error)
 }
 
 func NewDefaultEntryUseCase(options DefaultEntryUseCaseOptions) (*DefaultEntryUseCase, error) {
@@ -36,27 +36,33 @@ type DefaultEntryUseCaseOptions struct {
 
 var _ EntryUseCase = (*DefaultEntryUseCase)(nil)
 
-func (useCase *DefaultEntryUseCase) CreateEntryUseCase(ctx context.Context, input CreateEntryUseCaseInput) (*CreateEntryUseCaseOutput, error) {
+func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input CreateEntryInput) (*CreateEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
 		return nil, errors.New("invalid input")
 	}
 
-	var checkEntry GetInput
-	checkEntry.ID = input.ID
-	_, err = useCase.entryStorage.Get(ctx, checkEntry)
+	var describeEntryInput DescribeEntryInput
+	describeEntryInput.ID = input.ID
+	_, err = useCase.DescribeEntry(ctx, describeEntryInput)
 	if err == nil {
 		return nil, errors.New("entry already exists")
 	}
 
-	var desiredEntry AddInput
+	var desiredEntry EntryStorageData
 	desiredEntry.ID = input.ID
-	desiredEntry.Entryname = input.Entryname
-	if err != nil {
-		return nil, err
-	}
-
-	desiredEntry.Email = input.Email
+	desiredEntry.AccountID = input.AccountID
+	desiredEntry.MultipleEntryID = input.MultipleEntryID
+	desiredEntry.Currency = input.Currency
+	desiredEntry.Concept = input.Concept
+	desiredEntry.Date = input.Date
+	quarter := useCase.calculateQuarter(input.Date)
+	desiredEntry.Quarter = quarter
+	desiredEntry.DebitBalance = input.DebitBalance
+	desiredEntry.CreditBalance = input.CreditBalance
+	totalBalance := input.DebitBalance - input.CreditBalance
+	desiredEntry.TotalBalance = totalBalance
+	desiredEntry.State = EntryStateCreated
 	desiredEntry.CreationDate = time.Now()
 	desiredEntry.LastUpdate = desiredEntry.CreationDate
 
@@ -65,63 +71,78 @@ func (useCase *DefaultEntryUseCase) CreateEntryUseCase(ctx context.Context, inpu
 		return nil, err
 	}
 
-	return &CreateEntryUseCaseOutput{
+	return &CreateEntryOutput{
 		Entry: storedEntry.Entry,
 	}, nil
 }
 
-func (useCase *DefaultEntryUseCase) DescribeEntryUseCase(ctx context.Context, input DescribeEntryUseCaseInput) (*DescribeEntryUseCaseOutput, error) {
+func (useCase *DefaultEntryUseCase) DescribeEntry(ctx context.Context, input DescribeEntryInput) (*DescribeEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
 		return nil, errors.New("invalid input")
 	}
 
-	var desiredEntry GetInput
-	desiredEntry.ID = input.ID
-
-	storedEntry, err := useCase.entryStorage.Get(ctx, desiredEntry)
+	storedEntry, err := useCase.entryStorage.Get(ctx, input.ID)
 	if err != nil {
 		return nil, err
 	}
 
-	return &DescribeEntryUseCaseOutput{
+	return &DescribeEntryOutput{
 		Entry: storedEntry.Entry,
 	}, err
 }
 
-func (useCase *DefaultEntryUseCase) ListEntryUseCase(ctx context.Context, input ListEntryUseCaseInput) (*ListEntryUseCaseOutput, error) {
+func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListEntryInput) (*ListEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
 		return nil, errors.New("invalid input")
 	}
 
-	var desiredEntry AllInput
-
-	entryList, err := useCase.entryStorage.All(ctx, desiredEntry)
+	entryCollection, err := useCase.entryStorage.All(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	var items = entryList.Items
-
-	return &ListEntryUseCaseOutput{
-		Items: items,
+	return &ListEntryOutput{
+		Items: entryCollection.Items,
 	}, err
 }
 
-func (useCase *DefaultEntryUseCase) UpdateEntryUseCase(ctx context.Context, input UpdateEntryUseCaseInput) (*UpdateEntryUseCaseOutput, error) {
+func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input UpdateEntryInput) (*UpdateEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
 		return nil, errors.New("invalid input")
 	}
 
-	var desiredEntry EditInput
+	var desiredEntry EntryStorageData
 	desiredEntry.ID = input.ID
-	desiredEntry.Entryname = input.Entryname
-	if err != nil {
-		return nil, err
+	if input.AccountID != nil {
+		desiredEntry.AccountID = *input.AccountID
 	}
-	desiredEntry.Email = input.Email
+	if input.Currency != nil {
+		desiredEntry.Currency = *input.Currency
+	}
+	if input.Concept != nil {
+		desiredEntry.Concept = *input.Concept
+	}
+	if input.Date != nil {
+		desiredEntry.Date = *input.Date
+		quarter := useCase.calculateQuarter(*input.Date)
+		desiredEntry.Quarter = quarter
+	}
+	if input.DebitBalance != nil {
+		desiredEntry.DebitBalance = *input.DebitBalance
+	}
+	if input.CreditBalance != nil {
+		desiredEntry.CreditBalance = *input.CreditBalance
+	}
+	if input.DebitBalance != nil && input.CreditBalance != nil {
+		totalBalance := *input.DebitBalance - *input.CreditBalance
+		desiredEntry.TotalBalance = totalBalance
+	}
+	if input.State != nil {
+		desiredEntry.State = *input.State
+	}
 	desiredEntry.LastUpdate = time.Now()
 
 	storedEntry, err := useCase.entryStorage.Edit(ctx, desiredEntry)
@@ -129,26 +150,39 @@ func (useCase *DefaultEntryUseCase) UpdateEntryUseCase(ctx context.Context, inpu
 		return nil, err
 	}
 
-	return &UpdateEntryUseCaseOutput{
+	return &UpdateEntryOutput{
 		Entry: storedEntry.Entry,
 	}, err
 }
 
-func (useCase *DefaultEntryUseCase) RemoveEntryUseCase(ctx context.Context, input RemoveEntryUseCaseInput) (*RemoveEntryUseCaseOutput, error) {
+func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input RemoveEntryInput) (*RemoveEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
 		return nil, errors.New("invalid input")
 	}
 
-	var desiredEntry RemoveInput
-	desiredEntry.ID = input.ID
-
-	storedEntry, err := useCase.entryStorage.Remove(ctx, desiredEntry)
+	storedEntry, err := useCase.entryStorage.Remove(ctx, input.ID)
 	if err != nil {
 		return nil, err
 	}
 
-	return &RemoveEntryUseCaseOutput{
+	return &RemoveEntryOutput{
 		Entry: storedEntry.Entry,
 	}, err
+}
+
+func (useCase *DefaultEntryUseCase) calculateQuarter(date time.Time) int {
+	month := date.Month()
+	switch month {
+	case 1, 2, 3:
+		return 1
+	case 4, 5, 6:
+		return 2
+	case 7, 8, 9:
+		return 3
+	case 10, 11, 12:
+		return 4
+	default:
+		return 0
+	}
 }

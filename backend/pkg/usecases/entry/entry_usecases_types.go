@@ -5,118 +5,93 @@ import (
 	"time"
 )
 
+const (
+	// States
+	EntryStateCreated = "CREATED"
+)
+
 type Entry struct {
-	ID           string
-	Email        string
-	Username     string
-	Password     string
-	CreationDate time.Time
-	LastUpdate   time.Time
+	ID              string
+	AccountID       string
+	MultipleEntryID string
+	Currency        string
+	Concept         string
+	Date            time.Time
+	Quarter         int
+	DebitBalance    float64
+	CreditBalance   float64
+	TotalBalance    float64
+	State           string
+	StateReason     *string
+	CreationDate    time.Time
+	LastUpdate      time.Time
 }
 
-type CreateEntryUseCaseInput struct {
-	ID        string `valid:"required,length(1|64)"`
-	Email     string `valid:"required,length(1|64)"`
-	Entryname string `valid:"required,length(1|64)"`
-	Password  string `valid:"required,length(1|64)"`
+type CreateEntryInput struct {
+	ID              string    `valid:"required,length(1|64)"`
+	AccountID       string    `valid:"required,length(1|64)"`
+	MultipleEntryID string    `valid:"required,length(1|64)"`
+	Currency        string    `valid:"required,length(3)"`
+	Concept         string    `valid:"required"`
+	Date            time.Time `valid:"required"`
+	DebitBalance    float64   `valid:"required"`
+	CreditBalance   float64   `valid:"required"`
 }
 
-type CreateEntryUseCaseOutput struct {
+type CreateEntryOutput struct {
 	Entry
 }
 
-type DescribeEntryUseCaseInput struct {
+type DescribeEntryInput struct {
 	ID string `valid:"required,length(1|64)"`
 }
 
-type DescribeEntryUseCaseOutput struct {
+type DescribeEntryOutput struct {
 	Entry
 }
 
-type ListEntryUseCaseInput struct{}
+type ListEntryInput struct{}
 
-type ListEntryUseCaseOutput struct {
+type ListEntryOutput struct {
 	Items []Entry
 }
 
-type UpdateEntryUseCaseInput struct {
-	ID        string `valid:"required,length(1|64)"`
-	Email     string `valid:"required,length(1|64)"`
-	Entryname string `valid:"required,length(1|64)"`
-	Password  string `valid:"required,length(1|64)"`
+type UpdateEntryInput struct {
+	ID            string     `valid:"required,length(1|64)"`
+	AccountID     *string    `valid:"optional,length(1|64)"`
+	Currency      *string    `valid:"optional,length(3)"`
+	Concept       *string    `valid:"optional"`
+	Date          *time.Time `valid:"optional"`
+	DebitBalance  *float64   `valid:"optional"`
+	CreditBalance *float64   `valid:"optional"`
+	State         *string    `valid:"optional"`
+	StateReason   *string    `valid:"optional"`
 }
 
-type UpdateEntryUseCaseOutput struct {
-	Entry
+type UpdateEntryOutput struct {
+	Entry Entry
 }
 
-type RemoveEntryUseCaseInput struct {
+type RemoveEntryInput struct {
 	ID string `valid:"required,length(1|64)"`
 }
 
-type RemoveEntryUseCaseOutput struct {
-	Entry
+type RemoveEntryOutput struct {
+	Entry Entry
 }
-
-/* TYPES FOR STORAGE */
-
-type AddInput struct {
-	ID           string
-	Email        string
-	Entryname    string
-	Password     string
-	CreationDate time.Time
-	LastUpdate   time.Time
-}
-
-type AddOutput struct {
-	Entry
-}
-
-type GetInput struct {
-	ID string
-}
-
-type GetOutput struct {
-	Entry
-}
-
-type AllInput struct{}
-
-type AllOutput struct {
-	Items []Entry
-}
-
-type EditInput struct {
-	ID         string
-	Email      string
-	Entryname  string
-	Password   string
-	LastUpdate time.Time
-}
-
-type EditOutput struct {
-	Entry
-}
-
-type RemoveInput struct {
-	ID string
-}
-
-type RemoveOutput struct {
-	Entry
-}
-
-/* COLLECTION TYPE */
-
-type EntryCollection []Entry
-
-/* INTERFACES */
 
 type EntryStorage interface {
-	Add(ctx context.Context, input AddInput) (*AddOutput, error)
-	Get(ctx context.Context, input GetInput) (*GetOutput, error)
-	All(ctx context.Context, input AllInput) (*AllOutput, error)
-	Edit(ctx context.Context, input EditInput) (*EditOutput, error)
-	Remove(ctx context.Context, input RemoveInput) (*RemoveOutput, error)
+	Add(ctx context.Context, input EntryStorageData) (*EntryStorageData, error)
+	Get(ctx context.Context, id string) (*EntryStorageData, error)
+	All(ctx context.Context) (*EntryStorageCollectionData, error)
+	Edit(ctx context.Context, input EntryStorageData) (*EntryStorageData, error)
+	Remove(ctx context.Context, id string) (*EntryStorageData, error)
+}
+
+type EntryStorageData struct {
+	Entry
+}
+
+type EntryStorageCollectionData struct {
+	Items []Entry
 }

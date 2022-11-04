@@ -1,6 +1,7 @@
 package graph
 
 import (
+	"database/sql"
 	inputAdapterEntry "github.com/davidevloper/HoldContract-go/pkg/adapters/input/http/entry"
 	"github.com/davidevloper/HoldContract-go/pkg/usecases/entry"
 	"github.com/gorilla/mux"
@@ -29,8 +30,8 @@ func (graph *Graph) GetEntryInputAdapter() inputAdapterEntry.EntryInputAdapter {
 	return graph.EntryInputAdapter
 }
 
-func (graph *Graph) GetEntryDB() entry.EntryCollection {
-	return graph.EntryDb
+func (graph *Graph) GetEntryDB() *sql.DB {
+	return &graph.EntryDb
 }
 
 func (graph *Graph) GetEntryStorage() entry.EntryStorage {

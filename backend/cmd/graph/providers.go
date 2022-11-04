@@ -1,14 +1,13 @@
 package graph
 
 import (
-	"log"
-	"time"
-
+	"database/sql"
 	inputEntry "github.com/davidevloper/HoldContract-go/pkg/adapters/input/http/entry"
 	entryOutputDbAdapter "github.com/davidevloper/HoldContract-go/pkg/adapters/output/database/entry"
 	"github.com/davidevloper/HoldContract-go/pkg/infra/input"
 	"github.com/davidevloper/HoldContract-go/pkg/usecases/entry"
 	"github.com/gorilla/mux"
+	"log"
 )
 
 func (graph *Graph) provideRouter() {
@@ -16,29 +15,24 @@ func (graph *Graph) provideRouter() {
 }
 
 func (graph *Graph) provideEntryDB() {
-	graph.EntryDb = entry.EntryCollection{
-		{
-			ID:           "1",
-			Email:        "test@test.com",
-			Password:     "123",
-			CreationDate: time.Now(),
-			LastUpdate:   time.Now(),
-		},
-		{
-			ID:           "2",
-			Email:        "test@test.com",
-			Password:     "123",
-			CreationDate: time.Now(),
-			LastUpdate:   time.Now(),
-		},
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/db_accounting")
+	if err != nil {
+		panic(err)
 	}
+
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+
+	graph.EntryDb = *db
 }
 
 func (graph *Graph) provideEntryStorage() entry.EntryStorage {
-	entryStorageOpts := entryOutputDbAdapter.InMemoryEntryStorageOptions{
-		EntryDatabase: graph.GetEntryDB(),
+	entryStorageOpts := entryOutputDbAdapter.EntryRepositoryOptions{
+		DB: graph.GetEntryDB(),
 	}
-	entryStorage, err := entryOutputDbAdapter.NewInMemoryEntryStorage(entryStorageOpts)
+	entryStorage, err := entryOutputDbAdapter.NewEntryRepository(entryStorageOpts)
 	if err != nil {
 		panic(err)
 	}

@@ -19,7 +19,7 @@ CREATE TABLE
     entries(
         id VARCHAR(64) NOT NULL PRIMARY KEY,
         account_id VARCHAR(64) NOT NULL,
-        double_entry_code VARCHAR(64) NOT NULL,
+        multiple_entry_id VARCHAR(64) NOT NULL,
         currency VARCHAR(3) NOT NULL,
         concept TEXT NOT NULL,
         date DATETIME NOT NULL,
@@ -28,6 +28,7 @@ CREATE TABLE
         credit_balance DECIMAL NOT NULL,
         total_balance DECIMAL NOT NULL,
         state VARCHAR(64) NOT NULL,
+        state_reason TEXT,
         creation_date DATETIME NOT NULL,
         last_update DATETIME NOT NULL,
         FOREIGN KEY (account_id) REFERENCES accounts(id)

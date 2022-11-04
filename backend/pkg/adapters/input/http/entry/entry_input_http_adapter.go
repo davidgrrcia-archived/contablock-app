@@ -35,13 +35,13 @@ type DefaultHttpInputAdapterOptions struct {
 var _ EntryInputAdapter = (*DefaultHttpInputAdapter)(nil)
 
 func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, data CreateEntryRequest) (*CreateEntryResponseWrapper, error) {
-	var inputData entry.CreateEntryUseCaseInput
+	var inputData entry.CreateEntryInput
 	inputData.ID = data.ID
 	inputData.Entryname = data.Entryname
 	inputData.Password = data.Password
 	inputData.Email = data.Email
 
-	outputData, err := adapter.entryUseCase.CreateEntryUseCase(ctx, inputData)
+	outputData, err := adapter.entryUseCase.CreateEntry(ctx, inputData)
 	if err != nil {
 		return nil, err
 	}
@@ -60,10 +60,10 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 }
 
 func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, data DescribeEntryRequest) (*DescribeEntryResponseWrapper, error) {
-	var inputData entry.DescribeEntryUseCaseInput
+	var inputData entry.DescribeEntryInput
 	inputData.ID = data.ID
 
-	outputData, err := adapter.entryUseCase.DescribeEntryUseCase(ctx, inputData)
+	outputData, err := adapter.entryUseCase.DescribeEntry(ctx, inputData)
 	if err != nil {
 		return nil, err
 	}
@@ -82,9 +82,9 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 }
 
 func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, data ListEntryRequest) (*ListEntryResponseWrapper, error) {
-	var inputData entry.ListEntryUseCaseInput
+	var inputData entry.ListEntryInput
 
-	outputData, err := adapter.entryUseCase.ListEntryUseCase(ctx, inputData)
+	outputData, err := adapter.entryUseCase.ListEntries(ctx, inputData)
 	if err != nil {
 		return nil, err
 	}
@@ -108,13 +108,13 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 }
 
 func (adapter *DefaultHttpInputAdapter) AdaptUpdateEntry(ctx context.Context, data UpdateEntryRequest) (*UpdateEntryResponseWrapper, error) {
-	var inputData entry.UpdateEntryUseCaseInput
+	var inputData entry.UpdateEntryInput
 	inputData.ID = data.ID
 	inputData.Entryname = data.Entryname
 	inputData.Password = data.Password
 	inputData.Email = data.Email
 
-	outputData, err := adapter.entryUseCase.UpdateEntryUseCase(ctx, inputData)
+	outputData, err := adapter.entryUseCase.UpdateEntry(ctx, inputData)
 	if err != nil {
 		return nil, err
 	}
@@ -133,10 +133,10 @@ func (adapter *DefaultHttpInputAdapter) AdaptUpdateEntry(ctx context.Context, da
 }
 
 func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, data DeleteEntryRequest) (*DeleteEntryResponseWrapper, error) {
-	var inputData entry.RemoveEntryUseCaseInput
+	var inputData entry.RemoveEntryInput
 	inputData.ID = data.ID
 
-	outputData, err := adapter.entryUseCase.RemoveEntryUseCase(ctx, inputData)
+	outputData, err := adapter.entryUseCase.RemoveEntry(ctx, inputData)
 	if err != nil {
 		return nil, err
 	}

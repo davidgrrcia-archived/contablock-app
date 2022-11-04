@@ -1,6 +1,7 @@
 package graph
 
 import (
+	"database/sql"
 	"github.com/gorilla/mux"
 
 	inputEntry "github.com/davidevloper/HoldContract-go/pkg/adapters/input/http/entry"
@@ -15,7 +16,7 @@ type Graph struct {
 	//holdContract.HoldContractInterface
 
 	//entries
-	EntryDb entry.EntryCollection
+	EntryDb sql.DB
 	entry.EntryStorage
 	entry.EntryUseCase
 	inputEntry.EntryInputAdapter

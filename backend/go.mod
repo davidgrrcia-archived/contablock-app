@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
 	github.com/ethereum/go-ethereum v1.10.10
+	github.com/go-sql-driver/mysql v1.4.1
 	github.com/gorilla/mux v1.8.0
 )
 
@@ -22,5 +23,6 @@ require (
 	github.com/tklauser/numcpus v0.3.0 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	golang.org/x/sys v0.0.0-20211019181941-9d821ace8654 // indirect
+	google.golang.org/appengine v1.6.5 // indirect
 	gopkg.in/natefinch/npipe.v2 v2.0.0-20160621034901-c1b8fa8bdcce // indirect
 )

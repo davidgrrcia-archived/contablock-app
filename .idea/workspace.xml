@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="4e066e13-966e-4d6c-9c63-43b481da9d41" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/cmd/graph/providers.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/cmd/graph/providers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pkg/adapters/input/http/entry/entry_input_http_adapter.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pkg/adapters/input/http/entry/entry_input_http_adapter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pkg/adapters/output/database/entry/entry_output_database_adapter.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pkg/adapters/output/database/entry/entry_output_database_adapter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pkg/usecases/entry/entry_usecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pkg/usecases/entry/entry_usecases.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pkg/usecases/entry/entry_usecases_types.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pkg/usecases/entry/entry_usecases_types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/database-up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/database-up.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,38 +37,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "configurable..is.expanded": "true",
-    "configurable.GoLibrariesConfigurable.is.expanded": "true",
-    "full.screen.before.presentation.mode": "false",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/david/Documents/tfg/tfg-informatica-nextjs/backend/pkg/adapters/input/http/entry",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.goide.configuration.GoLibrariesConfigurableProvider",
-    "ts.external.directory.path": "/Users/david/Documents/tfg/tfg-informatica-nextjs/frontend/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;configurable..is.expanded&quot;: &quot;true&quot;,
+    &quot;configurable.GoLibrariesConfigurable.is.expanded&quot;: &quot;true&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/david/Documents/tfg/tfg-informatica-nextjs/backend/pkg/adapters/input/http/entry&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.goide.configuration.GoLibrariesConfigurableProvider&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/david/Documents/tfg/tfg-informatica-nextjs/frontend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/pkg/adapters/input/http/entry" />
@@ -125,7 +131,7 @@
         <compiler-path />
         <compiler-arguments />
         <envs />
-        <main-file>$PROJECT_DIR$/docs/tfg-ade/main.tex</main-file>
+        <main-file>/</main-file>
         <aux-dir>$PROJECT_DIR$/auxil</aux-dir>
       </texify-bibtex>
       <method v="2" />
@@ -139,7 +145,7 @@
         <viewer-command />
         <compiler-arguments />
         <envs />
-        <main-file>$PROJECT_DIR$/docs/tfg-ade/main.tex</main-file>
+        <main-file />
         <output-path>$PROJECT_DIR$/out</output-path>
         <auxil-path>$PROJECT_DIR$/auxil</auxil-path>
         <compile-twice>false</compile-twice>
@@ -154,7 +160,7 @@
     <configuration name="main makeindex" type="MAKEINDEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-makeindex>
         <program>MAKEINDEX</program>
-        <main-file>$PROJECT_DIR$/docs/tfg-ade/main.tex</main-file>
+        <main-file />
         <command-line-args />
         <work-dir>$PROJECT_DIR$/auxil</work-dir>
       </texify-makeindex>
@@ -174,6 +180,7 @@
       <workItem from="1665223182788" duration="7427000" />
       <workItem from="1665333323800" duration="1502000" />
       <workItem from="1667312297748" duration="5802000" />
+      <workItem from="1667580425621" duration="2000" />
     </task>
     <servers />
   </component>

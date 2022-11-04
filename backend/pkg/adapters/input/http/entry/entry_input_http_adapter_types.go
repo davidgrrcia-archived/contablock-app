@@ -4,8 +4,6 @@ import (
 	"time"
 )
 
-/* ADAPTERS TYPES */
-
 type Entry struct {
 	ID           string    `json:"id"`
 	Entryname    string    `json:"entryname"`
