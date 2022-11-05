@@ -36,34 +36,32 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 
 	defer db.Close()
 
-	var entryDb entry.EntryStorageData
-	entryDb.ID = input.ID
-	entryDb.AccountID = input.AccountID
-	entryDb.MultipleEntryID = input.MultipleEntryID
-	entryDb.Currency = input.Currency
-	entryDb.Concept = input.Concept
-	entryDb.Date = input.Date
-	entryDb.Quarter = input.Quarter
-	entryDb.DebitBalance = input.DebitBalance
-	entryDb.CreditBalance = input.CreditBalance
-	entryDb.TotalBalance = input.TotalBalance
-	entryDb.State = input.State
-	entryDb.StateReason = input.StateReason
-	entryDb.CreationDate = input.CreationDate
-	entryDb.LastUpdate = input.LastUpdate
+	entryDb, err := toEntryDb(input.Entry)
+	if err != nil {
+		return nil, err
+	}
 
 	query := "INSERT INTO entries (id, account_id, multiple_entry_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
 	result := db.QueryRow(query, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
 
-	var output entry.EntryStorageData
+	query = "SELECT * FROM entries WHERE id = ?"
+
+	result = db.QueryRow(query, entryDb.ID)
+
+	var output EntryDb
 	err = result.Scan(&output.ID, &output.AccountID, &output.MultipleEntryID, &output.Currency, &output.Concept, &output.Date, &output.Quarter, &output.DebitBalance, &output.CreditBalance, &output.TotalBalance, &output.State, &output.StateReason, &output.CreationDate, &output.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
 
+	storedEntry, err := toEntry(output)
+	if err != nil {
+		return nil, err
+	}
+
 	return &entry.EntryStorageData{
-		Entry: output.Entry,
+		Entry: *storedEntry,
 	}, nil
 }
 
@@ -85,9 +83,7 @@ func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.E
 		return nil, err
 	}
 
-	return &entry.EntryStorageData{
-		Entry: output.Entry,
-	}, nil
+	return &output, nil
 }
 
 func (repository *EntryRepository) All(ctx context.Context) (*entry.EntryStorageCollectionData, error) {
@@ -155,9 +151,7 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 		return nil, err
 	}
 
-	return &entry.EntryStorageData{
-		Entry: output.Entry,
-	}, nil
+	return &output, nil
 }
 
 func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entry.EntryStorageData, error) {
@@ -178,9 +172,7 @@ func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entr
 		return nil, err
 	}
 
-	return &entry.EntryStorageData{
-		Entry: output.Entry,
-	}, nil
+	return &output, nil
 }
 
 func (repository *EntryRepository) openConnection() (*sql.DB, error) {

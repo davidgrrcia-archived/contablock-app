@@ -3,14 +3,12 @@ POST http://localhost:3000/entries
 Content-Type: application/json
 
 {
-  "id": "3",
-  "account_id" : "1",
+  "account_id" : "572",
   "multiple_entry_id" : "1",
   "currency": "USD",
-  "concept": "Concept 3",
-  "date" : "2019-01-01",
-  "debit_balance" : "0",
-  "credit_balance": "1000",
+  "concept": "Concept 4",
+  "date" : "2021-02-18T21:54:42.123Z",
+  "credit_balance": 1000.00
 }
 
 ### DESCRIBE USER

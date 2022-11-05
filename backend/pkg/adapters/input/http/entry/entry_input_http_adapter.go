@@ -55,13 +55,23 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 	response.AccountID = outputData.AccountID
 	response.MultipleEntryID = outputData.MultipleEntryID
 	response.Currency = outputData.Currency
+	if outputData.Concept == nil {
+		response.Concept = ""
+	} else {
+		response.Concept = *outputData.Concept
+	}
 	response.Concept = *outputData.Concept
 	response.Date = outputData.Date
+	response.Quarter = outputData.Quarter
 	response.DebitBalance = outputData.DebitBalance
 	response.CreditBalance = outputData.CreditBalance
 	response.TotalBalance = outputData.TotalBalance
 	response.State = outputData.State
-	response.StateReason = *outputData.StateReason
+	if outputData.StateReason == nil {
+		response.StateReason = ""
+	} else {
+		response.StateReason = *outputData.StateReason
+	}
 	response.CreationDate = outputData.CreationDate
 	response.LastUpdate = outputData.LastUpdate
 

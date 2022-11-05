@@ -40,10 +40,12 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		err := json.NewDecoder(r.Body).Decode(&inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
+			return
 		}
 		outputPayload, err := handler.adapter.AdaptCreateEntry(ctx, inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
+			return
 		}
 
 		utils.Success(w, outputPayload.CreateEntryResponse)
@@ -54,6 +56,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		outputPayload, err := handler.adapter.AdaptListEntries(ctx, input.ListEntryRequest{})
 		if err != nil {
 			utils.Failure(w, err)
+			return
 		}
 		utils.Success(w, outputPayload.ListEntryResponse)
 	}).Methods("GET")
@@ -68,6 +71,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		entry, err := handler.adapter.AdaptDescribeEntry(ctx, inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
+			return
 		}
 		utils.Success(w, entry)
 	}).Methods("GET")
@@ -79,6 +83,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		err := json.NewDecoder(r.Body).Decode(&inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
+			return
 		}
 
 		vars := mux.Vars(r)
@@ -87,6 +92,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		outputPayload, err := handler.adapter.AdaptUpdateEntry(ctx, inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
+			return
 		}
 		utils.Success(w, outputPayload.UpdateEntryResponse)
 	}).Methods("PUT")
@@ -101,6 +107,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		entry, err := handler.adapter.AdaptDeleteEntry(ctx, inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
+			return
 		}
 		utils.Success(w, entry.DeleteEntryResponse)
 	}).Methods("DELETE")
