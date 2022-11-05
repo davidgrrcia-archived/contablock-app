@@ -59,7 +59,7 @@ type ListEntryOutput struct {
 type UpdateEntryInput struct {
 	ID            string     `valid:"required,length(1|64)"`
 	AccountID     *string    `valid:"optional,length(1|64)"`
-	Currency      *string    `valid:"optional,length(3)"`
+	Currency      *string    `valid:"optional,length(3|3)"`
 	Concept       *string    `valid:"optional"`
 	Date          *time.Time `valid:"optional"`
 	DebitBalance  *float64   `valid:"optional"`

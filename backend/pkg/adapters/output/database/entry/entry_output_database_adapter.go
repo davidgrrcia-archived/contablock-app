@@ -77,13 +77,20 @@ func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.E
 
 	result := db.QueryRow(query, id)
 
-	var output entry.EntryStorageData
+	var output EntryDb
 	err = result.Scan(&output.ID, &output.AccountID, &output.MultipleEntryID, &output.Currency, &output.Concept, &output.Date, &output.Quarter, &output.DebitBalance, &output.CreditBalance, &output.TotalBalance, &output.State, &output.StateReason, &output.CreationDate, &output.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	return &output, nil
+	storedEntry, err := toEntry(output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &entry.EntryStorageData{
+		Entry: *storedEntry,
+	}, nil
 }
 
 func (repository *EntryRepository) All(ctx context.Context) (*entry.EntryStorageCollectionData, error) {
@@ -101,19 +108,24 @@ func (repository *EntryRepository) All(ctx context.Context) (*entry.EntryStorage
 		return nil, err
 	}
 
-	var output entry.EntryStorageCollectionData
+	var output []EntryDb
 	for rows.Next() {
-		var entryDb entry.EntryStorageData
+		var entryDb EntryDb
 		err = rows.Scan(&entryDb.ID, &entryDb.AccountID, &entryDb.MultipleEntryID, &entryDb.Currency, &entryDb.Concept, &entryDb.Date, &entryDb.Quarter, &entryDb.DebitBalance, &entryDb.CreditBalance, &entryDb.TotalBalance, &entryDb.State, &entryDb.StateReason, &entryDb.CreationDate, &entryDb.LastUpdate)
 		if err != nil {
 			return nil, err
 		}
 
-		output.Items = append(output.Items, entryDb.Entry)
+		output = append(output, entryDb)
+	}
+
+	items, err := toEntryItems(output)
+	if err != nil {
+		return nil, err
 	}
 
 	return &entry.EntryStorageCollectionData{
-		Items: output.Items,
+		Items: items,
 	}, nil
 }
 
@@ -125,33 +137,33 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 
 	defer db.Close()
 
-	var entryDb entry.EntryStorageData
-	entryDb.ID = input.ID
-	entryDb.AccountID = input.AccountID
-	entryDb.MultipleEntryID = input.MultipleEntryID
-	entryDb.Currency = input.Currency
-	entryDb.Concept = input.Concept
-	entryDb.Date = input.Date
-	entryDb.Quarter = input.Quarter
-	entryDb.DebitBalance = input.DebitBalance
-	entryDb.CreditBalance = input.CreditBalance
-	entryDb.TotalBalance = input.TotalBalance
-	entryDb.State = input.State
-	entryDb.StateReason = input.StateReason
-	entryDb.CreationDate = input.CreationDate
-	entryDb.LastUpdate = input.LastUpdate
+	entryDb, err := toEntryDb(input.Entry)
+	if err != nil {
+		return nil, err
+	}
 
 	query := "UPDATE entries SET account_id = ?, multiple_entry_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, total_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE id = ?"
 
 	result := db.QueryRow(query, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.ID)
 
-	var output entry.EntryStorageData
+	query = "SELECT * FROM entries WHERE id = ?"
+
+	result = db.QueryRow(query, entryDb.ID)
+
+	var output EntryDb
 	err = result.Scan(&output.ID, &output.AccountID, &output.MultipleEntryID, &output.Currency, &output.Concept, &output.Date, &output.Quarter, &output.DebitBalance, &output.CreditBalance, &output.TotalBalance, &output.State, &output.StateReason, &output.CreationDate, &output.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	return &output, nil
+	storedEntry, err := toEntry(output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &entry.EntryStorageData{
+		Entry: *storedEntry,
+	}, nil
 }
 
 func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entry.EntryStorageData, error) {
@@ -162,17 +174,28 @@ func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entr
 
 	defer db.Close()
 
-	query := "DELETE FROM entries WHERE id = ?"
+	query := "SELECT * FROM entries WHERE id = ?"
 
 	result := db.QueryRow(query, id)
 
-	var output entry.EntryStorageData
+	query = "DELETE FROM entries WHERE id = ?"
+
+	_ = db.QueryRow(query, id)
+
+	var output EntryDb
 	err = result.Scan(&output.ID, &output.AccountID, &output.MultipleEntryID, &output.Currency, &output.Concept, &output.Date, &output.Quarter, &output.DebitBalance, &output.CreditBalance, &output.TotalBalance, &output.State, &output.StateReason, &output.CreationDate, &output.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
 
-	return &output, nil
+	storedEntry, err := toEntry(output)
+	if err != nil {
+		return nil, err
+	}
+
+	return &entry.EntryStorageData{
+		Entry: *storedEntry,
+	}, nil
 }
 
 func (repository *EntryRepository) openConnection() (*sql.DB, error) {

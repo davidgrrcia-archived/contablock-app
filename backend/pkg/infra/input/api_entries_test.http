@@ -11,27 +11,30 @@ Content-Type: application/json
   "credit_balance": 1000.00
 }
 
-### DESCRIBE USER
-GET http://localhost:8080/users/1
+### DESCRIBE ENTRY
+GET http://localhost:3000/entries/9da17f6f-29ea-4dc6-ae35-3a54eced8021
 Accept: application/json
 
-### LIST ALL USERS
-GET http://localhost:8080/users
+### LIST ALL ENTRIES
+GET http://localhost:3000/entries
 Accept: */*
 Cache-Control: no-cache
 
-### UPDATE USER
-PUT http://localhost:8080/users/3
+### UPDATE ENTRY
+PUT http://localhost:3000/entries/9da17f6f-29ea-4dc6-ae35-3a54eced8021
 Content-Type: application/json
 
 {
-  "username": "sergio23",
-  "password": "123456",
-  "email": "test@test.com"
+  "account_id" : "570",
+  "multiple_entry_id" : "1",
+  "currency": "USD",
+  "concept": "Concept 5",
+  "date" : "2021-02-18T21:54:42.123Z",
+  "debit_balance": 1000.00
 }
 
-### DELETE USER
-DELETE http://localhost:8080/users/3
+### DELETE ENTRY
+DELETE http://localhost:3000/entries/9da17f6f-29ea-4dc6-ae35-3a54eced8021
 Content-Type: application/json
 
 

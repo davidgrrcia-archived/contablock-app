@@ -68,12 +68,12 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		var inputPayload input.DescribeEntryRequest
 		inputPayload.ID = vars["id"]
 
-		entry, err := handler.adapter.AdaptDescribeEntry(ctx, inputPayload)
+		outputPayload, err := handler.adapter.AdaptDescribeEntry(ctx, inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
 			return
 		}
-		utils.Success(w, entry)
+		utils.Success(w, outputPayload.DescribeEntryResponse)
 	}).Methods("GET")
 
 	r.HandleFunc("/entries/{id}", func(w http.ResponseWriter, r *http.Request) {

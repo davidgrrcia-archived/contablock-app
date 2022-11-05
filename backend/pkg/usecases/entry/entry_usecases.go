@@ -128,15 +128,34 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 		return nil, errors.New("invalid input")
 	}
 
+	if input.DebitBalance == nil && input.CreditBalance == nil {
+		return nil, errors.New("valid debit or credit balance is required")
+	}
+
+	if input.DebitBalance != nil && input.CreditBalance != nil {
+		return nil, errors.New("only one of debit or credit balance is required")
+	}
+
+	var describeEntryInput DescribeEntryInput
+	describeEntryInput.ID = input.ID
+
+	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
 	var desiredEntry EntryStorageData
-	desiredEntry.ID = input.ID
+	desiredEntry.Entry = storedEntry.Entry
+
 	if input.AccountID != nil {
 		desiredEntry.AccountID = *input.AccountID
 	}
 	if input.Currency != nil {
 		desiredEntry.Currency = *input.Currency
 	}
-	desiredEntry.Concept = input.Concept
+	if input.Concept != nil {
+		desiredEntry.Concept = input.Concept
+	}
 	if input.Date != nil {
 		desiredEntry.Date = *input.Date
 		quarter := useCase.calculateQuarter(*input.Date)
@@ -144,26 +163,25 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	}
 	if input.DebitBalance != nil {
 		desiredEntry.DebitBalance = *input.DebitBalance
+		desiredEntry.CreditBalance = 0.00
 	}
 	if input.CreditBalance != nil {
 		desiredEntry.CreditBalance = *input.CreditBalance
+		desiredEntry.DebitBalance = 0.00
 	}
-	if input.DebitBalance != nil && input.CreditBalance != nil {
-		totalBalance := *input.DebitBalance - *input.CreditBalance
-		desiredEntry.TotalBalance = totalBalance
-	}
+	desiredEntry.TotalBalance = desiredEntry.DebitBalance - desiredEntry.CreditBalance
 	if input.State != nil {
 		desiredEntry.State = *input.State
 	}
 	desiredEntry.LastUpdate = time.Now()
 
-	storedEntry, err := useCase.entryStorage.Edit(ctx, desiredEntry)
+	updatedEntry, err := useCase.entryStorage.Edit(ctx, desiredEntry)
 	if err != nil {
 		return nil, err
 	}
 
 	return &UpdateEntryOutput{
-		Entry: storedEntry.Entry,
+		Entry: updatedEntry.Entry,
 	}, err
 }
 

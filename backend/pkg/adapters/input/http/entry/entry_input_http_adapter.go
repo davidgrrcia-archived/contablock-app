@@ -95,13 +95,23 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 	response.AccountID = outputData.AccountID
 	response.MultipleEntryID = outputData.MultipleEntryID
 	response.Currency = outputData.Currency
+	if outputData.Concept == nil {
+		response.Concept = ""
+	} else {
+		response.Concept = *outputData.Concept
+	}
 	response.Concept = *outputData.Concept
 	response.Date = outputData.Date
+	response.Quarter = outputData.Quarter
 	response.DebitBalance = outputData.DebitBalance
 	response.CreditBalance = outputData.CreditBalance
 	response.TotalBalance = outputData.TotalBalance
 	response.State = outputData.State
-	response.StateReason = *outputData.StateReason
+	if outputData.StateReason == nil {
+		response.StateReason = ""
+	} else {
+		response.StateReason = *outputData.StateReason
+	}
 	response.CreationDate = outputData.CreationDate
 	response.LastUpdate = outputData.LastUpdate
 
@@ -128,13 +138,23 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 		responseItem.AccountID = item.AccountID
 		responseItem.MultipleEntryID = item.MultipleEntryID
 		responseItem.Currency = item.Currency
+		if item.Concept == nil {
+			responseItem.Concept = ""
+		} else {
+			responseItem.Concept = *item.Concept
+		}
 		responseItem.Concept = *item.Concept
 		responseItem.Date = item.Date
+		responseItem.Quarter = item.Quarter
 		responseItem.DebitBalance = item.DebitBalance
 		responseItem.CreditBalance = item.CreditBalance
 		responseItem.TotalBalance = item.TotalBalance
 		responseItem.State = item.State
-		responseItem.StateReason = *item.StateReason
+		if item.StateReason == nil {
+			responseItem.StateReason = ""
+		} else {
+			responseItem.StateReason = *item.StateReason
+		}
 		responseItem.CreationDate = item.CreationDate
 		responseItem.LastUpdate = item.LastUpdate
 		response.Items = append(response.Items, responseItem)
@@ -165,13 +185,23 @@ func (adapter *DefaultHttpInputAdapter) AdaptUpdateEntry(ctx context.Context, da
 	response.AccountID = outputData.AccountID
 	response.MultipleEntryID = outputData.MultipleEntryID
 	response.Currency = outputData.Currency
+	if outputData.Concept == nil {
+		response.Concept = ""
+	} else {
+		response.Concept = *outputData.Concept
+	}
 	response.Concept = *outputData.Concept
 	response.Date = outputData.Date
+	response.Quarter = outputData.Quarter
 	response.DebitBalance = outputData.DebitBalance
 	response.CreditBalance = outputData.CreditBalance
 	response.TotalBalance = outputData.TotalBalance
 	response.State = outputData.State
-	response.StateReason = *outputData.StateReason
+	if outputData.StateReason == nil {
+		response.StateReason = ""
+	} else {
+		response.StateReason = *outputData.StateReason
+	}
 	response.CreationDate = outputData.CreationDate
 	response.LastUpdate = outputData.LastUpdate
 
@@ -195,13 +225,23 @@ func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, da
 	response.AccountID = outputData.AccountID
 	response.MultipleEntryID = outputData.MultipleEntryID
 	response.Currency = outputData.Currency
+	if outputData.Concept == nil {
+		response.Concept = ""
+	} else {
+		response.Concept = *outputData.Concept
+	}
 	response.Concept = *outputData.Concept
 	response.Date = outputData.Date
+	response.Quarter = outputData.Quarter
 	response.DebitBalance = outputData.DebitBalance
 	response.CreditBalance = outputData.CreditBalance
 	response.TotalBalance = outputData.TotalBalance
 	response.State = outputData.State
-	response.StateReason = *outputData.StateReason
+	if outputData.StateReason == nil {
+		response.StateReason = ""
+	} else {
+		response.StateReason = *outputData.StateReason
+	}
 	response.CreationDate = outputData.CreationDate
 	response.LastUpdate = outputData.LastUpdate
 

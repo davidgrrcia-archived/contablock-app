@@ -148,6 +148,12 @@
     <configuration name="api_entries_test | CREATE ENTRY" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" requestIdentifier="CREATE ENTRY" runType="Run single request">
       <method v="2" />
     </configuration>
+    <configuration name="api_entries_test | DESCRIBE ENTRY" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="2" requestIdentifier="DESCRIBE ENTRY" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="api_entries_test | LIST ALL USERS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="3" requestIdentifier="LIST ALL USERS" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
       <texify>
         <compiler>XELATEX</compiler>
@@ -181,9 +187,13 @@
     <list>
       <item itemvalue="Go Build.go build main.go" />
       <item itemvalue="HTTP Request.api_entries_test | CREATE ENTRY" />
+      <item itemvalue="HTTP Request.api_entries_test | DESCRIBE ENTRY" />
+      <item itemvalue="HTTP Request.api_entries_test | LIST ALL USERS" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.api_entries_test | LIST ALL USERS" />
+        <item itemvalue="HTTP Request.api_entries_test | DESCRIBE ENTRY" />
         <item itemvalue="HTTP Request.api_entries_test | CREATE ENTRY" />
       </list>
     </recent_temporary>
@@ -221,5 +231,16 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/backend/pkg/usecases/entry/entry_usecases.go</url>
+          <line>125</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
