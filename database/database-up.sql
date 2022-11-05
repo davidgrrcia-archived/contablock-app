@@ -13,7 +13,7 @@ CREATE TABLE
         social_denomination VARCHAR(256) NOT NULL,
         cif VARCHAR(9) NOT NULL,
         logo BLOB,
-        eth_address VARCHAR(42) NOT NULL,
+        eth_address VARCHAR(42) NOT NULL
     );
 
 CREATE TABLE
