@@ -148,31 +148,16 @@
     <configuration name="api_entries_test | CREATE ENTRY" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" requestIdentifier="CREATE ENTRY" runType="Run single request">
       <method v="2" />
     </configuration>
+    <configuration name="api_entries_test | DELETE USER" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="5" requestIdentifier="DELETE USER" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="api_entries_test | DESCRIBE ENTRY" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="2" requestIdentifier="DESCRIBE ENTRY" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="api_entries_test | LIST ALL USERS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="3" requestIdentifier="LIST ALL USERS" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="main" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
-      <texify>
-        <compiler>XELATEX</compiler>
-        <compiler-path />
-        <sumatra-path />
-        <pdf-viewer>NONE</pdf-viewer>
-        <viewer-command />
-        <compiler-arguments />
-        <envs />
-        <main-file />
-        <output-path>$PROJECT_DIR$/out</output-path>
-        <auxil-path>$PROJECT_DIR$/auxil</auxil-path>
-        <compile-twice>false</compile-twice>
-        <output-format>PDF</output-format>
-        <latex-distribution>MIKTEX</latex-distribution>
-        <has-been-run>true</has-been-run>
-        <bib-run-config>[BibTeX.main bibliography]</bib-run-config>
-        <makeindex-run-config>[Makeindex.main makeindex]</makeindex-run-config>
-      </texify>
+    <configuration name="api_entries_test | UPDATE USER" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="4" requestIdentifier="UPDATE USER" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="main makeindex" type="MAKEINDEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
@@ -187,12 +172,16 @@
     <list>
       <item itemvalue="Go Build.go build main.go" />
       <item itemvalue="HTTP Request.api_entries_test | CREATE ENTRY" />
+      <item itemvalue="HTTP Request.api_entries_test | DELETE USER" />
       <item itemvalue="HTTP Request.api_entries_test | DESCRIBE ENTRY" />
       <item itemvalue="HTTP Request.api_entries_test | LIST ALL USERS" />
+      <item itemvalue="HTTP Request.api_entries_test | UPDATE USER" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.api_entries_test | DELETE USER" />
         <item itemvalue="HTTP Request.api_entries_test | LIST ALL USERS" />
+        <item itemvalue="HTTP Request.api_entries_test | UPDATE USER" />
         <item itemvalue="HTTP Request.api_entries_test | DESCRIBE ENTRY" />
         <item itemvalue="HTTP Request.api_entries_test | CREATE ENTRY" />
       </list>
