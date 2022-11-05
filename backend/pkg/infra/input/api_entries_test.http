@@ -1,12 +1,16 @@
-### CREATE USER
-POST http://localhost:8080/users
+### CREATE ENTRY
+POST http://localhost:3000/entries
 Content-Type: application/json
 
 {
   "id": "3",
-  "username": "sergio",
-  "password": "123",
-  "email": "test@test.com"
+  "account_id" : "1",
+  "multiple_entry_id" : "1",
+  "currency": "USD",
+  "concept": "Concept 3",
+  "date" : "2019-01-01",
+  "debit_balance" : "0",
+  "credit_balance": "1000",
 }
 
 ### DESCRIBE USER

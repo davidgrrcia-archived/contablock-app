@@ -1,4 +1,4 @@
-module github.com/davidevloper/HoldContract-go
+module github.com/davidgrcia/tfg-informatica-nextjs
 
 go 1.17
 
@@ -6,6 +6,7 @@ require (
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
 	github.com/ethereum/go-ethereum v1.10.10
 	github.com/go-sql-driver/mysql v1.4.1
+	github.com/google/uuid v1.1.5
 	github.com/gorilla/mux v1.8.0
 )
 
@@ -15,7 +16,6 @@ require (
 	github.com/deckarep/golang-set v1.7.1 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/go-stack/stack v1.8.1 // indirect
-	github.com/google/uuid v1.1.5 // indirect
 	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/rjeczalik/notify v0.9.1 // indirect
 	github.com/shirou/gopsutil v3.21.9+incompatible // indirect

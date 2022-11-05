@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	input "github.com/davidevloper/HoldContract-go/pkg/adapters/input/http/entry"
-	"github.com/davidevloper/HoldContract-go/pkg/infra/utils"
+	input "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/infra/utils"
 
 	"net/http"
 

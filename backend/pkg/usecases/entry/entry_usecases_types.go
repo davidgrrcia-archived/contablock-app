@@ -15,7 +15,7 @@ type Entry struct {
 	AccountID       string
 	MultipleEntryID string
 	Currency        string
-	Concept         string
+	Concept         *string
 	Date            time.Time
 	Quarter         int
 	DebitBalance    float64
@@ -28,14 +28,14 @@ type Entry struct {
 }
 
 type CreateEntryInput struct {
-	ID              string    `valid:"required,length(1|64)"`
+	ID              *string   `valid:"optional,length(1|64)"`
 	AccountID       string    `valid:"required,length(1|64)"`
 	MultipleEntryID string    `valid:"required,length(1|64)"`
 	Currency        string    `valid:"required,length(3)"`
-	Concept         string    `valid:"required"`
+	Concept         *string   `valid:"optional"`
 	Date            time.Time `valid:"required"`
-	DebitBalance    float64   `valid:"required"`
-	CreditBalance   float64   `valid:"required"`
+	DebitBalance    *float64  `valid:"optional"`
+	CreditBalance   *float64  `valid:"optional"`
 }
 
 type CreateEntryOutput struct {
@@ -69,7 +69,7 @@ type UpdateEntryInput struct {
 }
 
 type UpdateEntryOutput struct {
-	Entry Entry
+	Entry
 }
 
 type RemoveEntryInput struct {
@@ -77,7 +77,7 @@ type RemoveEntryInput struct {
 }
 
 type RemoveEntryOutput struct {
-	Entry Entry
+	Entry
 }
 
 type EntryStorage interface {

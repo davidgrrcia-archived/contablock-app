@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/davidevloper/HoldContract-go/cmd/graph"
+	"github.com/davidgrcia/tfg-informatica-nextjs/cmd/graph"
 )
 
 func Run(graph graph.Graph, port string) {

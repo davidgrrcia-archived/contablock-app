@@ -83,7 +83,7 @@
       <recent name="$PROJECT_DIR$/pages/api/business" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="HTTP Request.api_entries_test | CREATE ENTRY">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
         <compiler />
@@ -136,6 +136,9 @@
       </texify-bibtex>
       <method v="2" />
     </configuration>
+    <configuration name="api_entries_test | CREATE ENTRY" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" requestIdentifier="CREATE ENTRY" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
       <texify>
         <compiler>XELATEX</compiler>
@@ -166,6 +169,14 @@
       </texify-makeindex>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="HTTP Request.api_entries_test | CREATE ENTRY" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.api_entries_test | CREATE ENTRY" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

@@ -5,7 +5,7 @@ import (
 	"crypto/ecdsa"
 	"encoding/json"
 	"fmt"
-	"github.com/davidevloper/HoldContract-go/eth-gateway/holdContract"
+	"github.com/davidgrcia/tfg-informatica-nextjs/eth-gateway/holdContract"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"

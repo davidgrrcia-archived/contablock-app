@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/davidevloper/HoldContract-go/pkg/usecases/entry"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
 )
 
 func NewEntryRepository(opts EntryRepositoryOptions) (*EntryRepository, error) {

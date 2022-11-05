@@ -5,20 +5,33 @@ import (
 )
 
 type Entry struct {
-	ID           string    `json:"id"`
-	Entryname    string    `json:"entryname"`
-	Password     string    `json:"password"`
-	Email        string    `json:"email"`
-	CreationDate time.Time `json:"creation-date"`
-	LastUpdate   time.Time `json:"last-update"`
+	ID              string    `json:"id"`
+	AccountID       string    `json:"account_id"`
+	MultipleEntryID string    `json:"multiple_entry_id"`
+	Currency        string    `json:"currency"`
+	Concept         string    `json:"concept"`
+	Date            time.Time `json:"date"`
+	Quarter         int       `json:"quarter"`
+	DebitBalance    float64   `json:"debit_balance"`
+	CreditBalance   float64   `json:"credit_balance"`
+	TotalBalance    float64   `json:"total_balance"`
+	State           string    `json:"state"`
+	StateReason     string    `json:"state_reason"`
+	CreationDate    time.Time `json:"creation-date"`
+	LastUpdate      time.Time `json:"last-update"`
 }
 
 type CreateEntryRequest struct {
-	ID        string `json:"id"`
-	Entryname string `json:"entryname"`
-	Password  string `json:"password"`
-	Email     string `json:"email"`
+	ID              *string   `json:"id"`
+	AccountID       string    `json:"account_id"`
+	MultipleEntryID string    `json:"multiple_entry_id"`
+	Currency        string    `json:"currency"`
+	Concept         *string   `json:"concept"`
+	Date            time.Time `json:"date"`
+	DebitBalance    *float64  `json:"debit_balance"`
+	CreditBalance   *float64  `json:"credit_balance"`
 }
+
 type CreateEntryResponse struct {
 	Entry
 }
@@ -46,10 +59,13 @@ type ListEntryResponseWrapper struct {
 }
 
 type UpdateEntryRequest struct {
-	ID        string `json:"id"`
-	Entryname string `json:"entryname"`
-	Password  string `json:"password"`
-	Email     string `json:"email"`
+	ID            string     `json:"id"`
+	AccountID     *string    `json:"account_id"`
+	Currency      *string    `json:"currency"`
+	Concept       *string    `json:"concept"`
+	Date          *time.Time `json:"date"`
+	DebitBalance  *float64   `json:"debit_balance"`
+	CreditBalance *float64   `json:"credit_balance"`
 }
 type UpdateEntryResponse struct {
 	Entry

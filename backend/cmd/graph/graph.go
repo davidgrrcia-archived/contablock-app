@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"github.com/gorilla/mux"
 
-	inputEntry "github.com/davidevloper/HoldContract-go/pkg/adapters/input/http/entry"
-	"github.com/davidevloper/HoldContract-go/pkg/usecases/entry"
+	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
 )
 
 type Graph struct {

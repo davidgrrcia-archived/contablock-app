@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/davidevloper/HoldContract-go/cmd/graph"
-	"github.com/davidevloper/HoldContract-go/cmd/server"
+	"github.com/davidgrcia/tfg-informatica-nextjs/cmd/graph"
+	"github.com/davidgrcia/tfg-informatica-nextjs/cmd/server"
 )
 
 const port = ":3000"

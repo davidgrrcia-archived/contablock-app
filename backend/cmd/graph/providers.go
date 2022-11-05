@@ -2,12 +2,14 @@ package graph
 
 import (
 	"database/sql"
-	inputEntry "github.com/davidevloper/HoldContract-go/pkg/adapters/input/http/entry"
-	entryOutputDbAdapter "github.com/davidevloper/HoldContract-go/pkg/adapters/output/database/entry"
-	"github.com/davidevloper/HoldContract-go/pkg/infra/input"
-	"github.com/davidevloper/HoldContract-go/pkg/usecases/entry"
-	"github.com/gorilla/mux"
 	"log"
+
+	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
+	entryOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/output/database/entry"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/infra/input"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/mux"
 )
 
 func (graph *Graph) provideRouter() {

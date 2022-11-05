@@ -14,3 +14,12 @@ provision:
 
 start: 
 	npm run dev
+
+backend-lint:
+	cd backend && golangci-lint run
+
+run-backend:
+	cd backend && go run main.go
+
+provision:
+	docker-compose up -d

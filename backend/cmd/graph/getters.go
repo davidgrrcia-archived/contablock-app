@@ -2,8 +2,8 @@ package graph
 
 import (
 	"database/sql"
-	inputAdapterEntry "github.com/davidevloper/HoldContract-go/pkg/adapters/input/http/entry"
-	"github.com/davidevloper/HoldContract-go/pkg/usecases/entry"
+	inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
 	"github.com/gorilla/mux"
 )
 

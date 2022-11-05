@@ -2,7 +2,7 @@ CREATE TABLE
     accounts(
         id VARCHAR(64) NOT NULL PRIMARY KEY,
         name VARCHAR(256) NOT NULL,
-        group INTEGER NOT NULL,
+        type INTEGER NOT NULL,
         category VARCHAR(64)
     );
 
@@ -21,7 +21,7 @@ CREATE TABLE
         account_id VARCHAR(64) NOT NULL,
         multiple_entry_id VARCHAR(64) NOT NULL,
         currency VARCHAR(3) NOT NULL,
-        concept TEXT NOT NULL,
+        concept TEXT,
         date DATETIME NOT NULL,
         quarter INTEGER NOT NULL,
         debit_balance DECIMAL NOT NULL,

@@ -3,7 +3,7 @@ package entryInputHttpAdapter
 import (
 	"context"
 	"errors"
-	"github.com/davidevloper/HoldContract-go/pkg/usecases/entry"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
 )
 
 type EntryInputAdapter interface {
@@ -37,9 +37,13 @@ var _ EntryInputAdapter = (*DefaultHttpInputAdapter)(nil)
 func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, data CreateEntryRequest) (*CreateEntryResponseWrapper, error) {
 	var inputData entry.CreateEntryInput
 	inputData.ID = data.ID
-	inputData.Entryname = data.Entryname
-	inputData.Password = data.Password
-	inputData.Email = data.Email
+	inputData.AccountID = data.AccountID
+	inputData.MultipleEntryID = data.MultipleEntryID
+	inputData.Currency = data.Currency
+	inputData.Concept = data.Concept
+	inputData.Date = data.Date
+	inputData.DebitBalance = data.DebitBalance
+	inputData.CreditBalance = data.CreditBalance
 
 	outputData, err := adapter.entryUseCase.CreateEntry(ctx, inputData)
 	if err != nil {
@@ -48,8 +52,16 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 
 	var response CreateEntryResponse
 	response.ID = outputData.ID
-	response.Password = outputData.Password
-	response.Email = outputData.Email
+	response.AccountID = outputData.AccountID
+	response.MultipleEntryID = outputData.MultipleEntryID
+	response.Currency = outputData.Currency
+	response.Concept = *outputData.Concept
+	response.Date = outputData.Date
+	response.DebitBalance = outputData.DebitBalance
+	response.CreditBalance = outputData.CreditBalance
+	response.TotalBalance = outputData.TotalBalance
+	response.State = outputData.State
+	response.StateReason = *outputData.StateReason
 	response.CreationDate = outputData.CreationDate
 	response.LastUpdate = outputData.LastUpdate
 
@@ -70,8 +82,16 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 
 	var response DescribeEntryResponse
 	response.ID = outputData.ID
-	response.Password = outputData.Password
-	response.Email = outputData.Email
+	response.AccountID = outputData.AccountID
+	response.MultipleEntryID = outputData.MultipleEntryID
+	response.Currency = outputData.Currency
+	response.Concept = *outputData.Concept
+	response.Date = outputData.Date
+	response.DebitBalance = outputData.DebitBalance
+	response.CreditBalance = outputData.CreditBalance
+	response.TotalBalance = outputData.TotalBalance
+	response.State = outputData.State
+	response.StateReason = *outputData.StateReason
 	response.CreationDate = outputData.CreationDate
 	response.LastUpdate = outputData.LastUpdate
 
@@ -95,8 +115,16 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 	for _, item := range outputData.Items {
 		var responseItem DescribeEntryResponse
 		responseItem.ID = item.ID
-		responseItem.Password = item.Password
-		responseItem.Email = item.Email
+		responseItem.AccountID = item.AccountID
+		responseItem.MultipleEntryID = item.MultipleEntryID
+		responseItem.Currency = item.Currency
+		responseItem.Concept = *item.Concept
+		responseItem.Date = item.Date
+		responseItem.DebitBalance = item.DebitBalance
+		responseItem.CreditBalance = item.CreditBalance
+		responseItem.TotalBalance = item.TotalBalance
+		responseItem.State = item.State
+		responseItem.StateReason = *item.StateReason
 		responseItem.CreationDate = item.CreationDate
 		responseItem.LastUpdate = item.LastUpdate
 		response.Items = append(response.Items, responseItem)
@@ -110,9 +138,12 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 func (adapter *DefaultHttpInputAdapter) AdaptUpdateEntry(ctx context.Context, data UpdateEntryRequest) (*UpdateEntryResponseWrapper, error) {
 	var inputData entry.UpdateEntryInput
 	inputData.ID = data.ID
-	inputData.Entryname = data.Entryname
-	inputData.Password = data.Password
-	inputData.Email = data.Email
+	inputData.AccountID = data.AccountID
+	inputData.Currency = data.Currency
+	inputData.Concept = data.Concept
+	inputData.Date = data.Date
+	inputData.DebitBalance = data.DebitBalance
+	inputData.CreditBalance = data.CreditBalance
 
 	outputData, err := adapter.entryUseCase.UpdateEntry(ctx, inputData)
 	if err != nil {
@@ -121,8 +152,16 @@ func (adapter *DefaultHttpInputAdapter) AdaptUpdateEntry(ctx context.Context, da
 
 	var response UpdateEntryResponse
 	response.ID = outputData.ID
-	response.Password = outputData.Password
-	response.Email = outputData.Email
+	response.AccountID = outputData.AccountID
+	response.MultipleEntryID = outputData.MultipleEntryID
+	response.Currency = outputData.Currency
+	response.Concept = *outputData.Concept
+	response.Date = outputData.Date
+	response.DebitBalance = outputData.DebitBalance
+	response.CreditBalance = outputData.CreditBalance
+	response.TotalBalance = outputData.TotalBalance
+	response.State = outputData.State
+	response.StateReason = *outputData.StateReason
 	response.CreationDate = outputData.CreationDate
 	response.LastUpdate = outputData.LastUpdate
 
@@ -143,8 +182,16 @@ func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, da
 
 	var response DeleteEntryResponse
 	response.ID = outputData.ID
-	response.Password = outputData.Password
-	response.Email = outputData.Email
+	response.AccountID = outputData.AccountID
+	response.MultipleEntryID = outputData.MultipleEntryID
+	response.Currency = outputData.Currency
+	response.Concept = *outputData.Concept
+	response.Date = outputData.Date
+	response.DebitBalance = outputData.DebitBalance
+	response.CreditBalance = outputData.CreditBalance
+	response.TotalBalance = outputData.TotalBalance
+	response.State = outputData.State
+	response.StateReason = *outputData.StateReason
 	response.CreationDate = outputData.CreationDate
 	response.LastUpdate = outputData.LastUpdate
 

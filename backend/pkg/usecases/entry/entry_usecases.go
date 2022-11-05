@@ -3,6 +3,7 @@ package entry
 import (
 	"context"
 	"errors"
+	"github.com/google/uuid"
 	"time"
 
 	"github.com/asaskevich/govalidator"
@@ -42,15 +43,20 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 		return nil, errors.New("invalid input")
 	}
 
-	var describeEntryInput DescribeEntryInput
-	describeEntryInput.ID = input.ID
-	_, err = useCase.DescribeEntry(ctx, describeEntryInput)
-	if err == nil {
-		return nil, errors.New("entry already exists")
+	if input.DebitBalance == nil && input.CreditBalance == nil {
+		return nil, errors.New("valid debit or credit balance is required")
+	}
+
+	if input.DebitBalance != nil && input.CreditBalance != nil {
+		return nil, errors.New("only one of debit or credit balance is required")
 	}
 
 	var desiredEntry EntryStorageData
-	desiredEntry.ID = input.ID
+	if input.ID == nil {
+		id := uuid.New().String()
+		input.ID = &id
+	}
+	desiredEntry.ID = *input.ID
 	desiredEntry.AccountID = input.AccountID
 	desiredEntry.MultipleEntryID = input.MultipleEntryID
 	desiredEntry.Currency = input.Currency
@@ -58,9 +64,17 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	desiredEntry.Date = input.Date
 	quarter := useCase.calculateQuarter(input.Date)
 	desiredEntry.Quarter = quarter
-	desiredEntry.DebitBalance = input.DebitBalance
-	desiredEntry.CreditBalance = input.CreditBalance
-	totalBalance := input.DebitBalance - input.CreditBalance
+	if input.DebitBalance == nil {
+		debitBalance := 0.00
+		input.DebitBalance = &debitBalance
+	}
+	desiredEntry.DebitBalance = *input.DebitBalance
+	if input.CreditBalance == nil {
+		creditBalance := 0.00
+		input.CreditBalance = &creditBalance
+	}
+	desiredEntry.CreditBalance = *input.CreditBalance
+	totalBalance := *input.DebitBalance - *input.CreditBalance
 	desiredEntry.TotalBalance = totalBalance
 	desiredEntry.State = EntryStateCreated
 	desiredEntry.CreationDate = time.Now()
@@ -122,9 +136,7 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	if input.Currency != nil {
 		desiredEntry.Currency = *input.Currency
 	}
-	if input.Concept != nil {
-		desiredEntry.Concept = *input.Concept
-	}
+	desiredEntry.Concept = input.Concept
 	if input.Date != nil {
 		desiredEntry.Date = *input.Date
 		quarter := useCase.calculateQuarter(*input.Date)
