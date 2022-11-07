@@ -33,6 +33,10 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2FqXP8sbzcX2vpgyXbbGjwmlNTz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="2" id="Remove" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -53,7 +57,7 @@
     "full.screen.before.presentation.mode": "false",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/david/Documents/tfg/tfg-informatica-nextjs/backend/pkg/adapters/output/database/entry",
+    "last_opened_file_path": "/Users/david/Documents/tfg/tfg-informatica-nextjs/backend/pkg/infra/input",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -71,10 +75,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/pkg/infra/input" />
+      <recent name="$PROJECT_DIR$/backend/pkg/adapters/output/database" />
+      <recent name="$PROJECT_DIR$/backend/pkg/adapters/input/http" />
+      <recent name="$PROJECT_DIR$/backend/pkg/usecases" />
       <recent name="$PROJECT_DIR$/backend/pkg/adapters/output/database/entry" />
-      <recent name="$PROJECT_DIR$/backend/pkg/adapters/input/http/entry" />
-      <recent name="$PROJECT_DIR$/backend/pkg/usecases/entry" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend" />
@@ -145,13 +150,13 @@
       <filePath value="$PROJECT_DIR$/backend/main.go" />
       <method v="2" />
     </configuration>
-    <configuration name="api_entries_test | CREATE ENTRY" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" requestIdentifier="CREATE ENTRY" runType="Run single request">
+    <configuration name="api_accounts_test | DESCRIBE GROUP" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_accounts_test.http" requestIdentifier="DESCRIBE GROUP" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="api_accounts_test | LIST ALL GROUPS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_accounts_test.http" index="2" requestIdentifier="LIST ALL GROUPS" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="api_entries_test | DELETE USER" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="5" requestIdentifier="DELETE USER" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="api_entries_test | DESCRIBE ENTRY" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="2" requestIdentifier="DESCRIBE ENTRY" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="api_entries_test | LIST ALL USERS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="3" requestIdentifier="LIST ALL USERS" runType="Run single request">
@@ -171,19 +176,19 @@
     </configuration>
     <list>
       <item itemvalue="Go Build.go build main.go" />
-      <item itemvalue="HTTP Request.api_entries_test | CREATE ENTRY" />
+      <item itemvalue="HTTP Request.api_accounts_test | DESCRIBE GROUP" />
+      <item itemvalue="HTTP Request.api_accounts_test | LIST ALL GROUPS" />
       <item itemvalue="HTTP Request.api_entries_test | DELETE USER" />
-      <item itemvalue="HTTP Request.api_entries_test | DESCRIBE ENTRY" />
       <item itemvalue="HTTP Request.api_entries_test | LIST ALL USERS" />
       <item itemvalue="HTTP Request.api_entries_test | UPDATE USER" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.api_accounts_test | LIST ALL GROUPS" />
+        <item itemvalue="HTTP Request.api_accounts_test | DESCRIBE GROUP" />
         <item itemvalue="HTTP Request.api_entries_test | DELETE USER" />
         <item itemvalue="HTTP Request.api_entries_test | LIST ALL USERS" />
         <item itemvalue="HTTP Request.api_entries_test | UPDATE USER" />
-        <item itemvalue="HTTP Request.api_entries_test | DESCRIBE ENTRY" />
-        <item itemvalue="HTTP Request.api_entries_test | CREATE ENTRY" />
       </list>
     </recent_temporary>
   </component>
@@ -206,6 +211,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

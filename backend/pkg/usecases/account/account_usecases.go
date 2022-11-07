@@ -1,0 +1,65 @@
+package account
+
+import (
+	"context"
+	"errors"
+
+	"github.com/asaskevich/govalidator"
+)
+
+type AccountUseCase interface {
+	DescribeAccount(ctx context.Context, input DescribeAccountInput) (*DescribeAccountOutput, error)
+	ListAccounts(ctx context.Context, input ListAccountInput) (*ListAccountOutput, error)
+}
+
+func NewDefaultAccountUseCase(options DefaultAccountUseCaseOptions) (*DefaultAccountUseCase, error) {
+	if options.AccountStorage == nil {
+		return nil, errors.New("cannot create an instance of AccountUseCase because provided AccountStorage is nil")
+	}
+
+	return &DefaultAccountUseCase{
+		accountStorage: options.AccountStorage,
+	}, nil
+}
+
+type DefaultAccountUseCase struct {
+	accountStorage AccountStorage
+}
+
+type DefaultAccountUseCaseOptions struct {
+	AccountStorage AccountStorage
+}
+
+var _ AccountUseCase = (*DefaultAccountUseCase)(nil)
+
+func (useCase *DefaultAccountUseCase) DescribeAccount(ctx context.Context, input DescribeAccountInput) (*DescribeAccountOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input")
+	}
+
+	storedAccount, err := useCase.accountStorage.Get(ctx, input.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &DescribeAccountOutput{
+		Account: storedAccount.Account,
+	}, err
+}
+
+func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input ListAccountInput) (*ListAccountOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input")
+	}
+
+	accountCollection, err := useCase.accountStorage.All(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return &ListAccountOutput{
+		Items: accountCollection.Items,
+	}, err
+}

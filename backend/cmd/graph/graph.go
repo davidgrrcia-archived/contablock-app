@@ -2,10 +2,12 @@ package graph
 
 import (
 	"database/sql"
-	"github.com/gorilla/mux"
 
+	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/account"
 	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/account"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
+	"github.com/gorilla/mux"
 )
 
 type Graph struct {
@@ -20,6 +22,12 @@ type Graph struct {
 	entry.EntryStorage
 	entry.EntryUseCase
 	inputEntry.EntryInputAdapter
+
+	//accounts
+	AccountDb sql.DB
+	account.AccountStorage
+	account.AccountUseCase
+	inputAccount.AccountInputAdapter
 }
 
 func NewGraph() Graph {
@@ -29,18 +37,23 @@ func NewGraph() Graph {
 func (graph *Graph) Build() {
 	// output infra
 	graph.provideEntryDB()
+	graph.provideAccountDB()
 
 	// output adapters
 	graph.provideEntryStorage()
+	graph.provideAccountStorage()
 	//graph.provideHoldContractInputAdapter()
 
 	// use cases
 	graph.provideEntryUseCase()
+	graph.provideAccountUseCase()
 
 	// input adapters
 	graph.provideEntryInputAdapter()
+	graph.provideAccountInputAdapter()
 
 	// input infra
 	graph.provideRouter()
 	graph.provideEntryEndpoints()
+	graph.provideAccountEndpoints()
 }

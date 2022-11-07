@@ -2,6 +2,9 @@ package graph
 
 import (
 	"database/sql"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/account"
+
+	inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/account"
 	inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
 	"github.com/gorilla/mux"
@@ -36,14 +39,38 @@ func (graph *Graph) GetEntryDB() *sql.DB {
 
 func (graph *Graph) GetEntryStorage() entry.EntryStorage {
 	if graph.EntryStorage == nil {
-		panic("graph EntryWalletStorage is nil")
+		panic("graph EntryStorage is nil")
 	}
 	return graph.EntryStorage
 }
 
 func (graph *Graph) GetEntryUseCase() entry.EntryUseCase {
 	if graph.EntryUseCase == nil {
-		panic("graph EntryWalletUseCase case is nil")
+		panic("graph EntryUseCase case is nil")
 	}
 	return graph.EntryUseCase
+}
+
+/* ACCOUNTS */
+
+func (graph *Graph) GetAccountInputAdapter() inputAdapterAccount.AccountInputAdapter {
+	return graph.AccountInputAdapter
+}
+
+func (graph *Graph) GetAccountDB() *sql.DB {
+	return &graph.AccountDb
+}
+
+func (graph *Graph) GetAccountStorage() account.AccountStorage {
+	if graph.AccountStorage == nil {
+		panic("graph AccountStorage is nil")
+	}
+	return graph.AccountStorage
+}
+
+func (graph *Graph) GetAccountUseCase() account.AccountUseCase {
+	if graph.AccountUseCase == nil {
+		panic("graph AccountUseCase case is nil")
+	}
+	return graph.AccountUseCase
 }
