@@ -11,8 +11,9 @@ CREATE TABLE
         id VARCHAR(64) NOT NULL PRIMARY KEY,
         name VARCHAR(256) NOT NULL,
         social_denomination VARCHAR(256) NOT NULL,
+        registered_office VARCHAR(256) NOT NULL,
         cif VARCHAR(9) NOT NULL,
-        logo BLOB,
+        logo BLOB NOT NULL,
         eth_address VARCHAR(42) NOT NULL
     );
 

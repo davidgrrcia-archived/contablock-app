@@ -2,10 +2,12 @@ package graph
 
 import (
 	"database/sql"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/account"
 
 	inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/account"
+	inputAdapterBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/business"
 	inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/account"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/business"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
 	"github.com/gorilla/mux"
 )
@@ -27,7 +29,7 @@ func (graph *Graph) GetHoldContractAdapter() holdContractAdapter.HoldContractAda
 	return graph.HoldContractAdapter
 }*/
 
-/* ENTRIES */
+/////// ENTRIES ///////
 
 func (graph *Graph) GetEntryInputAdapter() inputAdapterEntry.EntryInputAdapter {
 	return graph.EntryInputAdapter
@@ -51,7 +53,7 @@ func (graph *Graph) GetEntryUseCase() entry.EntryUseCase {
 	return graph.EntryUseCase
 }
 
-/* ACCOUNTS */
+/////// ACCOUNTS ///////
 
 func (graph *Graph) GetAccountInputAdapter() inputAdapterAccount.AccountInputAdapter {
 	return graph.AccountInputAdapter
@@ -73,4 +75,28 @@ func (graph *Graph) GetAccountUseCase() account.AccountUseCase {
 		panic("graph AccountUseCase case is nil")
 	}
 	return graph.AccountUseCase
+}
+
+/////// BUSINESS ///////
+
+func (graph *Graph) GetBusinessInputAdapter() inputAdapterBusiness.BusinessInputAdapter {
+	return graph.BusinessInputAdapter
+}
+
+func (graph *Graph) GetBusinessDB() *sql.DB {
+	return &graph.BusinessDb
+}
+
+func (graph *Graph) GetBusinessStorage() business.BusinessStorage {
+	if graph.BusinessStorage == nil {
+		panic("graph BusinessStorage is nil")
+	}
+	return graph.BusinessStorage
+}
+
+func (graph *Graph) GetBusinessUseCase() business.BusinessUseCase {
+	if graph.BusinessUseCase == nil {
+		panic("graph BusinessUseCase case is nil")
+	}
+	return graph.BusinessUseCase
 }

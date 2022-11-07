@@ -57,7 +57,7 @@
     "full.screen.before.presentation.mode": "false",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/david/Documents/tfg/tfg-informatica-nextjs/backend/pkg/infra/input",
+    "last_opened_file_path": "/Users/david/Documents/tfg/tfg-informatica-nextjs/backend/pkg/adapters/input/http",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -75,9 +75,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/backend/pkg/infra/input" />
-      <recent name="$PROJECT_DIR$/backend/pkg/adapters/output/database" />
       <recent name="$PROJECT_DIR$/backend/pkg/adapters/input/http" />
+      <recent name="$PROJECT_DIR$/backend/pkg/adapters/output/database" />
+      <recent name="$PROJECT_DIR$/backend/pkg/infra/input" />
       <recent name="$PROJECT_DIR$/backend/pkg/usecases" />
       <recent name="$PROJECT_DIR$/backend/pkg/adapters/output/database/entry" />
     </key>
@@ -156,13 +156,13 @@
     <configuration name="api_accounts_test | LIST ALL GROUPS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_accounts_test.http" index="2" requestIdentifier="LIST ALL GROUPS" runType="Run single request">
       <method v="2" />
     </configuration>
+    <configuration name="api_business_test | LIST ALL BUSINESS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_business_test.http" index="2" requestIdentifier="LIST ALL BUSINESS" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="api_entries_test | DELETE USER" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="5" requestIdentifier="DELETE USER" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="api_entries_test | LIST ALL USERS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="3" requestIdentifier="LIST ALL USERS" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="api_entries_test | UPDATE USER" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="4" requestIdentifier="UPDATE USER" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="main makeindex" type="MAKEINDEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
@@ -178,17 +178,17 @@
       <item itemvalue="Go Build.go build main.go" />
       <item itemvalue="HTTP Request.api_accounts_test | DESCRIBE GROUP" />
       <item itemvalue="HTTP Request.api_accounts_test | LIST ALL GROUPS" />
+      <item itemvalue="HTTP Request.api_business_test | LIST ALL BUSINESS" />
       <item itemvalue="HTTP Request.api_entries_test | DELETE USER" />
       <item itemvalue="HTTP Request.api_entries_test | LIST ALL USERS" />
-      <item itemvalue="HTTP Request.api_entries_test | UPDATE USER" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.api_business_test | LIST ALL BUSINESS" />
         <item itemvalue="HTTP Request.api_accounts_test | LIST ALL GROUPS" />
         <item itemvalue="HTTP Request.api_accounts_test | DESCRIBE GROUP" />
         <item itemvalue="HTTP Request.api_entries_test | DELETE USER" />
         <item itemvalue="HTTP Request.api_entries_test | LIST ALL USERS" />
-        <item itemvalue="HTTP Request.api_entries_test | UPDATE USER" />
       </list>
     </recent_temporary>
   </component>

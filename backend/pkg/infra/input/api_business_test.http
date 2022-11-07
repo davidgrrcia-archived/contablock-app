@@ -1,0 +1,8 @@
+### DESCRIBE BUSINESS
+GET http://localhost:3000/business/zara
+Accept: application/json
+
+### LIST ALL BUSINESS
+GET http://localhost:3000/business
+Accept: */*
+Cache-Control: no-cache

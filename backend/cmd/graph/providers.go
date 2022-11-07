@@ -5,11 +5,14 @@ import (
 	"log"
 
 	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/account"
+	inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/business"
 	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
 	accountOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/output/database/account"
+	businessOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/output/database/business"
 	entryOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/output/database/entry"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/infra/input"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/account"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/business"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
@@ -18,6 +21,8 @@ import (
 func (graph *Graph) provideRouter() {
 	graph.Router = mux.NewRouter().StrictSlash(true)
 }
+
+/////// ENTRIES ///////
 
 func (graph *Graph) provideEntryDB() {
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/db_accounting")
@@ -83,6 +88,8 @@ func (graph *Graph) provideEntryEndpoints() {
 	handler.RegisterEntryRoutes(graph.GetRouter())
 }
 
+/////// ACCOUNTS ///////
+
 func (graph *Graph) provideAccountDB() {
 	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/db_accounting")
 	if err != nil {
@@ -145,4 +152,70 @@ func (graph *Graph) provideAccountEndpoints() {
 		log.Fatal(err)
 	}
 	handler.RegisterAccountRoutes(graph.GetRouter())
+}
+
+/////// BUSINESS ///////
+
+func (graph *Graph) provideBusinessDB() {
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/db_accounting")
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+
+	graph.BusinessDb = *db
+}
+
+func (graph *Graph) provideBusinessStorage() business.BusinessStorage {
+	businessStorageOpts := businessOutputDbAdapter.BusinessRepositoryOptions{
+		DB: graph.GetBusinessDB(),
+	}
+	businessStorage, err := businessOutputDbAdapter.NewBusinessRepository(businessStorageOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.BusinessStorage = businessStorage
+
+	return businessStorage
+}
+
+func (graph *Graph) provideBusinessUseCase() {
+	businessUseCaseOpts := business.DefaultBusinessUseCaseOptions{
+		BusinessStorage: graph.GetBusinessStorage(),
+	}
+	businessUseCase, err := business.NewDefaultBusinessUseCase(businessUseCaseOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.BusinessUseCase = businessUseCase
+}
+
+func (graph *Graph) provideBusinessInputAdapter() *inputBusiness.DefaultHttpInputAdapter {
+	businessInputAdapterOpts := inputBusiness.DefaultHttpInputAdapterOptions{
+		BusinessUseCase: graph.GetBusinessUseCase(),
+	}
+	businessInputAdapter, err := inputBusiness.NewDefaultHttpInputAdapter(businessInputAdapterOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.BusinessInputAdapter = businessInputAdapter
+
+	return businessInputAdapter
+}
+
+func (graph *Graph) provideBusinessEndpoints() {
+	var options input.DefaultBusinessHttpHandlerOptions
+	options.Adapter = graph.GetBusinessInputAdapter()
+	handler, err := input.NewDefaultBusinessHttpHandler(options)
+	if err != nil {
+		log.Fatal(err)
+	}
+	handler.RegisterBusinessRoutes(graph.GetRouter())
 }
