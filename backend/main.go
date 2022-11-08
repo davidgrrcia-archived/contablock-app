@@ -5,7 +5,7 @@ import (
 	"github.com/davidgrcia/tfg-informatica-nextjs/cmd/server"
 )
 
-const port = ":3000"
+const port = ":4000"
 
 func main() {
 
