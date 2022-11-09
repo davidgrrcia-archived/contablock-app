@@ -1,5 +1,4 @@
 import { Disclosure } from '@headlessui/react'
-import {useRouter} from "next/router";
 
 const navigation = [
     { name: 'Daily Ledger', href: '/', current: false },
@@ -12,7 +11,7 @@ function classNames(...classes) {
 
 export default function HeaderNav({navigation}) {
     return (
-        <Disclosure as="nav" className="bg-gray-100">
+        <Disclosure as="nav" className="bg-gray-900">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2">
@@ -32,7 +31,7 @@ export default function HeaderNav({navigation}) {
                                                 key={item.name}
                                                 href={item.href}
                                                 className={classNames(
-                                                    item.current ? 'bg-gray-200 text-gray-700' : 'text-gray-500 hover:bg-gray-200 hover:text-black',
+                                                    item.current ? 'bg-gray-800 text-white' : 'text-white hover:bg-gray-700 hover:text-white',
                                                     'px-3 py-2 rounded-md text-sm font-medium'
                                                 )}
                                                 aria-current={item.current ? 'page' : undefined}
