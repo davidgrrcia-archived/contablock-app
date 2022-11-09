@@ -6,12 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4e066e13-966e-4d6c-9c63-43b481da9d41" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/cmd/graph/providers.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/cmd/graph/providers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pkg/adapters/input/http/entry/entry_input_http_adapter.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pkg/adapters/input/http/entry/entry_input_http_adapter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pkg/adapters/output/database/entry/entry_output_database_adapter.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pkg/adapters/output/database/entry/entry_output_database_adapter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pkg/usecases/entry/entry_usecases.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pkg/usecases/entry/entry_usecases.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pkg/usecases/entry/entry_usecases_types.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pkg/usecases/entry/entry_usecases_types.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database-up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/database-up.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/api/hello.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Go File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -41,38 +40,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "configurable..is.expanded": "true",
-    "configurable.GoLibrariesConfigurable.is.expanded": "true",
-    "full.screen.before.presentation.mode": "false",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/david/Documents/tfg/tfg-informatica-nextjs/backend/pkg/adapters/input/http",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.goide.configuration.GoLibrariesConfigurableProvider",
-    "ts.external.directory.path": "/Users/david/Documents/tfg/tfg-informatica-nextjs/frontend/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;configurable..is.expanded&quot;: &quot;true&quot;,
+    &quot;configurable.GoLibrariesConfigurable.is.expanded&quot;: &quot;true&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/david/Documents/tfg/tfg-informatica-nextjs/backend/pkg/adapters/input/http&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/david/Documents/tfg/tfg-informatica-nextjs/frontend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/pkg/adapters/input/http" />
@@ -82,11 +81,11 @@
       <recent name="$PROJECT_DIR$/backend/pkg/adapters/output/database/entry" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/pages/general-ledger" />
       <recent name="$PROJECT_DIR$/backend" />
       <recent name="$PROJECT_DIR$/backendv2" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/frontend" />
-      <recent name="$PROJECT_DIR$/pages/api/business" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build main.go">
@@ -131,17 +130,6 @@
       </texify-makeindex>
       <method v="2" />
     </configuration>
-    <configuration name="main bibliography" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
-      <texify-bibtex>
-        <compiler>BIBER</compiler>
-        <compiler-path />
-        <compiler-arguments />
-        <envs />
-        <main-file>/</main-file>
-        <aux-dir>$PROJECT_DIR$/auxil</aux-dir>
-      </texify-bibtex>
-      <method v="2" />
-    </configuration>
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="tfg-informatica-nextjs" />
       <working_directory value="$PROJECT_DIR$/backend" />
@@ -163,15 +151,6 @@
       <method v="2" />
     </configuration>
     <configuration name="api_entries_test | DELETE USER" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="5" requestIdentifier="DELETE USER" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="main makeindex" type="MAKEINDEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
-      <texify-makeindex>
-        <program>MAKEINDEX</program>
-        <main-file />
-        <command-line-args />
-        <work-dir>$PROJECT_DIR$/auxil</work-dir>
-      </texify-makeindex>
       <method v="2" />
     </configuration>
     <list>

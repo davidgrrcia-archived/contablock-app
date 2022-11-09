@@ -21,5 +21,5 @@ backend-lint:
 run-backend:
 	cd backend && go run main.go
 
-provision:
-	docker-compose up -d
+run-frontend:
+	cd frontend && npm run dev
