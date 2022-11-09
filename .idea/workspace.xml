@@ -138,7 +138,10 @@
       <filePath value="$PROJECT_DIR$/backend/main.go" />
       <method v="2" />
     </configuration>
-    <configuration name="api_accounts_test | DESCRIBE GROUP" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_accounts_test.http" requestIdentifier="DESCRIBE GROUP" runType="Run single request">
+    <configuration name="api_accounts_test | DESCRIBE ACCOUNTS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_accounts_test.http" requestIdentifier="DESCRIBE ACCOUNTS" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="api_accounts_test | LIST ALL ACCOUNTS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_accounts_test.http" index="2" requestIdentifier="LIST ALL ACCOUNTS" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="api_accounts_test | LIST ALL GROUPS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_accounts_test.http" index="2" requestIdentifier="LIST ALL GROUPS" runType="Run single request">
@@ -150,24 +153,21 @@
     <configuration name="api_business_test | LIST ALL BUSINESS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_business_test.http" index="2" requestIdentifier="LIST ALL BUSINESS" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="api_entries_test | DELETE USER" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="5" requestIdentifier="DELETE USER" runType="Run single request">
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Go Build.go build main.go" />
-      <item itemvalue="HTTP Request.api_accounts_test | DESCRIBE GROUP" />
+      <item itemvalue="HTTP Request.api_accounts_test | DESCRIBE ACCOUNTS" />
+      <item itemvalue="HTTP Request.api_accounts_test | LIST ALL ACCOUNTS" />
       <item itemvalue="HTTP Request.api_accounts_test | LIST ALL GROUPS" />
       <item itemvalue="HTTP Request.api_business_test | DESCRIBE BUSINESS" />
       <item itemvalue="HTTP Request.api_business_test | LIST ALL BUSINESS" />
-      <item itemvalue="HTTP Request.api_entries_test | DELETE USER" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.api_business_test | DESCRIBE BUSINESS" />
         <item itemvalue="HTTP Request.api_business_test | LIST ALL BUSINESS" />
+        <item itemvalue="HTTP Request.api_business_test | DESCRIBE BUSINESS" />
+        <item itemvalue="HTTP Request.api_accounts_test | DESCRIBE ACCOUNTS" />
+        <item itemvalue="HTTP Request.api_accounts_test | LIST ALL ACCOUNTS" />
         <item itemvalue="HTTP Request.api_accounts_test | LIST ALL GROUPS" />
-        <item itemvalue="HTTP Request.api_accounts_test | DESCRIBE GROUP" />
-        <item itemvalue="HTTP Request.api_entries_test | DELETE USER" />
       </list>
     </recent_temporary>
   </component>

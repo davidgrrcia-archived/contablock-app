@@ -1,5 +1,5 @@
 ### CREATE ENTRY
-POST http://localhost:3000/entries
+POST http://localhost:4000/entries
 Content-Type: application/json
 
 {
@@ -12,16 +12,16 @@ Content-Type: application/json
 }
 
 ### DESCRIBE ENTRY
-GET http://localhost:3000/entries/9da17f6f-29ea-4dc6-ae35-3a54eced8021
+GET http://localhost:4000/entries/9da17f6f-29ea-4dc6-ae35-3a54eced8021
 Accept: application/json
 
 ### LIST ALL ENTRIES
-GET http://localhost:3000/entries
+GET http://localhost:4000/entries
 Accept: */*
 Cache-Control: no-cache
 
 ### UPDATE ENTRY
-PUT http://localhost:3000/entries/9da17f6f-29ea-4dc6-ae35-3a54eced8021
+PUT http://localhost:4000/entries/9da17f6f-29ea-4dc6-ae35-3a54eced8021
 Content-Type: application/json
 
 {
@@ -34,7 +34,7 @@ Content-Type: application/json
 }
 
 ### DELETE ENTRY
-DELETE http://localhost:3000/entries/9da17f6f-29ea-4dc6-ae35-3a54eced8021
+DELETE http://localhost:4000/entries/9da17f6f-29ea-4dc6-ae35-3a54eced8021
 Content-Type: application/json
 
 

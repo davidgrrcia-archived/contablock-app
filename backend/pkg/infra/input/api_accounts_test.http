@@ -1,8 +1,8 @@
 ### DESCRIBE ACCOUNTS
-GET http://localhost:3000/accounts/572
+GET http://localhost:4000/accounts/572
 Accept: application/json
 
 ### LIST ALL ACCOUNTS
-GET http://localhost:3000/accounts
+GET http://localhost:4000/accounts
 Accept: */*
 Cache-Control: no-cache

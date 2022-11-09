@@ -13,7 +13,7 @@ CREATE TABLE
         social_denomination VARCHAR(256) NOT NULL,
         registered_office VARCHAR(256) NOT NULL,
         cif VARCHAR(9) NOT NULL,
-        logo MEDIUMBLOB NOT NULL,
+        logo TEXT NOT NULL,
         eth_address VARCHAR(42) NOT NULL
     );
 
@@ -35,3 +35,5 @@ CREATE TABLE
         last_update VARCHAR(64) NOT NULL,
         FOREIGN KEY (account_id) REFERENCES accounts(id)
     );
+
+INSERT INTO `business` (`id`, `name`, `social_denomination`, `registered_office`, `cif`, `logo`, `eth_address`) VALUES ('zara', 'Zara', 'Zara España, SA', 'Arteixo, La Coruña', 'A15022510', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg/1024px-Zara_Logo.svg.png', '0xb794f5ea0ba39494ce839613fffba74279579268');
