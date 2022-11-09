@@ -1,7 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
+import HeaderNav from "./HeaderNav";
 
-export default function PageLayout({ children, title = 'ContaBlock', description = 'Accounting blockchain software' }) {
+export default function PageLayout({ children, title = 'ContaBlock', description = 'Accounting blockchain software', navigation }) {
   return (
     <>
       <Head>
@@ -9,6 +10,7 @@ export default function PageLayout({ children, title = 'ContaBlock', description
         <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+        <HeaderNav navigation={navigation}/>
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
           <div className="flex min-h-screen flex-col items-center justify-center py-2">
               <div className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
