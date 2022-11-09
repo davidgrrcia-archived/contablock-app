@@ -32,7 +32,7 @@ type DefaultAccountsHttpHandlerOptions struct {
 
 func (handler *DefaultAccountsHttpHandler) RegisterAccountRoutes(r *mux.Router) {
 	//register endpoints
-	r.HandleFunc("/accounts", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/accounts", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 		outputPayload, err := handler.adapter.AdaptListAccounts(ctx, input.ListAccountRequest{})
 		if err != nil {
@@ -42,7 +42,7 @@ func (handler *DefaultAccountsHttpHandler) RegisterAccountRoutes(r *mux.Router) 
 		utils.Success(w, outputPayload.ListAccountResponse)
 	}).Methods("GET")
 
-	r.HandleFunc("/accounts/{id}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/accounts/{id}", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
 		vars := mux.Vars(r)

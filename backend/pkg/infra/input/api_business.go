@@ -32,7 +32,7 @@ type DefaultBusinessHttpHandlerOptions struct {
 
 func (handler *DefaultBusinessHttpHandler) RegisterBusinessRoutes(r *mux.Router) {
 	//register endpoints
-	r.HandleFunc("/business", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/business", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 		outputPayload, err := handler.adapter.AdaptListBusiness(ctx, input.ListBusinessRequest{})
 		if err != nil {
@@ -42,7 +42,7 @@ func (handler *DefaultBusinessHttpHandler) RegisterBusinessRoutes(r *mux.Router)
 		utils.Success(w, outputPayload.ListBusinessResponse)
 	}).Methods("GET")
 
-	r.HandleFunc("/business/{id}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/business/{id}", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
 		vars := mux.Vars(r)
