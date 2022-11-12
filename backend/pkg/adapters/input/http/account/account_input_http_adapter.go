@@ -44,7 +44,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeAccount(ctx context.Context
 	response.ID = outputData.ID
 	response.Name = outputData.Name
 	response.Level = outputData.Level
-	response.Type = outputData.Type
+	response.Type = *outputData.Type
 
 	responseWrapper := DescribeAccountResponseWrapper{}
 	responseWrapper.DescribeAccountResponse = response
@@ -68,7 +68,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListAccounts(ctx context.Context, d
 		responseItem.ID = item.ID
 		responseItem.Name = item.Name
 		responseItem.Level = item.Level
-		responseItem.Type = item.Type
+		responseItem.Type = *item.Type
 		response.Items = append(response.Items, responseItem)
 	}
 

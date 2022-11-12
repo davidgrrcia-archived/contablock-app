@@ -10,9 +10,6 @@ const Home: NextPage = ({business, entries}) => {
         { name: 'General Ledger', href: '/general-ledger', current: false },
     ]
 
-    console.log(business)
-    console.log(entries)
-
   return (
       <PageLayout title={'ContaBlock - Daily Ledger'} navigation={navigation} business={business}>
           <div className="flex flex-col">

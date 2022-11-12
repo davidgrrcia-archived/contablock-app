@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4e066e13-966e-4d6c-9c63-43b481da9d41" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/api/hello.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,33 +138,33 @@
     <configuration name="api_accounts_test | DESCRIBE ACCOUNTS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_accounts_test.http" requestIdentifier="DESCRIBE ACCOUNTS" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="api_accounts_test | LIST ALL ACCOUNTS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_accounts_test.http" index="2" requestIdentifier="LIST ALL ACCOUNTS" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="api_accounts_test | LIST ALL GROUPS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_accounts_test.http" index="2" requestIdentifier="LIST ALL GROUPS" runType="Run single request">
-      <method v="2" />
-    </configuration>
     <configuration name="api_business_test | DESCRIBE BUSINESS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_business_test.http" requestIdentifier="DESCRIBE BUSINESS" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="api_business_test | LIST ALL BUSINESS" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_business_test.http" index="2" requestIdentifier="LIST ALL BUSINESS" runType="Run single request">
+    <configuration name="api_entries_test | CREATE ENTRY" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" requestIdentifier="CREATE ENTRY" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="api_entries_test | LIST ALL ENTRIES WITH EXPAND FILTER" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="4" requestIdentifier="LIST ALL ENTRIES WITH EXPAND FILTER" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="api_entries_test | LIST ALL ENTRIES" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/backend/pkg/infra/input/api_entries_test.http" index="3" requestIdentifier="LIST ALL ENTRIES" runType="Run single request">
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Go Build.go build main.go" />
+      <item itemvalue="HTTP Request.api_entries_test | LIST ALL ENTRIES" />
+      <item itemvalue="HTTP Request.api_entries_test | LIST ALL ENTRIES WITH EXPAND FILTER" />
+      <item itemvalue="HTTP Request.api_entries_test | CREATE ENTRY" />
       <item itemvalue="HTTP Request.api_accounts_test | DESCRIBE ACCOUNTS" />
-      <item itemvalue="HTTP Request.api_accounts_test | LIST ALL ACCOUNTS" />
-      <item itemvalue="HTTP Request.api_accounts_test | LIST ALL GROUPS" />
       <item itemvalue="HTTP Request.api_business_test | DESCRIBE BUSINESS" />
-      <item itemvalue="HTTP Request.api_business_test | LIST ALL BUSINESS" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.api_business_test | DESCRIBE BUSINESS" />
+        <item itemvalue="HTTP Request.api_entries_test | LIST ALL ENTRIES WITH EXPAND FILTER" />
+        <item itemvalue="HTTP Request.api_entries_test | LIST ALL ENTRIES" />
         <item itemvalue="HTTP Request.api_accounts_test | DESCRIBE ACCOUNTS" />
-        <item itemvalue="HTTP Request.api_business_test | LIST ALL BUSINESS" />
-        <item itemvalue="HTTP Request.api_accounts_test | LIST ALL ACCOUNTS" />
-        <item itemvalue="HTTP Request.api_accounts_test | LIST ALL GROUPS" />
+        <item itemvalue="HTTP Request.api_entries_test | CREATE ENTRY" />
+        <item itemvalue="HTTP Request.api_business_test | DESCRIBE BUSINESS" />
       </list>
     </recent_temporary>
   </component>
@@ -220,9 +217,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/backend/pkg/usecases/entry/entry_usecases.go</url>
-          <line>125</line>
-          <option name="timeStamp" value="17" />
+          <url>file://$PROJECT_DIR$/backend/pkg/adapters/input/http/entry/entry_input_http_adapter.go</url>
+          <line>169</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

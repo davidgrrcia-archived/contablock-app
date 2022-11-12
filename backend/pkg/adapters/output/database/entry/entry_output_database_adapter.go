@@ -29,13 +29,6 @@ type EntryRepository struct {
 var _ entry.EntryStorage = (*EntryRepository)(nil)
 
 func (repository *EntryRepository) Add(ctx context.Context, input entry.EntryStorageData) (*entry.EntryStorageData, error) {
-	db, err := repository.openConnection()
-	if err != nil {
-		panic(err)
-	}
-
-	defer db.Close()
-
 	entryDb, err := toEntryDb(input.Entry)
 	if err != nil {
 		return nil, err
@@ -43,11 +36,11 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 
 	query := "INSERT INTO entries (id, account_id, multiple_entry_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-	result := db.QueryRow(query, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
+	result := repository.db.QueryRow(query, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
 
 	query = "SELECT * FROM entries WHERE id = ?"
 
-	result = db.QueryRow(query, entryDb.ID)
+	result = repository.db.QueryRow(query, entryDb.ID)
 
 	var output EntryDb
 	err = result.Scan(&output.ID, &output.AccountID, &output.MultipleEntryID, &output.Currency, &output.Concept, &output.Date, &output.Quarter, &output.DebitBalance, &output.CreditBalance, &output.TotalBalance, &output.State, &output.StateReason, &output.CreationDate, &output.LastUpdate)
@@ -66,19 +59,12 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 }
 
 func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.EntryStorageData, error) {
-	db, err := repository.openConnection()
-	if err != nil {
-		panic(err)
-	}
-
-	defer db.Close()
-
 	query := "SELECT * FROM entries WHERE id = ?"
 
-	result := db.QueryRow(query, id)
+	result := repository.db.QueryRow(query, id)
 
 	var output EntryDb
-	err = result.Scan(&output.ID, &output.AccountID, &output.MultipleEntryID, &output.Currency, &output.Concept, &output.Date, &output.Quarter, &output.DebitBalance, &output.CreditBalance, &output.TotalBalance, &output.State, &output.StateReason, &output.CreationDate, &output.LastUpdate)
+	err := result.Scan(&output.ID, &output.AccountID, &output.MultipleEntryID, &output.Currency, &output.Concept, &output.Date, &output.Quarter, &output.DebitBalance, &output.CreditBalance, &output.TotalBalance, &output.State, &output.StateReason, &output.CreationDate, &output.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
@@ -94,16 +80,9 @@ func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.E
 }
 
 func (repository *EntryRepository) All(ctx context.Context) (*entry.EntryStorageCollectionData, error) {
-	db, err := repository.openConnection()
-	if err != nil {
-		panic(err)
-	}
-
-	defer db.Close()
-
 	query := "SELECT * FROM entries"
 
-	rows, err := db.Query(query)
+	rows, err := repository.db.Query(query)
 	if err != nil {
 		return nil, err
 	}
@@ -130,13 +109,6 @@ func (repository *EntryRepository) All(ctx context.Context) (*entry.EntryStorage
 }
 
 func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntryStorageData) (*entry.EntryStorageData, error) {
-	db, err := repository.openConnection()
-	if err != nil {
-		panic(err)
-	}
-
-	defer db.Close()
-
 	entryDb, err := toEntryDb(input.Entry)
 	if err != nil {
 		return nil, err
@@ -144,11 +116,11 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 
 	query := "UPDATE entries SET account_id = ?, multiple_entry_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, total_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE id = ?"
 
-	result := db.QueryRow(query, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.ID)
+	result := repository.db.QueryRow(query, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.ID)
 
 	query = "SELECT * FROM entries WHERE id = ?"
 
-	result = db.QueryRow(query, entryDb.ID)
+	result = repository.db.QueryRow(query, entryDb.ID)
 
 	var output EntryDb
 	err = result.Scan(&output.ID, &output.AccountID, &output.MultipleEntryID, &output.Currency, &output.Concept, &output.Date, &output.Quarter, &output.DebitBalance, &output.CreditBalance, &output.TotalBalance, &output.State, &output.StateReason, &output.CreationDate, &output.LastUpdate)
@@ -167,23 +139,16 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 }
 
 func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entry.EntryStorageData, error) {
-	db, err := repository.openConnection()
-	if err != nil {
-		panic(err)
-	}
-
-	defer db.Close()
-
 	query := "SELECT * FROM entries WHERE id = ?"
 
-	result := db.QueryRow(query, id)
+	result := repository.db.QueryRow(query, id)
 
 	query = "DELETE FROM entries WHERE id = ?"
 
-	_ = db.QueryRow(query, id)
+	_ = repository.db.QueryRow(query, id)
 
 	var output EntryDb
-	err = result.Scan(&output.ID, &output.AccountID, &output.MultipleEntryID, &output.Currency, &output.Concept, &output.Date, &output.Quarter, &output.DebitBalance, &output.CreditBalance, &output.TotalBalance, &output.State, &output.StateReason, &output.CreationDate, &output.LastUpdate)
+	err := result.Scan(&output.ID, &output.AccountID, &output.MultipleEntryID, &output.Currency, &output.Concept, &output.Date, &output.Quarter, &output.DebitBalance, &output.CreditBalance, &output.TotalBalance, &output.State, &output.StateReason, &output.CreationDate, &output.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
@@ -196,18 +161,4 @@ func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entr
 	return &entry.EntryStorageData{
 		Entry: *storedEntry,
 	}, nil
-}
-
-func (repository *EntryRepository) openConnection() (*sql.DB, error) {
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/db_accounting")
-	if err != nil {
-		return nil, err
-	}
-
-	err = db.Ping()
-	if err != nil {
-		return nil, err
-	}
-
-	return db, nil
 }

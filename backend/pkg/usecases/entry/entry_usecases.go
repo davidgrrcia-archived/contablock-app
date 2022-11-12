@@ -3,6 +3,7 @@ package entry
 import (
 	"context"
 	"errors"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/account"
 	"github.com/google/uuid"
 	"time"
 
@@ -21,18 +22,24 @@ func NewDefaultEntryUseCase(options DefaultEntryUseCaseOptions) (*DefaultEntryUs
 	if options.EntryStorage == nil {
 		return nil, errors.New("cannot create an instance of EntryUseCase because provided EntryStorage is nil")
 	}
+	if options.AccountUseCase == nil {
+		return nil, errors.New("cannot create an instance of EntryUseCase because provided AccountUseCase is nil")
+	}
 
 	return &DefaultEntryUseCase{
-		entryStorage: options.EntryStorage,
+		entryStorage:   options.EntryStorage,
+		accountUseCase: options.AccountUseCase,
 	}, nil
 }
 
 type DefaultEntryUseCase struct {
-	entryStorage EntryStorage
+	entryStorage   EntryStorage
+	accountUseCase account.AccountUseCase
 }
 
 type DefaultEntryUseCaseOptions struct {
-	EntryStorage EntryStorage
+	EntryStorage   EntryStorage
+	AccountUseCase account.AccountUseCase
 }
 
 var _ EntryUseCase = (*DefaultEntryUseCase)(nil)
@@ -117,8 +124,26 @@ func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListE
 		return nil, err
 	}
 
+	var items []EntryExpand
+	for _, entry := range entryCollection.Items {
+		var entryExpand EntryExpand
+		entryExpand.Entry = entry
+		if input.Expand != nil && *input.Expand == true {
+			var describeAccountInput account.DescribeAccountInput
+			describeAccountInput.ID = entry.AccountID
+			storedAccount, err := useCase.accountUseCase.DescribeAccount(ctx, describeAccountInput)
+			if err != nil {
+				return nil, err
+			}
+			entryExpand.Account = &storedAccount.Account
+		} else {
+			entryExpand.Account = nil
+		}
+		items = append(items, entryExpand)
+	}
+
 	return &ListEntryOutput{
-		Items: entryCollection.Items,
+		Items: items,
 	}, err
 }
 

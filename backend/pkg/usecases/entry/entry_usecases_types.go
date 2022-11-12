@@ -2,6 +2,7 @@ package entry
 
 import (
 	"context"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/account"
 	"time"
 )
 
@@ -50,10 +51,17 @@ type DescribeEntryOutput struct {
 	Entry
 }
 
-type ListEntryInput struct{}
+type ListEntryInput struct {
+	Expand *bool `valid:"optional"`
+}
 
 type ListEntryOutput struct {
-	Items []Entry
+	Items []EntryExpand
+}
+
+type EntryExpand struct {
+	Entry   Entry
+	Account *account.Account
 }
 
 type UpdateEntryInput struct {

@@ -44,29 +44,29 @@ func NewGraph() Graph {
 
 func (graph *Graph) Build() {
 	// output infra
-	graph.provideEntryDB()
 	graph.provideAccountDB()
 	graph.provideBusinessDB()
+	graph.provideEntryDB()
 
 	// output adapters
-	graph.provideEntryStorage()
 	graph.provideAccountStorage()
 	graph.provideBusinessStorage()
+	graph.provideEntryStorage()
 	//graph.provideHoldContractInputAdapter()
 
 	// use cases
-	graph.provideEntryUseCase()
 	graph.provideAccountUseCase()
 	graph.provideBusinessUseCase()
+	graph.provideEntryUseCase()
 
 	// input adapters
-	graph.provideEntryInputAdapter()
 	graph.provideAccountInputAdapter()
 	graph.provideBusinessInputAdapter()
+	graph.provideEntryInputAdapter()
 
 	// input infra
 	graph.provideRouter()
-	graph.provideEntryEndpoints()
 	graph.provideAccountEndpoints()
 	graph.provideBusinessEndpoints()
+	graph.provideEntryEndpoints()
 }

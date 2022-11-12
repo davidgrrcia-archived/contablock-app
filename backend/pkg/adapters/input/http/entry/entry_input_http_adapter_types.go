@@ -2,6 +2,8 @@ package entryInputHttpAdapter
 
 import (
 	"time"
+
+	accountInputHttpAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/account"
 )
 
 type Entry struct {
@@ -49,10 +51,17 @@ type DescribeEntryResponseWrapper struct {
 	DescribeEntryResponse DescribeEntryResponse
 }
 
-type ListEntryRequest struct{}
+type ListEntryRequest struct {
+	Expand string `json:"expand"`
+}
+
+type EntryExpandResponse struct {
+	Entry   Entry                            `json:"entry"`
+	Account *accountInputHttpAdapter.Account `json:"account"`
+}
 
 type ListEntryResponse struct {
-	Items []DescribeEntryResponse `json:"items"`
+	Items []EntryExpandResponse `json:"items"`
 }
 type ListEntryResponseWrapper struct {
 	ListEntryResponse ListEntryResponse

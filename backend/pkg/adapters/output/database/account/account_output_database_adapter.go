@@ -29,19 +29,12 @@ type AccountRepository struct {
 var _ account.AccountStorage = (*AccountRepository)(nil)
 
 func (repository *AccountRepository) Get(ctx context.Context, id string) (*account.AccountStorageData, error) {
-	db, err := repository.openConnection()
-	if err != nil {
-		panic(err)
-	}
-
-	defer db.Close()
-
 	query := "SELECT * FROM accounts WHERE id = ?"
 
-	result := db.QueryRow(query, id)
+	result := repository.db.QueryRow(query, id)
 
 	var output AccountDb
-	err = result.Scan(&output.ID, &output.Name, &output.Level, &output.Type)
+	err := result.Scan(&output.ID, &output.Name, &output.Level, &output.Type)
 
 	storedAccount, err := toAccount(output)
 	if err != nil {
@@ -54,16 +47,9 @@ func (repository *AccountRepository) Get(ctx context.Context, id string) (*accou
 }
 
 func (repository *AccountRepository) All(ctx context.Context) (*account.AccountStorageCollectionData, error) {
-	db, err := repository.openConnection()
-	if err != nil {
-		panic(err)
-	}
-
-	defer db.Close()
-
 	query := "SELECT * FROM accounts"
 
-	rows, err := db.Query(query)
+	rows, err := repository.db.Query(query)
 	if err != nil {
 		return nil, err
 	}
@@ -84,18 +70,4 @@ func (repository *AccountRepository) All(ctx context.Context) (*account.AccountS
 	return &account.AccountStorageCollectionData{
 		Items: items,
 	}, nil
-}
-
-func (repository *AccountRepository) openConnection() (*sql.DB, error) {
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/db_accounting")
-	if err != nil {
-		return nil, err
-	}
-
-	err = db.Ping()
-	if err != nil {
-		return nil, err
-	}
-
-	return db, nil
 }

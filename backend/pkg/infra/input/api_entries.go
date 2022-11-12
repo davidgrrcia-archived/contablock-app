@@ -53,7 +53,11 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 
 	r.HandleFunc("/api/entries", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
-		outputPayload, err := handler.adapter.AdaptListEntries(ctx, input.ListEntryRequest{})
+
+		var inputPayload input.ListEntryRequest
+		inputPayload.Expand = r.URL.Query().Get("expand")
+
+		outputPayload, err := handler.adapter.AdaptListEntries(ctx, inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
 			return

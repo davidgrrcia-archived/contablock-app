@@ -29,19 +29,12 @@ type BusinessRepository struct {
 var _ business.BusinessStorage = (*BusinessRepository)(nil)
 
 func (repository *BusinessRepository) Get(ctx context.Context, id string) (*business.BusinessStorageData, error) {
-	db, err := repository.openConnection()
-	if err != nil {
-		panic(err)
-	}
-
-	defer db.Close()
-
 	query := "SELECT * FROM business WHERE id = ?"
 
-	result := db.QueryRow(query, id)
+	result := repository.db.QueryRow(query, id)
 
 	var output BusinessDb
-	err = result.Scan(&output.ID, &output.Name, &output.SocialDenomination, &output.RegisteredOffice, &output.Cif, &output.Logo, &output.EthAddress)
+	err := result.Scan(&output.ID, &output.Name, &output.SocialDenomination, &output.RegisteredOffice, &output.Cif, &output.Logo, &output.EthAddress)
 
 	storedBusiness, err := toBusiness(output)
 	if err != nil {
@@ -54,16 +47,9 @@ func (repository *BusinessRepository) Get(ctx context.Context, id string) (*busi
 }
 
 func (repository *BusinessRepository) All(ctx context.Context) (*business.BusinessStorageCollectionData, error) {
-	db, err := repository.openConnection()
-	if err != nil {
-		panic(err)
-	}
-
-	defer db.Close()
-
 	query := "SELECT * FROM business"
 
-	rows, err := db.Query(query)
+	rows, err := repository.db.Query(query)
 	if err != nil {
 		return nil, err
 	}
@@ -84,18 +70,4 @@ func (repository *BusinessRepository) All(ctx context.Context) (*business.Busine
 	return &business.BusinessStorageCollectionData{
 		Items: items,
 	}, nil
-}
-
-func (repository *BusinessRepository) openConnection() (*sql.DB, error) {
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/db_accounting")
-	if err != nil {
-		return nil, err
-	}
-
-	err = db.Ping()
-	if err != nil {
-		return nil, err
-	}
-
-	return db, nil
 }

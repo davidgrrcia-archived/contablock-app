@@ -20,6 +20,11 @@ GET http://localhost:4000/api/entries
 Accept: */*
 Cache-Control: no-cache
 
+### LIST ALL ENTRIES WITH EXPAND FILTER
+GET http://localhost:4000/api/entries?expand=true
+Accept: */*
+Cache-Control: no-cache
+
 ### UPDATE ENTRY
 PUT http://localhost:4000/api/entries/9da17f6f-29ea-4dc6-ae35-3a54eced8021
 Content-Type: application/json
