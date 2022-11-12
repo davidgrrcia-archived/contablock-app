@@ -213,15 +213,4 @@
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/backend/pkg/adapters/input/http/entry/entry_input_http_adapter.go</url>
-          <line>169</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
 </project>

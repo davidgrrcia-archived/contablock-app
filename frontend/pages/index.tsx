@@ -10,6 +10,8 @@ const Home: NextPage = ({business, entries}) => {
         { name: 'General Ledger', href: '/general-ledger', current: false },
     ]
 
+    var count = 0;
+
   return (
       <PageLayout title={'ContaBlock - Daily Ledger'} navigation={navigation} business={business}>
           <div className="flex flex-col">
@@ -50,28 +52,30 @@ const Home: NextPage = ({business, entries}) => {
                               </thead>
                               <tbody className="bg-white divide-y divide-gray-200">
                               {entries.items.map((entry) => (
-                                  <tr key={entry.email}>
+                                  count++,
+
+                                  <tr key={entry.entry.id}>
                                       <td className="px-6 py-4 whitespace-nowrap">
                                           <div className="flex items-center">
                                               <div className="ml-4">
-                                                  <div className="text-sm font-medium text-gray-900">{entry.accountId}</div>
+                                                  <div className="text-sm font-medium text-gray-900">{count}</div>
                                               </div>
                                               <div className="ml-4">
-                                                  <div className="text-sm font-medium text-gray-900">{entry.currency}</div>
-                                                  <div className="text-sm text-gray-500">{entry.concept}</div>
+                                                  <div className="text-sm font-medium text-gray-900">{entry.account.id}</div>
+                                                  <div className="text-sm text-gray-500">{entry.account.name}</div>
                                               </div>
                                           </div>
                                       </td>
                                       <td className="px-6 py-4 whitespace-nowrap">
-                                          <div className="text-sm text-gray-900">{entry.debitBalance}</div>
-                                          <div className="text-sm text-gray-500">{entry.CreditBalance}</div>
+                                          <div className="text-sm text-gray-900">{entry.entry.debitBalance}</div>
+                                          <div className="text-sm text-gray-500">{entry.entry.CreditBalance}</div>
                                       </td>
                                       <td className="px-6 py-4 whitespace-nowrap">
                       <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Active
+                        {entry.entry.state}
                       </span>
                                       </td>
-                                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.state}</td>
+                                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.entry.state}</td>
                                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                           <a href="#" className="text-indigo-600 hover:text-indigo-900">
                                               Edit
@@ -107,7 +111,7 @@ export default Home
 export async function getServerSideProps(){
     const res1 = await fetch('http://localhost:4000/api/business/zara')
     const business = await res1.json()
-    const res2 = await fetch('http://localhost:4000/api/entries')
+    const res2 = await fetch('http://localhost:4000/api/entries?expand=true')
     const entries = await res2.json()
     return {
         props: {
