@@ -3,12 +3,12 @@ package graph
 import (
 	"database/sql"
 
-	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/account"
-	inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/business"
-	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/account"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/business"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
+    inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
+    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+    inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
+    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+    inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
+    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	"github.com/gorilla/mux"
 )
 

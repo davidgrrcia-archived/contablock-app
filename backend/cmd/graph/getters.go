@@ -1,15 +1,15 @@
 package graph
 
 import (
-	"database/sql"
+    "database/sql"
 
-	inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/account"
-	inputAdapterBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/business"
-	inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/account"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/business"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
-	"github.com/gorilla/mux"
+    inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
+    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+    inputAdapterBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
+    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+    inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
+    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+    "github.com/gorilla/mux"
 )
 
 func (graph *Graph) GetRouter() *mux.Router {

@@ -4,16 +4,18 @@ import (
 	"database/sql"
 	"log"
 
-	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/account"
-	inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/business"
-	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/input/http/entry"
-	accountOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/output/database/account"
-	businessOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/output/database/business"
-	entryOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/adapters/output/database/entry"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/infra/input"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/account"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/business"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/usecases/entry"
+	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
+	accountOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/output/database"
+	accountInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/infra/input"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+	inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
+	businessOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/output/database"
+	businessInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/infra/input"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
+	entryOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/output/database"
+	entryInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/infra/input"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 )
@@ -80,9 +82,9 @@ func (graph *Graph) provideEntryInputAdapter() *inputEntry.DefaultHttpInputAdapt
 }
 
 func (graph *Graph) provideEntryEndpoints() {
-	var options input.DefaultEntriesHttpHandlerOptions
+	var options entryInputInfra.DefaultEntriesHttpHandlerOptions
 	options.Adapter = graph.GetEntryInputAdapter()
-	handler, err := input.NewDefaultEntriesHttpHandler(options)
+	handler, err := entryInputInfra.NewDefaultEntriesHttpHandler(options)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -146,9 +148,9 @@ func (graph *Graph) provideAccountInputAdapter() *inputAccount.DefaultHttpInputA
 }
 
 func (graph *Graph) provideAccountEndpoints() {
-	var options input.DefaultAccountsHttpHandlerOptions
+	var options accountInputInfra.DefaultAccountsHttpHandlerOptions
 	options.Adapter = graph.GetAccountInputAdapter()
-	handler, err := input.NewDefaultAccountsHttpHandler(options)
+	handler, err := accountInputInfra.NewDefaultAccountsHttpHandler(options)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -212,9 +214,9 @@ func (graph *Graph) provideBusinessInputAdapter() *inputBusiness.DefaultHttpInpu
 }
 
 func (graph *Graph) provideBusinessEndpoints() {
-	var options input.DefaultBusinessHttpHandlerOptions
+	var options businessInputInfra.DefaultBusinessHttpHandlerOptions
 	options.Adapter = graph.GetBusinessInputAdapter()
-	handler, err := input.NewDefaultBusinessHttpHandler(options)
+	handler, err := businessInputInfra.NewDefaultBusinessHttpHandler(options)
 	if err != nil {
 		log.Fatal(err)
 	}
