@@ -1,0 +1,22 @@
+get:
+  summary: Detail
+  operationId: showAccountById
+  description: Info for a specific account
+  tags:
+    - accounts
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the account to retrieve
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Account.yaml"
+    default:
+      $ref: "../responses/UnexpectedError.yaml"
