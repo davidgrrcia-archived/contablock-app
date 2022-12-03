@@ -1,4 +1,6 @@
 Account:
   $ref: "./Account.yaml"
-Error:
-  $ref: "./Error.yaml"
+Business:
+    $ref: "./Business.yaml"
+Entry:
+    $ref: "./Entry.yaml"

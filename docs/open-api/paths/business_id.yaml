@@ -1,0 +1,26 @@
+get:
+  summary: Detail
+  operationId: showBusinessById
+  description: Info for a specific business
+  tags:
+    - business
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the business to retrieve
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Business.yaml"
+    '403':
+        $ref: "../responses/Unauthorized.yaml"
+    '404':
+        $ref: "../responses/NotFound.yaml"
+    default:
+      $ref: "../responses/UnexpectedError.yaml"

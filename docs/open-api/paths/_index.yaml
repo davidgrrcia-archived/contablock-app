@@ -1,0 +1,12 @@
+/accounts:
+    $ref: "./accounts.yaml"
+/accounts/{id}:
+    $ref: "./accounts_id.yaml"
+/business:
+    $ref: "./business.yaml"
+/business/{id}:
+    $ref: "./business_id.yaml"
+/entries:
+    $ref: "./entries.yaml"
+/entries/{id}:
+    $ref: "./entries_id.yaml"

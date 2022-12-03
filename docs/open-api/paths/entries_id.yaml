@@ -1,0 +1,26 @@
+get:
+  summary: Detail
+  operationId: showEntryById
+  description: Info for a specific entry
+  tags:
+    - entries
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the entry to retrieve
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Entry.yaml"
+    '403':
+        $ref: "../responses/Unauthorized.yaml"
+    '404':
+        $ref: "../responses/NotFound.yaml"
+    default:
+      $ref: "../responses/UnexpectedError.yaml"

@@ -1,0 +1,48 @@
+type: object
+title: Business
+description: Business Database Schema
+required:
+  - id
+  - name
+  - social_denomination
+  - registered_office
+  - cif
+  - logo
+  - eth_address
+properties:
+  id:
+    type: string
+    description: The id of the business
+    minLength: 1
+    maxLength: 64
+  name:
+    type: string
+    description: The name of the business
+    minLength: 1
+    maxLength: 256
+  social_denomination:
+    type: string
+    description: The social denomination of the business
+    minLength: 1
+    maxLength: 256
+  registered_office:
+    type: string
+    description: The registered office of the business
+    minLength: 1
+    maxLength: 256
+  cif:
+    type: string
+    description: The cif of the business
+    minLength: 1
+    maxLength: 256
+  logo:
+    type: string
+    description: The logo of the business
+    minLength: 1
+    maxLength: 256
+  eth_address:
+    type: string
+    description: The eth address of the business
+    minLength: 1
+    maxLength: 256
+  

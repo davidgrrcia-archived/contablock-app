@@ -1,26 +1,25 @@
 openapi: "3.0.0"
 info:
-  version: 1.0.0
   title: Contablock
-  description: |
-    This API allows you to interact with the Contablock backend.
-    It is a REST API that uses JSON for serialization.
-    It is designed to be used by the Contablock frontend.
-  license:
-    name: MIT
+  version: 1.0.0
+  description: "### \U0001F4AB Overview\n\n This API allows you to interact with the Contablock backend. It is a REST API that uses JSON for serialization. It is designed to be used by the Contablock frontend. This API is documented using **OpenAPI 3.0**. \n\n### \U0001F9F0 Cross-Origin Resource Sharing\nThis API features Cross-Origin Resource Sharing (CORS) implemented in compliance with  [W3C spec](https://www.w3.org/TR/cors/). CORS support is necessary to make calls from the request maker within the API docs."
   contact:
     name: API Support
-    url: http://www.example.com/support
-    email: support@example.com
+    email: contact@example.com
+    url: 'example.com'
+  license:
+    name: MIT
+    url: 'https://spdx.org/licenses/MIT'
+  termsOfService: 'https://example.com/terms/'
 servers:
-    - url: http://localhost:4000/api/
+  - url: 'https://contablock.vercel.app/api/'
+    description: Production
+  - url: 'http://localhost:4000/api/'
+    description: Sandbox
 tags:
   - name: accounts
 paths:
-  /accounts:
-    $ref: "./paths/accounts.yaml"
-  /accounts/{id}:
-    $ref: "./paths/accounts_id.yaml"
+  $ref: "./paths/_index.yaml"
 components:
   schemas:
     $ref: "./schemas/_index.yaml"

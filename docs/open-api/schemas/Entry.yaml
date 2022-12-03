@@ -1,0 +1,93 @@
+type: object
+title: Entry
+description: Entry Database Schema
+required:
+  - id
+  - account_id
+  - multiple_entry_id
+  - currency
+  - concept
+  - date
+  - quarter
+  - debit_balance
+  - credit_balance
+  - total_balance
+  - state
+  - state_reason
+  - creation_date
+  - last_update
+
+properties:
+  id:
+    type: string
+    description: The id of the entry
+    minLength: 1
+    maxLength: 64
+  account_id:
+    type: string
+    description: The id of the account
+    minLength: 1
+    maxLength: 64
+  multiple_entry_id:
+    type: string
+    description: The id of the multiple entry
+    minLength: 1
+    maxLength: 64
+    readOnly: true
+  currency:
+    type: string
+    description: The currency of the entry
+    minLength: 3
+    maxLength: 3
+  concept:
+    type: string
+    description: The concept of the entry
+    minLength: 1
+    maxLength: 256
+  date:
+    type: string
+    description: The date of the entry
+    minLength: 1
+    maxLength: 64
+  quarter:
+    type: string
+    description: The quarter of the entry
+    minLength: 1
+    maxLength: 64
+    readOnly: true
+  debit_balance:
+    type: number
+    description: The debit balance of the entry
+    minimum: 0
+    maximum: 999999999999999
+  credit_balance:
+    type: number
+    description: The credit balance of the entry
+    minimum: 0
+    maximum: 999999999999999
+  total_balance:
+    type: number
+    description: The total balance of the entry
+    readOnly: true
+  state:
+    type: string
+    description: The state of the entry
+    minLength: 1
+    maxLength: 64
+    readOnly: true
+  state_reason:
+    type: string
+    description: The state reason of the entry
+    minLength: 1
+    maxLength: 256
+    readOnly: true
+  creation_date:
+    type: string
+    format: date-time
+    description: The creation date of the entry
+    readOnly: true
+  last_update:
+    type: string
+    format: date-time
+    description: The last update of the entry
+    readOnly: true

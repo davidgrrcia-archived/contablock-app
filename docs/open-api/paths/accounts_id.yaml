@@ -18,5 +18,9 @@ get:
         application/json:
           schema:
             $ref: "../schemas/Account.yaml"
+    '403':
+        $ref: "../responses/Unauthorized.yaml"
+    '404':
+        $ref: "../responses/NotFound.yaml"
     default:
       $ref: "../responses/UnexpectedError.yaml"

@@ -1,0 +1,49 @@
+get:
+  summary: List
+  operationId: listEntries
+  description: List all entries
+  tags:
+  - entries
+  parameters:
+    - name: limit
+      in: query
+      description: How many items to return at one time (max 100)
+      required: false
+      schema:
+        type: integer
+        format: int32
+  responses:
+    '200':
+      description: A paged array of entries
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "../schemas/Entry.yaml"
+    '403':
+        $ref: "../responses/Unauthorized.yaml"
+    '404':
+        $ref: "../responses/NotFound.yaml"
+    default:
+      $ref: "../responses/UnexpectedError.yaml"
+
+post:
+  summary: Create
+  operationId: createEntries
+  description: Create a entry
+  tags:
+  - entries
+  responses:
+    '201':
+      description: A paged array of entries
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/Entry.yaml"
+    '403':
+        $ref: "../responses/Unauthorized.yaml"
+    '404':
+        $ref: "../responses/NotFound.yaml"
+    default:
+        $ref : "../responses/UnexpectedError.yaml"
