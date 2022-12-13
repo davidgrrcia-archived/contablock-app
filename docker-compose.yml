@@ -25,3 +25,21 @@ services:
       PMA_PORT: 3306
     ports:
       - 8080:80
+
+  api:
+    build:
+      dockerfile: backend/Dockerfile
+      context: backend
+    restart: always
+    depends_on:
+        - db
+    links:
+        - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: db_accounting
+      DB_USER: root
+      DB_PASS: root
+    ports:
+        - 4000:4000

@@ -11,7 +11,7 @@ func main() {
 
 	//eth_gateway.CreateAbiBytecode()
 
-	var appGraph graph.Graph = graph.NewGraph()
+	var appGraph = graph.NewGraph()
 	appGraph.Build()
 
 	server.Run(appGraph, port)

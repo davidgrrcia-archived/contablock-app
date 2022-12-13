@@ -3,6 +3,7 @@ package graph
 import (
 	"database/sql"
 	"log"
+	"os"
 
 	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 	accountOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/output/database"
@@ -27,7 +28,10 @@ func (graph *Graph) provideRouter() {
 /////// ENTRIES ///////
 
 func (graph *Graph) provideEntryDB() {
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/db_accounting")
+
+	println(os.Getenv("DB_USER"))
+
+	db, err := sql.Open("mysql", os.Getenv("DB_USER")+":"+os.Getenv("DB_PASS")+"@tcp("+os.Getenv("DB_HOST")+":"+os.Getenv("DB_PORT")+")/"+os.Getenv("DB_NAME"))
 	if err != nil {
 		panic(err)
 	}
@@ -94,7 +98,7 @@ func (graph *Graph) provideEntryEndpoints() {
 /////// ACCOUNTS ///////
 
 func (graph *Graph) provideAccountDB() {
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/db_accounting")
+	db, err := sql.Open("mysql", os.Getenv("DB_USER")+":"+os.Getenv("DB_PASS")+"@tcp("+os.Getenv("DB_HOST")+":"+os.Getenv("DB_PORT")+")/"+os.Getenv("DB_NAME"))
 	if err != nil {
 		panic(err)
 	}
@@ -160,7 +164,7 @@ func (graph *Graph) provideAccountEndpoints() {
 /////// BUSINESS ///////
 
 func (graph *Graph) provideBusinessDB() {
-	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/db_accounting")
+	db, err := sql.Open("mysql", os.Getenv("DB_USER")+":"+os.Getenv("DB_PASS")+"@tcp("+os.Getenv("DB_HOST")+":"+os.Getenv("DB_PORT")+")/"+os.Getenv("DB_NAME"))
 	if err != nil {
 		panic(err)
 	}
