@@ -26,6 +26,7 @@
       <button
         class="px-3 py-2 text-sm font-medium rounded-md bg-amber-400 text-black"
         type="button"
+        @click="showCreateEntryModal()"
       >
         New Entry
       </button>
@@ -34,10 +35,19 @@
 </template>
 
 <script setup lang="ts">
-const navigation = [
+import type { Navigation } from '@/interfaces/Navigation';
+import { useCreateEntryModalStore } from '@/stores/createEntryModal';
+
+const navigation: Navigation[] = [
   { name: 'Dashboard', href: '#', current: true },
   { name: 'Team', href: '#', current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
 ];
+
+const modalState = useCreateEntryModalStore();
+
+function showCreateEntryModal() {
+  modalState.showModal();
+}
 </script>

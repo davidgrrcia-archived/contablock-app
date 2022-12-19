@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import SiteNavbar from '@/components/SiteNavbar.vue';
+import HeaderNav from '@/components/HeaderNav.vue';
+import CreateEntryModal from '@/components/CreateEntryModal.vue';
 </script>
 
 <template>
   <header></header>
-  <SiteNavbar />
+  <HeaderNav />
+  <CreateEntryModal></CreateEntryModal>
   <RouterView />
 </template>
