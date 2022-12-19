@@ -1,5 +1,5 @@
 <template>
-  <div class="columns-3 bg-black">
+  <div class="columns-3 bg-gray-800">
     <div class="w-full p-5">
       <img
         class="h-8 w-auto object-right"
@@ -24,7 +24,7 @@
     </div>
     <div class="w-full p-4">
       <button
-        class="px-3 py-2 text-sm font-medium rounded-md bg-amber-400 text-black"
+        class="px-3 py-2 text-sm font-medium rounded-md bg-amber-400 text-gray-800"
         type="button"
         @click="showCreateEntryModal()"
       >
@@ -32,11 +32,13 @@
       </button>
     </div>
   </div>
+  <CreateEntryModal></CreateEntryModal>
 </template>
 
 <script setup lang="ts">
 import type { Navigation } from '@/interfaces/Navigation';
 import { useCreateEntryModalStore } from '@/stores/createEntryModal';
+import CreateEntryModal from '@/components/CreateEntryModal.vue';
 
 const navigation: Navigation[] = [
   { name: 'Dashboard', href: '#', current: true },
