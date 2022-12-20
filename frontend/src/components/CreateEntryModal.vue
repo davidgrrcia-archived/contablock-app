@@ -9,59 +9,35 @@ function hideCreateEntryModal() {
 </script>
 
 <template>
-  <div v-if="modalState.isOpen" class="modal" id="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Crear Nuevo Asiento</h2>
-        <button @click="hideCreateEntryModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <label for="title">Titulo:</label><br />
-          <input type="text" id="title" name="title" /><br />
-          <label for="description">Descripcion:</label><br />
-          <textarea id="description" name="description"></textarea><br />
-          <button class="btn-submit" type="submit">Crear</button>
-        </form>
-      </div>
-    </div>
-  </div>
+  <Dialog
+    header="Header"
+    v-model:visible="modalState.isOpen"
+    :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
+    :style="{ width: '50vw' }"
+    :modal="true"
+  >
+    <p class="m-0">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </p>
+    <template #footer>
+      <Button
+        label="No"
+        icon="pi pi-times"
+        @click="hideCreateEntryModal"
+        class="p-button-text"
+      />
+      <Button
+        label="Yes"
+        icon="pi pi-check"
+        @click="hideCreateEntryModal"
+        autofocus
+      />
+    </template>
+  </Dialog>
 </template>
-
-<style scoped>
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
-.modal-content {
-  background-color: white;
-  border: 1px solid #888;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.modal-header button {
-  color: red;
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-.close-button {
-  appearance: none;
-  background-color: transparent;
-}
-</style>
