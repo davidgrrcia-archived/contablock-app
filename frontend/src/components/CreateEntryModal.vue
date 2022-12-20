@@ -1,166 +1,3 @@
-<template>
-  <div class="relative">
-    <div
-      v-if="modalState.isOpen"
-      class="fixed inset-0 z-50 overflow-y-auto bg-gray-800/25"
-    >
-      <div class="p-28 text-center">
-        <div class="bg-white rounded-md p-4">
-          <h3 class="text-2xl font-bold mb-2 text-gray-800">
-            Create New Entry
-          </h3>
-
-          <form action="#" method="POST">
-            <div class="overflow-hidden shadow sm:rounded-md">
-              <div class="bg-white px-4 py-5 sm:p-6">
-                <div class="grid grid-cols-6 gap-6">
-                  <div class="col-span-6 sm:col-span-3">
-                    <label
-                      for="first-name"
-                      class="block text-sm font-medium text-gray-700"
-                      >First name</label
-                    >
-                    <input
-                      type="text"
-                      name="first-name"
-                      id="first-name"
-                      autocomplete="given-name"
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-3">
-                    <label
-                      for="last-name"
-                      class="block text-sm font-medium text-gray-700"
-                      >Last name</label
-                    >
-                    <input
-                      type="text"
-                      name="last-name"
-                      id="last-name"
-                      autocomplete="family-name"
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-4">
-                    <label
-                      for="email-address"
-                      class="block text-sm font-medium text-gray-700"
-                      >Email address</label
-                    >
-                    <input
-                      type="text"
-                      name="email-address"
-                      id="email-address"
-                      autocomplete="email"
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-3">
-                    <label
-                      for="country"
-                      class="block text-sm font-medium text-gray-700"
-                      >Country</label
-                    >
-                    <select
-                      id="country"
-                      name="country"
-                      autocomplete="country-name"
-                      class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                    >
-                      <option>United States</option>
-                      <option>Canada</option>
-                      <option>Mexico</option>
-                    </select>
-                  </div>
-
-                  <div class="col-span-6">
-                    <label
-                      for="street-address"
-                      class="block text-sm font-medium text-gray-700"
-                      >Street address</label
-                    >
-                    <input
-                      type="text"
-                      name="street-address"
-                      id="street-address"
-                      autocomplete="street-address"
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                    <label
-                      for="city"
-                      class="block text-sm font-medium text-gray-700"
-                      >City</label
-                    >
-                    <input
-                      type="text"
-                      name="city"
-                      id="city"
-                      autocomplete="address-level2"
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                    <label
-                      for="region"
-                      class="block text-sm font-medium text-gray-700"
-                      >State / Province</label
-                    >
-                    <input
-                      type="text"
-                      name="region"
-                      id="region"
-                      autocomplete="address-level1"
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-
-                  <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                    <label
-                      for="postal-code"
-                      class="block text-sm font-medium text-gray-700"
-                      >ZIP / Postal code</label
-                    >
-                    <input
-                      type="text"
-                      name="postal-code"
-                      id="postal-code"
-                      autocomplete="postal-code"
-                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                <button
-                  type="submit"
-                  class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Save
-                </button>
-              </div>
-            </div>
-          </form>
-
-          <button
-            @click="hideCreateEntryModal()"
-            class="p-4 text-sm font-bold text-white bg-red-500 rounded-md hover:bg-gray-800"
-          >
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { useCreateEntryModalStore } from '@/stores/createEntryModal';
 
@@ -170,3 +7,61 @@ function hideCreateEntryModal() {
   modalState.hideModal();
 }
 </script>
+
+<template>
+  <div v-if="modalState.isOpen" class="modal" id="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Crear Nuevo Asiento</h2>
+        <button @click="hideCreateEntryModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <label for="title">Titulo:</label><br />
+          <input type="text" id="title" name="title" /><br />
+          <label for="description">Descripcion:</label><br />
+          <textarea id="description" name="description"></textarea><br />
+          <button class="btn-submit" type="submit">Crear</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.modal-content {
+  background-color: white;
+  border: 1px solid #888;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.modal-header button {
+  color: red;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.close-button {
+  appearance: none;
+  background-color: transparent;
+}
+</style>

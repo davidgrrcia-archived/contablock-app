@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Navigation } from '@/interfaces/Navigation';
 import { useCreateEntryModalStore } from '@/stores/createEntryModal';
+import CreateEntryModal from '@/components/CreateEntryModal.vue';
 
 const navigation: Navigation[] = [
   { name: 'Dashboard', href: '#', current: true },
@@ -40,11 +41,11 @@ function showCreateEntryModal() {
       New Entry
     </button>
   </header>
+  <CreateEntryModal></CreateEntryModal>
 </template>
 
 <style scoped>
-
-  header {
+header {
   position: fixed;
   display: flex;
   top: 0;
