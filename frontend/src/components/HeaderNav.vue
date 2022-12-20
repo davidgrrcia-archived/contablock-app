@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Navigation } from '@/interfaces/Navigation';
 import { useCreateEntryModalStore } from '@/stores/createEntryModal';
-import CreateEntryModal from '@/components/CreateEntryModal.vue';
 
 const navigation: Navigation[] = [
   { name: 'Dashboard', href: '#', current: true },
@@ -19,59 +18,54 @@ function showCreateEntryModal() {
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="@/assets/logo.svg"
+      width="50"
+      height="50"
+    />
 
-      <nav>
-        <RouterLink
-          v-for="item in navigation"
-          :key="item.name"
-          :to="item.href"
-          :class="[
-            item.current
-            ? 'current'
-            : 'not-current','menu'
-          ]"
+    <nav>
+      <RouterLink
+        v-for="item in navigation"
+        :key="item.name"
+        :to="item.href"
+        :class="[item.current ? 'current' : 'not-current', 'menu']"
+        >{{ item.name }}</RouterLink
+      >
+    </nav>
 
-        >{{item.name}}</RouterLink>
-      </nav>
-
-    <button
-      class="button"
-      type="button"
-      @click="showCreateEntryModal()"
-    >
+    <button class="btn" type="button" @click="showCreateEntryModal()">
       New Entry
     </button>
   </header>
 </template>
 
 <style scoped>
-header {
+
+  header {
   position: fixed;
   display: flex;
   top: 0;
   left: 0;
   height: auto;
   width: 100%;
-  background-color: #222222;
+  background-color: var(--primary);
   place-items: center;
-  padding: 10px;
 }
 
 .logo {
   display: block;
-  margin: 0 2rem 0 0;
+  margin: 20px;
 }
 
 nav {
   width: 100%;
-  margin-top: 1rem;
-  margin-left: -1rem;
-  padding: 1rem 0;
   text-align: center;
 }
 
-.menu{
+.menu {
   font-size: 18px;
   border-radius: 5px;
   margin-left: 20px;
@@ -79,23 +73,31 @@ nav {
   padding: 10px;
 }
 
-.not-current{
-  color: #fbbf24;
+.not-current {
+  color: var(--quaternary);
 }
 
-.not-current:hover{
-  background-color: #fbbf24;
+.not-current:hover {
+  background-color: var(--quaternary);
   color: #222222;
 }
 
-.current{
-  background-color: #fbbf24;
+.current {
+  background-color: var(--quaternary);
   color: #222222;
 }
 
-.button{
-    display: block;
-    margin: 0 2rem 0 0;
+.btn {
+  border: none;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius: 5px;
+  background-color: var(--enphasis);
+  color: #222222;
+  margin-right: 50px;
+  white-space: nowrap;
 }
-
 </style>

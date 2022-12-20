@@ -1,3 +1,13 @@
+:root {
+    --primary: #0C2340;
+    --secondary: #2D5C8A;
+    --tertiary: #4F93C4;
+    --quaternary: #A0C7E5;
+    --enphasis: #fbbf24;
+}
+
 * {
     font-family: 'Roboto', sans-serif;
 }
+
+
