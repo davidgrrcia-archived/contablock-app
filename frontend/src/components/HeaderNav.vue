@@ -1,40 +1,3 @@
-<template>
-  <div class="columns-3 bg-gray-800">
-    <div class="w-full p-5">
-      <img
-        class="h-8 w-auto object-right"
-        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-        alt="Your Company"
-      />
-    </div>
-    <div class="w-full p-5 space-x-4">
-      <a
-        v-for="item in navigation"
-        :key="item.name"
-        :href="item.href"
-        :class="[
-          item.current
-            ? 'text-amber-400 underline decoration-2 underline-offset-8'
-            : 'text-white hover:bg-amber-400 hover:text-black',
-          'px-3 py-2 rounded-md text-sm font-medium',
-        ]"
-        :aria-current="item.current ? 'page' : undefined"
-        >{{ item.name }}</a
-      >
-    </div>
-    <div class="w-full p-4">
-      <button
-        class="px-3 py-2 text-sm font-medium rounded-md bg-amber-400 text-gray-800"
-        type="button"
-        @click="showCreateEntryModal()"
-      >
-        New Entry
-      </button>
-    </div>
-  </div>
-  <CreateEntryModal></CreateEntryModal>
-</template>
-
 <script setup lang="ts">
 import type { Navigation } from '@/interfaces/Navigation';
 import { useCreateEntryModalStore } from '@/stores/createEntryModal';
@@ -53,3 +16,86 @@ function showCreateEntryModal() {
   modalState.showModal();
 }
 </script>
+
+<template>
+  <header>
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
+
+      <nav>
+        <RouterLink
+          v-for="item in navigation"
+          :key="item.name"
+          :to="item.href"
+          :class="[
+            item.current
+            ? 'current'
+            : 'not-current','menu'
+          ]"
+
+        >{{item.name}}</RouterLink>
+      </nav>
+
+    <button
+      class="button"
+      type="button"
+      @click="showCreateEntryModal()"
+    >
+      New Entry
+    </button>
+  </header>
+</template>
+
+<style scoped>
+header {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  height: auto;
+  width: 100%;
+  background-color: #222222;
+  place-items: center;
+  padding: 10px;
+}
+
+.logo {
+  display: block;
+  margin: 0 2rem 0 0;
+}
+
+nav {
+  width: 100%;
+  margin-top: 1rem;
+  margin-left: -1rem;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.menu{
+  font-size: 18px;
+  border-radius: 5px;
+  margin-left: 20px;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.not-current{
+  color: #fbbf24;
+}
+
+.not-current:hover{
+  background-color: #fbbf24;
+  color: #222222;
+}
+
+.current{
+  background-color: #fbbf24;
+  color: #222222;
+}
+
+.button{
+    display: block;
+    margin: 0 2rem 0 0;
+}
+
+</style>
