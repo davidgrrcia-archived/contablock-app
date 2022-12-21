@@ -4,10 +4,13 @@ clean:
 	docker system prune
 
 provision:
-	docker-compose up -d
+	cd backend && docker-compose up -d
 
 render-api-docs:
 	cd docs/open-api && http-server
 
 validate-api-docs:
 	cd docs/open-api && spectral lint open-api.yaml
+
+start-backend:
+	cd backend && make start

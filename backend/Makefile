@@ -15,7 +15,7 @@ provision:
 lint:
 	golangci-lint run
 
-start-local:
+start:
 	DB_HOST=localhost DB_PORT=3306 DB_NAME=db_accounting DB_USER=root DB_PASS=root go run main.go
 
 docker-build:

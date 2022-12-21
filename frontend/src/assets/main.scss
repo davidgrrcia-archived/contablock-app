@@ -1,12 +1,9 @@
-:root {
+#app {
   --primary: #0c2340;
   --secondary: #2d5c8a;
   --tertiary: #4f93c4;
   --quaternary: #a0c7e5;
   --enphasis: #fbbf24;
-}
-
-* {
   font-family: 'Roboto', sans-serif;
 }
 
@@ -52,12 +49,12 @@ html {
         margin-bottom: 2rem;
     }
 
-    input[type="number"] {
+    views[type="number"] {
         -moz-appearance: textfield;
     }
 
-    input[type="number"]::-webkit-outer-spin-button,
-    input[type="number"]::-webkit-inner-spin-button {
+    views[type="number"]::-webkit-outer-spin-button,
+    views[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }

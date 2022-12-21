@@ -19,13 +19,7 @@ function showCreateEntryModal() {
 
 <template>
   <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="50"
-      height="50"
-    />
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
 
     <nav>
       <RouterLink
@@ -37,9 +31,7 @@ function showCreateEntryModal() {
       >
     </nav>
 
-    <button class="btn" type="button" @click="showCreateEntryModal()">
-      New Entry
-    </button>
+    <button class="btn" type="button" @click="showCreateEntryModal()">New Entry</button>
   </header>
   <CreateEntryModal></CreateEntryModal>
 </template>
