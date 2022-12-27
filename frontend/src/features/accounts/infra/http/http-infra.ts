@@ -6,7 +6,7 @@ export interface AccountsHttpInfra {
 
 export class DefaultAccountsHttpInfra implements AccountsHttpInfra {
   listAccounts() {
-    return fetch('http://localhost:4000/api/accounts')
+    return fetch('/api/accounts')
       .then(response => response.json())
       .then(response => response as AccountListResponse);
   }

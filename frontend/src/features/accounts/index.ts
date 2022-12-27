@@ -4,4 +4,5 @@ import { DefaultAccountsUseCase } from '@/features/accounts/application/accounts
 
 const httpInfra = new DefaultAccountsHttpInfra();
 const httpAdapter = new DefaultAccountsHttpAdapter(httpInfra);
-const accountsUseCase = new DefaultAccountsUseCase(httpAdapter);
+export const accountsUseCase = new DefaultAccountsUseCase(httpAdapter);
+
