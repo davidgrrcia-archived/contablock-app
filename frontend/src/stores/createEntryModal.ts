@@ -14,7 +14,5 @@ export const useCreateEntryModalStore = defineStore('createEntryModal', {
     hideModal() {
       this.isOpen = false;
     },
-  }
+  },
 });
-
-

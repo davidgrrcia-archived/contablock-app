@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from "@/features/home/adapters/views/HomeView.vue";
+import HomeView from '@/features/home/adapters/views/HomeView.vue';
 
 //TODO: apply clean architecture
 

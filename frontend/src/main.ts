@@ -14,6 +14,11 @@ import Dialog from 'primevue/dialog';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import AutoComplete from 'primevue/autocomplete';
+import Dropdown from 'primevue/dropdown';
+import Divider from 'primevue/divider';
+import Calendar from 'primevue/calendar';
+import Textarea from 'primevue/textarea';
+import InputNumber from 'primevue/inputnumber';
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -22,9 +27,14 @@ app.use(router);
 app.use(pinia);
 app.use(PrimeVue);
 
-app.component('Dialog', Dialog);
-app.component('InputText', InputText);
-app.component('Button', Button);
-app.component('AutoComplete', AutoComplete);
+app.component('DialogPrimeVue', Dialog);
+app.component('InputTextPrimeVue', InputText);
+app.component('ButtonPrimeVue', Button);
+app.component('AutoCompletePrimeVue', AutoComplete);
+app.component('DropdownPrimeVue', Dropdown);
+app.component('DividerPrimeVue', Divider);
+app.component('CalendarPrimeVue', Calendar);
+app.component('TextareaPrimeVue', Textarea);
+app.component('InputNumberPrimeVue', InputNumber);
 
 app.mount('#app');

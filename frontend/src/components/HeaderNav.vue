@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Navigation } from '@/interfaces/Navigation';
 import { useCreateEntryModalStore } from '@/stores/createEntryModal';
 import CreateEntryModal from '@/components/CreateEntryModal.vue';
+import type { Navigation } from '@/components/Navigation';
 
 const navigation: Navigation[] = [
   { name: 'Dashboard', href: '#', current: true },
