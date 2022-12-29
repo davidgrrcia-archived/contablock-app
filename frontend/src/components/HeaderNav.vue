@@ -38,7 +38,7 @@ header {
   left: 0;
   height: auto;
   width: 100%;
-  background-color: var(--primary);
+  background-color: var(--black);
   place-items: center;
 }
 
@@ -61,16 +61,16 @@ nav {
 }
 
 .not-current {
-  color: var(--quaternary);
+  color: var(--white);
 }
 
 .not-current:hover {
-  background-color: var(--quaternary);
+  background-color: var(--white);
   color: #222222;
 }
 
 .current {
-  background-color: var(--quaternary);
+  background-color: var(--white);
   color: #222222;
 }
 
@@ -82,7 +82,7 @@ nav {
   display: inline-block;
   font-size: 18px;
   border-radius: 5px;
-  background-color: var(--enphasis);
+  background-color: var(--yellow);
   color: #222222;
   margin-right: 50px;
   white-space: nowrap;

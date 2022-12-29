@@ -49,7 +49,6 @@ export const useEntriesStore = defineStore('entries', {
 
         this.clearEntries();
       } catch (err) {
-        console.log('error is: ' + err);
         this.state.stateMessage = 'error creating entries';
         const messagesStore = useMessagesStore();
         messagesStore.addErrorMessage(this.state.stateMessage);

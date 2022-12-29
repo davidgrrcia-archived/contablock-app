@@ -12,7 +12,7 @@ import ErrorModal from '@/components/ErrorMessage.vue';
 </template>
 
 <style scoped>
-.body{
+.body {
   margin-top: 100px;
 }
 </style>
