@@ -8,5 +8,11 @@ import ErrorModal from '@/components/ErrorMessage.vue';
   <header></header>
   <ErrorModal></ErrorModal>
   <HeaderNav />
-  <RouterView />
+  <RouterView class="body" />
 </template>
+
+<style scoped>
+.body{
+  margin-top: 100px;
+}
+</style>

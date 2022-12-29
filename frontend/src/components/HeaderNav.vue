@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import { useCreateEntryModalStore } from '@/stores/createEntryModal';
 import CreateEntryModal from '@/components/CreateEntryModal.vue';
-import type { Navigation } from '@/components/Navigation';
+import { useConfigStore } from '@/stores/config';
 
-const navigation: Navigation[] = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-];
-
+const configStore = useConfigStore();
 const modalState = useCreateEntryModalStore();
 
 function showCreateEntryModal() {
@@ -23,7 +17,7 @@ function showCreateEntryModal() {
 
     <nav>
       <RouterLink
-        v-for="item in navigation"
+        v-for="item in configStore.state.navigation"
         :key="item.name"
         :to="item.href"
         :class="[item.current ? 'current' : 'not-current', 'menu']"

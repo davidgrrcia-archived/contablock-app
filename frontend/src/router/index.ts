@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/features/home/adapters/views/HomeView.vue';
+import DailyLedgerView from '@/features/daily-ledger/adapters/views/DailyLedgerView.vue';
+import GeneralLedgerView from '@/features/general-ledger/adapters/views/GeneralLedgerView.vue';
 
 //TODO: apply clean architecture
 
@@ -8,8 +9,13 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
+      name: 'dailyLedger',
+      component: DailyLedgerView,
+    },
+    {
+      path: '/general-ledger',
+      name: 'generalLedger',
+      component: GeneralLedgerView,
     },
   ],
 });
