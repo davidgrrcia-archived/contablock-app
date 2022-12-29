@@ -2,6 +2,7 @@ import type { Entry, EntriesAdapter } from '@/features/entries/application/entri
 
 export interface EntriesUseCase {
   listEntries(): Promise<Entry[]>;
+  createEntry(entry: Entry): Promise<Entry>;
 }
 
 export class DefaultEntriesUseCase implements EntriesUseCase {
@@ -9,5 +10,9 @@ export class DefaultEntriesUseCase implements EntriesUseCase {
 
   async listEntries() {
     return await this.entriesAdapter.listEntriesHttpResponse();
+  }
+
+  async createEntry(entry: Entry) {
+    return await this.entriesAdapter.createEntryHttpResponse(entry);
   }
 }

@@ -14,7 +14,7 @@ const state = {
   messages: [] as Message[],
 };
 
-export const useErrorMessagesStore = defineStore('errorModal', {
+export const useMessagesStore = defineStore('messagesStore', {
   state: () => {
     return { state };
   },
@@ -25,6 +25,18 @@ export const useErrorMessagesStore = defineStore('errorModal', {
         const msg: Message = {
           id: '',
           severity: 'error',
+          content: message,
+          life: 3000,
+          sticky: false,
+        };
+        this.state.messages.push(msg);
+      }
+    },
+    addSuccessMessage(message: string) {
+      if (message !== undefined || '') {
+        const msg: Message = {
+          id: '',
+          severity: 'success',
           content: message,
           life: 3000,
           sticky: false,

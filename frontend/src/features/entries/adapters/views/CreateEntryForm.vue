@@ -3,12 +3,12 @@ import { ref } from 'vue';
 import { v4 as uuid } from 'uuid';
 import type { Entry } from '@/features/entries/application/entries-model';
 import { useEntriesStore } from '@/stores/entries';
-import { useErrorMessagesStore } from '@/stores/errorMessages';
+import { useMessagesStore } from '@/stores/messages';
 import { useAccountsStore } from '@/stores/accounts';
 
 //store
 const entriesStore = useEntriesStore();
-const errorStore = useErrorMessagesStore();
+const errorStore = useMessagesStore();
 const accountsStore = useAccountsStore();
 await accountsStore.loadAccounts();
 
@@ -44,7 +44,8 @@ function addDebitEntry() {
     accountId: debitAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: currency.value,
-    date: date.value.toLocaleDateString(),
+    date: date.value.toISOString(),
+    displayDate: date.value.toLocaleDateString(),
     concept: concept.value,
     debitAmount: debitAmount.value,
     creditAmount: null,
@@ -65,7 +66,8 @@ function addCreditEntry() {
     accountId: creditAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: currency.value,
-    date: date.value.toLocaleDateString(),
+    date: date.value.toISOString(),
+    displayDate: date.value.toLocaleDateString(),
     concept: concept.value,
     debitAmount: null,
     creditAmount: creditAmount.value,
@@ -90,21 +92,21 @@ const currencies = ref([
 
 <template>
   <div class="form-header">
-      <DropdownPrimeVue
-        v-model="currency"
-        :options="currencies"
-        optionLabel="code"
-        optionValue="code"
-        :placeholder="currencies[0].code"
-      />
-      <CalendarPrimeVue v-model="date" :showIcon="true" dateFormat="dd/mm/yy" />
-      <TextareaPrimeVue
-        v-model="concept"
-        :autoResize="true"
-        rows="3"
-        cols="50"
-        placeholder="Descripción del asiento (opcional)"
-      />
+    <DropdownPrimeVue
+      v-model="currency"
+      :options="currencies"
+      optionLabel="code"
+      optionValue="code"
+      :placeholder="currencies[0].code"
+    />
+    <CalendarPrimeVue v-model="date" :showIcon="true" dateFormat="dd/mm/yy" />
+    <TextareaPrimeVue
+      v-model="concept"
+      :autoResize="true"
+      rows="3"
+      cols="50"
+      placeholder="Descripción del asiento (opcional)"
+    />
   </div>
   <div class="form-body">
     <div>
@@ -141,7 +143,7 @@ const currencies = ref([
     <DataTablePrimeVue :value="entriesStore.state.entriesCreation" responsiveLayout="scroll">
       <ColumnPrimeVue field="displayName" header="Cuenta"></ColumnPrimeVue>
       <ColumnPrimeVue field="currency" header="Divisa"></ColumnPrimeVue>
-      <ColumnPrimeVue field="date" header="Fecha"></ColumnPrimeVue>
+      <ColumnPrimeVue field="displayDate" header="Fecha"></ColumnPrimeVue>
       <ColumnPrimeVue field="concept" header="Concepto"></ColumnPrimeVue>
       <ColumnPrimeVue field="debitAmount" header="Debe"></ColumnPrimeVue>
       <ColumnPrimeVue field="creditAmount" header="Haber"></ColumnPrimeVue>

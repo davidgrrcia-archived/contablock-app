@@ -1,10 +1,26 @@
 <script setup lang="ts">
 import { useCreateEntryModalStore } from '@/stores/createEntryModal';
 import CreateEntryForm from '@/features/entries/adapters/views/CreateEntryForm.vue';
+import { useEntriesStore } from '@/stores/entries';
+import { useMessagesStore } from '@/stores/messages';
 
 const modalState = useCreateEntryModalStore();
+const entriesStore = useEntriesStore();
+const messagesStore = useMessagesStore();
 
 function hideCreateEntryModal() {
+  modalState.hideModal();
+}
+
+function createEntries() {
+  if (entriesStore.state.totalBalance !== 0) {
+    messagesStore.addErrorMessage(
+      'El principio de partida doble es obligatorio, el balance actual es: ' + entriesStore.state.totalBalance,
+    );
+    return;
+  }
+
+  entriesStore.createEntries();
   modalState.hideModal();
 }
 </script>
@@ -19,8 +35,8 @@ function hideCreateEntryModal() {
   >
     <suspense><CreateEntryForm></CreateEntryForm></suspense>
     <template #footer>
-      <ButtonPrimeVue label="No" icon="pi pi-times" @click="hideCreateEntryModal" class="p-button-text" />
-      <ButtonPrimeVue label="Yes" icon="pi pi-check" @click="hideCreateEntryModal" autofocus />
+      <ButtonPrimeVue label="Cancelar" icon="pi pi-times" @click="hideCreateEntryModal" class="p-button-text" />
+      <ButtonPrimeVue label="Crear Asiento" icon="pi pi-check" @click="createEntries" autofocus />
     </template>
   </DialogPrimeVue>
 </template>

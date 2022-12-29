@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useErrorMessagesStore } from '@/stores/errorMessages';
+import { useMessagesStore } from '@/stores/messages';
 
-const errorMessagesStore = useErrorMessagesStore();
+const errorMessagesStore = useMessagesStore();
 </script>
 
 <template>

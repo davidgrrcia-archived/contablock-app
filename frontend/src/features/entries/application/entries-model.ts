@@ -1,9 +1,10 @@
 export interface EntriesAdapter {
   listEntriesHttpResponse(): Promise<Entry[]>;
+  createEntryHttpResponse(entry: Entry): Promise<Entry>;
 }
 
 export interface Entry {
-  id: string;
+  id?: string;
   accountId: string;
   multipleEntryId: string;
   currency: string;
@@ -12,4 +13,5 @@ export interface Entry {
   debitAmount: number | null;
   creditAmount: number | null;
   displayName?: string;
+  displayDate?: string;
 }
