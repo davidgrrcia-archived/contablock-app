@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import AccountsDropDown from '@/features/accounts/adapters/views/AccountsDropDown.vue';
 import { ref } from 'vue';
 import { v4 as uuid } from 'uuid';
 import type { Entry } from '@/features/entries/application/entries-model';
 import { useEntriesStore } from '@/stores/entries';
 import {useErrorMessagesStore} from '@/stores/errorMessages';
+import { useAccountsStore } from "@/stores/accounts";
 
+//store
 const entriesStore = useEntriesStore();
 const errorStore = useErrorMessagesStore()
+const accountsStore = useAccountsStore();
+await accountsStore.loadAccounts();
+
+//constants
+const accounts = accountsStore.state.accounts;
 
 const currency = ref('EUR');
 const currentDate = new Date();
@@ -17,6 +23,8 @@ const debitAmount = ref();
 const creditAmount = ref();
 const id = uuid();
 const multipleEntryId = uuid();
+const debitAccount = ref();
+const creditAccount = ref();
 
 if (entriesStore.state.multipleEntryId === '') {
   entriesStore.state.multipleEntryId = multipleEntryId;
@@ -30,7 +38,7 @@ function addDebitEntry() {
 
   const newEntry: Entry = {
     id: id,
-    accountId: '', //TODO: retrieve
+    accountId: debitAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: currency.value,
     date: date.value.toLocaleDateString(),
@@ -51,7 +59,7 @@ function addCreditEntry() {
 
   const newEntry: Entry = {
     id: id,
-    accountId: '', //TODO: retrieve
+    accountId: creditAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: currency.value,
     date: date.value.toLocaleDateString(),
@@ -102,7 +110,14 @@ const currencies = ref([
   <div class="form-body">
     <div>
       <h4>Debe</h4>
-      <Suspense> <AccountsDropDown></AccountsDropDown></Suspense> <!-- TODO improve display UI -->
+        <DropdownPrimeVue
+          v-model="debitAccount"
+          :options="accounts"
+          optionLabel="name"
+          optionValue="id"
+          :virtualScrollerOptions="{ itemSize: 38 }"
+          placeholder="Selecciona una cuenta"
+        />
       <InputNumberPrimeVue v-model="debitAmount" mode="currency" :currency="currency" locale="es-ES" />
       <ButtonPrimeVue icon="fa-solid fa-plus" @click="addDebitEntry" />
     </div>
@@ -111,7 +126,14 @@ const currencies = ref([
     </div>
     <div>
       <h4>Haber</h4>
-      <Suspense> <AccountsDropDown></AccountsDropDown></Suspense>
+        <DropdownPrimeVue
+          v-model="creditAccount"
+          :options="accounts"
+          optionLabel="name"
+          optionValue="id"
+          :virtualScrollerOptions="{ itemSize: 38 }"
+          placeholder="Selecciona una cuenta"
+        />
       <InputNumberPrimeVue v-model="creditAmount" mode="currency" :currency="currency" locale="es-ES" />
       <ButtonPrimeVue icon="fa-solid fa-plus" @click="addCreditEntry" />
     </div>

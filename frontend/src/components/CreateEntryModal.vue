@@ -17,7 +17,7 @@ function hideCreateEntryModal() {
     :style="{ width: '60vw' }"
     :modal="true"
   >
-    <CreateEntryForm></CreateEntryForm>
+    <suspense><CreateEntryForm></CreateEntryForm></suspense>
     <template #footer>
       <ButtonPrimeVue label="No" icon="pi pi-times" @click="hideCreateEntryModal" class="p-button-text" />
       <ButtonPrimeVue label="Yes" icon="pi pi-check" @click="hideCreateEntryModal" autofocus />
