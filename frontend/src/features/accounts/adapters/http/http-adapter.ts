@@ -14,4 +14,8 @@ export class DefaultAccountsHttpAdapter implements AccountsAdapter {
       kind: item.kind,
     }));
   }
+
+  async describeAccountHttpResponse(id: string) {
+    return await this.accountsHttpInfra.describeAccount(id);
+  }
 }

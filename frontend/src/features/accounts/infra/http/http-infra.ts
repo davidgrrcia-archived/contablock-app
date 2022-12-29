@@ -1,7 +1,8 @@
-import type { AccountListResponse } from '@/features/accounts/infra/http/models';
+import type { AccountDescribeResponse, AccountListResponse } from '@/features/accounts/infra/http/models';
 
 export interface AccountsHttpInfra {
   listAccounts(): Promise<AccountListResponse>;
+  describeAccount(id: string): Promise<AccountDescribeResponse>;
 }
 
 export class DefaultAccountsHttpInfra implements AccountsHttpInfra {
@@ -9,5 +10,10 @@ export class DefaultAccountsHttpInfra implements AccountsHttpInfra {
     return fetch('/api/accounts')
       .then(response => response.json())
       .then(response => response as AccountListResponse);
+  }
+  describeAccount(id: string) {
+    return fetch('/api/accounts/' + id)
+      .then(response => response.json())
+      .then(response => response as AccountDescribeResponse);
   }
 }

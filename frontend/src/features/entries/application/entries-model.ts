@@ -11,4 +11,5 @@ export interface Entry {
   date: string;
   debitAmount: number | null;
   creditAmount: number | null;
+  displayName?: string;
 }

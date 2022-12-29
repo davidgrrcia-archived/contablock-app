@@ -3,17 +3,20 @@ import { ref } from 'vue';
 import { v4 as uuid } from 'uuid';
 import type { Entry } from '@/features/entries/application/entries-model';
 import { useEntriesStore } from '@/stores/entries';
-import {useErrorMessagesStore} from '@/stores/errorMessages';
-import { useAccountsStore } from "@/stores/accounts";
+import { useErrorMessagesStore } from '@/stores/errorMessages';
+import { useAccountsStore } from '@/stores/accounts';
 
 //store
 const entriesStore = useEntriesStore();
-const errorStore = useErrorMessagesStore()
+const errorStore = useErrorMessagesStore();
 const accountsStore = useAccountsStore();
 await accountsStore.loadAccounts();
 
 //constants
-const accounts = accountsStore.state.accounts;
+const accounts = accountsStore.state.accounts.map(account => ({
+  ...account,
+  displayName: account.id + ' - ' + account.name,
+}));
 
 const currency = ref('EUR');
 const currentDate = new Date();
@@ -31,9 +34,9 @@ if (entriesStore.state.multipleEntryId === '') {
 }
 
 function addDebitEntry() {
-  if (debitAmount.value === undefined){
-    errorStore.addErrorMessage("Introduce una cantidad en el debe")
-    return
+  if (debitAmount.value === undefined) {
+    errorStore.addErrorMessage('Introduce una cantidad en el debe');
+    return;
   }
 
   const newEntry: Entry = {
@@ -52,9 +55,9 @@ function addDebitEntry() {
 }
 
 function addCreditEntry() {
-  if (creditAmount.value === undefined){
-    errorStore.addErrorMessage("Introduce una cantidad en el haber")
-    return
+  if (creditAmount.value === undefined) {
+    errorStore.addErrorMessage('Introduce una cantidad en el haber');
+    return;
   }
 
   const newEntry: Entry = {
@@ -87,7 +90,6 @@ const currencies = ref([
 
 <template>
   <div class="form-header">
-    <div>
       <DropdownPrimeVue
         v-model="currency"
         :options="currencies"
@@ -96,8 +98,6 @@ const currencies = ref([
         :placeholder="currencies[0].code"
       />
       <CalendarPrimeVue v-model="date" :showIcon="true" dateFormat="dd/mm/yy" />
-    </div>
-    <div>
       <TextareaPrimeVue
         v-model="concept"
         :autoResize="true"
@@ -105,19 +105,18 @@ const currencies = ref([
         cols="50"
         placeholder="Descripción del asiento (opcional)"
       />
-    </div>
   </div>
   <div class="form-body">
     <div>
       <h4>Debe</h4>
-        <DropdownPrimeVue
-          v-model="debitAccount"
-          :options="accounts"
-          optionLabel="name"
-          optionValue="id"
-          :virtualScrollerOptions="{ itemSize: 38 }"
-          placeholder="Selecciona una cuenta"
-        />
+      <DropdownPrimeVue
+        v-model="debitAccount"
+        :options="accounts"
+        optionLabel="displayName"
+        optionValue="id"
+        :virtualScrollerOptions="{ itemSize: 38 }"
+        placeholder="Selecciona una cuenta"
+      />
       <InputNumberPrimeVue v-model="debitAmount" mode="currency" :currency="currency" locale="es-ES" />
       <ButtonPrimeVue icon="fa-solid fa-plus" @click="addDebitEntry" />
     </div>
@@ -126,21 +125,21 @@ const currencies = ref([
     </div>
     <div>
       <h4>Haber</h4>
-        <DropdownPrimeVue
-          v-model="creditAccount"
-          :options="accounts"
-          optionLabel="name"
-          optionValue="id"
-          :virtualScrollerOptions="{ itemSize: 38 }"
-          placeholder="Selecciona una cuenta"
-        />
+      <DropdownPrimeVue
+        v-model="creditAccount"
+        :options="accounts"
+        optionLabel="displayName"
+        optionValue="id"
+        :virtualScrollerOptions="{ itemSize: 38 }"
+        placeholder="Selecciona una cuenta"
+      />
       <InputNumberPrimeVue v-model="creditAmount" mode="currency" :currency="currency" locale="es-ES" />
       <ButtonPrimeVue icon="fa-solid fa-plus" @click="addCreditEntry" />
     </div>
   </div>
   <div class="form-table">
     <DataTablePrimeVue :value="entriesStore.state.entriesCreation" responsiveLayout="scroll">
-      <ColumnPrimeVue field="accountId" header="Cuenta"></ColumnPrimeVue>
+      <ColumnPrimeVue field="displayName" header="Cuenta"></ColumnPrimeVue>
       <ColumnPrimeVue field="currency" header="Divisa"></ColumnPrimeVue>
       <ColumnPrimeVue field="date" header="Fecha"></ColumnPrimeVue>
       <ColumnPrimeVue field="concept" header="Concepto"></ColumnPrimeVue>
@@ -148,7 +147,7 @@ const currencies = ref([
       <ColumnPrimeVue field="creditAmount" header="Haber"></ColumnPrimeVue>
     </DataTablePrimeVue>
     <h5>Balance:</h5>
-    <p> {{entriesStore.state.totalBalance}}</p>
+    <p>{{ entriesStore.state.totalBalance }}</p>
   </div>
 </template>
 

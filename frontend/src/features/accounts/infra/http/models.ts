@@ -8,3 +8,7 @@ export interface Account {
 export interface AccountListResponse {
   items: Account[];
 }
+
+export interface AccountDescribeResponse {
+  account: Account;
+}

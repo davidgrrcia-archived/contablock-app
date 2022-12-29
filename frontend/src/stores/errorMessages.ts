@@ -4,10 +4,10 @@ import { defineStore } from 'pinia';
 
 interface Message {
   id: string;
-  severity: "success" | "info" | "warn" | "error" | undefined;
+  severity: 'success' | 'info' | 'warn' | 'error' | undefined;
   content: string;
-  life: number
-  sticky: boolean
+  life: number;
+  sticky: boolean;
 }
 
 const state = {
@@ -16,24 +16,24 @@ const state = {
 
 export const useErrorMessagesStore = defineStore('errorModal', {
   state: () => {
-    return {state };
+    return { state };
   },
 
   actions: {
-    addErrorMessage(message: string){
-      if (message !== undefined || ""){
+    addErrorMessage(message: string) {
+      if (message !== undefined || '') {
         const msg: Message = {
-          id: "",
-          severity: "error",
+          id: '',
+          severity: 'error',
           content: message,
           life: 3000,
-          sticky: false
-        }
-        this.state.messages.push(msg)
+          sticky: false,
+        };
+        this.state.messages.push(msg);
       }
     },
-    clearMessages(){
-      this.state.messages = []
-    }
+    clearMessages() {
+      this.state.messages = [];
+    },
   },
 });

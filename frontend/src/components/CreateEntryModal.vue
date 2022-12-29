@@ -14,7 +14,7 @@ function hideCreateEntryModal() {
     header="Registrar nuevo asiento contable"
     v-model:visible="modalState.isOpen"
     :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
-    :style="{ width: '60vw' }"
+    :style="{ width: '90vw' }"
     :modal="true"
   >
     <suspense><CreateEntryForm></CreateEntryForm></suspense>

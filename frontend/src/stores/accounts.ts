@@ -21,22 +21,16 @@ export const useAccountsStore = defineStore('accounts', {
   actions: {
     async loadAccounts() {
       try {
-        this.state = {
-          accounts: [],
-          stateMessage: 'loading accounts',
-        };
+        this.state.accounts = [];
+        this.state.stateMessage = 'loading accounts';
 
         const accounts = await accountsUseCase.listAccounts();
 
-        this.state = {
-          accounts: accounts,
-          stateMessage: 'accounts loaded',
-        };
+        this.state.accounts = accounts;
+        this.state.stateMessage = 'accounts loaded';
       } catch (err) {
-        this.state = {
-          accounts: [],
-          stateMessage: 'error loading accounts',
-        };
+        this.state.accounts = [];
+        this.state.stateMessage = 'error loading accounts';
       }
     },
   },
