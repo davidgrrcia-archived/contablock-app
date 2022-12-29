@@ -19,6 +19,9 @@ import Divider from 'primevue/divider';
 import Calendar from 'primevue/calendar';
 import Textarea from 'primevue/textarea';
 import InputNumber from 'primevue/inputnumber';
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
+import Message from 'primevue/message'
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -36,5 +39,8 @@ app.component('DividerPrimeVue', Divider);
 app.component('CalendarPrimeVue', Calendar);
 app.component('TextareaPrimeVue', Textarea);
 app.component('InputNumberPrimeVue', InputNumber);
+app.component('DataTablePrimeVue', DataTable)
+app.component('ColumnPrimeVue',Column)
+app.component('MessagePrimeVue',Message)
 
 app.mount('#app');

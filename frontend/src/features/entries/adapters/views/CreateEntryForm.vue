@@ -4,8 +4,10 @@ import { ref } from 'vue';
 import { v4 as uuid } from 'uuid';
 import type { Entry } from '@/features/entries/application/entries-model';
 import { useEntriesStore } from '@/stores/entries';
+import {useErrorMessagesStore} from '@/stores/errorMessages';
 
 const entriesStore = useEntriesStore();
+const errorStore = useErrorMessagesStore()
 
 const currency = ref('EUR');
 const currentDate = new Date();
@@ -21,12 +23,17 @@ if (entriesStore.state.multipleEntryId === '') {
 }
 
 function addDebitEntry() {
+  if (debitAmount.value === undefined){
+    errorStore.addErrorMessage("Introduce una cantidad en el debe")
+    return
+  }
+
   const newEntry: Entry = {
     id: id,
     accountId: '', //TODO: retrieve
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: currency.value,
-    date: date.value.toISOString(),
+    date: date.value.toLocaleDateString(),
     concept: concept.value,
     debitAmount: debitAmount.value,
     creditAmount: null,
@@ -37,12 +44,17 @@ function addDebitEntry() {
 }
 
 function addCreditEntry() {
+  if (creditAmount.value === undefined){
+    errorStore.addErrorMessage("Introduce una cantidad en el haber")
+    return
+  }
+
   const newEntry: Entry = {
     id: id,
     accountId: '', //TODO: retrieve
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: currency.value,
-    date: date.value.toISOString(),
+    date: date.value.toLocaleDateString(),
     concept: concept.value,
     debitAmount: null,
     creditAmount: creditAmount.value,
@@ -90,7 +102,7 @@ const currencies = ref([
   <div class="form-body">
     <div>
       <h4>Debe</h4>
-      <Suspense> <AccountsDropDown></AccountsDropDown></Suspense>
+      <Suspense> <AccountsDropDown></AccountsDropDown></Suspense> <!-- TODO improve display UI -->
       <InputNumberPrimeVue v-model="debitAmount" mode="currency" :currency="currency" locale="es-ES" />
       <ButtonPrimeVue icon="fa-solid fa-plus" @click="addDebitEntry" />
     </div>
@@ -105,7 +117,16 @@ const currencies = ref([
     </div>
   </div>
   <div class="form-table">
-    <!-- TODO implement -->
+    <DataTablePrimeVue :value="entriesStore.state.entriesCreation" responsiveLayout="scroll">
+      <ColumnPrimeVue field="accountId" header="Cuenta"></ColumnPrimeVue>
+      <ColumnPrimeVue field="currency" header="Divisa"></ColumnPrimeVue>
+      <ColumnPrimeVue field="date" header="Fecha"></ColumnPrimeVue>
+      <ColumnPrimeVue field="concept" header="Concepto"></ColumnPrimeVue>
+      <ColumnPrimeVue field="debitAmount" header="Debe"></ColumnPrimeVue>
+      <ColumnPrimeVue field="creditAmount" header="Haber"></ColumnPrimeVue>
+    </DataTablePrimeVue>
+    <h5>Balance:</h5>
+    <p> {{entriesStore.state.totalBalance}}</p>
   </div>
 </template>
 
