@@ -2,7 +2,6 @@ package entry
 
 import (
 	"context"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 	"time"
 )
 
@@ -52,28 +51,22 @@ type DescribeEntryOutput struct {
 }
 
 type ListEntryInput struct {
-	Expand *bool `valid:"optional"`
 }
 
 type ListEntryOutput struct {
-	Items []EntryExpand
-}
-
-type EntryExpand struct {
-	Entry   Entry
-	Account *account.Account
+	Items []Entry
 }
 
 type UpdateEntryInput struct {
-	ID            string     `valid:"required,length(1|64)"`
-	AccountID     *string    `valid:"optional,length(1|64)"`
-	Currency      *string    `valid:"optional,length(3|3)"`
-	Concept       *string    `valid:"optional"`
-	Date          *time.Time `valid:"optional"`
-	DebitBalance  *float64   `valid:"optional"`
-	CreditBalance *float64   `valid:"optional"`
-	State         *string    `valid:"optional"`
-	StateReason   *string    `valid:"optional"`
+	ID            string    `valid:"required,length(1|64)"`
+	AccountID     string    `valid:"required,length(1|64)"`
+	Currency      string    `valid:"required,length(3|3)"`
+	Concept       *string   `valid:"required"`
+	Date          time.Time `valid:"required"`
+	DebitBalance  *float64  `valid:"required"`
+	CreditBalance *float64  `valid:"required"`
+	State         string    `valid:"required"`
+	StateReason   *string   `valid:"required"`
 }
 
 type UpdateEntryOutput struct {
@@ -97,9 +90,22 @@ type EntryStorage interface {
 }
 
 type EntryStorageData struct {
-	Entry
+	ID              string
+	AccountID       string
+	MultipleEntryID string
+	Currency        string
+	Concept         *string
+	Date            time.Time
+	Quarter         int
+	DebitBalance    float64
+	CreditBalance   float64
+	TotalBalance    float64
+	State           string
+	StateReason     *string
+	CreationDate    time.Time
+	LastUpdate      time.Time
 }
 
 type EntryStorageCollectionData struct {
-	Items []Entry
+	Items []EntryStorageData
 }

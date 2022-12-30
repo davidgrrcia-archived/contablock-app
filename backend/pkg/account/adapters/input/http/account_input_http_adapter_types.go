@@ -1,10 +1,11 @@
 package accountInputHttpAdapter
 
 type Account struct {
-	ID    string `json:"id"`
-	Name  string `json:"name"`
-	Level string `json:"level"`
-	Type  string `json:"type"`
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Level       string `json:"level"`
+	Type        string `json:"type"`
+	DisplayName string `json:"displayName"`
 }
 
 type DescribeAccountRequest struct {

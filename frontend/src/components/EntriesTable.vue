@@ -51,14 +51,15 @@ const results = groupBy(entriesStore.state.storedEntries, i => i.multipleEntryId
   margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 400px;
+  width: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  text-align: left;
 }
 
 .styled-table thead tr {
   background-color: var(--blue);
   color: #ffffff;
-  text-align: left;
+
 }
 
 .styled-table th,

@@ -34,9 +34,15 @@ type BusinessStorage interface {
 }
 
 type BusinessStorageData struct {
-	Business
+	ID                 string
+	Name               string
+	SocialDenomination string
+	RegisteredOffice   string
+	Cif                string
+	Logo               string
+	EthAddress         string
 }
 
 type BusinessStorageCollectionData struct {
-	Items []Business
+	Items []BusinessStorageData
 }

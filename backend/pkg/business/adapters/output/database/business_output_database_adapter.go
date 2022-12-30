@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
 )
 
@@ -33,17 +32,22 @@ func (repository *BusinessRepository) Get(ctx context.Context, id string) (*busi
 
 	result := repository.db.QueryRow(query, id)
 
-	var output BusinessDb
-	err := result.Scan(&output.ID, &output.Name, &output.SocialDenomination, &output.RegisteredOffice, &output.Cif, &output.Logo, &output.EthAddress)
-
-	storedBusiness, err := toBusiness(output)
+	var outputDb BusinessDb
+	err := result.Scan(&outputDb.ID, &outputDb.Name, &outputDb.SocialDenomination, &outputDb.RegisteredOffice, &outputDb.Cif, &outputDb.Logo, &outputDb.EthAddress)
 	if err != nil {
 		return nil, err
 	}
 
-	return &business.BusinessStorageData{
-		Business: *storedBusiness,
-	}, nil
+	var output business.BusinessStorageData
+	output.ID = outputDb.ID
+	output.Name = outputDb.Name
+	output.SocialDenomination = outputDb.SocialDenomination
+	output.RegisteredOffice = outputDb.RegisteredOffice
+	output.Cif = outputDb.Cif
+	output.Logo = outputDb.Logo
+	output.EthAddress = outputDb.EthAddress
+
+	return &output, nil
 }
 
 func (repository *BusinessRepository) All(ctx context.Context) (*business.BusinessStorageCollectionData, error) {
@@ -54,17 +58,27 @@ func (repository *BusinessRepository) All(ctx context.Context) (*business.Busine
 		return nil, err
 	}
 
-	var output []BusinessDb
+	var storedBusiness []BusinessDb
 	for rows.Next() {
 		var businessDb BusinessDb
 		err = rows.Scan(&businessDb.ID, &businessDb.Name, &businessDb.SocialDenomination, &businessDb.RegisteredOffice, &businessDb.Cif, &businessDb.Logo, &businessDb.EthAddress)
-
-		output = append(output, businessDb)
+		if err != nil {
+			return nil, err
+		}
+		storedBusiness = append(storedBusiness, businessDb)
 	}
 
-	items, err := toBusinessItems(output)
-	if err != nil {
-		return nil, err
+	var items []business.BusinessStorageData
+	for _, storedAccount := range storedBusiness {
+		var business business.BusinessStorageData
+		business.ID = storedAccount.ID
+		business.Name = storedAccount.Name
+		business.SocialDenomination = storedAccount.SocialDenomination
+		business.RegisteredOffice = storedAccount.RegisteredOffice
+		business.Cif = storedAccount.Cif
+		business.Logo = storedAccount.Logo
+		business.EthAddress = storedAccount.EthAddress
+		items = append(items, business)
 	}
 
 	return &business.BusinessStorageCollectionData{

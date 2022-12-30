@@ -2,8 +2,6 @@ package entryInputHttpAdapter
 
 import (
 	"time"
-
-	accountInputHttpAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 )
 
 type Entry struct {
@@ -52,29 +50,23 @@ type DescribeEntryResponseWrapper struct {
 }
 
 type ListEntryRequest struct {
-	Expand string `json:"expand"`
-}
-
-type EntryExpandResponse struct {
-	Entry   Entry                            `json:"entry"`
-	Account *accountInputHttpAdapter.Account `json:"account"`
 }
 
 type ListEntryResponse struct {
-	Items []EntryExpandResponse `json:"items"`
+	Items []DescribeEntryResponse `json:"items"`
 }
 type ListEntryResponseWrapper struct {
 	ListEntryResponse ListEntryResponse
 }
 
 type UpdateEntryRequest struct {
-	ID            string     `json:"id"`
-	AccountID     *string    `json:"accountId"`
-	Currency      *string    `json:"currency"`
-	Concept       *string    `json:"concept"`
-	Date          *time.Time `json:"date"`
-	DebitBalance  *float64   `json:"debitBalance"`
-	CreditBalance *float64   `json:"creditBalance"`
+	ID            string    `json:"id"`
+	AccountID     string    `json:"accountId"`
+	Currency      string    `json:"currency"`
+	Concept       *string   `json:"concept"`
+	Date          time.Time `json:"date"`
+	DebitBalance  *float64  `json:"debitBalance"`
+	CreditBalance *float64  `json:"creditBalance"`
 }
 type UpdateEntryResponse struct {
 	Entry

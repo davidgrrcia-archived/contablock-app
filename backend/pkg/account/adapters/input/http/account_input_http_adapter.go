@@ -3,7 +3,7 @@ package accountInputHttpAdapter
 import (
 	"context"
 	"errors"
-    
+
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 )
 
@@ -46,6 +46,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeAccount(ctx context.Context
 	response.Name = outputData.Name
 	response.Level = outputData.Level
 	response.Type = *outputData.Type
+	response.DisplayName = outputData.DisplayName
 
 	responseWrapper := DescribeAccountResponseWrapper{}
 	responseWrapper.DescribeAccountResponse = response
@@ -70,6 +71,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListAccounts(ctx context.Context, d
 		responseItem.Name = item.Name
 		responseItem.Level = item.Level
 		responseItem.Type = *item.Type
+		responseItem.DisplayName = item.DisplayName
 		response.Items = append(response.Items, responseItem)
 	}
 

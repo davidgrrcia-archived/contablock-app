@@ -5,10 +5,11 @@ import (
 )
 
 type Account struct {
-	ID    string
-	Name  string
-	Level string
-	Type  *string
+	ID          string
+	Name        string
+	Level       string
+	Type        *string
+	DisplayName string
 }
 
 type DescribeAccountInput struct {
@@ -31,9 +32,12 @@ type AccountStorage interface {
 }
 
 type AccountStorageData struct {
-	Account
+	ID    string
+	Name  string
+	Level string
+	Type  *string
 }
 
 type AccountStorageCollectionData struct {
-	Items []Account
+	Items []AccountStorageData
 }

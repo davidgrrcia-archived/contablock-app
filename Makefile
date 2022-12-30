@@ -14,3 +14,6 @@ validate-api-docs:
 
 start-backend:
 	cd backend && make start
+
+start-frontend:
+	cd frontend && make start

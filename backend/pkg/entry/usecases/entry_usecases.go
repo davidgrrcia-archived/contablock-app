@@ -92,9 +92,23 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 		return nil, err
 	}
 
-	return &CreateEntryOutput{
-		Entry: storedEntry.Entry,
-	}, nil
+	var output CreateEntryOutput
+	output.ID = storedEntry.ID
+	output.AccountID = storedEntry.AccountID
+	output.MultipleEntryID = storedEntry.MultipleEntryID
+	output.Currency = storedEntry.Currency
+	output.Concept = storedEntry.Concept
+	output.Date = storedEntry.Date
+	output.Quarter = storedEntry.Quarter
+	output.DebitBalance = storedEntry.DebitBalance
+	output.CreditBalance = storedEntry.CreditBalance
+	output.TotalBalance = storedEntry.TotalBalance
+	output.State = storedEntry.State
+	output.StateReason = storedEntry.StateReason
+	output.CreationDate = storedEntry.CreationDate
+	output.LastUpdate = storedEntry.LastUpdate
+
+	return &output, nil
 }
 
 func (useCase *DefaultEntryUseCase) DescribeEntry(ctx context.Context, input DescribeEntryInput) (*DescribeEntryOutput, error) {
@@ -108,9 +122,23 @@ func (useCase *DefaultEntryUseCase) DescribeEntry(ctx context.Context, input Des
 		return nil, err
 	}
 
-	return &DescribeEntryOutput{
-		Entry: storedEntry.Entry,
-	}, err
+	var output DescribeEntryOutput
+	output.ID = storedEntry.ID
+	output.AccountID = storedEntry.AccountID
+	output.MultipleEntryID = storedEntry.MultipleEntryID
+	output.Currency = storedEntry.Currency
+	output.Concept = storedEntry.Concept
+	output.Date = storedEntry.Date
+	output.Quarter = storedEntry.Quarter
+	output.DebitBalance = storedEntry.DebitBalance
+	output.CreditBalance = storedEntry.CreditBalance
+	output.TotalBalance = storedEntry.TotalBalance
+	output.State = storedEntry.State
+	output.StateReason = storedEntry.StateReason
+	output.CreationDate = storedEntry.CreationDate
+	output.LastUpdate = storedEntry.LastUpdate
+
+	return &output, err
 }
 
 func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListEntryInput) (*ListEntryOutput, error) {
@@ -119,27 +147,30 @@ func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListE
 		return nil, errors.New("invalid input")
 	}
 
-	entryCollection, err := useCase.entryStorage.All(ctx)
+	storedEntries, err := useCase.entryStorage.All(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	var items []EntryExpand
-	for _, entry := range entryCollection.Items {
-		var entryExpand EntryExpand
-		entryExpand.Entry = entry
-		if input.Expand != nil && *input.Expand == true {
-			var describeAccountInput account.DescribeAccountInput
-			describeAccountInput.ID = entry.AccountID
-			storedAccount, err := useCase.accountUseCase.DescribeAccount(ctx, describeAccountInput)
-			if err != nil {
-				return nil, err
-			}
-			entryExpand.Account = &storedAccount.Account
-		} else {
-			entryExpand.Account = nil
-		}
-		items = append(items, entryExpand)
+	var items []Entry
+	for _, item := range storedEntries.Items {
+		var entry Entry
+		entry.ID = item.ID
+		entry.AccountID = item.AccountID
+		entry.MultipleEntryID = item.MultipleEntryID
+		entry.Currency = item.Currency
+		entry.Concept = item.Concept
+		entry.Date = item.Date
+		entry.Quarter = item.Quarter
+		entry.DebitBalance = item.DebitBalance
+		entry.CreditBalance = item.CreditBalance
+		entry.TotalBalance = item.TotalBalance
+		entry.State = item.State
+		entry.StateReason = item.StateReason
+		entry.CreationDate = item.CreationDate
+		entry.LastUpdate = item.LastUpdate
+
+		items = append(items, entry)
 	}
 
 	return &ListEntryOutput{
@@ -170,34 +201,31 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	}
 
 	var desiredEntry EntryStorageData
-	desiredEntry.Entry = storedEntry.Entry
-
-	if input.AccountID != nil {
-		desiredEntry.AccountID = *input.AccountID
-	}
-	if input.Currency != nil {
-		desiredEntry.Currency = *input.Currency
-	}
-	if input.Concept != nil {
+	desiredEntry.ID = input.ID
+	desiredEntry.AccountID = input.AccountID
+	desiredEntry.Currency = input.Currency
+	if input.Concept == nil {
+		desiredEntry.Concept = storedEntry.Concept
+	} else {
 		desiredEntry.Concept = input.Concept
 	}
-	if input.Date != nil {
-		desiredEntry.Date = *input.Date
-		quarter := useCase.calculateQuarter(*input.Date)
-		desiredEntry.Quarter = quarter
+	desiredEntry.Date = input.Date
+	quarter := useCase.calculateQuarter(input.Date)
+	desiredEntry.Quarter = quarter
+	if input.DebitBalance == nil {
+		debitBalance := 0.00
+		input.DebitBalance = &debitBalance
 	}
-	if input.DebitBalance != nil {
-		desiredEntry.DebitBalance = *input.DebitBalance
-		desiredEntry.CreditBalance = 0.00
+	desiredEntry.DebitBalance = *input.DebitBalance
+	if input.CreditBalance == nil {
+		creditBalance := 0.00
+		input.CreditBalance = &creditBalance
 	}
-	if input.CreditBalance != nil {
-		desiredEntry.CreditBalance = *input.CreditBalance
-		desiredEntry.DebitBalance = 0.00
-	}
-	desiredEntry.TotalBalance = desiredEntry.DebitBalance - desiredEntry.CreditBalance
-	if input.State != nil {
-		desiredEntry.State = *input.State
-	}
+	desiredEntry.CreditBalance = *input.CreditBalance
+	totalBalance := *input.DebitBalance - *input.CreditBalance
+	desiredEntry.TotalBalance = totalBalance
+	desiredEntry.State = input.State
+	desiredEntry.CreationDate = storedEntry.CreationDate
 	desiredEntry.LastUpdate = time.Now()
 
 	updatedEntry, err := useCase.entryStorage.Edit(ctx, desiredEntry)
@@ -205,9 +233,23 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 		return nil, err
 	}
 
-	return &UpdateEntryOutput{
-		Entry: updatedEntry.Entry,
-	}, err
+	var output UpdateEntryOutput
+	output.ID = updatedEntry.ID
+	output.AccountID = updatedEntry.AccountID
+	output.MultipleEntryID = updatedEntry.MultipleEntryID
+	output.Currency = updatedEntry.Currency
+	output.Concept = updatedEntry.Concept
+	output.Date = updatedEntry.Date
+	output.Quarter = updatedEntry.Quarter
+	output.DebitBalance = updatedEntry.DebitBalance
+	output.CreditBalance = updatedEntry.CreditBalance
+	output.TotalBalance = updatedEntry.TotalBalance
+	output.State = updatedEntry.State
+	output.StateReason = updatedEntry.StateReason
+	output.CreationDate = updatedEntry.CreationDate
+	output.LastUpdate = updatedEntry.LastUpdate
+
+	return &output, err
 }
 
 func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input RemoveEntryInput) (*RemoveEntryOutput, error) {
@@ -221,9 +263,23 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 		return nil, err
 	}
 
-	return &RemoveEntryOutput{
-		Entry: storedEntry.Entry,
-	}, err
+	var output RemoveEntryOutput
+	output.ID = storedEntry.ID
+	output.AccountID = storedEntry.AccountID
+	output.MultipleEntryID = storedEntry.MultipleEntryID
+	output.Currency = storedEntry.Currency
+	output.Concept = storedEntry.Concept
+	output.Date = storedEntry.Date
+	output.Quarter = storedEntry.Quarter
+	output.DebitBalance = storedEntry.DebitBalance
+	output.CreditBalance = storedEntry.CreditBalance
+	output.TotalBalance = storedEntry.TotalBalance
+	output.State = storedEntry.State
+	output.StateReason = storedEntry.StateReason
+	output.CreationDate = storedEntry.CreationDate
+	output.LastUpdate = storedEntry.LastUpdate
+
+	return &output, err
 }
 
 func (useCase *DefaultEntryUseCase) calculateQuarter(date time.Time) int {

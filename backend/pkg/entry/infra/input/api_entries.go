@@ -55,7 +55,6 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		var ctx = context.Background()
 
 		var inputPayload input.ListEntryRequest
-		inputPayload.Expand = r.URL.Query().Get("expand")
 
 		outputPayload, err := handler.adapter.AdaptListEntries(ctx, inputPayload)
 		if err != nil {

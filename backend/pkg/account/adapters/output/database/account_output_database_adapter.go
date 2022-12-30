@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"errors"
 
-    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 )
 
 func NewAccountRepository(opts AccountRepositoryOptions) (*AccountRepository, error) {
@@ -33,17 +33,19 @@ func (repository *AccountRepository) Get(ctx context.Context, id string) (*accou
 
 	result := repository.db.QueryRow(query, id)
 
-	var output AccountDb
-	err := result.Scan(&output.ID, &output.Name, &output.Level, &output.Type)
-
-	storedAccount, err := toAccount(output)
+	var storedAccount AccountDb
+	err := result.Scan(&storedAccount.ID, &storedAccount.Name, &storedAccount.Level, &storedAccount.Type)
 	if err != nil {
 		return nil, err
 	}
 
-	return &account.AccountStorageData{
-		Account: *storedAccount,
-	}, nil
+	var output account.AccountStorageData
+	output.ID = storedAccount.ID
+	output.Name = storedAccount.Name
+	output.Level = storedAccount.Level
+	output.Type = &storedAccount.Type
+
+	return &output, nil
 }
 
 func (repository *AccountRepository) All(ctx context.Context) (*account.AccountStorageCollectionData, error) {
@@ -54,17 +56,25 @@ func (repository *AccountRepository) All(ctx context.Context) (*account.AccountS
 		return nil, err
 	}
 
-	var output []AccountDb
+	var storedAccounts []AccountDb
 	for rows.Next() {
 		var accountDb AccountDb
 		err = rows.Scan(&accountDb.ID, &accountDb.Name, &accountDb.Level, &accountDb.Type)
+		if err != nil {
+			return nil, err
+		}
 
-		output = append(output, accountDb)
+		storedAccounts = append(storedAccounts, accountDb)
 	}
 
-	items, err := toAccountItems(output)
-	if err != nil {
-		return nil, err
+	var items []account.AccountStorageData
+	for _, storedAccount := range storedAccounts {
+		var account account.AccountStorageData
+		account.ID = storedAccount.ID
+		account.Name = storedAccount.Name
+		account.Level = storedAccount.Level
+		account.Type = &storedAccount.Type
+		items = append(items, account)
 	}
 
 	return &account.AccountStorageCollectionData{

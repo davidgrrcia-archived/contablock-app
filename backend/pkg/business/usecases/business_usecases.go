@@ -43,9 +43,16 @@ func (useCase *DefaultBusinessUseCase) DescribeBusiness(ctx context.Context, inp
 		return nil, err
 	}
 
-	return &DescribeBusinessOutput{
-		Business: storedBusiness.Business,
-	}, err
+	var output DescribeBusinessOutput
+	output.ID = storedBusiness.ID
+	output.Name = storedBusiness.Name
+	output.SocialDenomination = storedBusiness.SocialDenomination
+	output.RegisteredOffice = storedBusiness.RegisteredOffice
+	output.Cif = storedBusiness.Cif
+	output.Logo = storedBusiness.Logo
+	output.EthAddress = storedBusiness.EthAddress
+
+	return &output, err
 }
 
 func (useCase *DefaultBusinessUseCase) ListBusiness(ctx context.Context, input ListBusinessInput) (*ListBusinessOutput, error) {
@@ -54,12 +61,26 @@ func (useCase *DefaultBusinessUseCase) ListBusiness(ctx context.Context, input L
 		return nil, errors.New("invalid input")
 	}
 
-	businessCollection, err := useCase.businessStorage.All(ctx)
+	storedBusiness, err := useCase.businessStorage.All(ctx)
 	if err != nil {
 		return nil, err
 	}
 
+	var items []Business
+	for _, item := range storedBusiness.Items {
+		var business Business
+		business.ID = item.ID
+		business.Name = item.Name
+		business.SocialDenomination = item.SocialDenomination
+		business.RegisteredOffice = item.RegisteredOffice
+		business.Cif = item.Cif
+		business.Logo = item.Logo
+		business.EthAddress = item.EthAddress
+
+		items = append(items, business)
+	}
+
 	return &ListBusinessOutput{
-		Items: businessCollection.Items,
+		Items: items,
 	}, err
 }

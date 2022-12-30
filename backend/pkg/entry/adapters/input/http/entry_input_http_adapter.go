@@ -3,9 +3,7 @@ package entryInputHttpAdapter
 import (
 	"context"
 	"errors"
-	accountInputHttpAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
-	"strconv"
 )
 
 type EntryInputAdapter interface {
@@ -126,54 +124,39 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, data ListEntryRequest) (*ListEntryResponseWrapper, error) {
 	var inputData entry.ListEntryInput
 
-	if data.Expand != "" {
-		expand, err := strconv.ParseBool(data.Expand)
-		if err != nil {
-			return nil, err
-		}
-		inputData.Expand = &expand
-	}
-
 	outputData, err := adapter.entryUseCase.ListEntries(ctx, inputData)
 	if err != nil {
 		return nil, err
 	}
 
 	var response ListEntryResponse
-	response.Items = make([]EntryExpandResponse, 0)
+	response.Items = make([]DescribeEntryResponse, 0)
 
 	for _, item := range outputData.Items {
-		var responseItem EntryExpandResponse
-		responseItem.Entry.ID = item.Entry.ID
-		responseItem.Entry.AccountID = item.Entry.AccountID
-		responseItem.Entry.MultipleEntryID = item.Entry.MultipleEntryID
-		responseItem.Entry.Currency = item.Entry.Currency
-		if item.Entry.Concept == nil {
-			responseItem.Entry.Concept = ""
+		var responseItem DescribeEntryResponse
+		responseItem.ID = item.ID
+		responseItem.AccountID = item.AccountID
+		responseItem.MultipleEntryID = item.MultipleEntryID
+		responseItem.Currency = item.Currency
+		if item.Concept == nil {
+			responseItem.Concept = ""
 		} else {
-			responseItem.Entry.Concept = *item.Entry.Concept
+			responseItem.Concept = *item.Concept
 		}
-		responseItem.Entry.Date = item.Entry.Date
-		responseItem.Entry.Quarter = item.Entry.Quarter
-		responseItem.Entry.DebitBalance = item.Entry.DebitBalance
-		responseItem.Entry.CreditBalance = item.Entry.CreditBalance
-		responseItem.Entry.TotalBalance = item.Entry.TotalBalance
-		responseItem.Entry.State = item.Entry.State
-		if item.Entry.StateReason == nil {
-			responseItem.Entry.StateReason = ""
+		responseItem.Concept = *item.Concept
+		responseItem.Date = item.Date
+		responseItem.Quarter = item.Quarter
+		responseItem.DebitBalance = item.DebitBalance
+		responseItem.CreditBalance = item.CreditBalance
+		responseItem.TotalBalance = item.TotalBalance
+		responseItem.State = item.State
+		if item.StateReason == nil {
+			responseItem.StateReason = ""
 		} else {
-			responseItem.Entry.StateReason = *item.Entry.StateReason
+			responseItem.StateReason = *item.StateReason
 		}
-		responseItem.Entry.CreationDate = item.Entry.CreationDate
-		responseItem.Entry.LastUpdate = item.Entry.LastUpdate
-		if item.Account != nil {
-			var account accountInputHttpAdapter.Account
-			account.ID = item.Account.ID
-			account.Name = item.Account.Name
-			account.Level = item.Account.Level
-			account.Type = *item.Account.Type
-			responseItem.Account = &account
-		}
+		responseItem.CreationDate = item.CreationDate
+		responseItem.LastUpdate = item.LastUpdate
 		response.Items = append(response.Items, responseItem)
 	}
 
