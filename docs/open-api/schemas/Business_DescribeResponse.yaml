@@ -1,6 +1,6 @@
 type: object
 title: Business
-description: Business Database Schema
+description: Business details
 required:
   - id
   - name
@@ -45,4 +45,3 @@ properties:
     description: The eth address of the business
     minLength: 1
     maxLength: 256
-  

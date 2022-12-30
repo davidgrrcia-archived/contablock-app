@@ -1,6 +1,6 @@
 type: object
 title: Entry
-description: Entry Database Schema
+description: Entry details
 required:
   - id
   - account_id

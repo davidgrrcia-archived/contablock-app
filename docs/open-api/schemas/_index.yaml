@@ -1,6 +1,12 @@
-Account:
-  $ref: "./Account.yaml"
-Business:
-    $ref: "./Business.yaml"
-Entry:
-    $ref: "./Entry.yaml"
+Accounts_DescribeResponse:
+  $ref: "./Accounts_DescribeResponse.yaml"
+Accounts_ListResponse:
+  $ref: "./Accounts_ListResponse.yaml"
+Business_DescribeResponse:
+    $ref: "./Business_DescribeResponse.yaml"
+Business_ListResponse:
+  $ref: "./Business_ListResponse.yaml"
+Entries_DescribeResponse:
+    $ref: "./Entries_DescribeResponse.yaml"
+Entries_ListResponse:
+  $ref: "./Entries_ListResponse.yaml"

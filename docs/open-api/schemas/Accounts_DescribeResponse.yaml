@@ -1,6 +1,6 @@
 type: object
 title: Account
-description: Account Database Schema
+description: Account details
 required:
   - id
   - name

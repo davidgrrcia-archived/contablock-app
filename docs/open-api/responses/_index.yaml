@@ -1,6 +1,6 @@
 UnexpectedError:
-  $ref: "./UnexpectedError.yaml"
+  $ref: "./common/UnexpectedError.yaml"
 NotFound:
-  $ref: "./NotFound.yaml"
+  $ref: "./common/NotFound.yaml"
 Unauthorized:
-  $ref: "./Unauthorized.yaml"
+  $ref: "./common/Unauthorized.yaml"

@@ -18,6 +18,8 @@ servers:
     description: Sandbox
 tags:
   - name: accounts
+  - name: business
+  - name: entries
 paths:
   $ref: "./paths/_index.yaml"
 components:

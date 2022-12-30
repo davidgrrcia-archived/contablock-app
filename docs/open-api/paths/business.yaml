@@ -1,49 +1,19 @@
 get:
-  summary: List
+  summary: List Business
   operationId: listBusiness
   description: List all business
   tags:
   - business
-  parameters:
-    - name: limit
-      in: query
-      description: How many items to return at one time (max 100)
-      required: false
-      schema:
-        type: integer
-        format: int32
   responses:
     '200':
-      description: A paged array of business
+      description: An array of business
       content:
         application/json:
           schema:
-            $ref: "../schemas/Business.yaml"
+            $ref: "../schemas/Business_ListResponse.yaml"
     '403':
-        $ref: "../responses/Unauthorized.yaml"
+        $ref: "../responses/common/Unauthorized.yaml"
     '404':
-        $ref: "../responses/NotFound.yaml"
+        $ref: "../responses/common/NotFound.yaml"
     default:
-      $ref: "../responses/UnexpectedError.yaml"
-
-post:
-  summary: Create
-  operationId: createBusiness
-  description: Create a business
-  tags:
-  - business
-  responses:
-    '201':
-      description: A paged array of business
-      content:
-        application/json:
-          schema:
-            type: array
-            items:
-              $ref: "../schemas/Business.yaml"
-    '403':
-        $ref: "../responses/Unauthorized.yaml"
-    '404':
-        $ref: "../responses/NotFound.yaml"
-    default:
-        $ref : "../responses/UnexpectedError.yaml"
+        $ref: "../responses/common/UnexpectedError.yaml"

@@ -1,6 +1,6 @@
 get:
-  summary: Detail
-  operationId: showBusinessById
+  summary: Describe Business
+  operationId: describeBusiness
   description: Info for a specific business
   tags:
     - business
@@ -13,14 +13,14 @@ get:
         type: string
   responses:
     '200':
-      description: Expected response to a valid request
+      description: A business
       content:
         application/json:
           schema:
-            $ref: "../schemas/Business.yaml"
+            $ref: "../schemas/Business_DescribeResponse.yaml"
     '403':
-        $ref: "../responses/Unauthorized.yaml"
+        $ref: "../responses/common/Unauthorized.yaml"
     '404':
-        $ref: "../responses/NotFound.yaml"
+        $ref: "../responses/common/NotFound.yaml"
     default:
-      $ref: "../responses/UnexpectedError.yaml"
+      $ref: "../responses/common/UnexpectedError.yaml"
