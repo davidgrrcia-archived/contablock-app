@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { accountsUseCase } from '@/features/accounts';
 import type { Account } from '@/features/accounts/application/accounts-model';
+import { useMessagesStore } from '@/stores/messages';
 
 //TODO: apply clean architecture
 interface AccountsState {
@@ -31,6 +32,8 @@ export const useAccountsStore = defineStore('accounts', {
       } catch (err) {
         this.state.accounts = [];
         this.state.stateMessage = 'error loading accounts';
+        const messagesStore = useMessagesStore();
+        messagesStore.addErrorMessage(this.state.stateMessage);
       }
     },
   },

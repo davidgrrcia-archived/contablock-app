@@ -1,8 +1,9 @@
 export interface Account {
   id: string;
+  level: string;
   name: string;
+
   type: string;
-  kind: string;
 }
 
 export interface AccountListResponse {
@@ -10,5 +11,9 @@ export interface AccountListResponse {
 }
 
 export interface AccountDescribeResponse {
-  account: Account;
+  id: string;
+  level: string;
+  name: string;
+
+  type: string;
 }

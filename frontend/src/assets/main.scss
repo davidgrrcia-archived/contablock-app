@@ -3,13 +3,16 @@ body {
   --black: #000000;
   --blue: #14213d;
   --yellow: #fca311;
-  --gray: #e5e5e5;
+  --gray: #f3f3f3;
   --white: #ffffff;
   --red: red;
 
   font-family: 'Roboto', sans-serif;
 
   margin: 0px;
+  padding-right: 20px;
+  padding-left: 20px;
+
   background-color: var(--white);
 }
 

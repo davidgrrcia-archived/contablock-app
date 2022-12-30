@@ -7,7 +7,7 @@ export interface EntriesHttpInfra {
 
 export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
   listEntries() {
-    return fetch('/api/entries')
+    return fetch('/api/entries?expand=true')
       .then(response => response.json())
       .then(response => response as EntryListResponse);
   }

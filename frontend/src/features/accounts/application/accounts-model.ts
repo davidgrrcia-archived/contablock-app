@@ -5,7 +5,7 @@ export interface AccountsAdapter {
 
 export interface Account {
   id: string;
+  level: string;
   name: string;
   type: string;
-  kind: string;
 }

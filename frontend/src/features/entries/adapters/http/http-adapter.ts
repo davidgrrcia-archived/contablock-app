@@ -10,13 +10,13 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
     const entryHttpResponse = await this.entriesHttpInfra.listEntries();
 
     return entryHttpResponse.items.map(item => ({
-      accountId: item.accountId,
-      multipleEntryId: item.multipleEntryId,
-      currency: item.currency,
-      concept: item.concept,
-      date: item.date,
-      debitAmount: item.debitAmount,
-      creditAmount: item.creditAmount,
+      accountId: item.entry.accountId,
+      multipleEntryId: item.entry.multipleEntryId,
+      currency: item.entry.currency,
+      concept: item.entry.concept,
+      date: item.entry.date,
+      debitAmount: item.entry.debitBalance,
+      creditAmount: item.entry.creditBalance,
     }));
   }
 
@@ -39,8 +39,8 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
       currency: entryHttpResponse.entry.currency,
       concept: entryHttpResponse.entry.concept,
       date: entryHttpResponse.entry.date,
-      debitAmount: entryHttpResponse.entry.debitAmount,
-      creditAmount: entryHttpResponse.entry.creditAmount,
+      debitAmount: entryHttpResponse.entry.debitBalance,
+      creditAmount: entryHttpResponse.entry.creditBalance,
     };
 
     return output;
