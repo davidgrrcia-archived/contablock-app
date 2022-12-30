@@ -20,6 +20,8 @@ tags:
   - name: accounts
   - name: business
   - name: entries
+  - name: daily-ledger
+  - name: general-ledger
 paths:
   $ref: "./paths/_index.yaml"
 components:

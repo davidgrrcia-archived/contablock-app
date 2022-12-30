@@ -5,6 +5,7 @@ required:
   - id
   - name
   - level
+  - type
 properties:
   id:
     type: string

@@ -10,3 +10,7 @@
     $ref: "./entries.yaml"
 /entries/{id}:
     $ref: "./entries_id.yaml"
+/daily-ledger:
+    $ref: "./daily-ledger.yaml"
+/general-ledger:
+    $ref: "./general-ledger.yaml"

@@ -4,14 +4,6 @@ get:
   description: List all entries
   tags:
   - entries
-  parameters:
-    - name: expand
-      in: query
-      description: "If expand = true: the account details are returned, 
-                    If expand = false: the account id is returned,"
-      required: false
-      schema:
-        type: boolean
   responses:
     '200':
       description: An array of entries
@@ -34,6 +26,15 @@ post:
   description: Create an entry
   tags:
   - entries
+
+  requestBody:
+    description: "Create an entry. \n >DebitBalance o CreditBalance es requerido pero no los dos al mismo tiempo."
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../schemas/Entries_Create.yaml"
+
   responses:
     '201':
       description: An entry

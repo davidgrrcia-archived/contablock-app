@@ -6,7 +6,17 @@ Business_DescribeResponse:
     $ref: "./Business_DescribeResponse.yaml"
 Business_ListResponse:
   $ref: "./Business_ListResponse.yaml"
+Entries_Create:
+  $ref: "./Entries_Create.yaml"
 Entries_DescribeResponse:
     $ref: "./Entries_DescribeResponse.yaml"
 Entries_ListResponse:
   $ref: "./Entries_ListResponse.yaml"
+DailyLedger_DescribeResponse:
+  $ref: "./DailyLedger_DescribeResponse.yaml"
+DailyLedger_ListResponse:
+  $ref: "./DailyLedger_ListResponse.yaml"
+GeneralLedger_DescribeResponse:
+  $ref: "./GeneralLedger_DescribeResponse.yaml"
+GeneralLedger_ListResponse:
+  $ref: "./GeneralLedger_ListResponse.yaml"
