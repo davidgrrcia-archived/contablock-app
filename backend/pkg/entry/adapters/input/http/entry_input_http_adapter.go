@@ -153,7 +153,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 		} else {
 			responseItem.Entry.Concept = *item.Entry.Concept
 		}
-		responseItem.Entry.Concept = *item.Entry.Concept
 		responseItem.Entry.Date = item.Entry.Date
 		responseItem.Entry.Quarter = item.Entry.Quarter
 		responseItem.Entry.DebitBalance = item.Entry.DebitBalance

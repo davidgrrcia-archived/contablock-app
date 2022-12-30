@@ -6,3 +6,6 @@
 /dist/
 /out/
 /.fleet/
+
+# hide environment vars
+*.env.local

@@ -8,6 +8,7 @@ require (
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/google/uuid v1.1.5
 	github.com/gorilla/mux v1.8.0
+	github.com/joho/godotenv v1.4.0
 )
 
 require (
