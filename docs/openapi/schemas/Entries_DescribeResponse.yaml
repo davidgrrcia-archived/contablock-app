@@ -3,37 +3,35 @@ title: Entry
 description: Entry details
 required:
   - id
-  - account_id
-  - multiple_entry_id
+  - accountId
+  - multipleEntryId
   - currency
   - concept
   - date
   - quarter
-  - debit_balance
-  - credit_balance
-  - total_balance
+  - debitBalance
+  - creditBalance
+  - totalBalance
   - state
-  - state_reason
-  - creation_date
-  - last_update
-
+  - stateReason
+  - creationDate
+  - lastUpdate
 properties:
   id:
     type: string
     description: The id of the entry
     minLength: 1
     maxLength: 64
-  account_id:
+  accountId:
     type: string
     description: The id of the account
     minLength: 1
     maxLength: 64
-  multiple_entry_id:
+  multipleEntryId:
     type: string
     description: The id of the multiple entry
     minLength: 1
     maxLength: 64
-    readOnly: true
   currency:
     type: string
     description: The currency of the entry
@@ -42,6 +40,7 @@ properties:
   concept:
     type: string
     description: The concept of the entry
+    nullable: true
     minLength: 1
     maxLength: 256
   date:
@@ -54,40 +53,36 @@ properties:
     description: The quarter of the entry
     minLength: 1
     maxLength: 64
-    readOnly: true
-  debit_balance:
+  debitBalance:
     type: number
     description: The debit balance of the entry
     minimum: 0
     maximum: 999999999999999
-  credit_balance:
+  creditBalance:
     type: number
     description: The credit balance of the entry
     minimum: 0
     maximum: 999999999999999
-  total_balance:
+  totalBalance:
     type: number
     description: The total balance of the entry
-    readOnly: true
   state:
     type: string
     description: The state of the entry
     minLength: 1
     maxLength: 64
-    readOnly: true
-  state_reason:
+  stateReason:
     type: string
     description: The state reason of the entry
+    nullable: true
     minLength: 1
     maxLength: 256
-    readOnly: true
-  creation_date:
+  creationDate:
     type: string
     format: date-time
     description: The creation date of the entry
-    readOnly: true
-  last_update:
+  lastUpdate:
     type: string
     format: date-time
     description: The last update of the entry
-    readOnly: true
+    

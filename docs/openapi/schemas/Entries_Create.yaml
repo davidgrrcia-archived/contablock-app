@@ -2,28 +2,26 @@ type: object
 title: Entry
 description: Entry details
 required:
-  - account_id
-  - multiple_entry_id
+  - accountId
+  - multipleEntryId
   - currency
   - date
-
 properties:
   id:
     type: string
     description: The id of the entry
     minLength: 1
     maxLength: 64
-  account_id:
+  accountId:
     type: string
     description: The id of the account
     minLength: 1
     maxLength: 64
-  multiple_entry_id:
+  multipleEntryId:
     type: string
     description: The id of the multiple entry
     minLength: 1
     maxLength: 64
-    readOnly: true
   currency:
     type: string
     description: The currency of the entry
@@ -39,12 +37,12 @@ properties:
     description: The date of the entry
     minLength: 1
     maxLength: 64
-  debit_balance:
+  debitBalance:
     type: number
     description: The debit balance of the entry
     minimum: 0
     maximum: 999999999999999
-  credit_balance:
+  creditBalance:
     type: number
     description: The credit balance of the entry
     minimum: 0

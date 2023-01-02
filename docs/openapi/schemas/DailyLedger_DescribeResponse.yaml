@@ -2,16 +2,14 @@ type: object
 title: Entry
 description: Entry details
 required:
-  - accountId
-
+  - multipleEntryId
 properties:
-  accountId:
-    description: The id of the account
+  multipleEntryId:
+    description: The id of all the entries related
     type: object
     required:
       - entry
       - account
-
     properties:
       entry:
         $ref: "../schemas/Entries_DescribeResponse.yaml"

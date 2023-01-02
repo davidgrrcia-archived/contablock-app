@@ -1,0 +1,17 @@
+get:
+  summary: List Business
+  operationId: listBusiness
+  description: List all business
+  tags:
+  - business
+  responses:
+    '200':
+      description: An array of business
+      schema:
+        $ref: "../schemas/_index.yaml#/Business_ListResponse"
+    '403':
+        $ref: "../responses/_index.yaml#/Unauthorized"
+    '404':
+        $ref: "../responses/_index.yaml#/NotFound"
+    default:
+        $ref: "../responses/_index.yaml#/UnexpectedError"

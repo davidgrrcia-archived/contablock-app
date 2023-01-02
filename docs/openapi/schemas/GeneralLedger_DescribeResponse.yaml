@@ -1,0 +1,28 @@
+type: object
+title: Entry
+description: Entry details
+required:
+  - accountId
+properties:
+  accountId:
+    description: The id of the account
+    type: object
+    required:
+      - entries
+    properties:
+      entries:
+        description: Entries given an account id
+        type: array
+        items:
+          type: object
+          required:
+            - entry
+            - account
+          properties:
+            entry:
+              $ref: "../schemas/Entries_DescribeResponse.yaml"
+            account:
+              $ref: "../schemas/Accounts_DescribeResponse.yaml"
+
+
+

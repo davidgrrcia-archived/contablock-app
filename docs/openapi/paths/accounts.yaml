@@ -1,0 +1,17 @@
+get:
+  summary: List Accounts
+  operationId: listAccounts
+  description: List all accounts
+  tags:
+  - accounts
+  responses:
+    '200':
+      description: An array of accounts
+      schema:
+        $ref: "../schemas/_index.yaml#/Accounts_ListResponse"
+    '403':
+        $ref: "../responses/_index.yaml#/Unauthorized"
+    '404':
+        $ref: "../responses/_index.yaml#/NotFound"
+    default:
+        $ref: "../responses/_index.yaml#/UnexpectedError"

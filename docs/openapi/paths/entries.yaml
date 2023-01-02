@@ -1,0 +1,42 @@
+get:
+  summary: List Entries
+  operationId: listEntries
+  description: List all entries
+  tags:
+  - entries
+  responses:
+    '200':
+      description: An array of entries
+      schema:
+        $ref: "../schemas/_index.yaml#/Entries_ListResponse"
+    '403':
+        $ref: "../responses/_index.yaml#/Unauthorized"
+    '404':
+        $ref: "../responses/_index.yaml#/NotFound"
+    default:
+        $ref: "../responses/_index.yaml#/UnexpectedError"
+
+post:
+  summary: Create Entry
+  operationId: createEntry
+  description: Create an entry
+  tags:
+  - entries
+  parameters:
+    - in: "body"
+      name: "body"
+      description: "Create an entry. \n >DebitBalance o CreditBalance es requerido pero no los dos al mismo tiempo."
+      required: true
+      schema:
+        $ref: "../schemas/_index.yaml#/Entries_Create"
+  responses:
+    '201':
+      description: An entry
+      schema:
+        $ref: "../schemas/_index.yaml#/Entries_DescribeResponse"
+    '403':
+        $ref: "../responses/_index.yaml#/Unauthorized"
+    '404':
+        $ref: "../responses/_index.yaml#/NotFound"
+    default:
+        $ref : "../responses/_index.yaml#/UnexpectedError"

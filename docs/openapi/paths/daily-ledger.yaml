@@ -1,0 +1,17 @@
+get:
+  summary: List Daily Ledger
+  operationId: listDailyLedger
+  description: List all entries grouped by multiple entry id
+  tags:
+  - daily-ledger
+  responses:
+    '200':
+      description: An array of entries grouped by multiple entry id
+      schema:
+        $ref: "../schemas/_index.yaml#/DailyLedger_ListResponse"
+    '403':
+        $ref: "../responses/_index.yaml#/Unauthorized"
+    '404':
+        $ref: "../responses/_index.yaml#/NotFound"
+    default:
+        $ref: "../responses/_index.yaml#/UnexpectedError"

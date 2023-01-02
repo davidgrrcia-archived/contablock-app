@@ -14,13 +14,11 @@ get:
   responses:
     '200':
       description: An account
-      content:
-        application/json:
-          schema:
-            $ref: "../schemas/Accounts_DescribeResponse.yaml"
+      schema:
+        $ref: "../schemas/_index.yaml#/Accounts_DescribeResponse"
     '403':
-        $ref: "../responses/common/Unauthorized.yaml"
+        $ref: "../responses/_index.yaml#/Unauthorized"
     '404':
-        $ref: "../responses/common/NotFound.yaml"
+        $ref: "../responses/_index.yaml#/NotFound"
     default:
-      $ref: "../responses/common/UnexpectedError.yaml"
+      $ref: "../responses/_index.yaml#/UnexpectedError"

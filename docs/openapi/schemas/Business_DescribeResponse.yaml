@@ -4,11 +4,11 @@ description: Business details
 required:
   - id
   - name
-  - social_denomination
-  - registered_office
+  - socialDenomination
+  - registeredOffice
   - cif
   - logo
-  - eth_address
+  - ethAddress
 properties:
   id:
     type: string
@@ -20,12 +20,12 @@ properties:
     description: The name of the business
     minLength: 1
     maxLength: 256
-  social_denomination:
+  socialDenomination:
     type: string
     description: The social denomination of the business
     minLength: 1
     maxLength: 256
-  registered_office:
+  registeredOffice:
     type: string
     description: The registered office of the business
     minLength: 1
@@ -40,7 +40,7 @@ properties:
     description: The logo of the business
     minLength: 1
     maxLength: 256
-  eth_address:
+  ethAddress:
     type: string
     description: The eth address of the business
     minLength: 1
