@@ -9,14 +9,14 @@ type Entry struct {
 	AccountID       string    `json:"accountId"`
 	MultipleEntryID string    `json:"multipleEntryId"`
 	Currency        string    `json:"currency"`
-	Concept         string    `json:"concept"`
+	Concept         *string   `json:"concept"`
 	Date            time.Time `json:"date"`
 	Quarter         int       `json:"quarter"`
 	DebitBalance    float64   `json:"debitBalance"`
 	CreditBalance   float64   `json:"creditBalance"`
 	TotalBalance    float64   `json:"totalBalance"`
 	State           string    `json:"state"`
-	StateReason     string    `json:"stateReason"`
+	StateReason     *string   `json:"stateReason"`
 	CreationDate    time.Time `json:"creationDate"`
 	LastUpdate      time.Time `json:"lastUpdate"`
 }

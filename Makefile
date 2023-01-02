@@ -7,10 +7,10 @@ provision:
 	cd backend && docker-compose up -d
 
 render-api-docs:
-	cd docs/open-api && http-server
+	cd docs/openapi && http-server
 
 validate-api-docs:
-	cd docs/open-api && spectral lint open-api.yaml
+	cd docs/openapi && spectral lint openapi.yaml
 
 start-backend:
 	cd backend && make start
