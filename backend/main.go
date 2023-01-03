@@ -9,10 +9,6 @@ import (
 const port = ":4000"
 
 func main() {
-
-	//eth_gateway.CreateAbiBytecode()
-
-	// load .env file
 	err := godotenv.Load(".env.local")
 	if err != nil {
 		panic(err)

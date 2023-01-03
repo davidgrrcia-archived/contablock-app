@@ -2,19 +2,27 @@ type: object
 title: Entry
 description: Entry details
 required:
-  - multipleEntryId
+  - accountingRecord
 properties:
-  multipleEntryId:
-    description: The id of all the entries related
+  accountingRecord:
+    description: The id of the accounting record
     type: object
     required:
-      - entry
-      - account
+      - entries
     properties:
-      entry:
-        $ref: "../schemas/Entries_DescribeResponse.yaml"
-      account:
-        $ref: "../schemas/Accounts_DescribeResponse.yaml"
+      entries:
+        description: Entries given an accounting record
+        type: array
+        items:
+          type: object
+          required:
+            - entry
+            - account
+          properties:
+            entry:
+              $ref: "../schemas/Entries_DescribeResponse.yaml"
+            account:
+              $ref: "../schemas/Accounts_DescribeResponse.yaml"
 
 
 

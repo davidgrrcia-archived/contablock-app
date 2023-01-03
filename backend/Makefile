@@ -20,3 +20,6 @@ start:
 
 docker-build:
 	docker build --tag contablock-backend .
+
+gw-client-generator:
+	abigen --bin=../smart-contracts/build/ContaBlockContract.bin --abi=../smart-contracts/build/ContaBlockContract.abi --pkg=contablock --out=generated/contablock.go
