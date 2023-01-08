@@ -16,5 +16,5 @@ tests-gas-report:
 start:
 	npx hardhat node
 
-deploy:
-	npx hardhat run scripts/deploy.ts
+deploy-local:
+	npx hardhat run --network localhost scripts/deploy.ts

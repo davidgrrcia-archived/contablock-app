@@ -2,22 +2,24 @@ package graph
 
 import (
 	"database/sql"
-
-    inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
-    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
-    inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
-    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
-    inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
-    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+	inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
+	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	"github.com/gorilla/mux"
 )
 
 type Graph struct {
 	*mux.Router
 
-	//holdContract
-	//holdContractAdapter.HoldContractAdapter
-	//holdContract.HoldContractInterface
+	//contablock
+	ContablockClient contablockClient.Contablock
+	contablock.ContaBlockContractAdapter
+	contablock.ContaBlockUseCase
 
 	//entries
 	EntryDb sql.DB
@@ -44,17 +46,19 @@ func NewGraph() Graph {
 
 func (graph *Graph) Build() {
 	// output infra
+	graph.provideContablockClient()
 	graph.provideAccountDB()
 	graph.provideBusinessDB()
 	graph.provideEntryDB()
 
 	// output adapters
+	graph.provideContablockContractAdapter()
 	graph.provideAccountStorage()
 	graph.provideBusinessStorage()
 	graph.provideEntryStorage()
-	//graph.provideHoldContractInputAdapter()
 
 	// use cases
+	graph.provideContablockUseCase()
 	graph.provideAccountUseCase()
 	graph.provideBusinessUseCase()
 	graph.provideEntryUseCase()

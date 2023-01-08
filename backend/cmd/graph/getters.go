@@ -1,15 +1,17 @@
 package graph
 
 import (
-    "database/sql"
+	"database/sql"
 
-    inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
-    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
-    inputAdapterBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
-    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
-    inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
-    "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
-    "github.com/gorilla/mux"
+	inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+	inputAdapterBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+	inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
+	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
+	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
+	"github.com/gorilla/mux"
 )
 
 func (graph *Graph) GetRouter() *mux.Router {
@@ -19,15 +21,19 @@ func (graph *Graph) GetRouter() *mux.Router {
 	return graph.Router
 }
 
-/*
-func (graph *Graph) GetHoldContract() *holdContract.HoldContract {
-	return graph.HoldContract
-}*/
+/////// SMART CONTRACT CONTABLOCK ///////
 
-/*
-func (graph *Graph) GetHoldContractAdapter() holdContractAdapter.HoldContractAdapter {
-	return graph.HoldContractAdapter
-}*/
+func (graph *Graph) GetContablockClient() *contablockClient.Contablock {
+	return &graph.ContablockClient
+}
+
+func (graph *Graph) GetContablockAdapter() contablock.ContaBlockContractAdapter {
+	return graph.ContaBlockContractAdapter
+}
+
+func (graph *Graph) GetContaBlockUseCase() contablock.ContaBlockUseCase {
+	return graph.ContaBlockUseCase
+}
 
 /////// ENTRIES ///////
 

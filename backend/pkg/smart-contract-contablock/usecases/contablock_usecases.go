@@ -35,6 +35,13 @@ func (useCase DefaultContaBlockUseCase) Store(input StoreInput) error {
 }
 
 func (useCase DefaultContaBlockUseCase) Retrieve() (*RetrieveOutput, error) {
-	//TODO implement me
-	panic("implement me")
+	value, err := useCase.contaBlockContractAdapter.Retrieve()
+	if err != nil {
+		return nil, err
+	}
+
+	var output RetrieveOutput
+	output.Num = value.Num
+
+	return &output, nil
 }

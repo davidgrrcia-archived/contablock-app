@@ -1,7 +1,11 @@
 package graph
 
 import (
+	"context"
 	"database/sql"
+	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
 	"os"
 
@@ -17,6 +21,9 @@ import (
 	entryOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/output/database"
 	entryInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/infra/input"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	contablockOutputHttpAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/adapters/outputhttp"
+	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
+	contablockUseCase "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 )
@@ -225,4 +232,52 @@ func (graph *Graph) provideBusinessEndpoints() {
 		log.Fatal(err)
 	}
 	handler.RegisterBusinessRoutes(graph.GetRouter())
+}
+
+/////// SMART CONTRACT CONTABLOCK ///////
+
+func (graph *Graph) provideContablockClient() {
+	client, err := ethclient.Dial("http://127.0.0.1:8545")
+	if err != nil {
+		panic("could not connect to Ethereum gateway")
+	}
+
+	_, err = client.ChainID(context.Background())
+	if err != nil {
+		panic(err)
+	}
+
+	address := common.HexToAddress("0x5FbDB2315678afecb367f032d93F642f64180aa3")
+	instance, err := contablockClient.NewContablock(address, client)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	graph.ContablockClient = *instance
+}
+
+func (graph *Graph) provideContablockContractAdapter() contablock.ContaBlockContractAdapter {
+	contaBlockContractAdapterOpts := contablockOutputHttpAdapter.DefaultContaBlockContractOptions{
+		Client: graph.GetContablockClient(),
+	}
+	contaBlockContractAdapter, err := contablockOutputHttpAdapter.NewDefaultContaBlockContract(contaBlockContractAdapterOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.ContaBlockContractAdapter = contaBlockContractAdapter
+
+	return contaBlockContractAdapter
+}
+
+func (graph *Graph) provideContablockUseCase() {
+	contablockUseCaseOpts := contablockUseCase.DefaultContaBlockUseCaseOptions{
+		ContaBlockContractAdapter: graph.GetContablockAdapter(),
+	}
+	contablockUseCase, err := contablockUseCase.NewDefaultContaBlockUseCase(contablockUseCaseOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.ContaBlockUseCase = contablockUseCase
 }

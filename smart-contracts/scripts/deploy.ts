@@ -1,8 +1,12 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const ContaBlock = await ethers.getContractFactory("ContaBlockContract");
-  console.log(ContaBlock.interface)
+  const Contract = await ethers.getContractFactory("ContaBlockContract");
+  const contract = await Contract.deploy();
+
+  await contract.deployed();
+
+  console.log(`Contract deployed to ${contract.address}`);
 }
 
 main().catch((error) => {
