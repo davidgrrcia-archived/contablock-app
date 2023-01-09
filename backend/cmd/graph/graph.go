@@ -10,6 +10,7 @@ import (
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/gorilla/mux"
 )
 
@@ -18,6 +19,7 @@ type Graph struct {
 
 	//contablock
 	ContablockClient contablockClient.Contablock
+	ContablockAuth   bind.TransactOpts
 	contablock.ContaBlockContractAdapter
 	contablock.ContaBlockUseCase
 

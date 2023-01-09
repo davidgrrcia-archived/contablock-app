@@ -2,7 +2,9 @@ package outputhttp
 
 import (
 	"errors"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"log"
+	"math/big"
 
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablockUseCase "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
@@ -12,42 +14,48 @@ func NewDefaultContaBlockContract(options DefaultContaBlockContractOptions) (*De
 	if options.Client == nil {
 		return nil, errors.New("cannot create an instance of ContaBlockContract with a nil client")
 	}
+	if options.Auth == nil {
+		return nil, errors.New("cannot create an instance of ContaBlockContract with a nil auth")
+	}
 
 	return &DefaultContaBlockContract{
 		client: options.Client,
+		auth:   options.Auth,
 	}, nil
 }
 
 type DefaultContaBlockContract struct {
 	client *contablockClient.Contablock
+	auth   *bind.TransactOpts
 }
 
 type DefaultContaBlockContractOptions struct {
 	Client *contablockClient.Contablock
+	Auth   *bind.TransactOpts
 }
 
 var _ contablockUseCase.ContaBlockContractAdapter = (*DefaultContaBlockContract)(nil)
 
-func (instance DefaultContaBlockContract) Store(input contablockUseCase.StoreAdapterInput) error {
+func (adapter DefaultContaBlockContract) Store(input contablockUseCase.StoreAdapterInput) error {
 	//input
-	//var num *big.Int
-	//num = input.Num
-	//
-	////client
-	//_, err := instance.client.Store(num)
-	//if err != nil {
-	//	return err
-	//}
+	var num *big.Int
+	num = input.Num
+
+	//client
+	_, err := adapter.client.Store(adapter.auth, num)
+	if err != nil {
+		return err
+	}
 
 	//output
 	return nil
 }
 
-func (instance DefaultContaBlockContract) Retrieve() (*contablockUseCase.RetrieveAdapterOutput, error) {
+func (adapter DefaultContaBlockContract) Retrieve() (*contablockUseCase.RetrieveAdapterOutput, error) {
 	//input
 
 	//client
-	value, err := instance.client.Retrieve(nil)
+	value, err := adapter.client.Retrieve(nil)
 	if err != nil {
 		log.Fatalf("Failed to retrieve value: %v", err)
 	}

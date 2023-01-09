@@ -2,6 +2,7 @@ package graph
 
 import (
 	"database/sql"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 
 	inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
@@ -25,6 +26,10 @@ func (graph *Graph) GetRouter() *mux.Router {
 
 func (graph *Graph) GetContablockClient() *contablockClient.Contablock {
 	return &graph.ContablockClient
+}
+
+func (graph *Graph) GetContablockAuth() *bind.TransactOpts {
+	return &graph.ContablockAuth
 }
 
 func (graph *Graph) GetContablockAdapter() contablock.ContaBlockContractAdapter {

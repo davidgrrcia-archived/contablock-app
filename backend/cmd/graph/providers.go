@@ -2,11 +2,15 @@ package graph
 
 import (
 	"context"
+	"crypto/ecdsa"
 	"database/sql"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
+	"math/big"
 	"os"
 
 	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
@@ -237,7 +241,7 @@ func (graph *Graph) provideBusinessEndpoints() {
 /////// SMART CONTRACT CONTABLOCK ///////
 
 func (graph *Graph) provideContablockClient() {
-	client, err := ethclient.Dial("http://127.0.0.1:8545")
+	client, err := ethclient.Dial(os.Getenv("SC_CLIENT_NETWORK"))
 	if err != nil {
 		panic("could not connect to Ethereum gateway")
 	}
@@ -247,18 +251,49 @@ func (graph *Graph) provideContablockClient() {
 		panic(err)
 	}
 
-	address := common.HexToAddress("0x5FbDB2315678afecb367f032d93F642f64180aa3")
+	address := common.HexToAddress(os.Getenv("SC_CONTABLOCK_ADDRESS"))
 	instance, err := contablockClient.NewContablock(address, client)
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
+	privateKey, err := crypto.HexToECDSA(os.Getenv("SC_PRIVATE_KEY_AUTH"))
+	if err != nil {
+		panic(err)
+	}
+
+	publicKey := privateKey.Public()
+	publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey)
+	if !ok {
+		panic("error casting public key to ECDSA")
+	}
+
+	fromAddress := crypto.PubkeyToAddress(*publicKeyECDSA)
+	nonce, err := client.PendingNonceAt(context.Background(), fromAddress)
+	if err != nil {
+		panic(err)
+	}
+
+	gasPrice, err := client.SuggestGasPrice(context.Background())
+	if err != nil {
+		panic(err)
+	}
+
+	auth := bind.NewKeyedTransactor(privateKey)
+	auth.Nonce = big.NewInt(int64(nonce))
+	auth.Value = big.NewInt(0)     // in wei
+	auth.GasLimit = uint64(300000) // in units
+	auth.GasPrice = gasPrice
+
 	graph.ContablockClient = *instance
+	graph.ContablockAuth = *auth
+
 }
 
 func (graph *Graph) provideContablockContractAdapter() contablock.ContaBlockContractAdapter {
 	contaBlockContractAdapterOpts := contablockOutputHttpAdapter.DefaultContaBlockContractOptions{
 		Client: graph.GetContablockClient(),
+		Auth:   graph.GetContablockAuth(),
 	}
 	contaBlockContractAdapter, err := contablockOutputHttpAdapter.NewDefaultContaBlockContract(contaBlockContractAdapterOpts)
 	if err != nil {
