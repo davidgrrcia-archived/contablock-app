@@ -30,8 +30,15 @@ type DefaultContaBlockUseCaseOptions struct {
 var _ ContaBlockUseCase = (*DefaultContaBlockUseCase)(nil)
 
 func (useCase DefaultContaBlockUseCase) Store(input StoreInput) error {
-	//TODO implement me
-	panic("implement me")
+	var storeAdapterInput StoreAdapterInput
+	storeAdapterInput.Num = input.Num
+
+	err := useCase.contaBlockContractAdapter.Store(storeAdapterInput)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (useCase DefaultContaBlockUseCase) Retrieve() (*RetrieveOutput, error) {
