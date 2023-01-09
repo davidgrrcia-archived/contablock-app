@@ -1,3 +1,6 @@
+format:
+	npx prettier --write .
+
 clean:
 	npx hardhat clean
 

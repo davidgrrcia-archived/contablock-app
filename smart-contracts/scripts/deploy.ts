@@ -1,15 +1,15 @@
-import { ethers } from "hardhat";
+import { ethers } from 'hardhat';
 
 async function main() {
-  const Contract = await ethers.getContractFactory("ContaBlockContract");
-  const contract = await Contract.deploy();
+    const Contract = await ethers.getContractFactory('ContaBlockContract');
+    const contract = await Contract.deploy();
 
-  await contract.deployed();
+    await contract.deployed();
 
-  console.log(`Contract deployed to ${contract.address}`);
+    console.log(`Contract deployed to ${contract.address}`);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
+main().catch(error => {
+    console.error(error);
+    process.exitCode = 1;
 });
