@@ -13,7 +13,12 @@ contract ContaBlockContract {
         uint256 creditBalance;
     }
 
-    mapping(string => Entry) public entries;
+    Entry[] entries;
+    mapping(string => bool) public entryExist;
+    string[] multipleEntryIds;
+    mapping(string => bool) multipleEntryIdExist;
+    string[] accountIds;
+    mapping(string => bool) accountIdExist;
 
     function createEntry(
         string memory _id,
@@ -25,16 +30,33 @@ contract ContaBlockContract {
         uint256 _debitBalance,
         uint256 _creditBalance
     ) public {
-        entries[_id] = Entry(
-            _id,
-            _accountId,
-            _multipleEntryId,
-            _currency,
-            _concept,
-            _date,
-            _debitBalance,
-            _creditBalance
+        require(entryExist[_id] == false, 'Entry already exists');
+
+        entries.push(
+            Entry(
+                _id,
+                _accountId,
+                _multipleEntryId,
+                _currency,
+                _concept,
+                _date,
+                _debitBalance,
+                _creditBalance
+            )
         );
+
+        entryExist[_id] = true;
+
+        if (!multipleEntryIdExist[_multipleEntryId]) {
+            multipleEntryIds.push(_multipleEntryId);
+            multipleEntryIdExist[_multipleEntryId] = true;
+        }
+
+        if (!accountIdExist[_accountId]) {
+            accountIds.push(_accountId);
+            accountIdExist[_accountId] = true;
+        }
+
         emit EntryCreated(
             _id,
             _accountId,
@@ -57,4 +79,12 @@ contract ContaBlockContract {
         uint256 debitBalance,
         uint256 creditBalance
     );
+
+    function listMultipleEntryIds() public view returns (string[] memory) {
+        return multipleEntryIds;
+    }
+
+    function listAccountIds() public view returns (string[] memory) {
+        return accountIds;
+    }
 }

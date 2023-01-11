@@ -71,8 +71,7 @@ func (graph *Graph) provideEntryStorage() entry.EntryStorage {
 
 func (graph *Graph) provideEntryUseCase() {
 	entryUseCaseOpts := entry.DefaultEntryUseCaseOptions{
-		EntryStorage:   graph.GetEntryStorage(),
-		AccountUseCase: graph.GetAccountUseCase(),
+		EntryStorage: graph.GetEntryStorage(),
 	}
 	entryUseCase, err := entry.NewDefaultEntryUseCase(entryUseCaseOpts)
 	if err != nil {

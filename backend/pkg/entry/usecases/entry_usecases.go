@@ -3,7 +3,6 @@ package entry
 import (
 	"context"
 	"errors"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 	"github.com/google/uuid"
 	"time"
 
@@ -22,24 +21,18 @@ func NewDefaultEntryUseCase(options DefaultEntryUseCaseOptions) (*DefaultEntryUs
 	if options.EntryStorage == nil {
 		return nil, errors.New("cannot create an instance of EntryUseCase because provided EntryStorage is nil")
 	}
-	if options.AccountUseCase == nil {
-		return nil, errors.New("cannot create an instance of EntryUseCase because provided AccountUseCase is nil")
-	}
 
 	return &DefaultEntryUseCase{
-		entryStorage:   options.EntryStorage,
-		accountUseCase: options.AccountUseCase,
+		entryStorage: options.EntryStorage,
 	}, nil
 }
 
 type DefaultEntryUseCase struct {
-	entryStorage   EntryStorage
-	accountUseCase account.AccountUseCase
+	entryStorage EntryStorage
 }
 
 type DefaultEntryUseCaseOptions struct {
-	EntryStorage   EntryStorage
-	AccountUseCase account.AccountUseCase
+	EntryStorage EntryStorage
 }
 
 var _ EntryUseCase = (*DefaultEntryUseCase)(nil)
