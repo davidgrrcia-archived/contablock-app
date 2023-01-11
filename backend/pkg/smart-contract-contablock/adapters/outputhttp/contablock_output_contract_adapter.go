@@ -2,12 +2,9 @@ package outputhttp
 
 import (
 	"errors"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"log"
-	"math/big"
-
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablockUseCase "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 )
 
 func NewDefaultContaBlockContract(options DefaultContaBlockContractOptions) (*DefaultContaBlockContract, error) {
@@ -36,33 +33,15 @@ type DefaultContaBlockContractOptions struct {
 
 var _ contablockUseCase.ContaBlockContractAdapter = (*DefaultContaBlockContract)(nil)
 
-func (adapter DefaultContaBlockContract) Store(input contablockUseCase.StoreAdapterInput) error {
+func (adapter DefaultContaBlockContract) CreateEntry(input contablockUseCase.CreateEntryAdapterInput) error {
 	//input
-	var num *big.Int
-	num = input.Num
 
 	//client
-	_, err := adapter.client.Store(adapter.auth, num)
+	_, err := adapter.client.CreateEntry(adapter.auth, input.ID, input.AccountID, input.MultipleEntryID, input.Currency, input.Concept, input.Date, input.DebitBalance, input.CreditBalance)
 	if err != nil {
 		return err
 	}
 
 	//output
 	return nil
-}
-
-func (adapter DefaultContaBlockContract) Retrieve() (*contablockUseCase.RetrieveAdapterOutput, error) {
-	//input
-
-	//client
-	value, err := adapter.client.Retrieve(nil)
-	if err != nil {
-		log.Fatalf("Failed to retrieve value: %v", err)
-	}
-
-	//output
-	var output contablockUseCase.RetrieveAdapterOutput
-	output.Num = value
-
-	return &output, nil
 }

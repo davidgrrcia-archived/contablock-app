@@ -5,14 +5,16 @@ import (
 )
 
 type ContaBlockContractAdapter interface {
-	Store(input StoreAdapterInput) error
-	Retrieve() (*RetrieveAdapterOutput, error)
+	CreateEntry(input CreateEntryAdapterInput) error
 }
 
-type StoreAdapterInput struct {
-	Num *big.Int
-}
-
-type RetrieveAdapterOutput struct {
-	Num *big.Int
+type CreateEntryAdapterInput struct {
+	ID              string
+	AccountID       string
+	MultipleEntryID string
+	Currency        string
+	Concept         string
+	Date            string
+	DebitBalance    *big.Int
+	CreditBalance   *big.Int
 }

@@ -5,8 +5,7 @@ import (
 )
 
 type ContaBlockUseCase interface {
-	Store(input StoreInput) error
-	Retrieve() (*RetrieveOutput, error)
+	CreateEntry(input CreateEntryInput) error
 }
 
 func NewDefaultContaBlockUseCase(options DefaultContaBlockUseCaseOptions) (*DefaultContaBlockUseCase, error) {
@@ -29,26 +28,21 @@ type DefaultContaBlockUseCaseOptions struct {
 
 var _ ContaBlockUseCase = (*DefaultContaBlockUseCase)(nil)
 
-func (useCase DefaultContaBlockUseCase) Store(input StoreInput) error {
-	var storeAdapterInput StoreAdapterInput
-	storeAdapterInput.Num = input.Num
+func (useCase DefaultContaBlockUseCase) CreateEntry(input CreateEntryInput) error {
+	var createEntryAdapterInput CreateEntryAdapterInput
+	createEntryAdapterInput.ID = input.ID
+	createEntryAdapterInput.AccountID = input.AccountID
+	createEntryAdapterInput.MultipleEntryID = input.MultipleEntryID
+	createEntryAdapterInput.Currency = input.Currency
+	createEntryAdapterInput.Concept = input.Concept
+	createEntryAdapterInput.Date = input.Date
+	createEntryAdapterInput.DebitBalance = input.DebitBalance
+	createEntryAdapterInput.CreditBalance = input.CreditBalance
 
-	err := useCase.contaBlockContractAdapter.Store(storeAdapterInput)
+	err := useCase.contaBlockContractAdapter.CreateEntry(createEntryAdapterInput)
 	if err != nil {
 		return err
 	}
 
 	return nil
-}
-
-func (useCase DefaultContaBlockUseCase) Retrieve() (*RetrieveOutput, error) {
-	value, err := useCase.contaBlockContractAdapter.Retrieve()
-	if err != nil {
-		return nil, err
-	}
-
-	var output RetrieveOutput
-	output.Num = value.Num
-
-	return &output, nil
 }

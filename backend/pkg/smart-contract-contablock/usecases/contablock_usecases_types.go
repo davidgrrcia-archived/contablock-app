@@ -4,10 +4,13 @@ import (
 	"math/big"
 )
 
-type StoreInput struct {
-	Num *big.Int
-}
-
-type RetrieveOutput struct {
-	Num *big.Int
+type CreateEntryInput struct {
+	ID              string
+	AccountID       string
+	MultipleEntryID string
+	Currency        string
+	Concept         string
+	Date            string
+	DebitBalance    *big.Int
+	CreditBalance   *big.Int
 }
