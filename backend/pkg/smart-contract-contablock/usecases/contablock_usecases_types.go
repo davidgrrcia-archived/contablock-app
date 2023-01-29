@@ -4,6 +4,11 @@ import (
 	"math/big"
 )
 
+const (
+	// States
+	EntryStateCreated = "CREATED"
+)
+
 type CreateEntryInput struct {
 	ID              string
 	AccountID       string
@@ -40,5 +45,9 @@ type ListAccountIdsOutput struct {
 }
 
 type PublishEntryInput struct {
+	ID string
+}
+
+type RemoveEntryInput struct {
 	ID string
 }

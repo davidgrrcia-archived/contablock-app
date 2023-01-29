@@ -10,6 +10,7 @@ type ContaBlockContractAdapter interface {
 	ListMultipleEntriesIds() (*ListMultipleEntriesIdsAdapterOutput, error)
 	ListAccountIds() (*ListAccountIdsAdapterOutput, error)
 	PublishEntry(input PublishEntryAdapterInput) error
+	RemoveEntry(input RemoveEntryAdapterInput) error
 }
 
 type CreateEntryAdapterInput struct {
@@ -56,5 +57,9 @@ type ListAccountIdsAdapterOutput struct {
 }
 
 type PublishEntryAdapterInput struct {
+	ID string
+}
+
+type RemoveEntryAdapterInput struct {
 	ID string
 }

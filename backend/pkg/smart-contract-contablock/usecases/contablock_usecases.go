@@ -10,6 +10,7 @@ type ContaBlockUseCase interface {
 	ListMultipleEntriesIds() (*ListMultipleEntriesIdsOutput, error)
 	ListAccountIds() (*ListAccountIdsOutput, error)
 	PublishEntry(input PublishEntryInput) error
+	RemoveEntry(input RemoveEntryInput) error
 }
 
 func NewDefaultContaBlockUseCase(options DefaultContaBlockUseCaseOptions) (*DefaultContaBlockUseCase, error) {
@@ -54,7 +55,6 @@ func (useCase DefaultContaBlockUseCase) CreateEntry(input CreateEntryInput) erro
 func (useCase DefaultContaBlockUseCase) GetEntryData(input GetEntryDataInput) (*GetEntryDataOutput, error) {
 	var getEntryDataAdapterInput GetEntryDataAdapterInput
 	getEntryDataAdapterInput.ID = input.ID
-
 	entryData, err := useCase.contaBlockContractAdapter.GetEntryData(getEntryDataAdapterInput)
 	if err != nil {
 		return nil, err
@@ -105,8 +105,18 @@ func (useCase DefaultContaBlockUseCase) ListAccountIds() (*ListAccountIdsOutput,
 func (useCase DefaultContaBlockUseCase) PublishEntry(input PublishEntryInput) error {
 	var publishEntryAdapterInput PublishEntryAdapterInput
 	publishEntryAdapterInput.ID = input.ID
-
 	err := useCase.contaBlockContractAdapter.PublishEntry(publishEntryAdapterInput)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (useCase DefaultContaBlockUseCase) RemoveEntry(input RemoveEntryInput) error {
+	var removeEntryAdapterInput RemoveEntryAdapterInput
+	removeEntryAdapterInput.ID = input.ID
+	err := useCase.contaBlockContractAdapter.RemoveEntry(removeEntryAdapterInput)
 	if err != nil {
 		return err
 	}

@@ -2,12 +2,14 @@ package entry
 
 import (
 	"context"
+	"math/big"
 	"time"
 )
 
 const (
 	// States
-	EntryStateCreated = "CREATED"
+	EntryStateCreated   = "CREATED"
+	EntryStatePublished = "PUBLISHED"
 )
 
 type Entry struct {
@@ -18,9 +20,9 @@ type Entry struct {
 	Concept         *string
 	Date            time.Time
 	Quarter         int
-	DebitBalance    float64
-	CreditBalance   float64
-	TotalBalance    float64
+	DebitBalance    big.Int
+	CreditBalance   big.Int
+	TotalBalance    big.Int
 	State           string
 	StateReason     *string
 	CreationDate    time.Time
@@ -34,12 +36,12 @@ type CreateEntryInput struct {
 	Currency        string    `valid:"required,length(3|3)"`
 	Concept         *string   `valid:"optional"`
 	Date            time.Time `valid:"required"`
-	DebitBalance    *float64  `valid:"optional"`
-	CreditBalance   *float64  `valid:"optional"`
+	DebitBalance    *big.Int  `valid:"optional"`
+	CreditBalance   *big.Int  `valid:"optional"`
 }
 
 type CreateEntryOutput struct {
-	Entry
+	Entry Entry
 }
 
 type DescribeEntryInput struct {
@@ -47,7 +49,7 @@ type DescribeEntryInput struct {
 }
 
 type DescribeEntryOutput struct {
-	Entry
+	Entry Entry
 }
 
 type ListEntryInput struct {
@@ -58,19 +60,11 @@ type ListEntryOutput struct {
 }
 
 type UpdateEntryInput struct {
-	ID            string    `valid:"required,length(1|64)"`
-	AccountID     string    `valid:"required,length(1|64)"`
-	Currency      string    `valid:"required,length(3|3)"`
-	Concept       *string   `valid:"required"`
-	Date          time.Time `valid:"required"`
-	DebitBalance  *float64  `valid:"required"`
-	CreditBalance *float64  `valid:"required"`
-	State         string    `valid:"required"`
-	StateReason   *string   `valid:"required"`
+	Entry Entry
 }
 
 type UpdateEntryOutput struct {
-	Entry
+	Entry Entry
 }
 
 type RemoveEntryInput struct {
@@ -78,7 +72,15 @@ type RemoveEntryInput struct {
 }
 
 type RemoveEntryOutput struct {
-	Entry
+	Entry Entry
+}
+
+type PublishEntryInput struct {
+	ID string `valid:"required,length(1|64)"`
+}
+
+type PublishEntryOutput struct {
+	Entry Entry
 }
 
 type EntryStorage interface {
@@ -97,9 +99,9 @@ type EntryStorageData struct {
 	Concept         *string
 	Date            time.Time
 	Quarter         int
-	DebitBalance    float64
-	CreditBalance   float64
-	TotalBalance    float64
+	DebitBalance    big.Int
+	CreditBalance   big.Int
+	TotalBalance    big.Int
 	State           string
 	StateReason     *string
 	CreationDate    time.Time

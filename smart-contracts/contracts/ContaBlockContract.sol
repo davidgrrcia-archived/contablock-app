@@ -100,4 +100,23 @@ contract ContaBlockContract {
     }
 
     event EntryPublished(Entry entry);
+
+    function removeEntry(string memory _id) public {
+        require(entryExist[_id], 'Entry does not exists');
+
+        Entry memory _entry = entries[_id];
+
+        //compare state strings
+        require(
+            keccak256(abi.encodePacked(_entry.state)) ==
+            keccak256(abi.encodePacked(CREATED_STATE)),
+            'Entry should be in created state'
+        );
+
+        entryExist[_id] = false;
+
+        emit EntryRemoved(_entry);
+    }
+
+    event EntryRemoved(Entry entry);
 }

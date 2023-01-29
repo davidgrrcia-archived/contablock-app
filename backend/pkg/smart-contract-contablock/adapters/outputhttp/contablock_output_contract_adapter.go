@@ -118,3 +118,16 @@ func (adapter DefaultContaBlockContract) PublishEntry(input contablockUseCase.Pu
 	//output
 	return nil
 }
+
+func (adapter DefaultContaBlockContract) RemoveEntry(input contablockUseCase.RemoveEntryAdapterInput) error {
+	//input
+
+	//client
+	_, err := adapter.client.RemoveEntry(adapter.auth, input.ID)
+	if err != nil {
+		return err
+	}
+
+	//output
+	return nil
+}
