@@ -37,11 +37,11 @@ type GetEntryDataOutput struct {
 }
 
 type ListMultipleEntriesIdsOutput struct {
-	multipleEntriesIds []string
+	MultipleEntriesIds []string
 }
 
 type ListAccountIdsOutput struct {
-	accountIds []string
+	AccountIds []string
 }
 
 type PublishEntryInput struct {

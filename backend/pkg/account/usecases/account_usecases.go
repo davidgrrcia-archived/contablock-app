@@ -44,11 +44,11 @@ func (useCase *DefaultAccountUseCase) DescribeAccount(ctx context.Context, input
 	}
 
 	var output DescribeAccountOutput
-	output.ID = storedAccount.ID
-	output.Name = storedAccount.Name
-	output.Level = storedAccount.Level
-	output.Type = storedAccount.Type
-	output.DisplayName = storedAccount.ID + " - " + storedAccount.Name
+	output.Account.ID = storedAccount.ID
+	output.Account.Name = storedAccount.Name
+	output.Account.Level = storedAccount.Level
+	output.Account.Type = storedAccount.Type
+	output.Account.DisplayName = storedAccount.ID + " - " + storedAccount.Name
 
 	return &output, err
 }

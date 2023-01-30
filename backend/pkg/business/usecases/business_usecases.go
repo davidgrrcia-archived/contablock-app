@@ -44,13 +44,13 @@ func (useCase *DefaultBusinessUseCase) DescribeBusiness(ctx context.Context, inp
 	}
 
 	var output DescribeBusinessOutput
-	output.ID = storedBusiness.ID
-	output.Name = storedBusiness.Name
-	output.SocialDenomination = storedBusiness.SocialDenomination
-	output.RegisteredOffice = storedBusiness.RegisteredOffice
-	output.Cif = storedBusiness.Cif
-	output.Logo = storedBusiness.Logo
-	output.EthAddress = storedBusiness.EthAddress
+	output.Business.ID = storedBusiness.ID
+	output.Business.Name = storedBusiness.Name
+	output.Business.SocialDenomination = storedBusiness.SocialDenomination
+	output.Business.RegisteredOffice = storedBusiness.RegisteredOffice
+	output.Business.Cif = storedBusiness.Cif
+	output.Business.Logo = storedBusiness.Logo
+	output.Business.EthAddress = storedBusiness.EthAddress
 
 	return &output, err
 }

@@ -19,7 +19,7 @@ type DescribeBusinessInput struct {
 }
 
 type DescribeBusinessOutput struct {
-	Business
+	Business Business
 }
 
 type ListBusinessInput struct{}

@@ -163,7 +163,9 @@ func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListE
 		return nil, errors.New("invalid input")
 	}
 
-	storedEntries, err := useCase.entryStorage.All(ctx)
+	var filters Filters
+	filters.MultipleEntryID = input.MultipleEntryID
+	storedEntries, err := useCase.entryStorage.All(ctx, filters)
 	if err != nil {
 		return nil, err
 	}

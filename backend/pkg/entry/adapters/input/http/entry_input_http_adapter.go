@@ -51,20 +51,20 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 	}
 
 	var response CreateEntryResponse
-	response.ID = outputData.ID
-	response.AccountID = outputData.AccountID
-	response.MultipleEntryID = outputData.MultipleEntryID
-	response.Currency = outputData.Currency
-	response.Concept = outputData.Concept
-	response.Date = outputData.Date
-	response.Quarter = outputData.Quarter
-	response.DebitBalance = outputData.DebitBalance
-	response.CreditBalance = outputData.CreditBalance
-	response.TotalBalance = outputData.TotalBalance
-	response.State = outputData.State
-	response.StateReason = outputData.StateReason
-	response.CreationDate = outputData.CreationDate
-	response.LastUpdate = outputData.LastUpdate
+	response.ID = outputData.Entry.ID
+	response.AccountID = outputData.Entry.AccountID
+	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.Currency = outputData.Entry.Currency
+	response.Concept = outputData.Entry.Concept
+	response.Date = outputData.Entry.Date
+	response.Quarter = outputData.Entry.Quarter
+	response.DebitBalance = outputData.Entry.DebitBalance
+	response.CreditBalance = outputData.Entry.CreditBalance
+	response.TotalBalance = outputData.Entry.TotalBalance
+	response.State = outputData.Entry.State
+	response.StateReason = outputData.Entry.StateReason
+	response.CreationDate = outputData.Entry.CreationDate
+	response.LastUpdate = outputData.Entry.LastUpdate
 
 	responseWrapper := CreateEntryResponseWrapper{}
 	responseWrapper.CreateEntryResponse = response
@@ -82,20 +82,20 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 	}
 
 	var response DescribeEntryResponse
-	response.ID = outputData.ID
-	response.AccountID = outputData.AccountID
-	response.MultipleEntryID = outputData.MultipleEntryID
-	response.Currency = outputData.Currency
-	response.Concept = outputData.Concept
-	response.Date = outputData.Date
-	response.Quarter = outputData.Quarter
-	response.DebitBalance = outputData.DebitBalance
-	response.CreditBalance = outputData.CreditBalance
-	response.TotalBalance = outputData.TotalBalance
-	response.State = outputData.State
-	response.StateReason = outputData.StateReason
-	response.CreationDate = outputData.CreationDate
-	response.LastUpdate = outputData.LastUpdate
+	response.ID = outputData.Entry.ID
+	response.AccountID = outputData.Entry.AccountID
+	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.Currency = outputData.Entry.Currency
+	response.Concept = outputData.Entry.Concept
+	response.Date = outputData.Entry.Date
+	response.Quarter = outputData.Entry.Quarter
+	response.DebitBalance = outputData.Entry.DebitBalance
+	response.CreditBalance = outputData.Entry.CreditBalance
+	response.TotalBalance = outputData.Entry.TotalBalance
+	response.State = outputData.Entry.State
+	response.StateReason = outputData.Entry.StateReason
+	response.CreationDate = outputData.Entry.CreationDate
+	response.LastUpdate = outputData.Entry.LastUpdate
 
 	responseWrapper := DescribeEntryResponseWrapper{}
 	responseWrapper.DescribeEntryResponse = response
@@ -140,13 +140,13 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 
 func (adapter *DefaultHttpInputAdapter) AdaptUpdateEntry(ctx context.Context, data UpdateEntryRequest) (*UpdateEntryResponseWrapper, error) {
 	var inputData entry.UpdateEntryInput
-	inputData.ID = data.ID
-	inputData.AccountID = data.AccountID
-	inputData.Currency = data.Currency
-	inputData.Concept = data.Concept
-	inputData.Date = data.Date
-	inputData.DebitBalance = data.DebitBalance
-	inputData.CreditBalance = data.CreditBalance
+	inputData.Entry.ID = data.ID
+	inputData.Entry.AccountID = data.AccountID
+	inputData.Entry.Currency = data.Currency
+	inputData.Entry.Concept = data.Concept
+	inputData.Entry.Date = data.Date
+	inputData.Entry.DebitBalance = *data.DebitBalance
+	inputData.Entry.CreditBalance = *data.CreditBalance
 
 	outputData, err := adapter.entryUseCase.UpdateEntry(ctx, inputData)
 	if err != nil {
@@ -154,20 +154,20 @@ func (adapter *DefaultHttpInputAdapter) AdaptUpdateEntry(ctx context.Context, da
 	}
 
 	var response UpdateEntryResponse
-	response.ID = outputData.ID
-	response.AccountID = outputData.AccountID
-	response.MultipleEntryID = outputData.MultipleEntryID
-	response.Currency = outputData.Currency
-	response.Concept = outputData.Concept
-	response.Date = outputData.Date
-	response.Quarter = outputData.Quarter
-	response.DebitBalance = outputData.DebitBalance
-	response.CreditBalance = outputData.CreditBalance
-	response.TotalBalance = outputData.TotalBalance
-	response.State = outputData.State
-	response.StateReason = outputData.StateReason
-	response.CreationDate = outputData.CreationDate
-	response.LastUpdate = outputData.LastUpdate
+	response.ID = outputData.Entry.ID
+	response.AccountID = outputData.Entry.AccountID
+	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.Currency = outputData.Entry.Currency
+	response.Concept = outputData.Entry.Concept
+	response.Date = outputData.Entry.Date
+	response.Quarter = outputData.Entry.Quarter
+	response.DebitBalance = outputData.Entry.DebitBalance
+	response.CreditBalance = outputData.Entry.CreditBalance
+	response.TotalBalance = outputData.Entry.TotalBalance
+	response.State = outputData.Entry.State
+	response.StateReason = outputData.Entry.StateReason
+	response.CreationDate = outputData.Entry.CreationDate
+	response.LastUpdate = outputData.Entry.LastUpdate
 
 	responseWrapper := UpdateEntryResponseWrapper{}
 	responseWrapper.UpdateEntryResponse = response
@@ -185,20 +185,20 @@ func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, da
 	}
 
 	var response DeleteEntryResponse
-	response.ID = outputData.ID
-	response.AccountID = outputData.AccountID
-	response.MultipleEntryID = outputData.MultipleEntryID
-	response.Currency = outputData.Currency
-	response.Concept = outputData.Concept
-	response.Date = outputData.Date
-	response.Quarter = outputData.Quarter
-	response.DebitBalance = outputData.DebitBalance
-	response.CreditBalance = outputData.CreditBalance
-	response.TotalBalance = outputData.TotalBalance
-	response.State = outputData.State
-	response.StateReason = outputData.StateReason
-	response.CreationDate = outputData.CreationDate
-	response.LastUpdate = outputData.LastUpdate
+	response.ID = outputData.Entry.ID
+	response.AccountID = outputData.Entry.AccountID
+	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.Currency = outputData.Entry.Currency
+	response.Concept = outputData.Entry.Concept
+	response.Date = outputData.Entry.Date
+	response.Quarter = outputData.Entry.Quarter
+	response.DebitBalance = outputData.Entry.DebitBalance
+	response.CreditBalance = outputData.Entry.CreditBalance
+	response.TotalBalance = outputData.Entry.TotalBalance
+	response.State = outputData.Entry.State
+	response.StateReason = outputData.Entry.StateReason
+	response.CreationDate = outputData.Entry.CreationDate
+	response.LastUpdate = outputData.Entry.LastUpdate
 
 	responseWrapper := DeleteEntryResponseWrapper{}
 	responseWrapper.DeleteEntryResponse = response

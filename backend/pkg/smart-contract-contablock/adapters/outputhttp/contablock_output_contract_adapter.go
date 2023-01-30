@@ -80,9 +80,7 @@ func (adapter DefaultContaBlockContract) ListMultipleEntriesIds() (*contablockUs
 	}
 
 	var output contablockUseCase.ListMultipleEntriesIdsAdapterOutput
-	for _, item := range multipleEntriesIds {
-		output.MultipleEntriesIds = append(output.MultipleEntriesIds, item)
-	}
+	output.MultipleEntriesIds = append(output.MultipleEntriesIds, multipleEntriesIds...)
 
 	//output
 	return &output, nil
@@ -98,9 +96,7 @@ func (adapter DefaultContaBlockContract) ListAccountIds() (*contablockUseCase.Li
 	}
 
 	var output contablockUseCase.ListAccountIdsAdapterOutput
-	for _, item := range accountIds {
-		output.AccountIds = append(output.AccountIds, item)
-	}
+	output.AccountIds = append(output.AccountIds, accountIds...)
 
 	//output
 	return &output, nil

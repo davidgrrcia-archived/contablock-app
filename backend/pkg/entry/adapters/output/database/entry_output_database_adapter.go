@@ -46,13 +46,13 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 	entryDb.CreationDate = input.CreationDate.Format(time.RFC3339)
 	entryDb.LastUpdate = input.LastUpdate.Format(time.RFC3339)
 
-	query := "INSERT INTO entries (id, account_id, multiple_entry_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+	insertQuery := "INSERT INTO entries (id, account_id, multiple_entry_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-	result := repository.db.QueryRow(query, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
+	repository.db.QueryRow(insertQuery, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
 
-	query = "SELECT * FROM entries WHERE id = ?"
+	query := "SELECT * FROM entries WHERE id = ?"
 
-	result = repository.db.QueryRow(query, entryDb.ID)
+	result := repository.db.QueryRow(query, entryDb.ID)
 
 	var addedEntry EntryDb
 	err := result.Scan(&addedEntry.ID, &addedEntry.AccountID, &addedEntry.MultipleEntryID, &addedEntry.Currency, &addedEntry.Concept, &addedEntry.Date, &addedEntry.Quarter, &addedEntry.DebitBalance, &addedEntry.CreditBalance, &addedEntry.TotalBalance, &addedEntry.State, &addedEntry.StateReason, &addedEntry.CreationDate, &addedEntry.LastUpdate)
@@ -133,8 +133,8 @@ func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.E
 	return &output, nil
 }
 
-func (repository *EntryRepository) All(ctx context.Context) (*entry.EntryStorageCollectionData, error) {
-	query := "SELECT * FROM entries"
+func (repository *EntryRepository) All(ctx context.Context, filters entry.Filters) (*entry.EntryStorageCollectionData, error) {
+	query := BuildQueryWithFilters("SELECT * FROM entries", filters)
 
 	rows, err := repository.db.Query(query)
 	if err != nil {
@@ -206,13 +206,13 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 	entryDb.CreationDate = input.CreationDate.Format(time.RFC3339)
 	entryDb.LastUpdate = input.LastUpdate.Format(time.RFC3339)
 
-	query := "UPDATE entries SET account_id = ?, multiple_entry_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, total_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE id = ?"
+	updateQuery := "UPDATE entries SET account_id = ?, multiple_entry_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, total_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE id = ?"
 
-	result := repository.db.QueryRow(query, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.ID)
+	repository.db.QueryRow(updateQuery, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.ID)
 
-	query = "SELECT * FROM entries WHERE id = ?"
+	query := "SELECT * FROM entries WHERE id = ?"
 
-	result = repository.db.QueryRow(query, entryDb.ID)
+	result := repository.db.QueryRow(query, entryDb.ID)
 
 	var storedEntry EntryDb
 	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
@@ -295,4 +295,12 @@ func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entr
 	output.LastUpdate = lastUpdate
 
 	return &output, nil
+}
+
+func BuildQueryWithFilters(query string, filters entry.Filters) string {
+	if filters.MultipleEntryID != nil {
+		query = query + " WHERE multiple_entry_id = " + *filters.MultipleEntryID
+	}
+
+	return query
 }

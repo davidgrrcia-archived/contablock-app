@@ -1,5 +1,7 @@
 package entrydb
 
+import "math/big"
+
 type EntryDb struct {
 	ID              string  `storage:"id"`
 	AccountID       string  `storage:"account_id"`

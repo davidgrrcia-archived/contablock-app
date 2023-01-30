@@ -53,6 +53,7 @@ type DescribeEntryOutput struct {
 }
 
 type ListEntryInput struct {
+	MultipleEntryID *string
 }
 
 type ListEntryOutput struct {
@@ -83,10 +84,14 @@ type PublishEntryOutput struct {
 	Entry Entry
 }
 
+type Filters struct {
+	MultipleEntryID *string
+}
+
 type EntryStorage interface {
 	Add(ctx context.Context, input EntryStorageData) (*EntryStorageData, error)
 	Get(ctx context.Context, id string) (*EntryStorageData, error)
-	All(ctx context.Context) (*EntryStorageCollectionData, error)
+	All(ctx context.Context, filters Filters) (*EntryStorageCollectionData, error)
 	Edit(ctx context.Context, input EntryStorageData) (*EntryStorageData, error)
 	Remove(ctx context.Context, id string) (*EntryStorageData, error)
 }

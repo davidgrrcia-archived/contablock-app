@@ -81,9 +81,7 @@ func (useCase DefaultContaBlockUseCase) ListMultipleEntriesIds() (*ListMultipleE
 	}
 
 	var output ListMultipleEntriesIdsOutput
-	for _, item := range multipleEntriesIds.MultipleEntriesIds {
-		output.multipleEntriesIds = append(output.multipleEntriesIds, item)
-	}
+	output.MultipleEntriesIds = append(output.MultipleEntriesIds, multipleEntriesIds.MultipleEntriesIds...)
 
 	return &output, nil
 }
@@ -95,9 +93,7 @@ func (useCase DefaultContaBlockUseCase) ListAccountIds() (*ListAccountIdsOutput,
 	}
 
 	var output ListAccountIdsOutput
-	for _, item := range accountIds.AccountIds {
-		output.accountIds = append(output.accountIds, item)
-	}
+	output.AccountIds = append(output.AccountIds, accountIds.AccountIds...)
 
 	return &output, nil
 }

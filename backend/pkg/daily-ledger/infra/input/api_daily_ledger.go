@@ -32,7 +32,7 @@ type DefaultDailyLedgerHttpHandlerOptions struct {
 
 func (handler *DefaultDailyLedgerHttpHandler) RegisterDailyLedgerRoutes(r *mux.Router) {
 	//register endpoints
-	r.HandleFunc("/api/dailyLedger", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/daily-ledger", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 		outputPayload, err := handler.adapter.AdaptListDailyLedger(ctx, input.ListDailyLedgerRequest{})
 		if err != nil {

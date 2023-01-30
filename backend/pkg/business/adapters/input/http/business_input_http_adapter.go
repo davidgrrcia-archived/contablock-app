@@ -3,7 +3,7 @@ package businessInputHttpAdapter
 import (
 	"context"
 	"errors"
-    
+
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
 )
 
@@ -42,13 +42,13 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeBusiness(ctx context.Contex
 	}
 
 	var response DescribeBusinessResponse
-	response.ID = outputData.ID
-	response.Name = outputData.Name
-	response.SocialDenomination = outputData.SocialDenomination
-	response.RegisteredOffice = outputData.RegisteredOffice
-	response.Cif = outputData.Cif
-	response.Logo = outputData.Logo
-	response.EthAddress = outputData.EthAddress
+	response.ID = outputData.Business.ID
+	response.Name = outputData.Business.Name
+	response.SocialDenomination = outputData.Business.SocialDenomination
+	response.RegisteredOffice = outputData.Business.RegisteredOffice
+	response.Cif = outputData.Business.Cif
+	response.Logo = outputData.Business.Logo
+	response.EthAddress = outputData.Business.EthAddress
 	responseWrapper := DescribeBusinessResponseWrapper{}
 	responseWrapper.DescribeBusinessResponse = response
 

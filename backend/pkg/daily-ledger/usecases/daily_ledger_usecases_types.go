@@ -8,14 +8,15 @@ import (
 type ListDailyLedgerInput struct{}
 
 type ListDailyLedgerOutput struct {
-	Items []AccountingRecord
-}
-
-type AccountingRecord struct {
-	Entries []Record
+	Items []Record
 }
 
 type Record struct {
-	Entry   []entry.Entry
-	Account []account.Account
+	ID              string
+	EntriesExpanded []EntryExpanded
+}
+
+type EntryExpanded struct {
+	Entry   entry.Entry
+	Account account.Account
 }

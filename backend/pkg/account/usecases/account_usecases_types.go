@@ -17,7 +17,7 @@ type DescribeAccountInput struct {
 }
 
 type DescribeAccountOutput struct {
-	Account
+	Account Account
 }
 
 type ListAccountInput struct{}

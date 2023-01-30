@@ -1,18 +1,25 @@
 package dailyLedgerInputHttpAdapter
 
-type DailyLedger struct {
-	ID          string  `json:"id"`
-	Name        string  `json:"name"`
-	Level       string  `json:"level"`
-	Type        *string `json:"type"`
-	DisplayName string  `json:"displayName"`
-}
+import (
+	account "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
+	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
+)
 
 type ListDailyLedgerRequest struct{}
 
 type ListDailyLedgerResponse struct {
-	Items []DescribeDailyLedgerResponse `json:"items"`
+	Items []Record `json:"items"`
 }
 type ListDailyLedgerResponseWrapper struct {
 	ListDailyLedgerResponse ListDailyLedgerResponse
+}
+
+type Record struct {
+	ID              string
+	EntriesExpanded []EntryExpanded
+}
+
+type EntryExpanded struct {
+	Entry   entry.Entry
+	Account account.Account
 }

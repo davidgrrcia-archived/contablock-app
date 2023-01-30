@@ -42,11 +42,11 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeAccount(ctx context.Context
 	}
 
 	var response DescribeAccountResponse
-	response.ID = outputData.ID
-	response.Name = outputData.Name
-	response.Level = outputData.Level
-	response.Type = outputData.Type
-	response.DisplayName = outputData.DisplayName
+	response.ID = outputData.Account.ID
+	response.Name = outputData.Account.Name
+	response.Level = outputData.Account.Level
+	response.Type = outputData.Account.Type
+	response.DisplayName = outputData.Account.DisplayName
 
 	responseWrapper := DescribeAccountResponseWrapper{}
 	responseWrapper.DescribeAccountResponse = response

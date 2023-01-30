@@ -7,7 +7,7 @@ import (
 )
 
 type DailyLedgerInputAdapter interface {
-	AdaptListDailyLedgers(ctx context.Context, data ListDailyLedgerRequest) (*ListDailyLedgerResponseWrapper, error)
+	AdaptListDailyLedger(ctx context.Context, data ListDailyLedgerRequest) (*ListDailyLedgerResponseWrapper, error)
 }
 
 func NewDefaultHttpInputAdapter(options DefaultHttpInputAdapterOptions) (*DefaultHttpInputAdapter, error) {
@@ -30,24 +30,45 @@ type DefaultHttpInputAdapterOptions struct {
 
 var _ DailyLedgerInputAdapter = (*DefaultHttpInputAdapter)(nil)
 
-func (adapter *DefaultHttpInputAdapter) AdaptListDailyLedgers(ctx context.Context, data ListDailyLedgerRequest) (*ListDailyLedgerResponseWrapper, error) {
-	var inputData dailyLedger.ListDailyLedgerInput
-
-	outputData, err := adapter.dailyLedgerUseCase.ListDailyLedgers(ctx, inputData)
+func (adapter *DefaultHttpInputAdapter) AdaptListDailyLedger(ctx context.Context, data ListDailyLedgerRequest) (*ListDailyLedgerResponseWrapper, error) {
+	var inputData dailyledger.ListDailyLedgerInput
+	outputData, err := adapter.dailyLedgerUseCase.ListDailyLedger(ctx, inputData)
 	if err != nil {
 		return nil, err
 	}
 
 	var response ListDailyLedgerResponse
-	response.Items = make([]DescribeDailyLedgerResponse, 0)
+	response.Items = make([]Record, 0)
 
 	for _, item := range outputData.Items {
-		var responseItem DescribeDailyLedgerResponse
+		var responseItem Record
 		responseItem.ID = item.ID
-		responseItem.Name = item.Name
-		responseItem.Level = item.Level
-		responseItem.Type = item.Type
-		responseItem.DisplayName = item.DisplayName
+
+		for _, entry := range item.EntriesExpanded {
+			var entryExpanded EntryExpanded
+			entryExpanded.Entry.ID = entry.Entry.ID
+			entryExpanded.Entry.AccountID = entry.Entry.AccountID
+			entryExpanded.Entry.MultipleEntryID = entry.Entry.MultipleEntryID
+			entryExpanded.Entry.Currency = entry.Entry.Currency
+			entryExpanded.Entry.Concept = entry.Entry.Concept
+			entryExpanded.Entry.Date = entry.Entry.Date
+			entryExpanded.Entry.Quarter = entry.Entry.Quarter
+			entryExpanded.Entry.DebitBalance = entry.Entry.DebitBalance
+			entryExpanded.Entry.CreditBalance = entry.Entry.CreditBalance
+			entryExpanded.Entry.TotalBalance = entry.Entry.TotalBalance
+			entryExpanded.Entry.State = entry.Entry.State
+			entryExpanded.Entry.StateReason = entry.Entry.StateReason
+			entryExpanded.Entry.CreationDate = entry.Entry.CreationDate
+			entryExpanded.Entry.LastUpdate = entry.Entry.LastUpdate
+			entryExpanded.Account.ID = entry.Account.ID
+			entryExpanded.Account.Name = entry.Account.Name
+			entryExpanded.Account.Level = entry.Account.Level
+			entryExpanded.Account.Type = entry.Account.Type
+			entryExpanded.Account.DisplayName = entry.Account.DisplayName
+
+			responseItem.EntriesExpanded = append(responseItem.EntriesExpanded, entryExpanded)
+		}
+
 		response.Items = append(response.Items, responseItem)
 	}
 
