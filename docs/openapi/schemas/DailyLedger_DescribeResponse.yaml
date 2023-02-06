@@ -2,15 +2,20 @@ type: object
 title: Entry
 description: Entry details
 required:
-  - accountingRecord
+  - record
 properties:
-  accountingRecord:
-    description: The id of the accounting record
+  record:
     type: object
     required:
-      - entries
+      - id
+      - entriesExpanded
     properties:
-      entries:
+      id:
+        type: string
+        description: The id of the record
+        minLength: 1
+        maxLength: 64
+      entriesExpanded:
         description: Entries given an accounting record
         type: array
         items:

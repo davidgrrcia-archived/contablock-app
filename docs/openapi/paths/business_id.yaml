@@ -14,10 +14,8 @@ get:
   responses:
     '200':
       description: A business
-      content:
-        application/json:
-          schema:
-            $ref: "../schemas/_index.yaml#/Business_DescribeResponse"
+      schema:
+        $ref: "../schemas/_index.yaml#/Business_DescribeResponse"
     '403':
         $ref: "../responses/_index.yaml#/Unauthorized"
     '404':

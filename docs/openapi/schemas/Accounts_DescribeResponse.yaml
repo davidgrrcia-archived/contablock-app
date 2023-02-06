@@ -12,19 +12,23 @@ properties:
     description: The id of the account
     minLength: 1
     maxLength: 64
+    example: "id"
   name:
     type: string
     description: The name of the account
     minLength: 1
     maxLength: 256
+    example: "name"
   level:
     type: string
     description: The level of the account
     minLength: 1
     maxLength: 64
+    example: "level"
   type:
     type: string
     description: The type of the account
     nullable: true
     minLength: 1
     maxLength: 64
+    example: "type"

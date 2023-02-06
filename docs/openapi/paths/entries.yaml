@@ -7,10 +7,8 @@ get:
   responses:
     '200':
       description: An array of entries
-      content:
-        application/json:
-          schema:
-            $ref: "../schemas/_index.yaml#/Entries_ListResponse"
+      schema:
+        $ref: "../schemas/_index.yaml#/Entries_ListResponse"
     '403':
         $ref: "../responses/_index.yaml#/Unauthorized"
     '404':
@@ -27,10 +25,8 @@ post:
   requestBody:
     description: "Create an entry. \n >DebitBalance o CreditBalance es requerido pero no los dos al mismo tiempo."
     required: true
-    content:
-      application/json:
-        schema:
-          $ref: "../schemas/_index.yaml#/Entries_Create"
+    schema:
+      $ref: "../schemas/_index.yaml#/Entries_Create"
   responses:
     '201':
       description: An entry
