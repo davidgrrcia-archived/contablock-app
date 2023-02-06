@@ -36,4 +36,16 @@ CREATE TABLE
         FOREIGN KEY (account_id) REFERENCES accounts(id)
     );
 
-INSERT INTO `business` (`id`, `name`, `social_denomination`, `registered_office`, `cif`, `logo`, `eth_address`) VALUES ('zara', 'Zara', 'Zara España, SA', 'Arteixo, La Coruña', 'A15022510', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg/1024px-Zara_Logo.svg.png', '0xb794f5ea0ba39494ce839613fffba74279579268');
+LOAD DATA INFILE '/var/lib/mysql-files/accounts.csv'
+INTO TABLE accounts
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 0 ROWS;
+
+LOAD DATA INFILE '/var/lib/mysql-files/business.csv'
+INTO TABLE business
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 0 ROWS;

@@ -4,7 +4,10 @@ clean:
 	docker system prune
 
 provision:
-	cd backend && docker-compose up -d
+	cd backend && make provision
+	sleep 10
+	cd backend && make up-migrations
+	cd smart-contracts && make start
 
 render-api-docs:
 	cd docs/openapi && http-server

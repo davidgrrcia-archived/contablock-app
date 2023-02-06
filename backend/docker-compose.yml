@@ -11,6 +11,9 @@ services:
       MYSQL_DATABASE: db_accounting
       MYSQL_USER: user
       MYSQL_PASSWORD: password
+    command: --secure-file-priv=/var/lib/mysql-files
+    volumes:
+      - ./database/data:/var/lib/mysql-files
     ports:
       - 3306:3306
 
@@ -26,20 +29,20 @@ services:
     ports:
       - 8080:80
 
-  api:
-    build:
-      dockerfile: backend/Dockerfile
-      context: backend
-    restart: always
-    depends_on:
-        - db
-    links:
-        - db
-    environment:
-      DB_HOST: db
-      DB_PORT: 3306
-      DB_NAME: db_accounting
-      DB_USER: root
-      DB_PASS: root
-    ports:
-        - 4000:4000
+#  api:
+#    build:
+#      dockerfile: backend/Dockerfile
+#      context: backend
+#    restart: always
+#    depends_on:
+#        - db
+#    links:
+#        - db
+#    environment:
+#      DB_HOST: db
+#      DB_PORT: 3306
+#      DB_NAME: db_accounting
+#      DB_USER: root
+#      DB_PASS: root
+#    ports:
+#        - 4000:4000
