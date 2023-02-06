@@ -14,8 +14,10 @@ get:
   responses:
     '200':
       description: An account
-      schema:
-        $ref: "../schemas/_index.yaml#/Accounts_DescribeResponse"
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/_index.yaml#/Accounts_DescribeResponse"
     '403':
         $ref: "../responses/_index.yaml#/Unauthorized"
     '404':

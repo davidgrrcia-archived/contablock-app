@@ -15,11 +15,11 @@ type ListDailyLedgerResponseWrapper struct {
 }
 
 type Record struct {
-	ID              string
-	EntriesExpanded []EntryExpanded
+	ID              string          `json:"id"`
+	EntriesExpanded []EntryExpanded `json:"entriesExpanded"`
 }
 
 type EntryExpanded struct {
-	Entry   entry.Entry
-	Account account.Account
+	Entry   entry.Entry     `json:"entry"`
+	Account account.Account `json:"account"`
 }

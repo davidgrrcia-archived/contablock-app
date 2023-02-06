@@ -1,16 +1,18 @@
 description: Unexpected error
-schema:
-  type: object
-  required:
-    - code
-    - message
-  title: Error
-  description: A standard error object.
-  properties:
-    code:
-      type: string
-      description: A code.
-    message:
-      type: string
-      description: A message.
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - code
+        - message
+      title: Error
+      description: A standard error object.
+      properties:
+        code:
+          type: string
+          description: A code.
+        message:
+          type: string
+          description: A message.
       

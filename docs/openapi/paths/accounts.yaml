@@ -7,8 +7,10 @@ get:
   responses:
     '200':
       description: An array of accounts
-      schema:
-        $ref: "../schemas/_index.yaml#/Accounts_ListResponse"
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/_index.yaml#/Accounts_ListResponse"
     '403':
         $ref: "../responses/_index.yaml#/Unauthorized"
     '404':

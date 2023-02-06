@@ -7,8 +7,10 @@ get:
   responses:
     '200':
       description: An array of entries grouped by multiple entry id
-      schema:
-        $ref: "../schemas/_index.yaml#/DailyLedger_ListResponse"
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/_index.yaml#/DailyLedger_ListResponse"
     '403':
         $ref: "../responses/_index.yaml#/Unauthorized"
     '404':
