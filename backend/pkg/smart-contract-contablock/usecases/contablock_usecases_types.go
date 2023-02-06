@@ -1,9 +1,5 @@
 package contablock
 
-import (
-	"math/big"
-)
-
 const (
 	// States
 	EntryStateCreated = "CREATED"
@@ -16,8 +12,8 @@ type CreateEntryInput struct {
 	Currency        string
 	Concept         string
 	Date            string
-	DebitBalance    *big.Int
-	CreditBalance   *big.Int
+	DebitBalance    *float64
+	CreditBalance   *float64
 }
 
 type GetEntryDataInput struct {
@@ -31,8 +27,8 @@ type GetEntryDataOutput struct {
 	Currency        string
 	Concept         string
 	Date            string
-	DebitBalance    *big.Int
-	CreditBalance   *big.Int
+	DebitBalance    *float64
+	CreditBalance   *float64
 	State           string
 }
 

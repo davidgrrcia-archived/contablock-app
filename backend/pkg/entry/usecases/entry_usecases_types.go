@@ -2,7 +2,6 @@ package entry
 
 import (
 	"context"
-	"math/big"
 	"time"
 )
 
@@ -20,9 +19,9 @@ type Entry struct {
 	Concept         *string
 	Date            time.Time
 	Quarter         int
-	DebitBalance    big.Int
-	CreditBalance   big.Int
-	TotalBalance    big.Int
+	DebitBalance    float64
+	CreditBalance   float64
+	TotalBalance    float64
 	State           string
 	StateReason     *string
 	CreationDate    time.Time
@@ -36,8 +35,8 @@ type CreateEntryInput struct {
 	Currency        string    `valid:"required,length(3|3)"`
 	Concept         *string   `valid:"optional"`
 	Date            time.Time `valid:"required"`
-	DebitBalance    *big.Int  `valid:"optional"`
-	CreditBalance   *big.Int  `valid:"optional"`
+	DebitBalance    *float64  `valid:"optional"`
+	CreditBalance   *float64  `valid:"optional"`
 }
 
 type CreateEntryOutput struct {
@@ -104,9 +103,9 @@ type EntryStorageData struct {
 	Concept         *string
 	Date            time.Time
 	Quarter         int
-	DebitBalance    big.Int
-	CreditBalance   big.Int
-	TotalBalance    big.Int
+	DebitBalance    float64
+	CreditBalance   float64
+	TotalBalance    float64
 	State           string
 	StateReason     *string
 	CreationDate    time.Time

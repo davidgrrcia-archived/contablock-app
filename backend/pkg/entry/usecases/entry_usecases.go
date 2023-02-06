@@ -5,7 +5,6 @@ import (
 	"errors"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	"github.com/google/uuid"
-	"math/big"
 	"time"
 
 	"github.com/asaskevich/govalidator"
@@ -89,16 +88,16 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	quarter := useCase.calculateQuarter(input.Date)
 	desiredEntry.Quarter = quarter
 	if input.DebitBalance == nil {
-		debitBalance := new(big.Int).SetUint64(0.00)
-		input.DebitBalance = debitBalance
+		debitBalance := 0.00
+		input.DebitBalance = &debitBalance
 	}
 	desiredEntry.DebitBalance = *input.DebitBalance
 	if input.CreditBalance == nil {
-		creditBalance := new(big.Int).SetUint64(0.00)
-		input.CreditBalance = creditBalance
+		creditBalance := 0.00
+		input.CreditBalance = &creditBalance
 	}
 	desiredEntry.CreditBalance = *input.CreditBalance
-	desiredEntry.TotalBalance.Sub(input.DebitBalance, input.CreditBalance)
+	desiredEntry.TotalBalance = desiredEntry.DebitBalance - desiredEntry.CreditBalance
 	desiredEntry.State = EntryStateCreated
 	desiredEntry.CreationDate = time.Now()
 	desiredEntry.LastUpdate = desiredEntry.CreationDate
@@ -224,7 +223,7 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	desiredEntry.Quarter = quarter
 	desiredEntry.DebitBalance = input.Entry.DebitBalance
 	desiredEntry.CreditBalance = input.Entry.CreditBalance
-	desiredEntry.TotalBalance.Sub(&input.Entry.DebitBalance, &input.Entry.CreditBalance)
+	desiredEntry.TotalBalance = desiredEntry.DebitBalance - desiredEntry.CreditBalance
 	desiredEntry.State = input.Entry.State
 	desiredEntry.CreationDate = storedEntry.Entry.CreationDate
 	desiredEntry.LastUpdate = time.Now()

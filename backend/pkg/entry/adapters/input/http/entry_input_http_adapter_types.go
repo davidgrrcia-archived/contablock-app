@@ -1,7 +1,6 @@
 package entryInputHttpAdapter
 
 import (
-	"math/big"
 	"time"
 )
 
@@ -13,9 +12,9 @@ type Entry struct {
 	Concept         *string   `json:"concept"`
 	Date            time.Time `json:"date"`
 	Quarter         int       `json:"quarter"`
-	DebitBalance    big.Int   `json:"debitBalance"`
-	CreditBalance   big.Int   `json:"creditBalance"`
-	TotalBalance    big.Int   `json:"totalBalance"`
+	DebitBalance    float64   `json:"debitBalance"`
+	CreditBalance   float64   `json:"creditBalance"`
+	TotalBalance    float64   `json:"totalBalance"`
 	State           string    `json:"state"`
 	StateReason     *string   `json:"stateReason"`
 	CreationDate    time.Time `json:"creationDate"`
@@ -29,8 +28,8 @@ type CreateEntryRequest struct {
 	Currency        string    `json:"currency"`
 	Concept         *string   `json:"concept"`
 	Date            time.Time `json:"date"`
-	DebitBalance    *big.Int  `json:"debitBalance"`
-	CreditBalance   *big.Int  `json:"creditBalance"`
+	DebitBalance    *float64  `json:"debitBalance"`
+	CreditBalance   *float64  `json:"creditBalance"`
 }
 
 type CreateEntryResponse struct {
@@ -66,8 +65,8 @@ type UpdateEntryRequest struct {
 	Currency      string    `json:"currency"`
 	Concept       *string   `json:"concept"`
 	Date          time.Time `json:"date"`
-	DebitBalance  *big.Int  `json:"debitBalance"`
-	CreditBalance *big.Int  `json:"creditBalance"`
+	DebitBalance  *float64  `json:"debitBalance"`
+	CreditBalance *float64  `json:"creditBalance"`
 }
 type UpdateEntryResponse struct {
 	Entry

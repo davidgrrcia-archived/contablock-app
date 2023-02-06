@@ -2,9 +2,12 @@ package outputhttp
 
 import (
 	"errors"
+	"fmt"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablockUseCase "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"math/big"
+	"strconv"
 )
 
 func NewDefaultContaBlockContract(options DefaultContaBlockContractOptions) (*DefaultContaBlockContract, error) {
@@ -35,9 +38,11 @@ var _ contablockUseCase.ContaBlockContractAdapter = (*DefaultContaBlockContract)
 
 func (adapter DefaultContaBlockContract) CreateEntry(input contablockUseCase.CreateEntryAdapterInput) error {
 	//input
+	debitBalance := transformFloat64ToBigInt(input.DebitBalance)
+	creditBalance := transformFloat64ToBigInt(input.CreditBalance)
 
 	//client
-	_, err := adapter.client.CreateEntry(adapter.auth, input.ID, input.AccountID, input.MultipleEntryID, input.Currency, input.Concept, input.Date, input.DebitBalance, input.CreditBalance)
+	_, err := adapter.client.CreateEntry(adapter.auth, input.ID, input.AccountID, input.MultipleEntryID, input.Currency, input.Concept, input.Date, debitBalance, creditBalance)
 	if err != nil {
 		return err
 	}
@@ -62,8 +67,16 @@ func (adapter DefaultContaBlockContract) GetEntryData(input contablockUseCase.Ge
 	output.Currency = entryData.Currency
 	output.Concept = entryData.Concept
 	output.Date = entryData.Date
-	output.DebitBalance = entryData.DebitBalance
-	output.CreditBalance = entryData.CreditBalance
+	debitBalance, err := transformBigIntToFloat64(entryData.DebitBalance)
+	if err != nil {
+		return nil, err
+	}
+	output.DebitBalance = debitBalance
+	creditBalance, err := transformBigIntToFloat64(entryData.CreditBalance)
+	if err != nil {
+		return nil, err
+	}
+	output.CreditBalance = creditBalance
 	output.State = entryData.State
 
 	//output
@@ -126,4 +139,32 @@ func (adapter DefaultContaBlockContract) RemoveEntry(input contablockUseCase.Rem
 
 	//output
 	return nil
+}
+
+func transformBigIntToFloat64(num *big.Int) (*float64, error) {
+	if num == nil {
+		return nil, nil
+	}
+
+	string := num.String()
+
+	float, err := strconv.ParseFloat(string, 64)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return nil, err
+	}
+
+	return &float, err
+}
+
+func transformFloat64ToBigInt(num *float64) *big.Int {
+	if num == nil {
+		zero := 0.00
+		num = &zero
+	}
+
+	bigFloat := big.NewFloat(*num)
+	bigInt, _ := bigFloat.Int(nil)
+
+	return bigInt
 }

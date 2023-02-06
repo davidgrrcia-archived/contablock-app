@@ -1,9 +1,5 @@
 package contablock
 
-import (
-	"math/big"
-)
-
 type ContaBlockContractAdapter interface {
 	CreateEntry(input CreateEntryAdapterInput) error
 	GetEntryData(input GetEntryDataAdapterInput) (*GetEntryDataAdapterOutput, error)
@@ -20,8 +16,8 @@ type CreateEntryAdapterInput struct {
 	Currency        string
 	Concept         string
 	Date            string
-	DebitBalance    *big.Int
-	CreditBalance   *big.Int
+	DebitBalance    *float64
+	CreditBalance   *float64
 }
 
 type GetEntryDataAdapterInput struct {
@@ -35,8 +31,8 @@ type GetEntryDataAdapterOutput struct {
 	Currency        string
 	Concept         string
 	Date            string
-	DebitBalance    *big.Int
-	CreditBalance   *big.Int
+	DebitBalance    *float64
+	CreditBalance   *float64
 	State           string
 }
 
