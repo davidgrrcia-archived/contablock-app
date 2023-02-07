@@ -7,6 +7,10 @@ provision:
 	cd backend && make provision
 	sleep 10
 	cd backend && make up-migrations
+	cd smart-contracts && make clean
+	cd smart-contracts && make compile
+	cd smart-contracts && make generate
+	cd backend && make gw-client-generator
 	cd smart-contracts && make start
 
 render-api-docs:

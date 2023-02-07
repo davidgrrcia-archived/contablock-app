@@ -251,7 +251,7 @@ func (graph *Graph) provideContablockClient() {
 		panic(err)
 	}
 
-	address := common.HexToAddress(os.Getenv("SC_CONTABLOCK_ADDRESS"))
+	address := common.HexToAddress(os.Getenv("SC_CONTABLOCK_CONTRACT_ADDRESS"))
 	instance, err := contablockClient.NewContablock(address, client)
 	if err != nil {
 		panic(err)
@@ -281,8 +281,8 @@ func (graph *Graph) provideContablockClient() {
 
 	auth := bind.NewKeyedTransactor(privateKey)
 	auth.Nonce = big.NewInt(int64(nonce))
-	auth.Value = big.NewInt(0)     // in wei
-	auth.GasLimit = uint64(300000) // in units
+	auth.Value = big.NewInt(0)       // in wei
+	auth.GasLimit = uint64(30000000) // in units
 	auth.GasPrice = gasPrice
 
 	graph.ContablockClient = *instance

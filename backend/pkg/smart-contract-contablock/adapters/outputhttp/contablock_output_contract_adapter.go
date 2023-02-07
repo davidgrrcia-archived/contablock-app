@@ -117,6 +117,7 @@ func (adapter DefaultContaBlockContract) ListAccountIds() (*contablockUseCase.Li
 
 func (adapter DefaultContaBlockContract) PublishEntry(input contablockUseCase.PublishEntryAdapterInput) error {
 	//input
+	adapter.auth.Nonce.Add(adapter.auth.Nonce, big.NewInt(0)) //todo review
 
 	//client
 	_, err := adapter.client.PublishEntry(adapter.auth, input.ID)

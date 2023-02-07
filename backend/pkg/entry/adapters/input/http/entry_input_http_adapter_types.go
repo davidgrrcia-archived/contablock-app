@@ -59,22 +59,6 @@ type ListEntryResponseWrapper struct {
 	ListEntryResponse ListEntryResponse
 }
 
-type UpdateEntryRequest struct {
-	ID            string    `json:"id"`
-	AccountID     string    `json:"accountId"`
-	Currency      string    `json:"currency"`
-	Concept       *string   `json:"concept"`
-	Date          time.Time `json:"date"`
-	DebitBalance  *float64  `json:"debitBalance"`
-	CreditBalance *float64  `json:"creditBalance"`
-}
-type UpdateEntryResponse struct {
-	Entry
-}
-type UpdateEntryResponseWrapper struct {
-	UpdateEntryResponse UpdateEntryResponse
-}
-
 type DeleteEntryRequest struct {
 	ID string `json:"id"`
 }
@@ -83,4 +67,14 @@ type DeleteEntryResponse struct {
 }
 type DeleteEntryResponseWrapper struct {
 	DeleteEntryResponse DeleteEntryResponse
+}
+
+type PublishEntryRequest struct {
+	ID string `json:"id"`
+}
+type PublishEntryResponse struct {
+	Entry
+}
+type PublishEntryResponseWrapper struct {
+	PublishEntryResponse PublishEntryResponse
 }
