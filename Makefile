@@ -20,6 +20,7 @@ validate-api-docs:
 	cd docs/openapi && spectral lint openapi.yaml
 
 start-backend:
+	cd smart-contracts && make deploy-local
 	cd backend && make start
 
 start-frontend:

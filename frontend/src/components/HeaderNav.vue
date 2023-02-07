@@ -13,7 +13,7 @@ function showCreateEntryModal() {
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
+    <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="300" height="50" />
 
     <nav>
       <RouterLink
@@ -25,7 +25,7 @@ function showCreateEntryModal() {
       >
     </nav>
 
-    <button class="btn" type="button" @click="showCreateEntryModal()">New Entry</button>
+    <button class="btn" type="button" @click="showCreateEntryModal()">Nuevo asiento</button>
   </header>
   <CreateEntryModal></CreateEntryModal>
 </template>
@@ -82,8 +82,8 @@ nav {
   display: inline-block;
   font-size: 18px;
   border-radius: 5px;
-  background-color: var(--yellow);
-  color: #222222;
+  background-color: var(--blue);
+  color: var(--white);
   margin-right: 50px;
   white-space: nowrap;
 }
