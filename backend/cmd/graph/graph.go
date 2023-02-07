@@ -2,6 +2,7 @@ package graph
 
 import (
 	"database/sql"
+	"math/big"
 
 	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
@@ -23,6 +24,7 @@ type Graph struct {
 	//contablock
 	ContablockClient contablockClient.Contablock
 	ContablockAuth   bind.TransactOpts
+	ContablockNonce  big.Int
 	contablock.ContaBlockContractAdapter
 	contablock.ContaBlockUseCase
 

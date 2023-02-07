@@ -290,13 +290,14 @@ func (graph *Graph) provideContablockClient() {
 
 	graph.ContablockClient = *instance
 	graph.ContablockAuth = *auth
-
+	graph.ContablockNonce = *auth.Nonce.Sub(auth.Nonce, big.NewInt(1))
 }
 
 func (graph *Graph) provideContablockContractAdapter() contablock.ContaBlockContractAdapter {
 	contaBlockContractAdapterOpts := contablockOutputHttpAdapter.DefaultContaBlockContractOptions{
 		Client: graph.GetContablockClient(),
 		Auth:   graph.GetContablockAuth(),
+		Nonce:  graph.GetContablockNonce(),
 	}
 	contaBlockContractAdapter, err := contablockOutputHttpAdapter.NewDefaultContaBlockContract(contaBlockContractAdapterOpts)
 	if err != nil {

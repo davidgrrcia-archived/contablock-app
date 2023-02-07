@@ -9,7 +9,6 @@ interface EntriesState {
   entriesCreation: Entry[];
   multipleEntryId: string;
   totalBalance: number;
-  storedEntries: Entry[];
   stateMessage: string | null;
   differentEntry: boolean;
 }
@@ -18,7 +17,6 @@ const state: EntriesState = {
   entriesCreation: [],
   multipleEntryId: '',
   totalBalance: 0,
-  storedEntries: [],
   stateMessage: null,
   differentEntry: false,
 };
@@ -54,21 +52,6 @@ export const useEntriesStore = defineStore('entries', {
         this.clearEntries();
       } catch (err) {
         this.state.stateMessage = 'error creating entries';
-        const messagesStore = useMessagesStore();
-        messagesStore.addErrorMessage(this.state.stateMessage);
-      }
-    },
-    async loadEntries() {
-      try {
-        this.state.storedEntries = [];
-        this.state.stateMessage = 'loading entries';
-
-        const entries = await entriesUseCase.listEntries();
-
-        this.state.storedEntries = entries;
-        this.state.stateMessage = 'entries loaded';
-      } catch (err) {
-        this.state.stateMessage = 'error loading entries';
         const messagesStore = useMessagesStore();
         messagesStore.addErrorMessage(this.state.stateMessage);
       }

@@ -54,6 +54,6 @@ function createEntries() {
   background-color: var(--red) !important;
 }
 .btn-create {
-  background-color: var(--yellow) !important;
+  background-color: var(--blue) !important;
 }
 </style>

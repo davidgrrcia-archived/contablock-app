@@ -1,16 +1,10 @@
-import type { EntryListResponse, EntryDescribeResponse, EntryCreateBody } from '@/features/entries/infra/http/models';
+import type { EntryDescribeResponse, EntryCreateBody } from '@/features/entries/infra/http/models';
 
 export interface EntriesHttpInfra {
-  listEntries(): Promise<EntryListResponse>;
   createEntry(entry: EntryCreateBody): Promise<EntryDescribeResponse>;
 }
 
 export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
-  listEntries() {
-    return fetch('/api/entries?expand=true')
-      .then(response => response.json())
-      .then(response => response as EntryListResponse);
-  }
   createEntry(entry: EntryCreateBody): Promise<EntryDescribeResponse> {
     return fetch('/api/entries', {
       method: 'POST',

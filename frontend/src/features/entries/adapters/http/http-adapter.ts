@@ -6,20 +6,6 @@ import type { EntryCreateBody as EntryInfra } from '@/features/entries/infra/htt
 export class DefaultEntriesHttpAdapter implements EntriesAdapter {
   constructor(private readonly entriesHttpInfra: DefaultEntriesHttpInfra) {}
 
-  async listEntriesHttpResponse() {
-    const entryHttpResponse = await this.entriesHttpInfra.listEntries();
-
-    return entryHttpResponse.items.map(item => ({
-      accountId: item.entry.accountId,
-      multipleEntryId: item.entry.multipleEntryId,
-      currency: item.entry.currency,
-      concept: item.entry.concept,
-      date: item.entry.date,
-      debitAmount: item.entry.debitBalance,
-      creditAmount: item.entry.creditBalance,
-    }));
-  }
-
   async createEntryHttpResponse(entry: EntryUseCase) {
     const input: EntryInfra = {
       accountId: entry.accountId,

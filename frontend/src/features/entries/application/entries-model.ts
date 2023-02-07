@@ -1,5 +1,4 @@
 export interface EntriesAdapter {
-  listEntriesHttpResponse(): Promise<Entry[]>;
   createEntryHttpResponse(entry: Entry): Promise<Entry>;
 }
 

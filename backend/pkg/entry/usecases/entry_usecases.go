@@ -66,7 +66,9 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	createEntryInput.AccountID = input.AccountID
 	createEntryInput.MultipleEntryID = input.MultipleEntryID
 	createEntryInput.Currency = input.Currency
-	createEntryInput.Concept = *input.Concept
+	if input.Concept != nil {
+		createEntryInput.Concept = *input.Concept
+	}
 	createEntryInput.Date = input.Date.String()
 	createEntryInput.DebitBalance = input.DebitBalance
 	createEntryInput.CreditBalance = input.CreditBalance

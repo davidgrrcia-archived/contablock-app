@@ -17,22 +17,32 @@ func NewDefaultContaBlockContract(options DefaultContaBlockContractOptions) (*De
 	if options.Auth == nil {
 		return nil, errors.New("cannot create an instance of ContaBlockContract with a nil auth")
 	}
+	if options.Nonce == nil {
+		return nil, errors.New("cannot create an instance of ContaBlockContract with a nil nonce")
+	}
+
+	nonce = options.Nonce
 
 	return &DefaultContaBlockContract{
 		client: options.Client,
 		auth:   options.Auth,
+		nonce:  options.Nonce,
 	}, nil
 }
 
 type DefaultContaBlockContract struct {
 	client *contablockClient.Contablock
 	auth   *bind.TransactOpts
+	nonce  *big.Int
 }
 
 type DefaultContaBlockContractOptions struct {
 	Client *contablockClient.Contablock
 	Auth   *bind.TransactOpts
+	Nonce  *big.Int
 }
+
+var nonce *big.Int
 
 var _ contablockUseCase.ContaBlockContractAdapter = (*DefaultContaBlockContract)(nil)
 
@@ -40,7 +50,7 @@ func (adapter DefaultContaBlockContract) CreateEntry(input contablockUseCase.Cre
 	//input
 	debitBalance := transformFloat64ToBigInt(input.DebitBalance)
 	creditBalance := transformFloat64ToBigInt(input.CreditBalance)
-	adapter.auth.Nonce.Add(adapter.auth.Nonce, big.NewInt(0)) //todo review
+	adapter.auth.Nonce = nonce.Add(nonce, big.NewInt(1))
 
 	//client
 	_, err := adapter.client.CreateEntry(adapter.auth, input.ID, input.AccountID, input.MultipleEntryID, input.Currency, input.Concept, input.Date, debitBalance, creditBalance)
@@ -118,7 +128,7 @@ func (adapter DefaultContaBlockContract) ListAccountIds() (*contablockUseCase.Li
 
 func (adapter DefaultContaBlockContract) PublishEntry(input contablockUseCase.PublishEntryAdapterInput) error {
 	//input
-	adapter.auth.Nonce.Add(adapter.auth.Nonce, big.NewInt(0)) //todo review
+	adapter.auth.Nonce = nonce.Add(nonce, big.NewInt(1))
 
 	//client
 	_, err := adapter.client.PublishEntry(adapter.auth, input.ID)
@@ -132,6 +142,7 @@ func (adapter DefaultContaBlockContract) PublishEntry(input contablockUseCase.Pu
 
 func (adapter DefaultContaBlockContract) RemoveEntry(input contablockUseCase.RemoveEntryAdapterInput) error {
 	//input
+	adapter.auth.Nonce = nonce.Add(nonce, big.NewInt(1))
 
 	//client
 	_, err := adapter.client.RemoveEntry(adapter.auth, input.ID)

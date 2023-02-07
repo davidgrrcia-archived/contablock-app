@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useEntriesStore } from '@/stores/entries';
+import { useDailyLedgerStore } from '@/stores/dailyLedger';
 
-const entriesStore = useEntriesStore();
-await entriesStore.loadEntries();
+const dailyLedgerStore = useDailyLedgerStore();
+await dailyLedgerStore.loadDailyLedger();
 
 const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
   arr.reduce((groups, item) => {
@@ -10,7 +10,7 @@ const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
     return groups;
   }, {} as Record<K, T[]>);
 
-const results = groupBy(entriesStore.state.storedEntries, i => i.multipleEntryId);
+const results = groupBy(dailyLedgerStore.state.storedDailyLedger, i => i.id);
 </script>
 
 <template>

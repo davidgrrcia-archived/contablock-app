@@ -1,4 +1,3 @@
-import type { Account } from '@/features/accounts/infra/http/models';
 
 export interface Entry {
   accountId: string;
@@ -24,13 +23,6 @@ export interface EntryCreateBody {
   date: string;
   debitBalance: number | null;
   creditBalance: number | null;
-}
-
-export interface EntryListResponse {
-  items: {
-    entry: Entry;
-    account: Account | null;
-  }[];
 }
 
 export interface EntryDescribeResponse {

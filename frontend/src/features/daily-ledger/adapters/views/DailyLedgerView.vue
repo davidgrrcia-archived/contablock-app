@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useConfigStore } from '@/stores/config';
-import EntriesTable from '@/components/EntriesTable.vue';
+import DailyLedgerTable from '@/components/DailyLedgerTable.vue';
 
 const configStore = useConfigStore();
 configStore.activateCurrent('/');
@@ -8,6 +8,6 @@ configStore.activateCurrent('/');
 
 <template>
   <main>
-    <suspense><EntriesTable></EntriesTable></suspense>
+    <suspense><DailyLedgerTable></DailyLedgerTable></suspense>
   </main>
 </template>

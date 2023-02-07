@@ -2,6 +2,7 @@ package graph
 
 import (
 	"database/sql"
+	"math/big"
 
 	inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
@@ -32,6 +33,10 @@ func (graph *Graph) GetContablockClient() *contablockClient.Contablock {
 
 func (graph *Graph) GetContablockAuth() *bind.TransactOpts {
 	return &graph.ContablockAuth
+}
+
+func (graph *Graph) GetContablockNonce() *big.Int {
+	return &graph.ContablockNonce
 }
 
 func (graph *Graph) GetContablockAdapter() contablock.ContaBlockContractAdapter {

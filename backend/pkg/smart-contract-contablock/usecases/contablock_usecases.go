@@ -2,6 +2,7 @@ package contablock
 
 import (
 	"errors"
+	"sync"
 )
 
 type ContaBlockUseCase interface {
@@ -31,6 +32,8 @@ type DefaultContaBlockUseCaseOptions struct {
 	ContaBlockContractAdapter ContaBlockContractAdapter
 }
 
+var mutex sync.Mutex
+
 var _ ContaBlockUseCase = (*DefaultContaBlockUseCase)(nil)
 
 func (useCase DefaultContaBlockUseCase) CreateEntry(input CreateEntryInput) error {
@@ -44,10 +47,12 @@ func (useCase DefaultContaBlockUseCase) CreateEntry(input CreateEntryInput) erro
 	createEntryAdapterInput.DebitBalance = input.DebitBalance
 	createEntryAdapterInput.CreditBalance = input.CreditBalance
 
+	mutex.Lock()
 	err := useCase.contaBlockContractAdapter.CreateEntry(createEntryAdapterInput)
 	if err != nil {
 		return err
 	}
+	mutex.Unlock()
 
 	return nil
 }
@@ -101,10 +106,13 @@ func (useCase DefaultContaBlockUseCase) ListAccountIds() (*ListAccountIdsOutput,
 func (useCase DefaultContaBlockUseCase) PublishEntry(input PublishEntryInput) error {
 	var publishEntryAdapterInput PublishEntryAdapterInput
 	publishEntryAdapterInput.ID = input.ID
+
+	mutex.Lock()
 	err := useCase.contaBlockContractAdapter.PublishEntry(publishEntryAdapterInput)
 	if err != nil {
 		return err
 	}
+	mutex.Unlock()
 
 	return nil
 }
@@ -112,10 +120,13 @@ func (useCase DefaultContaBlockUseCase) PublishEntry(input PublishEntryInput) er
 func (useCase DefaultContaBlockUseCase) RemoveEntry(input RemoveEntryInput) error {
 	var removeEntryAdapterInput RemoveEntryAdapterInput
 	removeEntryAdapterInput.ID = input.ID
+
+	mutex.Lock()
 	err := useCase.contaBlockContractAdapter.RemoveEntry(removeEntryAdapterInput)
 	if err != nil {
 		return err
 	}
+	mutex.Unlock()
 
 	return nil
 }
