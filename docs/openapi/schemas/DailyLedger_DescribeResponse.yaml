@@ -2,32 +2,27 @@ type: object
 title: Entry
 description: Entry details
 required:
-  - record
+  - id
+  - entriesExpanded
 properties:
-  record:
-    type: object
-    required:
-      - id
-      - entriesExpanded
-    properties:
-      id:
-        type: string
-        description: The id of the record
-        minLength: 1
-        maxLength: 64
-      entriesExpanded:
-        description: Entries given an accounting record
-        type: array
-        items:
-          type: object
-          required:
-            - entry
-            - account
-          properties:
-            entry:
-              $ref: "../schemas/Entries_DescribeResponse.yaml"
-            account:
-              $ref: "../schemas/Accounts_DescribeResponse.yaml"
+  id:
+    type: string
+    description: The id of the record
+    minLength: 1
+    maxLength: 64
+  entriesExpanded:
+    description: Entries given an accounting record
+    type: array
+    items:
+      type: object
+      required:
+        - entry
+        - account
+      properties:
+        entry:
+          $ref: "../schemas/Entries_DescribeResponse.yaml"
+        account:
+          $ref: "../schemas/Accounts_DescribeResponse.yaml"
 
 
 
