@@ -212,6 +212,7 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	var desiredEntry EntryStorageData
 	desiredEntry.ID = input.Entry.ID
 	desiredEntry.AccountID = input.Entry.AccountID
+	desiredEntry.MultipleEntryID = input.Entry.MultipleEntryID
 	desiredEntry.Currency = input.Entry.Currency
 	if input.Entry.Concept == nil {
 		desiredEntry.Concept = storedEntry.Entry.Concept

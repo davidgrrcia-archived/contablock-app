@@ -4,11 +4,6 @@ import (
 	"context"
 	"crypto/ecdsa"
 	"database/sql"
-	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
 	"math/big"
 	"os"
@@ -21,13 +16,21 @@ import (
 	businessOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/output/database"
 	businessInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/infra/input"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+	inputDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
+	dailyLedgerInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/infra/input"
+	dailyledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/usecases"
 	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 	entryOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/output/database"
 	entryInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/infra/input"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	contablockOutputHttpAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/adapters/outputhttp"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
+	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	contablockUseCase "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/ethclient"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 )
@@ -315,4 +318,44 @@ func (graph *Graph) provideContablockUseCase() {
 	}
 
 	graph.ContaBlockUseCase = contablockUseCase
+}
+
+/////// DAILY LEDGER ///////
+
+func (graph *Graph) provideDailyLedgerUseCase() {
+	dailyledgerUseCaseOpts := dailyledger.DefaultDailyLedgerUseCaseOptions{
+		EntryUseCase:      graph.GetEntryUseCase(),
+		AccountUseCase:    graph.GetAccountUseCase(),
+		ContaBlockUseCase: graph.GetContaBlockUseCase(),
+	}
+	dailyledgerUseCase, err := dailyledger.NewDefaultDailyLedgerUseCase(dailyledgerUseCaseOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.DailyLedgerUseCase = dailyledgerUseCase
+}
+
+func (graph *Graph) provideDailyLedgerInputAdapter() *inputDailyLedger.DefaultHttpInputAdapter {
+	dailyledgerInputAdapterOpts := inputDailyLedger.DefaultHttpInputAdapterOptions{
+		DailyLedgerUseCase: graph.GetDailyLedgerUseCase(),
+	}
+	dailyledgerInputAdapter, err := inputDailyLedger.NewDefaultHttpInputAdapter(dailyledgerInputAdapterOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.DailyLedgerInputAdapter = dailyledgerInputAdapter
+
+	return dailyledgerInputAdapter
+}
+
+func (graph *Graph) provideDailyLedgerEndpoints() {
+	var options dailyLedgerInputInfra.DefaultDailyLedgerHttpHandlerOptions
+	options.Adapter = graph.GetDailyLedgerInputAdapter()
+	handler, err := dailyLedgerInputInfra.NewDefaultDailyLedgerHttpHandler(options)
+	if err != nil {
+		log.Fatal(err)
+	}
+	handler.RegisterDailyLedgerRoutes(graph.GetRouter())
 }

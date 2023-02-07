@@ -40,6 +40,7 @@ func (adapter DefaultContaBlockContract) CreateEntry(input contablockUseCase.Cre
 	//input
 	debitBalance := transformFloat64ToBigInt(input.DebitBalance)
 	creditBalance := transformFloat64ToBigInt(input.CreditBalance)
+	adapter.auth.Nonce.Add(adapter.auth.Nonce, big.NewInt(0)) //todo review
 
 	//client
 	_, err := adapter.client.CreateEntry(adapter.auth, input.ID, input.AccountID, input.MultipleEntryID, input.Currency, input.Concept, input.Date, debitBalance, creditBalance)

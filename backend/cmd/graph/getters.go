@@ -2,16 +2,18 @@ package graph
 
 import (
 	"database/sql"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 
 	inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 	inputAdapterBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+	inputAdapterDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
+	dailyledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/usecases"
 	inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/gorilla/mux"
 )
 
@@ -110,4 +112,17 @@ func (graph *Graph) GetBusinessUseCase() business.BusinessUseCase {
 		panic("graph BusinessUseCase case is nil")
 	}
 	return graph.BusinessUseCase
+}
+
+/////// DAILY LEDGER ///////
+
+func (graph *Graph) GetDailyLedgerInputAdapter() inputAdapterDailyLedger.DailyLedgerInputAdapter {
+	return graph.DailyLedgerInputAdapter
+}
+
+func (graph *Graph) GetDailyLedgerUseCase() dailyledger.DailyLedgerUseCase {
+	if graph.DailyLedgerUseCase == nil {
+		panic("graph DailyLedgerUseCase case is nil")
+	}
+	return graph.DailyLedgerUseCase
 }
