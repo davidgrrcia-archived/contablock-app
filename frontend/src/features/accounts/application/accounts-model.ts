@@ -8,4 +8,5 @@ export interface Account {
   level: string;
   name: string;
   type: string;
+  displayName: string;
 }

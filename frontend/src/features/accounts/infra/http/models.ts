@@ -4,6 +4,7 @@ export interface Account {
   name: string;
 
   type: string;
+  displayName: string;
 }
 
 export interface AccountListResponse {
@@ -16,4 +17,5 @@ export interface AccountDescribeResponse {
   name: string;
 
   type: string;
+  displayName: string
 }

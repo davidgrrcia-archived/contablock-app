@@ -4,13 +4,7 @@ import { useDailyLedgerStore } from '@/stores/dailyLedger';
 const dailyLedgerStore = useDailyLedgerStore();
 await dailyLedgerStore.loadDailyLedger();
 
-const groupBy = <T, K extends keyof any>(arr: T[], key: (i: T) => K) =>
-  arr.reduce((groups, item) => {
-    (groups[key(item)] ||= []).push(item);
-    return groups;
-  }, {} as Record<K, T[]>);
-
-const results = groupBy(dailyLedgerStore.state.storedDailyLedger, i => i.id);
+const dailyLedger = dailyLedgerStore.state.storedDailyLedger
 </script>
 
 <template>
@@ -20,24 +14,26 @@ const results = groupBy(dailyLedgerStore.state.storedDailyLedger, i => i.id);
         <th>Cuenta</th>
         <th>Divisa</th>
         <th>Fecha</th>
+        <th>Trimestre</th>
         <th>Concepto</th>
         <th>Debe</th>
         <th>Haber</th>
       </tr>
     </thead>
     <tbody>
-      <template v-for="(item, index) in results" :key="index">
+      <template v-for="(item, index) in dailyLedger" :key="index">
         <tr class="divider">
           <td colspan="6">Asiento {{ index }}</td>
         </tr>
-        <template v-for="(entry, j) in results[index]" :key="j">
+        <template v-for="(entryExpanded, j) in dailyLedger[index].entriesExpanded" :key="j">
           <tr>
-            <td>{{ entry.accountId }}</td>
-            <td>{{ entry.currency }}</td>
-            <td>{{ entry.date }}</td>
-            <td>{{ entry.concept }}</td>
-            <td>{{ entry.debitAmount }}</td>
-            <td>{{ entry.creditAmount }}</td>
+            <td>{{ entryExpanded.account.displayName}}</td>
+            <td>{{ entryExpanded.entry.currency }}</td>
+            <td>{{ entryExpanded.entry.displayDate }}</td>
+            <td>{{ entryExpanded.entry.displayDate }}</td>
+            <td>{{ entryExpanded.entry.concept }}</td>
+            <td>{{ entryExpanded.entry.debitAmount }}</td>
+            <td>{{ entryExpanded.entry.creditAmount }}</td>
           </tr>
         </template>
       </template>

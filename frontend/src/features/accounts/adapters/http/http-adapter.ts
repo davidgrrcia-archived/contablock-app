@@ -12,6 +12,7 @@ export class DefaultAccountsHttpAdapter implements AccountsAdapter {
       name: item.name,
       level: item.level,
       type: item.type,
+      displayName: item.displayName
     }));
   }
 
@@ -23,6 +24,7 @@ export class DefaultAccountsHttpAdapter implements AccountsAdapter {
       name: input.name,
       level: input.level,
       type: input.type,
+      displayName: input.displayName
     };
 
     return output;
