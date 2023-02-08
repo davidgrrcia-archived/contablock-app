@@ -3,6 +3,7 @@ package account
 import (
 	"context"
 	"errors"
+	"strconv"
 
 	"github.com/asaskevich/govalidator"
 )
@@ -64,19 +65,61 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 		return nil, err
 	}
 
-	var items []Account
-	for _, item := range storedAccounts.Items {
-		var account Account
-		account.ID = item.ID
-		account.Name = item.Name
-		account.Level = item.Level
-		account.Type = item.Type
-		account.DisplayName = item.ID + " - " + item.Name
+	var groups []Group
+	var accounts []Account
 
-		items = append(items, account)
+	for _, item := range storedAccounts.Items {
+		if item.Level == LevelGroup {
+			var group Group
+			group.ID = item.ID
+			group.Name = item.Name
+			group.Level = item.Level
+			group.Type = item.Type
+			group.DisplayName = item.ID + " - " + item.Name
+			groups = append(groups, group)
+		}
+		if item.Level == LevelSubGroup {
+			var subgroup Subgroup
+			subgroup.ID = item.ID
+			subgroup.Name = item.Name
+			subgroup.Level = item.Level
+			subgroup.Type = item.Type
+			subgroup.DisplayName = item.ID + " - " + item.Name
+			indexString := subgroup.ID[0:1]
+			index, err := strconv.Atoi(indexString)
+			if err != nil {
+				return nil, err
+			}
+			groups[index-1].Subgroups = append(groups[index-1].Subgroups, subgroup)
+		}
+		if item.Level == LevelAccount || item.Level == LevelSubAccount {
+			var account Account
+			account.ID = item.ID
+			account.Name = item.Name
+			account.Level = item.Level
+			account.Type = item.Type
+			account.DisplayName = item.ID + " - " + item.Name
+			accounts = append(accounts, account)
+		}
+	}
+
+	for _, account := range accounts {
+		for i, group := range groups {
+			if group.ID != account.ID[0:1] {
+				continue
+			}
+
+			for j, subgroup := range group.Subgroups {
+				if subgroup.ID != account.ID[0:2] {
+					continue
+				}
+
+				groups[i].Subgroups[j].Accounts = append(groups[i].Subgroups[j].Accounts, account)
+			}
+		}
 	}
 
 	return &ListAccountOutput{
-		Items: items,
+		Items: groups,
 	}, err
 }

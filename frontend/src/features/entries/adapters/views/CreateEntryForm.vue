@@ -88,9 +88,52 @@ const currencies = ref([
     code: 'USD',
   },
 ]);
+
+const selectedGroupedCity = ref();
+
+const groupedCities = ref([
+  {
+    label: 'Germany', code: 'DE',
+    items: [
+      {label: 'Berlin', value: 'Berlin'},
+      {label: 'Frankfurt', value: 'Frankfurt'},
+      {label: 'Hamburg', value: 'Hamburg'},
+      {label: 'Munich', value: 'Munich'}
+    ]
+  },
+  {
+    label: 'USA', code: 'US',
+    items: [
+      {label: 'Chicago', value: 'Chicago'},
+      {label: 'Los Angeles', value: 'Los Angeles'},
+      {label: 'New York', value: 'New York'},
+      {label: 'San Francisco', value: 'San Francisco'}
+    ]
+  },
+  {
+    label: 'Japan', code: 'JP',
+    items: [
+      {label: 'Kyoto', value: 'Kyoto'},
+      {label: 'Osaka', value: 'Osaka'},
+      {label: 'Tokyo', value: 'Tokyo'},
+      {label: 'Yokohama', value: 'Yokohama'}
+    ]
+  }
+]);
 </script>
 
 <template>
+
+  <h5>Grouped</h5>
+  <DropdownPrimeVue v-model="selectedGroupedCity" :options="groupedCities" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items">
+    <template #optiongroup="slotProps">
+      <div class="flex align-items-center country-item">
+        <img src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="18" />
+        <div>{{slotProps.option.label}}</div>
+      </div>
+    </template>
+  </DropdownPrimeVue>
+
   <div class="form-header">
     <DropdownPrimeVue
       v-model="currency"

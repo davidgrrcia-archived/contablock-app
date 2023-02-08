@@ -63,15 +63,35 @@ func (adapter *DefaultHttpInputAdapter) AdaptListAccounts(ctx context.Context, d
 	}
 
 	var response ListAccountResponse
-	response.Items = make([]DescribeAccountResponse, 0)
+	response.Items = make([]Group, 0)
 
 	for _, item := range outputData.Items {
-		var responseItem DescribeAccountResponse
+		var responseItem Group
 		responseItem.ID = item.ID
 		responseItem.Name = item.Name
 		responseItem.Level = item.Level
 		responseItem.Type = item.Type
 		responseItem.DisplayName = item.DisplayName
+
+		for i, subgroup := range item.Subgroups {
+			var subgroupItem Subgroup
+			subgroupItem.ID = subgroup.ID
+			subgroupItem.Name = subgroup.Name
+			subgroupItem.Level = subgroup.Level
+			subgroupItem.Type = subgroup.Type
+			subgroupItem.DisplayName = subgroup.DisplayName
+			responseItem.Subgroups = append(responseItem.Subgroups, subgroupItem)
+			for _, account := range subgroup.Accounts {
+				var accountItem Account
+				accountItem.ID = account.ID
+				accountItem.Name = account.Name
+				accountItem.Level = account.Level
+				accountItem.Type = account.Type
+				accountItem.DisplayName = account.DisplayName
+				responseItem.Subgroups[i].Accounts = append(responseItem.Subgroups[i].Accounts, accountItem)
+			}
+		}
+
 		response.Items = append(response.Items, responseItem)
 	}
 

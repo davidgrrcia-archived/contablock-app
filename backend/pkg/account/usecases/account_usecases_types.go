@@ -4,12 +4,37 @@ import (
 	"context"
 )
 
+const (
+	LevelGroup      = "Grupo"
+	LevelSubGroup   = "Subgrupo"
+	LevelAccount    = "Cuenta"
+	LevelSubAccount = "Subcuenta"
+)
+
 type Account struct {
 	ID          string
 	Name        string
 	Level       string
 	Type        *string
 	DisplayName string
+}
+
+type Subgroup struct {
+	ID          string
+	Name        string
+	Level       string
+	Type        *string
+	DisplayName string
+	Accounts    []Account
+}
+
+type Group struct {
+	ID          string
+	Name        string
+	Level       string
+	Type        *string
+	DisplayName string
+	Subgroups   []Subgroup
 }
 
 type DescribeAccountInput struct {
@@ -23,7 +48,7 @@ type DescribeAccountOutput struct {
 type ListAccountInput struct{}
 
 type ListAccountOutput struct {
-	Items []Account
+	Items []Group
 }
 
 type AccountStorage interface {
