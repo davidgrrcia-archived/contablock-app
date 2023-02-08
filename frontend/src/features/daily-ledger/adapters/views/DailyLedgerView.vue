@@ -8,6 +8,7 @@ configStore.activateCurrent('/');
 
 <template>
   <main>
+    <h1>Libro Diario</h1>
     <suspense><DailyLedgerTable></DailyLedgerTable></suspense>
   </main>
 </template>

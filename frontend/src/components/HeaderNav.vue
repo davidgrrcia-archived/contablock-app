@@ -70,8 +70,11 @@ nav {
 }
 
 .current {
-  background-color: var(--white);
-  color: #222222;
+  color: var(--white);
+  text-decoration:underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+  display:inline-block;
 }
 
 .btn {
