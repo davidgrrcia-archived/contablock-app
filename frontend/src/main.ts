@@ -22,6 +22,7 @@ import InputNumber from 'primevue/inputnumber';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Message from 'primevue/message';
+import TreeSelect from "primevue/treeselect";
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -42,5 +43,6 @@ app.component('InputNumberPrimeVue', InputNumber);
 app.component('DataTablePrimeVue', DataTable);
 app.component('ColumnPrimeVue', Column);
 app.component('MessagePrimeVue', Message);
+app.component('TreeSelectPrimeVue',TreeSelect)
 
 app.mount('#app');

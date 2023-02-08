@@ -1,5 +1,5 @@
 export interface AccountsAdapter {
-  listAccountsHttpResponse(): Promise<Account[]>;
+  listAccountsHttpResponse(): Promise<Node[]>;
   describeAccountHttpResponse(id: string): Promise<Account>;
 }
 
@@ -9,4 +9,12 @@ export interface Account {
   name: string;
   type: string;
   displayName: string;
+}
+
+export interface Node {
+  key: string;
+  label: string;
+  data?: string;
+  icon?: string;
+  children?: Node[];
 }

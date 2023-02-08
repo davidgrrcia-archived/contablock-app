@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
 import { accountsUseCase } from '@/features/accounts';
-import type { Account } from '@/features/accounts/application/accounts-model';
+import type { Node } from '@/features/accounts/application/accounts-model';
 import { useMessagesStore } from '@/stores/messages';
 
 //TODO: apply clean architecture
 interface AccountsState {
-  accounts: Account[];
+  accounts: Node[];
   stateMessage: string | null;
 }
 

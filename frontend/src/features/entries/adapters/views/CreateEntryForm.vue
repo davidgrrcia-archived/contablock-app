@@ -12,12 +12,6 @@ const errorStore = useMessagesStore();
 const accountsStore = useAccountsStore();
 await accountsStore.loadAccounts();
 
-//constants
-const accounts = accountsStore.state.accounts.map(account => ({
-  ...account,
-  displayName: account.id + ' - ' + account.name,
-}));
-
 const currency = ref('EUR');
 const currentDate = new Date();
 const date = ref(currentDate);
@@ -28,6 +22,7 @@ const id = uuid();
 const multipleEntryId = uuid();
 const debitAccount = ref();
 const creditAccount = ref();
+const accounts = accountsStore.state.accounts
 
 if (entriesStore.state.multipleEntryId === '') {
   entriesStore.state.multipleEntryId = multipleEntryId;
@@ -39,9 +34,12 @@ function addDebitEntry() {
     return;
   }
 
+  const match = JSON.stringify(debitAccount.value).match(/"(\d+)"/);
+  const accountId = match ? match[1] : "";
+
   const newEntry: Entry = {
     id: id,
-    accountId: debitAccount.value,
+    accountId: accountId,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: currency.value,
     date: date.value.toISOString(),
@@ -61,9 +59,12 @@ function addCreditEntry() {
     return;
   }
 
+  const match = JSON.stringify(debitAccount.value).match(/"(\d+)"/);
+  const accountId = match ? match[1] : "";
+
   const newEntry: Entry = {
     id: id,
-    accountId: creditAccount.value,
+    accountId: accountId,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: currency.value,
     date: date.value.toISOString(),
@@ -88,51 +89,10 @@ const currencies = ref([
     code: 'USD',
   },
 ]);
-
-const selectedGroupedCity = ref();
-
-const groupedCities = ref([
-  {
-    label: 'Germany', code: 'DE',
-    items: [
-      {label: 'Berlin', value: 'Berlin'},
-      {label: 'Frankfurt', value: 'Frankfurt'},
-      {label: 'Hamburg', value: 'Hamburg'},
-      {label: 'Munich', value: 'Munich'}
-    ]
-  },
-  {
-    label: 'USA', code: 'US',
-    items: [
-      {label: 'Chicago', value: 'Chicago'},
-      {label: 'Los Angeles', value: 'Los Angeles'},
-      {label: 'New York', value: 'New York'},
-      {label: 'San Francisco', value: 'San Francisco'}
-    ]
-  },
-  {
-    label: 'Japan', code: 'JP',
-    items: [
-      {label: 'Kyoto', value: 'Kyoto'},
-      {label: 'Osaka', value: 'Osaka'},
-      {label: 'Tokyo', value: 'Tokyo'},
-      {label: 'Yokohama', value: 'Yokohama'}
-    ]
-  }
-]);
 </script>
 
 <template>
 
-  <h5>Grouped</h5>
-  <DropdownPrimeVue v-model="selectedGroupedCity" :options="groupedCities" optionLabel="label" optionGroupLabel="label" optionGroupChildren="items">
-    <template #optiongroup="slotProps">
-      <div class="flex align-items-center country-item">
-        <img src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png" width="18" />
-        <div>{{slotProps.option.label}}</div>
-      </div>
-    </template>
-  </DropdownPrimeVue>
 
   <div class="form-header">
     <DropdownPrimeVue
@@ -154,14 +114,7 @@ const groupedCities = ref([
   <div class="form-body">
     <div>
       <h4>Debe</h4>
-      <DropdownPrimeVue
-        v-model="debitAccount"
-        :options="accounts"
-        optionLabel="displayName"
-        optionValue="id"
-        :virtualScrollerOptions="{ itemSize: 38 }"
-        placeholder="Selecciona una cuenta"
-      />
+      <TreeSelectPrimeVue v-model="debitAccount" :options="accounts" placeholder="Select Item"></TreeSelectPrimeVue>
       <InputNumberPrimeVue v-model="debitAmount" mode="currency" :currency="currency" locale="es-ES" />
       <ButtonPrimeVue icon="fa-solid fa-plus" @click="addDebitEntry" />
     </div>
@@ -170,14 +123,7 @@ const groupedCities = ref([
     </div>
     <div>
       <h4>Haber</h4>
-      <DropdownPrimeVue
-        v-model="creditAccount"
-        :options="accounts"
-        optionLabel="displayName"
-        optionValue="id"
-        :virtualScrollerOptions="{ itemSize: 38 }"
-        placeholder="Selecciona una cuenta"
-      />
+      <TreeSelectPrimeVue v-model="creditAccount" :options="accounts" placeholder="Select Item"></TreeSelectPrimeVue>
       <InputNumberPrimeVue v-model="creditAmount" mode="currency" :currency="currency" locale="es-ES" />
       <ButtonPrimeVue icon="fa-solid fa-plus" @click="addCreditEntry" />
     </div>
@@ -200,5 +146,14 @@ const groupedCities = ref([
 .form-body {
   display: flex;
   margin-top: 20px;
+}
+.p-treeselect {
+  width:20rem;
+}
+
+@media screen and (max-width: 640px) {
+  .p-treeselect {
+    width: 100%;
+  }
 }
 </style>

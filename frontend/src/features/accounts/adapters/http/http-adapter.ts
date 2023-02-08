@@ -8,11 +8,19 @@ export class DefaultAccountsHttpAdapter implements AccountsAdapter {
     const accountHttpResponse = await this.accountsHttpInfra.listAccounts();
 
     return accountHttpResponse.items.map(item => ({
-      id: item.id,
-      name: item.name,
-      level: item.level,
-      type: item.type,
-      displayName: item.displayName
+      key: item.id,
+      label: item.displayName,
+      data: item.id,
+      children: item.subgroups.map(subgroup => ({
+        key: subgroup.id,
+        label: subgroup.displayName,
+        data: item.id,
+        children: subgroup.accounts.map(account => ({
+          key: account.id,
+          label: account.displayName,
+          data: item.id,
+        }))
+      }))
     }));
   }
 
