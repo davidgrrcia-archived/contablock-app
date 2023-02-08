@@ -22,7 +22,7 @@ const id = uuid();
 const multipleEntryId = uuid();
 const debitAccount = ref();
 const creditAccount = ref();
-const accounts = accountsStore.state.accounts
+const accounts = accountsStore.state.accounts;
 
 if (entriesStore.state.multipleEntryId === '') {
   entriesStore.state.multipleEntryId = multipleEntryId;
@@ -35,7 +35,7 @@ function addDebitEntry() {
   }
 
   const match = JSON.stringify(debitAccount.value).match(/"(\d+)"/);
-  const accountId = match ? match[1] : "";
+  const accountId = match ? match[1] : '';
 
   const newEntry: Entry = {
     id: id,
@@ -60,7 +60,7 @@ function addCreditEntry() {
   }
 
   const match = JSON.stringify(debitAccount.value).match(/"(\d+)"/);
-  const accountId = match ? match[1] : "";
+  const accountId = match ? match[1] : '';
 
   const newEntry: Entry = {
     id: id,
@@ -92,8 +92,6 @@ const currencies = ref([
 </script>
 
 <template>
-
-
   <div class="form-header">
     <DropdownPrimeVue
       v-model="currency"
@@ -148,7 +146,7 @@ const currencies = ref([
   margin-top: 20px;
 }
 .p-treeselect {
-  width:20rem;
+  width: 20rem;
 }
 
 @media screen and (max-width: 640px) {

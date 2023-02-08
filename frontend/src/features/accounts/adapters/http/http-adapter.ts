@@ -19,8 +19,8 @@ export class DefaultAccountsHttpAdapter implements AccountsAdapter {
           key: account.id,
           label: account.displayName,
           data: item.id,
-        }))
-      }))
+        })),
+      })),
     }));
   }
 
@@ -32,7 +32,7 @@ export class DefaultAccountsHttpAdapter implements AccountsAdapter {
       name: input.name,
       level: input.level,
       type: input.type,
-      displayName: input.displayName
+      displayName: input.displayName,
     };
 
     return output;

@@ -39,6 +39,13 @@ export const useEntriesStore = defineStore('entries', {
     },
     async createEntries() {
       try {
+        if (this.state.totalBalance !== 0) {
+          throw "El principio de partida doble es obligatorio"
+        }
+        if (this.state.entriesCreation.length === 0) {
+          throw 'No hay asientos creados';
+        }
+
         this.state.stateMessage = 'creating entries';
 
         this.state.entriesCreation.map(async entry => {
@@ -53,7 +60,7 @@ export const useEntriesStore = defineStore('entries', {
       } catch (err) {
         this.state.stateMessage = 'error creating entries';
         const messagesStore = useMessagesStore();
-        messagesStore.addErrorMessage(this.state.stateMessage);
+        messagesStore.addErrorMessage(err.toString());
       }
     },
     clearEntries() {

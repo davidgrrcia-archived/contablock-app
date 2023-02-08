@@ -6,23 +6,12 @@ import { useMessagesStore } from '@/stores/messages';
 
 const modalState = useCreateEntryModalStore();
 const entriesStore = useEntriesStore();
-const messagesStore = useMessagesStore();
 
 function hideCreateEntryModal() {
   modalState.hideModal();
 }
 
 function createEntries() {
-  if (entriesStore.state.totalBalance !== 0) {
-    messagesStore.addErrorMessage(
-      'El principio de partida doble es obligatorio, el balance actual es: ' + entriesStore.state.totalBalance,
-    );
-  }
-  if (entriesStore.state.entriesCreation.length === 0) {
-    messagesStore.addErrorMessage('No hay asientos creados');
-    return;
-  }
-
   entriesStore.createEntries();
   modalState.hideModal();
 }

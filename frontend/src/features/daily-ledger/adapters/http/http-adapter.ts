@@ -24,9 +24,9 @@ export class DefaultDailyLedgerHttpAdapter implements DailyLedgerAdapter {
           name: item2.account.name,
           level: item2.account.level,
           type: item2.account.type,
-          displayName: item2.account.displayName
-        }
-      }) ),
+          displayName: item2.account.displayName,
+        },
+      })),
     }));
   }
 }

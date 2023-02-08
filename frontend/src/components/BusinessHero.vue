@@ -4,13 +4,9 @@ import { useDailyLedgerStore } from '@/stores/dailyLedger';
 const dailyLedgerStore = useDailyLedgerStore();
 await dailyLedgerStore.loadDailyLedger();
 
-const dailyLedger = dailyLedgerStore.state.storedDailyLedger
+const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
 </script>
 
-<template>
+<template></template>
 
-</template>
-
-<style scoped>
-
-</style>
+<style scoped></style>

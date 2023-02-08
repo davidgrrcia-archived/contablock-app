@@ -4,7 +4,7 @@ import { useDailyLedgerStore } from '@/stores/dailyLedger';
 const dailyLedgerStore = useDailyLedgerStore();
 await dailyLedgerStore.loadDailyLedger();
 
-const dailyLedger = dailyLedgerStore.state.storedDailyLedger
+const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
 </script>
 
 <template>
@@ -27,7 +27,7 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger
         </tr>
         <template v-for="(entryExpanded, j) in dailyLedger[index].entriesExpanded" :key="j">
           <tr>
-            <td>{{ entryExpanded.account.displayName}}</td>
+            <td>{{ entryExpanded.account.displayName }}</td>
             <td>{{ entryExpanded.entry.currency }}</td>
             <td>{{ entryExpanded.entry.displayDate }}</td>
             <td>{{ entryExpanded.entry.displayDate }}</td>
@@ -55,7 +55,6 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger
 .styled-table thead tr {
   background-color: var(--blue);
   color: #ffffff;
-
 }
 
 .styled-table th,

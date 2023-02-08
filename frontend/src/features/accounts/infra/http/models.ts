@@ -37,5 +37,5 @@ export interface AccountDescribeResponse {
   name: string;
 
   type: string;
-  displayName: string
+  displayName: string;
 }
