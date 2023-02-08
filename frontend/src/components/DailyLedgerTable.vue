@@ -23,10 +23,10 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
     <tbody>
       <template v-for="(item, index) in dailyLedger" :key="index">
         <tr class="divider">
-          <td colspan="6">Asiento {{ index }}</td>
+          <td colspan="7">Asiento {{ index }}</td>
         </tr>
         <template v-for="(entryExpanded, j) in dailyLedger[index].entriesExpanded" :key="j">
-          <tr>
+          <tr class="content">
             <td>{{ entryExpanded.account.displayName }}</td>
             <td>{{ entryExpanded.entry.currency }}</td>
             <td>{{ entryExpanded.entry.displayDate }}</td>
@@ -36,6 +36,9 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
             <td>{{ entryExpanded.entry.creditAmount }}</td>
           </tr>
         </template>
+        <tr>
+          <td colspan="7" class="footer"></td>
+        </tr>
       </template>
     </tbody>
   </table>
@@ -66,7 +69,7 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
   border-bottom: 1px solid #dddddd;
 }
 
-.styled-table tbody tr:nth-of-type(even) {
+.content:nth-of-type(even) {
   background-color: var(--gray);
 }
 
@@ -77,5 +80,9 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
 .styled-table tbody tr.divider {
   font-weight: bold;
   color: var(--blue);
+}
+.footer{
+  background-color: var(--blue) !important;
+  padding: 2px !important;
 }
 </style>

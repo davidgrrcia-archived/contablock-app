@@ -16,5 +16,6 @@ export interface Node {
   label: string;
   data?: string;
   icon?: string;
+  selectable?: boolean;
   children?: Node[];
 }

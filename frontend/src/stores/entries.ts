@@ -66,6 +66,7 @@ export const useEntriesStore = defineStore('entries', {
     clearEntries() {
       this.state.entriesCreation = [];
       this.state.multipleEntryId = '';
+      this.state.totalBalance = 0
     },
   },
 });

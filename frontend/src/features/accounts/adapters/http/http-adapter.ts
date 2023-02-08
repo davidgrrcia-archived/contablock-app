@@ -11,14 +11,17 @@ export class DefaultAccountsHttpAdapter implements AccountsAdapter {
       key: item.id,
       label: item.displayName,
       data: item.id,
+      selectable: false,
       children: item.subgroups.map(subgroup => ({
         key: subgroup.id,
         label: subgroup.displayName,
         data: item.id,
+        selectable: false,
         children: subgroup.accounts.map(account => ({
           key: account.id,
           label: account.displayName,
           data: item.id,
+          selectable: true,
         })),
       })),
     }));

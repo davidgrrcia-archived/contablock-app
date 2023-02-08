@@ -59,7 +59,7 @@ function addCreditEntry() {
     return;
   }
 
-  const match = JSON.stringify(debitAccount.value).match(/"(\d+)"/);
+  const match = JSON.stringify(creditAccount.value).match(/"(\d+)"/);
   const accountId = match ? match[1] : '';
 
   const newEntry: Entry = {
@@ -114,7 +114,7 @@ const currencies = ref([
       <h4>Debe</h4>
       <TreeSelectPrimeVue v-model="debitAccount" :options="accounts" placeholder="Select Item"></TreeSelectPrimeVue>
       <InputNumberPrimeVue v-model="debitAmount" mode="currency" :currency="currency" locale="es-ES" />
-      <ButtonPrimeVue icon="fa-solid fa-plus" @click="addDebitEntry" />
+      <ButtonPrimeVue icon="fa-solid fa-plus" @click="addDebitEntry">Añadir al debe</ButtonPrimeVue>
     </div>
     <div>
       <DividerPrimeVue layout="vertical"> </DividerPrimeVue>
@@ -123,7 +123,7 @@ const currencies = ref([
       <h4>Haber</h4>
       <TreeSelectPrimeVue v-model="creditAccount" :options="accounts" placeholder="Select Item"></TreeSelectPrimeVue>
       <InputNumberPrimeVue v-model="creditAmount" mode="currency" :currency="currency" locale="es-ES" />
-      <ButtonPrimeVue icon="fa-solid fa-plus" @click="addCreditEntry" />
+      <ButtonPrimeVue icon="fa-solid fa-plus" @click="addCreditEntry" >Añadir al haber</ButtonPrimeVue>
     </div>
   </div>
   <div class="form-table">

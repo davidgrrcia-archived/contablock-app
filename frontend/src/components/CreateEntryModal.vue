@@ -8,6 +8,7 @@ const modalState = useCreateEntryModalStore();
 const entriesStore = useEntriesStore();
 
 function hideCreateEntryModal() {
+  entriesStore.clearEntries();
   modalState.hideModal();
 }
 
