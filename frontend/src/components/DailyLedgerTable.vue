@@ -12,6 +12,7 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
     <thead>
       <tr>
         <th>Cuenta</th>
+        <th>Tipo</th>
         <th>Divisa</th>
         <th>Fecha</th>
         <th>Trimestre</th>
@@ -25,7 +26,7 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
     <tbody>
       <template v-for="(item, index) in dailyLedger" :key="index">
         <tr class="divider">
-          <td colspan="8">Asiento {{ index }}</td>
+          <td colspan="9">Asiento {{ index }}</td>
           <td>
             <button class="btn-publish" type="button">Publicar</button>
             <button class="btn-remove" type="button">Eliminar</button>
@@ -35,9 +36,10 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
           <tr class="content">
             <td>{{ entryExpanded.account.displayName }}</td>
             <td>{{ entryExpanded.entry.currency }}</td>
+            <td>{{ entryExpanded.entry.currency }}</td>
             <td>{{ entryExpanded.entry.displayDate }}</td>
             <td>{{ entryExpanded.entry.displayDate }}</td>
-            <td>{{ entryExpanded.entry.concept }}</td>
+            <td >{{ entryExpanded.entry.concept }}</td>
             <td>{{ entryExpanded.entry.debitAmount }}</td>
             <td>{{ entryExpanded.entry.creditAmount }}</td>
             <td>{{ entryExpanded.entry.displayDate }}</td>
@@ -45,7 +47,7 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
           </tr>
         </template>
         <tr>
-          <td colspan="9" class="footer"></td>
+          <td colspan="10" class="footer"></td>
         </tr>
       </template>
     </tbody>
@@ -53,36 +55,23 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
 </template>
 
 <style scoped>
-.styled-table {
+table {
   border-collapse: collapse;
-  margin: 25px 0;
-  font-size: 0.9em;
-  font-family: sans-serif;
+  border-spacing: 0;
   width: 100%;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  text-align: left;
+  border: 1px solid #ddd;
 }
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: var(--gray)}
 
 .styled-table thead tr {
   background-color: var(--blue);
   color: #ffffff;
-}
-
-.styled-table th,
-.styled-table td {
-  padding: 12px 15px;
-}
-
-.styled-table tbody tr {
-  border-bottom: 1px solid #dddddd;
-}
-
-.content:nth-of-type(even) {
-  background-color: var(--gray);
-}
-
-.styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid var(--blue);
 }
 
 .styled-table tbody tr.divider {

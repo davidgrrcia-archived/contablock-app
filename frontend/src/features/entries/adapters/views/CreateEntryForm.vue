@@ -101,13 +101,7 @@ const currencies = ref([
       :placeholder="currencies[0].code"
     />
     <CalendarPrimeVue v-model="date" :showIcon="true" dateFormat="dd/mm/yy" />
-    <TextareaPrimeVue
-      v-model="concept"
-      :autoResize="true"
-      rows="3"
-      cols="50"
-      placeholder="Descripción del asiento (opcional)"
-    />
+    <input type="text"  class="concept" v-model="concept" maxlength="64" size="75" placeholder="Descripción del asiento (opcional)">
   </div>
   <div class="form-body">
     <div>
@@ -153,5 +147,14 @@ const currencies = ref([
   .p-treeselect {
     width: 100%;
   }
+}
+
+.concept {
+  background-color: var(--gray);
+  border-radius: 5px;
+  border: 0px;
+  font: inherit;
+  font-weight: 300;
+  padding: 15px;
 }
 </style>
