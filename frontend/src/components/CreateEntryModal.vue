@@ -19,13 +19,7 @@ function createEntries() {
 </script>
 
 <template>
-  <DialogPrimeVue
-    header="Registrar nuevo asiento contable"
-    v-model:visible="modalState.isOpen"
-    :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
-    :style="{ width: '90vw' }"
-    :modal="true"
-  >
+  <DialogPrimeVue header="Registrar nuevo asiento contable" v-model:visible="modalState.isOpen" :breakpoints="{ '960px': '75vw', '640px': '90vw' }" :style="{ width: '90vw' }" :modal="true">
     <suspense><CreateEntryForm></CreateEntryForm></suspense>
     <template #footer>
       <ButtonPrimeVue label="Cancelar" icon="pi pi-times" @click="hideCreateEntryModal" class="btn-cancel" />

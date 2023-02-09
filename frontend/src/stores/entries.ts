@@ -40,7 +40,7 @@ export const useEntriesStore = defineStore('entries', {
     async createEntries() {
       try {
         if (this.state.totalBalance !== 0) {
-          throw "El principio de partida doble es obligatorio"
+          throw 'El principio de partida doble es obligatorio';
         }
         if (this.state.entriesCreation.length === 0) {
           throw 'No hay asientos creados';
@@ -66,7 +66,7 @@ export const useEntriesStore = defineStore('entries', {
     clearEntries() {
       this.state.entriesCreation = [];
       this.state.multipleEntryId = '';
-      this.state.totalBalance = 0
+      this.state.totalBalance = 0;
     },
   },
 });

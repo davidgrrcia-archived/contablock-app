@@ -16,13 +16,7 @@ function showCreateEntryModal() {
     <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="300" height="50" />
 
     <nav>
-      <RouterLink
-        v-for="item in configStore.state.navigation"
-        :key="item.name"
-        :to="item.href"
-        :class="[item.current ? 'current' : 'not-current', 'menu']"
-        >{{ item.name }}</RouterLink
-      >
+      <RouterLink v-for="item in configStore.state.navigation" :key="item.name" :to="item.href" :class="[item.current ? 'current' : 'not-current', 'menu']">{{ item.name }}</RouterLink>
     </nav>
 
     <button class="btn" type="button" @click="showCreateEntryModal()">Nuevo asiento</button>
@@ -71,10 +65,10 @@ nav {
 
 .current {
   color: var(--white);
-  text-decoration:underline;
+  text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 8px;
-  display:inline-block;
+  display: inline-block;
 }
 
 .btn {

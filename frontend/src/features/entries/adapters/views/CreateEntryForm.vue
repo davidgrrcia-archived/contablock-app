@@ -93,15 +93,9 @@ const currencies = ref([
 
 <template>
   <div class="form-header">
-    <DropdownPrimeVue
-      v-model="currency"
-      :options="currencies"
-      optionLabel="code"
-      optionValue="code"
-      :placeholder="currencies[0].code"
-    />
+    <DropdownPrimeVue v-model="currency" :options="currencies" optionLabel="code" optionValue="code" :placeholder="currencies[0].code" />
     <CalendarPrimeVue v-model="date" :showIcon="true" dateFormat="dd/mm/yy" />
-    <input type="text"  class="concept" v-model="concept" maxlength="64" size="75" placeholder="Descripción del asiento (opcional)">
+    <input type="text" class="concept" v-model="concept" maxlength="64" size="75" placeholder="Descripción del asiento (opcional)" />
   </div>
   <div class="form-body">
     <div>
@@ -117,7 +111,7 @@ const currencies = ref([
       <h4>Haber</h4>
       <TreeSelectPrimeVue v-model="creditAccount" :options="accounts" placeholder="Select Item"></TreeSelectPrimeVue>
       <InputNumberPrimeVue v-model="creditAmount" mode="currency" :currency="currency" locale="es-ES" />
-      <ButtonPrimeVue icon="fa-solid fa-plus" @click="addCreditEntry" >Añadir al haber</ButtonPrimeVue>
+      <ButtonPrimeVue icon="fa-solid fa-plus" @click="addCreditEntry">Añadir al haber</ButtonPrimeVue>
     </div>
   </div>
   <div class="form-table">

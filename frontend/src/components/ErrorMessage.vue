@@ -7,14 +7,7 @@ const errorMessagesStore = useMessagesStore();
 <template>
   <div>
     <transition-group class="message" name="p-message" tag="div">
-      <MessagePrimeVue
-        v-for="msg of errorMessagesStore.state.messages"
-        :life="msg.life"
-        :sticky="msg.sticky"
-        :severity="msg.severity"
-        :key="msg.id"
-        >{{ msg.content }}</MessagePrimeVue
-      >
+      <MessagePrimeVue v-for="msg of errorMessagesStore.state.messages" :life="msg.life" :sticky="msg.sticky" :severity="msg.severity" :key="msg.id">{{ msg.content }}</MessagePrimeVue>
     </transition-group>
   </div>
 </template>
