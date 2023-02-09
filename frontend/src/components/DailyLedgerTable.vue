@@ -14,9 +14,6 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
         <h1 class="text-xl font-semibold text-gray-900">Libro Diario</h1>
         <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
       </div>
-      <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-        <button type="button" class="btn bg-[var(--blue)] hover:bg-indigo-700 focus:ring-indigo-500">Nuevo asiento</button>
-      </div>
     </div>
     <div class="mt-8 flex flex-col">
       <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -87,9 +84,3 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
     </div>
   </div>
 </template>
-
-<style scoped>
-.btn {
-  @apply inline-flex items-center justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:w-auto;
-}
-</style>

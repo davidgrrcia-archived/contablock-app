@@ -12,76 +12,12 @@ function showCreateEntryModal() {
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="300" height="50" />
-
-    <nav>
-      <RouterLink v-for="item in configStore.state.navigation" :key="item.name" :to="item.href" :class="[item.current ? 'current' : 'not-current', 'menu']">{{ item.name }}</RouterLink>
+  <header class="fixed top-0 left-0 flex w-full items-center bg-black">
+    <img alt="Vue logo" class="object-cover" src="@/assets/logo.png" />
+    <nav class="ml-10">
+      <RouterLink v-for="item in configStore.state.navigation" :key="item.name" :to="item.href" :class="['rounded-md p-2 font-normal text-white ' + (item.current ? 'underline' : 'hover:bg-white hover:text-black')]">{{ item.name }}</RouterLink>
     </nav>
-
-    <button class="btn" type="button" @click="showCreateEntryModal()">Nuevo asiento</button>
+    <button type="button" @click="showCreateEntryModal()" class="btn mt-3 mb-3 bg-[var(--blue)] hover:bg-indigo-700 focus:ring-indigo-500">Nuevo asiento</button>
   </header>
   <CreateEntryModal></CreateEntryModal>
 </template>
-
-<style scoped>
-header {
-  position: fixed;
-  display: flex;
-  top: 0;
-  left: 0;
-  height: auto;
-  width: 100%;
-  background-color: var(--black);
-  place-items: center;
-}
-
-.logo {
-  display: block;
-  margin: 20px;
-}
-
-nav {
-  width: 100%;
-  text-align: center;
-}
-
-.menu {
-  font-size: 18px;
-  border-radius: 5px;
-  margin-left: 20px;
-  text-decoration: none;
-  padding: 10px;
-}
-
-.not-current {
-  color: var(--white);
-}
-
-.not-current:hover {
-  background-color: var(--white);
-  color: #222222;
-}
-
-.current {
-  color: var(--white);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 8px;
-  display: inline-block;
-}
-
-.btn {
-  border: none;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  border-radius: 5px;
-  background-color: var(--blue);
-  color: var(--white);
-  margin-right: 50px;
-  white-space: nowrap;
-}
-</style>
