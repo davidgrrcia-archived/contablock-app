@@ -41,8 +41,14 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
                   <tr class="border-t border-gray-200">
                     <th colspan="9" scope="colgroup" class="bg-[var(--white)] px-4 py-2 text-left text-sm font-semibold text-[var(--blue)] sm:px-6">Asiento {{ index }}</th>
                     <th>
-                      <button type="button" class="btn bg-[var(--blue)] hover:bg-indigo-700 focus:ring-indigo-500">Publicar</button>
-                      <button type="button" class="btn bg-[var(--red)] hover:bg-indigo-700 focus:ring-indigo-500">Eliminar</button>
+                      <div class="flex">
+                        <div class="w-1/2">
+                          <button type="button" class="btn bg-[var(--blue)] hover:bg-indigo-700 focus:ring-indigo-500">Publicar</button>
+                        </div>
+                        <div class="w-1/2">
+                          <button type="button" class="btn bg-[var(--red)] hover:bg-indigo-700 focus:ring-indigo-500">Eliminar</button>
+                        </div>
+                      </div>
                     </th>
                   </tr>
                   <tr v-for="(entryExpanded, j) in dailyLedger[index].entriesExpanded" :key="j" :class="[j === 0 ? 'border-gray-300' : 'border-gray-200', 'border-t']">
