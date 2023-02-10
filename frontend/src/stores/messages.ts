@@ -3,7 +3,10 @@ import { defineStore } from 'pinia';
 //TODO: apply clean architecture
 
 export enum Severities {
-  'success', 'info' , 'warn' , 'error'
+  'success',
+  'info',
+  'warn',
+  'error',
 }
 
 interface Message {
@@ -12,7 +15,7 @@ interface Message {
   description: string;
   severity: Severities;
   lifeInSeconds: number;
-  show: boolean
+  show: boolean;
 }
 
 const state = {
@@ -27,10 +30,10 @@ export const useMessagesStore = defineStore('messagesStore', {
   actions: {
     addSuccessMessage(title: string, description?: string, lifeInSeconds?: number) {
       if (description == undefined || '') {
-        description = ""
+        description = '';
       }
       if (lifeInSeconds == undefined || 0 || lifeInSeconds > 60) {
-        lifeInSeconds = 60
+        lifeInSeconds = 60;
       }
 
       if (title !== undefined || '') {
@@ -47,10 +50,10 @@ export const useMessagesStore = defineStore('messagesStore', {
     },
     addErrorMessage(title: string, description?: string, lifeInSeconds?: number) {
       if (description == undefined || '') {
-        description = ""
+        description = '';
       }
       if (lifeInSeconds == undefined || 0 || lifeInSeconds > 60) {
-        lifeInSeconds = 60
+        lifeInSeconds = 60;
       }
 
       if (title !== undefined || '') {
@@ -67,10 +70,10 @@ export const useMessagesStore = defineStore('messagesStore', {
     },
     addMessage(title: string, description?: string, lifeInSeconds?: number) {
       if (description == undefined || '') {
-        description = ""
+        description = '';
       }
       if (lifeInSeconds == undefined || 0 || lifeInSeconds > 60) {
-        lifeInSeconds = 60
+        lifeInSeconds = 60;
       }
 
       if (title !== undefined || '') {
@@ -87,10 +90,10 @@ export const useMessagesStore = defineStore('messagesStore', {
     },
     addWarnMessage(title: string, description?: string, lifeInSeconds?: number) {
       if (description == undefined || '') {
-        description = ""
+        description = '';
       }
       if (lifeInSeconds == undefined || 0 || lifeInSeconds > 60) {
-        lifeInSeconds = 60
+        lifeInSeconds = 60;
       }
 
       if (title !== undefined || '') {

@@ -31,7 +31,7 @@ export const useEntriesStore = defineStore('entries', {
       const messagesStore = useMessagesStore();
 
       if (entry.debitAmount == undefined) {
-        messagesStore.addMessage('Introduce una cantidad en el debe');
+        messagesStore.addWarnMessage('Introduce una cantidad en el debe');
         return;
       }
 
@@ -45,8 +45,8 @@ export const useEntriesStore = defineStore('entries', {
     async addCreditEntry(entry: Entry) {
       const messagesStore = useMessagesStore();
 
-      if (entry.creditAmount == undefined ) {
-        messagesStore.addMessage('Introduce una cantidad en el haber');
+      if (entry.creditAmount == undefined) {
+        messagesStore.addWarnMessage('Introduce una cantidad en el haber');
         return;
       }
 
@@ -75,13 +75,13 @@ export const useEntriesStore = defineStore('entries', {
         });
 
         this.state.stateMessage = 'entries created';
-        messagesStore.addMessage(this.state.stateMessage);
+        messagesStore.addSuccessMessage(this.state.stateMessage);
 
         this.clearEntries();
       } catch (err) {
         this.state.stateMessage = 'error creating entries';
         const messagesStore = useMessagesStore();
-        messagesStore.addMessage(err.toString());
+        messagesStore.addErrorMessage(err.toString());
       }
     },
     clearEntries() {
