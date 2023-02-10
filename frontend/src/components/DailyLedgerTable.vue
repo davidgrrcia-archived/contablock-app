@@ -11,7 +11,7 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
   <div class="px-8">
     <div class="flex items-center">
       <div class="flex-auto">
-        <h1 class="text-xl font-semibold text-gray-900">Libro Diario</h1>
+        <h1 class="text-3xl font-semibold text-gray-900">Libro Diario</h1>
         <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
       </div>
     </div>

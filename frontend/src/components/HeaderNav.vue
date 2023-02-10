@@ -2,11 +2,7 @@
 import { useCreateEntryModalStore } from '@/stores/createEntryModal';
 import CreateEntryModal from '@/components/CreateEntryModal.vue';
 import { useConfigStore } from '@/stores/config';
-import {
-  BriefcaseIcon,
-  LinkIcon,
-  MapPinIcon,
-} from '@heroicons/vue/20/solid'
+import BusinessHeading from "@/features/business/adapters/views/BusinessHeading.vue";
 
 const configStore = useConfigStore();
 const modalState = useCreateEntryModalStore();
@@ -27,26 +23,5 @@ function showCreateEntryModal() {
     </div>
   </header>
   <CreateEntryModal></CreateEntryModal>
-
-  <div class="mt-18 mb-5 flex items-center justify-between">
-    <div class="min-w-0 flex-1 bg-gray-100 pt-24 pb-10 text-center">
-      <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">Zara España, SA</h2>
-      <div class="grid justify-items-center ">
-        <div class="flex mt-0  space-x-6">
-          <div class="mt-2 flex items-center text-sm text-gray-500">
-            <BriefcaseIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-            A15022510
-          </div>
-          <div class="mt-2 flex items-center text-sm text-gray-500">
-            <MapPinIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-            Arteixo
-          </div>
-          <div class="mt-2 flex items-center text-sm text-gray-500">
-            <LinkIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-            0xb794f5ea0ba39494ce839613fffba74279579268
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <suspense><BusinessHeading></BusinessHeading></suspense>
 </template>

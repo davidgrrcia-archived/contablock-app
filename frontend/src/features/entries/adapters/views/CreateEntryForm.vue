@@ -78,7 +78,7 @@ const currencies = ref([
 </script>
 
 <template>
-  <div class="mt-0 flex space-x-10 overflow-hidden rounded-md p-6 shadow">
+  <div class="mt-0 flex space-x-10 overflow-hidden rounded-md text-left p-6 shadow">
     <div class="w-1/4">
       <label for="currency" class="block text-sm font-medium text-gray-700">Currency</label>
       <select v-model="selectedCurrency" id="currency" name="currency" autocomplete="currency-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
@@ -99,7 +99,7 @@ const currencies = ref([
     </div>
   </div>
 
-  <div class="mt-2 mb-10 flex space-x-4">
+  <div class="mt-2 mb-10 flex text-left space-x-4">
     <div class="w-1/2">
       <div class="mt-0 overflow-hidden rounded-md shadow">
         <div class="bg-gray-50 py-3 px-6">
