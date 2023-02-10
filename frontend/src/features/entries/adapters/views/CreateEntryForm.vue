@@ -116,7 +116,7 @@ const currencies = ref([
           </div>
         </div>
         <div class="bg-gray-50 py-3 px-6">
-          <button type="submit" id="debit-amount" name="debit-amount" @click="addDebitEntry" class="inline-flex justify-center rounded-md border border-transparent bg-[var(--blue)] hover:bg-white hover:text-[var(--blue)] py-2 px-4 text-sm font-medium text-white shadow-sm">Añadir al debe</button>
+          <button type="submit" id="debit-amount" name="debit-amount" @click="addDebitEntry" class="inline-flex justify-center rounded-md border border-transparent bg-[var(--blue)] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-white hover:text-[var(--blue)]">Añadir al debe</button>
         </div>
       </div>
     </div>
@@ -137,7 +137,7 @@ const currencies = ref([
           </div>
         </div>
         <div class="bg-gray-50 py-3 px-6">
-          <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="inline-flex justify-center rounded-md border border-transparent bg-[var(--blue)] hover:bg-white hover:text-[var(--blue)] py-2 px-4 text-sm font-medium text-white shadow-sm">Añadir al haber</button>
+          <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="inline-flex justify-center rounded-md border border-transparent bg-[var(--blue)] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-white hover:text-[var(--blue)]">Añadir al haber</button>
         </div>
       </div>
     </div>
@@ -158,7 +158,7 @@ const currencies = ref([
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200 bg-white">
-            <tr v-for="(entry, i) in entriesStore.state.entriesCreation" :key="entry.id" :class="i % 2 === 0 ? undefined : 'bg-gray-50'">
+            <tr v-for="(entry, i) in entriesStore.state.entriesCreation.reverse()" :key="entry.id" :class="i % 2 === 0 ? undefined : 'bg-gray-50'">
               <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">{{ entry.displayName }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ entry.currency }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ entry.displayDate }}</td>

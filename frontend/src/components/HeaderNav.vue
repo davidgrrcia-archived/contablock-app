@@ -13,14 +13,12 @@ function showCreateEntryModal() {
 
 <template>
   <header class="fixed top-0 left-0 flex w-full items-center bg-gray-800">
-    <div class="w-1/3">
-      <img alt="Vue logo" class="object-cover" src="@/assets/logo.png" />
+    <div class="flex w-1/2 items-center">
+      <img alt="Vue logo" class="ml-5 object-cover" src="@/assets/logo.png" />
+      <RouterLink class="text-lg" v-for="item in configStore.state.navigation" :key="item.name" :to="item.href" :class="['rounded-md p-2 font-normal text-white ' + (item.current ? 'underline' : 'hover:bg-white hover:text-black')]">{{ item.name }}</RouterLink>
     </div>
-    <nav class="-ml-20 w-1/3">
-      <RouterLink v-for="item in configStore.state.navigation" :key="item.name" :to="item.href" :class="['rounded-md p-2 font-normal text-white ' + (item.current ? 'underline' : 'hover:bg-white hover:text-black')]">{{ item.name }}</RouterLink>
-    </nav>
-    <div class="w-1/3">
-      <button type="button" @click="showCreateEntryModal()" class="btn ml-80 mt-3 mb-3 bg-[var(--blue)] hover:bg-white hover:text-[var(--blue)]">Nuevo asiento</button>
+    <div class="w-1/2 text-right">
+      <button type="button" @click="showCreateEntryModal()" class="btn my-3 mr-24 bg-[var(--blue)] hover:bg-white hover:text-[var(--blue)]">Nuevo asiento</button>
     </div>
   </header>
   <CreateEntryModal></CreateEntryModal>

@@ -16,29 +16,29 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
       </div>
     </div>
     <div class="mt-8 flex flex-col">
-      <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+      <div class="-my-2 -mx-8">
+        <div class="inline-block min-w-full py-2 px-8 align-middle">
+          <div class="shadow ring-1 ring-black ring-opacity-5">
             <table class="min-w-full">
               <thead class="bg-white">
                 <tr>
-                  <th scope="col" class="bg-gray-800 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Cuenta</th>
-                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Tipo</th>
-                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Divisa</th>
-                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Fecha</th>
-                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Trimestre</th>
-                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Concepto</th>
-                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Debe</th>
-                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Haber</th>
-                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Estado</th>
+                  <th scope="col" class="sticky top-14 z-10 rounded-tl-lg bg-gray-800 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Cuenta</th>
+                  <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Tipo</th>
+                  <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Divisa</th>
+                  <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Fecha</th>
+                  <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Trimestre</th>
+                  <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Concepto</th>
+                  <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Debe</th>
+                  <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Haber</th>
+                  <th scope="col" class="sticky top-14 z-10 rounded-tr-lg bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Estado</th>
                 </tr>
               </thead>
               <tbody class="bg-white">
                 <template v-for="(record, index) in dailyLedger" :key="index">
-                  <tr class="bg-gray-600">
+                  <tr class="sticky top-24 z-10 bg-gray-600">
                     <th colspan="8" scope="colgroup" class="px-4 text-left text-sm font-semibold text-white sm:px-6">Asiento {{ index }}</th>
                     <th>
-                      <div class="flex py-2 space-x-4 px-2">
+                      <div class="flex space-x-4 py-2 px-2">
                         <div class="w-1/2">
                           <button type="button" class="btn bg-[var(--blue)]">Publicar</button>
                         </div>
