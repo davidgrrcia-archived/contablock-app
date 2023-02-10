@@ -27,17 +27,39 @@ export const useEntriesStore = defineStore('entries', {
   },
 
   actions: {
-    async addEntry(entry: Entry) {
+    async addDebitEntry(entry: Entry) {
+      const messagesStore = useMessagesStore();
+
+      if (entry.debitAmount == undefined) {
+        messagesStore.addMessage('Introduce una cantidad en el debe');
+        return;
+      }
+
       const account = await accountsUseCase.describeAccount(entry.accountId);
       const displayName = entry.accountId + ' - ' + account.name;
       entry.displayName = displayName;
 
       this.state.entriesCreation.push(entry);
+      this.state.totalBalance = this.state.totalBalance + entry.debitAmount;
     },
-    updateTotalBalance(amount: number) {
-      this.state.totalBalance = this.state.totalBalance + amount;
+    async addCreditEntry(entry: Entry) {
+      const messagesStore = useMessagesStore();
+
+      if (entry.creditAmount == undefined ) {
+        messagesStore.addMessage('Introduce una cantidad en el haber');
+        return;
+      }
+
+      const account = await accountsUseCase.describeAccount(entry.accountId);
+      const displayName = entry.accountId + ' - ' + account.name;
+      entry.displayName = displayName;
+
+      this.state.entriesCreation.push(entry);
+      this.state.totalBalance = this.state.totalBalance - entry.creditAmount;
     },
     async createEntries() {
+      const messagesStore = useMessagesStore();
+
       try {
         if (this.state.totalBalance !== 0) {
           throw 'El principio de partida doble es obligatorio';
@@ -53,14 +75,13 @@ export const useEntriesStore = defineStore('entries', {
         });
 
         this.state.stateMessage = 'entries created';
-        const messagesStore = useMessagesStore();
-        messagesStore.addSuccessMessage(this.state.stateMessage);
+        messagesStore.addMessage(this.state.stateMessage);
 
         this.clearEntries();
       } catch (err) {
         this.state.stateMessage = 'error creating entries';
         const messagesStore = useMessagesStore();
-        messagesStore.addErrorMessage(err.toString());
+        messagesStore.addMessage(err.toString());
       }
     },
     clearEntries() {

@@ -32,7 +32,7 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
       } catch (err) {
         this.state.stateMessage = 'error loading daily ledger';
         const messagesStore = useMessagesStore();
-        messagesStore.addErrorMessage(this.state.stateMessage);
+        messagesStore.addMessage(this.state.stateMessage);
       }
     },
   },

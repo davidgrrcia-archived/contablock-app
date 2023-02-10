@@ -33,7 +33,7 @@ export const useAccountsStore = defineStore('accounts', {
         this.state.accounts = [];
         this.state.stateMessage = 'error loading accounts';
         const messagesStore = useMessagesStore();
-        messagesStore.addErrorMessage(this.state.stateMessage);
+        messagesStore.addMessage(this.state.stateMessage);
       }
     },
   },

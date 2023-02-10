@@ -3,12 +3,10 @@ import { ref } from 'vue';
 import { v4 as uuid } from 'uuid';
 import type { Entry } from '@/features/entries/application/entries-model';
 import { useEntriesStore } from '@/stores/entries';
-import { useMessagesStore } from '@/stores/messages';
 import { useAccountsStore } from '@/stores/accounts';
 
 //store
 const entriesStore = useEntriesStore();
-const errorStore = useMessagesStore();
 const accountsStore = useAccountsStore();
 await accountsStore.loadAccounts();
 
@@ -29,11 +27,6 @@ if (entriesStore.state.multipleEntryId === '') {
 }
 
 function addDebitEntry() {
-  if (debitAmount.value === undefined) {
-    errorStore.addErrorMessage('Introduce una cantidad en el debe');
-    return;
-  }
-
   const match = JSON.stringify(debitAccount.value).match(/"(\d+)"/);
   const accountId = match ? match[1] : '';
 
@@ -49,16 +42,10 @@ function addDebitEntry() {
     creditAmount: null,
   };
 
-  entriesStore.addEntry(newEntry);
-  entriesStore.updateTotalBalance(debitAmount.value);
+  entriesStore.addDebitEntry(newEntry);
 }
 
 function addCreditEntry() {
-  if (creditAmount.value === undefined) {
-    errorStore.addErrorMessage('Introduce una cantidad en el haber');
-    return;
-  }
-
   const match = JSON.stringify(creditAccount.value).match(/"(\d+)"/);
   const accountId = match ? match[1] : '';
 
@@ -74,8 +61,7 @@ function addCreditEntry() {
     creditAmount: creditAmount.value,
   };
 
-  entriesStore.addEntry(newEntry);
-  entriesStore.updateTotalBalance(-creditAmount.value);
+  entriesStore.addCreditEntry(newEntry);
 }
 
 const currencies = ref([
