@@ -8,9 +8,9 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
 </script>
 
 <template>
-  <div class="px-4 sm:px-6 lg:px-8">
-    <div class="sm:flex sm:items-center">
-      <div class="sm:flex-auto">
+  <div class="px-8">
+    <div class="flex items-center">
+      <div class="flex-auto">
         <h1 class="text-xl font-semibold text-gray-900">Libro Diario</h1>
         <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
       </div>
@@ -22,7 +22,7 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
             <table class="min-w-full">
               <thead class="bg-white">
                 <tr>
-                  <th scope="col" class="sticky top-14 z-10 rounded-tl-lg bg-gray-800 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Cuenta</th>
+                  <th scope="col" class="sticky top-14 z-10 rounded-tl-lg bg-gray-800 py-3.5 pl-4 pr-3 pl-6 text-left text-sm font-semibold text-white">Cuenta</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Tipo</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Divisa</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Fecha</th>
@@ -36,7 +36,7 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
               <tbody class="bg-white">
                 <template v-for="(record, index) in dailyLedger" :key="index">
                   <tr class="sticky top-24 z-10 bg-gray-600">
-                    <th colspan="8" scope="colgroup" class="px-4 text-left text-sm font-semibold text-white sm:px-6">Asiento {{ index }}</th>
+                    <th colspan="8" scope="colgroup" class="px-4 px-6 text-left text-sm font-semibold text-white">Asiento {{ index }}</th>
                     <th>
                       <div class="flex space-x-4 py-2 px-2">
                         <div class="w-1/2">

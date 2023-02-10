@@ -10,9 +10,3 @@ import ErrorModal from '@/components/ErrorMessage.vue';
   <HeaderNav />
   <RouterView class="body" />
 </template>
-
-<style scoped>
-.body {
-  margin-top: 100px;
-}
-</style>
