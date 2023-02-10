@@ -22,61 +22,58 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
             <table class="min-w-full">
               <thead class="bg-white">
                 <tr>
-                  <th scope="col" class="bg-[var(--black)] py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Cuenta</th>
-                  <th scope="col" class="bg-[var(--black)] px-3 py-3.5 text-left text-sm font-semibold text-white">Tipo</th>
-                  <th scope="col" class="bg-[var(--black)] px-3 py-3.5 text-left text-sm font-semibold text-white">Divisa</th>
-                  <th scope="col" class="bg-[var(--black)] px-3 py-3.5 text-left text-sm font-semibold text-white">Fecha</th>
-                  <th scope="col" class="bg-[var(--black)] px-3 py-3.5 text-left text-sm font-semibold text-white">Trimestre</th>
-                  <th scope="col" class="bg-[var(--black)] px-3 py-3.5 text-left text-sm font-semibold text-white">Concepto</th>
-                  <th scope="col" class="bg-[var(--black)] px-3 py-3.5 text-left text-sm font-semibold text-white">Debe</th>
-                  <th scope="col" class="bg-[var(--black)] px-3 py-3.5 text-left text-sm font-semibold text-white">Haber</th>
-                  <th scope="col" class="bg-[var(--black)] px-3 py-3.5 text-left text-sm font-semibold text-white">Estado</th>
-                  <th scope="col" class="bg-[var(--black)] py-3.5 pl-3 pr-4 sm:pr-6">
-                    <span class="sr-only">Acciones</span>
-                  </th>
+                  <th scope="col" class="bg-gray-800 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Cuenta</th>
+                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Tipo</th>
+                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Divisa</th>
+                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Fecha</th>
+                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Trimestre</th>
+                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Concepto</th>
+                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Debe</th>
+                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Haber</th>
+                  <th scope="col" class="bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Estado</th>
                 </tr>
               </thead>
               <tbody class="bg-white">
                 <template v-for="(record, index) in dailyLedger" :key="index">
-                  <tr class="border-t border-gray-200">
-                    <th colspan="9" scope="colgroup" class="bg-[var(--white)] px-4 py-2 text-left text-sm font-semibold text-[var(--blue)] sm:px-6">Asiento {{ index }}</th>
+                  <tr class="bg-gray-600">
+                    <th colspan="8" scope="colgroup" class="px-4 text-left text-sm font-semibold text-white sm:px-6">Asiento {{ index }}</th>
                     <th>
-                      <div class="flex">
+                      <div class="flex py-2 space-x-4 px-2">
                         <div class="w-1/2">
-                          <button type="button" class="btn bg-[var(--blue)] hover:bg-indigo-700 focus:ring-indigo-500">Publicar</button>
+                          <button type="button" class="btn bg-[var(--blue)]">Publicar</button>
                         </div>
                         <div class="w-1/2">
-                          <button type="button" class="btn bg-[var(--red)] hover:bg-indigo-700 focus:ring-indigo-500">Eliminar</button>
+                          <button type="button" class="btn bg-[var(--red)]">Eliminar</button>
                         </div>
                       </div>
                     </th>
                   </tr>
-                  <tr v-for="(entryExpanded, j) in dailyLedger[index].entriesExpanded" :key="j" :class="[j === 0 ? 'border-gray-300' : 'border-gray-200', 'border-t']">
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  <tr v-for="(entryExpanded, j) in dailyLedger[index].entriesExpanded" :key="j" :class="j % 2 === 0 ? undefined : 'bg-gray-50'" class="border-t border-gray-200">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.account.displayName }}
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.account.type }}
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.entry.currency }}
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.entry.displayDate }}
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.entry.displayDate }}
                     </td>
-                    <td class="px-3 py-4 text-sm text-gray-500">
+                    <td class="px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.entry.concept }}
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.entry.debitAmount }}
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.entry.creditAmount }}
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.account.type }}
                     </td>
                     <td></td>

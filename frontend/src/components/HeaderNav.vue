@@ -12,7 +12,7 @@ function showCreateEntryModal() {
 </script>
 
 <template>
-  <header class="fixed top-0 left-0 flex w-full items-center bg-black">
+  <header class="fixed top-0 left-0 flex w-full items-center bg-gray-800">
     <div class="w-1/3">
       <img alt="Vue logo" class="object-cover" src="@/assets/logo.png" />
     </div>
@@ -20,7 +20,7 @@ function showCreateEntryModal() {
       <RouterLink v-for="item in configStore.state.navigation" :key="item.name" :to="item.href" :class="['rounded-md p-2 font-normal text-white ' + (item.current ? 'underline' : 'hover:bg-white hover:text-black')]">{{ item.name }}</RouterLink>
     </nav>
     <div class="w-1/3">
-      <button type="button" @click="showCreateEntryModal()" class="btn ml-80 mt-3 mb-3 bg-[var(--blue)] hover:bg-indigo-700 focus:ring-indigo-500">Nuevo asiento</button>
+      <button type="button" @click="showCreateEntryModal()" class="btn ml-80 mt-3 mb-3 bg-[var(--blue)] hover:bg-white hover:text-[var(--blue)]">Nuevo asiento</button>
     </div>
   </header>
   <CreateEntryModal></CreateEntryModal>

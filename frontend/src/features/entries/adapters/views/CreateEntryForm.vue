@@ -116,7 +116,7 @@ const currencies = ref([
           </div>
         </div>
         <div class="bg-gray-50 py-3 px-6">
-          <button type="submit" id="debit-amount" name="debit-amount" @click="addDebitEntry" class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Añadir al debe</button>
+          <button type="submit" id="debit-amount" name="debit-amount" @click="addDebitEntry" class="inline-flex justify-center rounded-md border border-transparent bg-[var(--blue)] hover:bg-white hover:text-[var(--blue)] py-2 px-4 text-sm font-medium text-white shadow-sm">Añadir al debe</button>
         </div>
       </div>
     </div>
@@ -137,20 +137,38 @@ const currencies = ref([
           </div>
         </div>
         <div class="bg-gray-50 py-3 px-6">
-          <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Añadir al haber</button>
+          <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="inline-flex justify-center rounded-md border border-transparent bg-[var(--blue)] hover:bg-white hover:text-[var(--blue)] py-2 px-4 text-sm font-medium text-white shadow-sm">Añadir al haber</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="form-table">
-    <DataTablePrimeVue :value="entriesStore.state.entriesCreation" responsiveLayout="scroll">
-      <ColumnPrimeVue field="displayName" header="Cuenta"></ColumnPrimeVue>
-      <ColumnPrimeVue field="currency" header="Divisa"></ColumnPrimeVue>
-      <ColumnPrimeVue field="displayDate" header="Fecha"></ColumnPrimeVue>
-      <ColumnPrimeVue field="concept" header="Concepto"></ColumnPrimeVue>
-      <ColumnPrimeVue field="debitAmount" header="Debe"></ColumnPrimeVue>
-      <ColumnPrimeVue field="creditAmount" header="Haber"></ColumnPrimeVue>
-    </DataTablePrimeVue>
+  <div class="-mx-8 mt-8 flex overflow-x-auto">
+    <div class="inline-block min-w-full py-2 px-8 align-middle">
+      <div class="overflow-hidden rounded-lg shadow ring-1 ring-black ring-opacity-5">
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Cuenta</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Divisa</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Fecha</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Concepto</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Debe</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Haber</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+            <tr v-for="(entry, i) in entriesStore.state.entriesCreation" :key="entry.id" :class="i % 2 === 0 ? undefined : 'bg-gray-50'">
+              <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">{{ entry.displayName }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ entry.currency }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ entry.displayDate }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ entry.concept }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ entry.debitAmount }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ entry.creditAmount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
