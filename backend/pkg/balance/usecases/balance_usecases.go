@@ -92,8 +92,38 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		balance.Kind = item.Kind
 		balance.Parent = item.Parent
 		balance.Child = item.Child
+		balance.CurrentYear = item.Year
+		balance.PreviousYear = previousYear
+		balance.CurrentAmount = item.Amount
 
 		balances = append(balances, balance)
+	}
+
+	for _, item := range storedBalancesPreviousYear.Items {
+		alreadyAdded := false
+
+		for j, balance := range balances {
+			if item.ID == balance.ID {
+				balances[j].PreviousAmount = item.Amount
+				balances[j].DifferenceAmount = balances[j].CurrentAmount - item.Amount
+				balances[j].Increase = int(balances[j].DifferenceAmount / balances[j].PreviousAmount * 100)
+				alreadyAdded = true
+			}
+		}
+
+		if !alreadyAdded {
+			var balance Balance
+			balance.ID = item.ID
+			balance.Type = item.Type
+			balance.Kind = item.Kind
+			balance.Parent = item.Parent
+			balance.Child = item.Child
+			balance.CurrentYear = previousYear + 1
+			balance.PreviousYear = previousYear
+			balance.PreviousAmount = item.Amount
+
+			balances = append(balances, balance)
+		}
 	}
 
 	return &ListBalanceOutput{

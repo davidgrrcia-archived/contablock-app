@@ -59,6 +59,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 		responseItem.PreviousYear = item.PreviousYear
 		responseItem.CurrentAmount = item.CurrentAmount
 		responseItem.PreviousAmount = item.PreviousAmount
+		responseItem.DifferenceAmount = item.DifferenceAmount
+		responseItem.Increase = item.Increase
 
 		response.Items = append(response.Items, responseItem)
 	}

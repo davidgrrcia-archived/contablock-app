@@ -59,7 +59,7 @@ func (repository *BalanceRepository) Add(ctx context.Context, input balance.Bala
 }
 
 func (repository *BalanceRepository) All(ctx context.Context, filters balance.Filters) (*balance.BalanceStorageCollectionData, error) {
-	query := BuildQueryWithFilters("SELECT balances.id, type, kind, parent, child, year, amount FROM balances INNER JOIN balances_by_year ON balances_by_year.balance_id=balances.id", filters)
+	query := BuildQueryWithFilters(filters)
 
 	rows, err := repository.db.Query(query)
 	if err != nil {
@@ -95,11 +95,12 @@ func (repository *BalanceRepository) All(ctx context.Context, filters balance.Fi
 	}, nil
 }
 
-func BuildQueryWithFilters(query string, filters balance.Filters) string {
+func BuildQueryWithFilters(filters balance.Filters) string {
 	if filters.Year != nil {
 		year := strconv.Itoa(*filters.Year)
-		query = query + " WHERE year = \"" + year + "\""
+		query := "SELECT balances.id, type, kind, parent, child, year, SUM(amount) FROM balances INNER JOIN balances_by_year ON balances_by_year.balance_id = balances.id WHERE year = \"" + year + "\" GROUP BY balances.id, type, kind, parent, child, year;"
+		return query
 	}
 
-	return query
+	return ""
 }
