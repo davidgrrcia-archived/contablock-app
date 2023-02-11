@@ -12,7 +12,9 @@ type Balance struct {
 	PreviousAmount *string `json:"previousAmount"`
 }
 
-type ListBalanceRequest struct{}
+type ListBalanceRequest struct {
+	Year string `json:"year"`
+}
 
 type ListBalanceResponse struct {
 	Items []Balance `json:"items"`

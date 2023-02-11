@@ -34,7 +34,11 @@ func (handler *DefaultBalancesHttpHandler) RegisterBalanceRoutes(r *mux.Router) 
 	//register endpoints
 	r.HandleFunc("/api/balances", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
-		outputPayload, err := handler.adapter.AdaptListBalances(ctx, input.ListBalanceRequest{})
+
+		var inputPayload input.ListBalanceRequest
+		inputPayload.Year = r.URL.Query().Get("year")
+
+		outputPayload, err := handler.adapter.AdaptListBalances(ctx, inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
 			return

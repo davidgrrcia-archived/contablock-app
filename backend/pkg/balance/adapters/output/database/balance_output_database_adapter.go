@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 )
 
@@ -28,8 +27,9 @@ type BalanceRepository struct {
 
 var _ balance.BalanceStorage = (*BalanceRepository)(nil)
 
-func (repository *BalanceRepository) All(ctx context.Context) (*balance.BalanceStorageCollectionData, error) {
-	query := "SELECT * FROM balances"
+func (repository *BalanceRepository) All(ctx context.Context, filters balance.Filters) (*balance.BalanceStorageCollectionData, error) {
+	//query := BuildQueryWithFilters("SELECT * FROM balances INNER JOIN balances_by_year ON balances_by_year.balance_id=balances.id", filters)
+	query := "SELECT * FROM `balances`"
 
 	rows, err := repository.db.Query(query)
 	if err != nil {
@@ -62,4 +62,12 @@ func (repository *BalanceRepository) All(ctx context.Context) (*balance.BalanceS
 	return &balance.BalanceStorageCollectionData{
 		Items: items,
 	}, nil
+}
+
+func BuildQueryWithFilters(query string, filters balance.Filters) string {
+	if filters.Year != nil {
+		query = query + " WHERE year = \"" + *filters.Year + "\""
+	}
+
+	return query
 }

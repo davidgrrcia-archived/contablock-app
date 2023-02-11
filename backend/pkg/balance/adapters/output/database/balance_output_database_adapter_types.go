@@ -7,11 +7,6 @@ type BalanceDb struct {
 	Parent   *string  `storage:"parent"`
 	Child    *string  `storage:"child"`
 	Accounts []string `storage:"accounts"`
-}
-
-type BalanceByYearDb struct {
-	ID        string `storage:"id"`
-	BalanceID string `storage:"balance_id"`
-	Year      string `storage:"year"`
-	Amount    string `storage:"amount"`
+	Year     string   `storage:"year"`
+	Amount   string   `storage:"amount"`
 }

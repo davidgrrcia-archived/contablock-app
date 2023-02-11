@@ -36,7 +36,10 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		return nil, errors.New("invalid input")
 	}
 
-	storedBalances, err := useCase.balanceStorage.All(ctx)
+	var filters Filters
+	filters.Year = input.Year
+
+	storedBalances, err := useCase.balanceStorage.All(ctx, filters)
 	if err != nil {
 		return nil, err
 	}

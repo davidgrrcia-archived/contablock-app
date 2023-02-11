@@ -33,7 +33,7 @@ var _ BalanceInputAdapter = (*DefaultHttpInputAdapter)(nil)
 
 func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, data ListBalanceRequest) (*ListBalanceResponseWrapper, error) {
 	var inputData balance.ListBalanceInput
-
+	inputData.Year = &data.Year
 	outputData, err := adapter.balanceUseCase.ListBalances(ctx, inputData)
 	if err != nil {
 		return nil, err

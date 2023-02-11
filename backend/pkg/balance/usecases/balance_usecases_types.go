@@ -17,14 +17,20 @@ type Balance struct {
 	PreviousAmount *string
 }
 
-type ListBalanceInput struct{}
+type ListBalanceInput struct {
+	Year *string
+}
 
 type ListBalanceOutput struct {
 	Items []Balance
 }
 
+type Filters struct {
+	Year *string
+}
+
 type BalanceStorage interface {
-	All(ctx context.Context) (*BalanceStorageCollectionData, error)
+	All(ctx context.Context, filters Filters) (*BalanceStorageCollectionData, error)
 }
 
 type BalanceStorageData struct {
