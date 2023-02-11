@@ -55,15 +55,13 @@ type BalanceByYearStorageData struct {
 }
 
 type BalanceStorageData struct {
-	ID             string
-	Type           string
-	Kind           *string
-	Parent         *string
-	Child          *string
-	CurrentYear    int
-	PreviousYear   int
-	CurrentAmount  float64
-	PreviousAmount float64
+	ID     string
+	Type   string
+	Kind   *string
+	Parent *string
+	Child  *string
+	Year   int
+	Amount float64
 }
 
 type BalanceStorageCollectionData struct {

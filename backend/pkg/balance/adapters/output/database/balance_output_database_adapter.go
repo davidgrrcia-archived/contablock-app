@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"fmt"
 	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
+	"strconv"
 )
 
 func NewBalanceRepository(opts BalanceRepositoryOptions) (*BalanceRepository, error) {
@@ -59,7 +59,7 @@ func (repository *BalanceRepository) Add(ctx context.Context, input balance.Bala
 }
 
 func (repository *BalanceRepository) All(ctx context.Context, filters balance.Filters) (*balance.BalanceStorageCollectionData, error) {
-	query := BuildQueryWithFilters("SELECT * FROM balances INNER JOIN balances_by_year ON balances_by_year.balance_id=balances.id", filters)
+	query := BuildQueryWithFilters("SELECT balances.id, type, kind, parent, child, year, amount FROM balances INNER JOIN balances_by_year ON balances_by_year.balance_id=balances.id", filters)
 
 	rows, err := repository.db.Query(query)
 	if err != nil {
@@ -69,7 +69,7 @@ func (repository *BalanceRepository) All(ctx context.Context, filters balance.Fi
 	var storedBalances []BalanceDb
 	for rows.Next() {
 		var balanceDb BalanceDb
-		err = rows.Scan(&balanceDb.ID, &balanceDb.Type, &balanceDb.Kind, &balanceDb.Parent, &balanceDb.Child)
+		err = rows.Scan(&balanceDb.ID, &balanceDb.Type, &balanceDb.Kind, &balanceDb.Parent, &balanceDb.Child, &balanceDb.Year, &balanceDb.Amount)
 		if err != nil {
 			return nil, err
 		}
@@ -85,6 +85,8 @@ func (repository *BalanceRepository) All(ctx context.Context, filters balance.Fi
 		balance.Kind = storedBalance.Kind
 		balance.Parent = storedBalance.Parent
 		balance.Child = storedBalance.Child
+		balance.Year = storedBalance.Year
+		balance.Amount = storedBalance.Amount
 		items = append(items, balance)
 	}
 
@@ -94,10 +96,9 @@ func (repository *BalanceRepository) All(ctx context.Context, filters balance.Fi
 }
 
 func BuildQueryWithFilters(query string, filters balance.Filters) string {
-	s := fmt.Sprintf("%v", filters.Year)
-
 	if filters.Year != nil {
-		query = query + " WHERE year = \"" + s + "\""
+		year := strconv.Itoa(*filters.Year)
+		query = query + " WHERE year = \"" + year + "\""
 	}
 
 	return query

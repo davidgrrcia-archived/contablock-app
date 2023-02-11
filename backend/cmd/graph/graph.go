@@ -80,11 +80,11 @@ func (graph *Graph) Build() {
 
 	// use cases
 	graph.provideContablockUseCase()
+	graph.provideBalanceUseCase()
 	graph.provideAccountUseCase()
 	graph.provideBusinessUseCase()
 	graph.provideEntryUseCase()
 	graph.provideDailyLedgerUseCase()
-	graph.provideBalanceUseCase()
 
 	// input adapters
 	graph.provideAccountInputAdapter()

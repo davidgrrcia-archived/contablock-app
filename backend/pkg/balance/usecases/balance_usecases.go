@@ -70,24 +70,28 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 
 	var filters Filters
 	filters.Year = input.Year
-
-	storedBalances, err := useCase.balanceStorage.All(ctx, filters)
+	storedBalancesCurrentYear, err := useCase.balanceStorage.All(ctx, filters)
 	if err != nil {
 		return nil, err
 	}
 
+	previousYear := *input.Year - 1
+	filters.Year = &previousYear
+	storedBalancesPreviousYear, err := useCase.balanceStorage.All(ctx, filters)
+	if err != nil {
+		return nil, err
+	}
+
+	_ = storedBalancesPreviousYear
+
 	var balances []Balance
-	for _, item := range storedBalances.Items {
+	for _, item := range storedBalancesCurrentYear.Items {
 		var balance Balance
 		balance.ID = item.ID
 		balance.Type = item.Type
 		balance.Kind = item.Kind
 		balance.Parent = item.Parent
 		balance.Child = item.Child
-		balance.CurrentYear = item.CurrentYear
-		balance.PreviousYear = item.PreviousYear
-		balance.CurrentAmount = item.CurrentAmount
-		balance.PreviousAmount = item.PreviousAmount
 
 		balances = append(balances, balance)
 	}

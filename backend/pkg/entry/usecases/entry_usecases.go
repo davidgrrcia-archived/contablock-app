@@ -3,6 +3,8 @@ package entry
 import (
 	"context"
 	"errors"
+	account "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	"github.com/google/uuid"
 	"time"
@@ -26,21 +28,33 @@ func NewDefaultEntryUseCase(options DefaultEntryUseCaseOptions) (*DefaultEntryUs
 	if options.ContaBlockUseCase == nil {
 		return nil, errors.New("cannot create an instance of EntryUseCase because provided ContaBlockUseCase is nil")
 	}
+	if options.BalanceUseCase == nil {
+		return nil, errors.New("cannot create an instance of EntryUseCase because provided BalanceUseCase is nil")
+	}
+	if options.AccountUseCase == nil {
+		return nil, errors.New("cannot create an instance of EntryUseCase because provided AccountUseCase is nil")
+	}
 
 	return &DefaultEntryUseCase{
 		entryStorage:      options.EntryStorage,
 		contaBlockUseCase: options.ContaBlockUseCase,
+		balanceUseCase:    options.BalanceUseCase,
+		accountUseCase:    options.AccountUseCase,
 	}, nil
 }
 
 type DefaultEntryUseCase struct {
 	entryStorage      EntryStorage
 	contaBlockUseCase contablock.ContaBlockUseCase
+	balanceUseCase    balance.BalanceUseCase
+	accountUseCase    account.AccountUseCase
 }
 
 type DefaultEntryUseCaseOptions struct {
 	EntryStorage      EntryStorage
 	ContaBlockUseCase contablock.ContaBlockUseCase
+	BalanceUseCase    balance.BalanceUseCase
+	AccountUseCase    account.AccountUseCase
 }
 
 var _ EntryUseCase = (*DefaultEntryUseCase)(nil)
@@ -75,6 +89,24 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	err = useCase.contaBlockUseCase.CreateEntry(createEntryInput)
 	if err != nil {
 		return nil, err
+	}
+
+	var describeAccountInput account.DescribeAccountInput
+	describeAccountInput.ID = input.AccountID
+	storedAccount, err := useCase.accountUseCase.DescribeAccount(ctx, describeAccountInput)
+	if err != nil {
+		return nil, err
+	}
+
+	if storedAccount.Account.BalanceID != nil {
+		var createBalanceInput balance.CreateBalanceInput
+		createBalanceInput.BalanceID = *storedAccount.Account.BalanceID
+		createBalanceInput.Amount = *getAmountForBalance(input.DebitBalance, input.CreditBalance)
+		createBalanceInput.Year = input.Date.Year()
+		_, err = useCase.balanceUseCase.CreateBalance(ctx, createBalanceInput)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	var desiredEntry EntryStorageData
@@ -369,4 +401,12 @@ func (useCase *DefaultEntryUseCase) calculateQuarter(date time.Time) int {
 	default:
 		return 0
 	}
+}
+
+func getAmountForBalance(debitBalance *float64, creditBalance *float64) *float64 {
+	if debitBalance == nil {
+		return creditBalance
+	}
+
+	return debitBalance
 }

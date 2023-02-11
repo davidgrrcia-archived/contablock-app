@@ -80,6 +80,8 @@ func (graph *Graph) provideEntryUseCase() {
 	entryUseCaseOpts := entry.DefaultEntryUseCaseOptions{
 		EntryStorage:      graph.GetEntryStorage(),
 		ContaBlockUseCase: graph.GetContaBlockUseCase(),
+		BalanceUseCase:    graph.GetBalanceUseCase(),
+		AccountUseCase:    graph.GetAccountUseCase(),
 	}
 	entryUseCase, err := entry.NewDefaultEntryUseCase(entryUseCaseOpts)
 	if err != nil {
