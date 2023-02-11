@@ -4,7 +4,7 @@ type Account struct {
 	ID          string  `json:"id"`
 	Name        string  `json:"name"`
 	Level       string  `json:"level"`
-	Type        *string `json:"type"`
+	BalanceID   *string `json:"balanceId"`
 	DisplayName string  `json:"displayName"`
 }
 
@@ -12,7 +12,7 @@ type Subgroup struct {
 	ID          string    `json:"id"`
 	Name        string    `json:"name"`
 	Level       string    `json:"level"`
-	Type        *string   `json:"type"`
+	BalanceID   *string   `json:"balanceId"`
 	DisplayName string    `json:"displayName"`
 	Accounts    []Account `json:"accounts"`
 }
@@ -21,7 +21,7 @@ type Group struct {
 	ID          string     `json:"id"`
 	Name        string     `json:"name"`
 	Level       string     `json:"level"`
-	Type        *string    `json:"type"`
+	BalanceID   *string    `json:"balanceId"`
 	DisplayName string     `json:"displayName"`
 	Subgroups   []Subgroup `json:"subgroups"`
 }

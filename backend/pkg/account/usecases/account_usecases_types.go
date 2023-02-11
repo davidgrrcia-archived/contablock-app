@@ -15,7 +15,7 @@ type Account struct {
 	ID          string
 	Name        string
 	Level       string
-	Type        *string
+	BalanceID   *string
 	DisplayName string
 }
 
@@ -23,7 +23,7 @@ type Subgroup struct {
 	ID          string
 	Name        string
 	Level       string
-	Type        *string
+	BalanceID   *string
 	DisplayName string
 	Accounts    []Account
 }
@@ -32,7 +32,7 @@ type Group struct {
 	ID          string
 	Name        string
 	Level       string
-	Type        *string
+	BalanceID   *string
 	DisplayName string
 	Subgroups   []Subgroup
 }
@@ -54,13 +54,14 @@ type ListAccountOutput struct {
 type AccountStorage interface {
 	Get(ctx context.Context, id string) (*AccountStorageData, error)
 	All(ctx context.Context) (*AccountStorageCollectionData, error)
+	Edit(ctx context.Context, input AccountStorageData) (*AccountStorageData, error)
 }
 
 type AccountStorageData struct {
-	ID    string
-	Name  string
-	Level string
-	Type  *string
+	ID        string
+	Name      string
+	Level     string
+	BalanceID *string
 }
 
 type AccountStorageCollectionData struct {

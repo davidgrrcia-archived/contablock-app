@@ -48,7 +48,7 @@ func (useCase *DefaultAccountUseCase) DescribeAccount(ctx context.Context, input
 	output.Account.ID = storedAccount.ID
 	output.Account.Name = storedAccount.Name
 	output.Account.Level = storedAccount.Level
-	output.Account.Type = storedAccount.Type
+	output.Account.BalanceID = storedAccount.BalanceID
 	output.Account.DisplayName = storedAccount.ID + " - " + storedAccount.Name
 
 	return &output, err
@@ -74,7 +74,7 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 			group.ID = item.ID
 			group.Name = item.Name
 			group.Level = item.Level
-			group.Type = item.Type
+			group.BalanceID = item.BalanceID
 			group.DisplayName = item.ID + " - " + item.Name
 			groups = append(groups, group)
 		}
@@ -83,7 +83,7 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 			subgroup.ID = item.ID
 			subgroup.Name = item.Name
 			subgroup.Level = item.Level
-			subgroup.Type = item.Type
+			subgroup.BalanceID = item.BalanceID
 			subgroup.DisplayName = item.ID + " - " + item.Name
 			indexString := subgroup.ID[0:1]
 			index, err := strconv.Atoi(indexString)
@@ -97,7 +97,7 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 			account.ID = item.ID
 			account.Name = item.Name
 			account.Level = item.Level
-			account.Type = item.Type
+			account.BalanceID = item.BalanceID
 			account.DisplayName = item.ID + " - " + item.Name
 			accounts = append(accounts, account)
 		}

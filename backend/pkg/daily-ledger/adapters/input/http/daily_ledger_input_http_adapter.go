@@ -63,7 +63,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListDailyLedger(ctx context.Context
 			entryExpanded.Account.ID = entry.Account.ID
 			entryExpanded.Account.Name = entry.Account.Name
 			entryExpanded.Account.Level = entry.Account.Level
-			entryExpanded.Account.Type = entry.Account.Type
+			entryExpanded.Account.BalanceID = entry.Account.BalanceID
 			entryExpanded.Account.DisplayName = entry.Account.DisplayName
 
 			responseItem.EntriesExpanded = append(responseItem.EntriesExpanded, entryExpanded)

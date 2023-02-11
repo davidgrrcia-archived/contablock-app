@@ -45,7 +45,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeAccount(ctx context.Context
 	response.ID = outputData.Account.ID
 	response.Name = outputData.Account.Name
 	response.Level = outputData.Account.Level
-	response.Type = outputData.Account.Type
+	response.BalanceID = outputData.Account.BalanceID
 	response.DisplayName = outputData.Account.DisplayName
 
 	responseWrapper := DescribeAccountResponseWrapper{}
@@ -70,7 +70,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListAccounts(ctx context.Context, d
 		responseItem.ID = item.ID
 		responseItem.Name = item.Name
 		responseItem.Level = item.Level
-		responseItem.Type = item.Type
+		responseItem.BalanceID = item.BalanceID
 		responseItem.DisplayName = item.DisplayName
 
 		for i, subgroup := range item.Subgroups {
@@ -78,7 +78,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListAccounts(ctx context.Context, d
 			subgroupItem.ID = subgroup.ID
 			subgroupItem.Name = subgroup.Name
 			subgroupItem.Level = subgroup.Level
-			subgroupItem.Type = subgroup.Type
+			subgroupItem.BalanceID = subgroup.BalanceID
 			subgroupItem.DisplayName = subgroup.DisplayName
 			responseItem.Subgroups = append(responseItem.Subgroups, subgroupItem)
 			for _, account := range subgroup.Accounts {
@@ -86,7 +86,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListAccounts(ctx context.Context, d
 				accountItem.ID = account.ID
 				accountItem.Name = account.Name
 				accountItem.Level = account.Level
-				accountItem.Type = account.Type
+				accountItem.BalanceID = account.BalanceID
 				accountItem.DisplayName = account.DisplayName
 				responseItem.Subgroups[i].Accounts = append(responseItem.Subgroups[i].Accounts, accountItem)
 			}
