@@ -12,6 +12,10 @@ import (
 	accountOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/output/database"
 	accountInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/infra/input"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+	inputBalance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/adapters/input/http"
+	balanceOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/adapters/output/database"
+	balanceInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/infra/input"
+	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 	inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
 	businessOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/output/database"
 	businessInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/infra/input"
@@ -359,4 +363,70 @@ func (graph *Graph) provideDailyLedgerEndpoints() {
 		log.Fatal(err)
 	}
 	handler.RegisterDailyLedgerRoutes(graph.GetRouter())
+}
+
+/////// BALANCES ///////
+
+func (graph *Graph) provideBalanceDB() {
+	db, err := sql.Open("mysql", os.Getenv("DB_USER")+":"+os.Getenv("DB_PASS")+"@tcp("+os.Getenv("DB_HOST")+":"+os.Getenv("DB_PORT")+")/"+os.Getenv("DB_NAME"))
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+
+	graph.BalanceDb = *db
+}
+
+func (graph *Graph) provideBalanceStorage() balance.BalanceStorage {
+	balanceStorageOpts := balanceOutputDbAdapter.BalanceRepositoryOptions{
+		DB: graph.GetBalanceDB(),
+	}
+	balanceStorage, err := balanceOutputDbAdapter.NewBalanceRepository(balanceStorageOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.BalanceStorage = balanceStorage
+
+	return balanceStorage
+}
+
+func (graph *Graph) provideBalanceUseCase() {
+	balanceUseCaseOpts := balance.DefaultBalanceUseCaseOptions{
+		BalanceStorage: graph.GetBalanceStorage(),
+	}
+	balanceUseCase, err := balance.NewDefaultBalanceUseCase(balanceUseCaseOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.BalanceUseCase = balanceUseCase
+}
+
+func (graph *Graph) provideBalanceInputAdapter() *inputBalance.DefaultHttpInputAdapter {
+	balanceInputAdapterOpts := inputBalance.DefaultHttpInputAdapterOptions{
+		BalanceUseCase: graph.GetBalanceUseCase(),
+	}
+	balanceInputAdapter, err := inputBalance.NewDefaultHttpInputAdapter(balanceInputAdapterOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.BalanceInputAdapter = balanceInputAdapter
+
+	return balanceInputAdapter
+}
+
+func (graph *Graph) provideBalanceEndpoints() {
+	var options balanceInputInfra.DefaultBalancesHttpHandlerOptions
+	options.Adapter = graph.GetBalanceInputAdapter()
+	handler, err := balanceInputInfra.NewDefaultBalancesHttpHandler(options)
+	if err != nil {
+		log.Fatal(err)
+	}
+	handler.RegisterBalanceRoutes(graph.GetRouter())
 }

@@ -1,9 +1,29 @@
 CREATE TABLE
+    balances(
+        id VARCHAR(64) NOT NULL PRIMARY KEY,
+        type VARCHAR(256) NOT NULL,
+        kind VARCHAR(256) NULL,
+        parent VARCHAR(256) NULL,
+        child VARCHAR(256)  NULL,
+        accounts VARCHAR(256) NOT NULL
+);
+
+CREATE TABLE
+    balances_by_year(
+        id VARCHAR(64) NOT NULL PRIMARY KEY,
+        balance_id VARCHAR(64) NOT NULL,
+        amount VARCHAR(64) NOT NULL,
+        year VARCHAR(4) NOT NULL,
+        FOREIGN KEY (balance_id) REFERENCES balances(id)
+);
+
+CREATE TABLE
     accounts(
         id VARCHAR(64) NOT NULL PRIMARY KEY,
         name VARCHAR(256) NOT NULL,
         level VARCHAR(64) NOT NULL,
-        type VARCHAR(64)
+        balance_id VARCHAR(64) NULL
+--         FOREIGN KEY (balance_id) REFERENCES balances(id)
     );
 
 CREATE TABLE
@@ -38,6 +58,13 @@ CREATE TABLE
 
 LOAD DATA INFILE '/var/lib/mysql-files/accounts.csv'
 INTO TABLE accounts
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 0 ROWS;
+
+LOAD DATA INFILE '/var/lib/mysql-files/balances.csv'
+INTO TABLE balances
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'

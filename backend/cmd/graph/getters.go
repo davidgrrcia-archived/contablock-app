@@ -6,6 +6,8 @@ import (
 
 	inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+	inputAdapterBalance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/adapters/input/http"
+	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 	inputAdapterBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
 	inputAdapterDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
@@ -130,4 +132,28 @@ func (graph *Graph) GetDailyLedgerUseCase() dailyledger.DailyLedgerUseCase {
 		panic("graph DailyLedgerUseCase case is nil")
 	}
 	return graph.DailyLedgerUseCase
+}
+
+/////// BALANCES ///////
+
+func (graph *Graph) GetBalanceInputAdapter() inputAdapterBalance.BalanceInputAdapter {
+	return graph.BalanceInputAdapter
+}
+
+func (graph *Graph) GetBalanceDB() *sql.DB {
+	return &graph.BalanceDb
+}
+
+func (graph *Graph) GetBalanceStorage() balance.BalanceStorage {
+	if graph.BalanceStorage == nil {
+		panic("graph BalanceStorage is nil")
+	}
+	return graph.BalanceStorage
+}
+
+func (graph *Graph) GetBalanceUseCase() balance.BalanceUseCase {
+	if graph.BalanceUseCase == nil {
+		panic("graph BalanceUseCase case is nil")
+	}
+	return graph.BalanceUseCase
 }

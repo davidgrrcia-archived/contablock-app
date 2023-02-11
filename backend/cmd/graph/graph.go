@@ -6,6 +6,8 @@ import (
 
 	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+	inputBalance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/adapters/input/http"
+	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 	inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
 	inputDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
@@ -49,6 +51,12 @@ type Graph struct {
 	//daily ledger
 	dailyledger.DailyLedgerUseCase
 	inputDailyLedger.DailyLedgerInputAdapter
+
+	//balances
+	BalanceDb sql.DB
+	balance.BalanceStorage
+	balance.BalanceUseCase
+	inputBalance.BalanceInputAdapter
 }
 
 func NewGraph() Graph {
@@ -61,12 +69,14 @@ func (graph *Graph) Build() {
 	graph.provideAccountDB()
 	graph.provideBusinessDB()
 	graph.provideEntryDB()
+	graph.provideBalanceDB()
 
 	// output adapters
 	graph.provideContablockContractAdapter()
 	graph.provideAccountStorage()
 	graph.provideBusinessStorage()
 	graph.provideEntryStorage()
+	graph.provideBalanceStorage()
 
 	// use cases
 	graph.provideContablockUseCase()
@@ -74,12 +84,14 @@ func (graph *Graph) Build() {
 	graph.provideBusinessUseCase()
 	graph.provideEntryUseCase()
 	graph.provideDailyLedgerUseCase()
+	graph.provideBalanceUseCase()
 
 	// input adapters
 	graph.provideAccountInputAdapter()
 	graph.provideBusinessInputAdapter()
 	graph.provideEntryInputAdapter()
 	graph.provideDailyLedgerInputAdapter()
+	graph.provideBalanceInputAdapter()
 
 	// input infra
 	graph.provideRouter()
@@ -87,4 +99,5 @@ func (graph *Graph) Build() {
 	graph.provideBusinessEndpoints()
 	graph.provideEntryEndpoints()
 	graph.provideDailyLedgerEndpoints()
+	graph.provideBalanceEndpoints()
 }
