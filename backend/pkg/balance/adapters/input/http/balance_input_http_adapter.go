@@ -3,6 +3,7 @@ package balanceInputHttpAdapter
 import (
 	"context"
 	"errors"
+	"strconv"
 
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 )
@@ -32,8 +33,13 @@ type DefaultHttpInputAdapterOptions struct {
 var _ BalanceInputAdapter = (*DefaultHttpInputAdapter)(nil)
 
 func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, data ListBalanceRequest) (*ListBalanceResponseWrapper, error) {
+	year, err := strconv.Atoi(data.Year)
+	if err != nil {
+		return nil, err
+	}
+
 	var inputData balance.ListBalanceInput
-	inputData.Year = &data.Year
+	inputData.Year = &year
 	outputData, err := adapter.balanceUseCase.ListBalances(ctx, inputData)
 	if err != nil {
 		return nil, err

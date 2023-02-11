@@ -4,7 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
+	"fmt"
+	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 )
 
 func NewBalanceRepository(opts BalanceRepositoryOptions) (*BalanceRepository, error) {
@@ -27,9 +28,38 @@ type BalanceRepository struct {
 
 var _ balance.BalanceStorage = (*BalanceRepository)(nil)
 
+func (repository *BalanceRepository) Add(ctx context.Context, input balance.BalanceByYearStorageData) (*balance.BalanceByYearStorageData, error) {
+	var balanceDb BalanceByYearDb
+	balanceDb.ID = input.ID
+	balanceDb.BalanceID = input.BalanceID
+	balanceDb.Amount = input.Amount
+	balanceDb.Year = input.Year
+
+	insertQuery := "INSERT INTO balances_by_year (id, balance_id, amount, year) VALUES (?, ?, ?, ?)"
+
+	repository.db.QueryRow(insertQuery, balanceDb.ID, balanceDb.BalanceID, balanceDb.Amount, balanceDb.Year)
+
+	query := "SELECT * FROM balances_by_year WHERE id = ?"
+
+	result := repository.db.QueryRow(query, balanceDb.ID)
+
+	var addedBalance BalanceByYearDb
+	err := result.Scan(&addedBalance.ID, &addedBalance.BalanceID, &addedBalance.Amount, &addedBalance.Year)
+	if err != nil {
+		return nil, err
+	}
+
+	var output balance.BalanceByYearStorageData
+	output.ID = addedBalance.ID
+	output.BalanceID = addedBalance.BalanceID
+	output.Amount = addedBalance.Amount
+	output.Year = addedBalance.Year
+
+	return &output, nil
+}
+
 func (repository *BalanceRepository) All(ctx context.Context, filters balance.Filters) (*balance.BalanceStorageCollectionData, error) {
-	//query := BuildQueryWithFilters("SELECT * FROM balances INNER JOIN balances_by_year ON balances_by_year.balance_id=balances.id", filters)
-	query := "SELECT * FROM `balances`"
+	query := BuildQueryWithFilters("SELECT * FROM balances INNER JOIN balances_by_year ON balances_by_year.balance_id=balances.id", filters)
 
 	rows, err := repository.db.Query(query)
 	if err != nil {
@@ -39,7 +69,7 @@ func (repository *BalanceRepository) All(ctx context.Context, filters balance.Fi
 	var storedBalances []BalanceDb
 	for rows.Next() {
 		var balanceDb BalanceDb
-		err = rows.Scan(&balanceDb.ID, &balanceDb.Type, &balanceDb.Kind, &balanceDb.Parent, &balanceDb.Child, &balanceDb.Accounts)
+		err = rows.Scan(&balanceDb.ID, &balanceDb.Type, &balanceDb.Kind, &balanceDb.Parent, &balanceDb.Child)
 		if err != nil {
 			return nil, err
 		}
@@ -55,7 +85,6 @@ func (repository *BalanceRepository) All(ctx context.Context, filters balance.Fi
 		balance.Kind = storedBalance.Kind
 		balance.Parent = storedBalance.Parent
 		balance.Child = storedBalance.Child
-		balance.Accounts = storedBalance.Accounts
 		items = append(items, balance)
 	}
 
@@ -65,8 +94,10 @@ func (repository *BalanceRepository) All(ctx context.Context, filters balance.Fi
 }
 
 func BuildQueryWithFilters(query string, filters balance.Filters) string {
+	s := fmt.Sprintf("%v", filters.Year)
+
 	if filters.Year != nil {
-		query = query + " WHERE year = \"" + *filters.Year + "\""
+		query = query + " WHERE year = \"" + s + "\""
 	}
 
 	return query

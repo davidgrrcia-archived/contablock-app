@@ -10,15 +10,28 @@ type Balance struct {
 	Kind           *string
 	Parent         *string
 	Child          *string
-	Accounts       []string
-	CurrentYear    *string
-	PreviousYear   *string
-	CurrentAmount  *string
-	PreviousAmount *string
+	CurrentYear    int
+	PreviousYear   int
+	CurrentAmount  float64
+	PreviousAmount float64
+}
+
+type CreateBalanceInput struct {
+	ID        *string
+	BalanceID string
+	Amount    float64
+	Year      int
+}
+
+type CreateBalanceOutput struct {
+	ID        string
+	BalanceID string
+	Amount    float64
+	Year      int
 }
 
 type ListBalanceInput struct {
-	Year *string
+	Year *int
 }
 
 type ListBalanceOutput struct {
@@ -26,11 +39,19 @@ type ListBalanceOutput struct {
 }
 
 type Filters struct {
-	Year *string
+	Year *int
 }
 
 type BalanceStorage interface {
+	Add(ctx context.Context, input BalanceByYearStorageData) (*BalanceByYearStorageData, error)
 	All(ctx context.Context, filters Filters) (*BalanceStorageCollectionData, error)
+}
+
+type BalanceByYearStorageData struct {
+	ID        string
+	BalanceID string
+	Amount    float64
+	Year      int
 }
 
 type BalanceStorageData struct {
@@ -39,11 +60,10 @@ type BalanceStorageData struct {
 	Kind           *string
 	Parent         *string
 	Child          *string
-	Accounts       []string
-	CurrentYear    *string
-	PreviousYear   *string
-	CurrentAmount  *string
-	PreviousAmount *string
+	CurrentYear    int
+	PreviousYear   int
+	CurrentAmount  float64
+	PreviousAmount float64
 }
 
 type BalanceStorageCollectionData struct {

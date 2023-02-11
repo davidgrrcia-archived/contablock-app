@@ -23,7 +23,6 @@ CREATE TABLE
         name VARCHAR(256) NOT NULL,
         level VARCHAR(64) NOT NULL,
         balance_id VARCHAR(64) NULL
---         FOREIGN KEY (balance_id) REFERENCES balances(id)
     );
 
 CREATE TABLE

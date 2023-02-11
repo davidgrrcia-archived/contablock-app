@@ -6,10 +6,10 @@ type Balance struct {
 	Kind           *string `json:"kind"`
 	Parent         *string `json:"parent"`
 	Child          *string `json:"child"`
-	CurrentYear    *string `json:"currentYear"`
-	PreviousYear   *string `json:"previousYear"`
-	CurrentAmount  *string `json:"currentAmount"`
-	PreviousAmount *string `json:"previousAmount"`
+	CurrentYear    int     `json:"currentYear"`
+	PreviousYear   int     `json:"previousYear"`
+	CurrentAmount  float64 `json:"currentAmount"`
+	PreviousAmount float64 `json:"previousAmount"`
 }
 
 type ListBalanceRequest struct {

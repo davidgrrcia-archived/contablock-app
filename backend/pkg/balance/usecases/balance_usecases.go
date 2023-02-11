@@ -4,9 +4,11 @@ import (
 	"context"
 	"errors"
 	"github.com/asaskevich/govalidator"
+	"github.com/google/uuid"
 )
 
 type BalanceUseCase interface {
+	CreateBalance(ctx context.Context, input CreateBalanceInput) (*CreateBalanceOutput, error)
 	ListBalances(ctx context.Context, input ListBalanceInput) (*ListBalanceOutput, error)
 }
 
@@ -30,6 +32,36 @@ type DefaultBalanceUseCaseOptions struct {
 
 var _ BalanceUseCase = (*DefaultBalanceUseCase)(nil)
 
+func (useCase *DefaultBalanceUseCase) CreateBalance(ctx context.Context, input CreateBalanceInput) (*CreateBalanceOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input")
+	}
+
+	id := uuid.New().String()
+
+	var desiredBalance BalanceByYearStorageData
+	if input.ID == nil {
+		input.ID = &id
+	}
+	desiredBalance.ID = *input.ID
+	desiredBalance.BalanceID = input.BalanceID
+	desiredBalance.Amount = input.Amount
+	desiredBalance.Year = input.Year
+	storedBalance, err := useCase.balanceStorage.Add(ctx, desiredBalance)
+	if err != nil {
+		return nil, err
+	}
+
+	var output CreateBalanceOutput
+	output.ID = storedBalance.ID
+	output.BalanceID = storedBalance.BalanceID
+	output.Amount = storedBalance.Amount
+	output.Year = storedBalance.Year
+
+	return &output, nil
+}
+
 func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input ListBalanceInput) (*ListBalanceOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
@@ -52,7 +84,6 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		balance.Kind = item.Kind
 		balance.Parent = item.Parent
 		balance.Child = item.Child
-		balance.Accounts = item.Accounts
 		balance.CurrentYear = item.CurrentYear
 		balance.PreviousYear = item.PreviousYear
 		balance.CurrentAmount = item.CurrentAmount
