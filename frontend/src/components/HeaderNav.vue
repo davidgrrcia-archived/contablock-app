@@ -2,7 +2,7 @@
 import { useCreateEntryModalStore } from '@/stores/createEntryModal';
 import CreateEntryModal from '@/components/CreateEntryModal.vue';
 import { useConfigStore } from '@/stores/config';
-import BusinessHeading from "@/features/business/adapters/views/BusinessHeading.vue";
+import BusinessHeading from '@/features/business/adapters/views/BusinessHeading.vue';
 
 const configStore = useConfigStore();
 const modalState = useCreateEntryModalStore();

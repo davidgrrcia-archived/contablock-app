@@ -1,7 +1,7 @@
-import {defineStore} from 'pinia';
-import {businessUseCase} from '@/features/business';
-import type {Business} from '@/features/business/application/business-model';
-import {useMessagesStore} from '@/stores/messages';
+import { defineStore } from 'pinia';
+import { businessUseCase } from '@/features/business';
+import type { Business } from '@/features/business/application/business-model';
+import { useMessagesStore } from '@/stores/messages';
 
 //TODO: apply clean architecture
 interface BusinessState {
@@ -10,14 +10,14 @@ interface BusinessState {
 }
 
 const emptyBusiness: Business = {
-  id: "",
-  name: "",
-  socialDenomination: "",
-  registeredOffice: "",
-  cif: "",
-  logo: "",
-  ethAddress: ""
-}
+  id: '',
+  name: '',
+  socialDenomination: '',
+  registeredOffice: '',
+  cif: '',
+  logo: '',
+  ethAddress: '',
+};
 
 const state: BusinessState = {
   business: emptyBusiness,
@@ -37,12 +37,12 @@ export const useBusinessStore = defineStore('business', {
         this.state.business = await businessUseCase.describeBusiness(id);
         this.state.stateMessage = 'business loaded';
 
-        return this.state
+        return this.state;
       } catch (err) {
         this.state.stateMessage = 'error loading business';
         const messagesStore = useMessagesStore();
         messagesStore.addMessage(this.state.stateMessage);
-        return this.state
+        return this.state;
       }
     },
   },

@@ -14,7 +14,7 @@ export class DefaultBusinessHttpAdapter implements BusinessAdapter {
       registeredOffice: input.registeredOffice,
       cif: input.cif,
       logo: input.logo,
-      ethAddress: input.ethAddress
+      ethAddress: input.ethAddress,
     };
 
     return output;
