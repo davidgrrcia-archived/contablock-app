@@ -19,7 +19,7 @@ function showCreateEntryModal() {
       <RouterLink class="text-lg" v-for="item in configStore.state.navigation" :key="item.name" :to="item.href" :class="['rounded-md p-2 font-normal text-white ' + (item.current ? 'underline' : 'hover:bg-white hover:text-black')]">{{ item.name }}</RouterLink>
     </div>
     <div class="w-1/2 text-right">
-      <button type="button" @click="showCreateEntryModal()" class="btn my-3 mr-24 bg-[var(--blue)] hover:bg-white hover:text-[var(--blue)]">Nuevo asiento</button>
+      <button type="button" @click="showCreateEntryModal()" class="btn my-3 mr-24 bg-blue-500 hover:bg-white hover:text-blue-500">Nuevo asiento</button>
     </div>
   </header>
   <CreateEntryModal></CreateEntryModal>

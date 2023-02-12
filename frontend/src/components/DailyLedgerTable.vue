@@ -40,7 +40,7 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
                     <th>
                       <div class="flex space-x-4 py-2 px-2">
                         <div class="w-1/2">
-                          <button type="button" class="btn bg-[var(--blue)]">Publicar</button>
+                          <button type="button" class="btn bg-blue-500">Publicar</button>
                         </div>
                         <div class="w-1/2">
                           <button type="button" class="btn bg-[var(--red)]">Eliminar</button>

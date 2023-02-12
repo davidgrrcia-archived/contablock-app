@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import type { Entry } from '@/features/entries/application/entries-model';
 import { useEntriesStore } from '@/stores/entries';
 import { useAccountsStore } from '@/stores/accounts';
+import { Dropdown, ListGroup, ListGroupItem } from 'flowbite-vue';
 
 //store
 const entriesStore = useEntriesStore();
@@ -67,27 +68,36 @@ function addCreditEntry() {
 const currencies = ref([
   {
     code: 'EUR',
+    symbol: '€',
   },
   {
     code: 'GBP',
+    symbol: '£',
   },
   {
     code: 'USD',
+    symbol: '$',
   },
 ]);
+
+function findCurrencyByCode(code: string): string {
+  const c = currencies.value.find(currency => currency.code === code);
+
+  return c ? c.symbol : '';
+}
 </script>
 
 <template>
-  <div class="mt-0 flex space-x-10 overflow-hidden rounded-md p-6 text-left shadow">
+  <div class="mt-0 flex w-full space-x-10 overflow-hidden rounded-md p-6 text-left shadow">
     <div class="w-1/4">
       <label for="currency" class="block text-sm font-medium text-gray-700">Currency</label>
-      <select v-model="selectedCurrency" id="currency" name="currency" autocomplete="currency-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+      <select v-model="selectedCurrency" id="currency" name="currency" autocomplete="currency-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm sm:text-sm">
         <option v-for="(currency, i) in currencies" :key="i">{{ currency.code }}</option>
       </select>
     </div>
     <div class="w-1/4">
       <label for="concept" class="block text-sm font-medium text-gray-700">Concepto</label>
-      <input type="text" v-model="concept" maxlength="64" name="concept" id="concept" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+      <input type="text" v-model="concept" maxlength="64" name="concept" id="concept" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm" />
     </div>
     <div class="w-1/4">
       <label for="calendar" class="block text-sm font-medium text-gray-700">Fecha del asiento</label>
@@ -102,42 +112,64 @@ const currencies = ref([
   <div class="mt-2 mb-10 flex space-x-4 text-left">
     <div class="w-1/2">
       <div class="mt-0 overflow-hidden rounded-md shadow">
-        <div class="bg-gray-50 py-3 px-6">
+        <div class="bg-gray-700 py-3 px-6 text-white">
           <h4 class="text-2xl">Debe</h4>
         </div>
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-700">Cuenta</label>
-            <TreeSelectPrimeVue v-model="debitAccount" :options="accounts" id="account" name="account"></TreeSelectPrimeVue>
+            <TreeSelectPrimeVue v-model="debitAccount" :options="accounts" placeholder="Selecciona una cuenta para añadirla al debe" id="account" name="account"></TreeSelectPrimeVue>
           </div>
           <div>
             <label for="debit-amount" class="block text-sm font-medium text-gray-700">Importe</label>
-            <InputNumberPrimeVue v-model="debitAmount" mode="currency" :currency="selectedCurrency" locale="es-ES" />
+            <div class="relative mt-1 rounded-md shadow-sm">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <span class="text-gray-500 sm:text-sm">{{ findCurrencyByCode(selectedCurrency) }}</span>
+              </div>
+              <input v-model="debitAmount" type="text" name="debit-amount" id="debit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="0.00" />
+              <div class="absolute inset-y-0 right-0 flex items-center">
+                <label for="currency" class="sr-only">Divisa</label>
+                <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                  <option v-for="(currency, i) in currencies" :key="i">{{ currency.code }}</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
         <div class="bg-gray-50 py-3 px-6">
-          <button type="submit" id="debit-amount" name="debit-amount" @click="addDebitEntry" class="inline-flex justify-center rounded-md border border-transparent bg-[var(--blue)] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-white hover:text-[var(--blue)]">Añadir al debe</button>
+          <button type="submit" id="debit-amount" name="debit-amount" @click="addDebitEntry" class="inline-flex justify-center rounded-md border border-transparent bg-blue-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-white hover:text-blue-500">Añadir al debe</button>
         </div>
       </div>
     </div>
 
     <div class="w-1/2">
-      <div class="mt-0 overflow-hidden rounded-md text-right shadow">
-        <div class="bg-gray-50 py-3 px-6">
-          <h4 class="text-2xl">Haber</h4>
+      <div class="mt-0 overflow-hidden rounded-md shadow">
+        <div class="bg-gray-700 py-3 px-6 text-white">
+          <h4 class="text-right text-2xl">Haber</h4>
         </div>
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-700">Cuenta</label>
-            <TreeSelectPrimeVue v-model="creditAccount" :options="accounts" id="account" name="account"></TreeSelectPrimeVue>
+            <TreeSelectPrimeVue v-model="creditAccount" :options="accounts" placeholder="Selecciona una cuenta para añadirla al haber" id="account" name="account"></TreeSelectPrimeVue>
           </div>
           <div>
             <label for="credit-amount" class="block text-sm font-medium text-gray-700">Importe</label>
-            <InputNumberPrimeVue v-model="creditAmount" mode="currency" :currency="selectedCurrency" locale="es-ES" />
+            <div class="relative mt-1 rounded-md shadow-sm">
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                <span class="text-gray-500 sm:text-sm">{{ findCurrencyByCode(selectedCurrency) }}</span>
+              </div>
+              <input v-model="creditAmount" type="text" name="credit-amount" id="credit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="0.00" />
+              <div class="absolute inset-y-0 right-0 flex items-center">
+                <label for="currency" class="sr-only">Divisa</label>
+                <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                  <option v-for="(currency, i) in currencies" :key="i">{{ currency.code }}</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="bg-gray-50 py-3 px-6">
-          <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="inline-flex justify-center rounded-md border border-transparent bg-[var(--blue)] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-white hover:text-[var(--blue)]">Añadir al haber</button>
+        <div class="bg-gray-50 py-3 px-6 text-right">
+          <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="inline-flex w-full justify-center rounded-md bg-blue-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700">Añadir al haber</button>
         </div>
       </div>
     </div>
@@ -147,14 +179,14 @@ const currencies = ref([
     <div class="inline-block min-w-full py-2 px-8 align-middle">
       <div class="overflow-hidden rounded-lg shadow ring-1 ring-black ring-opacity-5">
         <table class="min-w-full divide-y divide-gray-300">
-          <thead class="bg-gray-50">
+          <thead class="bg-gray-700">
             <tr>
-              <th scope="col" class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Cuenta</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Divisa</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Fecha</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Concepto</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Debe</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">Haber</th>
+              <th scope="col" class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-6">Cuenta</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Divisa</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Fecha</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Concepto</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Debe</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Haber</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200 bg-white">
@@ -172,3 +204,17 @@ const currencies = ref([
     </div>
   </div>
 </template>
+
+<style>
+.p-treeselect {
+  @apply w-full rounded-md border-gray-300 pl-7 pr-12 text-sm focus:border-blue-500 focus:ring-blue-500;
+}
+
+.p-treenode-content {
+  @apply bg-gray-100 text-sm text-gray-700;
+}
+
+.p-calendar-w-btn .p-datepicker-trigger {
+  @apply border-transparent bg-gray-700 text-sm text-white hover:bg-gray-700 focus:border-gray-700 focus:ring-gray-700;
+}
+</style>
