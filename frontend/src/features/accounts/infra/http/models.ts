@@ -3,7 +3,7 @@ export interface Account {
   level: string;
   name: string;
 
-  type: string;
+  balanceId: string;
   displayName: string;
 }
 
@@ -12,7 +12,7 @@ export interface Group {
   level: string;
   name: string;
 
-  type: string;
+  balanceId: string;
   displayName: string;
   subgroups: Subgroup[];
 }
@@ -22,7 +22,7 @@ export interface Subgroup {
   level: string;
   name: string;
 
-  type: string;
+  balanceId: string;
   displayName: string;
   accounts: Account[];
 }
@@ -36,6 +36,6 @@ export interface AccountDescribeResponse {
   level: string;
   name: string;
 
-  type: string;
+  balanceId: string;
   displayName: string;
 }

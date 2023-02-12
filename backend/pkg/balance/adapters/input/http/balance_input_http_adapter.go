@@ -52,7 +52,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 		typeBalance.Name = item.Type
 		typeBalance.CurrentYear = item.CurrentYear
 		typeBalance.PreviousYear = item.PreviousYear
-		typeBalance.Increase = item.Increase
 		if mapping[item.Type].Map == nil {
 			typeBalance.Map = make(map[string]Balance)
 			typeBalance.CurrentAmount = item.CurrentAmount
@@ -122,38 +121,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 	}
 
 	var response ListBalanceResponse
-	response.Items = make([]Type, 0)
-
-	for _, balance := range outputData.Items {
-		var child Child
-		var parent Parent
-		var kind Kind
-		var item Type
-
-		child.Balance.ID = balance.ID
-		child.Balance.Name = *balance.Child
-		child.Balance.CurrentYear = balance.CurrentYear
-		child.Balance.PreviousYear = balance.PreviousYear
-		child.Balance.CurrentAmount = balance.CurrentAmount
-		child.Balance.PreviousAmount = balance.PreviousAmount
-		child.Balance.DifferenceAmount = balance.DifferenceAmount
-		child.Balance.Increase = balance.Increase
-
-		if balance.Child != nil {
-			child.Balance.ID = *balance.Child
-			if balance.Parent != nil {
-				parent.Balance.ID = *balance.Parent
-				parent.Childs = []Child{child}
-				if balance.Kind != nil {
-					kind.Balance.ID = *balance.Kind
-					kind.Parents = []Parent{parent}
-					item.Balance.ID = balance.ID
-					item.Kinds = []Kind{kind}
-					response.Items = append(response.Items, item)
-				}
-			}
-		}
-	}
+	response.Items = mapping
 
 	responseWrapper := ListBalanceResponseWrapper{}
 	responseWrapper.ListBalanceResponse = response

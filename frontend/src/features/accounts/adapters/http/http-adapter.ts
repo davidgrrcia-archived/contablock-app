@@ -34,7 +34,7 @@ export class DefaultAccountsHttpAdapter implements AccountsAdapter {
       id: input.id,
       name: input.name,
       level: input.level,
-      type: input.type,
+      balanceId: input.balanceId,
       displayName: input.displayName,
     };
 

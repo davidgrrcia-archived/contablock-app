@@ -7,7 +7,7 @@ export interface Account {
   id: string;
   level: string;
   name: string;
-  type: string;
+  balanceId: string;
   displayName: string;
 }
 

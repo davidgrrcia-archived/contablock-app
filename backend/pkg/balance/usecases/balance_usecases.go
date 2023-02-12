@@ -82,8 +82,6 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		return nil, err
 	}
 
-	_ = storedBalancesPreviousYear
-
 	var balances []Balance
 	for _, item := range storedBalancesCurrentYear.Items {
 		var balance Balance
@@ -105,8 +103,6 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		for j, balance := range balances {
 			if item.ID == balance.ID {
 				balances[j].PreviousAmount = item.Amount
-				balances[j].DifferenceAmount = balances[j].CurrentAmount - item.Amount
-				balances[j].Increase = int(balances[j].DifferenceAmount / balances[j].PreviousAmount * 100)
 				alreadyAdded = true
 			}
 		}

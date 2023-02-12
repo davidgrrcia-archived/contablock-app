@@ -27,7 +27,7 @@ function createEntries() {
       <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end items-center justify-center p-4 p-0 text-center">
           <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 translate-y-0 scale-95" enter-to="opacity-100 translate-y-0 scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 scale-100" leave-to="opacity-0 translate-y-4 translate-y-0 scale-95">
-            <DialogPanel class="relative my-8 w-full max-w-fit transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all">
+            <DialogPanel class="relative my-8 w-full max-w-full transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all">
               <div class="bg-white p-6 px-4 pt-5 pb-4 pb-4">
                 <div class="flex items-start">
                   <div class="mt-3 mt-0 ml-4 text-left text-center">
