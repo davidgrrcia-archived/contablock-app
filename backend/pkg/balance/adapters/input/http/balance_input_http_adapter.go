@@ -45,64 +45,78 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 		return nil, err
 	}
 
-	typesMap := make(map[string]Balance)
+	mapping := make(map[string]Balance)
 
 	for _, item := range outputData.Items {
-		kindsMap := make(map[string]Balance)
-		parentsMap := make(map[string]Balance)
-
-		var balance Balance
-		balance.ID = item.ID
-		balance.CurrentYear = item.CurrentYear
-		balance.PreviousYear = item.PreviousYear
-		balance.CurrentAmount = item.CurrentAmount
-		balance.PreviousAmount = item.PreviousAmount
-		balance.DifferenceAmount = item.DifferenceAmount
-		balance.Increase = item.Increase
+		var typeBalance Balance
+		typeBalance.Name = item.Type
+		typeBalance.CurrentYear = item.CurrentYear
+		typeBalance.PreviousYear = item.PreviousYear
+		typeBalance.Increase = item.Increase
+		if mapping[item.Type].Map == nil {
+			typeBalance.Map = make(map[string]Balance)
+			typeBalance.CurrentAmount = item.CurrentAmount
+			typeBalance.PreviousAmount = item.PreviousAmount
+			mapping[item.Type] = typeBalance
+		} else {
+			typeBalance.Map = mapping[item.Type].Map
+			typeBalance.CurrentAmount = mapping[item.Type].CurrentAmount + item.CurrentAmount
+			typeBalance.PreviousAmount = mapping[item.Type].PreviousAmount + item.PreviousAmount
+			mapping[item.Type] = typeBalance
+		}
 
 		if item.Kind != nil && *item.Kind != "" {
-			balance.Name = *item.Kind
-			typesMap[item.Type] = balance
-
-			if item.Parent != nil && *item.Parent != "" {
-				balance.Name = *item.Parent
-				if balance.Map == nil {
-					kindsMap[*item.Kind] = balance
-					balance.Map = kindsMap
-				} else {
-					balance.Map[*item.Kind] = balance
-				}
-				typesMap[item.Type] = balance
-
-				if item.Child != nil && *item.Child != "" {
-					balance.Name = *item.Child
-					parentsMap[*item.Parent] = balance
-					balance.Map = parentsMap //todo review
-					typesMap[item.Type] = balance
-				}
-			}
-			continue
+			//balance.Name = *item.Kind
+			//typesMap[item.Type] = balance
+			//
+			//if item.Parent != nil && *item.Parent != "" {
+			//	parentBalance := Balance{
+			//		Name: *item.Parent,
+			//		Map:  make(map[string]Balance),
+			//	}
+			//	parentBalance.Map[*item.Kind] = balance
+			//	typesMap[item.Type] = parentBalance
+			//
+			//	if item.Child != nil && *item.Child != "" {
+			//		childBalance := Balance{
+			//			Name: *item.Child,
+			//			Map:  make(map[string]Balance),
+			//		}
+			//		childBalance.Map[*item.Parent] = parentBalance
+			//		typesMap[item.Type] = childBalance
+			//	}
+			//}
+			//continue
 		}
 		if item.Parent != nil && *item.Parent != "" {
-			balance.Name = *item.Parent
-			typesMap[item.Type] = balance
+			var parentBalance Balance
+			parentBalance.Name = *item.Parent
+			if mapping[item.Type].Map[*item.Parent].Map == nil {
+				parentBalance.Map = make(map[string]Balance)
+				parentBalance.CurrentAmount = item.CurrentAmount
+				parentBalance.PreviousAmount = item.PreviousAmount
+				mapping[item.Type].Map[*item.Parent] = parentBalance
+			} else {
+				parentBalance.Map = mapping[item.Type].Map[*item.Parent].Map
+				parentBalance.CurrentAmount = mapping[item.Type].Map[*item.Parent].CurrentAmount + item.CurrentAmount
+				parentBalance.PreviousAmount = mapping[item.Type].Map[*item.Parent].PreviousAmount + item.PreviousAmount
+				mapping[item.Type].Map[*item.Parent] = parentBalance
+			}
 
 			if item.Child != nil && *item.Child != "" {
-				balance.Name = *item.Child
-				if typesMap[item.Type].Map == nil {
-					parentsMap[*item.Parent] = balance
-					balance.Map = parentsMap
-				} else {
-					balance.Map[*item.Parent] = balance
-				}
-				balance.Name = *item.Parent
-				typesMap[item.Type] = balance
+				var childBalance Balance
+				childBalance.Name = *item.Child
+				childBalance.CurrentAmount = item.CurrentAmount
+				childBalance.PreviousAmount = item.PreviousAmount
+				mapping[item.Type].Map[*item.Parent].Map[*item.Child] = childBalance
 			}
 			continue
 		}
 		if item.Child != nil && *item.Child != "" {
-			balance.Name = *item.Child
-			typesMap[item.Type] = balance
+			childBalance := Balance{
+				Name: *item.Child,
+			}
+			mapping[item.Type] = childBalance
 			continue
 		}
 	}
