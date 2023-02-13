@@ -21,6 +21,29 @@ const state: EntriesState = {
   differentEntry: false,
 };
 
+const currencies = [
+  {
+    code: 'EUR',
+    symbol: '€',
+  },
+  {
+    code: 'GBP',
+    symbol: '£',
+  },
+  {
+    code: 'USD',
+    symbol: '$',
+  },
+];
+
+function findCurrencyByCode(code: string): string {
+  console.log('code', code)
+
+  const c = currencies.find(currency => currency.code === code);
+
+  return c ? c.symbol : '';
+}
+
 export const useEntriesStore = defineStore('entries', {
   state: () => {
     return { state };
@@ -30,10 +53,19 @@ export const useEntriesStore = defineStore('entries', {
     async addDebitEntry(entry: Entry) {
       const messagesStore = useMessagesStore();
 
-      if (entry.debitAmount == undefined) {
-        messagesStore.addWarnMessage('Introduce una cantidad en el debe');
+      if (entry.accountId == undefined) {
+        messagesStore.addWarnMessage('Selecciona una cuenta en el debe', 'Para poder crear un asiento debes seleccionar una cuenta en la partida del debe');
         return;
       }
+
+      if (entry.debitAmount == undefined) {
+        messagesStore.addWarnMessage('Introduce una cantidad en el debe', 'Para poder crear un asiento debes introducir una cantidad en la partida del debe');
+        return;
+      }
+
+      //match account id
+      const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
+      entry.accountId = match ? match[1] : '';
 
       const account = await accountsUseCase.describeAccount(entry.accountId);
       const displayName = entry.accountId + ' - ' + account.name;
@@ -45,10 +77,19 @@ export const useEntriesStore = defineStore('entries', {
     async addCreditEntry(entry: Entry) {
       const messagesStore = useMessagesStore();
 
-      if (entry.creditAmount == undefined) {
-        messagesStore.addWarnMessage('Introduce una cantidad en el haber');
+      if (entry.accountId == undefined) {
+        messagesStore.addWarnMessage('Selecciona una cuenta en el haber', 'Para poder crear un asiento debes seleccionar una cuenta en la partida del haber');
         return;
       }
+
+      if (entry.creditAmount == undefined) {
+        messagesStore.addWarnMessage('Introduce una cantidad en el haber', 'Para poder crear un asiento debes introducir una cantidad en la partida del haber');
+        return;
+      }
+
+      //match account id
+      const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
+      entry.accountId = match ? match[1] : '';
 
       const account = await accountsUseCase.describeAccount(entry.accountId);
       const displayName = entry.accountId + ' - ' + account.name;
@@ -61,11 +102,14 @@ export const useEntriesStore = defineStore('entries', {
       const messagesStore = useMessagesStore();
 
       try {
-        if (this.state.totalBalance !== 0) {
-          throw 'El principio de partida doble es obligatorio';
+        if (this.state.totalBalance > 0) {
+          messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es mayor que el haber en ' + this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].currency));
+        }
+        if (this.state.totalBalance < 0) {
+          messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es menor que el haber en ' +  this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].currency));
         }
         if (this.state.entriesCreation.length === 0) {
-          throw 'No hay asientos creados';
+          messagesStore.addWarnMessage('No hay asientos creados', 'Para poder crear un asiento debes crear al menos una partida en el debe y otra en el haber');
         }
 
         this.state.stateMessage = 'creating entries';
@@ -75,8 +119,6 @@ export const useEntriesStore = defineStore('entries', {
         });
 
         this.state.stateMessage = 'entries created';
-        messagesStore.addSuccessMessage(this.state.stateMessage);
-
         this.clearEntries();
       } catch (err) {
         this.state.stateMessage = 'error creating entries';

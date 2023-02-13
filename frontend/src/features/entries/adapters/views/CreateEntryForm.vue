@@ -4,7 +4,6 @@ import { v4 as uuid } from 'uuid';
 import type { Entry } from '@/features/entries/application/entries-model';
 import { useEntriesStore } from '@/stores/entries';
 import { useAccountsStore } from '@/stores/accounts';
-import { Dropdown, ListGroup, ListGroupItem } from 'flowbite-vue';
 
 //store
 const entriesStore = useEntriesStore();
@@ -28,12 +27,9 @@ if (entriesStore.state.multipleEntryId === '') {
 }
 
 function addDebitEntry() {
-  const match = JSON.stringify(debitAccount.value).match(/"(\d+)"/);
-  const accountId = match ? match[1] : '';
-
   const newEntry: Entry = {
     id: id,
-    accountId: accountId,
+    accountId: debitAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: selectedCurrency.value,
     date: date.value.toISOString(),
@@ -47,12 +43,9 @@ function addDebitEntry() {
 }
 
 function addCreditEntry() {
-  const match = JSON.stringify(creditAccount.value).match(/"(\d+)"/);
-  const accountId = match ? match[1] : '';
-
   const newEntry: Entry = {
     id: id,
-    accountId: accountId,
+    accountId: creditAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: selectedCurrency.value,
     date: date.value.toISOString(),
@@ -90,7 +83,7 @@ function findCurrencyByCode(code: string): string {
 <template>
   <div class="mt-0 flex w-full space-x-10 overflow-hidden rounded-md p-6 text-left shadow">
     <div class="w-1/4">
-      <label for="currency" class="block text-sm font-medium text-gray-700">Currency</label>
+      <label for="currency" class="block text-sm font-medium text-gray-700">Divisa</label>
       <select v-model="selectedCurrency" id="currency" name="currency" autocomplete="currency-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm sm:text-sm">
         <option v-for="(currency, i) in currencies" :key="i">{{ currency.code }}</option>
       </select>
@@ -136,8 +129,8 @@ function findCurrencyByCode(code: string): string {
             </div>
           </div>
         </div>
-        <div class="bg-gray-50 py-3 px-6">
-          <button type="submit" id="debit-amount" name="debit-amount" @click="addDebitEntry" class="inline-flex justify-center rounded-md border border-transparent bg-blue-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-white hover:text-blue-500">Añadir al debe</button>
+        <div class="bg-gray-50 py-3 px-6 text-right">
+          <button type="submit" id="credit-amount" name="credit-amount" @click="addDebitEntry" class="inline-flex w-full justify-center rounded-md bg-blue-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700">Añadir al debe</button>
         </div>
       </div>
     </div>
