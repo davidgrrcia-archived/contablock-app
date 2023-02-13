@@ -12,8 +12,7 @@ start-local:
 	go run main.go
 
 start-docker:
-	make docker-build
-	docker run --net=host -d contablock-backend
+	docker run -d -p 4000:4000 --name=contablock-backend contablock-backend
 
 docker-build:
 	docker build --tag contablock-backend .

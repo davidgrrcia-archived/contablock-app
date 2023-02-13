@@ -8,8 +8,7 @@ start-local:
 	npm run dev
 
 start-docker:
-	make docker-build
-	docker run --net=host -d contablock-frontend
+	docker run -d -p 5173:5173 --name=contablock-frontend contablock-frontend
 
 docker-build:
 	docker build --tag contablock-frontend .

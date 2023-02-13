@@ -39,25 +39,35 @@ services:
     ports:
         - 8545:8545
 
-  # api:
-  #   image: contablock-backend
-  #   container_name: contablock-backend
-  #   build:
-  #     dockerfile: Dockerfile
-  #     context: ./backend
-  #   restart: always
-  #   depends_on:
-  #       - db
-  #   links:
-  #       - db
-  #   environment:
-  #     DB_HOST: db
-  #     DB_PORT: 3306
-  #     DB_NAME: db_accounting
-  #     DB_USER: root
-  #     DB_PASS: root
-  #     SC_CLIENT_NETWORK: http://localhost:8545/
-  #     SC_CONTABLOCK_CONTRACT_ADDRESS: 0x5FbDB2315678afecb367f032d93F642f64180aa3
-  #     SC_PRIVATE_KEY_AUTH: ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
-  #   ports:
-  #       - 4000:4000
+  frontend:
+    image: contablock-frontend
+    container_name: contablock-frontend
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    restart: always  
+    ports:
+        - 5173:5173
+
+  backend:
+    image: contablock-backend
+    container_name: contablock-backend
+    build:
+      dockerfile: Dockerfile
+      context: ./backend
+    restart: always
+    depends_on:
+        - db
+    links:
+        - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: db_accounting
+      DB_USER: root
+      DB_PASS: root
+      SC_CLIENT_NETWORK: http://0.0.0.0:8545/
+      SC_CONTABLOCK_CONTRACT_ADDRESS: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+      SC_PRIVATE_KEY_AUTH: ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+    ports:
+        - 4000:4000
