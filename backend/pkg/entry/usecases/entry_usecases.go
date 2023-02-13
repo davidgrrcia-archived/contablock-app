@@ -98,7 +98,7 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 		return nil, err
 	}
 
-	if storedAccount.Account.BalanceID != nil {
+	if storedAccount.Account.BalanceID != nil && *storedAccount.Account.BalanceID != "" {
 		var createBalanceInput balance.CreateBalanceInput
 		createBalanceInput.BalanceID = *storedAccount.Account.BalanceID
 		createBalanceInput.Amount = *getAmountForBalance(input.DebitBalance, input.CreditBalance)

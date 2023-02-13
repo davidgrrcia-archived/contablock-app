@@ -119,7 +119,7 @@ function findCurrencyByCode(code: string): string {
               <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <span class="text-gray-500 sm:text-sm">{{ findCurrencyByCode(selectedCurrency) }}</span>
               </div>
-              <input v-model="debitAmount" type="text" name="debit-amount" id="debit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="0.00" />
+              <input v-model="debitAmount" type="number" oninput="validity.valid||(value='');" name="debit-amount" id="debit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="0.00" min="0" max="999999999999999" />
               <div class="absolute inset-y-0 right-0 flex items-center">
                 <label for="currency" class="sr-only">Divisa</label>
                 <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
@@ -151,7 +151,7 @@ function findCurrencyByCode(code: string): string {
               <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <span class="text-gray-500 sm:text-sm">{{ findCurrencyByCode(selectedCurrency) }}</span>
               </div>
-              <input v-model="creditAmount" type="text" name="credit-amount" id="credit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="0.00" />
+              <input v-model="creditAmount" type="number" oninput="validity.valid||(value='');" name="credit-amount" id="credit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="0.00" min="0" max="999999999999999" />
               <div class="absolute inset-y-0 right-0 flex items-center">
                 <label for="currency" class="sr-only">Divisa</label>
                 <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">

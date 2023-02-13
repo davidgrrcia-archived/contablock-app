@@ -18,15 +18,18 @@ console.log(state.business.logo);
         <div class="mt-0 flex space-x-6">
           <div class="mt-2 flex items-center text-sm text-gray-500">
             <BriefcaseIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-            CIF: {{ state.business.cif }}
+            <p class="font-semibold">CIF:</p>
+            <p class="pl-1">{{ state.business.cif }}</p>
           </div>
           <div class="mt-2 flex items-center text-sm text-gray-500">
             <MapPinIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-            Sede: {{ state.business.registeredOffice }}
+            <p class="font-semibold">Sede:</p>
+            <p class="pl-1">{{ state.business.registeredOffice }}</p>
           </div>
           <div class="mt-2 flex items-center text-sm text-gray-500">
             <LinkIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-            Cuenta Ethereum: {{ state.business.ethAddress }}
+            <p class="font-semibold">Cuenta Ethereum:</p>
+            <p class="pl-1">{{ state.business.ethAddress }}</p>
           </div>
         </div>
       </div>

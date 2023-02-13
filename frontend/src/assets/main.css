@@ -8,13 +8,10 @@
   }
 }
 
-html,
-body {
-  --black: #000000;
-  --gray: #e5e5ea;
-  --white: #ffffff;
-  --blue: #007afe;
-  --yellow: #ffcc01;
-  --red: #ff3b2f;
-  --green: #34c759;
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
