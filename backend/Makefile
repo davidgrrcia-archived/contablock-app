@@ -4,22 +4,22 @@ up-migrations:
 down-migrations:
 	docker exec -i mysql mysql -uroot -proot db_accounting < ./database/database-down.sql
 
-clean:
-	docker stop $$(docker ps -aq)
-	docker rm $$(docker ps -aq)
-	docker system prune
-
-provision:
-	docker-compose up -d
-
 lint:
 	golangci-lint run
 
-start:
+start-local:
+	make gw-client-generator
 	go run main.go
+
+start-docker:
+	make docker-build
+	docker run --net=host -d contablock-backend
 
 docker-build:
 	docker build --tag contablock-backend .
 
 gw-client-generator:
+	cd ../smart-contracts && make clean
+	cd ../smart-contracts && make compile
+	cd ../smart-contracts && make generate
 	abigen --bin=../smart-contracts/build/ContaBlockContract.bin --abi=../smart-contracts/build/ContaBlockContract.abi --pkg=contablock --out=pkg/smart-contract-contablock/infra/outputhttp/generated/contablock_gw_client_generated.go

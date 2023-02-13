@@ -1,6 +1,7 @@
-# syntax=docker/dockerfile:1
+FROM golang:1.19-alpine
 
-FROM golang:1.16-alpine
+# Install GCC
+RUN apk add --no-cache build-base
 
 WORKDIR /app
 

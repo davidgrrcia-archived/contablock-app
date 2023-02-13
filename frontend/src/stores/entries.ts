@@ -37,7 +37,7 @@ const currencies = [
 ];
 
 function findCurrencyByCode(code: string): string {
-  console.log('code', code)
+  console.log('code', code);
 
   const c = currencies.find(currency => currency.code === code);
 
@@ -106,7 +106,7 @@ export const useEntriesStore = defineStore('entries', {
           messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es mayor que el haber en ' + this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].currency));
         }
         if (this.state.totalBalance < 0) {
-          messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es menor que el haber en ' +  this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].currency));
+          messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es menor que el haber en ' + this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].currency));
         }
         if (this.state.entriesCreation.length === 0) {
           messagesStore.addWarnMessage('No hay asientos creados', 'Para poder crear un asiento debes crear al menos una partida en el debe y otra en el haber');
@@ -123,7 +123,7 @@ export const useEntriesStore = defineStore('entries', {
       } catch (err) {
         this.state.stateMessage = 'error creating entries';
         const messagesStore = useMessagesStore();
-        messagesStore.addErrorMessage(err.toString());
+        messagesStore.addErrorMessage('Error creando asientos', 'Ha ocurrido un error creando los asientos');
       }
     },
     clearEntries() {

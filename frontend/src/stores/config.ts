@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { entriesUseCase } from '@/features/entries';
 
 //TODO: apply clean architecture
 interface Navigation {

@@ -23,7 +23,7 @@ export class DefaultDailyLedgerHttpAdapter implements DailyLedgerAdapter {
           id: item2.account.id,
           name: item2.account.name,
           level: item2.account.level,
-          type: item2.account.type,
+          balanceId: item2.account.balanceId,
           displayName: item2.account.displayName,
         },
       })),

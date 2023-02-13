@@ -21,3 +21,6 @@ start:
 
 deploy-local:
 	npx hardhat run --network localhost scripts/deploy.ts
+
+deploy-docker:
+	docker exec -it contablock-blockchain npx hardhat run --network localhost scripts/deploy.ts
