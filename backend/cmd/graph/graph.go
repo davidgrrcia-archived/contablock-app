@@ -65,7 +65,7 @@ func NewGraph() Graph {
 
 func (graph *Graph) Build() {
 	// output infra
-	//graph.provideContablockClient()
+	graph.provideContablockClient()
 	graph.provideAccountDB()
 	graph.provideBusinessDB()
 	graph.provideEntryDB()

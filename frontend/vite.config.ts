@@ -3,13 +3,6 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
-import { config } from 'dotenv';
-config();
-
-const API_URL = process.env.VITE_API_URL;
-
-console.log('Consumiendo api: ', API_URL);
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
@@ -23,7 +16,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: API_URL,
+        target: 'http://localhost:4000/api',
         changeOrigin: true,
         secure: false,
         rewrite: path => path.replace(/^\/api/, ''),
