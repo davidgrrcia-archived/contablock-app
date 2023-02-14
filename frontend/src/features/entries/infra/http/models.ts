@@ -4,7 +4,7 @@ export interface Entry {
   currency: string;
   concept: string;
   date: string;
-  quarter: string;
+  quarter: number;
   debitBalance: number | null;
   creditBalance: number | null;
   totalBalance: number;

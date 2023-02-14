@@ -9,8 +9,14 @@ export interface Entry {
   currency: string;
   concept: string;
   date: string;
+  quarter: number;
   debitAmount: number | null;
   creditAmount: number | null;
+  totalAmount: number;
   displayName?: string;
   displayDate?: string;
+  state: string;
+  stateReason: string;
+  creationDate: string;
+  lastUpdate: string;
 }

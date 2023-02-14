@@ -25,8 +25,14 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
       currency: entryHttpResponse.entry.currency,
       concept: entryHttpResponse.entry.concept,
       date: entryHttpResponse.entry.date,
+      quarter: entryHttpResponse.entry.quarter,
       debitAmount: entryHttpResponse.entry.debitBalance,
       creditAmount: entryHttpResponse.entry.creditBalance,
+      totalAmount: entryHttpResponse.entry.totalBalance,
+      state: entryHttpResponse.entry.state,
+      stateReason: entryHttpResponse.entry.stateReason,
+      creationDate: entryHttpResponse.entry.creationDate,
+      lastUpdate: entryHttpResponse.entry.lastUpdate,
     };
 
     return output;

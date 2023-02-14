@@ -5,6 +5,53 @@ const dailyLedgerStore = useDailyLedgerStore();
 await dailyLedgerStore.loadDailyLedger();
 
 const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
+
+function getState(state: string): string {
+  switch (state) {
+    case 'CREATED':
+      return 'Creado';
+    case 'PUBLISHED':
+      return 'Publicado';
+    default:
+      return 'N/A';
+  }
+}
+
+function getQuarter(quarter: number): string {
+  switch (quarter) {
+    case 1:
+      return 'Primer Trimestre';
+    case 2:
+      return 'Segundo Trimestre';
+    case 3:
+      return 'Tercer Trimestre';
+    case 4:
+      return 'Cuarto Trimestre';
+    default:
+      return 'N/A';
+  }
+}
+
+function formatAmount(amount: number | null, currency: string): string {
+  if (amount === null || amount === 0) {
+    return '';
+  }
+
+  switch (currency) {
+    case 'USD':
+      return amount + '€';
+    case 'EUR':
+      return new Intl.NumberFormat('de-DE', {
+        style: 'currency',
+        currency: 'EUR',
+      }).format(amount);
+    default:
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(amount);
+  }
+}
 </script>
 
 <template>
@@ -23,14 +70,14 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
               <thead class="bg-white">
                 <tr>
                   <th scope="col" class="sticky top-14 z-10 rounded-tl-lg bg-gray-800 py-3.5 pr-3 pl-6 text-left text-sm font-semibold text-white">Cuenta</th>
-                  <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Tipo</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Divisa</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Fecha</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Trimestre</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Concepto</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Debe</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Haber</th>
-                  <th scope="col" class="sticky top-14 z-10 rounded-tr-lg bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Estado</th>
+                  <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Estado</th>
+                  <th scope="col" class="sticky top-14 z-10 rounded-tr-lg bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Acciones</th>
                 </tr>
               </thead>
               <tbody class="bg-white">
@@ -39,12 +86,8 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
                     <th colspan="8" scope="colgroup" class="px-6 text-left text-sm font-semibold text-white">Asiento {{ index }}</th>
                     <th>
                       <div class="flex space-x-4 py-2 px-2">
-                        <div class="w-1/2">
-                          <button type="button" class="btn bg-blue-500">Publicar</button>
-                        </div>
-                        <div class="w-1/2">
-                          <button type="button" class="btn bg-red-500">Eliminar</button>
-                        </div>
+                        <button type="button" class="btn bg-blue-500">Publicar</button>
+                        <button type="button" class="btn bg-red-500">Eliminar</button>
                       </div>
                     </th>
                   </tr>
@@ -53,28 +96,25 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
                       {{ entryExpanded.account.displayName }}
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                      {{ entryExpanded.account.balanceId }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.entry.currency }}
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.entry.displayDate }}
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                      {{ entryExpanded.entry.displayDate }}
+                      {{ getQuarter(entryExpanded.entry.quarter) }}
                     </td>
                     <td class="px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.entry.concept }}
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                      {{ entryExpanded.entry.debitAmount }}
+                    <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-800">
+                      {{ formatAmount(entryExpanded.entry.debitAmount, entryExpanded.entry.currency) }}
+                    </td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-800">
+                      {{ formatAmount(entryExpanded.entry.creditAmount, entryExpanded.entry.currency) }}
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                      {{ entryExpanded.entry.creditAmount }}
-                    </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                      {{ entryExpanded.account.balanceId }}
+                      <span :class="[getState(entryExpanded.entry.state) === 'Creado' ? 'bg-yellow-100 text-yellow-800' : getState(entryExpanded.entry.state) === 'Publicado' ? 'bg-green-100 text-green-800' : 'bg-blue-500']" class="inline-flex rounded-full px-2 text-xs font-semibold leading-5">{{ getState(entryExpanded.entry.state) }}</span>
                     </td>
                     <td></td>
                   </tr>
