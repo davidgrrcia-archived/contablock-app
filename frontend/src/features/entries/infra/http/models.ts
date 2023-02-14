@@ -1,17 +1,18 @@
 export interface Entry {
+  id: string;
   accountId: string;
   multipleEntryId: string;
   currency: string;
   concept: string;
-  date: string;
+  date: number;
   quarter: number;
   debitBalance: number | null;
   creditBalance: number | null;
   totalBalance: number;
   state: string;
   stateReason: string;
-  creationDate: string;
-  lastUpdate: string;
+  creationDate: number;
+  lastUpdate: number;
 }
 
 export interface EntryCreateBody {
@@ -19,7 +20,7 @@ export interface EntryCreateBody {
   multipleEntryId: string;
   currency: string;
   concept: string;
-  date: string;
+  date: number;
   debitBalance: number | null;
   creditBalance: number | null;
 }

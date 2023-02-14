@@ -1,22 +1,32 @@
 export interface EntriesAdapter {
-  createEntryHttpResponse(entry: Entry): Promise<Entry>;
+  createEntryHttpResponse(entry: CreateEntryInput): Promise<Entry>;
 }
 
 export interface Entry {
+  id: string;
+  accountId: string;
+  multipleEntryId: string;
+  currency: string;
+  concept: string;
+  date: number;
+  quarter: number;
+  debitAmount: number | null;
+  creditAmount: number | null;
+  totalAmount: number;
+  state: string;
+  stateReason: string;
+  creationDate: number;
+  lastUpdate: number;
+}
+
+
+export interface CreateEntryInput {
   id?: string;
   accountId: string;
   multipleEntryId: string;
   currency: string;
   concept: string;
-  date: string;
-  quarter: number;
+  date: number;
   debitAmount: number | null;
   creditAmount: number | null;
-  totalAmount: number;
-  displayName?: string;
-  displayDate?: string;
-  state: string;
-  stateReason: string;
-  creationDate: string;
-  lastUpdate: string;
 }

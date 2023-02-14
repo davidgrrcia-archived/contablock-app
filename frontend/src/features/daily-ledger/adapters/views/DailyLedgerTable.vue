@@ -1,57 +1,11 @@
 <script setup lang="ts">
 import { useDailyLedgerStore } from '@/stores/dailyLedger';
+import { getState, getQuarter, formatAmount, formatDate } from '../../../utils/utils';
 
 const dailyLedgerStore = useDailyLedgerStore();
 await dailyLedgerStore.loadDailyLedger();
 
 const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
-
-function getState(state: string): string {
-  switch (state) {
-    case 'CREATED':
-      return 'Creado';
-    case 'PUBLISHED':
-      return 'Publicado';
-    default:
-      return 'N/A';
-  }
-}
-
-function getQuarter(quarter: number): string {
-  switch (quarter) {
-    case 1:
-      return 'Primer Trimestre';
-    case 2:
-      return 'Segundo Trimestre';
-    case 3:
-      return 'Tercer Trimestre';
-    case 4:
-      return 'Cuarto Trimestre';
-    default:
-      return 'N/A';
-  }
-}
-
-function formatAmount(amount: number | null, currency: string): string {
-  if (amount === null || amount === 0) {
-    return '';
-  }
-
-  switch (currency) {
-    case 'USD':
-      return amount + '€';
-    case 'EUR':
-      return new Intl.NumberFormat('de-DE', {
-        style: 'currency',
-        currency: 'EUR',
-      }).format(amount);
-    default:
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(amount);
-  }
-}
 </script>
 
 <template>
@@ -99,7 +53,7 @@ function formatAmount(amount: number | null, currency: string): string {
                       {{ entryExpanded.entry.currency }}
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                      {{ entryExpanded.entry.displayDate }}
+                      {{ formatDate(entryExpanded.entry.date) }}
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ getQuarter(entryExpanded.entry.quarter) }}

@@ -3,7 +3,9 @@ package entryInputHttpAdapter
 import (
 	"context"
 	"errors"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	"time"
+
+	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 )
 
 type EntryInputAdapter interface {
@@ -41,7 +43,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 	inputData.MultipleEntryID = data.MultipleEntryID
 	inputData.Currency = data.Currency
 	inputData.Concept = data.Concept
-	inputData.Date = data.Date
+	inputData.Date = time.Unix(data.Date, 0)
 	inputData.DebitBalance = data.DebitBalance
 	inputData.CreditBalance = data.CreditBalance
 
@@ -56,15 +58,15 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
 	response.Currency = outputData.Entry.Currency
 	response.Concept = outputData.Entry.Concept
-	response.Date = outputData.Entry.Date
+	response.Date = outputData.Entry.Date.Unix()
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
 	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
-	response.CreationDate = outputData.Entry.CreationDate
-	response.LastUpdate = outputData.Entry.LastUpdate
+	response.CreationDate = outputData.Entry.CreationDate.Unix()
+	response.LastUpdate = outputData.Entry.LastUpdate.Unix()
 
 	responseWrapper := CreateEntryResponseWrapper{}
 	responseWrapper.CreateEntryResponse = response
@@ -87,15 +89,15 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
 	response.Currency = outputData.Entry.Currency
 	response.Concept = outputData.Entry.Concept
-	response.Date = outputData.Entry.Date
+	response.Date = outputData.Entry.Date.Unix()
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
 	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
-	response.CreationDate = outputData.Entry.CreationDate
-	response.LastUpdate = outputData.Entry.LastUpdate
+	response.CreationDate = outputData.Entry.CreationDate.Unix()
+	response.LastUpdate = outputData.Entry.LastUpdate.Unix()
 
 	responseWrapper := DescribeEntryResponseWrapper{}
 	responseWrapper.DescribeEntryResponse = response
@@ -121,15 +123,15 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 		responseItem.MultipleEntryID = item.MultipleEntryID
 		responseItem.Currency = item.Currency
 		responseItem.Concept = item.Concept //todo
-		responseItem.Date = item.Date
+		responseItem.Date = item.Date.Unix()
 		responseItem.Quarter = item.Quarter
 		responseItem.DebitBalance = item.DebitBalance
 		responseItem.CreditBalance = item.CreditBalance
 		responseItem.TotalBalance = item.TotalBalance
 		responseItem.State = item.State
 		responseItem.StateReason = item.StateReason
-		responseItem.CreationDate = item.CreationDate
-		responseItem.LastUpdate = item.LastUpdate
+		responseItem.CreationDate = item.CreationDate.Unix()
+		responseItem.LastUpdate = item.LastUpdate.Unix()
 		response.Items = append(response.Items, responseItem)
 	}
 
@@ -153,15 +155,15 @@ func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, da
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
 	response.Currency = outputData.Entry.Currency
 	response.Concept = outputData.Entry.Concept
-	response.Date = outputData.Entry.Date
+	response.Date = outputData.Entry.Date.Unix()
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
 	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
-	response.CreationDate = outputData.Entry.CreationDate
-	response.LastUpdate = outputData.Entry.LastUpdate
+	response.CreationDate = outputData.Entry.CreationDate.Unix()
+	response.LastUpdate = outputData.Entry.LastUpdate.Unix()
 
 	responseWrapper := DeleteEntryResponseWrapper{}
 	responseWrapper.DeleteEntryResponse = response
@@ -184,15 +186,15 @@ func (adapter *DefaultHttpInputAdapter) AdaptPublishEntry(ctx context.Context, d
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
 	response.Currency = outputData.Entry.Currency
 	response.Concept = outputData.Entry.Concept
-	response.Date = outputData.Entry.Date
+	response.Date = outputData.Entry.Date.Unix()
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
 	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
-	response.CreationDate = outputData.Entry.CreationDate
-	response.LastUpdate = outputData.Entry.LastUpdate
+	response.CreationDate = outputData.Entry.CreationDate.Unix()
+	response.LastUpdate = outputData.Entry.LastUpdate.Unix()
 
 	responseWrapper := PublishEntryResponseWrapper{}
 	responseWrapper.PublishEntryResponse = response

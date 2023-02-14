@@ -1,12 +1,19 @@
 import { defineStore } from 'pinia';
-import type { Entry } from '@/features/entries/application/entries-model';
+import type { CreateEntryInput } from '@/features/entries/application/entries-model';
 import { accountsUseCase } from '@/features/accounts';
 import { entriesUseCase } from '@/features/entries';
 import { useMessagesStore } from '@/stores/messages';
+import type { Account } from '@/features/accounts/application/accounts-model';
+import { findCurrencyByCode } from '@/features/utils/utils';
+
+interface EntryWithAccount {
+  entry: CreateEntryInput;
+  account: Account;
+}
 
 //TODO: apply clean architecture
 interface EntriesState {
-  entriesCreation: Entry[];
+  entriesCreation: EntryWithAccount[];
   multipleEntryId: string;
   totalBalance: number;
   stateMessage: string | null;
@@ -21,36 +28,13 @@ const state: EntriesState = {
   differentEntry: false,
 };
 
-const currencies = [
-  {
-    code: 'EUR',
-    symbol: '€',
-  },
-  {
-    code: 'GBP',
-    symbol: '£',
-  },
-  {
-    code: 'USD',
-    symbol: '$',
-  },
-];
-
-function findCurrencyByCode(code: string): string {
-  console.log('code', code);
-
-  const c = currencies.find(currency => currency.code === code);
-
-  return c ? c.symbol : '';
-}
-
 export const useEntriesStore = defineStore('entries', {
   state: () => {
     return { state };
   },
 
   actions: {
-    async addDebitEntry(entry: Entry) {
+    async addDebitEntry(entry: CreateEntryInput) {
       const messagesStore = useMessagesStore();
 
       if (entry.accountId == undefined) {
@@ -67,14 +51,15 @@ export const useEntriesStore = defineStore('entries', {
       const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
       entry.accountId = match ? match[1] : '';
 
-      const account = await accountsUseCase.describeAccount(entry.accountId);
-      const displayName = entry.accountId + ' - ' + account.name;
-      entry.displayName = displayName;
+      const entryWithAccount: EntryWithAccount = {
+        entry: entry,
+        account: await accountsUseCase.describeAccount(entry.accountId),
+      };
 
-      this.state.entriesCreation.push(entry);
+      this.state.entriesCreation.push(entryWithAccount);
       this.state.totalBalance = this.state.totalBalance + entry.debitAmount;
     },
-    async addCreditEntry(entry: Entry) {
+    async addCreditEntry(entry: CreateEntryInput) {
       const messagesStore = useMessagesStore();
 
       if (entry.accountId == undefined) {
@@ -91,11 +76,12 @@ export const useEntriesStore = defineStore('entries', {
       const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
       entry.accountId = match ? match[1] : '';
 
-      const account = await accountsUseCase.describeAccount(entry.accountId);
-      const displayName = entry.accountId + ' - ' + account.name;
-      entry.displayName = displayName;
+      const entryWithAccount: EntryWithAccount = {
+        entry: entry,
+        account: await accountsUseCase.describeAccount(entry.accountId),
+      };
 
-      this.state.entriesCreation.push(entry);
+      this.state.entriesCreation.push(entryWithAccount);
       this.state.totalBalance = this.state.totalBalance - entry.creditAmount;
     },
     async createEntries() {
@@ -103,10 +89,10 @@ export const useEntriesStore = defineStore('entries', {
 
       try {
         if (this.state.totalBalance > 0) {
-          messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es mayor que el haber en ' + this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].currency));
+          messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es mayor que el haber en ' + this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].entry.currency));
         }
         if (this.state.totalBalance < 0) {
-          messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es menor que el haber en ' + this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].currency));
+          messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es menor que el haber en ' + this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].entry.currency));
         }
         if (this.state.entriesCreation.length === 0) {
           messagesStore.addWarnMessage('No hay asientos creados', 'Para poder crear un asiento debes crear al menos una partida en el debe y otra en el haber');
@@ -115,7 +101,7 @@ export const useEntriesStore = defineStore('entries', {
         this.state.stateMessage = 'creating entries';
 
         this.state.entriesCreation.map(async entry => {
-          return await entriesUseCase.createEntry(entry);
+          return await entriesUseCase.createEntry(entry.entry);
         });
 
         this.state.stateMessage = 'entries created';

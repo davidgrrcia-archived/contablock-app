@@ -1,35 +1,31 @@
 package entryInputHttpAdapter
 
-import (
-	"time"
-)
-
 type Entry struct {
-	ID              string    `json:"id"`
-	AccountID       string    `json:"accountId"`
-	MultipleEntryID string    `json:"multipleEntryId"`
-	Currency        string    `json:"currency"`
-	Concept         *string   `json:"concept"`
-	Date            time.Time `json:"date"`
-	Quarter         int       `json:"quarter"`
-	DebitBalance    float64   `json:"debitBalance"`
-	CreditBalance   float64   `json:"creditBalance"`
-	TotalBalance    float64   `json:"totalBalance"`
-	State           string    `json:"state"`
-	StateReason     *string   `json:"stateReason"`
-	CreationDate    time.Time `json:"creationDate"`
-	LastUpdate      time.Time `json:"lastUpdate"`
+	ID              string  `json:"id"`
+	AccountID       string  `json:"accountId"`
+	MultipleEntryID string  `json:"multipleEntryId"`
+	Currency        string  `json:"currency"`
+	Concept         *string `json:"concept"`
+	Date            int64   `json:"date"`
+	Quarter         int     `json:"quarter"`
+	DebitBalance    float64 `json:"debitBalance"`
+	CreditBalance   float64 `json:"creditBalance"`
+	TotalBalance    float64 `json:"totalBalance"`
+	State           string  `json:"state"`
+	StateReason     *string `json:"stateReason"`
+	CreationDate    int64   `json:"creationDate"`
+	LastUpdate      int64   `json:"lastUpdate"`
 }
 
 type CreateEntryRequest struct {
-	ID              *string   `json:"id"`
-	AccountID       string    `json:"accountId"`
-	MultipleEntryID string    `json:"multipleEntryId"`
-	Currency        string    `json:"currency"`
-	Concept         *string   `json:"concept"`
-	Date            time.Time `json:"date"`
-	DebitBalance    *float64  `json:"debitBalance"`
-	CreditBalance   *float64  `json:"creditBalance"`
+	ID              *string  `json:"id"`
+	AccountID       string   `json:"accountId"`
+	MultipleEntryID string   `json:"multipleEntryId"`
+	Currency        string   `json:"currency"`
+	Concept         *string  `json:"concept"`
+	Date            int64    `json:"date"`
+	DebitBalance    *float64 `json:"debitBalance"`
+	CreditBalance   *float64 `json:"creditBalance"`
 }
 
 type CreateEntryResponse struct {

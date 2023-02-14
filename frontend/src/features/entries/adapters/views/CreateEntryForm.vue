@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { v4 as uuid } from 'uuid';
-import type { Entry } from '@/features/entries/application/entries-model';
+import type { CreateEntryInput } from '@/features/entries/application/entries-model';
 import { useEntriesStore } from '@/stores/entries';
 import { useAccountsStore } from '@/stores/accounts';
+import { findCurrencyByCode, currencies, dateToUnixTimestamp, formatDate } from '@/features/utils/utils';
 
 //store
 const entriesStore = useEntriesStore();
@@ -13,6 +14,7 @@ await accountsStore.loadAccounts();
 const selectedCurrency = ref('EUR');
 const currentDate = new Date();
 const date = ref(currentDate);
+const currenciesArray = ref(currencies);
 const concept = ref();
 const debitAmount = ref();
 const creditAmount = ref();
@@ -27,13 +29,12 @@ if (entriesStore.state.multipleEntryId === '') {
 }
 
 function addDebitEntry() {
-  const newEntry: Entry = {
+  const newEntry: CreateEntryInput = {
     id: id,
     accountId: debitAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: selectedCurrency.value,
-    date: date.value.toISOString(),
-    displayDate: date.value.toLocaleDateString(),
+    date: dateToUnixTimestamp(date.value),
     concept: concept.value,
     debitAmount: debitAmount.value,
     creditAmount: null,
@@ -43,40 +44,18 @@ function addDebitEntry() {
 }
 
 function addCreditEntry() {
-  const newEntry: Entry = {
+  const newEntry: CreateEntryInput = {
     id: id,
     accountId: creditAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: selectedCurrency.value,
-    date: date.value.toISOString(),
-    displayDate: date.value.toLocaleDateString(),
+    date: dateToUnixTimestamp(date.value),
     concept: concept.value,
     debitAmount: null,
     creditAmount: creditAmount.value,
   };
 
   entriesStore.addCreditEntry(newEntry);
-}
-
-const currencies = ref([
-  {
-    code: 'EUR',
-    symbol: '€',
-  },
-  {
-    code: 'GBP',
-    symbol: '£',
-  },
-  {
-    code: 'USD',
-    symbol: '$',
-  },
-]);
-
-function findCurrencyByCode(code: string): string {
-  const c = currencies.value.find(currency => currency.code === code);
-
-  return c ? c.symbol : '';
 }
 </script>
 
@@ -85,7 +64,7 @@ function findCurrencyByCode(code: string): string {
     <div class="w-1/4">
       <label for="currency" class="block text-sm font-medium text-gray-700">Divisa</label>
       <select v-model="selectedCurrency" id="currency" name="currency" autocomplete="currency-name" class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm sm:text-sm">
-        <option v-for="(currency, i) in currencies" :key="i">{{ currency.code }}</option>
+        <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
       </select>
     </div>
     <div class="w-1/4">
@@ -123,7 +102,7 @@ function findCurrencyByCode(code: string): string {
               <div class="absolute inset-y-0 right-0 flex items-center">
                 <label for="currency" class="sr-only">Divisa</label>
                 <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                  <option v-for="(currency, i) in currencies" :key="i">{{ currency.code }}</option>
+                  <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
                 </select>
               </div>
             </div>
@@ -155,7 +134,7 @@ function findCurrencyByCode(code: string): string {
               <div class="absolute inset-y-0 right-0 flex items-center">
                 <label for="currency" class="sr-only">Divisa</label>
                 <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                  <option v-for="(currency, i) in currencies" :key="i">{{ currency.code }}</option>
+                  <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
                 </select>
               </div>
             </div>
@@ -183,13 +162,13 @@ function findCurrencyByCode(code: string): string {
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200 bg-white">
-            <tr v-for="(entry, i) in entriesStore.state.entriesCreation.reverse()" :key="entry.id" :class="i % 2 === 0 ? undefined : 'bg-gray-50'">
-              <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">{{ entry.displayName }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ entry.currency }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ entry.displayDate }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ entry.concept }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ entry.debitAmount }}</td>
-              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ entry.creditAmount }}</td>
+            <tr v-for="(entry, i) in entriesStore.state.entriesCreation.reverse()" :key="entry.entry.id" :class="i % 2 === 0 ? undefined : 'bg-gray-50'">
+              <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">{{ entry.account.displayName }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ entry.entry.currency }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ formatDate(entry.entry.date) }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ entry.entry.concept }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ entry.entry.debitAmount }}</td>
+              <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ entry.entry.creditAmount }}</td>
             </tr>
           </tbody>
         </table>

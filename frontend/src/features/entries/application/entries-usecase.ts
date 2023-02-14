@@ -1,13 +1,13 @@
-import type { Entry, EntriesAdapter } from '@/features/entries/application/entries-model';
+import type { CreateEntryInput, Entry, EntriesAdapter } from '@/features/entries/application/entries-model';
 
 export interface EntriesUseCase {
-  createEntry(entry: Entry): Promise<Entry>;
+  createEntry(entry: CreateEntryInput): Promise<Entry>;
 }
 
 export class DefaultEntriesUseCase implements EntriesUseCase {
   constructor(private readonly entriesAdapter: EntriesAdapter) {}
 
-  async createEntry(entry: Entry) {
+  async createEntry(entry: CreateEntryInput) {
     return await this.entriesAdapter.createEntryHttpResponse(entry);
   }
 }

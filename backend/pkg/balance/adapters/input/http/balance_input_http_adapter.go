@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
+	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 )
 
 type BalanceInputAdapter interface {
@@ -65,27 +65,44 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 		}
 
 		if item.Kind != nil && *item.Kind != "" {
-			//balance.Name = *item.Kind
-			//typesMap[item.Type] = balance
-			//
-			//if item.Parent != nil && *item.Parent != "" {
-			//	parentBalance := Balance{
-			//		Name: *item.Parent,
-			//		Map:  make(map[string]Balance),
-			//	}
-			//	parentBalance.Map[*item.Kind] = balance
-			//	typesMap[item.Type] = parentBalance
-			//
-			//	if item.Child != nil && *item.Child != "" {
-			//		childBalance := Balance{
-			//			Name: *item.Child,
-			//			Map:  make(map[string]Balance),
-			//		}
-			//		childBalance.Map[*item.Parent] = parentBalance
-			//		typesMap[item.Type] = childBalance
-			//	}
-			//}
-			//continue
+			var kindBalance Balance
+			kindBalance.Name = *item.Kind
+			if mapping[item.Type].Map[*item.Kind].Map == nil {
+				kindBalance.Map = make(map[string]Balance)
+				kindBalance.CurrentAmount = item.CurrentAmount
+				kindBalance.PreviousAmount = item.PreviousAmount
+				mapping[item.Type].Map[*item.Kind] = kindBalance
+			} else {
+				kindBalance.Map = mapping[item.Type].Map[*item.Kind].Map
+				kindBalance.CurrentAmount = mapping[item.Type].Map[*item.Kind].CurrentAmount + item.CurrentAmount
+				kindBalance.PreviousAmount = mapping[item.Type].Map[*item.Kind].PreviousAmount + item.PreviousAmount
+				mapping[item.Type].Map[*item.Kind] = kindBalance
+			}
+
+			if item.Parent != nil && *item.Parent != "" {
+				var parentBalance Balance
+				parentBalance.Name = *item.Parent
+				if mapping[item.Type].Map[*item.Kind].Map[*item.Parent].Map == nil {
+					parentBalance.Map = make(map[string]Balance)
+					parentBalance.CurrentAmount = item.CurrentAmount
+					parentBalance.PreviousAmount = item.PreviousAmount
+					mapping[item.Type].Map[*item.Kind].Map[*item.Parent] = parentBalance
+				} else {
+					parentBalance.Map = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].Map
+					parentBalance.CurrentAmount = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].CurrentAmount + item.CurrentAmount
+					parentBalance.PreviousAmount = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].PreviousAmount + item.PreviousAmount
+					mapping[item.Type].Map[*item.Kind].Map[*item.Parent] = parentBalance
+				}
+			}
+
+			if item.Child != nil && *item.Child != "" {
+				var childBalance Balance
+				childBalance.Name = *item.Child
+				childBalance.CurrentAmount = item.CurrentAmount
+				childBalance.PreviousAmount = item.PreviousAmount
+				mapping[item.Type].Map[*item.Kind].Map[*item.Parent].Map[*item.Child] = childBalance
+			}
+			continue
 		}
 		if item.Parent != nil && *item.Parent != "" {
 			var parentBalance Balance

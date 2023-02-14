@@ -20,6 +20,7 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
     const entryHttpResponse = await this.entriesHttpInfra.createEntry(input);
 
     const output: EntryUseCase = {
+      id: entryHttpResponse.entry.id,
       accountId: entryHttpResponse.entry.accountId,
       multipleEntryId: entryHttpResponse.entry.multipleEntryId,
       currency: entryHttpResponse.entry.currency,
