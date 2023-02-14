@@ -11,6 +11,7 @@ export class DefaultDailyLedgerHttpAdapter implements DailyLedgerAdapter {
       id: item.id,
       entriesExpanded: item.entriesExpanded.map(item2 => ({
         entry: {
+          id: item2.entry.id,
           accountId: item2.entry.accountId,
           multipleEntryId: item2.entry.multipleEntryId,
           currency: item2.entry.currency,

@@ -79,12 +79,15 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		utils.Success(w, outputPayload.DescribeEntryResponse)
 	}).Methods("GET")
 
-	r.HandleFunc("/api/entries/{id}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/entries:remove", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
-		vars := mux.Vars(r)
 		var inputPayload input.DeleteEntryRequest
-		inputPayload.ID = vars["id"]
+		err := json.NewDecoder(r.Body).Decode(&inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
 
 		entry, err := handler.adapter.AdaptDeleteEntry(ctx, inputPayload)
 		if err != nil {
@@ -94,12 +97,15 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		utils.Success(w, entry.DeleteEntryResponse)
 	}).Methods("DELETE")
 
-	r.HandleFunc("/api/entries/{id}:publish", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/entries:publish", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
-		vars := mux.Vars(r)
 		var inputPayload input.PublishEntryRequest
-		inputPayload.ID = vars["id"]
+		err := json.NewDecoder(r.Body).Decode(&inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
 
 		outputPayload, err := handler.adapter.AdaptPublishEntry(ctx, inputPayload)
 		if err != nil {

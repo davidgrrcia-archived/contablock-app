@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMessagesStore, Severities } from '@/stores/messages';
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
-import { ExclamationTriangleIcon } from '@heroicons/vue/24/outline';
+import { ExclamationTriangleIcon, CheckCircleIcon } from '@heroicons/vue/24/outline';
 
 const errorMessagesStore = useMessagesStore();
 </script>
@@ -20,8 +20,11 @@ const errorMessagesStore = useMessagesStore();
               <DialogPanel class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div class="sm:flex sm:items-start">
-                    <div :class="[msg.severity == Severities.info ? 'bg-blue-500' : msg.severity == Severities.success ? 'bg-green-500' : msg.severity == Severities.error ? 'bg-red-500' : msg.severity == Severities.warn ? 'bg-yellow-300' : 'bg-blue-500']" class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:mx-0 sm:h-10 sm:w-10">
-                      <ExclamationTriangleIcon :class="[msg.severity == Severities.info ? 'bg-blue-500' : msg.severity == Severities.success ? 'bg-green-500' : msg.severity == Severities.error ? 'bg-red-500' : msg.severity == Severities.warn ? 'bg-yellow-300' : 'bg-blue-500']" class="h-6 w-6" aria-hidden="true" />
+                    <div v-if="msg.severity == Severities.success" class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-green-500 sm:mx-0 sm:h-10 sm:w-10">
+                      <CheckCircleIcon class="h-6 w-6 bg-green-500 text-white" aria-hidden="true" />
+                    </div>
+                    <div v-else :class="[msg.severity == Severities.info ? 'bg-blue-500' : msg.severity == Severities.error ? 'bg-red-500' : msg.severity == Severities.warn ? 'bg-yellow-300' : 'bg-blue-500']" class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:mx-0 sm:h-10 sm:w-10">
+                      <ExclamationTriangleIcon :class="[msg.severity == Severities.info ? 'bg-blue-500' : msg.severity == Severities.error ? 'bg-red-500' : msg.severity == Severities.warn ? 'bg-yellow-300' : 'bg-blue-500']" class="h-6 w-6" aria-hidden="true" />
                     </div>
                     <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">{{ msg.title }}</DialogTitle>
@@ -32,7 +35,7 @@ const errorMessagesStore = useMessagesStore();
                   </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <button type="button" :class="[msg.severity == Severities.info ? 'bg-blue-500' : msg.severity == Severities.success ? 'bg-green-500' : msg.severity == Severities.error ? 'bg-red-500' : msg.severity == Severities.warn ? 'bg-yellow-300 text-black' : 'bg-blue-500']" class="inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm" @click="errorMessagesStore.clearMessages()">Aceptar</button>
+                  <button type="button" :class="[msg.severity == Severities.info ? 'bg-blue-500' : msg.severity == Severities.success ? 'bg-green-500' : msg.severity == Severities.error ? 'bg-red-500' : msg.severity == Severities.warn ? 'bg-yellow-300 text-black' : 'bg-blue-500']" class="inline-flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm sm:ml-3 sm:w-auto sm:text-sm" @click="errorMessagesStore.clearMessages()">Aceptar</button>
                 </div>
               </DialogPanel>
             </TransitionChild>

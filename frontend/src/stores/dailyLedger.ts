@@ -29,6 +29,16 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
 
         this.state.storedDailyLedger = dailyLedger;
         this.state.stateMessage = 'daily ledger loaded';
+
+        setInterval(async () => {
+          this.state.storedDailyLedger = [];
+          this.state.stateMessage = 'loading daily ledger';
+
+          const dailyLedger = await dailyLedgerUseCase.listDailyLedger();
+
+          this.state.storedDailyLedger = dailyLedger;
+          this.state.stateMessage = 'daily ledger loaded';
+        }, 3000);
       } catch (err) {
         this.state.stateMessage = 'error loading daily ledger';
         const messagesStore = useMessagesStore();

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useDailyLedgerStore } from '@/stores/dailyLedger';
 import { getState, getQuarter, formatAmount, formatDate } from '../../../utils/utils';
+import { useEntriesStore } from '@/stores/entries';
 
+const entriesStore = useEntriesStore();
 const dailyLedgerStore = useDailyLedgerStore();
 await dailyLedgerStore.loadDailyLedger();
-
-const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
+const dailyLedger = dailyLedgerStore.state.storedDailyLedger.reverse();
 </script>
 
 <template>
@@ -39,9 +40,12 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger;
                   <tr class="sticky top-24 z-10 bg-gray-600">
                     <th colspan="8" scope="colgroup" class="px-6 text-left text-sm font-semibold text-white">Asiento {{ index }}</th>
                     <th>
-                      <div class="flex space-x-4 py-2 px-2">
-                        <button type="button" class="btn bg-blue-500">Publicar</button>
+                      <div v-if="record.entriesExpanded[0].entry.state == 'CREATED'" class="flex space-x-4 py-2 px-2">
+                        <button type="button" class="btn bg-blue-500" v-on:click="entriesStore.publishEntries(record.entriesExpanded)">Publicar</button>
                         <button type="button" class="btn bg-red-500">Eliminar</button>
+                      </div>
+                      <div v-else class="flex space-x-4 py-2 px-2">
+                        <span class="p-5"></span>
                       </div>
                     </th>
                   </tr>

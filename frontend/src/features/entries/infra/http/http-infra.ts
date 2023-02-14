@@ -2,6 +2,7 @@ import type { EntryDescribeResponse, EntryCreateBody } from '@/features/entries/
 
 export interface EntriesHttpInfra {
   createEntry(entry: EntryCreateBody): Promise<EntryDescribeResponse>;
+  publishEntry(id: string): Promise<EntryDescribeResponse>;
 }
 
 export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
@@ -13,6 +14,18 @@ export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(entry),
+    })
+      .then(response => response.json())
+      .then(response => response as EntryDescribeResponse);
+  }
+  publishEntry(id: string): Promise<EntryDescribeResponse> {
+    return fetch(`/api/entries:publish`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
     })
       .then(response => response.json())
       .then(response => response as EntryDescribeResponse);

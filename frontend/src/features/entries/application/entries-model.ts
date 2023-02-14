@@ -1,5 +1,6 @@
 export interface EntriesAdapter {
   createEntryHttpResponse(entry: CreateEntryInput): Promise<Entry>;
+  publishEntryHttpResponse(id: string): Promise<Entry>;
 }
 
 export interface Entry {

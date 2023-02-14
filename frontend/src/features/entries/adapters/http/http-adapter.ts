@@ -38,4 +38,27 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
 
     return output;
   }
+
+  async publishEntryHttpResponse(id: string) {
+    const entryHttpResponse = await this.entriesHttpInfra.publishEntry(id);
+
+    const output: EntryUseCase = {
+      id: entryHttpResponse.entry.id, //todo: this returning undefined
+      accountId: entryHttpResponse.entry.accountId,
+      multipleEntryId: entryHttpResponse.entry.multipleEntryId,
+      currency: entryHttpResponse.entry.currency,
+      concept: entryHttpResponse.entry.concept,
+      date: entryHttpResponse.entry.date,
+      quarter: entryHttpResponse.entry.quarter,
+      debitAmount: entryHttpResponse.entry.debitBalance,
+      creditAmount: entryHttpResponse.entry.creditBalance,
+      totalAmount: entryHttpResponse.entry.totalBalance,
+      state: entryHttpResponse.entry.state,
+      stateReason: entryHttpResponse.entry.stateReason,
+      creationDate: entryHttpResponse.entry.creationDate,
+      lastUpdate: entryHttpResponse.entry.lastUpdate,
+    };
+
+    return output;
+  }
 }

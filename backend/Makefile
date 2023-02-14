@@ -8,7 +8,6 @@ lint:
 	golangci-lint run
 
 start-local:
-	make gw-client-generator
 	go run main.go
 
 start-docker:

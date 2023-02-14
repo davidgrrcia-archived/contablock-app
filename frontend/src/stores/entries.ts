@@ -112,6 +112,24 @@ export const useEntriesStore = defineStore('entries', {
         messagesStore.addErrorMessage('Error creando asientos', 'Ha ocurrido un error creando los asientos');
       }
     },
+    async publishEntries(entriesExpanded: any) {
+      try {
+        this.state.stateMessage = 'publishing entries';
+
+        entriesExpanded.map(async entry => {
+          console.log("publicado");
+          return await entriesUseCase.publishEntry(entry.entry.id);
+        });
+        this.state.stateMessage = 'entries published';
+        const messagesStore = useMessagesStore();
+        messagesStore.addSuccessMessage('Asiento publicado', 'El asiento ha sido publicado correctamente');
+      } catch (err) {
+        console.log(err);
+        this.state.stateMessage = 'error publishing entries';
+        const messagesStore = useMessagesStore();
+        messagesStore.addMessage(this.state.stateMessage);
+      }
+    },
     clearEntries() {
       this.state.entriesCreation = [];
       this.state.multipleEntryId = '';
