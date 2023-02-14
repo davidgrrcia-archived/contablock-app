@@ -1,12 +1,12 @@
 package main
 
 import (
+	"os"
+
 	"github.com/davidgrcia/tfg-informatica-nextjs/cmd/graph"
 	"github.com/davidgrcia/tfg-informatica-nextjs/cmd/server"
 	"github.com/joho/godotenv"
 )
-
-const port = ":4000"
 
 func main() {
 	err := godotenv.Load(".env.local")
@@ -14,8 +14,10 @@ func main() {
 		panic(err)
 	}
 
+	port := os.Getenv("BACKEND_PORT")
+
 	var appGraph = graph.NewGraph()
 	appGraph.Build()
 
-	server.Run(appGraph, port)
+	server.Run(appGraph, ":"+port)
 }

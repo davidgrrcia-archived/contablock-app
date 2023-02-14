@@ -13,6 +13,9 @@ import TreeSelect from 'primevue/treeselect';
 
 const pinia = createPinia();
 const app = createApp(App);
+const API_URL = import.meta.env.VITE_API_URL;
+
+console.log('API_URL', API_URL);
 
 app.use(router);
 app.use(pinia);
