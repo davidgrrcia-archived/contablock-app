@@ -56,6 +56,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 	response.ID = outputData.Entry.ID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.BalanceByYearID = outputData.Entry.BalanceByYearID
 	response.Currency = outputData.Entry.Currency
 	response.Concept = outputData.Entry.Concept
 	response.Date = outputData.Entry.Date.Unix()
@@ -87,6 +88,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 	response.ID = outputData.Entry.ID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.BalanceByYearID = outputData.Entry.BalanceByYearID
 	response.Currency = outputData.Entry.Currency
 	response.Concept = outputData.Entry.Concept
 	response.Date = outputData.Entry.Date.Unix()
@@ -121,8 +123,9 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 		responseItem.ID = item.ID
 		responseItem.AccountID = item.AccountID
 		responseItem.MultipleEntryID = item.MultipleEntryID
+		responseItem.BalanceByYearID = item.BalanceByYearID
 		responseItem.Currency = item.Currency
-		responseItem.Concept = item.Concept //todo
+		responseItem.Concept = item.Concept
 		responseItem.Date = item.Date.Unix()
 		responseItem.Quarter = item.Quarter
 		responseItem.DebitBalance = item.DebitBalance
@@ -153,6 +156,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, da
 	response.ID = outputData.Entry.ID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.BalanceByYearID = outputData.Entry.BalanceByYearID
 	response.Currency = outputData.Entry.Currency
 	response.Concept = outputData.Entry.Concept
 	response.Date = outputData.Entry.Date.Unix()
@@ -184,6 +188,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptPublishEntry(ctx context.Context, d
 	response.ID = outputData.Entry.ID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.BalanceByYearID = outputData.Entry.BalanceByYearID
 	response.Currency = outputData.Entry.Currency
 	response.Concept = outputData.Entry.Concept
 	response.Date = outputData.Entry.Date.Unix()

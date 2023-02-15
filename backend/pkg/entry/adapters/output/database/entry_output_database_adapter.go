@@ -6,7 +6,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 )
 
 func NewEntryRepository(opts EntryRepositoryOptions) (*EntryRepository, error) {
@@ -34,6 +34,7 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 	entryDb.ID = input.ID
 	entryDb.AccountID = input.AccountID
 	entryDb.MultipleEntryID = input.MultipleEntryID
+	entryDb.BalanceByYearID = input.BalanceByYearID
 	entryDb.Currency = input.Currency
 	entryDb.Concept = input.Concept
 	entryDb.Date = input.Date.Format(time.RFC3339)
@@ -46,16 +47,16 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 	entryDb.CreationDate = input.CreationDate.Format(time.RFC3339)
 	entryDb.LastUpdate = input.LastUpdate.Format(time.RFC3339)
 
-	insertQuery := "INSERT INTO entries (id, account_id, multiple_entry_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+	insertQuery := "INSERT INTO entries (id, account_id, multiple_entry_id, balance_by_year_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-	repository.db.QueryRow(insertQuery, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
+	repository.db.QueryRow(insertQuery, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
 
 	query := "SELECT * FROM entries WHERE id = ?"
 
 	result := repository.db.QueryRow(query, entryDb.ID)
 
 	var addedEntry EntryDb
-	err := result.Scan(&addedEntry.ID, &addedEntry.AccountID, &addedEntry.MultipleEntryID, &addedEntry.Currency, &addedEntry.Concept, &addedEntry.Date, &addedEntry.Quarter, &addedEntry.DebitBalance, &addedEntry.CreditBalance, &addedEntry.TotalBalance, &addedEntry.State, &addedEntry.StateReason, &addedEntry.CreationDate, &addedEntry.LastUpdate)
+	err := result.Scan(&addedEntry.ID, &addedEntry.AccountID, &addedEntry.MultipleEntryID, &addedEntry.BalanceByYearID, &addedEntry.Currency, &addedEntry.Concept, &addedEntry.Date, &addedEntry.Quarter, &addedEntry.DebitBalance, &addedEntry.CreditBalance, &addedEntry.TotalBalance, &addedEntry.State, &addedEntry.StateReason, &addedEntry.CreationDate, &addedEntry.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
@@ -64,6 +65,7 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 	output.ID = addedEntry.ID
 	output.AccountID = addedEntry.AccountID
 	output.MultipleEntryID = addedEntry.MultipleEntryID
+	output.BalanceByYearID = addedEntry.BalanceByYearID
 	output.Currency = addedEntry.Currency
 	output.Concept = addedEntry.Concept
 	date, err := time.Parse(time.RFC3339, addedEntry.Date)
@@ -97,7 +99,7 @@ func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.E
 	result := repository.db.QueryRow(query, id)
 
 	var storedEntry EntryDb
-	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
+	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
@@ -106,6 +108,7 @@ func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.E
 	output.ID = storedEntry.ID
 	output.AccountID = storedEntry.AccountID
 	output.MultipleEntryID = storedEntry.MultipleEntryID
+	output.BalanceByYearID = storedEntry.BalanceByYearID
 	output.Currency = storedEntry.Currency
 	output.Concept = storedEntry.Concept
 	date, err := time.Parse(time.RFC3339, storedEntry.Date)
@@ -144,7 +147,7 @@ func (repository *EntryRepository) All(ctx context.Context, filters entry.Filter
 	var storedEntries []EntryDb
 	for rows.Next() {
 		var entryDb EntryDb
-		err = rows.Scan(&entryDb.ID, &entryDb.AccountID, &entryDb.MultipleEntryID, &entryDb.Currency, &entryDb.Concept, &entryDb.Date, &entryDb.Quarter, &entryDb.DebitBalance, &entryDb.CreditBalance, &entryDb.TotalBalance, &entryDb.State, &entryDb.StateReason, &entryDb.CreationDate, &entryDb.LastUpdate)
+		err = rows.Scan(&entryDb.ID, &entryDb.AccountID, &entryDb.MultipleEntryID, &entryDb.BalanceByYearID, &entryDb.Currency, &entryDb.Concept, &entryDb.Date, &entryDb.Quarter, &entryDb.DebitBalance, &entryDb.CreditBalance, &entryDb.TotalBalance, &entryDb.State, &entryDb.StateReason, &entryDb.CreationDate, &entryDb.LastUpdate)
 		if err != nil {
 			return nil, err
 		}
@@ -158,6 +161,7 @@ func (repository *EntryRepository) All(ctx context.Context, filters entry.Filter
 		entry.ID = storedEntry.ID
 		entry.AccountID = storedEntry.AccountID
 		entry.MultipleEntryID = storedEntry.MultipleEntryID
+		entry.BalanceByYearID = storedEntry.BalanceByYearID
 		entry.Currency = storedEntry.Currency
 		entry.Concept = storedEntry.Concept
 		date, err := time.Parse(time.RFC3339, storedEntry.Date)
@@ -194,6 +198,7 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 	entryDb.ID = input.ID
 	entryDb.AccountID = input.AccountID
 	entryDb.MultipleEntryID = input.MultipleEntryID
+	entryDb.BalanceByYearID = input.BalanceByYearID
 	entryDb.Currency = input.Currency
 	entryDb.Concept = input.Concept
 	entryDb.Date = input.Date.Format(time.RFC3339)
@@ -206,16 +211,16 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 	entryDb.CreationDate = input.CreationDate.Format(time.RFC3339)
 	entryDb.LastUpdate = input.LastUpdate.Format(time.RFC3339)
 
-	updateQuery := "UPDATE entries SET account_id = ?, multiple_entry_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, total_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE id = ?"
+	updateQuery := "UPDATE entries SET account_id = ?, multiple_entry_id = ?, balance_by_year_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, total_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE id = ?"
 
-	repository.db.QueryRow(updateQuery, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.ID)
+	repository.db.QueryRow(updateQuery, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.ID)
 
 	query := "SELECT * FROM entries WHERE id = ?"
 
 	result := repository.db.QueryRow(query, entryDb.ID)
 
 	var storedEntry EntryDb
-	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
+	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
@@ -224,6 +229,7 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 	output.ID = storedEntry.ID
 	output.AccountID = storedEntry.AccountID
 	output.MultipleEntryID = storedEntry.MultipleEntryID
+	output.BalanceByYearID = storedEntry.BalanceByYearID
 	output.Currency = storedEntry.Currency
 	output.Concept = storedEntry.Concept
 	date, err := time.Parse(time.RFC3339, storedEntry.Date)
@@ -257,7 +263,7 @@ func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entr
 	result := repository.db.QueryRow(query, id)
 
 	var storedEntry EntryDb
-	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
+	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
@@ -270,6 +276,7 @@ func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entr
 	output.ID = storedEntry.ID
 	output.AccountID = storedEntry.AccountID
 	output.MultipleEntryID = storedEntry.MultipleEntryID
+	output.BalanceByYearID = storedEntry.BalanceByYearID
 	output.Currency = storedEntry.Currency
 	output.Concept = storedEntry.Concept
 	date, err := time.Parse(time.RFC3339, storedEntry.Date)

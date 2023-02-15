@@ -95,6 +95,30 @@ func (repository *BalanceRepository) All(ctx context.Context, filters balance.Fi
 	}, nil
 }
 
+func (repository *BalanceRepository) Remove(ctx context.Context, id string) (*balance.BalanceByYearStorageData, error) {
+	query := "SELECT * FROM balances_by_year WHERE id = ?"
+
+	result := repository.db.QueryRow(query, id)
+
+	var storedBalance BalanceByYearDb
+	err := result.Scan(&storedBalance.ID, &storedBalance.BalanceID, &storedBalance.Amount, &storedBalance.Year)
+	if err != nil {
+		return nil, err
+	}
+
+	query = "DELETE FROM balances_by_year WHERE id = ?"
+
+	_ = repository.db.QueryRow(query, id)
+
+	var output balance.BalanceByYearStorageData
+	output.ID = storedBalance.ID
+	output.BalanceID = storedBalance.BalanceID
+	output.Amount = storedBalance.Amount
+	output.Year = storedBalance.Year
+
+	return &output, nil
+}
+
 func BuildQueryWithFilters(filters balance.Filters) string {
 	if filters.Year != nil {
 		year := strconv.Itoa(*filters.Year)

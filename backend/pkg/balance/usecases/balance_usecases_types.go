@@ -38,6 +38,18 @@ type ListBalanceOutput struct {
 	Items []Balance
 }
 
+type RemoveBalanceInput struct {
+	ID        string
+}
+
+type RemoveBalanceOutput struct {
+	ID        string
+	BalanceID string
+	Amount    float64
+	Year      int
+}
+
+
 type Filters struct {
 	Year *int
 }
@@ -45,6 +57,7 @@ type Filters struct {
 type BalanceStorage interface {
 	Add(ctx context.Context, input BalanceByYearStorageData) (*BalanceByYearStorageData, error)
 	All(ctx context.Context, filters Filters) (*BalanceStorageCollectionData, error)
+	Remove(ctx context.Context, id string) (*BalanceByYearStorageData, error)
 }
 
 type BalanceByYearStorageData struct {

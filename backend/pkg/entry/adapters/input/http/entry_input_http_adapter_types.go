@@ -4,6 +4,7 @@ type Entry struct {
 	ID              string  `json:"id"`
 	AccountID       string  `json:"accountId"`
 	MultipleEntryID string  `json:"multipleEntryId"`
+	BalanceByYearID *string `json:"balanceByYearId"`
 	Currency        string  `json:"currency"`
 	Concept         *string `json:"concept"`
 	Date            int64   `json:"date"`

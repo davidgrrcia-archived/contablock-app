@@ -10,6 +10,7 @@ import (
 type BalanceUseCase interface {
 	CreateBalance(ctx context.Context, input CreateBalanceInput) (*CreateBalanceOutput, error)
 	ListBalances(ctx context.Context, input ListBalanceInput) (*ListBalanceOutput, error)
+	RemoveBalance(ctx context.Context, input RemoveBalanceInput) (*RemoveBalanceOutput, error)
 }
 
 func NewDefaultBalanceUseCase(options DefaultBalanceUseCaseOptions) (*DefaultBalanceUseCase, error) {
@@ -125,4 +126,24 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 	return &ListBalanceOutput{
 		Items: balances,
 	}, err
+}
+
+func (useCase *DefaultBalanceUseCase) RemoveBalance(ctx context.Context, input RemoveBalanceInput) (*RemoveBalanceOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input")
+	}
+
+	storedBalance, err := useCase.balanceStorage.Remove(ctx, input.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	var output RemoveBalanceOutput
+	output.ID = storedBalance.ID
+	output.BalanceID = storedBalance.BalanceID
+	output.Amount = storedBalance.Amount
+	output.Year = storedBalance.Year
+
+	return &output, nil
 }

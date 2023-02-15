@@ -41,6 +41,7 @@ CREATE TABLE
         id VARCHAR(64) NOT NULL PRIMARY KEY,
         account_id VARCHAR(64) NOT NULL,
         multiple_entry_id VARCHAR(64) NOT NULL,
+        balance_by_year_id VARCHAR(64) NULL,
         currency VARCHAR(3) NOT NULL,
         concept VARCHAR(256),
         date VARCHAR(64) NOT NULL,

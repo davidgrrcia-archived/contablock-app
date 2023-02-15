@@ -15,6 +15,7 @@ type Entry struct {
 	ID              string
 	AccountID       string
 	MultipleEntryID string
+	BalanceByYearID *string
 	Currency        string
 	Concept         *string
 	Date            time.Time
@@ -99,6 +100,7 @@ type EntryStorageData struct {
 	ID              string
 	AccountID       string
 	MultipleEntryID string
+	BalanceByYearID *string
 	Currency        string
 	Concept         *string
 	Date            time.Time

@@ -98,15 +98,17 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 		return nil, err
 	}
 
+	var balanceByYearID *string
 	if storedAccount.Account.BalanceID != nil && *storedAccount.Account.BalanceID != "" {
 		var createBalanceInput balance.CreateBalanceInput
 		createBalanceInput.BalanceID = *storedAccount.Account.BalanceID
 		createBalanceInput.Amount = *getAmountForBalance(input.DebitBalance, input.CreditBalance)
 		createBalanceInput.Year = input.Date.Year()
-		_, err = useCase.balanceUseCase.CreateBalance(ctx, createBalanceInput)
+		storedBalance, err := useCase.balanceUseCase.CreateBalance(ctx, createBalanceInput)
 		if err != nil {
 			return nil, err
 		}
+		balanceByYearID = &storedBalance.ID
 	}
 
 	var desiredEntry EntryStorageData
@@ -116,6 +118,7 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	desiredEntry.ID = *input.ID
 	desiredEntry.AccountID = input.AccountID
 	desiredEntry.MultipleEntryID = input.MultipleEntryID
+	desiredEntry.BalanceByYearID = balanceByYearID
 	desiredEntry.Currency = input.Currency
 	desiredEntry.Concept = input.Concept
 	desiredEntry.Date = input.Date
@@ -145,6 +148,7 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	output.Entry.ID = storedEntry.ID
 	output.Entry.AccountID = storedEntry.AccountID
 	output.Entry.MultipleEntryID = storedEntry.MultipleEntryID
+	output.Entry.BalanceByYearID = storedEntry.BalanceByYearID
 	output.Entry.Currency = storedEntry.Currency
 	output.Entry.Concept = storedEntry.Concept
 	output.Entry.Date = storedEntry.Date
@@ -175,6 +179,7 @@ func (useCase *DefaultEntryUseCase) DescribeEntry(ctx context.Context, input Des
 	output.Entry.ID = storedEntry.ID
 	output.Entry.AccountID = storedEntry.AccountID
 	output.Entry.MultipleEntryID = storedEntry.MultipleEntryID
+	output.Entry.BalanceByYearID = storedEntry.BalanceByYearID
 	output.Entry.Currency = storedEntry.Currency
 	output.Entry.Concept = storedEntry.Concept
 	output.Entry.Date = storedEntry.Date
@@ -209,6 +214,7 @@ func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListE
 		entry.ID = item.ID
 		entry.AccountID = item.AccountID
 		entry.MultipleEntryID = item.MultipleEntryID
+		entry.BalanceByYearID = item.BalanceByYearID
 		entry.Currency = item.Currency
 		entry.Concept = item.Concept
 		entry.Date = item.Date
@@ -247,6 +253,7 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	desiredEntry.ID = input.Entry.ID
 	desiredEntry.AccountID = input.Entry.AccountID
 	desiredEntry.MultipleEntryID = input.Entry.MultipleEntryID
+	desiredEntry.BalanceByYearID = input.Entry.BalanceByYearID
 	desiredEntry.Currency = input.Entry.Currency
 	if input.Entry.Concept == nil {
 		desiredEntry.Concept = storedEntry.Entry.Concept
@@ -272,6 +279,7 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	output.Entry.ID = updatedEntry.ID
 	output.Entry.AccountID = updatedEntry.AccountID
 	output.Entry.MultipleEntryID = updatedEntry.MultipleEntryID
+	output.Entry.BalanceByYearID = updatedEntry.BalanceByYearID
 	output.Entry.Currency = updatedEntry.Currency
 	output.Entry.Concept = updatedEntry.Concept
 	output.Entry.Date = updatedEntry.Date
@@ -311,9 +319,18 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 		return nil, errors.New("failure publishing state not allowed")
 	}
 
-	var removeEntryInput contablock.RemoveEntryInput
-	removeEntryInput.ID = input.ID
-	err = useCase.contaBlockUseCase.RemoveEntry(removeEntryInput)
+	if storedEntry.Entry.BalanceByYearID != nil && *storedEntry.Entry.BalanceByYearID != "" {
+		var removeBalanceInput balance.RemoveBalanceInput
+		removeBalanceInput.ID = *storedEntry.Entry.BalanceByYearID
+		_, err = useCase.balanceUseCase.RemoveBalance(ctx, removeBalanceInput)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	var removeEntrySmartContractInput contablock.RemoveEntryInput
+	removeEntrySmartContractInput.ID = input.ID
+	err = useCase.contaBlockUseCase.RemoveEntry(removeEntrySmartContractInput)
 	if err != nil {
 		return nil, err
 	}
@@ -327,6 +344,7 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 	output.Entry.ID = removedEntry.ID
 	output.Entry.AccountID = removedEntry.AccountID
 	output.Entry.MultipleEntryID = removedEntry.MultipleEntryID
+	output.Entry.BalanceByYearID = removedEntry.BalanceByYearID
 	output.Entry.Currency = removedEntry.Currency
 	output.Entry.Concept = removedEntry.Concept
 	output.Entry.Date = removedEntry.Date

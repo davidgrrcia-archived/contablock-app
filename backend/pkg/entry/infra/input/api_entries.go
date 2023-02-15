@@ -79,15 +79,12 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		utils.Success(w, outputPayload.DescribeEntryResponse)
 	}).Methods("GET")
 
-	r.HandleFunc("/api/entries:remove", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/entries/{id}", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
+		vars := mux.Vars(r)
 		var inputPayload input.DeleteEntryRequest
-		err := json.NewDecoder(r.Body).Decode(&inputPayload)
-		if err != nil {
-			utils.Failure(w, err)
-			return
-		}
+		inputPayload.ID = vars["id"]
 
 		entry, err := handler.adapter.AdaptDeleteEntry(ctx, inputPayload)
 		if err != nil {

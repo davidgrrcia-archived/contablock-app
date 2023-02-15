@@ -4,6 +4,7 @@ type EntryDb struct {
 	ID              string  `storage:"id"`
 	AccountID       string  `storage:"account_id"`
 	MultipleEntryID string  `storage:"multiple_entry_id"`
+	BalanceByYearID *string `storage:"balance_by_year_id"`
 	Currency        string  `storage:"currency"`
 	Concept         *string `storage:"concept"`
 	Date            string  `storage:"date"`
