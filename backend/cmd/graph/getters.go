@@ -5,15 +5,17 @@ import (
 	"math/big"
 
 	inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+	account "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 	inputAdapterBalance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/adapters/input/http"
 	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 	inputAdapterBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+	business "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
 	inputAdapterDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
 	dailyledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/usecases"
 	inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	inputAdapterGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
+	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -132,6 +134,19 @@ func (graph *Graph) GetDailyLedgerUseCase() dailyledger.DailyLedgerUseCase {
 		panic("graph DailyLedgerUseCase case is nil")
 	}
 	return graph.DailyLedgerUseCase
+}
+
+/////// GENERAL LEDGER ///////
+
+func (graph *Graph) GetGeneralLedgerInputAdapter() inputAdapterGeneralLedger.GeneralLedgerInputAdapter {
+	return graph.GeneralLedgerInputAdapter
+}
+
+func (graph *Graph) GetGeneralLedgerUseCase() generalledger.GeneralLedgerUseCase {
+	if graph.GeneralLedgerUseCase == nil {
+		panic("graph GeneralLedgerUseCase case is nil")
+	}
+	return graph.GeneralLedgerUseCase
 }
 
 /////// BALANCES ///////

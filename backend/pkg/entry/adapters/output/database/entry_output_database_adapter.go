@@ -307,6 +307,11 @@ func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entr
 func BuildQueryWithFilters(query string, filters entry.Filters) string {
 	if filters.MultipleEntryID != nil {
 		query = query + " WHERE multiple_entry_id = \"" + *filters.MultipleEntryID + "\""
+		return query
+	}
+	if filters.AccountID != nil {
+		query = query + " WHERE account_id = \"" + *filters.AccountID + "\""
+		return query
 	}
 
 	return query

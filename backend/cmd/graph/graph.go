@@ -5,15 +5,17 @@ import (
 	"math/big"
 
 	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
+	account "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 	inputBalance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/adapters/input/http"
 	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 	inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+	business "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
 	inputDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
 	dailyledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/usecases"
 	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	inputGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
+	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -52,6 +54,10 @@ type Graph struct {
 	dailyledger.DailyLedgerUseCase
 	inputDailyLedger.DailyLedgerInputAdapter
 
+	//general ledger
+	generalledger.GeneralLedgerUseCase
+	inputGeneralLedger.GeneralLedgerInputAdapter
+
 	//balances
 	BalanceDb sql.DB
 	balance.BalanceStorage
@@ -85,12 +91,14 @@ func (graph *Graph) Build() {
 	graph.provideBusinessUseCase()
 	graph.provideEntryUseCase()
 	graph.provideDailyLedgerUseCase()
+	graph.provideGeneralLedgerUseCase()
 
 	// input adapters
 	graph.provideAccountInputAdapter()
 	graph.provideBusinessInputAdapter()
 	graph.provideEntryInputAdapter()
 	graph.provideDailyLedgerInputAdapter()
+	graph.provideGeneralLedgerInputAdapter()
 	graph.provideBalanceInputAdapter()
 
 	// input infra
@@ -99,5 +107,6 @@ func (graph *Graph) Build() {
 	graph.provideBusinessEndpoints()
 	graph.provideEntryEndpoints()
 	graph.provideDailyLedgerEndpoints()
+	graph.provideGeneralLedgerEndpoints()
 	graph.provideBalanceEndpoints()
 }

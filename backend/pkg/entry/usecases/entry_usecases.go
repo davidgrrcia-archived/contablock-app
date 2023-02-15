@@ -203,6 +203,7 @@ func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListE
 
 	var filters Filters
 	filters.MultipleEntryID = input.MultipleEntryID
+	filters.AccountID = input.AccountID
 	storedEntries, err := useCase.entryStorage.All(ctx, filters)
 	if err != nil {
 		return nil, err

@@ -54,6 +54,7 @@ type DescribeEntryOutput struct {
 
 type ListEntryInput struct {
 	MultipleEntryID *string
+	AccountID       *string
 }
 
 type ListEntryOutput struct {
@@ -86,6 +87,7 @@ type PublishEntryOutput struct {
 
 type Filters struct {
 	MultipleEntryID *string
+	AccountID       *string
 }
 
 type EntryStorage interface {

@@ -27,6 +27,9 @@ import (
 	entryOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/output/database"
 	entryInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/infra/input"
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	inputGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
+	generalLedgerInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/infra/input"
+	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
 	contablockOutputHttpAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/adapters/outputhttp"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
@@ -365,6 +368,46 @@ func (graph *Graph) provideDailyLedgerEndpoints() {
 		log.Fatal(err)
 	}
 	handler.RegisterDailyLedgerRoutes(graph.GetRouter())
+}
+
+/////// GENERAL LEDGER ///////
+
+func (graph *Graph) provideGeneralLedgerUseCase() {
+	generalledgerUseCaseOpts := generalledger.DefaultGeneralLedgerUseCaseOptions{
+		EntryUseCase:      graph.GetEntryUseCase(),
+		AccountUseCase:    graph.GetAccountUseCase(),
+		ContaBlockUseCase: graph.GetContaBlockUseCase(),
+	}
+	generalledgerUseCase, err := generalledger.NewDefaultGeneralLedgerUseCase(generalledgerUseCaseOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.GeneralLedgerUseCase = generalledgerUseCase
+}
+
+func (graph *Graph) provideGeneralLedgerInputAdapter() *inputGeneralLedger.DefaultHttpInputAdapter {
+	generalledgerInputAdapterOpts := inputGeneralLedger.DefaultHttpInputAdapterOptions{
+		GeneralLedgerUseCase: graph.GetGeneralLedgerUseCase(),
+	}
+	generalledgerInputAdapter, err := inputGeneralLedger.NewDefaultHttpInputAdapter(generalledgerInputAdapterOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.GeneralLedgerInputAdapter = generalledgerInputAdapter
+
+	return generalledgerInputAdapter
+}
+
+func (graph *Graph) provideGeneralLedgerEndpoints() {
+	var options generalLedgerInputInfra.DefaultGeneralLedgerHttpHandlerOptions
+	options.Adapter = graph.GetGeneralLedgerInputAdapter()
+	handler, err := generalLedgerInputInfra.NewDefaultGeneralLedgerHttpHandler(options)
+	if err != nil {
+		log.Fatal(err)
+	}
+	handler.RegisterGeneralLedgerRoutes(graph.GetRouter())
 }
 
 /////// BALANCES ///////
