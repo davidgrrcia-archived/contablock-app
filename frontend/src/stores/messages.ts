@@ -5,8 +5,10 @@ import { defineStore } from 'pinia';
 export enum Severities {
   'success',
   'info',
-  'warn',
+  'warning',
   'error',
+  'confirm',
+  'dangerousConfirm',
 }
 
 interface Message {
@@ -14,8 +16,9 @@ interface Message {
   title: string;
   description: string;
   severity: Severities;
-  lifeInSeconds: number;
+  lifeInSeconds?: number;
   show: boolean;
+  actionCallback?: (props?: any) => void;
 }
 
 const state = {
@@ -101,9 +104,41 @@ export const useMessagesStore = defineStore('messagesStore', {
           id: '',
           title: title,
           description: description,
-          severity: Severities.warn,
+          severity: Severities.warning,
           lifeInSeconds: lifeInSeconds,
           show: true,
+        };
+        this.state.messages.push(msg);
+      }
+    },
+    addConfirmMessage(title: string, description?: string, actionCallback?: (props?: any) => void) {
+      if (description == undefined || '') {
+        description = '';
+      }
+      if (title !== undefined || '') {
+        const msg: Message = {
+          id: '',
+          title: title,
+          description: description,
+          severity: Severities.confirm,
+          show: true,
+          actionCallback: actionCallback,
+        };
+        this.state.messages.push(msg);
+      }
+    },
+    addDangerousConfirmMessage(title: string, description?: string, actionCallback?: (props?: any) => void) {
+      if (description == undefined || '') {
+        description = '';
+      }
+      if (title !== undefined || '') {
+        const msg: Message = {
+          id: '',
+          title: title,
+          description: description,
+          severity: Severities.dangerousConfirm,
+          show: true,
+          actionCallback: actionCallback,
         };
         this.state.messages.push(msg);
       }

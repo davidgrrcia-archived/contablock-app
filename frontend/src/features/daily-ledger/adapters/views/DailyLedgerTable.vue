@@ -2,11 +2,24 @@
 import { useDailyLedgerStore } from '@/stores/dailyLedger';
 import { getState, getQuarter, formatAmount, formatDate } from '../../../utils/utils';
 import { useEntriesStore } from '@/stores/entries';
+import { useMessagesStore } from '@/stores/messages';
 
 const entriesStore = useEntriesStore();
 const dailyLedgerStore = useDailyLedgerStore();
+const messagesStore = useMessagesStore();
 await dailyLedgerStore.loadDailyLedger();
 const dailyLedger = dailyLedgerStore.state.storedDailyLedger.reverse();
+
+function publishEntries(entries: any) {
+  messagesStore.addConfirmMessage('¿Estás seguro de publicar los asientos seleccionados?', 'Esta es una acción que no se puede revertir, asegúrate de querer publicar este asiento', () => {
+    entriesStore.publishEntries(entries);
+  });
+}
+function removeEntries(entries: any) {
+  messagesStore.addDangerousConfirmMessage('¿Estás seguro de eliminar los asientos seleccionados?', 'Esta es una acción que no se puede revertir, asegúrate de querer eliminar este asiento', () => {
+    entriesStore.removeEntries(entries);
+  });
+}
 </script>
 
 <template>
@@ -41,8 +54,8 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger.reverse();
                     <th colspan="8" scope="colgroup" class="px-6 text-left text-sm font-semibold text-white">Asiento {{ index }}</th>
                     <th>
                       <div v-if="record.entriesExpanded[0].entry.state == 'CREATED'" class="flex space-x-4 py-2 px-2">
-                        <button type="button" class="btn bg-blue-500" v-on:click="entriesStore.publishEntries(record.entriesExpanded)">Publicar</button>
-                        <button type="button" class="btn bg-red-500" v-on:click="entriesStore.removeEntries(record.entriesExpanded)">Eliminar</button>
+                        <button type="button" class="btn bg-blue-500" v-on:click="publishEntries(record.entriesExpanded)">Publicar</button>
+                        <button type="button" class="btn bg-red-500" v-on:click="removeEntries(record.entriesExpanded)">Eliminar</button>
                       </div>
                       <div v-else class="flex space-x-4 py-2 px-2">
                         <span class="p-5"></span>
