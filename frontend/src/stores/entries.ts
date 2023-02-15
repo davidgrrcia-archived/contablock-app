@@ -124,8 +124,23 @@ export const useEntriesStore = defineStore('entries', {
         const messagesStore = useMessagesStore();
         messagesStore.addSuccessMessage('Asiento publicado', 'El asiento ha sido publicado correctamente');
       } catch (err) {
-        console.log(err);
         this.state.stateMessage = 'error publishing entries';
+        const messagesStore = useMessagesStore();
+        messagesStore.addMessage(this.state.stateMessage);
+      }
+    },
+    async removeEntries(entriesExpanded: any) {
+      try {
+        this.state.stateMessage = 'removing entries';
+
+        entriesExpanded.map(async entry => {
+          return await entriesUseCase.removeEntry(entry.entry.id);
+        });
+        this.state.stateMessage = 'entries removed';
+        const messagesStore = useMessagesStore();
+        messagesStore.addSuccessMessage('Asiento eliminado', 'El asiento ha sido eliminado correctamente');
+      } catch (err) {
+        this.state.stateMessage = 'error removing entries';
         const messagesStore = useMessagesStore();
         messagesStore.addMessage(this.state.stateMessage);
       }

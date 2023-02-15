@@ -67,6 +67,10 @@ func (useCase *DefaultDailyLedgerUseCase) ListDailyLedger(ctx context.Context, i
 			return nil, errors.New("failure listing entries")
 		}
 
+		if len(listEntries.Items) == 0 {
+			continue
+		}
+
 		var record Record
 		record.ID = multipleEntryID
 
@@ -84,7 +88,6 @@ func (useCase *DefaultDailyLedgerUseCase) ListDailyLedger(ctx context.Context, i
 
 			record.EntriesExpanded = append(record.EntriesExpanded, entryExpanded)
 		}
-
 		output.Items = append(output.Items, record)
 	}
 

@@ -3,6 +3,7 @@ import type { EntryDescribeResponse, EntryCreateBody } from '@/features/entries/
 export interface EntriesHttpInfra {
   createEntry(entry: EntryCreateBody): Promise<EntryDescribeResponse>;
   publishEntry(id: string): Promise<EntryDescribeResponse>;
+  removeEntry(id: string): Promise<EntryDescribeResponse>;
 }
 
 export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
@@ -26,6 +27,17 @@ export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id }),
+    })
+      .then(response => response.json())
+      .then(response => response as EntryDescribeResponse);
+  }
+  removeEntry(id: string): Promise<EntryDescribeResponse> {
+    return fetch(`/api/entries/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     })
       .then(response => response.json())
       .then(response => response as EntryDescribeResponse);

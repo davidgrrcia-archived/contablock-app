@@ -42,7 +42,7 @@ const dailyLedger = dailyLedgerStore.state.storedDailyLedger.reverse();
                     <th>
                       <div v-if="record.entriesExpanded[0].entry.state == 'CREATED'" class="flex space-x-4 py-2 px-2">
                         <button type="button" class="btn bg-blue-500" v-on:click="entriesStore.publishEntries(record.entriesExpanded)">Publicar</button>
-                        <button type="button" class="btn bg-red-500">Eliminar</button>
+                        <button type="button" class="btn bg-red-500" v-on:click="entriesStore.removeEntries(record.entriesExpanded)">Eliminar</button>
                       </div>
                       <div v-else class="flex space-x-4 py-2 px-2">
                         <span class="p-5"></span>
