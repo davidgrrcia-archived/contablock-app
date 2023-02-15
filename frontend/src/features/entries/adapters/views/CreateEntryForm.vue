@@ -2,8 +2,8 @@
 import { ref } from 'vue';
 import { v4 as uuid } from 'uuid';
 import type { CreateEntryInput } from '@/features/entries/application/entries-model';
-import { useEntriesStore } from '@/stores/entries';
-import { useAccountsStore } from '@/stores/accounts';
+import { useEntriesStore } from '@/features/entries/application/entries-store.js';
+import { useAccountsStore } from '@/features/accounts/application/accounts-store.js';
 import { findCurrencyByCode, currencies, dateToUnixTimestamp, formatDate, formatAmount } from '@/features/utils/utils';
 
 //store

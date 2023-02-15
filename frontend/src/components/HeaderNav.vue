@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useCreateEntryModalStore } from '@/stores/createEntryModal';
+import { useCreateEntryModalStore } from '@/features/entries/application/create-entry-modal-store.js';
 import CreateEntryModal from '@/features/entries/adapters/views/CreateEntryModal.vue';
 import { useConfigStore } from '@/stores/config';
 import BusinessHeading from '@/features/business/adapters/views/BusinessHeading.vue';

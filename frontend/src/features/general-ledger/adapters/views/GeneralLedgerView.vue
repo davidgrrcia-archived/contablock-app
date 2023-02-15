@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useConfigStore } from '@/stores/config';
+import GeneralLedgerTable from '@/features/general-ledger/adapters/views/GeneralLedgerTable.vue';
 
 const configStore = useConfigStore();
 configStore.activateCurrent('/general-ledger');
@@ -7,6 +8,6 @@ configStore.activateCurrent('/general-ledger');
 
 <template>
   <main>
-    <h1>Libro Mayor</h1>
+    <suspense><GeneralLedgerTable></GeneralLedgerTable></suspense>
   </main>
 </template>

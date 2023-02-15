@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useDailyLedgerStore } from '@/stores/dailyLedger';
+import { useDailyLedgerStore } from '@/features/daily-ledger/application/daily-ledger-store';
 import { getState, getQuarter, formatAmount, formatDate } from '../../../utils/utils';
-import { useEntriesStore } from '@/stores/entries';
+import { useEntriesStore } from '@/features/entries/application/entries-store';
 import { useMessagesStore } from '@/stores/messages';
 
 const entriesStore = useEntriesStore();

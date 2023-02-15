@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { BriefcaseIcon, LinkIcon, MapPinIcon } from '@heroicons/vue/20/solid';
-import { useBusinessStore } from '@/stores/business';
+import { useBusinessStore } from '@/features/business/application/business-store.js';
 
 const businessState = useBusinessStore();
 const state = await businessState.loadBusiness('zara');

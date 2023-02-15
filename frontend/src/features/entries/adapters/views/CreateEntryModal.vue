@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useCreateEntryModalStore } from '@/stores/createEntryModal';
+import { useCreateEntryModalStore } from '@/features/entries/application/create-entry-modal-store.js';
 import CreateEntryForm from '@/features/entries/adapters/views/CreateEntryForm.vue';
-import { useEntriesStore } from '@/stores/entries';
+import { useEntriesStore } from '@/features/entries/application/entries-store.js';
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
 
 const modalState = useCreateEntryModalStore();
