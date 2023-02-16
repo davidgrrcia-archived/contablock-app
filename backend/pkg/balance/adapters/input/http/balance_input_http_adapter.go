@@ -138,9 +138,30 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 	}
 
 	var response ListBalanceResponse
-	response.Items = mapping
+	response.Items = mapToList(mapping)
 
 	responseWrapper := ListBalanceResponseWrapper{}
 	responseWrapper.ListBalanceResponse = response
 	return &responseWrapper, nil
 }
+
+func mapToList(mapa map[string]Balance) []BalanceItem {
+	lista := []BalanceItem{}
+	for _, valor := range mapa {
+		item := BalanceItem{
+			ID:             valor.ID,
+			Name:           valor.Name,
+			CurrentYear:    valor.CurrentYear,
+			PreviousYear:   valor.PreviousYear,
+			CurrentAmount:  valor.CurrentAmount,
+			PreviousAmount: valor.PreviousAmount,
+			Child:          nil,
+		}
+		if valor.Map != nil {
+			item.Child = mapToList(valor.Map)
+		}
+		lista = append(lista, item)
+	}
+	return lista
+}
+

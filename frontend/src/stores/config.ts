@@ -11,6 +11,7 @@ const state = {
   navigation: [
     { name: 'Libro Diario', href: '/', current: false },
     { name: 'Libro Mayor', href: '/general-ledger', current: false },
+    { name: 'Balance General', href: '/balances', current: false },
   ] as Navigation[],
 };
 
