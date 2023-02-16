@@ -22,34 +22,32 @@ const balance = balanceStore.state.storedBalance;
             <table class="min-w-full">
               <thead class="bg-white">
                 <tr>
-                  <th scope="col" class="sticky top-14 z-10 rounded-tl-lg bg-gray-800 py-3.5 pr-3 pl-6 text-left text-sm font-semibold text-white"></th>
+                  <th scope="col" class="sticky top-14 z-10 rounded-tl-lg bg-gray-800 py-3.5 pr-3 pl-6 text-left text-sm font-semibold text-white">Naturaleza</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ balance[0].currentYear }}</th>
                   <th scope="col" class="sticky top-14 z-10 rounded-tr-lg bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ balance[0].previousYear }}</th>
                 </tr>
               </thead>
               <tbody v-for="(record, i) in balance" :key="i" class="bg-white">
-                <tr :class="i % 2 === 0 ? undefined : 'bg-gray-50'" class="border-t border-gray-200">
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
+                <tr class="sticky top-24 z-10 bg-gray-600">
+                  <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-white">
                     {{ record.name }}
                   </td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                    <!-- CHANGE THIS HARDCODED -->
+                  <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-white">
                     {{ formatAmount(record.currentAmount, 'EUR') }}
                   </td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
+                  <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-white">
                     {{ formatAmount(record.previousAmount, 'EUR') }}
                   </td>
                 </tr>
                 <template v-for="(child, j) in record.child" :key="j">
                   <tr :class="i % 2 === 0 ? undefined : 'bg-gray-50'" class="border-t border-gray-200">
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-gray-800">
                       {{ child.name }}
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                      <!-- CHANGE THIS HARDCODED -->
+                    <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-gray-800">
                       {{ formatAmount(child.currentAmount, 'EUR') }}
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
+                    <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-gray-800">
                       {{ formatAmount(child.previousAmount, 'EUR') }}
                     </td>
                   </tr>
@@ -59,7 +57,6 @@ const balance = balanceStore.state.storedBalance;
                         {{ child2.name }}
                       </td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                        <!-- CHANGE THIS HARDCODED -->
                         {{ formatAmount(child2.currentAmount, 'EUR') }}
                       </td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
@@ -72,7 +69,6 @@ const balance = balanceStore.state.storedBalance;
                           {{ child3.name }}
                         </td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                          <!-- CHANGE THIS HARDCODED -->
                           {{ formatAmount(child3.currentAmount, 'EUR') }}
                         </td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
