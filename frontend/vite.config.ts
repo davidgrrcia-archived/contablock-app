@@ -13,10 +13,10 @@ export default defineConfig({
   },
   server: {
     host: true,
-    port: 5173,
+    port: 4173,
     proxy: {
       '/api': {
-        target: 'http://localhost:4000/api',
+        target: 'http://nginx/api', //localhost:4000/api
         changeOrigin: true,
         secure: false,
         rewrite: path => path.replace(/^\/api/, ''),

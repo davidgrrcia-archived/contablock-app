@@ -1,18 +1,20 @@
-FROM golang:1.19-alpine
+# Usar una imagen base de golang
+FROM golang:1.17
 
-# Install GCC
-RUN apk add --no-cache build-base
-
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-COPY go.mod ./
-COPY go.sum ./
+# Copiar los archivos del código fuente
+COPY . .
+
+# Instalar las dependencias
 RUN go mod download
 
-COPY . ./
+# Compilar el código
+RUN go build -o main .
 
-RUN go build -o /contablock-backend
+# Exponer el puerto 8080
+EXPOSE 8080
 
-EXPOSE 4000
-
-CMD [ "/contablock-backend" ]
+# Ejecutar el binario
+CMD ["./main"]

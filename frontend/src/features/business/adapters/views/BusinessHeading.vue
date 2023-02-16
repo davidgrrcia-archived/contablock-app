@@ -4,7 +4,6 @@ import { useBusinessStore } from '@/features/business/application/business-store
 
 const businessState = useBusinessStore();
 const state = await businessState.loadBusiness('zara');
-console.log(state.business.logo);
 </script>
 
 <template>

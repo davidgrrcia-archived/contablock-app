@@ -116,8 +116,7 @@ export const useEntriesStore = defineStore('entries', {
       try {
         this.state.stateMessage = 'publishing entries';
 
-        entriesExpanded.map(async entry => {
-          console.log("publicado");
+        entriesExpanded.map(async (entry: any) => {
           return await entriesUseCase.publishEntry(entry.entry.id);
         });
         this.state.stateMessage = 'entries published';
@@ -133,7 +132,7 @@ export const useEntriesStore = defineStore('entries', {
       try {
         this.state.stateMessage = 'removing entries';
 
-        entriesExpanded.map(async entry => {
+        entriesExpanded.map(async (entry: any) => {
           return await entriesUseCase.removeEntry(entry.entry.id);
         });
         this.state.stateMessage = 'entries removed';

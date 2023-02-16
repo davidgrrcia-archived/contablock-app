@@ -1,22 +1,18 @@
-# Use the official Node.js image as the base image
-FROM node:14-alpine
+# Usar una imagen base de node
+FROM node:16
 
-# Set the working directory in the container
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copy the package.json and package-lock.json files to the container
-COPY package*.json ./
-
-# Install the dependencies
-RUN npm install
-
-# Copy the rest of the application code to the container
+# Copiar los archivos del código fuente
 COPY . .
+
+# Instalar las dependencias
+RUN npm install
 
 # Expose the port used by Hardhat
 EXPOSE 8545
 
 # Set the command to run when the container starts
-
 CMD npx hardhat node;
 
