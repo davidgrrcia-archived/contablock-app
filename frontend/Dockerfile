@@ -17,4 +17,4 @@ RUN npm run build
 EXPOSE 5173
 
 # Servir los archivos estáticos con vite
-CMD ["npx", "vite", "preview"]
+CMD npm run dev

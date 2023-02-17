@@ -21,7 +21,9 @@ func NewDefaultContaBlockContract(options DefaultContaBlockContractOptions) (*De
 		return nil, errors.New("cannot create an instance of ContaBlockContract with a nil nonce")
 	}
 
-	nonce = options.Nonce
+	if options.Nonce.Cmp(big.NewInt(0)) <= 0 {
+		options.Nonce = big.NewInt(1)
+	}
 
 	return &DefaultContaBlockContract{
 		client: options.Client,
@@ -42,21 +44,21 @@ type DefaultContaBlockContractOptions struct {
 	Nonce  *big.Int
 }
 
-var nonce *big.Int
-
 var _ contablockUseCase.ContaBlockContractAdapter = (*DefaultContaBlockContract)(nil)
 
 func (adapter DefaultContaBlockContract) CreateEntry(input contablockUseCase.CreateEntryAdapterInput) error {
 	//input
 	debitBalance := transformFloat64ToBigInt(input.DebitBalance)
 	creditBalance := transformFloat64ToBigInt(input.CreditBalance)
-	adapter.auth.Nonce = nonce.Add(nonce, big.NewInt(1))
+	adapter.auth.Nonce = adapter.nonce
 
 	//client
 	_, err := adapter.client.CreateEntry(adapter.auth, input.ID, input.AccountID, input.MultipleEntryID, input.Currency, input.Concept, input.Date, debitBalance, creditBalance)
 	if err != nil {
 		return err
 	}
+
+	adapter.nonce = adapter.nonce.Add(adapter.nonce, big.NewInt(1))
 
 	//output
 	return nil
@@ -128,27 +130,31 @@ func (adapter DefaultContaBlockContract) ListAccountIds() (*contablockUseCase.Li
 
 func (adapter DefaultContaBlockContract) PublishEntry(input contablockUseCase.PublishEntryAdapterInput) error {
 	//input
-	adapter.auth.Nonce = nonce.Add(nonce, big.NewInt(1))
+	adapter.auth.Nonce = adapter.nonce
 
 	//client
 	_, err := adapter.client.PublishEntry(adapter.auth, input.ID)
 	if err != nil {
 		return err
 	}
-
+	
+	adapter.nonce = adapter.nonce.Add(adapter.nonce, big.NewInt(1))
+	
 	//output
 	return nil
 }
 
 func (adapter DefaultContaBlockContract) RemoveEntry(input contablockUseCase.RemoveEntryAdapterInput) error {
 	//input
-	adapter.auth.Nonce = nonce.Add(nonce, big.NewInt(1))
+	adapter.auth.Nonce = adapter.nonce
 
 	//client
 	_, err := adapter.client.RemoveEntry(adapter.auth, input.ID)
 	if err != nil {
 		return err
 	}
+
+	adapter.nonce = adapter.nonce.Add(adapter.nonce, big.NewInt(1))
 
 	//output
 	return nil

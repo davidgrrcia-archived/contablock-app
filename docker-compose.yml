@@ -21,15 +21,20 @@ services:
     depends_on:
       - db
       - blockchain
+    volumes:
+      - ./backend:/usr/src/app
 
   frontend:
     container_name: contablock-frontend
     build: ./frontend
     restart: always
     ports:
-      - '4173:4173'
+      - '5173:5173'
     depends_on:
       - backend
+    environment:
+      VITE_API_URL: http://nginx/api
+      VITE_FRONTEND_PORT: 5173
 
   db:
     image: mysql
@@ -63,6 +68,8 @@ services:
     build: ./smart-contracts
     ports:
       - '8545:8545'
+    volumes:
+      - ./smart-contracts:/usr/src/app
 
   nginx:
     image: nginx 

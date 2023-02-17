@@ -4,7 +4,7 @@ clean:
 	docker system prune -f
 
 provision:
-	docker-compose up -d
+	docker-compose up --build -d
 	sleep 10
 	cd backend && make up-migrations
 	cd smart-contracts && make deploy-docker

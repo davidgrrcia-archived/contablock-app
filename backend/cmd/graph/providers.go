@@ -299,7 +299,7 @@ func (graph *Graph) provideContablockClient() {
 
 	graph.ContablockClient = *instance
 	graph.ContablockAuth = *auth
-	graph.ContablockNonce = *auth.Nonce.Sub(auth.Nonce, big.NewInt(1))
+	graph.ContablockNonce = *auth.Nonce
 }
 
 func (graph *Graph) provideContablockContractAdapter() contablock.ContaBlockContractAdapter {
