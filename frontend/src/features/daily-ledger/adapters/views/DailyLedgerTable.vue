@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDailyLedgerStore } from '@/features/daily-ledger/application/daily-ledger-store';
-import { getState, getQuarter, formatAmount, formatDate } from '../../../utils/utils';
+import { getState, getQuarter, formatAmount, formatDate, formatId } from '../../../utils/utils';
 import { useEntriesStore } from '@/features/entries/application/entries-store';
 import { useMessagesStore } from '@/stores/messages';
 
@@ -37,7 +37,8 @@ function removeEntries(entries: any) {
             <table class="min-w-full">
               <thead class="bg-white">
                 <tr>
-                  <th scope="col" class="sticky top-14 z-10 rounded-tl-lg bg-gray-800 py-3.5 pr-3 pl-6 text-left text-sm font-semibold text-white">Cuenta</th>
+                  <th scope="col" class="sticky top-14 z-10 rounded-tl-lg bg-gray-800 py-3.5 pr-3 pl-6 text-left text-sm font-semibold text-white">#</th>
+                  <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Cuenta</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Divisa</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Fecha</th>
                   <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Trimestre</th>
@@ -51,7 +52,7 @@ function removeEntries(entries: any) {
               <tbody class="bg-white">
                 <template v-for="(record, index) in dailyLedger" :key="index">
                   <tr class="sticky top-24 z-10 bg-gray-600">
-                    <th colspan="8" scope="colgroup" class="px-6 text-left text-sm font-semibold text-white">Asiento {{ index }}</th>
+                    <th colspan="9" scope="colgroup" class="px-6 text-left text-sm font-semibold text-white">Asiento: {{ formatId(record.id) }}</th>
                     <th>
                       <div v-if="record.entriesExpanded[0].entry.state == 'CREATED'" class="flex space-x-4 py-2 px-2">
                         <button type="button" class="btn bg-blue-500" v-on:click="publishEntries(record.entriesExpanded)">Publicar</button>
@@ -63,6 +64,9 @@ function removeEntries(entries: any) {
                     </th>
                   </tr>
                   <tr v-for="(entryExpanded, j) in dailyLedger[index].entriesExpanded" :key="j" :class="j % 2 === 0 ? undefined : 'bg-gray-50'" class="border-t border-gray-200">
+                    <td class="whitespace-nowrap px-3 py-4 text-xs text-gray-800">
+                      {{ formatId(entryExpanded.entry.id) }}
+                    </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ entryExpanded.account.displayName }}
                     </td>

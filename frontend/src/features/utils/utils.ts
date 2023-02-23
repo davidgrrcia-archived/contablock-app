@@ -66,13 +66,17 @@ export function formatAmount(amount: number | null, currency: string): string {
   }
 }
 
-//format unix timestamp to date string
+//format unix timestamp to date with time string
 export function formatDate(date: number): string {
   const d = new Date(date * 1000);
-  return d.toLocaleDateString();
+  return d.toLocaleDateString() + ' - ' + d.toLocaleTimeString();
 }
 
 // date to unix timestamp
 export function dateToUnixTimestamp(date: Date): number {
   return Math.floor(date.getTime() / 1000);
+}
+
+export function formatId(id: string): string {
+  return id.substring(0, 8) + '...';
 }

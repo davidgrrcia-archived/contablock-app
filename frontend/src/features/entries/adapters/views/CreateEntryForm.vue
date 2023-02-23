@@ -73,7 +73,7 @@ function addCreditEntry() {
     </div>
     <div class="flex-none">
       <label for="calendar" class="block text-sm font-medium text-gray-700">Fecha del asiento</label>
-      <CalendarPrimeVue v-model="date" :showIcon="true" dateFormat="dd/mm/yy" name="calendar" id="calendar" />
+      <CalendarPrimeVue v-model="date" :showTime="true" :showSeconds="true" :showIcon="true" dateFormat="dd/mm/yy" name="calendar" id="calendar" />
     </div>
     <div class="flex-1">
       <label for="balance" class="block text-sm font-medium text-gray-700">Balance del asiento</label>
