@@ -36,6 +36,9 @@ func (repository *AccountRepository) Get(ctx context.Context, project string, id
 	var storedAccount AccountDb
 	err := result.Scan(&storedAccount.Project, &storedAccount.ID, &storedAccount.Name, &storedAccount.Level, &storedAccount.BalanceID)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
 		return nil, err
 	}
 
@@ -94,7 +97,7 @@ func (repository *AccountRepository) Edit(ctx context.Context, input account.Acc
 
 	updateQuery := "UPDATE accounts SET name = ?, level = ?, balance_id = ? WHERE project = ? AND id = ?"
 
-	repository.db.QueryRow(updateQuery, accountDb.Name, accountDb.Level, accountDb.BalanceID, accountDb.Project, accountDb.ID)
+	repository.db.Exec(updateQuery, accountDb.Name, accountDb.Level, accountDb.BalanceID, accountDb.Project, accountDb.ID)
 
 	query := "SELECT * FROM accounts WHERE project = ? AND id = ?"
 
@@ -103,6 +106,9 @@ func (repository *AccountRepository) Edit(ctx context.Context, input account.Acc
 	var storedAccount AccountDb
 	err := result.Scan(&storedAccount.Project, &storedAccount.ID, &storedAccount.Name, &storedAccount.Level, &storedAccount.BalanceID)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("account [" + accountDb.ID + "] not found")
+		}
 		return nil, err
 	}
 
@@ -126,15 +132,21 @@ func (repository *AccountRepository) Add(ctx context.Context, input account.Acco
 
 	insertQuery := "INSERT INTO accounts (project, id, name, level, balance_id) VALUES (?, ?, ?, ?, ?)"
 
-	repository.db.Exec(insertQuery, accountDb.Project, accountDb.ID, accountDb.Name, accountDb.Level, accountDb.BalanceID)
+	_, err := repository.db.Exec(insertQuery, accountDb.Project, accountDb.ID, accountDb.Name, accountDb.Level, accountDb.BalanceID)
+	if err != nil {
+		return nil, err
+	}
 
 	query := "SELECT * FROM accounts WHERE project = ? AND id = ?"
 
 	result := repository.db.QueryRow(query, accountDb.Project, accountDb.ID)
 
 	var storedAccount AccountDb
-	err := result.Scan(&storedAccount.Project, &storedAccount.ID, &storedAccount.Name, &storedAccount.Level, &storedAccount.BalanceID)
+	err = result.Scan(&storedAccount.Project, &storedAccount.ID, &storedAccount.Name, &storedAccount.Level, &storedAccount.BalanceID)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("account [" + accountDb.ID + "] not added")
+		}
 		return nil, err
 	}
 

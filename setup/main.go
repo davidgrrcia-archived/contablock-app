@@ -80,11 +80,11 @@ func main() {
 
 		defer response.Body.Close()
 
-		_, err = ioutil.ReadAll(response.Body)
+		body, err := ioutil.ReadAll(response.Body)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		fmt.Printf("Account %s added to database successfully.\n", account.ID)
+		fmt.Println(string(body))
 	}
 }

@@ -4,7 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+
+	business "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
 )
 
 func NewBusinessRepository(opts BusinessRepositoryOptions) (*BusinessRepository, error) {
@@ -35,6 +36,9 @@ func (repository *BusinessRepository) Get(ctx context.Context, id string) (*busi
 	var outputDb BusinessDb
 	err := result.Scan(&outputDb.ID, &outputDb.Name, &outputDb.SocialDenomination, &outputDb.RegisteredOffice, &outputDb.Cif, &outputDb.Logo, &outputDb.EthAddress)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
 		return nil, err
 	}
 

@@ -60,7 +60,7 @@ type ListAccountOutput struct {
 type CreateAccountInput struct {
 	Project   string  `valid:"required,length(1|64)"`
 	ID        string  `valid:"required,length(1|64)"`
-	Name      string  `valid:"required,length(1|64)"`
+	Name      string  `valid:"required,length(1|256)"`
 	Level     string  `valid:"required,length(1|64)"`
 	BalanceID *string `valid:"optional,length(1|64)"`
 }

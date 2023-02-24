@@ -4,8 +4,9 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 	"strconv"
+
+	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 )
 
 func NewBalanceRepository(opts BalanceRepositoryOptions) (*BalanceRepository, error) {
@@ -37,7 +38,7 @@ func (repository *BalanceRepository) Add(ctx context.Context, input balance.Bala
 
 	insertQuery := "INSERT INTO balances_by_year (id, balance_id, amount, year) VALUES (?, ?, ?, ?)"
 
-	repository.db.QueryRow(insertQuery, balanceDb.ID, balanceDb.BalanceID, balanceDb.Amount, balanceDb.Year)
+	repository.db.Exec(insertQuery, balanceDb.ID, balanceDb.BalanceID, balanceDb.Amount, balanceDb.Year)
 
 	query := "SELECT * FROM balances_by_year WHERE id = ?"
 
@@ -46,6 +47,9 @@ func (repository *BalanceRepository) Add(ctx context.Context, input balance.Bala
 	var addedBalance BalanceByYearDb
 	err := result.Scan(&addedBalance.ID, &addedBalance.BalanceID, &addedBalance.Amount, &addedBalance.Year)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("balance [" + balanceDb.ID + "] not added")
+		}
 		return nil, err
 	}
 
@@ -103,6 +107,9 @@ func (repository *BalanceRepository) Remove(ctx context.Context, id string) (*ba
 	var storedBalance BalanceByYearDb
 	err := result.Scan(&storedBalance.ID, &storedBalance.BalanceID, &storedBalance.Amount, &storedBalance.Year)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("balance [" + id + "] not found")
+		}
 		return nil, err
 	}
 

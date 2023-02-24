@@ -135,6 +135,15 @@ func (useCase *DefaultAccountUseCase) CreateAccount(ctx context.Context, input C
 		return nil, errors.New("invalid input")
 	}
 
+	storedAccount, err := useCase.accountStorage.Get(ctx, input.Project, input.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	if storedAccount != nil {
+		return nil, errors.New("account [" + storedAccount.ID + "] already exists")
+	}
+
 	var desiredAccount AccountStorageData
 	desiredAccount.Project = input.Project
 	desiredAccount.ID = input.ID

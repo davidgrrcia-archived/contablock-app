@@ -9,6 +9,9 @@ provision:
 	cd backend && make up-migrations
 	cd smart-contracts && make deploy-docker
 
+install:
+	cd setup && go run main.go
+
 start-backend:
 	cd backend && make start-local
 

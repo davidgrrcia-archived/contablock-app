@@ -49,7 +49,7 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 
 	insertQuery := "INSERT INTO entries (id, account_id, multiple_entry_id, balance_by_year_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-	repository.db.QueryRow(insertQuery, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
+	repository.db.Exec(insertQuery, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
 
 	query := "SELECT * FROM entries WHERE id = ?"
 
@@ -58,6 +58,9 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 	var addedEntry EntryDb
 	err := result.Scan(&addedEntry.ID, &addedEntry.AccountID, &addedEntry.MultipleEntryID, &addedEntry.BalanceByYearID, &addedEntry.Currency, &addedEntry.Concept, &addedEntry.Date, &addedEntry.Quarter, &addedEntry.DebitBalance, &addedEntry.CreditBalance, &addedEntry.TotalBalance, &addedEntry.State, &addedEntry.StateReason, &addedEntry.CreationDate, &addedEntry.LastUpdate)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("entry [" + entryDb.ID + "] not added")
+		}
 		return nil, err
 	}
 
@@ -101,6 +104,9 @@ func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.E
 	var storedEntry EntryDb
 	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("entry [" + id + "] not found")
+		}
 		return nil, err
 	}
 
@@ -213,7 +219,7 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 
 	updateQuery := "UPDATE entries SET account_id = ?, multiple_entry_id = ?, balance_by_year_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, total_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE id = ?"
 
-	repository.db.QueryRow(updateQuery, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.ID)
+	repository.db.Exec(updateQuery, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.ID)
 
 	query := "SELECT * FROM entries WHERE id = ?"
 
@@ -222,6 +228,9 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 	var storedEntry EntryDb
 	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("entry not found")
+		}
 		return nil, err
 	}
 
@@ -265,12 +274,15 @@ func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entr
 	var storedEntry EntryDb
 	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.New("entry not found")
+		}
 		return nil, err
 	}
 
 	query = "DELETE FROM entries WHERE id = ?"
 
-	_ = repository.db.QueryRow(query, id)
+	repository.db.Exec(query, id)
 
 	var output entry.EntryStorageData
 	output.ID = storedEntry.ID
