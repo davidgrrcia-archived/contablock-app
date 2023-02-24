@@ -11,6 +11,7 @@ import (
 type AccountUseCase interface {
 	DescribeAccount(ctx context.Context, input DescribeAccountInput) (*DescribeAccountOutput, error)
 	ListAccounts(ctx context.Context, input ListAccountInput) (*ListAccountOutput, error)
+	CreateAccount(ctx context.Context, input CreateAccountInput) (*CreateAccountOutput, error)
 }
 
 func NewDefaultAccountUseCase(options DefaultAccountUseCaseOptions) (*DefaultAccountUseCase, error) {
@@ -39,12 +40,13 @@ func (useCase *DefaultAccountUseCase) DescribeAccount(ctx context.Context, input
 		return nil, errors.New("invalid input")
 	}
 
-	storedAccount, err := useCase.accountStorage.Get(ctx, input.ID)
+	storedAccount, err := useCase.accountStorage.Get(ctx, input.Project, input.ID)
 	if err != nil {
 		return nil, err
 	}
 
 	var output DescribeAccountOutput
+	output.Account.Project = storedAccount.Project
 	output.Account.ID = storedAccount.ID
 	output.Account.Name = storedAccount.Name
 	output.Account.Level = storedAccount.Level
@@ -60,7 +62,7 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 		return nil, errors.New("invalid input")
 	}
 
-	storedAccounts, err := useCase.accountStorage.All(ctx)
+	storedAccounts, err := useCase.accountStorage.All(ctx, input.Project)
 	if err != nil {
 		return nil, err
 	}
@@ -71,6 +73,7 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 	for _, item := range storedAccounts.Items {
 		if item.Level == LevelGroup {
 			var group Group
+			group.Project = item.Project
 			group.ID = item.ID
 			group.Name = item.Name
 			group.Level = item.Level
@@ -80,6 +83,7 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 		}
 		if item.Level == LevelSubGroup {
 			var subgroup Subgroup
+			subgroup.Project = item.Project
 			subgroup.ID = item.ID
 			subgroup.Name = item.Name
 			subgroup.Level = item.Level
@@ -94,6 +98,7 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 		}
 		if item.Level == LevelAccount || item.Level == LevelSubAccount {
 			var account Account
+			account.Project = item.Project
 			account.ID = item.ID
 			account.Name = item.Name
 			account.Level = item.Level
@@ -122,4 +127,33 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 	return &ListAccountOutput{
 		Items: groups,
 	}, err
+}
+
+func (useCase *DefaultAccountUseCase) CreateAccount(ctx context.Context, input CreateAccountInput) (*CreateAccountOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input")
+	}
+
+	var desiredAccount AccountStorageData
+	desiredAccount.Project = input.Project
+	desiredAccount.ID = input.ID
+	desiredAccount.Name = input.Name
+	desiredAccount.Level = input.Level
+	desiredAccount.BalanceID = input.BalanceID
+
+	addedAccount, err := useCase.accountStorage.Add(ctx, desiredAccount)
+	if err != nil {
+		return nil, err
+	}
+
+	var output CreateAccountOutput
+	output.Account.Project = addedAccount.Project
+	output.Account.ID = addedAccount.ID
+	output.Account.Name = addedAccount.Name
+	output.Account.Level = addedAccount.Level
+	output.Account.BalanceID = addedAccount.BalanceID
+	output.Account.DisplayName = addedAccount.ID + " - " + addedAccount.Name
+
+	return &output, nil
 }

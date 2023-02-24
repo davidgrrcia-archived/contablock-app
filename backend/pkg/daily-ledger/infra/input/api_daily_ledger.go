@@ -3,8 +3,9 @@ package input
 import (
 	"context"
 	"errors"
+
 	input "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/utils/infra/input"
+	utils "github.com/davidgrcia/tfg-informatica-nextjs/pkg/utils/infra/input"
 
 	"net/http"
 
@@ -32,7 +33,7 @@ type DefaultDailyLedgerHttpHandlerOptions struct {
 
 func (handler *DefaultDailyLedgerHttpHandler) RegisterDailyLedgerRoutes(r *mux.Router) {
 	//register endpoints
-	r.HandleFunc("/api/daily-ledger", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/projects/{project}/daily-ledger", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 		outputPayload, err := handler.adapter.AdaptListDailyLedger(ctx, input.ListDailyLedgerRequest{})
 		if err != nil {

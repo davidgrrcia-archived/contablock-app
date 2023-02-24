@@ -3,8 +3,9 @@ package input
 import (
 	"context"
 	"errors"
+
 	input "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/utils/infra/input"
+	utils "github.com/davidgrcia/tfg-informatica-nextjs/pkg/utils/infra/input"
 
 	"net/http"
 
@@ -32,7 +33,7 @@ type DefaultBusinessHttpHandlerOptions struct {
 
 func (handler *DefaultBusinessHttpHandler) RegisterBusinessRoutes(r *mux.Router) {
 	//register endpoints
-	r.HandleFunc("/api/business", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/projects/{project}/business", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 		outputPayload, err := handler.adapter.AdaptListBusiness(ctx, input.ListBusinessRequest{})
 		if err != nil {
@@ -42,7 +43,7 @@ func (handler *DefaultBusinessHttpHandler) RegisterBusinessRoutes(r *mux.Router)
 		utils.Success(w, outputPayload.ListBusinessResponse)
 	}).Methods("GET")
 
-	r.HandleFunc("/api/business/{id}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/projects/{project}/business/{id}", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
 		vars := mux.Vars(r)

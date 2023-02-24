@@ -9,20 +9,20 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/projects/:project/',
       name: 'dailyLedger',
       component: DailyLedgerView,
     },
     {
-      path: '/general-ledger',
+      path: '/projects/:project/general-ledger',
       name: 'generalLedger',
       component: GeneralLedgerView,
     },
     {
-      path: '/balances',
+      path: '/projects/:project/balances',
       name: 'balances',
       component: BalancesView,
-    }
+    },
   ],
 });
 

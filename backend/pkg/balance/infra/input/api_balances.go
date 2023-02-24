@@ -3,8 +3,9 @@ package input
 import (
 	"context"
 	"errors"
+
 	input "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/adapters/input/http"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/utils/infra/input"
+	utils "github.com/davidgrcia/tfg-informatica-nextjs/pkg/utils/infra/input"
 
 	"net/http"
 
@@ -32,7 +33,7 @@ type DefaultBalancesHttpHandlerOptions struct {
 
 func (handler *DefaultBalancesHttpHandler) RegisterBalanceRoutes(r *mux.Router) {
 	//register endpoints
-	r.HandleFunc("/api/balances", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/projects/{project}/balances", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
 		var inputPayload input.ListBalanceRequest

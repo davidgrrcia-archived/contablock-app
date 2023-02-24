@@ -4,8 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+
 	input "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
-	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/utils/infra/input"
+	utils "github.com/davidgrcia/tfg-informatica-nextjs/pkg/utils/infra/input"
 
 	"net/http"
 
@@ -33,7 +34,7 @@ type DefaultEntriesHttpHandlerOptions struct {
 
 func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 	//register endpoints
-	r.HandleFunc("/api/entries", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/projects/{project}/entries", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 		var inputPayload input.CreateEntryRequest
 
@@ -51,7 +52,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		utils.Success(w, outputPayload.CreateEntryResponse)
 	}).Methods("POST")
 
-	r.HandleFunc("/api/entries", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/projects/{project}/entries", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
 		var inputPayload input.ListEntryRequest
@@ -64,7 +65,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		utils.Success(w, outputPayload.ListEntryResponse)
 	}).Methods("GET")
 
-	r.HandleFunc("/api/entries/{id}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/projects/{project}/entries/{id}", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
 		vars := mux.Vars(r)
@@ -79,7 +80,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		utils.Success(w, outputPayload.DescribeEntryResponse)
 	}).Methods("GET")
 
-	r.HandleFunc("/api/entries/{id}", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/projects/{project}/entries/{id}", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
 		vars := mux.Vars(r)
@@ -94,7 +95,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		utils.Success(w, entry.DeleteEntryResponse)
 	}).Methods("DELETE")
 
-	r.HandleFunc("/api/entries:publish", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/projects/{project}/entries:publish", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
 		var inputPayload input.PublishEntryRequest

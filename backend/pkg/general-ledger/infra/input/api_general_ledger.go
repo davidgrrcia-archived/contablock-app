@@ -33,7 +33,7 @@ type DefaultGeneralLedgerHttpHandlerOptions struct {
 
 func (handler *DefaultGeneralLedgerHttpHandler) RegisterGeneralLedgerRoutes(r *mux.Router) {
 	//register endpoints
-	r.HandleFunc("/api/general-ledger", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/api/projects/{project}/general-ledger", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 		outputPayload, err := handler.adapter.AdaptListGeneralLedger(ctx, input.ListGeneralLedgerRequest{})
 		if err != nil {

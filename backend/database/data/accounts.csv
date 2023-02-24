@@ -1,908 +1,908 @@
-1,FINANCIACIÓN BÁSICA,Grupo,
-10,CAPITAL,Subgrupo,
-100,Capital social,Cuenta,10048
-101,Fondo social,Cuenta,10048
-102,Capital,Cuenta,10048
-103,Socios por desembolsos no exigidos,Cuenta,10049
-1030,"Socios por desembolsos no exigidos, capital social",Subcuenta,10049
-1034,"Socios por desembolsos no exigidos, capital pendiente de inscripción",Subcuenta,10085
-104,Socios por aportaciones no dinerarias pendientes,Cuenta,10049
-1040,"Socios por aportaciones no dinerarias pendientes, capital social",Subcuenta,10049
-1044,"Socios por aportaciones no dinerarias pendientes, capital pendiente de inscripción",Subcuenta,10085
-108,Acciones o participaciones propias en situaciones especiales,Cuenta,10053
-109,Acciones o participaciones propias para reducción de capital,Cuenta,10053
-11,RESERVAS Y OTROS INSTRUMENTOS DE PATRIMONIO,Subgrupo,
-110,Prima de emisión o asunción,Cuenta,10050
-111,Otros instrumentos de patrimonio neto,Cuenta,10059
-1110,Patrimonio neto por emisión de instrumentos financieros compuestos,Subcuenta,10059
-1111,Resto de instrumentos de patrimonio neto,Subcuenta,10059
-112,Reserva legal,Cuenta,10051
-113,Reservas voluntarias,Cuenta,10052
-114,Reservas especiales,Cuenta,10052
-1140,Reservas para acciones o participaciones de la sociedad dominante,Subcuenta,10052
-1141,Reservas estatutarias,Subcuenta,10051
-1142,Reserva por capital amortizado,Subcuenta,10052
-1143,Reserva por fondo de comercio,Subcuenta,10052
-1144,Reservas por acciones propias aceptadas en garantía,Subcuenta,10052
-115,Reservas por pérdidas y ganancias actuariales y otros ajustes,Cuenta,10052
-118,Aportaciones de socios o propietarios,Cuenta,10056
-119,Diferencias por ajuste del capital a euros,Cuenta,10052
-12,RESULTADOS PENDIENTES DE APLICACIÓN,Subgrupo,
-120,Remanente,Cuenta,10054
-121,Resultados negativos de ejercicios anteriores,Cuenta,10055
-129,Resultado del ejercicio,Cuenta,10057
-13,"SUBVENCIONES, DONACIONES Y AJUSTES POR CAMBIOS DE VALOR",Subgrupo,
-130,Subvenciones oficiales de capital,Cuenta,10065
-131,Donaciones y legados de capital,Cuenta,10065
-132,"Otras subvenciones, donaciones y legados",Cuenta,10065
-133,Ajustes por valoración en activos financieros disponibles para la venta,Cuenta,10060
-134,Operaciones de cobertura,Cuenta,10061
-1340,Cobertura de flujos de efectivo,Subcuenta,10061
-1341,Cobertura de una inversión neta en un negocio en el extranjero,Subcuenta,10061
-135,Diferencias de conversión,Cuenta,10063
-136,"Ajustes por valoración en activos no corrientes y grupos enajenables de elementos, mantenidos para la venta",Cuenta,10062
-137,Ingresos fiscales a distribuir en varios ejercicios,Cuenta,10064
-1370,Ingresos fiscales por diferencias permanentes a distribuir en varios ejercicios,Subcuenta,10064
-1371,Ingresos fiscales por deducciones y bonificaciones a distribuir en varios ejercicios,Subcuenta,10064
-14,PROVISIONES,Subgrupo,
-140,Provisión por retribuciones a largo plazo al personal,Cuenta,10066
-141,Provisión para impuestos,Cuenta,10069
-142,Provisión para otras responsabilidades,Cuenta,10069
-143,"Provisión por desmantelamiento, retiro o rehabilitación del inmovilizado",Cuenta,10069
-145,Provisión para actuaciones medioambientales,Cuenta,10067
-146,Provisión para reestructuraciones,Cuenta,10068
-147,Provisión por transacciones con pagos basados en instrumentos de patrimonio,Cuenta,10069
-15,DEUDAS A LARGO PLAZO CON CARACTERÍSTICAS ESPECIALES,Subgrupo,
-150,Acciones o participaciones a largo plazo consideradas como pasivos financieros,Cuenta,10078
-153,Desembolsos no exigidos por acciones o participaciones consideradas como pasivos financieros,Cuenta,10078
-1533,"Desembolsos no exigidos, empresas del grupo",Subcuenta,10078
-1534,"Desembolsos no exigidos, empresas asociadas",Subcuenta,10078
-1535,"Desembolsos no exigidos, otras partes vinculadas",Subcuenta,10078
-1536,Otros desembolsos no exigidos,Subcuenta,10078
-154,Aportaciones no dinerarias pendientes por acciones o participaciones consideradas como pasivos financieros,Cuenta,10078
-1543,"Aportaciones no dinerarias pendientes, empresas del grupo",Subcuenta,10078
-1544,"Aportaciones no dinerarias pendientes, empresas asociadas",Subcuenta,10078
-1545,"Aportaciones no dinerarias pendientes, otras partes vinculadas",Subcuenta,10078
-1546,Otras aportaciones no dinerarias pendientes,Subcuenta,10078
-16,DEUDAS A LARGO PLAZO CON PARTES VINCULADAS,Subgrupo,
-160,Deudas a largo plazo con entidades de crédito vinculadas,Cuenta,10075
-1603,"Deudas a largo plazo con entidades de crédito, empresas del grupo",Subcuenta,10075
-1604,"Deudas a largo plazo con entidades de crédito, empresas asociadas",Subcuenta,10075
-1605,Deudas a largo plazo con otras entidades de crédito vinculadas,Subcuenta,10071
-161,"Proveedores de inmovilizado a largo plazo, partes vinculadas",Cuenta,10075
-1613,"Proveedores de inmovilizado a largo plazo, empresas del grupo",Subcuenta,10075
-1614,"Proveedores de inmovilizado a largo plazo, empresas asociadas",Subcuenta,10075
-1615,"Proveedores de inmovilizado a largo plazo, otras partes vinculadas",Subcuenta,10074
-162,"Acreedores por arrendamiento financiero a largo plazo, partes vinculadas",Cuenta,10075
-1623,"Acreedores por arrendamiento financiero a largo plazo, empresas de grupo",Subcuenta,10075
-1624,"Acreedores por arrendamiento financiero a largo plazo, empresas asociadas",Subcuenta,10075
-1625,"Acreedores por arrendamiento financiero a largo plazo, otras partes vinculadas",Subcuenta,10072
-163,Otras deudas a largo plazo con partes vinculadas,Cuenta,10075
-1633,"Otras deudas a largo plazo, empresas del grupo",Subcuenta,10075
-1634,"Otras deudas a largo plazo, empresas asociadas",Subcuenta,10075
-1635,"Otras deudas a largo plazo, con otras partes vinculadas",Subcuenta,10074
-17,"DEUDAS A LARGO PLAZO POR PRÉSTAMOS RECIBIDOS, EMPRÉSTITOS Y OTROS CONCEPTOS",Subgrupo,
-170,Deudas a largo plazo con entidades de crédito,Cuenta,10071
-171,Deudas a largo plazo,Cuenta,10074
-172,"Deudas a largo plazo transformables en subvenciones, donaciones y legados",Cuenta,10074
-173,Proveedores de inmovilizado a largo plazo,Cuenta,10074
-174,Acreedores por arrendamiento financiero a largo plazo,Cuenta,10072
-175,Efectos a pagar a largo plazo,Cuenta,10074
-176,Pasivos por derivados financieros a largo plazo,Cuenta,10073
-1765,"Pasivos por derivados financieros a largo plazo, cartera de negociación",Subcuenta,10073
-1768,"Pasivos por derivados financieros a largo plazo, instrumentos de cobertura",Subcuenta,10073
-177,Obligaciones y bonos,Cuenta,10070
-178,Obligaciones y bonos convertibles,Cuenta,10070
-179,Deudas representadas en otros valores negociables,Cuenta,10070
-18,"PASIVOS POR FIANZAS, GARANTÍAS Y OTROS CONCEPTOS A LARGO PLAZO",Subgrupo,
-180,Fianzas recibidas a largo plazo,Cuenta,10074
-181,Anticipos recibidos por ventas o prestaciones de servicios a largo plazo,Cuenta,10077
-185,Depósitos recibidos a largo plazo,Cuenta,10074
-189,Garantías financieras a largo plazo,Cuenta,10074
-19,SITUACIONES TRANSITORIAS DE FINANCIACIÓN,Subgrupo,
-190,Acciones o participaciones emitidas,Cuenta,10085
-192,Suscriptores de acciones,Cuenta,10085
-194,Capital emitido pendiente de inscripción,Cuenta,10085
-195,Acciones o participaciones emitidas consideradas como pasivos financieros,Cuenta,10085
-197,Suscriptores de acciones consideradas como pasivos financieros,Cuenta,10085
-199,Acciones o participaciones emitidas consideradas como pasivos financieros pendientes de inscripción,Cuenta,10085
-2,ACTIVO NO CORRIENTE,Grupo,
-20,INMOVILIZACIONES INTANGIBLES,Subgrupo,
-200,Investigación,Cuenta,10005
-201,Desarrollo,Cuenta,10000
-202,Concesiones administrativas,Cuenta,10001
-203,Propiedad industrial,Cuenta,10002
-204,Fondo de comercio,Cuenta,10003
-205,Derechos de traspaso,Cuenta,10006
-206,Aplicaciones informáticas,Cuenta,10004
-209,Anticipos para inmovilizaciones intangibles,Cuenta,10006
-21,INMOVILIZACIONES MATERIALES,Subgrupo,
-210,Terrenos y bienes naturales,Cuenta,10007
-211,Construcciones,Cuenta,10007
-212,Instalaciones técnicas,Cuenta,10008
-213,Maquinaria,Cuenta,10008
-214,Utillaje,Cuenta,10008
-215,Otras instalaciones,Cuenta,10008
-216,Mobiliario,Cuenta,10008
-217,Equipos para procesos de información,Cuenta,10008
-218,Elementos de transporte,Cuenta,10008
-219,Otro inmovilizado material,Cuenta,10008
-22,INVERSIONES INMOBILIARIAS,Subgrupo,
-220,Inversiones en terrenos y bienes naturales,Cuenta,10010
-221,Inversiones en construcciones,Cuenta,10011
-23,INMOVILIZACIONES MATERIALES EN CURSO,Subgrupo,
-230,Adaptación de terrenos y bienes naturales,Cuenta,10009
-231,Construcciones en curso,Cuenta,10009
-232,Instalaciones técnicas en montaje,Cuenta,10009
-233,Maquinaria en montaje,Cuenta,10009
-237,Equipos para procesos de información en montaje,Cuenta,10009
-239,Anticipos para inmovilizaciones materiales,Cuenta,10009
-24,INVERSIONES FINANCIERAS A LARGO PLAZO EN PARTES VINCULADAS,Subgrupo,
-240,Participaciones a largo plazo en partes vinculadas,Cuenta,10012
-2403,Participaciones a largo plazo en empresas del grupo,Subcuenta,10012
-2404,Participaciones a largo plazo en empresas asociadas,Subcuenta,10012
-2405,Participaciones a largo plazo en otras partes vinculadas,Subcuenta,10015
-241,Valores representativos de deuda a largo plazo de partes vinculadas,Cuenta,10014
-2413,Valores representativos de deuda a largo plazo de empresas del grupo,Subcuenta,10014
-2414,Valores representativos de deuda a largo plazo de empresas asociadas,Subcuenta,10014
-2415,Valores representativos de deuda a largo plazo de otras partes vinculadas,Subcuenta,10017
-242,Créditos a largo plazo a partes vinculadas,Cuenta,10013
-2423,Créditos a largo plazo a empresas del grupo,Subcuenta,10013
-2424,Créditos a largo plazo a empresas asociadas,Subcuenta,10013
-2425,Créditos a largo plazo a otras partes vinculadas,Subcuenta,10016
-249,Desembolsos pendientes sobre participaciones a largo plazo en partes vinculadas,Cuenta,10012
-2493,Desembolsos pendientes sobre participaciones a largo plazo en empresas del grupo,Subcuenta,10012
-2494,Desembolsos pendientes sobre participaciones a largo plazo en empresas asociadas,Subcuenta,10012
-2495,Desembolsos pendientes sobre participaciones a largo plazo en otras partes vinculadas,Subcuenta,10015
-25,OTRAS INVERSIONES FINANCIERAS A LARGO PLAZO,Subgrupo,
-250,Inversiones financieras a largo plazo en instrumentos de patrimonio,Cuenta,10015
-251,Valores representativos de deuda a largo plazo,Cuenta,10017
-252,Créditos a largo plazo,Cuenta,10016
-253,Créditos a largo plazo por enajenación de in movilizado,Cuenta,10016
-254,Créditos a largo plazo al personal,Cuenta,10016
-255,Activos por derivados financieros a largo plazo,Cuenta,10018
-2550,"Activos por derivados financieros a largo plazo, cartera de negociación",Subcuenta,10018
-2553,"Activos por derivados financieros a largo plazo, instrumentos de cobertura",Subcuenta,10018
-257,Derechos de reembolso derivados de contratos de seguro relativos a retribuciones a largo plazo al personal,Cuenta,10020
-258,Imposiciones a largo plazo,Cuenta,10019
-259,Desembolsos pendientes sobre participaciones en el patrimonio neto a largo plazo,Cuenta,10015
-26,FIANZAS Y DEPÓSITOS CONSTITUIDOS A LARGO PLAZO,Subgrupo,
-260,Fianzas constituidas a largo plazo,Cuenta,10019
-265,Depósitos constituidos a largo plazo,Cuenta,10019
-28,AMORTIZACIÓN ACUMULADA DEL INMOVILIZADO,Subgrupo,
-280,Amortización acumulada del inmovilizado intangible,Cuenta,10006
-2800,Amortización acumulada de investigación,Subcuenta,10005
-2801,Amortización acumulada de desarrollo,Subcuenta,10000
-2802,Amortización acumulada de concesiones administrativas,Subcuenta,10001
-2803,Amortización acumulada de propiedad industrial,Subcuenta,10002
-2805,Amortización acumulada de derechos de traspaso,Subcuenta,10006
-2806,Amortización acumulada de aplicaciones informáticas,Subcuenta,10004
-281,Amortización acumulada del inmovilizado material,Cuenta,10008
-2811,Amortización acumulada de construcciones,Subcuenta,10007
-2812,Amortización acumulada de instalaciones técnicas,Subcuenta,10008
-2813,Amortización acumulada de maquinaria,Subcuenta,10008
-2814,Amortización acumulada de utillaje,Subcuenta,10008
-2815,Amortización acumulada de otras instalaciones,Subcuenta,10008
-2816,Amortización acumulada de mobiliario,Subcuenta,10008
-2817,Amortización acumulada de equipos para procesos de información,Subcuenta,10008
-2818,Amortización acumulada de elementos de transporte,Subcuenta,10008
-2819,Amortización acumulada de otro inmovilizado material,Subcuenta,10008
-282,Amortización acumulada de las inversiones inmobiliarias,Cuenta,10011
-29,DETERIORO DE VALOR DE ACTIVOS NO CORRIENTES,Subgrupo,
-290,Deterioro de valor del inmovilizado intangible,Cuenta,10006
-2900,Deterioro de valor de investigación,Subcuenta,10005
-2901,Deterioro del valor de desarrollo,Subcuenta,10000
-2902,Deterioro de valor de concesiones administrativas,Subcuenta,10001
-2903,Deterioro de valor de propiedad industrial,Subcuenta,10002
-2905,Deterioro de valor de derechos de traspaso,Subcuenta,10006
-2906,Deterioro de valor de aplicaciones informáticas,Subcuenta,10004
-291,Deterioro de valor del inmovilizado materia l,Cuenta,10008
-2910,Deterioro de valor de terrenos y bienes naturales,Subcuenta,10007
-2911,Deterioro de valor de construcciones,Subcuenta,10007
-2912,Deterioro de valor de instalaciones técnicas,Subcuenta,10008
-2913,Deterioro de valor de maquinaria,Subcuenta,10008
-2914,Deterioro de valor de utillaje,Subcuenta,10008
-2915,Deterioro de valor de otras instalaciones,Subcuenta,10008
-2916,Deterioro de valor de mobiliario,Subcuenta,10008
-2917,Deterioro de valor de equipos para procesos de información,Subcuenta,10008
-2918,Deterioro de valor de elementos de transporte,Subcuenta,10008
-2919,Deterioro de valor de otro inmovilizado material,Subcuenta,10008
-292,Deterioro de valor de las inversiones inmobiliarias,Cuenta,10010
-2920,Deterioro de valor de los terrenos y bienes naturales,Subcuenta,10010
-2921,Deterioro de valor de construcciones,Subcuenta,10011
-293,Deterioro de valor de participaciones a largo plazo en partes vinculadas,Cuenta,10012
-2933,Deterioro de valor de participaciones a largo plazo en empresas del grupo,Subcuenta,10012
-2934,Deterioro de valor de participaciones a largo plazo en empresas asociadas,Subcuenta,10012
-294,Deterioro de valor de valores representativos de deuda a largo plazo de partes vinculadas,Cuenta,10014
-2943,Deterioro de valor de valores representativos de deuda a largo plazo de empresas del grupo,Subcuenta,10014
-2944,Deterioro de valor de valores representativos de deuda a largo plazo de empresas asociadas,Subcuenta,10014
-2945,Deterioro de valor de valores representativos de deuda a largo plazo de otras partes vinculadas,Subcuenta,10017
-295,Deterioro de valor de créditos a largo plazo a partes vinculadas,Cuenta,10013
-2953,Deterioro de valor de créditos a largo plazo a empresas del grupo,Subcuenta,10013
-2954,Deterioro de valor de créditos a largo plazo a empresas asociadas,Subcuenta,10013
-2955,Deterioro de valor de créditos a largo plazo a otras partes vinculadas,Subcuenta,10016
-297,Deterioro de valor de valores representativos de deuda a largo plazo,Cuenta,10017
-298,Deterioro de valor de créditos a largo plazo,Cuenta,10016
-3,EXISTENCIAS,Grupo,
-30,COMERCIALES,Subgrupo,
-300,Mercaderías A,Cuenta,10023
-301,Mercaderías B,Cuenta,10023
-31,MATERIAS PRIMAS,Subgrupo,
-310,Materias primas A,Cuenta,10024
-311,Materias primas B,Cuenta,10024
-32,OTROS APROVISIONAMIENTOS,Subgrupo,
-320,Elementos y conjuntos incorporables,Cuenta,10024
-321,Combustibles,Cuenta,10024
-322,Repuestos,Cuenta,10024
-325,Materiales diversos,Cuenta,10024
-326,Embalajes,Cuenta,10024
-327,Envases,Cuenta,10024
-328,Material de oficina,Cuenta,10024
-33,PRODUCTOS EN CURSO,Subgrupo,
-330,Productos en curso A,Cuenta,10025
-331,Productos en curso B,Cuenta,10025
-34,PRODUCTOS SEMITERMINADOS,Subgrupo,
-340,Productos semiterminados A,Cuenta,10025
-341,Productos semiterminados B,Cuenta,10025
-35,PRODUCTOS TERMINADOS,Subgrupo,
-350,Productos terminados A,Cuenta,10026
-351,Productos terminados B,Cuenta,10026
-36,"SUBPRODUCTOS, RESIDUOS Y MATERIALES RECUPERADOS",Subgrupo,
-360,Subproductos A,Cuenta,10027
-361,Subproductos B,Cuenta,10027
-365,Residuos A,Cuenta,10027
-366,Residuos B,Cuenta,10027
-368,Materiales recuperados A,Cuenta,10027
-369,Materiales recuperados B,Cuenta,10027
-39,DETERIORO DE VALOR DE LAS EXISTENCIAS,Subgrupo,
-390,Deterioro de valor de las mercaderías,Cuenta,10023
-391,Deterioro de valor de las materias primas,Cuenta,10024
-392,Deterioro de valor de otros aprovi sionamientos,Cuenta,10024
-393,Deterioro de valor de los productos en curso,Cuenta,10025
-394,Deterioro de valor de los productos semiterminados,Cuenta,10025
-395,Deterioro de valor de los productos terminados,Cuenta,10026
-396,"Deterioro de valor de los subproductos, residuos y materiales recuperados",Cuenta,10027
-4,ACREEDORES Y DEUDORES POR OPERACIONES COMERCIALES,Grupo,
-40,PROVEEDORES,Subgrupo,
-400,Proveedores,Cuenta,10087
-4000,Proveedores (euros),Subcuenta,10087
-4004,Proveedores (moneda extranjera),Subcuenta,10087
-4009,"Proveedores, facturas pendientes de recibir o de formalizar",Subcuenta,10087
-401,"Proveedores, efectos comerciales a pagar",Cuenta,10087
-403,"Proveedores, empresas del grupo",Cuenta,10088
-4030,"Proveedores, empresas del grupo (euros)",Subcuenta,10088
-4031,"Efectos comerciales a pagar, empresas del grupo",Subcuenta,10088
-4034,"Proveedores, empresas del grupo (moneda extranjera)",Subcuenta,10088
-4036,"Envases y embalajes a devolver a proveedores, empresas del grupo",Subcuenta,10088
-4039,"Proveedores, empresas del grupo, facturas pendientes de recibir o de formalizar",Subcuenta,10088
-404,"Proveedores, empresas asociadas",Cuenta,10088
-405,"Proveedores, otras partes vinculadas",Cuenta,10087
-406,Envases y embalajes a devolver a proveedores,Cuenta,10087
-407,Anticipos a proveedores,Cuenta,10028
-41,ACREEDORES VARIOS,Subgrupo,
-410,Acreedores por prestaciones de servicios,Cuenta,10089
-4100,Acreedores por prestaciones de servicios (euros),Subcuenta,10089
-4104,"Acreedores por prestaciones de servicios, (moneda extranjera)",Subcuenta,10089
-4109,"Acreedores por prestaciones de servicios, facturas pendientes de recibir o de formalizar",Subcuenta,10089
-411,"Acreedores, efectos comerciales a pagar",Cuenta,10089
-419,Acreedores por operaciones en común,Cuenta,10089
-43,CLIENTES,Subgrupo,
-430,Clientes,Cuenta,10029
-4300,Clientes (euros),Subcuenta,10029
-4304,Clientes (moneda extranjera),Subcuenta,10029
-4309,"Clientes, facturas pendientes de formalizar",Subcuenta,10029
-431,"Clientes, efectos comerciales a cobrar",Cuenta,10029
-4310,Efectos comerciales en cartera,Subcuenta,10029
-4311,Efectos comerciales descontados,Subcuenta,10029
-4312,Efectos comerciales en gestión de cobro,Subcuenta,10029
-4315,Efectos comerciales impagados,Subcuenta,10029
-432,"Clientes, operaciones de “factoring”",Cuenta,10029
-433,"Clientes, empresas del grupo",Cuenta,10030
-4330,Clientes empresas del grupo (euros),Subcuenta,10030
-4331,"Efectos comerciales a cobrar, empresas del grupo",Subcuenta,10030
-4332,"Clientes empresas del grupo, operaciones de “factoring”",Subcuenta,10030
-4334,Clientes empresas del grupo (moneda extranjera),Subcuenta,10030
-4336,Clientes empresas del grupo de dudoso cobro,Subcuenta,10030
-4337,"Envases y embalajes a devolver a clientes, empresas del grupo",Subcuenta,10030
-4339,"Clientes empresas del grupo, facturas pendientes de formalizar",Subcuenta,10030
-434,"Clientes, empresas asociadas",Cuenta,10030
-435,"Clientes, otras partes vinculadas",Cuenta,10029
-436,Clientes de dudoso cobro,Cuenta,10029
-437,Envases y embalajes a devolver por clientes,Cuenta,10029
-438,Anticipos de clientes,Cuenta,10093
-44,DEUDORES VARIOS,Subgrupo,
-440,Deudores,Cuenta,10032
-4400,Deudores (euros),Subcuenta,10032
-4404,Deudores (moneda extranjera),Subcuenta,10032
-4409,"Deudores, facturas pendientes de formalizar",Subcuenta,10032
-441,"Deudores, efectos comerciales a cobrar",Cuenta,10032
-4410,"Deudores, efectos comerciales en cartera",Subcuenta,10032
-4411,"Deudores, efectos comerciales descontados",Subcuenta,10032
-4412,"Deudores, efectos comerciales en gestión de cobro",Subcuenta,10032
-4415,"Deudores, efectos comerciales impagados",Subcuenta,10032
-446,Deudores de dudoso cobro,Cuenta,10032
-449,Deudores por operaciones en común,Cuenta,10032
-46,PERSONAL,Subgrupo,
-460,Anticipos de remuneraciones,Cuenta,10032
-465,Remuneraciones pendientes de pago,Cuenta,10090
-466,Remuneraciones mediante sistemas de aportación definida pendientes de pago,Cuenta,10090
-47,ADMINISTRACIONES PÚBLICAS,Subgrupo,
-470,"Hacienda Pública, deudora por diversos conceptos",Cuenta,10034
-4700,"Hacienda Pública, deudora por IVA",Subcuenta,10034
-4708,"Hacienda Pública, deudora por subvenciones concedidas",Subcuenta,10034
-4709,"Hacienda Pública, deudora por devolución de impuestos",Subcuenta,10033
-471,"Organismos de la Seguridad Social, deudores",Cuenta,10034
-472,"Hacienda Pública, IVA soportado",Cuenta,10034
-473,"Hacienda Pública, retenciones y pagos a cuenta",Cuenta,N/A
-474,Activos por impuesto diferido,Cuenta,10021
-4740,Activos por diferencias temporarias deducibles,Subcuenta,10021
-4742,Derechos por deducciones y bonificaciones pendientes de aplicar,Subcuenta,10021
-4745,Crédito por pérdidas a compensar del ejercicio,Subcuenta,10021
-475,"Hacienda Pública, acreedora por conceptos fiscales",Cuenta,10092
-4750,"Hacienda Pública, acreedora por IVA",Subcuenta,10092
-4751,"Hacienda Pública, acreedora por retenciones practicadas",Subcuenta,10092
-4752,"Hacienda Pública, acreedora por impuesto sobre sociedades",Subcuenta,10091
-4758,"Hacienda Pública, acreedora por subvenciones a reintegrar",Subcuenta,10092
-476,"Organismos de la Seguridad Social, acreedores",Cuenta,10092
-477,"Hacienda Pública, IVA repercutido",Cuenta,10092
-479,Pasivos por diferencias temporarias imponibles,Cuenta,10076
-48,AJUSTES POR PERIODIFICACIÓN,Subgrupo,
-480,Gastos anticipados,Cuenta,10045
-485,Ingresos anticipados,Cuenta,10094
-49,DETERIORO DE VALOR DE CRÉDITOS COMERCIALES Y PROVISIONES A CORTO PLAZO,Subgrupo,
-490,Deterioro de valor de créditos por operaciones comerciales,Cuenta,10029
-493,Deterioro de valor de créditos por operaciones comerciales con partes vinculadas,Cuenta,10030
-4933,Deterioro de valor de créditos por operaciones comerciales con empresas del grupo,Subcuenta,10030
-4934,Deterioro de valor de créditos por operaciones comerciales con empresas asociadas,Subcuenta,10030
-4935,Deterioro de valor de créditos por operaciones comerciales con otras partes vinculadas,Subcuenta,10029
-499,Provisiones por operaciones comerciales,Cuenta,10080
-4994,Provisión por contratos onerosos,Subcuenta,10080
-4999,Provisión para otras operaciones comerciales,Subcuenta,10080
-5,CUENTAS FINANCIERAS,Grupo,
-50,"EMPRÉSTITOS, DEUDAS CON CARÁCTERÍSTICAS ESPECIALES Y OTRAS EMISIONES ANÁLOGAS A CORTO PLAZO",Subgrupo,
-500,Obligaciones y bonos a corto plazo,Cuenta,10081
-501,Obligaciones y bonos convertibles a corto plazo,Cuenta,10081
-502,Acciones o participaciones a corto plazo consideradas como pasivos financieros,Cuenta,10095
-505,Deudas representadas en otros valores negociables a corto plazo,Cuenta,10081
-506,Intereses a corto plazo de empréstitos y otras emisiones análogas,Cuenta,10081
-507,Dividendos de acciones o participaciones consideradas como pasivos financieros,Cuenta,10095
-509,Valores negociables amortizados,Cuenta,10085
-5090,Obligaciones y bonos amortizados,Subcuenta,10085
-5091,Obligaciones y bonos convertibles amortizados,Subcuenta,10085
-5095,Otros valores negociables amortizados,Subcuenta,10085
-51,DEUDAS A CORTO PLAZO CON PARTES VINCULADAS,Subgrupo,
-510,Deudas a corto plazo con entidades de crédito vinculadas,Cuenta,10086
-5103,"Deudas a corto plazo con entidades de crédito, empresas del grupo",Subcuenta,10086
-5104,"Deudas a corto plazo con entidades de crédito, empresas asociadas",Subcuenta,10086
-5105,Deudas a corto plazo con otras entidades de crédito vinculadas,Subcuenta,10082
-511,"Proveedores de inmovilizado a corto plazo, partes vinculadas",Cuenta,10086
-5113,"Proveedores de inmovilizado a corto plazo, empresas del grupo",Subcuenta,10086
-5114,"Proveedores de inmovilizado a corto plazo, empresas asociadas",Subcuenta,10086
-5115,"Proveedores de inmovilizado a corto plazo, otras partes vinculadas",Subcuenta,10085
-512,"Acreedores por arrendamiento financiero a corto plazo, partes vinculadas",Cuenta,10086
-5123,"Acreedores por arrendamiento financiero a corto plazo, empresas del grupo",Subcuenta,10086
-5124,"Acreedores por arrendamiento financiero a corto plazo, empresas asociadas",Subcuenta,10086
-5125,"Acreedores por arrendamiento financiero a corto plazo, otras partes vinculadas",Subcuenta,10083
-513,Otras deudas a corto plazo con partes vinculadas,Cuenta,10086
-5133,Otras deudas a corto plazo con empresas del grupo,Subcuenta,10086
-5134,Otras deudas a corto plazo con empresas asociadas,Subcuenta,10086
-5135,Otras deudas a corto plazo con otras partes vinculadas,Subcuenta,10085
-514,Intereses a corto plazo de deudas con partes vinculadas,Cuenta,10086
-5143,"Intereses a corto plazo de deudas, empresas del grupo",Subcuenta,10086
-5144,"Intereses a corto plazo de deudas, empresas asociadas",Subcuenta,10086
-5145,"Intereses a corto plazo de deudas, otras partes vinculadas",Subcuenta,10085
-52,DEUDAS A CORTO PLAZO POR PRÉSTAMOS RECIBIDOS Y OTROS CONCEPTOS,Subgrupo,
-520,Deudas a corto plazo con entidades de crédito,Cuenta,10082
-5200,Préstamos a corto plazo de entidades de crédito,Subcuenta,10082
-5201,Deudas a corto plazo por crédito dispuesto,Subcuenta,10082
-5208,Deudas por efectos descontados,Subcuenta,10082
-5209,Deudas por operaciones de “factoring”,Subcuenta,10082
-521,Deudas a corto plazo,Cuenta,10085
-522,"Deudas a corto plazo transformables en subvenciones, donaciones y legados",Cuenta,10085
-523,Proveedores de inmovilizado a corto plazo,Cuenta,10085
-524,Acreedores por arrendamiento financiero a corto plazo,Cuenta,10083
-525,Efectos a pagar a corto plazo,Cuenta,10085
-526,Dividendo activo a pagar,Cuenta,10085
-527,Intereses a corto plazo de deudas con entidades de crédito,Cuenta,10082
-528,Intereses a corto plazo de deudas,Cuenta,10085
-529,Provisiones a corto plazo,Cuenta,10080
-5290,Provisión a corto plazo por retribuciones al personal,Subcuenta,10080
-5291,Provisión a corto plazo para impuestos,Subcuenta,10080
-5292,Provisión a corto plazo para otras responsabilidades,Subcuenta,10080
-5293,"Provisión a corto plazo por desmantelamiento, retiro o rehabilitación del inmovilizado",Subcuenta,10080
-5295,Provisión a corto plazo para actuaciones Medioambientales,Subcuenta,10080
-5296,Provisión a corto plazo para reestructuraciones,Subcuenta,10080
-5297,Provisión a corto plazo por transacciones con pagos basados en instrumentos de patrimonio,Subcuenta,10080
-53,INVERSIONES FINANCIERAS A CORTO PLAZO EN PARTES VINCULADAS,Subgrupo,
-530,Participaciones a corto plazo en partes vinculadas,Cuenta,10036
-5303,"Participaciones a corto plazo, en empresas del grupo",Subcuenta,10036
-5304,"Participaciones a corto plazo, en empresas asociadas",Subcuenta,10036
-5305,"Participaciones a corto plazo, en otras partes vinculadas",Subcuenta,10040
-531,Valores representativos de deuda a corto plazo de partes vinculadas,Cuenta,10038
-5313,Valores representativos de deuda a corto plazo de empresas del grupo,Subcuenta,10038
-5314,Valores representativos de deuda a corto plazo de empresas asociadas,Subcuenta,10038
-5315,Valores representativos de deuda a corto plazo de otras partes vinculadas,Subcuenta,10042
-532,Créditos a corto plazo a partes vinculadas,Cuenta,10037
-5323,Créditos a corto plazo a empresas del grupo,Subcuenta,10037
-5324,Créditos a corto plazo a empresas asociadas,Subcuenta,10037
-5325,Créditos a corto plazo a otras partes vinculadas,Subcuenta,10041
-533,Intereses a corto plazo de valores representativos de deuda de partes vinculadas,Cuenta,10038
-5333,Intereses a corto plazo de valores representativos de deuda de empresas del grupo,Subcuenta,10038
-5334,Intereses a corto plazo de valores representativos de deuda de empresas asociadas,Subcuenta,10038
-5335,Intereses a corto plazo de valores representativos de deuda de otras partes vinculadas,Subcuenta,10042
-534,Intereses a corto plazo de créditos a partes vinculadas,Cuenta,10037
-5343,Intereses a corto plazo de créditos a empresas del grupo,Subcuenta,10037
-5344,Intereses a corto plazo de créditos a empresas asociadas,Subcuenta,10037
-5345,Intereses a corto plazo de créditos a otras partes vinculadas,Subcuenta,10041
-535,Dividendo a cobrar de inversiones financieras en partes vinculadas,Cuenta,10039
-5353,Dividendo a cobrar de empresas de grupo,Subcuenta,10039
-5354,Dividendo a cobrar de empresas asociadas,Subcuenta,10039
-5355,Dividendo a cobrar de otras partes vinculadas,Subcuenta,10044
-539,Desembolsos pendientes sobre participaciones a corto plazo en partes vinculadas,Cuenta,10036
-5393,Desembolsos pendientes sobre participaciones a corto plazo en empresas del grupo,Subcuenta,10036
-5394,Desembolsos pendientes sobre participaciones a corto plazo en empresas asociadas,Subcuenta,10036
-5395,Desembolsos pendientes sobre participaciones a corto plazo en otras partes vinculadas,Subcuenta,10040
-54,OTRAS INVERSIONES FINANCIERAS A CORTO PLAZO,Subgrupo,
-540,Inversiones financieras a corto plazo en instrumentos de patrimonio,Cuenta,10040
-541,Valores representativos de deuda a corto plazo,Cuenta,10042
-542,Créditos a corto plazo,Cuenta,10041
-543,Créditos a corto plazo por enajenación de in movilizado,Cuenta,10041
-544,Créditos a corto plazo al personal,Cuenta,10032
-545,Dividendo a cobrar,Cuenta,10044
-546,Intereses a corto plazo de valores representativos de deudas,Cuenta,10042
-547,Intereses a corto plazo de créditos,Cuenta,10041
-548,Imposiciones a corto plazo,Cuenta,10044
-549,Desembolsos pendientes sobre participaciones en el patrimonio neto a corto plazo,Cuenta,10040
-55,OTRAS CUENTAS NO BANCARIAS,Subgrupo,
-550,Titular de la explotación,Cuenta,N/A
-551,Cuenta corriente con socios y ad ministradores,Cuenta,10044
-552,Cuenta corriente con otras personas y entidades vinculadas,Cuenta,10039
-5523,Cuenta corriente con empresas del grupo,Subcuenta,10039
-5524,Cuenta corriente con empresas asociadas,Subcuenta,10039
-5525,Cuenta corriente con otras partes vinculadas,Subcuenta,10044
-553,Cuentas corrientes en fusiones y escisiones,Cuenta,10085
-5530,Socios de sociedad disuelta,Subcuenta,10085
-5531,"Socios, cuenta de fusión",Subcuenta,10031
-5532,Socios de sociedad escindida,Subcuenta,10085
-5533,"Socios, cuenta de escisión",Subcuenta,10031
-554,Cuenta corriente con uniones temporales de empresas y comunidades de bienes,Cuenta,N/A
-555,Partidas pendientes de aplicación,Cuenta,10085
-556,Desembolsos exigidos sobre participaciones en el patrimonio neto,Cuenta,10086
-5563,"Desembolsos exigidos sobre participaciones, empresas del grupo",Subcuenta,10086
-5564,"Desembolsos exigidos sobre participaciones, empresas asociadas",Subcuenta,10086
-5565,"Desembolsos exigidos sobre participaciones, otras partes vinculadas",Subcuenta,10085
-5566,Desembolsos exigidos sobre participaciones de otras empresas,Subcuenta,10085
-557,Dividendo activo a cuenta,Cuenta,10058
-558,Socios por desembolsos exigidos,Cuenta,10035
-5580,Socios por desembolsos exigidos sobre acciones o participaciones ordinarias,Subcuenta,10035
-5585,Socios por desembolsos exigidos sobre acciones o participaciones consideradas como pasivos financieros,Subcuenta,10035
-559,Derivados financieros a corto plazo,Cuenta,10043
-5590,"Activos por derivados financieros a corto plazo, cartera de negociación",Subcuenta,10043
-5593,"Activos por derivados financieros a corto plazo, instrumentos de cobertura",Subcuenta,10043
-5595,"Pasivos por derivados financieros a corto plazo, cartera de negociación",Subcuenta,10084
-5598,"Pasivos por derivados financieros a corto plazo, instrumentos de cobertura",Subcuenta,10084
-56,FIANZAS Y DEPÓSITOS RECIBIDOS Y CONSTITUIDOS A COR TO PLAZO Y AJUSTES POR PERIODIFICACIÓN,Subgrupo,
-560,Fianzas recibidas a corto plazo,Cuenta,10085
-561,Depósitos recibidos a corto plazo,Cuenta,10085
-565,Fianzas constituidas a corto plazo,Cuenta,10044
-566,Depósitos constituidos a corto plazo,Cuenta,10044
-567,Intereses pagados por anticipado,Cuenta,10045
-568,Intereses cobrados por anticipado,Cuenta,10094
-569,Garantías financieras a corto plazo,Cuenta,10085
-57,TESORERÍA,Subgrupo,
-570,"Caja, euros",Cuenta,10046
-571,"Caja, moneda extranjera",Cuenta,10046
-572,"Bancos e instituciones de crédito c/c vista, euros",Cuenta,10046
-573,"Bancos e instituciones de crédito c/c vista, moneda extranjera",Cuenta,10046
-574,"Bancos e instituciones de crédito, cuentas de ahorro, euros",Cuenta,10046
-575,"Bancos e instituciones de crédito, cuentas de ahorro, moneda extranjera",Cuenta,10046
-576,Inversiones a corto plazo de gran liquidez,Cuenta,10047
-58,ACTIVOS NO CORRIENTES MANTENIDOS PARA LA VENTA Y ACTIVOS Y PASIVOS ASOCIADOS,Subgrupo,
-580,Inmovilizado,Cuenta,10022
-581,Inversiones con personas y entidades vinculadas,Cuenta,10022
-582,Inversiones financieras,Cuenta,10022
-583,"Existencias, deudores comerciales y otras cuentas a cobrar",Cuenta,10022
-584,Otros activos,Cuenta,10022
-585,Provisiones,Cuenta,10079
-586,Deudas con características especiales,Cuenta,10079
-587,Deudas con personas y entidades vinculadas,Cuenta,10079
-588,Acreedores comerciales y otras cuentas a pagar,Cuenta,10079
-589,Otros pasivos,Cuenta,10079
-59,DETERIORO DEL VALOR DE INVERSIONES FINANCIERAS A CORTO PLAZO Y DE ACTIVOS NO CORRIENTES MANTENIDOS PARA LA VENTA,Subgrupo,
-593,Deterioro de valor de participaciones a corto plazo en partes vinculadas,Cuenta,10036
-5933,Deterioro de valor de participaciones a corto plazo en empresas del grupo,Subcuenta,10036
-5934,Deterioro de valor de participaciones a corto plazo en empresas asociadas,Subcuenta,10036
-594,Deterioro de valor de valores representativos de deuda a corto plazo de partes vinculadas,Cuenta,10038
-5943,Deterioro de valor de valores representativos de deuda a corto plazo de empresas del grupo,Subcuenta,10038
-5944,Deterioro de valor de valores representativos de deuda a corto plazo de empresas asociadas,Subcuenta,10038
-5945,Deterioro de valor de valores representativos de deuda a corto plazo de otras partes vinculadas,Subcuenta,10042
-595,Deterioro de valor de créditos a corto plazo a partes vinculadas,Cuenta,10037
-5953,Deterioro de valor de créditos a corto plazo a empresas del grupo,Subcuenta,10037
-5954,Deterioro de valor de créditos a corto plazo a empresas asociadas,Subcuenta,10037
-5955,Deterioro de valor de créditos a corto plazo a otras partes vinculadas,Subcuenta,10041
-597,Deterioro de valor de valores representativos de deuda a corto plazo,Cuenta,10042
-598,Deterioro de valor de créditos a corto plazo,Cuenta,10041
-599,Deterioro de valor de activos no corrientes mantenidos para la venta,Cuenta,10022
-5990,Deterioro de valor de inmovilizado no corriente mantenido para la venta,Subcuenta,10022
-5991,Deterioro de valor de inversiones con personas y entidades vinculadas no corrientes mantenidas para la venta,Subcuenta,10022
-5992,Deterioro de valor de inversiones financieras no corrientes mantenidas para la venta,Subcuenta,10022
-5993,"Deterioro de valor de existencias, deudores comerciales y otras cuentas a cobrar integrados en un grupo enajenable mantenido para la venta",Subcuenta,10022
-5994,Deterioro de valor de otros activos mantenidos para la venta,Subcuenta,10022
-6,COMPRAS Y GASTOS,Grupo,
-60,COMPRAS,Subgrupo,
-600,Compras de mercaderías,Cuenta,
-601,Compras de materias primas,Cuenta,
-602,Compras de otros aprovisionamientos,Cuenta,
-606,Descuentos sobre compras por pronto pago,Cuenta,
-6060,Descuentos sobre compras por pronto pago de mercaderías,Subcuenta,
-6061,Descuentos sobre compras por pronto pago de materias primas,Subcuenta,
-6062,Descuentos sobre compras por pronto pago de otros aprovisionamientos,Subcuenta,
-607,Trabajos realizados por otras empresas,Cuenta,
-608,Devoluciones de compras y operaciones similares,Cuenta,
-6080,Devoluciones de compras de mercaderías,Subcuenta,
-6081,Devoluciones de compras de materias primas,Subcuenta,
-6082,Devoluciones de compras de otros aprovisionamientos,Subcuenta,
-609,“Rappels” por compras,Cuenta,
-6090,“Rappels” por compras de mercaderías,Subcuenta,
-6091,“Rappels” por compras de materias primas,Subcuenta,
-6092,“Rappels” por compras de otros aprovisionamientos,Subcuenta,
-61,VARIACIÓN DE EXISTENCIAS,Subgrupo,
-610,Variación de existencias de mercaderías,Cuenta,
-611,Variación de existencias de materias primas,Cuenta,
-612,Variación de existencias de otros aprovisionamientos,Cuenta,
-62,SERVICIOS EXTERIORES,Subgrupo,
-620,Gastos en investigación y desarrollo del ejercicio,Cuenta,
-621,Arrendamientos y cánones,Cuenta,
-622,Reparaciones y conservación,Cuenta,
-623,Servicios de profesionales independientes,Cuenta,
-624,Transportes,Cuenta,
-625,Primas de seguros,Cuenta,
-626,Servicios bancarios y similares,Cuenta,
-627,"Publicidad, propaganda y relaciones públicas",Cuenta,
-628,Suministros,Cuenta,
-629,Otros servicios,Cuenta,
-63,TRIBUTOS,Subgrupo,
-630,Impuesto sobre beneficios,Cuenta,
-6300,Impuesto corriente,Subcuenta,
-6301,Impuesto diferido,Subcuenta,
-631,Otros tributos,Cuenta,
-633,Ajustes negativos en la imposición sobre beneficios,Cuenta,
-634,Ajustes negativos en la imposición indirecta,Cuenta,
-6341,Ajustes negativos en IVA de activo corriente,Subcuenta,
-6342,Ajustes negativos en IVA de inversiones,Subcuenta,
-636,Devolución de impuestos,Cuenta,
-638,Ajustes positivos en la imposición sobre beneficios,Cuenta,
-639,Ajustes positivos en la imposición indirecta,Cuenta,
-6391,Ajustes positivos en IVA de activo corriente,Subcuenta,
-6392,Ajustes positivos en IVA de inversiones,Subcuenta,
-64,GASTOS DE PERSONAL,Subgrupo,
-640,Sueldos y salarios,Cuenta,
-641,Indemnizaciones,Cuenta,
-642,Seguridad Social a cargo de la empresa,Cuenta,
-643,Retribuciones a largo plazo mediante sistemas de aportación definida,Cuenta,
-644,Retribuciones a largo plazo mediante sistemas de prestación definida,Cuenta,
-6440,Contribuciones anuales,Subcuenta,
-6442,Otros costes,Subcuenta,
-645,Retribuciones al personal mediante instrumentos de patrimonio,Cuenta,
-6450,Retribuciones al personal liquidados con instrumentos de patrimonio,Subcuenta,
-6457,Retribuciones al personal liquidados en efectivo basado en instrumentos de patrimonio,Subcuenta,
-649,Otros gastos sociales,Cuenta,
-65,OTROS GASTOS DE GESTIÓN,Subgrupo,
-650,Pérdidas de créditos comerciales incobrables,Cuenta,
-651,Resultados de operaciones en común,Cuenta,
-6510,Beneficio transferido (gestor),Subcuenta,
-6511,Pérdida soportada (partícipe o asociado no gestor),Subcuenta,
-659,Otras pérdidas en gestión corriente,Cuenta,
-66,GASTOS FINANCIEROS,Subgrupo,
-660,Gastos financieros por actualización de provisiones,Cuenta,
-661,Intereses de obligaciones y bonos,Cuenta,
-6610,"Intereses de obligaciones y bonos a largo plazo, empresas del grupo",Subcuenta,
-6611,"Intereses de obligaciones y bonos a largo plazo, empresas asociadas",Subcuenta,
-6612,"Intereses de obligaciones y bonos a largo plazo, otras partes vinculadas",Subcuenta,
-6613,"Intereses de obligaciones y bonos a largo plazo, otras empresas",Subcuenta,
-6615,"Intereses de obligaciones y bonos a corto plazo, empresas del grupo",Subcuenta,
-6616,"Intereses de obligaciones y bonos a corto plazo, empresas asociadas",Subcuenta,
-6617,"Intereses de obligaciones y bonos a corto plazo, otras partes vinculadas",Subcuenta,
-6618,"Intereses de obligaciones y bonos a corto plazo, otras empresas",Subcuenta,
-662,Intereses de deudas,Cuenta,
-6620,"Intereses de deudas, empresas del grupo",Subcuenta,
-6621,"Intereses de deudas, empresas asociadas",Subcuenta,
-6622,"Intereses de deudas, otras partes vinculadas",Subcuenta,
-6623,Intereses de deudas con entidades de crédito,Subcuenta,
-6624,"Intereses de deudas, otras empresas",Subcuenta,
-663,Pérdidas por valoración de instrumentos financieros por su valor razonable,Cuenta,
-6630,Pérdidas de cartera de negociación,Subcuenta,
-6631,Pérdidas de designados por la empresa,Subcuenta,
-6632,Pérdidas de disponibles para la venta,Subcuenta,
-6633,Pérdidas de instrumentos de cobertura,Subcuenta,
-664,Dividendos de acciones o participaciones consideradas como pasivos financieros,Cuenta,
-6640,"Dividendos de pasivos, empresas del grupo",Subcuenta,
-6641,"Dividendos de pasivos, empresas asociadas",Subcuenta,
-6642,"Dividendos de pasivos, otras partes vinculadas",Subcuenta,
-6643,"Dividendos de pasivos, otras empresas",Subcuenta,
-665,Intereses por descuento de efectos y operaciones de “factoring”,Cuenta,
-6650,Intereses por descuento de efectos en entidades de crédito del grupo,Subcuenta,
-6651,Intereses por descuento de efectos en entidades de crédito asociadas,Subcuenta,
-6652,Intereses por descuento de efectos en otras entidades de crédito vinculadas,Subcuenta,
-6653,Intereses por descuento de efectos en otras entidades de crédito,Subcuenta,
-6654,Intereses por operaciones de “factoring” con entidades de crédito del grupo,Subcuenta,
-6655,Intereses por operaciones de “factoring” con entidades de crédito asociadas,Subcuenta,
-6656,Intereses por operaciones de “factoring” con otras entidades de crédito vinculadas,Subcuenta,
-6657,Intereses por operaciones de “factoring” con otras entidades de crédito,Subcuenta,
-666,Pérdidas en participaciones y valores representativos de deuda,Cuenta,
-6660,"Pérdidas en valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,
-6661,"Pérdidas en valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,
-6662,"Pérdidas en valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,
-6663,"Pérdidas en participaciones y valores representativos de deuda a largo plazo, otras empresas",Subcuenta,
-6665,"Pérdidas en participaciones y valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,
-6666,"Pérdidas en participaciones y valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,
-6667,"Pérdidas en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,
-6668,"Pérdidas en valores representativos de deuda a corto plazo, otras empresas",Subcuenta,
-667,Pérdidas de créditos no comerciales,Cuenta,
-6670,"Pérdidas de créditos a largo plazo, empresas del grupo",Subcuenta,
-6671,"Pérdidas de créditos a largo plazo, empresas asociadas",Subcuenta,
-6672,"Pérdidas de créditos a largo plazo, otras partes vinculadas",Subcuenta,
-6673,"Pérdidas de créditos a largo plazo, otras empresas",Subcuenta,
-6675,"Pérdidas de créditos a corto plazo, empresas del grupo",Subcuenta,
-6676,"Pérdidas de créditos a corto plazo, empresas asociadas",Subcuenta,
-6677,"Pérdidas de créditos a corto plazo, otras partes vinculadas",Subcuenta,
-6678,"Pérdidas de créditos a corto plazo, otras empresas",Subcuenta,
-668,Diferencias negativas de cambio,Cuenta,
-669,Otros gastos financieros,Cuenta,
-67,PÉRDIDAS PROCEDENTES DE ACTIVOS NO CORRIENTES Y GASTOS EXCEPCIONALES,Subgrupo,
-670,Pérdidas procedentes del inmovilizado intangible,Cuenta,
-671,Pérdidas procedentes del inmovilizado material,Cuenta,
-672,Pérdidas procedentes de las inversiones inmobiliarias,Cuenta,
-673,Pérdidas procedentes de participaciones a largo plazo en partes vinculadas,Cuenta,
-6733,"Pérdidas procedentes de participaciones a largo plazo, empresas del grupo",Subcuenta,
-6734,"Pérdidas procedentes de participaciones a largo plazo, empresas asociadas",Subcuenta,
-6735,"Pérdidas procedentes de participaciones a largo plazo, otras partes vinculadas",Subcuenta,
-675,Pérdidas por operaciones con obligaciones propias,Cuenta,
-678,Gastos excepcionales,Cuenta,
-68,DOTACIONES PARA AMORTIZACIONES,Subgrupo,
-680,Amortización del inmovilizado intangible,Cuenta,
-681,Amortización del inmovilizado material,Cuenta,
-682,Amortización de las inversiones inmobiliarias,Cuenta,
-69,PÉRDIDAS POR DETERIORO Y OTRAS DOTACIONES,Subgrupo,
-690,Pérdidas por deterioro del inmovilizado intangible,Cuenta,
-691,Pérdidas por deterioro del inmovilizado material,Cuenta,
-692,Pérdidas por deterioro de las inversiones inmobiliarias,Cuenta,
-693,Pérdidas por deterioro de existencias,Cuenta,
-6930,Pérdidas por deterioro de productos terminados y en curso de fabricación,Subcuenta,
-6931,Pérdidas por deterioro de mercaderías,Subcuenta,
-6932,Pérdidas por deterioro de materias primas,Subcuenta,
-6933,Pérdidas por deterioro de otros aprovisionamientos,Subcuenta,
-694,Pérdidas por deterioro de créditos por operaciones comerciales,Cuenta,
-695,Dotación a la provisión por operaciones comerciales,Cuenta,
-6954,Dotación a la provisión por contratos onerosos,Subcuenta,
-6959,Dotación a la provisión para otras operaciones comerciales,Subcuenta,
-696,Pérdidas por deterioro de participaciones y valores representativos de deuda a largo plazo,Cuenta,
-6960,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del grupo",Subcuenta,
-6961,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas asociadas",Subcuenta,
-6962,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, otras partes vinculadas",Subcuenta,
-6963,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, otras empresas",Subcuenta,
-6965,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,
-6966,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,
-6967,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,
-6968,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, de otras empresas",Subcuenta,
-697,Pérdidas por deterioro de créditos a largo plazo,Cuenta,
-6970,"Pérdidas por deterioro de créditos a largo plazo, empresas del grupo",Subcuenta,
-6971,"Pérdidas por deterioro de créditos a largo plazo, empresas asociadas",Subcuenta,
-6972,"Pérdidas por deterioro de créditos a largo plazo, otras partes vinculadas",Subcuenta,
-6973,"Pérdidas por deterioro de créditos a largo plazo, otras empresas",Subcuenta,
-698,Pérdidas por deterioro de participaciones y valores representativos de deuda a corto plazo,Cuenta,
-6980,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del grupo",Subcuenta,
-6981,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas asociadas",Subcuenta,
-6985,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,
-6986,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,
-6987,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,
-6988,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, de otras empresas",Subcuenta,
-699,Pérdidas por deterioro de créditos a corto plazo,Cuenta,
-6990,"Pérdidas por deterioro de créditos a corto plazo, empresas del grupo",Subcuenta,
-6991,"Pérdidas por deterioro de créditos a corto plazo, empresas asociadas",Subcuenta,
-6992,"Pérdidas por deterioro de créditos a corto plazo, otras partes vinculadas",Subcuenta,
-6993,"Pérdidas por deterioro de créditos a corto plazo, otras empresas",Subcuenta,
-7,VENTAS E INGRESOS,Grupo,
-70,"VENTAS DE MERCADERÍAS, DE PRODUCCIÓN PROPIA, DE SERVICIOS, ETC",Subgrupo,
-700,Ventas de mercaderías,Cuenta,
-701,Ventas de productos terminados,Cuenta,
-702,Ventas de productos semiterminados,Cuenta,
-703,Ventas de subproductos y residuos,Cuenta,
-704,Ventas de envases y embalajes,Cuenta,
-705,Prestaciones de servicios,Cuenta,
-706,Descuentos sobre ventas por pronto pago,Cuenta,
-7060,Descuentos sobre ventas por pronto pago de mercaderías,Subcuenta,
-7061,Descuentos sobre ventas por pronto pago de productos terminados,Subcuenta,
-7062,Descuentos sobre ventas por pronto pago de productos semiterminados,Subcuenta,
-7063,Descuentos sobre ventas por pronto pago de subproductos y residuos,Subcuenta,
-708,Devoluciones de ventas y operaciones similares,Cuenta,
-7080,Devoluciones de ventas de mercaderías,Subcuenta,
-7081,Devoluciones de ventas de productos terminados,Subcuenta,
-7082,Devoluciones de ventas de productos semiterminados,Subcuenta,
-7083,Devoluciones de ventas de subproductos y residuos,Subcuenta,
-7084,Devoluciones de ventas de envases y embalajes,Subcuenta,
-709,“Rappels” sobre ventas,Cuenta,
-7090,«Rappels» sobre ventas de mercaderías,Subcuenta,
-7091,“Rappels” sobre ventas de productos terminados,Subcuenta,
-7092,“Rappels” sobre ventas de productos semiterminados,Subcuenta,
-7093,“Rappels” sobre ventas de subproductos y residuos,Subcuenta,
-7094,“Rappels” sobre ventas de envases y embalajes,Subcuenta,
-71,VARIACIÓN DE EXISTENCIAS,Subgrupo,
-710,Variación de existencias de productos en curso,Cuenta,
-711,Variación de existencias de productos semiterminados,Cuenta,
-712,Variación de existencias de productos terminados,Cuenta,
-713,"Variación de existencias de subproductos, residuos y materiales recuperados",Cuenta,
-73,TRABAJOS REALIZADOS PARA LA EMPRESA,Subgrupo,
-730,Trabajos realizados para el inmovilizado intangible,Cuenta,
-731,Trabajos realizados para el inmovilizado material,Cuenta,
-732,Trabajos realizados en inversiones inmobiliarias,Cuenta,
-733,Trabajos realizados para el inmovilizado material en curso,Cuenta,
-74,"SUBVENCIONES, DONACIONES Y LEGADOS",Subgrupo,
-740,"Subvenciones, donaciones y legados a la explotación",Cuenta,
-746,"Subvenciones, donaciones y legados de capital transferidos al resultado del ejercicio",Cuenta,
-747,"Otras subvenciones, donaciones y legados transferidos al resultado del ejercicio",Cuenta,
-75,OTROS INGRESOS DE GESTIÓN,Subgrupo,
-751,Resultados de operaciones en común,Cuenta,
-7510,Pérdida transferida (gestor),Subcuenta,
-7511,Beneficio atribuido (partícipe o asociado no gestor),Subcuenta,
-752,Ingresos por arrendamientos,Cuenta,
-753,Ingresos de propiedad industrial cedida en explotación,Cuenta,
-754,Ingresos por comisiones,Cuenta,
-755,Ingresos por servicios al personal,Cuenta,
-759,Ingresos por servicios diversos,Cuenta,
-76,INGRESOS FINANCIEROS,Subgrupo,
-760,Ingresos de participaciones en instrumentos de patrimonio,Cuenta,
-7600,"Ingresos de participaciones en instrumentos de patrimonio, empresas del grupo",Subcuenta,
-7601,"Ingresos de participaciones en instrumentos de patrimonio, empresas asociadas",Subcuenta,
-7602,"Ingresos de participaciones en instrumentos de patrimonio, otras partes vinculadas",Subcuenta,
-7603,"Ingresos de participaciones en instrumentos de patrimonio, otras empresas",Subcuenta,
-761,Ingresos de valores representativos de deuda,Cuenta,
-7610,"Ingresos de valores representativos de deuda, empresas del grupo",Subcuenta,
-7611,"Ingresos de valores representativos de deuda, empresas asociadas",Subcuenta,
-7612,"Ingresos de valores representativos de deuda, otras partes vinculadas",Subcuenta,
-7613,"Ingresos de valores representativos de deuda, otras empresas",Subcuenta,
-762,Ingresos de créditos,Cuenta,
-7620,Ingresos de créditos a largo plazo,Subcuenta,
-76200,"Ingresos de créditos a largo plazo, empresas del grupo",Subcuenta,
-76201,"Ingresos de créditos a largo plazo, empresas asociadas",Subcuenta,
-76202,"Ingresos de créditos a largo plazo, otras partes vinculadas",Subcuenta,
-76203,"Ingresos de créditos a largo plazo, otras empresas",Subcuenta,
-7621,Ingresos de créditos a corto plazo,Subcuenta,
-76210,"Ingresos de créditos a corto plazo, empresas del grupo",Subcuenta,
-76211,"Ingresos de créditos a corto plazo, empresas asociadas",Subcuenta,
-76212,"Ingresos de créditos a corto plazo, otras partes vinculadas",Subcuenta,
-76213,"Ingresos de créditos a corto plazo, otras empresas",Subcuenta,
-763,Beneficios por valoración de instrumentos financieros por su valor razonable,Cuenta,
-7630,Beneficios de cartera de negociación,Subcuenta,
-7631,Beneficios de designados por la empresa,Subcuenta,
-7632,Beneficios de disponibles para la venta,Subcuenta,
-7633,Beneficios de instrumentos de cobertura,Subcuenta,
-766,Beneficios en participaciones y valores representativos de deuda,Cuenta,
-7660,"Beneficios en valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,
-7661,"Beneficios en valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,
-7662,"Beneficios en valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,
-7663,"Beneficios en participaciones y valores representativos de deuda a largo plazo, otras empresas",Subcuenta,
-7665,"Beneficios en participaciones y valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,
-7666,"Beneficios en participaciones y valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,
-7667,"Beneficios en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,
-7668,"Beneficios en valores representativos de deuda a corto plazo, otras empresas",Subcuenta,
-767,Ingresos de activos afectos y de derechos de reembolso relativos a retribuciones a largo plazo,Cuenta,
-768,Diferencias positivas de cambio,Cuenta,
-769,Otros ingresos financieros,Cuenta,
-77,BENEFICIOS PROCEDENTES DE ACTIVOS NO CORRIENTES E INGRESOS EXCEPCIONALES,Subgrupo,
-770,Beneficios procedentes del inmovilizado intangible,Cuenta,
-771,Beneficios procedentes del inmovilizado material,Cuenta,
-772,Beneficios procedentes de las inversiones inmobiliarias,Cuenta,
-773,Beneficios procedentes de participaciones a largo plazo en partes vinculadas,Cuenta,
-7733,"Beneficios procedentes de participaciones a largo plazo, empresas del grupo",Subcuenta,
-7734,"Beneficios procedentes de participaciones a largo plazo, empresas asociadas",Subcuenta,
-7735,"Beneficios procedentes de participaciones a largo plazo, otras partes vinculadas",Subcuenta,
-774,Diferencia negativa en combinaciones de negocios,Cuenta,
-775,Beneficios por operaciones con obligaciones propias,Cuenta,
-778,Ingresos excepcionales,Cuenta,
-79,EXCESOS Y APLICACIONES DE PROVISIONES Y DE PÉRDIDAS POR DETERIORO,Subgrupo,
-790,Reversión del deterioro del inmovilizado intangible,Cuenta,
-791,Reversión del deterioro del inmovilizado material,Cuenta,
-792,Reversión del deterioro de las inversiones inmobiliarias,Cuenta,
-793,Reversión del deterioro de existencias,Cuenta,
-7930,Reversión del deterioro de productos terminados y en curso de fabricación,Subcuenta,
-7931,Reversión del deterioro de mercaderías,Subcuenta,
-7932,Reversión del deterioro de materias primas,Subcuenta,
-7933,Reversión del deterioro de otros aprovisionamientos,Subcuenta,
-794,Reversión del deterioro de créditos por operaciones comerciales,Cuenta,
-795,Exceso de provisiones,Cuenta,
-7950,Exceso de provisión por retribuciones al personal,Subcuenta,
-7951,Exceso de provisión para impuestos,Subcuenta,
-7952,Exceso de provisión para otras responsabilidades,Subcuenta,
-7954,Exceso de provisión por operaciones comerciales,Subcuenta,
-79544,Exceso de provisión por contratos onerosos,Subcuenta,
-79549,Exceso de provisión para otras operaciones comerciales,Subcuenta,
-7955,Exceso de provisión para actuaciones medioambientales,Subcuenta,
-7956,Exceso de provisión para reestructuraciones,Subcuenta,
-7957,Exceso de provisión por transacciones con pagos basados en instrumentos de patrimonio,Subcuenta,
-796,Reversión del deterioro de participaciones y valores representativos de deuda a largo plazo,Cuenta,
-7960,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del grupo",Subcuenta,
-7961,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas asociadas",Subcuenta,
-7965,"Reversión del deterioro de valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,
-7966,"Reversión del deterioro de valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,
-7967,"Reversión del deterioro de valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,
-7968,"Reversión del deterioro de valores representativos de deuda a largo plazo, otras empresas",Subcuenta,
-797,Reversión del deterioro de créditos a largo plazo,Cuenta,
-7970,"Reversión del deterioro de créditos a largo plazo, empresas del grupo",Subcuenta,
-7971,"Reversión del deterioro de créditos a largo plazo, empresas asociadas",Subcuenta,
-7972,"Reversión del deterioro de créditos a largo plazo, otras partes vinculadas",Subcuenta,
-7973,"Reversión del deterioro de créditos a largo plazo, otras empresas",Subcuenta,
-798,Reversión del deterioro de participaciones y valores representativos de deuda a corto plazo,Cuenta,
-7980,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del grupo",Subcuenta,
-7981,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas asociadas",Subcuenta,
-7985,"Reversión del deterioro en valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,
-7986,"Reversión del deterioro en valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,
-7987,"Reversión del deterioro en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,
-7988,"Reversión del deterioro en valores representativos de deuda a corto plazo, otras empresas",Subcuenta,
-799,Reversión del deterioro de créditos a corto plazo,Cuenta,
-7990,"Reversión del deterioro de créditos a corto plazo, empresas del grupo",Subcuenta,
-7991,"Reversión del deterioro de créditos a corto plazo, empresas asociadas",Subcuenta,
-7992,"Reversión del deterioro de créditos a corto plazo, otras partes vinculadas",Subcuenta,
-7993,"Reversión del deterioro de créditos a corto plazo, otras empresas",Subcuenta,
-8,GASTOS IMPUTADOS AL PATRIMONIO NETO,Grupo,
-80,GASTOS FINANCIEROS POR VALORACIÓN DE ACTIVOS Y PASIVOS,Subgrupo,
-800,Pérdidas en activos financieros disponibles para la venta,Cuenta,
-802,Transferencia de beneficios en activos financieros disponibles para la venta,Cuenta,
-81,GASTOS EN OPERACIONES DE COBERTURA,Subgrupo,
-810,Pérdidas por coberturas de flujos de efectivo,Cuenta,
-811,Pérdidas por coberturas de inversiones netas en un negocio en el extranjero,Cuenta,
-812,Transferencia de beneficios por coberturas de flujos de efectivo,Cuenta,
-813,Transferencia de beneficios por coberturas de inversiones netas en un negocio en el extranjero,Cuenta,
-82,GASTOS POR DIFERENCIAS DE CONVERSIÓN,Subgrupo,
-820,Diferencias de conversión negativas,Cuenta,
-821,Transferencia de diferencias de conversión positivas,Cuenta,
-83,IMPUESTO SOBRE BENEFICIOS,Subgrupo,
-830,Impuesto sobre beneficios,Cuenta,
-8300,Impuesto corriente,Subcuenta,
-8301,Impuesto diferido,Subcuenta,
-833,Ajustes negativos en la imposición sobre Beneficios,Cuenta,
-834,Ingresos fiscales por diferencias permanentes,Cuenta,
-835,Ingresos fiscales por deducciones y bonificaciones,Cuenta,
-836,Transferencia de diferencias permanentes,Cuenta,
-837,Transferencia de deducciones y bonificaciones,Cuenta,
-838,Ajustes positivos en la imposición sobre beneficios,Cuenta,
-84,"TRANSFERENCIAS DE SUBVENCIONES, DONACIONES Y LEGADOS",Subgrupo,
-840,Transferencia de subvenciones oficiales de capital,Cuenta,
-841,Transferencia de donaciones y legados de capital,Cuenta,
-842,"Transferencia de otras subvenciones, donaciones y legados",Cuenta,
-85,GASTOS POR PÉRDIDAS ACTUARIALES Y AJUSTES EN LOS ACTIVOS POR RETRIBUCIONES A LARGO PLAZO DE PRESTACIÓN DEFINIDA,Subgrupo,
-850,Pérdidas actuariales,Cuenta,
-851,Ajustes negativos en activos por retribuciones a largo plazo de prestación definida,Cuenta,
-86,GASTOS POR ACTIVOS NO CORRIENTES EN VENTA,Subgrupo,
-860,Pérdidas en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
-862,Transferencia de beneficios en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
-89,GASTOS DE PARTICIPACIONES EN EMPRESAS DEL GRUPO O ASOCIADAS CON AJUSTES VALORATIVOS POSITIVOS PREVIOS,Subgrupo,
-891,"Deterioro de participaciones en el patrimonio, empresas del grupo",Cuenta,
-892,"Deterioro de participaciones en el patrimonio, empresas asociadas",Cuenta,
-9,INGRESOS IMPUTADOS AL PATRIMONIO NETO,Grupo,
-90,INGRESOS FINANCIEROS POR VALORACIÓN DE ACTIVOS Y PASIVOS,Subgrupo,
-900,Beneficios en activos financieros disponibles para la venta,Cuenta,
-902,Transferencia de pérdidas de activos financieros disponibles para la venta,Cuenta,
-91,INGRESOS EN OPERACIONES DE COBERTURA,Subgrupo,
-910,Beneficios por coberturas de flujos de efectivo,Cuenta,
-911,Beneficios por coberturas de una inversión neta en un negocio en el extranjero,Cuenta,
-912,Transferencia de pérdidas por coberturas de flujos de efectivo,Cuenta,
-913,Transferencia de pérdidas por coberturas de una inversión neta en un negocio en el extranjero,Cuenta,
-92,INGRESOS POR DIFERENCIAS DE CONVERSIÓN,Subgrupo,
-920,Diferencias de conversión positivas,Cuenta,
-921,Transferencia de diferencias de conversión negativas,Cuenta,
-94,"INGRESOS POR SUBVENCIONES, DONACIONES Y LEGADOS",Subgrupo,
-940,Ingresos de subvenciones oficiales de capital,Cuenta,
-941,Ingresos de donaciones y legados de capital,Cuenta,
-942,"Ingresos de otras subvenciones, donaciones y legados",Cuenta,
-95,INGRESOS POR GANANCIAS ACTUARIALES Y AJUSTES EN LOS ACTIVOS POR RETRIBUCIONES A LARGO PLAZO DE PRESTACIÓN DEFINIDA,Subgrupo,
-950,Ganancias actuariales,Cuenta,
-951,Ajustes positivos en activos por retribuciones a largo plazo de prestación definida,Cuenta,
-96,INGRESOS POR ACTIVOS NO CORRIENTES EN VENTA,Subgrupo,
-960,Beneficios en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
-962,Transferencia de pérdidas en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
-99,INGRESOS DE PARTICIPACIONES EN EMPRESAS DEL GRUPO O ASOCIADAS CON AJUSTES VALORATIVOS NEGATIVOS PREVIOS,Subgrupo,
-991,"Recuperación de ajustes valorativos negativos previos, empresas del grupo",Cuenta,
-992,"Recuperación de ajustes valorativos negativos previos, empresas asociadas",Cuenta,
-993,"Transferencia por deterioro de ajustes valorativos negativos previos, empresas del grupo",Cuenta,
-994,"Transferencia por deterioro de ajustes valorativos negativos previos, empresas asociadas",Cuenta,
+zara-accountant,1,FINANCIACIÓN BÁSICA,Grupo,
+zara-accountant,10,CAPITAL,Subgrupo,
+zara-accountant,100,Capital social,Cuenta,10048
+zara-accountant,101,Fondo social,Cuenta,10048
+zara-accountant,102,Capital,Cuenta,10048
+zara-accountant,103,Socios por desembolsos no exigidos,Cuenta,10049
+zara-accountant,1030,"Socios por desembolsos no exigidos, capital social",Subcuenta,10049
+zara-accountant,1034,"Socios por desembolsos no exigidos, capital pendiente de inscripción",Subcuenta,10085
+zara-accountant,104,Socios por aportaciones no dinerarias pendientes,Cuenta,10049
+zara-accountant,1040,"Socios por aportaciones no dinerarias pendientes, capital social",Subcuenta,10049
+zara-accountant,1044,"Socios por aportaciones no dinerarias pendientes, capital pendiente de inscripción",Subcuenta,10085
+zara-accountant,108,Acciones o participaciones propias en situaciones especiales,Cuenta,10053
+zara-accountant,109,Acciones o participaciones propias para reducción de capital,Cuenta,10053
+zara-accountant,11,RESERVAS Y OTROS INSTRUMENTOS DE PATRIMONIO,Subgrupo,
+zara-accountant,110,Prima de emisión o asunción,Cuenta,10050
+zara-accountant,111,Otros instrumentos de patrimonio neto,Cuenta,10059
+zara-accountant,1110,Patrimonio neto por emisión de instrumentos financieros compuestos,Subcuenta,10059
+zara-accountant,1111,Resto de instrumentos de patrimonio neto,Subcuenta,10059
+zara-accountant,112,Reserva legal,Cuenta,10051
+zara-accountant,113,Reservas voluntarias,Cuenta,10052
+zara-accountant,114,Reservas especiales,Cuenta,10052
+zara-accountant,1140,Reservas para acciones o participaciones de la sociedad dominante,Subcuenta,10052
+zara-accountant,1141,Reservas estatutarias,Subcuenta,10051
+zara-accountant,1142,Reserva por capital amortizado,Subcuenta,10052
+zara-accountant,1143,Reserva por fondo de comercio,Subcuenta,10052
+zara-accountant,1144,Reservas por acciones propias aceptadas en garantía,Subcuenta,10052
+zara-accountant,115,Reservas por pérdidas y ganancias actuariales y otros ajustes,Cuenta,10052
+zara-accountant,118,Aportaciones de socios o propietarios,Cuenta,10056
+zara-accountant,119,Diferencias por ajuste del capital a euros,Cuenta,10052
+zara-accountant,12,RESULTADOS PENDIENTES DE APLICACIÓN,Subgrupo,
+zara-accountant,120,Remanente,Cuenta,10054
+zara-accountant,121,Resultados negativos de ejercicios anteriores,Cuenta,10055
+zara-accountant,129,Resultado del ejercicio,Cuenta,10057
+zara-accountant,13,"SUBVENCIONES, DONACIONES Y AJUSTES POR CAMBIOS DE VALOR",Subgrupo,
+zara-accountant,130,Subvenciones oficiales de capital,Cuenta,10065
+zara-accountant,131,Donaciones y legados de capital,Cuenta,10065
+zara-accountant,132,"Otras subvenciones, donaciones y legados",Cuenta,10065
+zara-accountant,133,Ajustes por valoración en activos financieros disponibles para la venta,Cuenta,10060
+zara-accountant,134,Operaciones de cobertura,Cuenta,10061
+zara-accountant,1340,Cobertura de flujos de efectivo,Subcuenta,10061
+zara-accountant,1341,Cobertura de una inversión neta en un negocio en el extranjero,Subcuenta,10061
+zara-accountant,135,Diferencias de conversión,Cuenta,10063
+zara-accountant,136,"Ajustes por valoración en activos no corrientes y grupos enajenables de elementos, mantenidos para la venta",Cuenta,10062
+zara-accountant,137,Ingresos fiscales a distribuir en varios ejercicios,Cuenta,10064
+zara-accountant,1370,Ingresos fiscales por diferencias permanentes a distribuir en varios ejercicios,Subcuenta,10064
+zara-accountant,1371,Ingresos fiscales por deducciones y bonificaciones a distribuir en varios ejercicios,Subcuenta,10064
+zara-accountant,14,PROVISIONES,Subgrupo,
+zara-accountant,140,Provisión por retribuciones a largo plazo al personal,Cuenta,10066
+zara-accountant,141,Provisión para impuestos,Cuenta,10069
+zara-accountant,142,Provisión para otras responsabilidades,Cuenta,10069
+zara-accountant,143,"Provisión por desmantelamiento, retiro o rehabilitación del inmovilizado",Cuenta,10069
+zara-accountant,145,Provisión para actuaciones medioambientales,Cuenta,10067
+zara-accountant,146,Provisión para reestructuraciones,Cuenta,10068
+zara-accountant,147,Provisión por transacciones con pagos basados en instrumentos de patrimonio,Cuenta,10069
+zara-accountant,15,DEUDAS A LARGO PLAZO CON CARACTERÍSTICAS ESPECIALES,Subgrupo,
+zara-accountant,150,Acciones o participaciones a largo plazo consideradas como pasivos financieros,Cuenta,10078
+zara-accountant,153,Desembolsos no exigidos por acciones o participaciones consideradas como pasivos financieros,Cuenta,10078
+zara-accountant,1533,"Desembolsos no exigidos, empresas del grupo",Subcuenta,10078
+zara-accountant,1534,"Desembolsos no exigidos, empresas asociadas",Subcuenta,10078
+zara-accountant,1535,"Desembolsos no exigidos, otras partes vinculadas",Subcuenta,10078
+zara-accountant,1536,Otros desembolsos no exigidos,Subcuenta,10078
+zara-accountant,154,Aportaciones no dinerarias pendientes por acciones o participaciones consideradas como pasivos financieros,Cuenta,10078
+zara-accountant,1543,"Aportaciones no dinerarias pendientes, empresas del grupo",Subcuenta,10078
+zara-accountant,1544,"Aportaciones no dinerarias pendientes, empresas asociadas",Subcuenta,10078
+zara-accountant,1545,"Aportaciones no dinerarias pendientes, otras partes vinculadas",Subcuenta,10078
+zara-accountant,1546,Otras aportaciones no dinerarias pendientes,Subcuenta,10078
+zara-accountant,16,DEUDAS A LARGO PLAZO CON PARTES VINCULADAS,Subgrupo,
+zara-accountant,160,Deudas a largo plazo con entidades de crédito vinculadas,Cuenta,10075
+zara-accountant,1603,"Deudas a largo plazo con entidades de crédito, empresas del grupo",Subcuenta,10075
+zara-accountant,1604,"Deudas a largo plazo con entidades de crédito, empresas asociadas",Subcuenta,10075
+zara-accountant,1605,Deudas a largo plazo con otras entidades de crédito vinculadas,Subcuenta,10071
+zara-accountant,161,"Proveedores de inmovilizado a largo plazo, partes vinculadas",Cuenta,10075
+zara-accountant,1613,"Proveedores de inmovilizado a largo plazo, empresas del grupo",Subcuenta,10075
+zara-accountant,1614,"Proveedores de inmovilizado a largo plazo, empresas asociadas",Subcuenta,10075
+zara-accountant,1615,"Proveedores de inmovilizado a largo plazo, otras partes vinculadas",Subcuenta,10074
+zara-accountant,162,"Acreedores por arrendamiento financiero a largo plazo, partes vinculadas",Cuenta,10075
+zara-accountant,1623,"Acreedores por arrendamiento financiero a largo plazo, empresas de grupo",Subcuenta,10075
+zara-accountant,1624,"Acreedores por arrendamiento financiero a largo plazo, empresas asociadas",Subcuenta,10075
+zara-accountant,1625,"Acreedores por arrendamiento financiero a largo plazo, otras partes vinculadas",Subcuenta,10072
+zara-accountant,163,Otras deudas a largo plazo con partes vinculadas,Cuenta,10075
+zara-accountant,1633,"Otras deudas a largo plazo, empresas del grupo",Subcuenta,10075
+zara-accountant,1634,"Otras deudas a largo plazo, empresas asociadas",Subcuenta,10075
+zara-accountant,1635,"Otras deudas a largo plazo, con otras partes vinculadas",Subcuenta,10074
+zara-accountant,17,"DEUDAS A LARGO PLAZO POR PRÉSTAMOS RECIBIDOS, EMPRÉSTITOS Y OTROS CONCEPTOS",Subgrupo,
+zara-accountant,170,Deudas a largo plazo con entidades de crédito,Cuenta,10071
+zara-accountant,171,Deudas a largo plazo,Cuenta,10074
+zara-accountant,172,"Deudas a largo plazo transformables en subvenciones, donaciones y legados",Cuenta,10074
+zara-accountant,173,Proveedores de inmovilizado a largo plazo,Cuenta,10074
+zara-accountant,174,Acreedores por arrendamiento financiero a largo plazo,Cuenta,10072
+zara-accountant,175,Efectos a pagar a largo plazo,Cuenta,10074
+zara-accountant,176,Pasivos por derivados financieros a largo plazo,Cuenta,10073
+zara-accountant,1765,"Pasivos por derivados financieros a largo plazo, cartera de negociación",Subcuenta,10073
+zara-accountant,1768,"Pasivos por derivados financieros a largo plazo, instrumentos de cobertura",Subcuenta,10073
+zara-accountant,177,Obligaciones y bonos,Cuenta,10070
+zara-accountant,178,Obligaciones y bonos convertibles,Cuenta,10070
+zara-accountant,179,Deudas representadas en otros valores negociables,Cuenta,10070
+zara-accountant,18,"PASIVOS POR FIANZAS, GARANTÍAS Y OTROS CONCEPTOS A LARGO PLAZO",Subgrupo,
+zara-accountant,180,Fianzas recibidas a largo plazo,Cuenta,10074
+zara-accountant,181,Anticipos recibidos por ventas o prestaciones de servicios a largo plazo,Cuenta,10077
+zara-accountant,185,Depósitos recibidos a largo plazo,Cuenta,10074
+zara-accountant,189,Garantías financieras a largo plazo,Cuenta,10074
+zara-accountant,19,SITUACIONES TRANSITORIAS DE FINANCIACIÓN,Subgrupo,
+zara-accountant,190,Acciones o participaciones emitidas,Cuenta,10085
+zara-accountant,192,Suscriptores de acciones,Cuenta,10085
+zara-accountant,194,Capital emitido pendiente de inscripción,Cuenta,10085
+zara-accountant,195,Acciones o participaciones emitidas consideradas como pasivos financieros,Cuenta,10085
+zara-accountant,197,Suscriptores de acciones consideradas como pasivos financieros,Cuenta,10085
+zara-accountant,199,Acciones o participaciones emitidas consideradas como pasivos financieros pendientes de inscripción,Cuenta,10085
+zara-accountant,2,ACTIVO NO CORRIENTE,Grupo,
+zara-accountant,20,INMOVILIZACIONES INTANGIBLES,Subgrupo,
+zara-accountant,200,Investigación,Cuenta,10005
+zara-accountant,201,Desarrollo,Cuenta,10000
+zara-accountant,202,Concesiones administrativas,Cuenta,10001
+zara-accountant,203,Propiedad industrial,Cuenta,10002
+zara-accountant,204,Fondo de comercio,Cuenta,10003
+zara-accountant,205,Derechos de traspaso,Cuenta,10006
+zara-accountant,206,Aplicaciones informáticas,Cuenta,10004
+zara-accountant,209,Anticipos para inmovilizaciones intangibles,Cuenta,10006
+zara-accountant,21,INMOVILIZACIONES MATERIALES,Subgrupo,
+zara-accountant,210,Terrenos y bienes naturales,Cuenta,10007
+zara-accountant,211,Construcciones,Cuenta,10007
+zara-accountant,212,Instalaciones técnicas,Cuenta,10008
+zara-accountant,213,Maquinaria,Cuenta,10008
+zara-accountant,214,Utillaje,Cuenta,10008
+zara-accountant,215,Otras instalaciones,Cuenta,10008
+zara-accountant,216,Mobiliario,Cuenta,10008
+zara-accountant,217,Equipos para procesos de información,Cuenta,10008
+zara-accountant,218,Elementos de transporte,Cuenta,10008
+zara-accountant,219,Otro inmovilizado material,Cuenta,10008
+zara-accountant,22,INVERSIONES INMOBILIARIAS,Subgrupo,
+zara-accountant,220,Inversiones en terrenos y bienes naturales,Cuenta,10010
+zara-accountant,221,Inversiones en construcciones,Cuenta,10011
+zara-accountant,23,INMOVILIZACIONES MATERIALES EN CURSO,Subgrupo,
+zara-accountant,230,Adaptación de terrenos y bienes naturales,Cuenta,10009
+zara-accountant,231,Construcciones en curso,Cuenta,10009
+zara-accountant,232,Instalaciones técnicas en montaje,Cuenta,10009
+zara-accountant,233,Maquinaria en montaje,Cuenta,10009
+zara-accountant,237,Equipos para procesos de información en montaje,Cuenta,10009
+zara-accountant,239,Anticipos para inmovilizaciones materiales,Cuenta,10009
+zara-accountant,24,INVERSIONES FINANCIERAS A LARGO PLAZO EN PARTES VINCULADAS,Subgrupo,
+zara-accountant,240,Participaciones a largo plazo en partes vinculadas,Cuenta,10012
+zara-accountant,2403,Participaciones a largo plazo en empresas del grupo,Subcuenta,10012
+zara-accountant,2404,Participaciones a largo plazo en empresas asociadas,Subcuenta,10012
+zara-accountant,2405,Participaciones a largo plazo en otras partes vinculadas,Subcuenta,10015
+zara-accountant,241,Valores representativos de deuda a largo plazo de partes vinculadas,Cuenta,10014
+zara-accountant,2413,Valores representativos de deuda a largo plazo de empresas del grupo,Subcuenta,10014
+zara-accountant,2414,Valores representativos de deuda a largo plazo de empresas asociadas,Subcuenta,10014
+zara-accountant,2415,Valores representativos de deuda a largo plazo de otras partes vinculadas,Subcuenta,10017
+zara-accountant,242,Créditos a largo plazo a partes vinculadas,Cuenta,10013
+zara-accountant,2423,Créditos a largo plazo a empresas del grupo,Subcuenta,10013
+zara-accountant,2424,Créditos a largo plazo a empresas asociadas,Subcuenta,10013
+zara-accountant,2425,Créditos a largo plazo a otras partes vinculadas,Subcuenta,10016
+zara-accountant,249,Desembolsos pendientes sobre participaciones a largo plazo en partes vinculadas,Cuenta,10012
+zara-accountant,2493,Desembolsos pendientes sobre participaciones a largo plazo en empresas del grupo,Subcuenta,10012
+zara-accountant,2494,Desembolsos pendientes sobre participaciones a largo plazo en empresas asociadas,Subcuenta,10012
+zara-accountant,2495,Desembolsos pendientes sobre participaciones a largo plazo en otras partes vinculadas,Subcuenta,10015
+zara-accountant,25,OTRAS INVERSIONES FINANCIERAS A LARGO PLAZO,Subgrupo,
+zara-accountant,250,Inversiones financieras a largo plazo en instrumentos de patrimonio,Cuenta,10015
+zara-accountant,251,Valores representativos de deuda a largo plazo,Cuenta,10017
+zara-accountant,252,Créditos a largo plazo,Cuenta,10016
+zara-accountant,253,Créditos a largo plazo por enajenación de in movilizado,Cuenta,10016
+zara-accountant,254,Créditos a largo plazo al personal,Cuenta,10016
+zara-accountant,255,Activos por derivados financieros a largo plazo,Cuenta,10018
+zara-accountant,2550,"Activos por derivados financieros a largo plazo, cartera de negociación",Subcuenta,10018
+zara-accountant,2553,"Activos por derivados financieros a largo plazo, instrumentos de cobertura",Subcuenta,10018
+zara-accountant,257,Derechos de reembolso derivados de contratos de seguro relativos a retribuciones a largo plazo al personal,Cuenta,10020
+zara-accountant,258,Imposiciones a largo plazo,Cuenta,10019
+zara-accountant,259,Desembolsos pendientes sobre participaciones en el patrimonio neto a largo plazo,Cuenta,10015
+zara-accountant,26,FIANZAS Y DEPÓSITOS CONSTITUIDOS A LARGO PLAZO,Subgrupo,
+zara-accountant,260,Fianzas constituidas a largo plazo,Cuenta,10019
+zara-accountant,265,Depósitos constituidos a largo plazo,Cuenta,10019
+zara-accountant,28,AMORTIZACIÓN ACUMULADA DEL INMOVILIZADO,Subgrupo,
+zara-accountant,280,Amortización acumulada del inmovilizado intangible,Cuenta,10006
+zara-accountant,2800,Amortización acumulada de investigación,Subcuenta,10005
+zara-accountant,2801,Amortización acumulada de desarrollo,Subcuenta,10000
+zara-accountant,2802,Amortización acumulada de concesiones administrativas,Subcuenta,10001
+zara-accountant,2803,Amortización acumulada de propiedad industrial,Subcuenta,10002
+zara-accountant,2805,Amortización acumulada de derechos de traspaso,Subcuenta,10006
+zara-accountant,2806,Amortización acumulada de aplicaciones informáticas,Subcuenta,10004
+zara-accountant,281,Amortización acumulada del inmovilizado material,Cuenta,10008
+zara-accountant,2811,Amortización acumulada de construcciones,Subcuenta,10007
+zara-accountant,2812,Amortización acumulada de instalaciones técnicas,Subcuenta,10008
+zara-accountant,2813,Amortización acumulada de maquinaria,Subcuenta,10008
+zara-accountant,2814,Amortización acumulada de utillaje,Subcuenta,10008
+zara-accountant,2815,Amortización acumulada de otras instalaciones,Subcuenta,10008
+zara-accountant,2816,Amortización acumulada de mobiliario,Subcuenta,10008
+zara-accountant,2817,Amortización acumulada de equipos para procesos de información,Subcuenta,10008
+zara-accountant,2818,Amortización acumulada de elementos de transporte,Subcuenta,10008
+zara-accountant,2819,Amortización acumulada de otro inmovilizado material,Subcuenta,10008
+zara-accountant,282,Amortización acumulada de las inversiones inmobiliarias,Cuenta,10011
+zara-accountant,29,DETERIORO DE VALOR DE ACTIVOS NO CORRIENTES,Subgrupo,
+zara-accountant,290,Deterioro de valor del inmovilizado intangible,Cuenta,10006
+zara-accountant,2900,Deterioro de valor de investigación,Subcuenta,10005
+zara-accountant,2901,Deterioro del valor de desarrollo,Subcuenta,10000
+zara-accountant,2902,Deterioro de valor de concesiones administrativas,Subcuenta,10001
+zara-accountant,2903,Deterioro de valor de propiedad industrial,Subcuenta,10002
+zara-accountant,2905,Deterioro de valor de derechos de traspaso,Subcuenta,10006
+zara-accountant,2906,Deterioro de valor de aplicaciones informáticas,Subcuenta,10004
+zara-accountant,291,Deterioro de valor del inmovilizado materia l,Cuenta,10008
+zara-accountant,2910,Deterioro de valor de terrenos y bienes naturales,Subcuenta,10007
+zara-accountant,2911,Deterioro de valor de construcciones,Subcuenta,10007
+zara-accountant,2912,Deterioro de valor de instalaciones técnicas,Subcuenta,10008
+zara-accountant,2913,Deterioro de valor de maquinaria,Subcuenta,10008
+zara-accountant,2914,Deterioro de valor de utillaje,Subcuenta,10008
+zara-accountant,2915,Deterioro de valor de otras instalaciones,Subcuenta,10008
+zara-accountant,2916,Deterioro de valor de mobiliario,Subcuenta,10008
+zara-accountant,2917,Deterioro de valor de equipos para procesos de información,Subcuenta,10008
+zara-accountant,2918,Deterioro de valor de elementos de transporte,Subcuenta,10008
+zara-accountant,2919,Deterioro de valor de otro inmovilizado material,Subcuenta,10008
+zara-accountant,292,Deterioro de valor de las inversiones inmobiliarias,Cuenta,10010
+zara-accountant,2920,Deterioro de valor de los terrenos y bienes naturales,Subcuenta,10010
+zara-accountant,2921,Deterioro de valor de construcciones,Subcuenta,10011
+zara-accountant,293,Deterioro de valor de participaciones a largo plazo en partes vinculadas,Cuenta,10012
+zara-accountant,2933,Deterioro de valor de participaciones a largo plazo en empresas del grupo,Subcuenta,10012
+zara-accountant,2934,Deterioro de valor de participaciones a largo plazo en empresas asociadas,Subcuenta,10012
+zara-accountant,294,Deterioro de valor de valores representativos de deuda a largo plazo de partes vinculadas,Cuenta,10014
+zara-accountant,2943,Deterioro de valor de valores representativos de deuda a largo plazo de empresas del grupo,Subcuenta,10014
+zara-accountant,2944,Deterioro de valor de valores representativos de deuda a largo plazo de empresas asociadas,Subcuenta,10014
+zara-accountant,2945,Deterioro de valor de valores representativos de deuda a largo plazo de otras partes vinculadas,Subcuenta,10017
+zara-accountant,295,Deterioro de valor de créditos a largo plazo a partes vinculadas,Cuenta,10013
+zara-accountant,2953,Deterioro de valor de créditos a largo plazo a empresas del grupo,Subcuenta,10013
+zara-accountant,2954,Deterioro de valor de créditos a largo plazo a empresas asociadas,Subcuenta,10013
+zara-accountant,2955,Deterioro de valor de créditos a largo plazo a otras partes vinculadas,Subcuenta,10016
+zara-accountant,297,Deterioro de valor de valores representativos de deuda a largo plazo,Cuenta,10017
+zara-accountant,298,Deterioro de valor de créditos a largo plazo,Cuenta,10016
+zara-accountant,3,EXISTENCIAS,Grupo,
+zara-accountant,30,COMERCIALES,Subgrupo,
+zara-accountant,300,Mercaderías A,Cuenta,10023
+zara-accountant,301,Mercaderías B,Cuenta,10023
+zara-accountant,31,MATERIAS PRIMAS,Subgrupo,
+zara-accountant,310,Materias primas A,Cuenta,10024
+zara-accountant,311,Materias primas B,Cuenta,10024
+zara-accountant,32,OTROS APROVISIONAMIENTOS,Subgrupo,
+zara-accountant,320,Elementos y conjuntos incorporables,Cuenta,10024
+zara-accountant,321,Combustibles,Cuenta,10024
+zara-accountant,322,Repuestos,Cuenta,10024
+zara-accountant,325,Materiales diversos,Cuenta,10024
+zara-accountant,326,Embalajes,Cuenta,10024
+zara-accountant,327,Envases,Cuenta,10024
+zara-accountant,328,Material de oficina,Cuenta,10024
+zara-accountant,33,PRODUCTOS EN CURSO,Subgrupo,
+zara-accountant,330,Productos en curso A,Cuenta,10025
+zara-accountant,331,Productos en curso B,Cuenta,10025
+zara-accountant,34,PRODUCTOS SEMITERMINADOS,Subgrupo,
+zara-accountant,340,Productos semiterminados A,Cuenta,10025
+zara-accountant,341,Productos semiterminados B,Cuenta,10025
+zara-accountant,35,PRODUCTOS TERMINADOS,Subgrupo,
+zara-accountant,350,Productos terminados A,Cuenta,10026
+zara-accountant,351,Productos terminados B,Cuenta,10026
+zara-accountant,36,"SUBPRODUCTOS, RESIDUOS Y MATERIALES RECUPERADOS",Subgrupo,
+zara-accountant,360,Subproductos A,Cuenta,10027
+zara-accountant,361,Subproductos B,Cuenta,10027
+zara-accountant,365,Residuos A,Cuenta,10027
+zara-accountant,366,Residuos B,Cuenta,10027
+zara-accountant,368,Materiales recuperados A,Cuenta,10027
+zara-accountant,369,Materiales recuperados B,Cuenta,10027
+zara-accountant,39,DETERIORO DE VALOR DE LAS EXISTENCIAS,Subgrupo,
+zara-accountant,390,Deterioro de valor de las mercaderías,Cuenta,10023
+zara-accountant,391,Deterioro de valor de las materias primas,Cuenta,10024
+zara-accountant,392,Deterioro de valor de otros aprovi sionamientos,Cuenta,10024
+zara-accountant,393,Deterioro de valor de los productos en curso,Cuenta,10025
+zara-accountant,394,Deterioro de valor de los productos semiterminados,Cuenta,10025
+zara-accountant,395,Deterioro de valor de los productos terminados,Cuenta,10026
+zara-accountant,396,"Deterioro de valor de los subproductos, residuos y materiales recuperados",Cuenta,10027
+zara-accountant,4,ACREEDORES Y DEUDORES POR OPERACIONES COMERCIALES,Grupo,
+zara-accountant,40,PROVEEDORES,Subgrupo,
+zara-accountant,400,Proveedores,Cuenta,10087
+zara-accountant,4000,Proveedores (euros),Subcuenta,10087
+zara-accountant,4004,Proveedores (moneda extranjera),Subcuenta,10087
+zara-accountant,4009,"Proveedores, facturas pendientes de recibir o de formalizar",Subcuenta,10087
+zara-accountant,401,"Proveedores, efectos comerciales a pagar",Cuenta,10087
+zara-accountant,403,"Proveedores, empresas del grupo",Cuenta,10088
+zara-accountant,4030,"Proveedores, empresas del grupo (euros)",Subcuenta,10088
+zara-accountant,4031,"Efectos comerciales a pagar, empresas del grupo",Subcuenta,10088
+zara-accountant,4034,"Proveedores, empresas del grupo (moneda extranjera)",Subcuenta,10088
+zara-accountant,4036,"Envases y embalajes a devolver a proveedores, empresas del grupo",Subcuenta,10088
+zara-accountant,4039,"Proveedores, empresas del grupo, facturas pendientes de recibir o de formalizar",Subcuenta,10088
+zara-accountant,404,"Proveedores, empresas asociadas",Cuenta,10088
+zara-accountant,405,"Proveedores, otras partes vinculadas",Cuenta,10087
+zara-accountant,406,Envases y embalajes a devolver a proveedores,Cuenta,10087
+zara-accountant,407,Anticipos a proveedores,Cuenta,10028
+zara-accountant,41,ACREEDORES VARIOS,Subgrupo,
+zara-accountant,410,Acreedores por prestaciones de servicios,Cuenta,10089
+zara-accountant,4100,Acreedores por prestaciones de servicios (euros),Subcuenta,10089
+zara-accountant,4104,"Acreedores por prestaciones de servicios, (moneda extranjera)",Subcuenta,10089
+zara-accountant,4109,"Acreedores por prestaciones de servicios, facturas pendientes de recibir o de formalizar",Subcuenta,10089
+zara-accountant,411,"Acreedores, efectos comerciales a pagar",Cuenta,10089
+zara-accountant,419,Acreedores por operaciones en común,Cuenta,10089
+zara-accountant,43,CLIENTES,Subgrupo,
+zara-accountant,430,Clientes,Cuenta,10029
+zara-accountant,4300,Clientes (euros),Subcuenta,10029
+zara-accountant,4304,Clientes (moneda extranjera),Subcuenta,10029
+zara-accountant,4309,"Clientes, facturas pendientes de formalizar",Subcuenta,10029
+zara-accountant,431,"Clientes, efectos comerciales a cobrar",Cuenta,10029
+zara-accountant,4310,Efectos comerciales en cartera,Subcuenta,10029
+zara-accountant,4311,Efectos comerciales descontados,Subcuenta,10029
+zara-accountant,4312,Efectos comerciales en gestión de cobro,Subcuenta,10029
+zara-accountant,4315,Efectos comerciales impagados,Subcuenta,10029
+zara-accountant,432,"Clientes, operaciones de “factoring”",Cuenta,10029
+zara-accountant,433,"Clientes, empresas del grupo",Cuenta,10030
+zara-accountant,4330,Clientes empresas del grupo (euros),Subcuenta,10030
+zara-accountant,4331,"Efectos comerciales a cobrar, empresas del grupo",Subcuenta,10030
+zara-accountant,4332,"Clientes empresas del grupo, operaciones de “factoring”",Subcuenta,10030
+zara-accountant,4334,Clientes empresas del grupo (moneda extranjera),Subcuenta,10030
+zara-accountant,4336,Clientes empresas del grupo de dudoso cobro,Subcuenta,10030
+zara-accountant,4337,"Envases y embalajes a devolver a clientes, empresas del grupo",Subcuenta,10030
+zara-accountant,4339,"Clientes empresas del grupo, facturas pendientes de formalizar",Subcuenta,10030
+zara-accountant,434,"Clientes, empresas asociadas",Cuenta,10030
+zara-accountant,435,"Clientes, otras partes vinculadas",Cuenta,10029
+zara-accountant,436,Clientes de dudoso cobro,Cuenta,10029
+zara-accountant,437,Envases y embalajes a devolver por clientes,Cuenta,10029
+zara-accountant,438,Anticipos de clientes,Cuenta,10093
+zara-accountant,44,DEUDORES VARIOS,Subgrupo,
+zara-accountant,440,Deudores,Cuenta,10032
+zara-accountant,4400,Deudores (euros),Subcuenta,10032
+zara-accountant,4404,Deudores (moneda extranjera),Subcuenta,10032
+zara-accountant,4409,"Deudores, facturas pendientes de formalizar",Subcuenta,10032
+zara-accountant,441,"Deudores, efectos comerciales a cobrar",Cuenta,10032
+zara-accountant,4410,"Deudores, efectos comerciales en cartera",Subcuenta,10032
+zara-accountant,4411,"Deudores, efectos comerciales descontados",Subcuenta,10032
+zara-accountant,4412,"Deudores, efectos comerciales en gestión de cobro",Subcuenta,10032
+zara-accountant,4415,"Deudores, efectos comerciales impagados",Subcuenta,10032
+zara-accountant,446,Deudores de dudoso cobro,Cuenta,10032
+zara-accountant,449,Deudores por operaciones en común,Cuenta,10032
+zara-accountant,46,PERSONAL,Subgrupo,
+zara-accountant,460,Anticipos de remuneraciones,Cuenta,10032
+zara-accountant,465,Remuneraciones pendientes de pago,Cuenta,10090
+zara-accountant,466,Remuneraciones mediante sistemas de aportación definida pendientes de pago,Cuenta,10090
+zara-accountant,47,ADMINISTRACIONES PÚBLICAS,Subgrupo,
+zara-accountant,470,"Hacienda Pública, deudora por diversos conceptos",Cuenta,10034
+zara-accountant,4700,"Hacienda Pública, deudora por IVA",Subcuenta,10034
+zara-accountant,4708,"Hacienda Pública, deudora por subvenciones concedidas",Subcuenta,10034
+zara-accountant,4709,"Hacienda Pública, deudora por devolución de impuestos",Subcuenta,10033
+zara-accountant,471,"Organismos de la Seguridad Social, deudores",Cuenta,10034
+zara-accountant,472,"Hacienda Pública, IVA soportado",Cuenta,10034
+zara-accountant,473,"Hacienda Pública, retenciones y pagos a cuenta",Cuenta,N/A
+zara-accountant,474,Activos por impuesto diferido,Cuenta,10021
+zara-accountant,4740,Activos por diferencias temporarias deducibles,Subcuenta,10021
+zara-accountant,4742,Derechos por deducciones y bonificaciones pendientes de aplicar,Subcuenta,10021
+zara-accountant,4745,Crédito por pérdidas a compensar del ejercicio,Subcuenta,10021
+zara-accountant,475,"Hacienda Pública, acreedora por conceptos fiscales",Cuenta,10092
+zara-accountant,4750,"Hacienda Pública, acreedora por IVA",Subcuenta,10092
+zara-accountant,4751,"Hacienda Pública, acreedora por retenciones practicadas",Subcuenta,10092
+zara-accountant,4752,"Hacienda Pública, acreedora por impuesto sobre sociedades",Subcuenta,10091
+zara-accountant,4758,"Hacienda Pública, acreedora por subvenciones a reintegrar",Subcuenta,10092
+zara-accountant,476,"Organismos de la Seguridad Social, acreedores",Cuenta,10092
+zara-accountant,477,"Hacienda Pública, IVA repercutido",Cuenta,10092
+zara-accountant,479,Pasivos por diferencias temporarias imponibles,Cuenta,10076
+zara-accountant,48,AJUSTES POR PERIODIFICACIÓN,Subgrupo,
+zara-accountant,480,Gastos anticipados,Cuenta,10045
+zara-accountant,485,Ingresos anticipados,Cuenta,10094
+zara-accountant,49,DETERIORO DE VALOR DE CRÉDITOS COMERCIALES Y PROVISIONES A CORTO PLAZO,Subgrupo,
+zara-accountant,490,Deterioro de valor de créditos por operaciones comerciales,Cuenta,10029
+zara-accountant,493,Deterioro de valor de créditos por operaciones comerciales con partes vinculadas,Cuenta,10030
+zara-accountant,4933,Deterioro de valor de créditos por operaciones comerciales con empresas del grupo,Subcuenta,10030
+zara-accountant,4934,Deterioro de valor de créditos por operaciones comerciales con empresas asociadas,Subcuenta,10030
+zara-accountant,4935,Deterioro de valor de créditos por operaciones comerciales con otras partes vinculadas,Subcuenta,10029
+zara-accountant,499,Provisiones por operaciones comerciales,Cuenta,10080
+zara-accountant,4994,Provisión por contratos onerosos,Subcuenta,10080
+zara-accountant,4999,Provisión para otras operaciones comerciales,Subcuenta,10080
+zara-accountant,5,CUENTAS FINANCIERAS,Grupo,
+zara-accountant,50,"EMPRÉSTITOS, DEUDAS CON CARÁCTERÍSTICAS ESPECIALES Y OTRAS EMISIONES ANÁLOGAS A CORTO PLAZO",Subgrupo,
+zara-accountant,500,Obligaciones y bonos a corto plazo,Cuenta,10081
+zara-accountant,501,Obligaciones y bonos convertibles a corto plazo,Cuenta,10081
+zara-accountant,502,Acciones o participaciones a corto plazo consideradas como pasivos financieros,Cuenta,10095
+zara-accountant,505,Deudas representadas en otros valores negociables a corto plazo,Cuenta,10081
+zara-accountant,506,Intereses a corto plazo de empréstitos y otras emisiones análogas,Cuenta,10081
+zara-accountant,507,Dividendos de acciones o participaciones consideradas como pasivos financieros,Cuenta,10095
+zara-accountant,509,Valores negociables amortizados,Cuenta,10085
+zara-accountant,5090,Obligaciones y bonos amortizados,Subcuenta,10085
+zara-accountant,5091,Obligaciones y bonos convertibles amortizados,Subcuenta,10085
+zara-accountant,5095,Otros valores negociables amortizados,Subcuenta,10085
+zara-accountant,51,DEUDAS A CORTO PLAZO CON PARTES VINCULADAS,Subgrupo,
+zara-accountant,510,Deudas a corto plazo con entidades de crédito vinculadas,Cuenta,10086
+zara-accountant,5103,"Deudas a corto plazo con entidades de crédito, empresas del grupo",Subcuenta,10086
+zara-accountant,5104,"Deudas a corto plazo con entidades de crédito, empresas asociadas",Subcuenta,10086
+zara-accountant,5105,Deudas a corto plazo con otras entidades de crédito vinculadas,Subcuenta,10082
+zara-accountant,511,"Proveedores de inmovilizado a corto plazo, partes vinculadas",Cuenta,10086
+zara-accountant,5113,"Proveedores de inmovilizado a corto plazo, empresas del grupo",Subcuenta,10086
+zara-accountant,5114,"Proveedores de inmovilizado a corto plazo, empresas asociadas",Subcuenta,10086
+zara-accountant,5115,"Proveedores de inmovilizado a corto plazo, otras partes vinculadas",Subcuenta,10085
+zara-accountant,512,"Acreedores por arrendamiento financiero a corto plazo, partes vinculadas",Cuenta,10086
+zara-accountant,5123,"Acreedores por arrendamiento financiero a corto plazo, empresas del grupo",Subcuenta,10086
+zara-accountant,5124,"Acreedores por arrendamiento financiero a corto plazo, empresas asociadas",Subcuenta,10086
+zara-accountant,5125,"Acreedores por arrendamiento financiero a corto plazo, otras partes vinculadas",Subcuenta,10083
+zara-accountant,513,Otras deudas a corto plazo con partes vinculadas,Cuenta,10086
+zara-accountant,5133,Otras deudas a corto plazo con empresas del grupo,Subcuenta,10086
+zara-accountant,5134,Otras deudas a corto plazo con empresas asociadas,Subcuenta,10086
+zara-accountant,5135,Otras deudas a corto plazo con otras partes vinculadas,Subcuenta,10085
+zara-accountant,514,Intereses a corto plazo de deudas con partes vinculadas,Cuenta,10086
+zara-accountant,5143,"Intereses a corto plazo de deudas, empresas del grupo",Subcuenta,10086
+zara-accountant,5144,"Intereses a corto plazo de deudas, empresas asociadas",Subcuenta,10086
+zara-accountant,5145,"Intereses a corto plazo de deudas, otras partes vinculadas",Subcuenta,10085
+zara-accountant,52,DEUDAS A CORTO PLAZO POR PRÉSTAMOS RECIBIDOS Y OTROS CONCEPTOS,Subgrupo,
+zara-accountant,520,Deudas a corto plazo con entidades de crédito,Cuenta,10082
+zara-accountant,5200,Préstamos a corto plazo de entidades de crédito,Subcuenta,10082
+zara-accountant,5201,Deudas a corto plazo por crédito dispuesto,Subcuenta,10082
+zara-accountant,5208,Deudas por efectos descontados,Subcuenta,10082
+zara-accountant,5209,Deudas por operaciones de “factoring”,Subcuenta,10082
+zara-accountant,521,Deudas a corto plazo,Cuenta,10085
+zara-accountant,522,"Deudas a corto plazo transformables en subvenciones, donaciones y legados",Cuenta,10085
+zara-accountant,523,Proveedores de inmovilizado a corto plazo,Cuenta,10085
+zara-accountant,524,Acreedores por arrendamiento financiero a corto plazo,Cuenta,10083
+zara-accountant,525,Efectos a pagar a corto plazo,Cuenta,10085
+zara-accountant,526,Dividendo activo a pagar,Cuenta,10085
+zara-accountant,527,Intereses a corto plazo de deudas con entidades de crédito,Cuenta,10082
+zara-accountant,528,Intereses a corto plazo de deudas,Cuenta,10085
+zara-accountant,529,Provisiones a corto plazo,Cuenta,10080
+zara-accountant,5290,Provisión a corto plazo por retribuciones al personal,Subcuenta,10080
+zara-accountant,5291,Provisión a corto plazo para impuestos,Subcuenta,10080
+zara-accountant,5292,Provisión a corto plazo para otras responsabilidades,Subcuenta,10080
+zara-accountant,5293,"Provisión a corto plazo por desmantelamiento, retiro o rehabilitación del inmovilizado",Subcuenta,10080
+zara-accountant,5295,Provisión a corto plazo para actuaciones Medioambientales,Subcuenta,10080
+zara-accountant,5296,Provisión a corto plazo para reestructuraciones,Subcuenta,10080
+zara-accountant,5297,Provisión a corto plazo por transacciones con pagos basados en instrumentos de patrimonio,Subcuenta,10080
+zara-accountant,53,INVERSIONES FINANCIERAS A CORTO PLAZO EN PARTES VINCULADAS,Subgrupo,
+zara-accountant,530,Participaciones a corto plazo en partes vinculadas,Cuenta,10036
+zara-accountant,5303,"Participaciones a corto plazo, en empresas del grupo",Subcuenta,10036
+zara-accountant,5304,"Participaciones a corto plazo, en empresas asociadas",Subcuenta,10036
+zara-accountant,5305,"Participaciones a corto plazo, en otras partes vinculadas",Subcuenta,10040
+zara-accountant,531,Valores representativos de deuda a corto plazo de partes vinculadas,Cuenta,10038
+zara-accountant,5313,Valores representativos de deuda a corto plazo de empresas del grupo,Subcuenta,10038
+zara-accountant,5314,Valores representativos de deuda a corto plazo de empresas asociadas,Subcuenta,10038
+zara-accountant,5315,Valores representativos de deuda a corto plazo de otras partes vinculadas,Subcuenta,10042
+zara-accountant,532,Créditos a corto plazo a partes vinculadas,Cuenta,10037
+zara-accountant,5323,Créditos a corto plazo a empresas del grupo,Subcuenta,10037
+zara-accountant,5324,Créditos a corto plazo a empresas asociadas,Subcuenta,10037
+zara-accountant,5325,Créditos a corto plazo a otras partes vinculadas,Subcuenta,10041
+zara-accountant,533,Intereses a corto plazo de valores representativos de deuda de partes vinculadas,Cuenta,10038
+zara-accountant,5333,Intereses a corto plazo de valores representativos de deuda de empresas del grupo,Subcuenta,10038
+zara-accountant,5334,Intereses a corto plazo de valores representativos de deuda de empresas asociadas,Subcuenta,10038
+zara-accountant,5335,Intereses a corto plazo de valores representativos de deuda de otras partes vinculadas,Subcuenta,10042
+zara-accountant,534,Intereses a corto plazo de créditos a partes vinculadas,Cuenta,10037
+zara-accountant,5343,Intereses a corto plazo de créditos a empresas del grupo,Subcuenta,10037
+zara-accountant,5344,Intereses a corto plazo de créditos a empresas asociadas,Subcuenta,10037
+zara-accountant,5345,Intereses a corto plazo de créditos a otras partes vinculadas,Subcuenta,10041
+zara-accountant,535,Dividendo a cobrar de inversiones financieras en partes vinculadas,Cuenta,10039
+zara-accountant,5353,Dividendo a cobrar de empresas de grupo,Subcuenta,10039
+zara-accountant,5354,Dividendo a cobrar de empresas asociadas,Subcuenta,10039
+zara-accountant,5355,Dividendo a cobrar de otras partes vinculadas,Subcuenta,10044
+zara-accountant,539,Desembolsos pendientes sobre participaciones a corto plazo en partes vinculadas,Cuenta,10036
+zara-accountant,5393,Desembolsos pendientes sobre participaciones a corto plazo en empresas del grupo,Subcuenta,10036
+zara-accountant,5394,Desembolsos pendientes sobre participaciones a corto plazo en empresas asociadas,Subcuenta,10036
+zara-accountant,5395,Desembolsos pendientes sobre participaciones a corto plazo en otras partes vinculadas,Subcuenta,10040
+zara-accountant,54,OTRAS INVERSIONES FINANCIERAS A CORTO PLAZO,Subgrupo,
+zara-accountant,540,Inversiones financieras a corto plazo en instrumentos de patrimonio,Cuenta,10040
+zara-accountant,541,Valores representativos de deuda a corto plazo,Cuenta,10042
+zara-accountant,542,Créditos a corto plazo,Cuenta,10041
+zara-accountant,543,Créditos a corto plazo por enajenación de in movilizado,Cuenta,10041
+zara-accountant,544,Créditos a corto plazo al personal,Cuenta,10032
+zara-accountant,545,Dividendo a cobrar,Cuenta,10044
+zara-accountant,546,Intereses a corto plazo de valores representativos de deudas,Cuenta,10042
+zara-accountant,547,Intereses a corto plazo de créditos,Cuenta,10041
+zara-accountant,548,Imposiciones a corto plazo,Cuenta,10044
+zara-accountant,549,Desembolsos pendientes sobre participaciones en el patrimonio neto a corto plazo,Cuenta,10040
+zara-accountant,55,OTRAS CUENTAS NO BANCARIAS,Subgrupo,
+zara-accountant,550,Titular de la explotación,Cuenta,N/A
+zara-accountant,551,Cuenta corriente con socios y ad ministradores,Cuenta,10044
+zara-accountant,552,Cuenta corriente con otras personas y entidades vinculadas,Cuenta,10039
+zara-accountant,5523,Cuenta corriente con empresas del grupo,Subcuenta,10039
+zara-accountant,5524,Cuenta corriente con empresas asociadas,Subcuenta,10039
+zara-accountant,5525,Cuenta corriente con otras partes vinculadas,Subcuenta,10044
+zara-accountant,553,Cuentas corrientes en fusiones y escisiones,Cuenta,10085
+zara-accountant,5530,Socios de sociedad disuelta,Subcuenta,10085
+zara-accountant,5531,"Socios, cuenta de fusión",Subcuenta,10031
+zara-accountant,5532,Socios de sociedad escindida,Subcuenta,10085
+zara-accountant,5533,"Socios, cuenta de escisión",Subcuenta,10031
+zara-accountant,554,Cuenta corriente con uniones temporales de empresas y comunidades de bienes,Cuenta,N/A
+zara-accountant,555,Partidas pendientes de aplicación,Cuenta,10085
+zara-accountant,556,Desembolsos exigidos sobre participaciones en el patrimonio neto,Cuenta,10086
+zara-accountant,5563,"Desembolsos exigidos sobre participaciones, empresas del grupo",Subcuenta,10086
+zara-accountant,5564,"Desembolsos exigidos sobre participaciones, empresas asociadas",Subcuenta,10086
+zara-accountant,5565,"Desembolsos exigidos sobre participaciones, otras partes vinculadas",Subcuenta,10085
+zara-accountant,5566,Desembolsos exigidos sobre participaciones de otras empresas,Subcuenta,10085
+zara-accountant,557,Dividendo activo a cuenta,Cuenta,10058
+zara-accountant,558,Socios por desembolsos exigidos,Cuenta,10035
+zara-accountant,5580,Socios por desembolsos exigidos sobre acciones o participaciones ordinarias,Subcuenta,10035
+zara-accountant,5585,Socios por desembolsos exigidos sobre acciones o participaciones consideradas como pasivos financieros,Subcuenta,10035
+zara-accountant,559,Derivados financieros a corto plazo,Cuenta,10043
+zara-accountant,5590,"Activos por derivados financieros a corto plazo, cartera de negociación",Subcuenta,10043
+zara-accountant,5593,"Activos por derivados financieros a corto plazo, instrumentos de cobertura",Subcuenta,10043
+zara-accountant,5595,"Pasivos por derivados financieros a corto plazo, cartera de negociación",Subcuenta,10084
+zara-accountant,5598,"Pasivos por derivados financieros a corto plazo, instrumentos de cobertura",Subcuenta,10084
+zara-accountant,56,FIANZAS Y DEPÓSITOS RECIBIDOS Y CONSTITUIDOS A COR TO PLAZO Y AJUSTES POR PERIODIFICACIÓN,Subgrupo,
+zara-accountant,560,Fianzas recibidas a corto plazo,Cuenta,10085
+zara-accountant,561,Depósitos recibidos a corto plazo,Cuenta,10085
+zara-accountant,565,Fianzas constituidas a corto plazo,Cuenta,10044
+zara-accountant,566,Depósitos constituidos a corto plazo,Cuenta,10044
+zara-accountant,567,Intereses pagados por anticipado,Cuenta,10045
+zara-accountant,568,Intereses cobrados por anticipado,Cuenta,10094
+zara-accountant,569,Garantías financieras a corto plazo,Cuenta,10085
+zara-accountant,57,TESORERÍA,Subgrupo,
+zara-accountant,570,"Caja, euros",Cuenta,10046
+zara-accountant,571,"Caja, moneda extranjera",Cuenta,10046
+zara-accountant,572,"Bancos e instituciones de crédito c/c vista, euros",Cuenta,10046
+zara-accountant,573,"Bancos e instituciones de crédito c/c vista, moneda extranjera",Cuenta,10046
+zara-accountant,574,"Bancos e instituciones de crédito, cuentas de ahorro, euros",Cuenta,10046
+zara-accountant,575,"Bancos e instituciones de crédito, cuentas de ahorro, moneda extranjera",Cuenta,10046
+zara-accountant,576,Inversiones a corto plazo de gran liquidez,Cuenta,10047
+zara-accountant,58,ACTIVOS NO CORRIENTES MANTENIDOS PARA LA VENTA Y ACTIVOS Y PASIVOS ASOCIADOS,Subgrupo,
+zara-accountant,580,Inmovilizado,Cuenta,10022
+zara-accountant,581,Inversiones con personas y entidades vinculadas,Cuenta,10022
+zara-accountant,582,Inversiones financieras,Cuenta,10022
+zara-accountant,583,"Existencias, deudores comerciales y otras cuentas a cobrar",Cuenta,10022
+zara-accountant,584,Otros activos,Cuenta,10022
+zara-accountant,585,Provisiones,Cuenta,10079
+zara-accountant,586,Deudas con características especiales,Cuenta,10079
+zara-accountant,587,Deudas con personas y entidades vinculadas,Cuenta,10079
+zara-accountant,588,Acreedores comerciales y otras cuentas a pagar,Cuenta,10079
+zara-accountant,589,Otros pasivos,Cuenta,10079
+zara-accountant,59,DETERIORO DEL VALOR DE INVERSIONES FINANCIERAS A CORTO PLAZO Y DE ACTIVOS NO CORRIENTES MANTENIDOS PARA LA VENTA,Subgrupo,
+zara-accountant,593,Deterioro de valor de participaciones a corto plazo en partes vinculadas,Cuenta,10036
+zara-accountant,5933,Deterioro de valor de participaciones a corto plazo en empresas del grupo,Subcuenta,10036
+zara-accountant,5934,Deterioro de valor de participaciones a corto plazo en empresas asociadas,Subcuenta,10036
+zara-accountant,594,Deterioro de valor de valores representativos de deuda a corto plazo de partes vinculadas,Cuenta,10038
+zara-accountant,5943,Deterioro de valor de valores representativos de deuda a corto plazo de empresas del grupo,Subcuenta,10038
+zara-accountant,5944,Deterioro de valor de valores representativos de deuda a corto plazo de empresas asociadas,Subcuenta,10038
+zara-accountant,5945,Deterioro de valor de valores representativos de deuda a corto plazo de otras partes vinculadas,Subcuenta,10042
+zara-accountant,595,Deterioro de valor de créditos a corto plazo a partes vinculadas,Cuenta,10037
+zara-accountant,5953,Deterioro de valor de créditos a corto plazo a empresas del grupo,Subcuenta,10037
+zara-accountant,5954,Deterioro de valor de créditos a corto plazo a empresas asociadas,Subcuenta,10037
+zara-accountant,5955,Deterioro de valor de créditos a corto plazo a otras partes vinculadas,Subcuenta,10041
+zara-accountant,597,Deterioro de valor de valores representativos de deuda a corto plazo,Cuenta,10042
+zara-accountant,598,Deterioro de valor de créditos a corto plazo,Cuenta,10041
+zara-accountant,599,Deterioro de valor de activos no corrientes mantenidos para la venta,Cuenta,10022
+zara-accountant,5990,Deterioro de valor de inmovilizado no corriente mantenido para la venta,Subcuenta,10022
+zara-accountant,5991,Deterioro de valor de inversiones con personas y entidades vinculadas no corrientes mantenidas para la venta,Subcuenta,10022
+zara-accountant,5992,Deterioro de valor de inversiones financieras no corrientes mantenidas para la venta,Subcuenta,10022
+zara-accountant,5993,"Deterioro de valor de existencias, deudores comerciales y otras cuentas a cobrar integrados en un grupo enajenable mantenido para la venta",Subcuenta,10022
+zara-accountant,5994,Deterioro de valor de otros activos mantenidos para la venta,Subcuenta,10022
+zara-accountant,6,COMPRAS Y GASTOS,Grupo,
+zara-accountant,60,COMPRAS,Subgrupo,
+zara-accountant,600,Compras de mercaderías,Cuenta,
+zara-accountant,601,Compras de materias primas,Cuenta,
+zara-accountant,602,Compras de otros aprovisionamientos,Cuenta,
+zara-accountant,606,Descuentos sobre compras por pronto pago,Cuenta,
+zara-accountant,6060,Descuentos sobre compras por pronto pago de mercaderías,Subcuenta,
+zara-accountant,6061,Descuentos sobre compras por pronto pago de materias primas,Subcuenta,
+zara-accountant,6062,Descuentos sobre compras por pronto pago de otros aprovisionamientos,Subcuenta,
+zara-accountant,607,Trabajos realizados por otras empresas,Cuenta,
+zara-accountant,608,Devoluciones de compras y operaciones similares,Cuenta,
+zara-accountant,6080,Devoluciones de compras de mercaderías,Subcuenta,
+zara-accountant,6081,Devoluciones de compras de materias primas,Subcuenta,
+zara-accountant,6082,Devoluciones de compras de otros aprovisionamientos,Subcuenta,
+zara-accountant,609,“Rappels” por compras,Cuenta,
+zara-accountant,6090,“Rappels” por compras de mercaderías,Subcuenta,
+zara-accountant,6091,“Rappels” por compras de materias primas,Subcuenta,
+zara-accountant,6092,“Rappels” por compras de otros aprovisionamientos,Subcuenta,
+zara-accountant,61,VARIACIÓN DE EXISTENCIAS,Subgrupo,
+zara-accountant,610,Variación de existencias de mercaderías,Cuenta,
+zara-accountant,611,Variación de existencias de materias primas,Cuenta,
+zara-accountant,612,Variación de existencias de otros aprovisionamientos,Cuenta,
+zara-accountant,62,SERVICIOS EXTERIORES,Subgrupo,
+zara-accountant,620,Gastos en investigación y desarrollo del ejercicio,Cuenta,
+zara-accountant,621,Arrendamientos y cánones,Cuenta,
+zara-accountant,622,Reparaciones y conservación,Cuenta,
+zara-accountant,623,Servicios de profesionales independientes,Cuenta,
+zara-accountant,624,Transportes,Cuenta,
+zara-accountant,625,Primas de seguros,Cuenta,
+zara-accountant,626,Servicios bancarios y similares,Cuenta,
+zara-accountant,627,"Publicidad, propaganda y relaciones públicas",Cuenta,
+zara-accountant,628,Suministros,Cuenta,
+zara-accountant,629,Otros servicios,Cuenta,
+zara-accountant,63,TRIBUTOS,Subgrupo,
+zara-accountant,630,Impuesto sobre beneficios,Cuenta,
+zara-accountant,6300,Impuesto corriente,Subcuenta,
+zara-accountant,6301,Impuesto diferido,Subcuenta,
+zara-accountant,631,Otros tributos,Cuenta,
+zara-accountant,633,Ajustes negativos en la imposición sobre beneficios,Cuenta,
+zara-accountant,634,Ajustes negativos en la imposición indirecta,Cuenta,
+zara-accountant,6341,Ajustes negativos en IVA de activo corriente,Subcuenta,
+zara-accountant,6342,Ajustes negativos en IVA de inversiones,Subcuenta,
+zara-accountant,636,Devolución de impuestos,Cuenta,
+zara-accountant,638,Ajustes positivos en la imposición sobre beneficios,Cuenta,
+zara-accountant,639,Ajustes positivos en la imposición indirecta,Cuenta,
+zara-accountant,6391,Ajustes positivos en IVA de activo corriente,Subcuenta,
+zara-accountant,6392,Ajustes positivos en IVA de inversiones,Subcuenta,
+zara-accountant,64,GASTOS DE PERSONAL,Subgrupo,
+zara-accountant,640,Sueldos y salarios,Cuenta,
+zara-accountant,641,Indemnizaciones,Cuenta,
+zara-accountant,642,Seguridad Social a cargo de la empresa,Cuenta,
+zara-accountant,643,Retribuciones a largo plazo mediante sistemas de aportación definida,Cuenta,
+zara-accountant,644,Retribuciones a largo plazo mediante sistemas de prestación definida,Cuenta,
+zara-accountant,6440,Contribuciones anuales,Subcuenta,
+zara-accountant,6442,Otros costes,Subcuenta,
+zara-accountant,645,Retribuciones al personal mediante instrumentos de patrimonio,Cuenta,
+zara-accountant,6450,Retribuciones al personal liquidados con instrumentos de patrimonio,Subcuenta,
+zara-accountant,6457,Retribuciones al personal liquidados en efectivo basado en instrumentos de patrimonio,Subcuenta,
+zara-accountant,649,Otros gastos sociales,Cuenta,
+zara-accountant,65,OTROS GASTOS DE GESTIÓN,Subgrupo,
+zara-accountant,650,Pérdidas de créditos comerciales incobrables,Cuenta,
+zara-accountant,651,Resultados de operaciones en común,Cuenta,
+zara-accountant,6510,Beneficio transferido (gestor),Subcuenta,
+zara-accountant,6511,Pérdida soportada (partícipe o asociado no gestor),Subcuenta,
+zara-accountant,659,Otras pérdidas en gestión corriente,Cuenta,
+zara-accountant,66,GASTOS FINANCIEROS,Subgrupo,
+zara-accountant,660,Gastos financieros por actualización de provisiones,Cuenta,
+zara-accountant,661,Intereses de obligaciones y bonos,Cuenta,
+zara-accountant,6610,"Intereses de obligaciones y bonos a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,6611,"Intereses de obligaciones y bonos a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,6612,"Intereses de obligaciones y bonos a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6613,"Intereses de obligaciones y bonos a largo plazo, otras empresas",Subcuenta,
+zara-accountant,6615,"Intereses de obligaciones y bonos a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,6616,"Intereses de obligaciones y bonos a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,6617,"Intereses de obligaciones y bonos a corto plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6618,"Intereses de obligaciones y bonos a corto plazo, otras empresas",Subcuenta,
+zara-accountant,662,Intereses de deudas,Cuenta,
+zara-accountant,6620,"Intereses de deudas, empresas del grupo",Subcuenta,
+zara-accountant,6621,"Intereses de deudas, empresas asociadas",Subcuenta,
+zara-accountant,6622,"Intereses de deudas, otras partes vinculadas",Subcuenta,
+zara-accountant,6623,Intereses de deudas con entidades de crédito,Subcuenta,
+zara-accountant,6624,"Intereses de deudas, otras empresas",Subcuenta,
+zara-accountant,663,Pérdidas por valoración de instrumentos financieros por su valor razonable,Cuenta,
+zara-accountant,6630,Pérdidas de cartera de negociación,Subcuenta,
+zara-accountant,6631,Pérdidas de designados por la empresa,Subcuenta,
+zara-accountant,6632,Pérdidas de disponibles para la venta,Subcuenta,
+zara-accountant,6633,Pérdidas de instrumentos de cobertura,Subcuenta,
+zara-accountant,664,Dividendos de acciones o participaciones consideradas como pasivos financieros,Cuenta,
+zara-accountant,6640,"Dividendos de pasivos, empresas del grupo",Subcuenta,
+zara-accountant,6641,"Dividendos de pasivos, empresas asociadas",Subcuenta,
+zara-accountant,6642,"Dividendos de pasivos, otras partes vinculadas",Subcuenta,
+zara-accountant,6643,"Dividendos de pasivos, otras empresas",Subcuenta,
+zara-accountant,665,Intereses por descuento de efectos y operaciones de “factoring”,Cuenta,
+zara-accountant,6650,Intereses por descuento de efectos en entidades de crédito del grupo,Subcuenta,
+zara-accountant,6651,Intereses por descuento de efectos en entidades de crédito asociadas,Subcuenta,
+zara-accountant,6652,Intereses por descuento de efectos en otras entidades de crédito vinculadas,Subcuenta,
+zara-accountant,6653,Intereses por descuento de efectos en otras entidades de crédito,Subcuenta,
+zara-accountant,6654,Intereses por operaciones de “factoring” con entidades de crédito del grupo,Subcuenta,
+zara-accountant,6655,Intereses por operaciones de “factoring” con entidades de crédito asociadas,Subcuenta,
+zara-accountant,6656,Intereses por operaciones de “factoring” con otras entidades de crédito vinculadas,Subcuenta,
+zara-accountant,6657,Intereses por operaciones de “factoring” con otras entidades de crédito,Subcuenta,
+zara-accountant,666,Pérdidas en participaciones y valores representativos de deuda,Cuenta,
+zara-accountant,6660,"Pérdidas en valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,6661,"Pérdidas en valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,6662,"Pérdidas en valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6663,"Pérdidas en participaciones y valores representativos de deuda a largo plazo, otras empresas",Subcuenta,
+zara-accountant,6665,"Pérdidas en participaciones y valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,6666,"Pérdidas en participaciones y valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,6667,"Pérdidas en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6668,"Pérdidas en valores representativos de deuda a corto plazo, otras empresas",Subcuenta,
+zara-accountant,667,Pérdidas de créditos no comerciales,Cuenta,
+zara-accountant,6670,"Pérdidas de créditos a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,6671,"Pérdidas de créditos a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,6672,"Pérdidas de créditos a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6673,"Pérdidas de créditos a largo plazo, otras empresas",Subcuenta,
+zara-accountant,6675,"Pérdidas de créditos a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,6676,"Pérdidas de créditos a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,6677,"Pérdidas de créditos a corto plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6678,"Pérdidas de créditos a corto plazo, otras empresas",Subcuenta,
+zara-accountant,668,Diferencias negativas de cambio,Cuenta,
+zara-accountant,669,Otros gastos financieros,Cuenta,
+zara-accountant,67,PÉRDIDAS PROCEDENTES DE ACTIVOS NO CORRIENTES Y GASTOS EXCEPCIONALES,Subgrupo,
+zara-accountant,670,Pérdidas procedentes del inmovilizado intangible,Cuenta,
+zara-accountant,671,Pérdidas procedentes del inmovilizado material,Cuenta,
+zara-accountant,672,Pérdidas procedentes de las inversiones inmobiliarias,Cuenta,
+zara-accountant,673,Pérdidas procedentes de participaciones a largo plazo en partes vinculadas,Cuenta,
+zara-accountant,6733,"Pérdidas procedentes de participaciones a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,6734,"Pérdidas procedentes de participaciones a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,6735,"Pérdidas procedentes de participaciones a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,675,Pérdidas por operaciones con obligaciones propias,Cuenta,
+zara-accountant,678,Gastos excepcionales,Cuenta,
+zara-accountant,68,DOTACIONES PARA AMORTIZACIONES,Subgrupo,
+zara-accountant,680,Amortización del inmovilizado intangible,Cuenta,
+zara-accountant,681,Amortización del inmovilizado material,Cuenta,
+zara-accountant,682,Amortización de las inversiones inmobiliarias,Cuenta,
+zara-accountant,69,PÉRDIDAS POR DETERIORO Y OTRAS DOTACIONES,Subgrupo,
+zara-accountant,690,Pérdidas por deterioro del inmovilizado intangible,Cuenta,
+zara-accountant,691,Pérdidas por deterioro del inmovilizado material,Cuenta,
+zara-accountant,692,Pérdidas por deterioro de las inversiones inmobiliarias,Cuenta,
+zara-accountant,693,Pérdidas por deterioro de existencias,Cuenta,
+zara-accountant,6930,Pérdidas por deterioro de productos terminados y en curso de fabricación,Subcuenta,
+zara-accountant,6931,Pérdidas por deterioro de mercaderías,Subcuenta,
+zara-accountant,6932,Pérdidas por deterioro de materias primas,Subcuenta,
+zara-accountant,6933,Pérdidas por deterioro de otros aprovisionamientos,Subcuenta,
+zara-accountant,694,Pérdidas por deterioro de créditos por operaciones comerciales,Cuenta,
+zara-accountant,695,Dotación a la provisión por operaciones comerciales,Cuenta,
+zara-accountant,6954,Dotación a la provisión por contratos onerosos,Subcuenta,
+zara-accountant,6959,Dotación a la provisión para otras operaciones comerciales,Subcuenta,
+zara-accountant,696,Pérdidas por deterioro de participaciones y valores representativos de deuda a largo plazo,Cuenta,
+zara-accountant,6960,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,6961,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,6962,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6963,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, otras empresas",Subcuenta,
+zara-accountant,6965,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,6966,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,6967,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6968,"Pérdidas por deterioro en valores representativos de deuda a largo plazo, de otras empresas",Subcuenta,
+zara-accountant,697,Pérdidas por deterioro de créditos a largo plazo,Cuenta,
+zara-accountant,6970,"Pérdidas por deterioro de créditos a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,6971,"Pérdidas por deterioro de créditos a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,6972,"Pérdidas por deterioro de créditos a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6973,"Pérdidas por deterioro de créditos a largo plazo, otras empresas",Subcuenta,
+zara-accountant,698,Pérdidas por deterioro de participaciones y valores representativos de deuda a corto plazo,Cuenta,
+zara-accountant,6980,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,6981,"Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,6985,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,6986,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,6987,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6988,"Pérdidas por deterioro en valores representativos de deuda a corto plazo, de otras empresas",Subcuenta,
+zara-accountant,699,Pérdidas por deterioro de créditos a corto plazo,Cuenta,
+zara-accountant,6990,"Pérdidas por deterioro de créditos a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,6991,"Pérdidas por deterioro de créditos a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,6992,"Pérdidas por deterioro de créditos a corto plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,6993,"Pérdidas por deterioro de créditos a corto plazo, otras empresas",Subcuenta,
+zara-accountant,7,VENTAS E INGRESOS,Grupo,
+zara-accountant,70,"VENTAS DE MERCADERÍAS, DE PRODUCCIÓN PROPIA, DE SERVICIOS, ETC",Subgrupo,
+zara-accountant,700,Ventas de mercaderías,Cuenta,
+zara-accountant,701,Ventas de productos terminados,Cuenta,
+zara-accountant,702,Ventas de productos semiterminados,Cuenta,
+zara-accountant,703,Ventas de subproductos y residuos,Cuenta,
+zara-accountant,704,Ventas de envases y embalajes,Cuenta,
+zara-accountant,705,Prestaciones de servicios,Cuenta,
+zara-accountant,706,Descuentos sobre ventas por pronto pago,Cuenta,
+zara-accountant,7060,Descuentos sobre ventas por pronto pago de mercaderías,Subcuenta,
+zara-accountant,7061,Descuentos sobre ventas por pronto pago de productos terminados,Subcuenta,
+zara-accountant,7062,Descuentos sobre ventas por pronto pago de productos semiterminados,Subcuenta,
+zara-accountant,7063,Descuentos sobre ventas por pronto pago de subproductos y residuos,Subcuenta,
+zara-accountant,708,Devoluciones de ventas y operaciones similares,Cuenta,
+zara-accountant,7080,Devoluciones de ventas de mercaderías,Subcuenta,
+zara-accountant,7081,Devoluciones de ventas de productos terminados,Subcuenta,
+zara-accountant,7082,Devoluciones de ventas de productos semiterminados,Subcuenta,
+zara-accountant,7083,Devoluciones de ventas de subproductos y residuos,Subcuenta,
+zara-accountant,7084,Devoluciones de ventas de envases y embalajes,Subcuenta,
+zara-accountant,709,“Rappels” sobre ventas,Cuenta,
+zara-accountant,7090,«Rappels» sobre ventas de mercaderías,Subcuenta,
+zara-accountant,7091,“Rappels” sobre ventas de productos terminados,Subcuenta,
+zara-accountant,7092,“Rappels” sobre ventas de productos semiterminados,Subcuenta,
+zara-accountant,7093,“Rappels” sobre ventas de subproductos y residuos,Subcuenta,
+zara-accountant,7094,“Rappels” sobre ventas de envases y embalajes,Subcuenta,
+zara-accountant,71,VARIACIÓN DE EXISTENCIAS,Subgrupo,
+zara-accountant,710,Variación de existencias de productos en curso,Cuenta,
+zara-accountant,711,Variación de existencias de productos semiterminados,Cuenta,
+zara-accountant,712,Variación de existencias de productos terminados,Cuenta,
+zara-accountant,713,"Variación de existencias de subproductos, residuos y materiales recuperados",Cuenta,
+zara-accountant,73,TRABAJOS REALIZADOS PARA LA EMPRESA,Subgrupo,
+zara-accountant,730,Trabajos realizados para el inmovilizado intangible,Cuenta,
+zara-accountant,731,Trabajos realizados para el inmovilizado material,Cuenta,
+zara-accountant,732,Trabajos realizados en inversiones inmobiliarias,Cuenta,
+zara-accountant,733,Trabajos realizados para el inmovilizado material en curso,Cuenta,
+zara-accountant,74,"SUBVENCIONES, DONACIONES Y LEGADOS",Subgrupo,
+zara-accountant,740,"Subvenciones, donaciones y legados a la explotación",Cuenta,
+zara-accountant,746,"Subvenciones, donaciones y legados de capital transferidos al resultado del ejercicio",Cuenta,
+zara-accountant,747,"Otras subvenciones, donaciones y legados transferidos al resultado del ejercicio",Cuenta,
+zara-accountant,75,OTROS INGRESOS DE GESTIÓN,Subgrupo,
+zara-accountant,751,Resultados de operaciones en común,Cuenta,
+zara-accountant,7510,Pérdida transferida (gestor),Subcuenta,
+zara-accountant,7511,Beneficio atribuido (partícipe o asociado no gestor),Subcuenta,
+zara-accountant,752,Ingresos por arrendamientos,Cuenta,
+zara-accountant,753,Ingresos de propiedad industrial cedida en explotación,Cuenta,
+zara-accountant,754,Ingresos por comisiones,Cuenta,
+zara-accountant,755,Ingresos por servicios al personal,Cuenta,
+zara-accountant,759,Ingresos por servicios diversos,Cuenta,
+zara-accountant,76,INGRESOS FINANCIEROS,Subgrupo,
+zara-accountant,760,Ingresos de participaciones en instrumentos de patrimonio,Cuenta,
+zara-accountant,7600,"Ingresos de participaciones en instrumentos de patrimonio, empresas del grupo",Subcuenta,
+zara-accountant,7601,"Ingresos de participaciones en instrumentos de patrimonio, empresas asociadas",Subcuenta,
+zara-accountant,7602,"Ingresos de participaciones en instrumentos de patrimonio, otras partes vinculadas",Subcuenta,
+zara-accountant,7603,"Ingresos de participaciones en instrumentos de patrimonio, otras empresas",Subcuenta,
+zara-accountant,761,Ingresos de valores representativos de deuda,Cuenta,
+zara-accountant,7610,"Ingresos de valores representativos de deuda, empresas del grupo",Subcuenta,
+zara-accountant,7611,"Ingresos de valores representativos de deuda, empresas asociadas",Subcuenta,
+zara-accountant,7612,"Ingresos de valores representativos de deuda, otras partes vinculadas",Subcuenta,
+zara-accountant,7613,"Ingresos de valores representativos de deuda, otras empresas",Subcuenta,
+zara-accountant,762,Ingresos de créditos,Cuenta,
+zara-accountant,7620,Ingresos de créditos a largo plazo,Subcuenta,
+zara-accountant,76200,"Ingresos de créditos a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,76201,"Ingresos de créditos a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,76202,"Ingresos de créditos a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,76203,"Ingresos de créditos a largo plazo, otras empresas",Subcuenta,
+zara-accountant,7621,Ingresos de créditos a corto plazo,Subcuenta,
+zara-accountant,76210,"Ingresos de créditos a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,76211,"Ingresos de créditos a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,76212,"Ingresos de créditos a corto plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,76213,"Ingresos de créditos a corto plazo, otras empresas",Subcuenta,
+zara-accountant,763,Beneficios por valoración de instrumentos financieros por su valor razonable,Cuenta,
+zara-accountant,7630,Beneficios de cartera de negociación,Subcuenta,
+zara-accountant,7631,Beneficios de designados por la empresa,Subcuenta,
+zara-accountant,7632,Beneficios de disponibles para la venta,Subcuenta,
+zara-accountant,7633,Beneficios de instrumentos de cobertura,Subcuenta,
+zara-accountant,766,Beneficios en participaciones y valores representativos de deuda,Cuenta,
+zara-accountant,7660,"Beneficios en valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,7661,"Beneficios en valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,7662,"Beneficios en valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,7663,"Beneficios en participaciones y valores representativos de deuda a largo plazo, otras empresas",Subcuenta,
+zara-accountant,7665,"Beneficios en participaciones y valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,7666,"Beneficios en participaciones y valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,7667,"Beneficios en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,7668,"Beneficios en valores representativos de deuda a corto plazo, otras empresas",Subcuenta,
+zara-accountant,767,Ingresos de activos afectos y de derechos de reembolso relativos a retribuciones a largo plazo,Cuenta,
+zara-accountant,768,Diferencias positivas de cambio,Cuenta,
+zara-accountant,769,Otros ingresos financieros,Cuenta,
+zara-accountant,77,BENEFICIOS PROCEDENTES DE ACTIVOS NO CORRIENTES E INGRESOS EXCEPCIONALES,Subgrupo,
+zara-accountant,770,Beneficios procedentes del inmovilizado intangible,Cuenta,
+zara-accountant,771,Beneficios procedentes del inmovilizado material,Cuenta,
+zara-accountant,772,Beneficios procedentes de las inversiones inmobiliarias,Cuenta,
+zara-accountant,773,Beneficios procedentes de participaciones a largo plazo en partes vinculadas,Cuenta,
+zara-accountant,7733,"Beneficios procedentes de participaciones a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,7734,"Beneficios procedentes de participaciones a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,7735,"Beneficios procedentes de participaciones a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,774,Diferencia negativa en combinaciones de negocios,Cuenta,
+zara-accountant,775,Beneficios por operaciones con obligaciones propias,Cuenta,
+zara-accountant,778,Ingresos excepcionales,Cuenta,
+zara-accountant,79,EXCESOS Y APLICACIONES DE PROVISIONES Y DE PÉRDIDAS POR DETERIORO,Subgrupo,
+zara-accountant,790,Reversión del deterioro del inmovilizado intangible,Cuenta,
+zara-accountant,791,Reversión del deterioro del inmovilizado material,Cuenta,
+zara-accountant,792,Reversión del deterioro de las inversiones inmobiliarias,Cuenta,
+zara-accountant,793,Reversión del deterioro de existencias,Cuenta,
+zara-accountant,7930,Reversión del deterioro de productos terminados y en curso de fabricación,Subcuenta,
+zara-accountant,7931,Reversión del deterioro de mercaderías,Subcuenta,
+zara-accountant,7932,Reversión del deterioro de materias primas,Subcuenta,
+zara-accountant,7933,Reversión del deterioro de otros aprovisionamientos,Subcuenta,
+zara-accountant,794,Reversión del deterioro de créditos por operaciones comerciales,Cuenta,
+zara-accountant,795,Exceso de provisiones,Cuenta,
+zara-accountant,7950,Exceso de provisión por retribuciones al personal,Subcuenta,
+zara-accountant,7951,Exceso de provisión para impuestos,Subcuenta,
+zara-accountant,7952,Exceso de provisión para otras responsabilidades,Subcuenta,
+zara-accountant,7954,Exceso de provisión por operaciones comerciales,Subcuenta,
+zara-accountant,79544,Exceso de provisión por contratos onerosos,Subcuenta,
+zara-accountant,79549,Exceso de provisión para otras operaciones comerciales,Subcuenta,
+zara-accountant,7955,Exceso de provisión para actuaciones medioambientales,Subcuenta,
+zara-accountant,7956,Exceso de provisión para reestructuraciones,Subcuenta,
+zara-accountant,7957,Exceso de provisión por transacciones con pagos basados en instrumentos de patrimonio,Subcuenta,
+zara-accountant,796,Reversión del deterioro de participaciones y valores representativos de deuda a largo plazo,Cuenta,
+zara-accountant,7960,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,7961,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,7965,"Reversión del deterioro de valores representativos de deuda a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,7966,"Reversión del deterioro de valores representativos de deuda a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,7967,"Reversión del deterioro de valores representativos de deuda a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,7968,"Reversión del deterioro de valores representativos de deuda a largo plazo, otras empresas",Subcuenta,
+zara-accountant,797,Reversión del deterioro de créditos a largo plazo,Cuenta,
+zara-accountant,7970,"Reversión del deterioro de créditos a largo plazo, empresas del grupo",Subcuenta,
+zara-accountant,7971,"Reversión del deterioro de créditos a largo plazo, empresas asociadas",Subcuenta,
+zara-accountant,7972,"Reversión del deterioro de créditos a largo plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,7973,"Reversión del deterioro de créditos a largo plazo, otras empresas",Subcuenta,
+zara-accountant,798,Reversión del deterioro de participaciones y valores representativos de deuda a corto plazo,Cuenta,
+zara-accountant,7980,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,7981,"Reversión del deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,7985,"Reversión del deterioro en valores representativos de deuda a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,7986,"Reversión del deterioro en valores representativos de deuda a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,7987,"Reversión del deterioro en valores representativos de deuda a corto plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,7988,"Reversión del deterioro en valores representativos de deuda a corto plazo, otras empresas",Subcuenta,
+zara-accountant,799,Reversión del deterioro de créditos a corto plazo,Cuenta,
+zara-accountant,7990,"Reversión del deterioro de créditos a corto plazo, empresas del grupo",Subcuenta,
+zara-accountant,7991,"Reversión del deterioro de créditos a corto plazo, empresas asociadas",Subcuenta,
+zara-accountant,7992,"Reversión del deterioro de créditos a corto plazo, otras partes vinculadas",Subcuenta,
+zara-accountant,7993,"Reversión del deterioro de créditos a corto plazo, otras empresas",Subcuenta,
+zara-accountant,8,GASTOS IMPUTADOS AL PATRIMONIO NETO,Grupo,
+zara-accountant,80,GASTOS FINANCIEROS POR VALORACIÓN DE ACTIVOS Y PASIVOS,Subgrupo,
+zara-accountant,800,Pérdidas en activos financieros disponibles para la venta,Cuenta,
+zara-accountant,802,Transferencia de beneficios en activos financieros disponibles para la venta,Cuenta,
+zara-accountant,81,GASTOS EN OPERACIONES DE COBERTURA,Subgrupo,
+zara-accountant,810,Pérdidas por coberturas de flujos de efectivo,Cuenta,
+zara-accountant,811,Pérdidas por coberturas de inversiones netas en un negocio en el extranjero,Cuenta,
+zara-accountant,812,Transferencia de beneficios por coberturas de flujos de efectivo,Cuenta,
+zara-accountant,813,Transferencia de beneficios por coberturas de inversiones netas en un negocio en el extranjero,Cuenta,
+zara-accountant,82,GASTOS POR DIFERENCIAS DE CONVERSIÓN,Subgrupo,
+zara-accountant,820,Diferencias de conversión negativas,Cuenta,
+zara-accountant,821,Transferencia de diferencias de conversión positivas,Cuenta,
+zara-accountant,83,IMPUESTO SOBRE BENEFICIOS,Subgrupo,
+zara-accountant,830,Impuesto sobre beneficios,Cuenta,
+zara-accountant,8300,Impuesto corriente,Subcuenta,
+zara-accountant,8301,Impuesto diferido,Subcuenta,
+zara-accountant,833,Ajustes negativos en la imposición sobre Beneficios,Cuenta,
+zara-accountant,834,Ingresos fiscales por diferencias permanentes,Cuenta,
+zara-accountant,835,Ingresos fiscales por deducciones y bonificaciones,Cuenta,
+zara-accountant,836,Transferencia de diferencias permanentes,Cuenta,
+zara-accountant,837,Transferencia de deducciones y bonificaciones,Cuenta,
+zara-accountant,838,Ajustes positivos en la imposición sobre beneficios,Cuenta,
+zara-accountant,84,"TRANSFERENCIAS DE SUBVENCIONES, DONACIONES Y LEGADOS",Subgrupo,
+zara-accountant,840,Transferencia de subvenciones oficiales de capital,Cuenta,
+zara-accountant,841,Transferencia de donaciones y legados de capital,Cuenta,
+zara-accountant,842,"Transferencia de otras subvenciones, donaciones y legados",Cuenta,
+zara-accountant,85,GASTOS POR PÉRDIDAS ACTUARIALES Y AJUSTES EN LOS ACTIVOS POR RETRIBUCIONES A LARGO PLAZO DE PRESTACIÓN DEFINIDA,Subgrupo,
+zara-accountant,850,Pérdidas actuariales,Cuenta,
+zara-accountant,851,Ajustes negativos en activos por retribuciones a largo plazo de prestación definida,Cuenta,
+zara-accountant,86,GASTOS POR ACTIVOS NO CORRIENTES EN VENTA,Subgrupo,
+zara-accountant,860,Pérdidas en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
+zara-accountant,862,Transferencia de beneficios en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
+zara-accountant,89,GASTOS DE PARTICIPACIONES EN EMPRESAS DEL GRUPO O ASOCIADAS CON AJUSTES VALORATIVOS POSITIVOS PREVIOS,Subgrupo,
+zara-accountant,891,"Deterioro de participaciones en el patrimonio, empresas del grupo",Cuenta,
+zara-accountant,892,"Deterioro de participaciones en el patrimonio, empresas asociadas",Cuenta,
+zara-accountant,9,INGRESOS IMPUTADOS AL PATRIMONIO NETO,Grupo,
+zara-accountant,90,INGRESOS FINANCIEROS POR VALORACIÓN DE ACTIVOS Y PASIVOS,Subgrupo,
+zara-accountant,900,Beneficios en activos financieros disponibles para la venta,Cuenta,
+zara-accountant,902,Transferencia de pérdidas de activos financieros disponibles para la venta,Cuenta,
+zara-accountant,91,INGRESOS EN OPERACIONES DE COBERTURA,Subgrupo,
+zara-accountant,910,Beneficios por coberturas de flujos de efectivo,Cuenta,
+zara-accountant,911,Beneficios por coberturas de una inversión neta en un negocio en el extranjero,Cuenta,
+zara-accountant,912,Transferencia de pérdidas por coberturas de flujos de efectivo,Cuenta,
+zara-accountant,913,Transferencia de pérdidas por coberturas de una inversión neta en un negocio en el extranjero,Cuenta,
+zara-accountant,92,INGRESOS POR DIFERENCIAS DE CONVERSIÓN,Subgrupo,
+zara-accountant,920,Diferencias de conversión positivas,Cuenta,
+zara-accountant,921,Transferencia de diferencias de conversión negativas,Cuenta,
+zara-accountant,94,"INGRESOS POR SUBVENCIONES, DONACIONES Y LEGADOS",Subgrupo,
+zara-accountant,940,Ingresos de subvenciones oficiales de capital,Cuenta,
+zara-accountant,941,Ingresos de donaciones y legados de capital,Cuenta,
+zara-accountant,942,"Ingresos de otras subvenciones, donaciones y legados",Cuenta,
+zara-accountant,95,INGRESOS POR GANANCIAS ACTUARIALES Y AJUSTES EN LOS ACTIVOS POR RETRIBUCIONES A LARGO PLAZO DE PRESTACIÓN DEFINIDA,Subgrupo,
+zara-accountant,950,Ganancias actuariales,Cuenta,
+zara-accountant,951,Ajustes positivos en activos por retribuciones a largo plazo de prestación definida,Cuenta,
+zara-accountant,96,INGRESOS POR ACTIVOS NO CORRIENTES EN VENTA,Subgrupo,
+zara-accountant,960,Beneficios en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
+zara-accountant,962,Transferencia de pérdidas en activos no corrientes y grupos enajenables de elementos mantenidos para la venta,Cuenta,
+zara-accountant,99,INGRESOS DE PARTICIPACIONES EN EMPRESAS DEL GRUPO O ASOCIADAS CON AJUSTES VALORATIVOS NEGATIVOS PREVIOS,Subgrupo,
+zara-accountant,991,"Recuperación de ajustes valorativos negativos previos, empresas del grupo",Cuenta,
+zara-accountant,992,"Recuperación de ajustes valorativos negativos previos, empresas asociadas",Cuenta,
+zara-accountant,993,"Transferencia por deterioro de ajustes valorativos negativos previos, empresas del grupo",Cuenta,
+zara-accountant,994,"Transferencia por deterioro de ajustes valorativos negativos previos, empresas asociadas",Cuenta,

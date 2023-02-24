@@ -12,6 +12,7 @@ const (
 )
 
 type Account struct {
+	Project     string
 	ID          string
 	Name        string
 	Level       string
@@ -20,6 +21,7 @@ type Account struct {
 }
 
 type Subgroup struct {
+	Project     string
 	ID          string
 	Name        string
 	Level       string
@@ -29,6 +31,7 @@ type Subgroup struct {
 }
 
 type Group struct {
+	Project     string
 	ID          string
 	Name        string
 	Level       string
@@ -38,26 +41,43 @@ type Group struct {
 }
 
 type DescribeAccountInput struct {
-	ID string `valid:"required,length(1|64)"`
+	Project string `valid:"required,length(1|64)"`
+	ID      string `valid:"required,length(1|64)"`
 }
 
 type DescribeAccountOutput struct {
 	Account Account
 }
 
-type ListAccountInput struct{}
+type ListAccountInput struct {
+	Project string `valid:"required,length(1|64)"`
+}
 
 type ListAccountOutput struct {
 	Items []Group
 }
 
+type CreateAccountInput struct {
+	Project   string  `valid:"required,length(1|64)"`
+	ID        string  `valid:"required,length(1|64)"`
+	Name      string  `valid:"required,length(1|64)"`
+	Level     string  `valid:"required,length(1|64)"`
+	BalanceID *string `valid:"optional,length(1|64)"`
+}
+
+type CreateAccountOutput struct {
+	Account Account
+}
+
 type AccountStorage interface {
-	Get(ctx context.Context, id string) (*AccountStorageData, error)
-	All(ctx context.Context) (*AccountStorageCollectionData, error)
+	Get(ctx context.Context, project string, id string) (*AccountStorageData, error)
+	All(ctx context.Context, project string) (*AccountStorageCollectionData, error)
 	Edit(ctx context.Context, input AccountStorageData) (*AccountStorageData, error)
+	Add(ctx context.Context, input AccountStorageData) (*AccountStorageData, error)
 }
 
 type AccountStorageData struct {
+	Project   string
 	ID        string
 	Name      string
 	Level     string
