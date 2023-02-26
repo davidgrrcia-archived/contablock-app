@@ -3,14 +3,16 @@ package balance
 import (
 	"context"
 	"errors"
+
 	"github.com/asaskevich/govalidator"
 	"github.com/google/uuid"
 )
 
 type BalanceUseCase interface {
-	CreateBalance(ctx context.Context, input CreateBalanceInput) (*CreateBalanceOutput, error)
+	CreateBalanceByYear(ctx context.Context, input CreateBalanceByYearInput) (*CreateBalanceByYearOutput, error)
 	ListBalances(ctx context.Context, input ListBalanceInput) (*ListBalanceOutput, error)
 	RemoveBalance(ctx context.Context, input RemoveBalanceInput) (*RemoveBalanceOutput, error)
+	CreateBalance(ctx context.Context, input CreateBalanceInput) (*CreateBalanceOutput, error)
 }
 
 func NewDefaultBalanceUseCase(options DefaultBalanceUseCaseOptions) (*DefaultBalanceUseCase, error) {
@@ -33,7 +35,7 @@ type DefaultBalanceUseCaseOptions struct {
 
 var _ BalanceUseCase = (*DefaultBalanceUseCase)(nil)
 
-func (useCase *DefaultBalanceUseCase) CreateBalance(ctx context.Context, input CreateBalanceInput) (*CreateBalanceOutput, error) {
+func (useCase *DefaultBalanceUseCase) CreateBalanceByYear(ctx context.Context, input CreateBalanceByYearInput) (*CreateBalanceByYearOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
 		return nil, errors.New("invalid input")
@@ -45,16 +47,18 @@ func (useCase *DefaultBalanceUseCase) CreateBalance(ctx context.Context, input C
 	if input.ID == nil {
 		input.ID = &id
 	}
+	desiredBalance.Project = input.Project
 	desiredBalance.ID = *input.ID
 	desiredBalance.BalanceID = input.BalanceID
 	desiredBalance.Amount = input.Amount
 	desiredBalance.Year = input.Year
-	storedBalance, err := useCase.balanceStorage.Add(ctx, desiredBalance)
+	storedBalance, err := useCase.balanceStorage.AddByYear(ctx, desiredBalance)
 	if err != nil {
 		return nil, err
 	}
 
-	var output CreateBalanceOutput
+	var output CreateBalanceByYearOutput
+	output.Project = storedBalance.Project
 	output.ID = storedBalance.ID
 	output.BalanceID = storedBalance.BalanceID
 	output.Amount = storedBalance.Amount
@@ -71,14 +75,14 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 
 	var filters Filters
 	filters.Year = input.Year
-	storedBalancesCurrentYear, err := useCase.balanceStorage.All(ctx, filters)
+	storedBalancesCurrentYear, err := useCase.balanceStorage.All(ctx, input.Project, filters)
 	if err != nil {
 		return nil, err
 	}
 
 	previousYear := *input.Year - 1
 	filters.Year = &previousYear
-	storedBalancesPreviousYear, err := useCase.balanceStorage.All(ctx, filters)
+	storedBalancesPreviousYear, err := useCase.balanceStorage.All(ctx, input.Project, filters)
 	if err != nil {
 		return nil, err
 	}
@@ -86,6 +90,7 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 	var balances []Balance
 	for _, item := range storedBalancesCurrentYear.Items {
 		var balance Balance
+		balance.Project = item.Project
 		balance.ID = item.ID
 		balance.Type = item.Type
 		balance.Kind = item.Kind
@@ -110,6 +115,7 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 
 		if !alreadyAdded {
 			var balance Balance
+			balance.Project = item.Project
 			balance.ID = item.ID
 			balance.Type = item.Type
 			balance.Kind = item.Kind
@@ -134,16 +140,58 @@ func (useCase *DefaultBalanceUseCase) RemoveBalance(ctx context.Context, input R
 		return nil, errors.New("invalid input")
 	}
 
-	storedBalance, err := useCase.balanceStorage.Remove(ctx, input.ID)
+	storedBalance, err := useCase.balanceStorage.Remove(ctx, input.Project, input.ID)
 	if err != nil {
 		return nil, err
 	}
 
 	var output RemoveBalanceOutput
+	output.Project = storedBalance.Project
 	output.ID = storedBalance.ID
 	output.BalanceID = storedBalance.BalanceID
 	output.Amount = storedBalance.Amount
 	output.Year = storedBalance.Year
+
+	return &output, nil
+}
+
+func (useCase *DefaultBalanceUseCase) CreateBalance(ctx context.Context, input CreateBalanceInput) (*CreateBalanceOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input")
+	}
+
+	storedBalance, err := useCase.balanceStorage.Get(ctx, input.Project, input.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	if storedBalance != nil {
+		return nil, errors.New("balance [" + storedBalance.ID + "] already exists")
+	}
+
+	var desiredBalance AddBalanceStorageData
+	desiredBalance.Project = input.Project
+	desiredBalance.ID = input.ID
+	desiredBalance.Type = input.Type
+	desiredBalance.Kind = input.Kind
+	desiredBalance.Parent = input.Parent
+	desiredBalance.Child = input.Child
+	desiredBalance.Accounts = input.Accounts
+
+	addedBalance, err := useCase.balanceStorage.Add(ctx, desiredBalance)
+	if err != nil {
+		return nil, err
+	}
+
+	var output CreateBalanceOutput
+	output.Project = addedBalance.Project
+	output.ID = addedBalance.ID
+	output.Type = addedBalance.Type
+	output.Kind = addedBalance.Kind
+	output.Parent = addedBalance.Parent
+	output.Child = addedBalance.Child
+	output.Accounts = addedBalance.Accounts
 
 	return &output, nil
 }

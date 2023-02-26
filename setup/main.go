@@ -56,6 +56,7 @@ func main() {
 	yamlFile := readYamlFile(zaraAccountantYamlPath)
 	addAccounts(yamlFile)
 	addBusiness(yamlFile)
+	addBalances(yamlFile)
 }
 
 func readYamlFile(path string) YamlFile {
@@ -106,6 +107,31 @@ func addBusiness(yamlFile YamlFile) {
 		}
 
 		path := backendURL + business.Project + "/business"
+
+		response, err := http.Post(path, "application/json", bytes.NewBuffer(requestBody))
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer response.Body.Close()
+
+		body, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println(string(body))
+	}
+}
+
+func addBalances(yamlFile YamlFile) {
+	for _, balance := range yamlFile.Balances {
+		requestBody, err := json.Marshal(balance)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		path := backendURL + balance.Project + "/balances"
 
 		response, err := http.Post(path, "application/json", bytes.NewBuffer(requestBody))
 		if err != nil {

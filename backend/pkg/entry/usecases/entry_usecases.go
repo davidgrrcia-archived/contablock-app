@@ -100,11 +100,11 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 
 	var balanceByYearID *string
 	if storedAccount.Account.BalanceID != nil && *storedAccount.Account.BalanceID != "" {
-		var createBalanceInput balance.CreateBalanceInput
+		var createBalanceInput balance.CreateBalanceByYearInput
 		createBalanceInput.BalanceID = *storedAccount.Account.BalanceID
 		createBalanceInput.Amount = *getAmountForBalance(input.DebitBalance, input.CreditBalance)
 		createBalanceInput.Year = input.Date.Year()
-		storedBalance, err := useCase.balanceUseCase.CreateBalance(ctx, createBalanceInput)
+		storedBalance, err := useCase.balanceUseCase.CreateBalanceByYear(ctx, createBalanceInput)
 		if err != nil {
 			return nil, err
 		}

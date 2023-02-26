@@ -9,6 +9,7 @@ import (
 )
 
 type BalanceInputAdapter interface {
+	AdaptCreateBalance(ctx context.Context, data CreateBalanceRequest) (*CreateBalanceResponseWrapper, error)
 	AdaptListBalances(ctx context.Context, data ListBalanceRequest) (*ListBalanceResponseWrapper, error)
 }
 
@@ -149,6 +150,7 @@ func mapToList(mapa map[string]Balance) []BalanceItem {
 	lista := []BalanceItem{}
 	for _, valor := range mapa {
 		item := BalanceItem{
+			Project:        valor.Project,
 			ID:             valor.ID,
 			Name:           valor.Name,
 			CurrentYear:    valor.CurrentYear,
@@ -165,3 +167,32 @@ func mapToList(mapa map[string]Balance) []BalanceItem {
 	return lista
 }
 
+func (adapter *DefaultHttpInputAdapter) AdaptCreateBalance(ctx context.Context, data CreateBalanceRequest) (*CreateBalanceResponseWrapper, error) {
+	var inputData balance.CreateBalanceInput
+	inputData.Project = data.Project
+	inputData.ID = data.ID
+	inputData.Type = data.Type
+	inputData.Kind = data.Kind
+	inputData.Parent = data.Parent
+	inputData.Child = data.Child
+	inputData.Accounts = data.Accounts
+
+	outputData, err := adapter.balanceUseCase.CreateBalance(ctx, inputData)
+	if err != nil {
+		return nil, err
+	}
+
+	var response CreateBalanceResponse
+	response.Project = outputData.Project
+	response.ID = outputData.ID
+	response.Type = outputData.Type
+	response.Kind = outputData.Kind
+	response.Parent = outputData.Parent
+	response.Child = outputData.Child
+	response.Accounts = outputData.Accounts
+
+	responseWrapper := CreateBalanceResponseWrapper{}
+	responseWrapper.CreateBalanceResponse = response
+
+	return &responseWrapper, nil
+}

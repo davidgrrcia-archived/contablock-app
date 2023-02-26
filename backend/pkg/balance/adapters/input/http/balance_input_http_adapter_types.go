@@ -1,6 +1,7 @@
 package balanceInputHttpAdapter
 
 type Balance struct {
+	Project        string             `json:"project"`
 	ID             string             `json:"id"`
 	Name           string             `json:"name"`
 	CurrentYear    int                `json:"currentYear"`
@@ -11,6 +12,7 @@ type Balance struct {
 }
 
 type BalanceItem struct {
+	Project        string        `json:"project"`
 	ID             string        `json:"id"`
 	Name           string        `json:"name"`
 	CurrentYear    int           `json:"currentYear"`
@@ -21,7 +23,8 @@ type BalanceItem struct {
 }
 
 type ListBalanceRequest struct {
-	Year string `json:"year"`
+	Project string `json:"project"`
+	Year    string `json:"year"`
 }
 
 type ListBalanceResponse struct {
@@ -29,4 +32,28 @@ type ListBalanceResponse struct {
 }
 type ListBalanceResponseWrapper struct {
 	ListBalanceResponse ListBalanceResponse
+}
+
+type CreateBalanceRequest struct {
+	Project  string   `json:"project"`
+	ID       string   `json:"id"`
+	Type     string   `json:"type"`
+	Kind     *string  `json:"kind"`
+	Parent   *string  `json:"parent"`
+	Child    *string  `json:"child"`
+	Accounts []string `json:"accounts"`
+}
+
+type CreateBalanceResponse struct {
+	Project  string   `json:"project"`
+	ID       string   `json:"id"`
+	Type     string   `json:"type"`
+	Kind     *string  `json:"kind"`
+	Parent   *string  `json:"parent"`
+	Child    *string  `json:"child"`
+	Accounts []string `json:"accounts"`
+}
+
+type CreateBalanceResponseWrapper struct {
+	CreateBalanceResponse CreateBalanceResponse
 }

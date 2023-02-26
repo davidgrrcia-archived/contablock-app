@@ -5,6 +5,7 @@ import (
 )
 
 type Balance struct {
+	Project        string
 	ID             string
 	Type           string
 	Kind           *string
@@ -16,14 +17,16 @@ type Balance struct {
 	PreviousAmount float64
 }
 
-type CreateBalanceInput struct {
+type CreateBalanceByYearInput struct {
+	Project   string
 	ID        *string
 	BalanceID string
 	Amount    float64
 	Year      int
 }
 
-type CreateBalanceOutput struct {
+type CreateBalanceByYearOutput struct {
+	Project   string
 	ID        string
 	BalanceID string
 	Amount    float64
@@ -31,7 +34,8 @@ type CreateBalanceOutput struct {
 }
 
 type ListBalanceInput struct {
-	Year *int
+	Project string
+	Year    *int
 }
 
 type ListBalanceOutput struct {
@@ -39,28 +43,52 @@ type ListBalanceOutput struct {
 }
 
 type RemoveBalanceInput struct {
-	ID        string
+	Project string
+	ID      string
 }
 
 type RemoveBalanceOutput struct {
+	Project   string
 	ID        string
 	BalanceID string
 	Amount    float64
 	Year      int
 }
 
+type CreateBalanceInput struct {
+	Project  string   `valid:"required,length(1|64)"`
+	ID       string   `valid:"required,length(1|64)"`
+	Type     string   `valid:"required,length(1|256)"`
+	Kind     *string  `valid:"length(1|256)"`
+	Parent   *string  `valid:"length(1|256)"`
+	Child    *string  `valid:"length(1|256)"`
+	Accounts []string `valid:"required"`
+}
+
+type CreateBalanceOutput struct {
+	Project  string
+	ID       string
+	Type     string
+	Kind     *string
+	Parent   *string
+	Child    *string
+	Accounts []string
+}
 
 type Filters struct {
 	Year *int
 }
 
 type BalanceStorage interface {
-	Add(ctx context.Context, input BalanceByYearStorageData) (*BalanceByYearStorageData, error)
-	All(ctx context.Context, filters Filters) (*BalanceStorageCollectionData, error)
-	Remove(ctx context.Context, id string) (*BalanceByYearStorageData, error)
+	AddByYear(ctx context.Context, input BalanceByYearStorageData) (*BalanceByYearStorageData, error)
+	All(ctx context.Context, project string, filters Filters) (*BalanceStorageCollectionData, error)
+	Remove(ctx context.Context, project string, id string) (*BalanceByYearStorageData, error)
+	Add(ctx context.Context, input AddBalanceStorageData) (*AddBalanceStorageData, error)
+	Get(ctx context.Context, project string, id string) (*AddBalanceStorageData, error)
 }
 
 type BalanceByYearStorageData struct {
+	Project   string
 	ID        string
 	BalanceID string
 	Amount    float64
@@ -68,13 +96,24 @@ type BalanceByYearStorageData struct {
 }
 
 type BalanceStorageData struct {
-	ID     string
-	Type   string
-	Kind   *string
-	Parent *string
-	Child  *string
-	Year   int
-	Amount float64
+	Project string
+	ID      string
+	Type    string
+	Kind    *string
+	Parent  *string
+	Child   *string
+	Year    int
+	Amount  float64
+}
+
+type AddBalanceStorageData struct {
+	Project  string
+	ID       string
+	Type     string
+	Kind     *string
+	Parent   *string
+	Child    *string
+	Accounts []string
 }
 
 type BalanceStorageCollectionData struct {
