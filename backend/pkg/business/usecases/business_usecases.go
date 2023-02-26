@@ -10,6 +10,7 @@ import (
 type BusinessUseCase interface {
 	DescribeBusiness(ctx context.Context, input DescribeBusinessInput) (*DescribeBusinessOutput, error)
 	ListBusiness(ctx context.Context, input ListBusinessInput) (*ListBusinessOutput, error)
+	CreateBusiness(ctx context.Context, input CreateBusinessInput) (*CreateBusinessOutput, error)
 }
 
 func NewDefaultBusinessUseCase(options DefaultBusinessUseCaseOptions) (*DefaultBusinessUseCase, error) {
@@ -38,7 +39,7 @@ func (useCase *DefaultBusinessUseCase) DescribeBusiness(ctx context.Context, inp
 		return nil, errors.New("invalid input")
 	}
 
-	storedBusiness, err := useCase.businessStorage.Get(ctx, input.ID)
+	storedBusiness, err := useCase.businessStorage.Get(ctx, input.Project, input.ID)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +62,7 @@ func (useCase *DefaultBusinessUseCase) ListBusiness(ctx context.Context, input L
 		return nil, errors.New("invalid input")
 	}
 
-	storedBusiness, err := useCase.businessStorage.All(ctx)
+	storedBusiness, err := useCase.businessStorage.All(ctx, input.Project)
 	if err != nil {
 		return nil, err
 	}
@@ -83,4 +84,47 @@ func (useCase *DefaultBusinessUseCase) ListBusiness(ctx context.Context, input L
 	return &ListBusinessOutput{
 		Items: items,
 	}, err
+}
+
+func (useCase *DefaultBusinessUseCase) CreateBusiness(ctx context.Context, input CreateBusinessInput) (*CreateBusinessOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input")
+	}
+
+	storedBusiness, err := useCase.businessStorage.Get(ctx, input.Project, input.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	if storedBusiness != nil {
+		return nil, errors.New("business [" + storedBusiness.ID + "] already exists")
+	}
+
+	var desiredBusiness BusinessStorageData
+	desiredBusiness.Project = input.Project
+	desiredBusiness.ID = input.ID
+	desiredBusiness.Name = input.Name
+	desiredBusiness.SocialDenomination = input.SocialDenomination
+	desiredBusiness.RegisteredOffice = input.RegisteredOffice
+	desiredBusiness.Cif = input.Cif
+	desiredBusiness.Logo = input.Logo
+	desiredBusiness.EthAddress = input.EthAddress
+
+	addedBusiness, err := useCase.businessStorage.Add(ctx, desiredBusiness)
+	if err != nil {
+		return nil, err
+	}
+
+	var output CreateBusinessOutput
+	output.Business.Project = addedBusiness.Project
+	output.Business.ID = addedBusiness.ID
+	output.Business.Name = addedBusiness.Name
+	output.Business.SocialDenomination = addedBusiness.SocialDenomination
+	output.Business.RegisteredOffice = addedBusiness.RegisteredOffice
+	output.Business.Cif = addedBusiness.Cif
+	output.Business.Logo = addedBusiness.Logo
+	output.Business.EthAddress = addedBusiness.EthAddress
+
+	return &output, nil
 }

@@ -55,6 +55,7 @@ type Balances struct {
 func main() {
 	yamlFile := readYamlFile(zaraAccountantYamlPath)
 	addAccounts(yamlFile)
+	addBusiness(yamlFile)
 }
 
 func readYamlFile(path string) YamlFile {
@@ -95,5 +96,29 @@ func addAccounts(yamlFile YamlFile) {
 
 		fmt.Println(string(body))
 	}
+}
 
+func addBusiness(yamlFile YamlFile) {
+	for _, business := range yamlFile.Business {
+		requestBody, err := json.Marshal(business)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		path := backendURL + business.Project + "/business"
+
+		response, err := http.Post(path, "application/json", bytes.NewBuffer(requestBody))
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer response.Body.Close()
+
+		body, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println(string(body))
+	}
 }
