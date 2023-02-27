@@ -40,7 +40,7 @@ func (repository *BalanceRepository) AddByYear(ctx context.Context, input balanc
 
 	insertQuery := "INSERT INTO balances_by_year (project, id, balance_id, amount, year) VALUES (?, ?, ?, ?, ?)"
 
-	repository.db.Exec(insertQuery, balanceDb.ID, balanceDb.BalanceID, balanceDb.Amount, balanceDb.Year)
+	repository.db.Exec(insertQuery, balanceDb.Project, balanceDb.ID, balanceDb.BalanceID, balanceDb.Amount, balanceDb.Year)
 
 	query := "SELECT * FROM balances_by_year WHERE project = ? AND id = ?"
 
@@ -212,7 +212,7 @@ func (repository *BalanceRepository) Get(ctx context.Context, project string, id
 func BuildQueryWithFilters(filters balance.Filters) string {
 	if filters.Year != nil {
 		year := strconv.Itoa(*filters.Year)
-		query := "SELECT balances.project, balances.id, type, kind, parent, child, year, SUM(amount) FROM balances INNER JOIN balances_by_year ON balances_by_year.balance_id = balances.id WHERE year = \"" + year + "\" AND project = ? GROUP BY balances.id, type, kind, parent, child, year;"
+		query := "SELECT balances.project, balances.id, type, kind, parent, child, year, SUM(amount) FROM balances INNER JOIN balances_by_year ON balances_by_year.balance_id = balances.id WHERE balances.project = ? AND year = \"" + year + "\" GROUP BY balances.project, balances.id, type, kind, parent, child, year;"
 		return query
 	}
 

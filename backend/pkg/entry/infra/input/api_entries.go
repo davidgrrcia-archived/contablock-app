@@ -105,7 +105,10 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 	r.HandleFunc("/api/projects/{project}/entries:publish", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
+		vars := mux.Vars(r)
 		var inputPayload input.PublishEntryRequest
+		inputPayload.Project = vars["project"]
+		
 		err := json.NewDecoder(r.Body).Decode(&inputPayload)
 		if err != nil {
 			utils.Failure(w, err)

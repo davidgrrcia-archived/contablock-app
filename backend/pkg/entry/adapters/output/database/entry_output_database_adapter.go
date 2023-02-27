@@ -50,7 +50,7 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 
 	insertQuery := "INSERT INTO entries (project, id, account_id, multiple_entry_id, balance_by_year_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-	repository.db.Exec(insertQuery, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
+	repository.db.Exec(insertQuery, entryDb.Project, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
 
 	query := "SELECT * FROM entries WHERE project = ? AND id = ?"
 
@@ -148,7 +148,7 @@ func (repository *EntryRepository) Get(ctx context.Context, project string, id s
 func (repository *EntryRepository) All(ctx context.Context, project string, filters entry.Filters) (*entry.EntryStorageCollectionData, error) {
 	query := BuildQueryWithFilters("SELECT * FROM entries WHERE project = ?", filters)
 
-	rows, err := repository.db.Query(query)
+	rows, err := repository.db.Query(query, project)
 	if err != nil {
 		return nil, err
 	}
