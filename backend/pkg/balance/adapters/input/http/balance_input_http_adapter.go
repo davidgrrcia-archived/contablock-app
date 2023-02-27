@@ -40,6 +40,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 	}
 
 	var inputData balance.ListBalanceInput
+	inputData.Project = data.Project
 	inputData.Year = &year
 	outputData, err := adapter.balanceUseCase.ListBalances(ctx, inputData)
 	if err != nil {

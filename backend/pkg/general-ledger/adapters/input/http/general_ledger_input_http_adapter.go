@@ -34,6 +34,7 @@ var _ GeneralLedgerInputAdapter = (*DefaultHttpInputAdapter)(nil)
 
 func (adapter *DefaultHttpInputAdapter) AdaptListGeneralLedger(ctx context.Context, data ListGeneralLedgerRequest) (*ListGeneralLedgerResponseWrapper, error) {
 	var inputData generalledger.ListGeneralLedgerInput
+	inputData.Project = data.Project
 	outputData, err := adapter.generalLedgerUseCase.ListGeneralLedger(ctx, inputData)
 	if err != nil {
 		return nil, err

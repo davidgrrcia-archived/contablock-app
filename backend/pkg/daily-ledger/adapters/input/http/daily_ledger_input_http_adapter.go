@@ -33,6 +33,7 @@ var _ DailyLedgerInputAdapter = (*DefaultHttpInputAdapter)(nil)
 
 func (adapter *DefaultHttpInputAdapter) AdaptListDailyLedger(ctx context.Context, data ListDailyLedgerRequest) (*ListDailyLedgerResponseWrapper, error) {
 	var inputData dailyledger.ListDailyLedgerInput
+	inputData.Project = data.Project
 	outputData, err := adapter.dailyLedgerUseCase.ListDailyLedger(ctx, inputData)
 	if err != nil {
 		return nil, err
