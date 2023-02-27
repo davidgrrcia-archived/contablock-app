@@ -5,7 +5,9 @@ import (
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 )
 
-type ListGeneralLedgerInput struct{}
+type ListGeneralLedgerInput struct{
+	Project string
+}
 
 type ListGeneralLedgerOutput struct {
 	Items []Record

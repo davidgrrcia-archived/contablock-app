@@ -43,10 +43,12 @@ func (adapter *DefaultHttpInputAdapter) AdaptListDailyLedger(ctx context.Context
 
 	for _, item := range outputData.Items {
 		var responseItem Record
+		responseItem.Project = item.Project
 		responseItem.ID = item.ID
 
 		for _, entry := range item.EntriesExpanded {
 			var entryExpanded EntryExpanded
+			entryExpanded.Entry.Project = entry.Entry.Project
 			entryExpanded.Entry.ID = entry.Entry.ID
 			entryExpanded.Entry.AccountID = entry.Entry.AccountID
 			entryExpanded.Entry.MultipleEntryID = entry.Entry.MultipleEntryID
@@ -61,6 +63,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListDailyLedger(ctx context.Context
 			entryExpanded.Entry.StateReason = entry.Entry.StateReason
 			entryExpanded.Entry.CreationDate = entry.Entry.CreationDate.Unix()
 			entryExpanded.Entry.LastUpdate = entry.Entry.LastUpdate.Unix()
+			entryExpanded.Account.Project = entry.Account.Project
 			entryExpanded.Account.ID = entry.Account.ID
 			entryExpanded.Account.Name = entry.Account.Name
 			entryExpanded.Account.Level = entry.Account.Level

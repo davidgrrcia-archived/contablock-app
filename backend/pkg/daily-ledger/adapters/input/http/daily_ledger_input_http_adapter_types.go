@@ -5,7 +5,9 @@ import (
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 )
 
-type ListDailyLedgerRequest struct{}
+type ListDailyLedgerRequest struct {
+	Project string `json:"project"`
+}
 
 type ListDailyLedgerResponse struct {
 	Items []Record `json:"items"`
@@ -15,6 +17,7 @@ type ListDailyLedgerResponseWrapper struct {
 }
 
 type Record struct {
+	Project         string          `json:"project"`
 	ID              string          `json:"id"`
 	EntriesExpanded []EntryExpanded `json:"entriesExpanded"`
 }

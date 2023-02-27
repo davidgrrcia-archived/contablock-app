@@ -61,6 +61,7 @@ func (useCase *DefaultDailyLedgerUseCase) ListDailyLedger(ctx context.Context, i
 
 	for _, multipleEntryID := range listOutput.MultipleEntriesIds {
 		var listEntriesInput entry.ListEntryInput
+		listEntriesInput.Project = input.Project
 		listEntriesInput.MultipleEntryID = &multipleEntryID
 		listEntries, err := useCase.entryUseCase.ListEntries(ctx, listEntriesInput)
 		if err != nil {
@@ -77,6 +78,7 @@ func (useCase *DefaultDailyLedgerUseCase) ListDailyLedger(ctx context.Context, i
 		for _, entry := range listEntries.Items {
 			var getAccountInput account.DescribeAccountInput
 			getAccountInput.ID = entry.AccountID
+			getAccountInput.Project = input.Project
 			account, err := useCase.accountUseCase.DescribeAccount(ctx, getAccountInput)
 			if err != nil {
 				return nil, errors.New("failure describing account")

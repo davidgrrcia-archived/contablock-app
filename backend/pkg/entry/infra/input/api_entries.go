@@ -36,7 +36,10 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 	//register endpoints
 	r.HandleFunc("/api/projects/{project}/entries", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
+
+		vars := mux.Vars(r)
 		var inputPayload input.CreateEntryRequest
+		inputPayload.Project = vars["project"]
 
 		err := json.NewDecoder(r.Body).Decode(&inputPayload)
 		if err != nil {
@@ -55,7 +58,9 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 	r.HandleFunc("/api/projects/{project}/entries", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
 
+		vars := mux.Vars(r)
 		var inputPayload input.ListEntryRequest
+		inputPayload.Project = vars["project"]
 
 		outputPayload, err := handler.adapter.AdaptListEntries(ctx, inputPayload)
 		if err != nil {
@@ -71,6 +76,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		vars := mux.Vars(r)
 		var inputPayload input.DescribeEntryRequest
 		inputPayload.ID = vars["id"]
+		inputPayload.Project = vars["project"]
 
 		outputPayload, err := handler.adapter.AdaptDescribeEntry(ctx, inputPayload)
 		if err != nil {
@@ -86,6 +92,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		vars := mux.Vars(r)
 		var inputPayload input.DeleteEntryRequest
 		inputPayload.ID = vars["id"]
+		inputPayload.Project = vars["project"]
 
 		entry, err := handler.adapter.AdaptDeleteEntry(ctx, inputPayload)
 		if err != nil {

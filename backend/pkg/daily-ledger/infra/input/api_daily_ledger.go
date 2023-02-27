@@ -35,7 +35,12 @@ func (handler *DefaultDailyLedgerHttpHandler) RegisterDailyLedgerRoutes(r *mux.R
 	//register endpoints
 	r.HandleFunc("/api/projects/{project}/daily-ledger", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
-		outputPayload, err := handler.adapter.AdaptListDailyLedger(ctx, input.ListDailyLedgerRequest{})
+
+		vars := mux.Vars(r)
+		var inputPayload input.ListDailyLedgerRequest
+		inputPayload.Project = vars["project"]
+
+		outputPayload, err := handler.adapter.AdaptListDailyLedger(ctx, inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
 			return

@@ -35,7 +35,12 @@ func (handler *DefaultGeneralLedgerHttpHandler) RegisterGeneralLedgerRoutes(r *m
 	//register endpoints
 	r.HandleFunc("/api/projects/{project}/general-ledger", func(w http.ResponseWriter, r *http.Request) {
 		var ctx = context.Background()
-		outputPayload, err := handler.adapter.AdaptListGeneralLedger(ctx, input.ListGeneralLedgerRequest{})
+
+		vars := mux.Vars(r)
+		var inputPayload input.ListGeneralLedgerRequest
+		inputPayload.Project = vars["project"]
+
+		outputPayload, err := handler.adapter.AdaptListGeneralLedger(ctx, inputPayload)
 		if err != nil {
 			utils.Failure(w, err)
 			return

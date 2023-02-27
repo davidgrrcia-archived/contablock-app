@@ -3,11 +3,12 @@ package entry
 import (
 	"context"
 	"errors"
+	"time"
+
 	account "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	"github.com/google/uuid"
-	"time"
 
 	"github.com/asaskevich/govalidator"
 )
@@ -92,6 +93,7 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	}
 
 	var describeAccountInput account.DescribeAccountInput
+	describeAccountInput.Project = input.Project
 	describeAccountInput.ID = input.AccountID
 	storedAccount, err := useCase.accountUseCase.DescribeAccount(ctx, describeAccountInput)
 	if err != nil {
@@ -101,6 +103,7 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	var balanceByYearID *string
 	if storedAccount.Account.BalanceID != nil && *storedAccount.Account.BalanceID != "" {
 		var createBalanceInput balance.CreateBalanceByYearInput
+		createBalanceInput.Project = input.Project
 		createBalanceInput.BalanceID = *storedAccount.Account.BalanceID
 		createBalanceInput.Amount = *getAmountForBalance(input.DebitBalance, input.CreditBalance)
 		createBalanceInput.Year = input.Date.Year()
@@ -115,6 +118,7 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	if input.ID == nil {
 		input.ID = &id
 	}
+	desiredEntry.Project = input.Project
 	desiredEntry.ID = *input.ID
 	desiredEntry.AccountID = input.AccountID
 	desiredEntry.MultipleEntryID = input.MultipleEntryID
@@ -145,6 +149,7 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	}
 
 	var output CreateEntryOutput
+	output.Entry.Project = storedEntry.Project
 	output.Entry.ID = storedEntry.ID
 	output.Entry.AccountID = storedEntry.AccountID
 	output.Entry.MultipleEntryID = storedEntry.MultipleEntryID
@@ -170,12 +175,13 @@ func (useCase *DefaultEntryUseCase) DescribeEntry(ctx context.Context, input Des
 		return nil, errors.New("invalid input")
 	}
 
-	storedEntry, err := useCase.entryStorage.Get(ctx, input.ID)
+	storedEntry, err := useCase.entryStorage.Get(ctx, input.Project, input.ID)
 	if err != nil {
 		return nil, err
 	}
 
 	var output DescribeEntryOutput
+	output.Entry.Project = storedEntry.Project
 	output.Entry.ID = storedEntry.ID
 	output.Entry.AccountID = storedEntry.AccountID
 	output.Entry.MultipleEntryID = storedEntry.MultipleEntryID
@@ -204,7 +210,7 @@ func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListE
 	var filters Filters
 	filters.MultipleEntryID = input.MultipleEntryID
 	filters.AccountID = input.AccountID
-	storedEntries, err := useCase.entryStorage.All(ctx, filters)
+	storedEntries, err := useCase.entryStorage.All(ctx, input.Project, filters)
 	if err != nil {
 		return nil, err
 	}
@@ -212,6 +218,7 @@ func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListE
 	var items []Entry
 	for _, item := range storedEntries.Items {
 		var entry Entry
+		entry.Project = item.Project
 		entry.ID = item.ID
 		entry.AccountID = item.AccountID
 		entry.MultipleEntryID = item.MultipleEntryID
@@ -243,6 +250,7 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	}
 
 	var describeEntryInput DescribeEntryInput
+	describeEntryInput.Project = input.Entry.Project
 	describeEntryInput.ID = input.Entry.ID
 
 	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
@@ -251,6 +259,7 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	}
 
 	var desiredEntry EntryStorageData
+	desiredEntry.Project = input.Entry.Project
 	desiredEntry.ID = input.Entry.ID
 	desiredEntry.AccountID = input.Entry.AccountID
 	desiredEntry.MultipleEntryID = input.Entry.MultipleEntryID
@@ -277,6 +286,7 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	}
 
 	var output UpdateEntryOutput
+	output.Entry.Project = updatedEntry.Project
 	output.Entry.ID = updatedEntry.ID
 	output.Entry.AccountID = updatedEntry.AccountID
 	output.Entry.MultipleEntryID = updatedEntry.MultipleEntryID
@@ -304,6 +314,7 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 
 	var describeEntryInput DescribeEntryInput
 	describeEntryInput.ID = input.ID
+	describeEntryInput.Project = input.Project
 	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
 	if err != nil {
 		return nil, err
@@ -322,6 +333,7 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 
 	if storedEntry.Entry.BalanceByYearID != nil && *storedEntry.Entry.BalanceByYearID != "" {
 		var removeBalanceInput balance.RemoveBalanceInput
+		removeBalanceInput.Project = input.Project
 		removeBalanceInput.ID = *storedEntry.Entry.BalanceByYearID
 		_, err = useCase.balanceUseCase.RemoveBalance(ctx, removeBalanceInput)
 		if err != nil {
@@ -336,12 +348,13 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 		return nil, err
 	}
 
-	removedEntry, err := useCase.entryStorage.Remove(ctx, input.ID)
+	removedEntry, err := useCase.entryStorage.Remove(ctx, input.Project, input.ID)
 	if err != nil {
 		return nil, err
 	}
 
 	var output RemoveEntryOutput
+	output.Entry.Project = removedEntry.Project
 	output.Entry.ID = removedEntry.ID
 	output.Entry.AccountID = removedEntry.AccountID
 	output.Entry.MultipleEntryID = removedEntry.MultipleEntryID
@@ -368,6 +381,7 @@ func (useCase *DefaultEntryUseCase) PublishEntry(ctx context.Context, input Publ
 	}
 
 	var describeEntryInput DescribeEntryInput
+	describeEntryInput.Project = input.Project
 	describeEntryInput.ID = input.ID
 	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
 	if err != nil {

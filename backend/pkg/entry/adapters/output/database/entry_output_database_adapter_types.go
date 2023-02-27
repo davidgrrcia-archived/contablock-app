@@ -1,6 +1,7 @@
 package entrydb
 
 type EntryDb struct {
+	Project         string  `storage:"project"`
 	ID              string  `storage:"id"`
 	AccountID       string  `storage:"account_id"`
 	MultipleEntryID string  `storage:"multiple_entry_id"`

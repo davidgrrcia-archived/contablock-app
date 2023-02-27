@@ -44,6 +44,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListGeneralLedger(ctx context.Conte
 
 	for _, item := range outputData.Items {
 		var responseItem Record
+		responseItem.Account.Project = item.Account.Project
 		responseItem.Account.ID = item.Account.ID
 		responseItem.Account.Name = item.Account.Name
 		responseItem.Account.BalanceID = item.Account.BalanceID
@@ -52,6 +53,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListGeneralLedger(ctx context.Conte
 
 		for _, item2 := range item.Entries {
 			var entry entry.Entry
+			entry.Project = item2.Project
 			entry.ID = item2.ID
 			entry.AccountID = item2.AccountID
 			entry.MultipleEntryID = item2.MultipleEntryID

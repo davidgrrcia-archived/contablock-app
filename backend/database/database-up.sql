@@ -78,23 +78,3 @@ CREATE TABLE
         PRIMARY KEY (id, project)
     );
 
--- LOAD DATA INFILE '/var/lib/mysql-files/accounts.csv'
--- INTO TABLE accounts
--- FIELDS TERMINATED BY ','
--- ENCLOSED BY '"'
--- LINES TERMINATED BY '\n'
--- IGNORE 0 ROWS;
-
--- LOAD DATA INFILE '/var/lib/mysql-files/balances.csv'
--- INTO TABLE balances
--- FIELDS TERMINATED BY ','
--- ENCLOSED BY '"'
--- LINES TERMINATED BY '\n'
--- IGNORE 0 ROWS;
-
--- LOAD DATA INFILE '/var/lib/mysql-files/business.csv'
--- INTO TABLE business
--- FIELDS TERMINATED BY ','
--- ENCLOSED BY '"'
--- LINES TERMINATED BY '\n'
--- IGNORE 0 ROWS;

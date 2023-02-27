@@ -12,6 +12,7 @@ const (
 )
 
 type Entry struct {
+	Project         string
 	ID              string
 	AccountID       string
 	MultipleEntryID string
@@ -30,6 +31,7 @@ type Entry struct {
 }
 
 type CreateEntryInput struct {
+	Project         string    `valid:"required,length(1|64)"`
 	ID              *string   `valid:"optional,length(1|64)"`
 	AccountID       string    `valid:"required,length(1|64)"`
 	MultipleEntryID string    `valid:"required,length(1|64)"`
@@ -45,7 +47,8 @@ type CreateEntryOutput struct {
 }
 
 type DescribeEntryInput struct {
-	ID string `valid:"required,length(1|64)"`
+	Project string `valid:"required,length(1|64)"`
+	ID      string `valid:"required,length(1|64)"`
 }
 
 type DescribeEntryOutput struct {
@@ -53,6 +56,7 @@ type DescribeEntryOutput struct {
 }
 
 type ListEntryInput struct {
+	Project         string
 	MultipleEntryID *string
 	AccountID       *string
 }
@@ -70,7 +74,8 @@ type UpdateEntryOutput struct {
 }
 
 type RemoveEntryInput struct {
-	ID string `valid:"required,length(1|64)"`
+	Project string `valid:"required,length(1|64)"`
+	ID      string `valid:"required,length(1|64)"`
 }
 
 type RemoveEntryOutput struct {
@@ -78,7 +83,8 @@ type RemoveEntryOutput struct {
 }
 
 type PublishEntryInput struct {
-	ID string `valid:"required,length(1|64)"`
+	Project string `valid:"required,length(1|64)"`
+	ID      string `valid:"required,length(1|64)"`
 }
 
 type PublishEntryOutput struct {
@@ -92,13 +98,14 @@ type Filters struct {
 
 type EntryStorage interface {
 	Add(ctx context.Context, input EntryStorageData) (*EntryStorageData, error)
-	Get(ctx context.Context, id string) (*EntryStorageData, error)
-	All(ctx context.Context, filters Filters) (*EntryStorageCollectionData, error)
+	Get(ctx context.Context, project string, id string) (*EntryStorageData, error)
+	All(ctx context.Context, project string, filters Filters) (*EntryStorageCollectionData, error)
 	Edit(ctx context.Context, input EntryStorageData) (*EntryStorageData, error)
-	Remove(ctx context.Context, id string) (*EntryStorageData, error)
+	Remove(ctx context.Context, project string, id string) (*EntryStorageData, error)
 }
 
 type EntryStorageData struct {
+	Project         string
 	ID              string
 	AccountID       string
 	MultipleEntryID string

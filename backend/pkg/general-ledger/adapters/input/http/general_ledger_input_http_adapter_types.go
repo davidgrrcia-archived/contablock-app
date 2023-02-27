@@ -5,7 +5,9 @@ import (
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 )
 
-type ListGeneralLedgerRequest struct{}
+type ListGeneralLedgerRequest struct {
+	Project string `json:"project"`
+}
 
 type ListGeneralLedgerResponse struct {
 	Items []Record `json:"items"`

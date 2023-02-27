@@ -38,6 +38,7 @@ var _ EntryInputAdapter = (*DefaultHttpInputAdapter)(nil)
 
 func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, data CreateEntryRequest) (*CreateEntryResponseWrapper, error) {
 	var inputData entry.CreateEntryInput
+	inputData.Project = data.Project
 	inputData.ID = data.ID
 	inputData.AccountID = data.AccountID
 	inputData.MultipleEntryID = data.MultipleEntryID
@@ -53,6 +54,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 	}
 
 	var response CreateEntryResponse
+	response.Project = outputData.Entry.Project
 	response.ID = outputData.Entry.ID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
@@ -77,6 +79,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 
 func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, data DescribeEntryRequest) (*DescribeEntryResponseWrapper, error) {
 	var inputData entry.DescribeEntryInput
+	inputData.Project = data.Project
 	inputData.ID = data.ID
 
 	outputData, err := adapter.entryUseCase.DescribeEntry(ctx, inputData)
@@ -85,6 +88,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 	}
 
 	var response DescribeEntryResponse
+	response.Project = outputData.Entry.Project
 	response.ID = outputData.Entry.ID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
@@ -109,6 +113,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 
 func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, data ListEntryRequest) (*ListEntryResponseWrapper, error) {
 	var inputData entry.ListEntryInput
+	inputData.Project = data.Project
 
 	outputData, err := adapter.entryUseCase.ListEntries(ctx, inputData)
 	if err != nil {
@@ -120,6 +125,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 
 	for _, item := range outputData.Items {
 		var responseItem DescribeEntryResponse
+		responseItem.Project = item.Project
 		responseItem.ID = item.ID
 		responseItem.AccountID = item.AccountID
 		responseItem.MultipleEntryID = item.MultipleEntryID
@@ -145,6 +151,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 
 func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, data DeleteEntryRequest) (*DeleteEntryResponseWrapper, error) {
 	var inputData entry.RemoveEntryInput
+	inputData.Project = data.Project
 	inputData.ID = data.ID
 
 	outputData, err := adapter.entryUseCase.RemoveEntry(ctx, inputData)
@@ -153,6 +160,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, da
 	}
 
 	var response DeleteEntryResponse
+	response.Project = outputData.Entry.Project
 	response.ID = outputData.Entry.ID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
@@ -177,6 +185,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, da
 
 func (adapter *DefaultHttpInputAdapter) AdaptPublishEntry(ctx context.Context, data PublishEntryRequest) (*PublishEntryResponseWrapper, error) {
 	var inputData entry.PublishEntryInput
+	inputData.Project = data.Project
 	inputData.ID = data.ID
 
 	outputData, err := adapter.entryUseCase.PublishEntry(ctx, inputData)
@@ -185,6 +194,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptPublishEntry(ctx context.Context, d
 	}
 
 	var response PublishEntryResponse
+	response.Project = outputData.Entry.Project
 	response.ID = outputData.Entry.ID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID

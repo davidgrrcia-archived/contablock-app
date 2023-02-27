@@ -1,6 +1,7 @@
 package entryInputHttpAdapter
 
 type Entry struct {
+	Project         string  `json:"project"`
 	ID              string  `json:"id"`
 	AccountID       string  `json:"accountId"`
 	MultipleEntryID string  `json:"multipleEntryId"`
@@ -19,6 +20,7 @@ type Entry struct {
 }
 
 type CreateEntryRequest struct {
+	Project         string   `json:"project"`
 	ID              *string  `json:"id"`
 	AccountID       string   `json:"accountId"`
 	MultipleEntryID string   `json:"multipleEntryId"`
@@ -37,7 +39,8 @@ type CreateEntryResponseWrapper struct {
 }
 
 type DescribeEntryRequest struct {
-	ID string `json:"id"`
+	Project string `json:"project"`
+	ID      string `json:"id"`
 }
 type DescribeEntryResponse struct {
 	Entry
@@ -47,6 +50,7 @@ type DescribeEntryResponseWrapper struct {
 }
 
 type ListEntryRequest struct {
+	Project string `json:"project"`
 }
 
 type ListEntryResponse struct {
@@ -57,7 +61,8 @@ type ListEntryResponseWrapper struct {
 }
 
 type DeleteEntryRequest struct {
-	ID string `json:"id"`
+	Project string `json:"project"`
+	ID      string `json:"id"`
 }
 type DeleteEntryResponse struct {
 	Entry
@@ -67,7 +72,8 @@ type DeleteEntryResponseWrapper struct {
 }
 
 type PublishEntryRequest struct {
-	ID string `json:"id"`
+	Project string `json:"project"`
+	ID      string `json:"id"`
 }
 type PublishEntryResponse struct {
 	Entry

@@ -31,6 +31,7 @@ var _ entry.EntryStorage = (*EntryRepository)(nil)
 
 func (repository *EntryRepository) Add(ctx context.Context, input entry.EntryStorageData) (*entry.EntryStorageData, error) {
 	var entryDb EntryDb
+	entryDb.Project = input.Project
 	entryDb.ID = input.ID
 	entryDb.AccountID = input.AccountID
 	entryDb.MultipleEntryID = input.MultipleEntryID
@@ -47,16 +48,16 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 	entryDb.CreationDate = input.CreationDate.Format(time.RFC3339)
 	entryDb.LastUpdate = input.LastUpdate.Format(time.RFC3339)
 
-	insertQuery := "INSERT INTO entries (id, account_id, multiple_entry_id, balance_by_year_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+	insertQuery := "INSERT INTO entries (project, id, account_id, multiple_entry_id, balance_by_year_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
 	repository.db.Exec(insertQuery, entryDb.ID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
 
-	query := "SELECT * FROM entries WHERE id = ?"
+	query := "SELECT * FROM entries WHERE project = ? AND id = ?"
 
-	result := repository.db.QueryRow(query, entryDb.ID)
+	result := repository.db.QueryRow(query, entryDb.Project, entryDb.ID)
 
 	var addedEntry EntryDb
-	err := result.Scan(&addedEntry.ID, &addedEntry.AccountID, &addedEntry.MultipleEntryID, &addedEntry.BalanceByYearID, &addedEntry.Currency, &addedEntry.Concept, &addedEntry.Date, &addedEntry.Quarter, &addedEntry.DebitBalance, &addedEntry.CreditBalance, &addedEntry.TotalBalance, &addedEntry.State, &addedEntry.StateReason, &addedEntry.CreationDate, &addedEntry.LastUpdate)
+	err := result.Scan(&addedEntry.Project, &addedEntry.ID, &addedEntry.AccountID, &addedEntry.MultipleEntryID, &addedEntry.BalanceByYearID, &addedEntry.Currency, &addedEntry.Concept, &addedEntry.Date, &addedEntry.Quarter, &addedEntry.DebitBalance, &addedEntry.CreditBalance, &addedEntry.TotalBalance, &addedEntry.State, &addedEntry.StateReason, &addedEntry.CreationDate, &addedEntry.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("entry [" + entryDb.ID + "] not added")
@@ -65,6 +66,7 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 	}
 
 	var output entry.EntryStorageData
+	output.Project = addedEntry.Project
 	output.ID = addedEntry.ID
 	output.AccountID = addedEntry.AccountID
 	output.MultipleEntryID = addedEntry.MultipleEntryID
@@ -96,13 +98,13 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 	return &output, nil
 }
 
-func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.EntryStorageData, error) {
-	query := "SELECT * FROM entries WHERE id = ?"
+func (repository *EntryRepository) Get(ctx context.Context, project string, id string) (*entry.EntryStorageData, error) {
+	query := "SELECT * FROM entries WHERE project = ? AND id = ?"
 
-	result := repository.db.QueryRow(query, id)
+	result := repository.db.QueryRow(query, project, id)
 
 	var storedEntry EntryDb
-	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
+	err := result.Scan(&storedEntry.Project, &storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("entry [" + id + "] not found")
@@ -111,6 +113,7 @@ func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.E
 	}
 
 	var output entry.EntryStorageData
+	output.Project = storedEntry.Project
 	output.ID = storedEntry.ID
 	output.AccountID = storedEntry.AccountID
 	output.MultipleEntryID = storedEntry.MultipleEntryID
@@ -142,8 +145,8 @@ func (repository *EntryRepository) Get(ctx context.Context, id string) (*entry.E
 	return &output, nil
 }
 
-func (repository *EntryRepository) All(ctx context.Context, filters entry.Filters) (*entry.EntryStorageCollectionData, error) {
-	query := BuildQueryWithFilters("SELECT * FROM entries", filters)
+func (repository *EntryRepository) All(ctx context.Context, project string, filters entry.Filters) (*entry.EntryStorageCollectionData, error) {
+	query := BuildQueryWithFilters("SELECT * FROM entries WHERE project = ?", filters)
 
 	rows, err := repository.db.Query(query)
 	if err != nil {
@@ -153,7 +156,7 @@ func (repository *EntryRepository) All(ctx context.Context, filters entry.Filter
 	var storedEntries []EntryDb
 	for rows.Next() {
 		var entryDb EntryDb
-		err = rows.Scan(&entryDb.ID, &entryDb.AccountID, &entryDb.MultipleEntryID, &entryDb.BalanceByYearID, &entryDb.Currency, &entryDb.Concept, &entryDb.Date, &entryDb.Quarter, &entryDb.DebitBalance, &entryDb.CreditBalance, &entryDb.TotalBalance, &entryDb.State, &entryDb.StateReason, &entryDb.CreationDate, &entryDb.LastUpdate)
+		err = rows.Scan(&entryDb.Project, &entryDb.ID, &entryDb.AccountID, &entryDb.MultipleEntryID, &entryDb.BalanceByYearID, &entryDb.Currency, &entryDb.Concept, &entryDb.Date, &entryDb.Quarter, &entryDb.DebitBalance, &entryDb.CreditBalance, &entryDb.TotalBalance, &entryDb.State, &entryDb.StateReason, &entryDb.CreationDate, &entryDb.LastUpdate)
 		if err != nil {
 			return nil, err
 		}
@@ -164,6 +167,7 @@ func (repository *EntryRepository) All(ctx context.Context, filters entry.Filter
 	var items []entry.EntryStorageData
 	for _, storedEntry := range storedEntries {
 		var entry entry.EntryStorageData
+		entry.Project = storedEntry.Project
 		entry.ID = storedEntry.ID
 		entry.AccountID = storedEntry.AccountID
 		entry.MultipleEntryID = storedEntry.MultipleEntryID
@@ -201,6 +205,7 @@ func (repository *EntryRepository) All(ctx context.Context, filters entry.Filter
 
 func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntryStorageData) (*entry.EntryStorageData, error) {
 	var entryDb EntryDb
+	entryDb.Project = input.Project
 	entryDb.ID = input.ID
 	entryDb.AccountID = input.AccountID
 	entryDb.MultipleEntryID = input.MultipleEntryID
@@ -217,16 +222,16 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 	entryDb.CreationDate = input.CreationDate.Format(time.RFC3339)
 	entryDb.LastUpdate = input.LastUpdate.Format(time.RFC3339)
 
-	updateQuery := "UPDATE entries SET account_id = ?, multiple_entry_id = ?, balance_by_year_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, total_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE id = ?"
+	updateQuery := "UPDATE entries SET account_id = ?, multiple_entry_id = ?, balance_by_year_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, total_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE project = ? AND id = ?"
 
-	repository.db.Exec(updateQuery, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.ID)
+	repository.db.Exec(updateQuery, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.Project, entryDb.ID)
 
-	query := "SELECT * FROM entries WHERE id = ?"
+	query := "SELECT * FROM entries WHERE project = ? AND id = ?"
 
-	result := repository.db.QueryRow(query, entryDb.ID)
+	result := repository.db.QueryRow(query, entryDb.Project, entryDb.ID)
 
 	var storedEntry EntryDb
-	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
+	err := result.Scan(&storedEntry.Project, &storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("entry not found")
@@ -235,6 +240,7 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 	}
 
 	var output entry.EntryStorageData
+	output.Project = storedEntry.Project
 	output.ID = storedEntry.ID
 	output.AccountID = storedEntry.AccountID
 	output.MultipleEntryID = storedEntry.MultipleEntryID
@@ -266,13 +272,13 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 	return &output, nil
 }
 
-func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entry.EntryStorageData, error) {
-	query := "SELECT * FROM entries WHERE id = ?"
+func (repository *EntryRepository) Remove(ctx context.Context, project string, id string) (*entry.EntryStorageData, error) {
+	query := "SELECT * FROM entries WHERE project = ? AND id = ?"
 
-	result := repository.db.QueryRow(query, id)
+	result := repository.db.QueryRow(query, project, id)
 
 	var storedEntry EntryDb
-	err := result.Scan(&storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
+	err := result.Scan(&storedEntry.Project, &storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("entry not found")
@@ -280,11 +286,12 @@ func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entr
 		return nil, err
 	}
 
-	query = "DELETE FROM entries WHERE id = ?"
+	query = "DELETE FROM entries WHERE project = ? AND id = ?"
 
-	repository.db.Exec(query, id)
+	repository.db.Exec(query, project, id)
 
 	var output entry.EntryStorageData
+	output.Project = storedEntry.Project
 	output.ID = storedEntry.ID
 	output.AccountID = storedEntry.AccountID
 	output.MultipleEntryID = storedEntry.MultipleEntryID
@@ -318,11 +325,11 @@ func (repository *EntryRepository) Remove(ctx context.Context, id string) (*entr
 
 func BuildQueryWithFilters(query string, filters entry.Filters) string {
 	if filters.MultipleEntryID != nil {
-		query = query + " WHERE multiple_entry_id = \"" + *filters.MultipleEntryID + "\""
+		query = query + " AND multiple_entry_id = \"" + *filters.MultipleEntryID + "\""
 		return query
 	}
 	if filters.AccountID != nil {
-		query = query + " WHERE account_id = \"" + *filters.AccountID + "\""
+		query = query + " AND account_id = \"" + *filters.AccountID + "\""
 		return query
 	}
 

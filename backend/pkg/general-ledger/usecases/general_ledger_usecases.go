@@ -62,6 +62,7 @@ func (useCase *DefaultGeneralLedgerUseCase) ListGeneralLedger(ctx context.Contex
 	for _, accountID := range listOutput.AccountIds {
 
 		var listEntriesInput entry.ListEntryInput
+		listEntriesInput.Project = input.Project
 		listEntriesInput.AccountID = &accountID
 		listEntries, err := useCase.entryUseCase.ListEntries(ctx, listEntriesInput)
 		if err != nil {
@@ -73,6 +74,7 @@ func (useCase *DefaultGeneralLedgerUseCase) ListGeneralLedger(ctx context.Contex
 		}
 
 		var getAccountInput account.DescribeAccountInput
+		getAccountInput.Project = input.Project
 		getAccountInput.ID = accountID
 		account, err := useCase.accountUseCase.DescribeAccount(ctx, getAccountInput)
 		if err != nil {
@@ -80,6 +82,7 @@ func (useCase *DefaultGeneralLedgerUseCase) ListGeneralLedger(ctx context.Contex
 		}
 
 		var record Record
+		record.Account.Project = account.Account.Project
 		record.Account.ID = account.Account.ID
 		record.Account.Name = account.Account.Name
 		record.Account.BalanceID = account.Account.BalanceID

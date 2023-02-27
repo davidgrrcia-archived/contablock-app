@@ -161,6 +161,8 @@ func (useCase *DefaultBalanceUseCase) CreateBalance(ctx context.Context, input C
 		return nil, errors.New("invalid input")
 	}
 
+	//TODO if the project in the path is the admin, then allow to add
+
 	storedBalance, err := useCase.balanceStorage.Get(ctx, input.Project, input.ID)
 	if err != nil {
 		return nil, err

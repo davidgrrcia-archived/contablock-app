@@ -45,6 +45,7 @@ func (useCase *DefaultBusinessUseCase) DescribeBusiness(ctx context.Context, inp
 	}
 
 	var output DescribeBusinessOutput
+	output.Business.Project = storedBusiness.Project
 	output.Business.ID = storedBusiness.ID
 	output.Business.Name = storedBusiness.Name
 	output.Business.SocialDenomination = storedBusiness.SocialDenomination
@@ -70,6 +71,7 @@ func (useCase *DefaultBusinessUseCase) ListBusiness(ctx context.Context, input L
 	var items []Business
 	for _, item := range storedBusiness.Items {
 		var business Business
+		business.Project = item.Project
 		business.ID = item.ID
 		business.Name = item.Name
 		business.SocialDenomination = item.SocialDenomination
@@ -91,6 +93,8 @@ func (useCase *DefaultBusinessUseCase) CreateBusiness(ctx context.Context, input
 	if err != nil {
 		return nil, errors.New("invalid input")
 	}
+
+	//TODO if the project in the path is the admin, then allow to add
 
 	storedBusiness, err := useCase.businessStorage.Get(ctx, input.Project, input.ID)
 	if err != nil {
