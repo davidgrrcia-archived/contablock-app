@@ -23,6 +23,7 @@ type YamlFile struct {
 	Accounts []Account  `yaml:"accounts"`
 	Business []Business `yaml:"business"`
 	Balances []Balances `yaml:"balances"`
+	Users    []User     `yaml:"users"`
 }
 
 type Account struct {
@@ -44,6 +45,16 @@ type Business struct {
 	EthAddress         string `yaml:"ethAddress"`
 }
 
+type User struct {
+	Project    string `yaml:"project"`
+	ID         string `yaml:"id"`
+	Name       string `yaml:"name"`
+	Email      string `yaml:"email"`
+	Password   string `yaml:"password"`
+	Role       string `yaml:"role"`
+	EthAddress string `yaml:"ethAddress"`
+}
+
 type Balances struct {
 	Project  string   `yaml:"project"`
 	ID       string   `yaml:"id"`
@@ -59,6 +70,7 @@ func main() {
 	addAccounts(yamlFile)
 	addBusiness(yamlFile)
 	addBalances(yamlFile)
+	addUsers(yamlFile)
 }
 
 func readYamlFile(path string) YamlFile {
@@ -166,6 +178,36 @@ func addBalances(yamlFile YamlFile) {
 	}
 }
 
+func addUsers(yamlFile YamlFile) {
+	for _, user := range yamlFile.Users {
+		requestBody, err := json.Marshal(user)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		path := backendURL + user.Project + "/users"
+
+		response, err := http.Post(path, "application/json", bytes.NewBuffer(requestBody))
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer response.Body.Close()
+
+		body, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		err = checkErrorMessage(body)
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println(string(body))
+	}
+}
+
 type ErrorMessage struct {
 	StatusCode int    `json:"statusCode"`
 	Error      string `json:"error"`
@@ -175,6 +217,10 @@ func checkErrorMessage(data []byte) error {
 	var errorMessage ErrorMessage
 	err := json.Unmarshal(data, &errorMessage)
 	if err != nil {
+		return nil
+	}
+
+	if errorMessage.Error == "" {
 		return nil
 	}
 

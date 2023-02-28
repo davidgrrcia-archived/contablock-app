@@ -18,6 +18,8 @@ import (
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
+	inputUser "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/adapters/input/http"
+	user "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/usecases"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/gorilla/mux"
 )
@@ -31,6 +33,12 @@ type Graph struct {
 	ContablockNonce  big.Int
 	contablock.ContaBlockContractAdapter
 	contablock.ContaBlockUseCase
+
+	//users
+	UserDb sql.DB
+	user.UserStorage
+	user.UserUseCase
+	inputUser.UserInputAdapter
 
 	//entries
 	EntryDb sql.DB
@@ -72,6 +80,7 @@ func NewGraph() Graph {
 func (graph *Graph) Build() {
 	// output infra
 	graph.provideContablockClient()
+	graph.provideUserDB()
 	graph.provideAccountDB()
 	graph.provideBusinessDB()
 	graph.provideEntryDB()
@@ -79,6 +88,7 @@ func (graph *Graph) Build() {
 
 	// output adapters
 	graph.provideContablockContractAdapter()
+	graph.provideUserStorage()
 	graph.provideAccountStorage()
 	graph.provideBusinessStorage()
 	graph.provideEntryStorage()
@@ -86,6 +96,7 @@ func (graph *Graph) Build() {
 
 	// use cases
 	graph.provideContablockUseCase()
+	graph.provideUserUseCase()
 	graph.provideBalanceUseCase()
 	graph.provideAccountUseCase()
 	graph.provideBusinessUseCase()
@@ -95,6 +106,7 @@ func (graph *Graph) Build() {
 
 	// input adapters
 	graph.provideAccountInputAdapter()
+	graph.provideUserInputAdapter()
 	graph.provideBusinessInputAdapter()
 	graph.provideEntryInputAdapter()
 	graph.provideDailyLedgerInputAdapter()
@@ -104,6 +116,7 @@ func (graph *Graph) Build() {
 	// input infra
 	graph.provideRouter()
 	graph.provideAccountEndpoints()
+	graph.provideUserEndpoints()
 	graph.provideBusinessEndpoints()
 	graph.provideEntryEndpoints()
 	graph.provideDailyLedgerEndpoints()

@@ -18,6 +18,8 @@ import (
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
+	inputAdapterUser "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/adapters/input/http"
+	user "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/usecases"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/gorilla/mux"
 )
@@ -171,4 +173,28 @@ func (graph *Graph) GetBalanceUseCase() balance.BalanceUseCase {
 		panic("graph BalanceUseCase case is nil")
 	}
 	return graph.BalanceUseCase
+}
+
+/////// USERS ///////
+
+func (graph *Graph) GetUserInputAdapter() inputAdapterUser.UserInputAdapter {
+	return graph.UserInputAdapter
+}
+
+func (graph *Graph) GetUserDB() *sql.DB {
+	return &graph.UserDb
+}
+
+func (graph *Graph) GetUserStorage() user.UserStorage {
+	if graph.UserStorage == nil {
+		panic("graph UserStorage is nil")
+	}
+	return graph.UserStorage
+}
+
+func (graph *Graph) GetUserUseCase() user.UserUseCase {
+	if graph.UserUseCase == nil {
+		panic("graph UserUseCase case is nil")
+	}
+	return graph.UserUseCase
 }

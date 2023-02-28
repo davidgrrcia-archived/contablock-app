@@ -34,6 +34,10 @@ import (
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	contablockUseCase "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
+	inputUser "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/adapters/input/http"
+	userOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/adapters/output/database"
+	userInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/infra/input"
+	user "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/usecases"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -474,4 +478,70 @@ func (graph *Graph) provideBalanceEndpoints() {
 		log.Fatal(err)
 	}
 	handler.RegisterBalanceRoutes(graph.GetRouter())
+}
+
+/////// USERS ///////
+
+func (graph *Graph) provideUserDB() {
+	db, err := sql.Open("mysql", os.Getenv("DB_USER")+":"+os.Getenv("DB_PASS")+"@tcp("+os.Getenv("DB_HOST")+":"+os.Getenv("DB_PORT")+")/"+os.Getenv("DB_NAME"))
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+
+	graph.UserDb = *db
+}
+
+func (graph *Graph) provideUserStorage() user.UserStorage {
+	userStorageOpts := userOutputDbAdapter.UserRepositoryOptions{
+		DB: graph.GetUserDB(),
+	}
+	userStorage, err := userOutputDbAdapter.NewUserRepository(userStorageOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.UserStorage = userStorage
+
+	return userStorage
+}
+
+func (graph *Graph) provideUserUseCase() {
+	userUseCaseOpts := user.DefaultUserUseCaseOptions{
+		UserStorage: graph.GetUserStorage(),
+	}
+	userUseCase, err := user.NewDefaultUserUseCase(userUseCaseOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.UserUseCase = userUseCase
+}
+
+func (graph *Graph) provideUserInputAdapter() *inputUser.DefaultHttpInputAdapter {
+	userInputAdapterOpts := inputUser.DefaultHttpInputAdapterOptions{
+		UserUseCase: graph.GetUserUseCase(),
+	}
+	userInputAdapter, err := inputUser.NewDefaultHttpInputAdapter(userInputAdapterOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.UserInputAdapter = userInputAdapter
+
+	return userInputAdapter
+}
+
+func (graph *Graph) provideUserEndpoints() {
+	var options userInputInfra.DefaultUsersHttpHandlerOptions
+	options.Adapter = graph.GetUserInputAdapter()
+	handler, err := userInputInfra.NewDefaultUsersHttpHandler(options)
+	if err != nil {
+		log.Fatal(err)
+	}
+	handler.RegisterUserRoutes(graph.GetRouter())
 }
