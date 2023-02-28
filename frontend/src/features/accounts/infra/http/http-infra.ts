@@ -12,7 +12,7 @@ export class DefaultAccountsHttpInfra implements AccountsHttpInfra {
   async listAccounts() {
     const configStore = useConfigStore();
 
-    const response = await fetch('/api/projects/' + configStore.state.project + '/accounts');
+    const response = await fetch(`/api/projects/${configStore.state.project}/accounts`);
 
     const data = await response.json();
 
@@ -25,7 +25,7 @@ export class DefaultAccountsHttpInfra implements AccountsHttpInfra {
   async describeAccount(id: string) {
     const configStore = useConfigStore();
 
-    const response = await fetch('/api/projects/' + configStore.state.project + '/accounts/' + id);
+    const response = await fetch(`/api/projects/${configStore.state.project}/accounts/${id}`);
 
     const data = await response.json();
 

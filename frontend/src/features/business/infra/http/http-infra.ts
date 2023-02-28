@@ -11,7 +11,7 @@ export class DefaultBusinessHttpInfra implements BusinessHttpInfra {
   async describeBusiness(id: string) {
     const configStore = useConfigStore();
 
-    const response = await fetch('/api/projects/' + configStore.state.project + '/business/' + id);
+    const response = await fetch(`/api/projects/${configStore.state.project}/business/${id}`);
 
     const data = await response.json();
 

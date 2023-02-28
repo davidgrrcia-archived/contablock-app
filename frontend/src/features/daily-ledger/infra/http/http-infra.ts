@@ -11,7 +11,7 @@ export class DefaultDailyLedgerHttpInfra implements DailyLedgerHttpInfra {
   async listDailyLedger() {
     const configStore = useConfigStore();
 
-    const response = await fetch('/api/projects/' + configStore.state.project + '/daily-ledger');
+    const response = await fetch(`/api/projects/${configStore.state.project}/daily-ledger`);
 
     const data = await response.json();
 

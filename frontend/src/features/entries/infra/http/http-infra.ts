@@ -13,7 +13,7 @@ export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
   async createEntry(entry: EntryCreateBody): Promise<EntryDescribeResponse | Error> {
     const configStore = useConfigStore();
 
-    const response = await fetch(`/api/projects/'${configStore.state.project}/entries`, {
+    const response = await fetch(`/api/projects/${configStore.state.project}/entries`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -33,7 +33,7 @@ export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
   async publishEntry(id: string): Promise<EntryDescribeResponse | Error> {
     const configStore = useConfigStore();
 
-    const response = await fetch(`/api/projects/'${configStore.state.project}/entries:publish`, {
+    const response = await fetch(`/api/projects/${configStore.state.project}/entries:publish`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -53,7 +53,7 @@ export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
   async removeEntry(id: string): Promise<EntryDescribeResponse | Error> {
     const configStore = useConfigStore();
 
-    const response = await fetch(`/api/projects/'${configStore.state.project}/entries/${id}`, {
+    const response = await fetch(`/api/projects/${configStore.state.project}/entries/${id}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',

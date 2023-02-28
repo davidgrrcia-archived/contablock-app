@@ -11,7 +11,7 @@ export class DefaultBalancesHttpInfra implements BalancesHttpInfra {
   async listBalances() {
     const configStore = useConfigStore();
 
-    const response = await fetch('/api/projects/' + configStore.state.project + '/balances?year=' + new Date().getFullYear());
+    const response = await fetch(`/api/projects/${configStore.state.project}/balances?year=${new Date().getFullYear()}`);
 
     const data = await response.json();
 
