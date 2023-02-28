@@ -2,6 +2,8 @@ package user
 
 import (
 	"context"
+	"crypto/sha256"
+	"encoding/hex"
 	"errors"
 	"time"
 
@@ -12,6 +14,7 @@ type UserUseCase interface {
 	DescribeUser(ctx context.Context, input DescribeUserInput) (*DescribeUserOutput, error)
 	ListUsers(ctx context.Context, input ListUserInput) (*ListUserOutput, error)
 	CreateUser(ctx context.Context, input CreateUserInput) (*CreateUserOutput, error)
+	LoginUser(ctx context.Context, input LoginUserInput) (*LoginUserOutput, error)
 }
 
 func NewDefaultUserUseCase(options DefaultUserUseCaseOptions) (*DefaultUserUseCase, error) {
@@ -65,7 +68,8 @@ func (useCase *DefaultUserUseCase) ListUsers(ctx context.Context, input ListUser
 		return nil, errors.New("invalid input")
 	}
 
-	storedUsers, err := useCase.userStorage.All(ctx, input.Project)
+	var filters Filters
+	storedUsers, err := useCase.userStorage.All(ctx, input.Project, filters)
 	if err != nil {
 		return nil, err
 	}
@@ -113,7 +117,7 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 	desiredUser.ID = input.ID
 	desiredUser.Name = input.Name
 	desiredUser.Email = input.Email
-	desiredUser.Password = input.Password
+	desiredUser.Password = hashPassword(input.Password)
 	desiredUser.Role = input.Role
 	desiredUser.EthAddress = input.EthAddress
 	desiredUser.CreationDate = time.Now()
@@ -136,4 +140,48 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 	output.User.LastUpdate = addedUser.LastUpdate
 
 	return &output, nil
+}
+
+func (useCase *DefaultUserUseCase) LoginUser(ctx context.Context, input LoginUserInput) (*LoginUserOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input")
+	}
+
+	var filters Filters
+	filters.Email = &input.Email
+	hashedPassword := hashPassword(input.Password)
+	filters.Password = &hashedPassword
+	storedUsers, err := useCase.userStorage.All(ctx, input.Project, filters)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(storedUsers.Items) == 0 {
+		return nil, errors.New("user not found")
+	}
+
+	if len(storedUsers.Items) > 1 {
+		return nil, errors.New("more than one user found")
+	}
+
+	storedUser := storedUsers.Items[0]
+
+	var output LoginUserOutput
+	output.User.Project = storedUser.Project
+	output.User.ID = storedUser.ID
+	output.User.Name = storedUser.Name
+	output.User.Email = storedUser.Email
+	output.User.Password = storedUser.Password
+	output.User.Role = storedUser.Role
+	output.User.EthAddress = storedUser.EthAddress
+	output.User.CreationDate = storedUser.CreationDate
+	output.User.LastUpdate = storedUser.LastUpdate
+
+	return &output, nil
+}
+
+func hashPassword(password string) string {
+	hash := sha256.Sum256([]byte(password))
+	return hex.EncodeToString(hash[:])
 }

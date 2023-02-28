@@ -65,8 +65,8 @@ func (repository *UserRepository) Get(ctx context.Context, project string, id st
 	return &output, nil
 }
 
-func (repository *UserRepository) All(ctx context.Context, project string) (*user.UserStorageCollectionData, error) {
-	query := "SELECT * FROM users WHERE project = ?"
+func (repository *UserRepository) All(ctx context.Context, project string, filters user.Filters) (*user.UserStorageCollectionData, error) {
+	query := BuildQueryWithFilters("SELECT * FROM users WHERE project = ?", filters)
 
 	rows, err := repository.db.Query(query, project)
 	if err != nil {
@@ -215,4 +215,17 @@ func (repository *UserRepository) Add(ctx context.Context, input user.UserStorag
 	output.LastUpdate = lastUpdate
 
 	return &output, nil
+}
+
+func BuildQueryWithFilters(query string, filters user.Filters) string {
+	if filters.Email != nil {
+		query = query + " AND email = \"" + *filters.Email + "\""
+		return query
+	}
+	if filters.Password != nil {
+		query = query + " AND password = \"" + *filters.Password + "\""
+		return query
+	}
+
+	return query
 }

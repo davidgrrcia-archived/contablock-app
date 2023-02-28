@@ -11,6 +11,7 @@ type UserInputAdapter interface {
 	AdaptDescribeUser(ctx context.Context, data DescribeUserRequest) (*DescribeUserResponseWrapper, error)
 	AdaptListUsers(ctx context.Context, data ListUserRequest) (*ListUserResponseWrapper, error)
 	AdaptCreateUser(ctx context.Context, data CreateUserRequest) (*CreateUserResponseWrapper, error)
+	AdaptLoginUser(ctx context.Context, data LoginUserRequest) (*LoginUserResponseWrapper, error)
 }
 
 func NewDefaultHttpInputAdapter(options DefaultHttpInputAdapterOptions) (*DefaultHttpInputAdapter, error) {
@@ -48,7 +49,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeUser(ctx context.Context, d
 	response.ID = outputData.User.ID
 	response.Name = outputData.User.Name
 	response.Email = outputData.User.Email
-	response.Password = outputData.User.Password
 	response.Role = outputData.User.Role
 	response.EthAddress = outputData.User.EthAddress
 	response.CreationDate = outputData.User.CreationDate.Unix()
@@ -78,7 +78,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptListUsers(ctx context.Context, data
 		responseItem.ID = item.ID
 		responseItem.Name = item.Name
 		responseItem.Email = item.Email
-		responseItem.Password = item.Password
 		responseItem.Role = item.Role
 		responseItem.EthAddress = item.EthAddress
 		responseItem.CreationDate = item.CreationDate.Unix()
@@ -112,7 +111,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateUser(ctx context.Context, dat
 	response.ID = outputData.User.ID
 	response.Name = outputData.User.Name
 	response.Email = outputData.User.Email
-	response.Password = outputData.User.Password
 	response.Role = outputData.User.Role
 	response.EthAddress = outputData.User.EthAddress
 	response.CreationDate = outputData.User.CreationDate.Unix()
@@ -120,6 +118,34 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateUser(ctx context.Context, dat
 
 	responseWrapper := CreateUserResponseWrapper{}
 	responseWrapper.CreateUserResponse = response
+
+	return &responseWrapper, nil
+}
+
+func (adapter *DefaultHttpInputAdapter) AdaptLoginUser(ctx context.Context, data LoginUserRequest) (*LoginUserResponseWrapper, error) {
+	var inputData user.LoginUserInput
+	inputData.Project = data.Project
+	inputData.Email = data.Email
+	inputData.Password = data.Password
+
+	outputData, err := adapter.userUseCase.LoginUser(ctx, inputData)
+	if err != nil {
+		return nil, err
+	}
+
+	var response LoginUserResponse
+	response.Project = outputData.User.Project
+	response.ID = outputData.User.ID
+	response.Name = outputData.User.Name
+	response.Email = outputData.User.Email
+	response.Role = outputData.User.Role
+	response.EthAddress = outputData.User.EthAddress
+	response.CreationDate = outputData.User.CreationDate.Unix()
+	response.LastUpdate = outputData.User.LastUpdate.Unix()
+	// TODO: response.Token = outputData.Token
+
+	responseWrapper := LoginUserResponseWrapper{}
+	responseWrapper.LoginUserResponse = response
 
 	return &responseWrapper, nil
 }

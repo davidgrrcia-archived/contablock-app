@@ -48,9 +48,24 @@ type CreateUserOutput struct {
 	User User
 }
 
+type LoginUserInput struct {
+	Project  string `valid:"required,length(1|64)"`
+	Email    string `valid:"required,email,length(1|256)"`
+	Password string `valid:"required,length(1|256)"`
+}
+
+type LoginUserOutput struct {
+	User User
+}
+
+type Filters struct {
+	Email    *string
+	Password *string
+}
+
 type UserStorage interface {
 	Get(ctx context.Context, project string, id string) (*UserStorageData, error)
-	All(ctx context.Context, project string) (*UserStorageCollectionData, error)
+	All(ctx context.Context, project string, filters Filters) (*UserStorageCollectionData, error)
 	Edit(ctx context.Context, input UserStorageData) (*UserStorageData, error)
 	Add(ctx context.Context, input UserStorageData) (*UserStorageData, error)
 }

@@ -82,4 +82,25 @@ func (handler *DefaultUsersHttpHandler) RegisterUserRoutes(r *mux.Router) {
 
 		utils.Success(w, outputPayload.CreateUserResponse)
 	}).Methods("POST")
+
+	r.HandleFunc("/api/projects/{project}/users:login", func(w http.ResponseWriter, r *http.Request) {
+		var ctx = context.Background()
+
+		vars := mux.Vars(r)
+		var inputPayload input.LoginUserRequest
+		inputPayload.Project = vars["project"]
+
+		err := json.NewDecoder(r.Body).Decode(&inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+		outputPayload, err := handler.adapter.AdaptLoginUser(ctx, inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+
+		utils.Success(w, outputPayload.LoginUserResponse)
+	}).Methods("POST")
 }

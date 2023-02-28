@@ -5,7 +5,6 @@ type User struct {
 	ID           string `json:"id"`
 	Name         string `json:"name"`
 	Email        string `json:"email"`
-	Password     string `json:"password"`
 	Role         string `json:"role"`
 	EthAddress   string `json:"ethAddress"`
 	CreationDate int64  `json:"creationDate"`
@@ -50,4 +49,19 @@ type CreateUserResponse struct {
 
 type CreateUserResponseWrapper struct {
 	CreateUserResponse CreateUserResponse
+}
+
+type LoginUserRequest struct {
+	Project  string `json:"project"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+type LoginUserResponse struct {
+	User
+	// Token string `json:"token"` TODO JWT cookie token
+}
+
+type LoginUserResponseWrapper struct {
+	LoginUserResponse LoginUserResponse
 }
