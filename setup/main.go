@@ -3,10 +3,12 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 
 	_ "github.com/lib/pq"
 	"gopkg.in/yaml.v2"
@@ -95,6 +97,11 @@ func addAccounts(yamlFile YamlFile) {
 			log.Fatal(err)
 		}
 
+		err = checkErrorMessage(body)
+		if err != nil {
+			panic(err)
+		}
+
 		fmt.Println(string(body))
 	}
 }
@@ -118,6 +125,11 @@ func addBusiness(yamlFile YamlFile) {
 		body, err := ioutil.ReadAll(response.Body)
 		if err != nil {
 			log.Fatal(err)
+		}
+
+		err = checkErrorMessage(body)
+		if err != nil {
+			panic(err)
 		}
 
 		fmt.Println(string(body))
@@ -145,6 +157,30 @@ func addBalances(yamlFile YamlFile) {
 			log.Fatal(err)
 		}
 
+		err = checkErrorMessage(body)
+		if err != nil {
+			panic(err)
+		}
+
 		fmt.Println(string(body))
 	}
+}
+
+type ErrorMessage struct {
+	StatusCode int    `json:"statusCode"`
+	Error      string `json:"error"`
+}
+
+func checkErrorMessage(data []byte) error {
+	var errorMessage ErrorMessage
+	err := json.Unmarshal(data, &errorMessage)
+	if err != nil {
+		return nil
+	}
+
+	if strings.Contains(errorMessage.Error, "already exists") {
+		return nil
+	}
+
+	return errors.New(errorMessage.Error)
 }
