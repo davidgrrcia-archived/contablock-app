@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import DailyLedgerView from '@/features/daily-ledger/adapters/views/DailyLedgerView.vue';
 import GeneralLedgerView from '@/features/general-ledger/adapters/views/GeneralLedgerView.vue';
 import BalancesView from '@/features/balances/adapters/views/BalancesView.vue';
+import NotFound from '@/components/NotFound.vue';
 
 //TODO: apply clean architecture
 
@@ -23,6 +24,7 @@ const router = createRouter({
       name: 'balances',
       component: BalancesView,
     },
+    { path: '/:pathMatch(.*)*', component: NotFound },
   ],
 });
 

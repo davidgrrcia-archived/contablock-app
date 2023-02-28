@@ -27,6 +27,12 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
 
         const dailyLedger = await dailyLedgerUseCase.listDailyLedger();
 
+        if (dailyLedger instanceof Error) {
+          const messagesStore = useMessagesStore();
+          messagesStore.addMessage('Fallo al cargar el libro diario');
+          return;
+        }
+
         this.state.storedDailyLedger = dailyLedger;
         this.state.stateMessage = 'daily ledger loaded';
 
@@ -35,6 +41,12 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
           this.state.stateMessage = 'loading daily ledger';
 
           const dailyLedger = await dailyLedgerUseCase.listDailyLedger();
+
+          if (dailyLedger instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addMessage('Fallo al cargar el libro diario');
+            return;
+          }
 
           this.state.storedDailyLedger = dailyLedger;
           this.state.stateMessage = 'daily ledger loaded';

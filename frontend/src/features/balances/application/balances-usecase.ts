@@ -1,7 +1,7 @@
 import type { Balance, BalancesAdapter } from '@/features/balances/application/balances-model';
 
 export interface BalancesUsecase {
-  listBalances(): Promise<Balance[]>;
+  listBalances(): Promise<Balance[] | Error>;
 }
 
 export class DefaultBalancesUseCase implements BalancesUsecase {

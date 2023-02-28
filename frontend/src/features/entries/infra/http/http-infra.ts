@@ -1,45 +1,72 @@
 import type { EntryDescribeResponse, EntryCreateBody } from '@/features/entries/infra/http/models';
+import { useConfigStore } from '@/stores/config';
 
 export interface EntriesHttpInfra {
-  createEntry(entry: EntryCreateBody): Promise<EntryDescribeResponse>;
-  publishEntry(id: string): Promise<EntryDescribeResponse>;
-  removeEntry(id: string): Promise<EntryDescribeResponse>;
+  createEntry(entry: EntryCreateBody): Promise<EntryDescribeResponse | Error>;
+  publishEntry(id: string): Promise<EntryDescribeResponse | Error>;
+  removeEntry(id: string): Promise<EntryDescribeResponse | Error>;
 }
 
 export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
-  createEntry(entry: EntryCreateBody): Promise<EntryDescribeResponse> {
-    return fetch('/api/entries', {
+  // constructor(private readonly project: string) {} TODO use project constructor
+
+  async createEntry(entry: EntryCreateBody): Promise<EntryDescribeResponse | Error> {
+    const configStore = useConfigStore();
+
+    const response = await fetch(`/api/projects/'${configStore.state.project}/entries`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(entry),
-    })
-      .then(response => response.json())
-      .then(response => response as EntryDescribeResponse);
+    });
+
+    const data = await response.json();
+
+    if (data.statusCode === 500) {
+      return new Error(data.error);
+    }
+
+    return data as EntryDescribeResponse;
   }
-  publishEntry(id: string): Promise<EntryDescribeResponse> {
-    return fetch(`/api/entries:publish`, {
+  async publishEntry(id: string): Promise<EntryDescribeResponse | Error> {
+    const configStore = useConfigStore();
+
+    const response = await fetch(`/api/projects/'${configStore.state.project}/entries:publish`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id }),
-    })
-      .then(response => response.json())
-      .then(response => response as EntryDescribeResponse);
+    });
+
+    const data = await response.json();
+
+    if (data.statusCode === 500) {
+      return new Error(data.error);
+    }
+
+    return data as EntryDescribeResponse;
   }
-  removeEntry(id: string): Promise<EntryDescribeResponse> {
-    return fetch(`/api/entries/${id}`, {
+  async removeEntry(id: string): Promise<EntryDescribeResponse | Error> {
+    const configStore = useConfigStore();
+
+    const response = await fetch(`/api/projects/'${configStore.state.project}/entries/${id}`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-    })
-      .then(response => response.json())
-      .then(response => response as EntryDescribeResponse);
+    });
+
+    const data = await response.json();
+
+    if (data.statusCode === 500) {
+      return new Error(data.error);
+    }
+
+    return data as EntryDescribeResponse;
   }
 }

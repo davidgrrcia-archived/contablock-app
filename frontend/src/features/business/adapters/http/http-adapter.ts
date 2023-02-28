@@ -7,6 +7,10 @@ export class DefaultBusinessHttpAdapter implements BusinessAdapter {
   async describeBusinessHttpResponse(id: string) {
     const input = await this.businessHttpInfra.describeBusiness(id);
 
+    if (input instanceof Error) {
+      return input;
+    }
+
     const output: Business = {
       id: input.id,
       name: input.name,

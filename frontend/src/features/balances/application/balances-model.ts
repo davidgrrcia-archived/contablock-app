@@ -1,5 +1,5 @@
 export interface BalancesAdapter {
-  listBalancesHttpResponse(): Promise<Balance[]>;
+  listBalancesHttpResponse(): Promise<Balance[] | Error>;
 }
 
 export interface Balance {

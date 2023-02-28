@@ -7,6 +7,10 @@ export class DefaultGeneralLedgerHttpAdapter implements GeneralLedgerAdapter {
   async listGeneralLedgerHttpResponse() {
     const generalLedgerHttpResponse = await this.generalLedgerHttpInfra.listGeneralLedger();
 
+    if (generalLedgerHttpResponse instanceof Error) {
+      return generalLedgerHttpResponse;
+    }
+
     return generalLedgerHttpResponse.items.map(item => ({
       account: {
         id: item.account.id,

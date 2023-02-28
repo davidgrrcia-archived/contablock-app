@@ -27,6 +27,12 @@ export const useAccountsStore = defineStore('accounts', {
 
         const accounts = await accountsUseCase.listAccounts();
 
+        if (accounts instanceof Error) {
+          const messagesStore = useMessagesStore();
+          messagesStore.addMessage('Fallo al cargar las cuentas');
+          return;
+        }
+
         this.state.accounts = accounts;
         this.state.stateMessage = 'accounts loaded';
       } catch (err) {

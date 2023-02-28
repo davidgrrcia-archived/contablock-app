@@ -1,13 +1,24 @@
 import type { GeneralLedgerListResponse } from '@/features/general-ledger/infra/http/models';
+import { useConfigStore } from '@/stores/config';
 
 export interface GeneralLedgerHttpInfra {
-  listGeneralLedger(): Promise<GeneralLedgerListResponse>;
+  listGeneralLedger(): Promise<GeneralLedgerListResponse | Error>;
 }
 
 export class DefaultGeneralLedgerHttpInfra implements GeneralLedgerHttpInfra {
-  listGeneralLedger() {
-    return fetch('/api/general-ledger')
-      .then(response => response.json())
-      .then(response => response as GeneralLedgerListResponse);
+  // constructor(private readonly project: string) {} TODO use project constructor
+
+  async listGeneralLedger() {
+    const configStore = useConfigStore();
+
+    const response = await fetch('/api/projects/' + configStore.state.project + '/general-ledger');
+
+    const data = await response.json();
+
+    if (data.statusCode === 500) {
+      return new Error(data.error);
+    }
+
+    return data as GeneralLedgerListResponse;
   }
 }

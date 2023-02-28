@@ -27,6 +27,12 @@ export const useGeneralLedgerStore = defineStore('generalLedger', {
 
         const generalLedger = await generalLedgerUseCase.listGeneralLedger();
 
+        if (generalLedger instanceof Error) {
+          const messagesStore = useMessagesStore();
+          messagesStore.addMessage('Fallo al cargar el libro mayor');
+          return;
+        }
+
         this.state.storedGeneralLedger = generalLedger;
         this.state.stateMessage = 'general ledger loaded';
 
@@ -35,6 +41,12 @@ export const useGeneralLedgerStore = defineStore('generalLedger', {
           this.state.stateMessage = 'loading general ledger';
 
           const generalLedger = await generalLedgerUseCase.listGeneralLedger();
+
+          if (generalLedger instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addMessage('Fallo al cargar el libro mayor');
+            return;
+          }
 
           this.state.storedGeneralLedger = generalLedger;
           this.state.stateMessage = 'general ledger loaded';

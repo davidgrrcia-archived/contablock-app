@@ -118,7 +118,7 @@ func (repository *BusinessRepository) Add(ctx context.Context, input business.Bu
 	err = result.Scan(&storedBusiness.Project, &storedBusiness.ID, &storedBusiness.Name, &storedBusiness.SocialDenomination, &storedBusiness.RegisteredOffice, &storedBusiness.Cif, &storedBusiness.Logo, &storedBusiness.EthAddress)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("business [" + businessDb.ID + "] not added")
+			return nil, errors.New("business with project " + businessDb.Project + " and id " + businessDb.ID + " not added")
 		}
 		return nil, err
 	}

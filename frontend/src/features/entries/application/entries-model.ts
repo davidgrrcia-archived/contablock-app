@@ -1,7 +1,7 @@
 export interface EntriesAdapter {
-  createEntryHttpResponse(entry: CreateEntryInput): Promise<Entry>;
-  publishEntryHttpResponse(id: string): Promise<Entry>;
-  removeEntryHttpResponse(id: string): Promise<Entry>;
+  createEntryHttpResponse(entry: CreateEntryInput): Promise<Entry | Error>;
+  publishEntryHttpResponse(id: string): Promise<Entry | Error>;
+  removeEntryHttpResponse(id: string): Promise<Entry | Error>;
 }
 
 export interface Entry {
@@ -20,7 +20,6 @@ export interface Entry {
   creationDate: number;
   lastUpdate: number;
 }
-
 
 export interface CreateEntryInput {
   id?: string;

@@ -1,7 +1,7 @@
 import type { DailyLedger, DailyLedgerAdapter } from '@/features/daily-ledger/application/daily-ledger-model';
 
 export interface DailyLedgerUsecase {
-  listDailyLedger(): Promise<DailyLedger[]>;
+  listDailyLedger(): Promise<DailyLedger[] | Error>;
 }
 
 export class DefaultDailyLedgerUseCase implements DailyLedgerUsecase {

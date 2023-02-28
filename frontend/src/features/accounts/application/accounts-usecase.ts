@@ -1,8 +1,8 @@
 import type { Node, Account, AccountsAdapter } from '@/features/accounts/application/accounts-model';
 
 export interface AccountsUseCase {
-  listAccounts(): Promise<Node[]>;
-  describeAccount(id: string): Promise<Account>;
+  listAccounts(): Promise<Node[] | Error>;
+  describeAccount(id: string): Promise<Account | Error>;
 }
 
 export class DefaultAccountsUseCase implements AccountsUseCase {

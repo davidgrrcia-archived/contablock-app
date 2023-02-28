@@ -107,7 +107,7 @@ func (repository *AccountRepository) Edit(ctx context.Context, input account.Acc
 	err := result.Scan(&storedAccount.Project, &storedAccount.ID, &storedAccount.Name, &storedAccount.Level, &storedAccount.BalanceID)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("account [" + accountDb.ID + "] not found")
+			return nil, errors.New("account with project [" + accountDb.Project + "] and id [" + accountDb.ID + "] not found")
 		}
 		return nil, err
 	}
@@ -145,7 +145,7 @@ func (repository *AccountRepository) Add(ctx context.Context, input account.Acco
 	err = result.Scan(&storedAccount.Project, &storedAccount.ID, &storedAccount.Name, &storedAccount.Level, &storedAccount.BalanceID)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("account [" + accountDb.ID + "] not added")
+			return nil, errors.New("account with project [" + accountDb.Project + "] and id [" + accountDb.ID + "] not added")
 		}
 		return nil, err
 	}

@@ -1,7 +1,7 @@
 import type { Business, BusinessAdapter } from '@/features/business/application/business-model';
 
 export interface BusinessUseCase {
-  describeBusiness(id: string): Promise<Business>;
+  describeBusiness(id: string): Promise<Business | Error>;
 }
 
 export class DefaultBusinessUseCase implements BusinessUseCase {

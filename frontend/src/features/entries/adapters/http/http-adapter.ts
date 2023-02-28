@@ -19,6 +19,10 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
 
     const entryHttpResponse = await this.entriesHttpInfra.createEntry(input);
 
+    if (entryHttpResponse instanceof Error) {
+      return entryHttpResponse;
+    }
+
     const output: EntryUseCase = {
       id: entryHttpResponse.entry.id,
       accountId: entryHttpResponse.entry.accountId,
@@ -42,6 +46,10 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
   async publishEntryHttpResponse(id: string) {
     const entryHttpResponse = await this.entriesHttpInfra.publishEntry(id);
 
+    if (entryHttpResponse instanceof Error) {
+      return entryHttpResponse;
+    }
+
     const output: EntryUseCase = {
       id: entryHttpResponse.entry.id, //todo: this returning undefined
       accountId: entryHttpResponse.entry.accountId,
@@ -63,6 +71,10 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
   }
   async removeEntryHttpResponse(id: string) {
     const entryHttpResponse = await this.entriesHttpInfra.removeEntry(id);
+
+    if (entryHttpResponse instanceof Error) {
+      return entryHttpResponse;
+    }
 
     const output: EntryUseCase = {
       id: entryHttpResponse.entry.id,

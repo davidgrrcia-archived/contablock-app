@@ -51,9 +51,16 @@ export const useEntriesStore = defineStore('entries', {
       const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
       entry.accountId = match ? match[1] : '';
 
+      const account = await accountsUseCase.describeAccount(entry.accountId);
+
+      if (account instanceof Error) {
+        messagesStore.addWarnMessage('Fallo al cargar la cuenta', 'No se ha podido cargar la cuenta seleccionada');
+        return;
+      }
+
       const entryWithAccount: EntryWithAccount = {
         entry: entry,
-        account: await accountsUseCase.describeAccount(entry.accountId),
+        account: account,
       };
 
       this.state.entriesCreation.push(entryWithAccount);
@@ -76,9 +83,16 @@ export const useEntriesStore = defineStore('entries', {
       const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
       entry.accountId = match ? match[1] : '';
 
+      const account = await accountsUseCase.describeAccount(entry.accountId);
+
+      if (account instanceof Error) {
+        messagesStore.addWarnMessage('Fallo al cargar la cuenta', 'No se ha podido cargar la cuenta seleccionada');
+        return;
+      }
+
       const entryWithAccount: EntryWithAccount = {
         entry: entry,
-        account: await accountsUseCase.describeAccount(entry.accountId),
+        account: account,
       };
 
       this.state.entriesCreation.push(entryWithAccount);
@@ -101,7 +115,15 @@ export const useEntriesStore = defineStore('entries', {
         this.state.stateMessage = 'creating entries';
 
         this.state.entriesCreation.map(async entry => {
-          return await entriesUseCase.createEntry(entry.entry);
+          const response = await entriesUseCase.createEntry(entry.entry);
+
+          if (response instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addErrorMessage('Error creando asiento', 'Ha ocurrido un error creando el asiento');
+            return;
+          }
+
+          return response;
         });
 
         this.state.stateMessage = 'entries created';
@@ -117,7 +139,15 @@ export const useEntriesStore = defineStore('entries', {
         this.state.stateMessage = 'publishing entries';
 
         entriesExpanded.map(async (entry: any) => {
-          return await entriesUseCase.publishEntry(entry.entry.id);
+          const response = await entriesUseCase.publishEntry(entry.entry.id);
+
+          if (response instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addErrorMessage('Error publicando asiento', 'Ha ocurrido un error publicando el asiento');
+            return;
+          }
+
+          return response;
         });
         this.state.stateMessage = 'entries published';
         const messagesStore = useMessagesStore();
@@ -133,7 +163,15 @@ export const useEntriesStore = defineStore('entries', {
         this.state.stateMessage = 'removing entries';
 
         entriesExpanded.map(async (entry: any) => {
-          return await entriesUseCase.removeEntry(entry.entry.id);
+          const response = await entriesUseCase.removeEntry(entry.entry.id);
+
+          if (response instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addErrorMessage('Error eliminando asientos', 'Ha ocurrido un error eliminando los asientos');
+            return;
+          }
+
+          return response;
         });
         this.state.stateMessage = 'entries removed';
         const messagesStore = useMessagesStore();
@@ -141,7 +179,7 @@ export const useEntriesStore = defineStore('entries', {
       } catch (err) {
         this.state.stateMessage = 'error removing entries';
         const messagesStore = useMessagesStore();
-        messagesStore.addMessage(this.state.stateMessage);
+        messagesStore.addErrorMessage('Error eliminando asientos', 'Ha ocurrido un error eliminando los asientos');
       }
     },
     clearEntries() {

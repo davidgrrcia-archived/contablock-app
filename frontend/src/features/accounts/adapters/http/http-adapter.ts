@@ -7,6 +7,10 @@ export class DefaultAccountsHttpAdapter implements AccountsAdapter {
   async listAccountsHttpResponse() {
     const accountHttpResponse = await this.accountsHttpInfra.listAccounts();
 
+    if (accountHttpResponse instanceof Error) {
+      return accountHttpResponse;
+    }
+
     return accountHttpResponse.items.map(item => ({
       key: item.id,
       label: item.displayName,
@@ -29,6 +33,10 @@ export class DefaultAccountsHttpAdapter implements AccountsAdapter {
 
   async describeAccountHttpResponse(id: string) {
     const input = await this.accountsHttpInfra.describeAccount(id);
+
+    if (input instanceof Error) {
+      return input;
+    }
 
     const output: Account = {
       id: input.id,

@@ -50,7 +50,7 @@ func (repository *BalanceRepository) AddByYear(ctx context.Context, input balanc
 	err := result.Scan(&addedBalance.Project, &addedBalance.ID, &addedBalance.BalanceID, &addedBalance.Amount, &addedBalance.Year)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("balance [" + balanceDb.ID + "] not added")
+			return nil, errors.New("balance with project " + balanceDb.Project + " and id " + balanceDb.ID + " not added")
 		}
 		return nil, err
 	}
@@ -112,7 +112,7 @@ func (repository *BalanceRepository) Remove(ctx context.Context, project string,
 	err := result.Scan(&storedBalance.Project, &storedBalance.ID, &storedBalance.BalanceID, &storedBalance.Amount, &storedBalance.Year)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("balance [" + id + "] not found")
+			return nil, errors.New("balance with project " + project + " and id " + id + " not found")
 		}
 		return nil, err
 	}
@@ -160,7 +160,7 @@ func (repository *BalanceRepository) Add(ctx context.Context, input balance.AddB
 	err = result.Scan(&storedBalance.Project, &storedBalance.ID, &storedBalance.Type, &storedBalance.Kind, &storedBalance.Parent, &storedBalance.Child, &storedBalance.Accounts)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("balance [" + addBalanceDb.ID + "] not added")
+			return nil, errors.New("balance with project " + addBalanceDb.Project + " and id " + addBalanceDb.ID + " not added")
 		}
 		return nil, err
 	}

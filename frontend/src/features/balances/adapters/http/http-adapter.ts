@@ -7,6 +7,10 @@ export class DefaultBalancesHttpAdapter implements BalancesAdapter {
   async listBalancesHttpResponse() {
     const balanceHttpResponse = await this.balanceHttpInfra.listBalances();
 
+    if (balanceHttpResponse instanceof Error) {
+      return balanceHttpResponse;
+    }
+
     return balanceHttpResponse.items.map(item => ({
       id: item.id,
       name: item.name,

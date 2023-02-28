@@ -27,6 +27,12 @@ export const useBalanceStore = defineStore('balance', {
 
         const balance = await balancesUseCase.listBalances();
 
+        if (balance instanceof Error) {
+          const messagesStore = useMessagesStore();
+          messagesStore.addMessage('Fallo al cargar los balances');
+          return;
+        }
+
         this.state.storedBalance = balance;
         this.state.stateMessage = 'balances loaded';
 
@@ -35,6 +41,12 @@ export const useBalanceStore = defineStore('balance', {
           this.state.stateMessage = 'loading balances';
 
           const balance = await balancesUseCase.listBalances();
+
+          if (balance instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addMessage('Fallo al cargar los balances');
+            return;
+          }
 
           this.state.storedBalance = balance;
           this.state.stateMessage = 'balances loaded';

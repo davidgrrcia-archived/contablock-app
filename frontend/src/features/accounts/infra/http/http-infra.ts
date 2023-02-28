@@ -1,19 +1,38 @@
 import type { AccountDescribeResponse, AccountListResponse } from '@/features/accounts/infra/http/models';
+import { useConfigStore } from '@/stores/config';
 
 export interface AccountsHttpInfra {
-  listAccounts(): Promise<AccountListResponse>;
-  describeAccount(id: string): Promise<AccountDescribeResponse>;
+  listAccounts(): Promise<AccountListResponse | Error>;
+  describeAccount(id: string): Promise<AccountDescribeResponse | Error>;
 }
 
 export class DefaultAccountsHttpInfra implements AccountsHttpInfra {
-  listAccounts() {
-    return fetch('/api/accounts')
-      .then(response => response.json())
-      .then(response => response as AccountListResponse);
+  // constructor(private readonly project: string) {} TODO use project constructor
+
+  async listAccounts() {
+    const configStore = useConfigStore();
+
+    const response = await fetch('/api/projects/' + configStore.state.project + '/accounts');
+
+    const data = await response.json();
+
+    if (data.statusCode === 500) {
+      return new Error(data.error);
+    }
+
+    return data as AccountListResponse;
   }
-  describeAccount(id: string) {
-    return fetch('/api/accounts/' + id)
-      .then(response => response.json())
-      .then(response => response as AccountDescribeResponse);
+  async describeAccount(id: string) {
+    const configStore = useConfigStore();
+
+    const response = await fetch('/api/projects/' + configStore.state.project + '/accounts/' + id);
+
+    const data = await response.json();
+
+    if (data.statusCode === 500) {
+      return new Error(data.error);
+    }
+
+    return data as AccountDescribeResponse;
   }
 }

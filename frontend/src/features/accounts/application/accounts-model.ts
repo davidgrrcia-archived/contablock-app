@@ -1,6 +1,6 @@
 export interface AccountsAdapter {
-  listAccountsHttpResponse(): Promise<Node[]>;
-  describeAccountHttpResponse(id: string): Promise<Account>;
+  listAccountsHttpResponse(): Promise<Node[] | Error>;
+  describeAccountHttpResponse(id: string): Promise<Account | Error>;
 }
 
 export interface Account {

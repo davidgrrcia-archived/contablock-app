@@ -7,6 +7,10 @@ export class DefaultDailyLedgerHttpAdapter implements DailyLedgerAdapter {
   async listDailyLedgerHttpResponse() {
     const dailyLedgerHttpResponse = await this.dailyLedgerHttpInfra.listDailyLedger();
 
+    if (dailyLedgerHttpResponse instanceof Error) {
+      return dailyLedgerHttpResponse;
+    }
+
     return dailyLedgerHttpResponse.items.map(item => ({
       id: item.id,
       entriesExpanded: item.entriesExpanded.map(item2 => ({

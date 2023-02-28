@@ -34,7 +34,16 @@ export const useBusinessStore = defineStore('business', {
       try {
         this.state.stateMessage = 'loading business';
 
-        this.state.business = await businessUseCase.describeBusiness(id);
+        const response = await businessUseCase.describeBusiness(id);
+
+        if (response instanceof Error) {
+          const messagesStore = useMessagesStore();
+          messagesStore.addMessage('Fallo al cargar los datos de la empresa');
+          return this.state;
+        }
+
+        this.state.business = response;
+
         this.state.stateMessage = 'business loaded';
 
         return this.state;

@@ -60,7 +60,7 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 	err := result.Scan(&addedEntry.Project, &addedEntry.ID, &addedEntry.AccountID, &addedEntry.MultipleEntryID, &addedEntry.BalanceByYearID, &addedEntry.Currency, &addedEntry.Concept, &addedEntry.Date, &addedEntry.Quarter, &addedEntry.DebitBalance, &addedEntry.CreditBalance, &addedEntry.TotalBalance, &addedEntry.State, &addedEntry.StateReason, &addedEntry.CreationDate, &addedEntry.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("entry [" + entryDb.ID + "] not added")
+			return nil, errors.New("entry with project [" + entryDb.Project + "] and id [" + entryDb.ID + "] not added")
 		}
 		return nil, err
 	}
@@ -107,7 +107,7 @@ func (repository *EntryRepository) Get(ctx context.Context, project string, id s
 	err := result.Scan(&storedEntry.Project, &storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("entry [" + id + "] not found")
+			return nil, errors.New("entry with project [" + project + "] and id [" + id + "] not found")
 		}
 		return nil, err
 	}
@@ -234,7 +234,7 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 	err := result.Scan(&storedEntry.Project, &storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("entry not found")
+			return nil, errors.New("entry with project " + entryDb.Project + " and id " + entryDb.ID + " not found")
 		}
 		return nil, err
 	}
@@ -281,7 +281,7 @@ func (repository *EntryRepository) Remove(ctx context.Context, project string, i
 	err := result.Scan(&storedEntry.Project, &storedEntry.ID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.New("entry not found")
+			return nil, errors.New("entry with project " + project + " and id " + id + " not found")
 		}
 		return nil, err
 	}
