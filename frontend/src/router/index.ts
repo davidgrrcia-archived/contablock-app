@@ -12,7 +12,7 @@ import { useConfigStore } from '@/stores/config';
 const requireAuth = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
   const configStore = useConfigStore();
 
-  const isAuthenticated = configStore.getIsAuthenticated(configStore.state.project);
+  const isAuthenticated = configStore.getIsAuthenticated();
   if (isAuthenticated) {
     next();
   } else {

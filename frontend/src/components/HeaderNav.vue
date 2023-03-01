@@ -3,9 +3,11 @@ import { useCreateEntryModalStore } from '@/features/entries/application/create-
 import CreateEntryModal from '@/features/entries/adapters/views/CreateEntryModal.vue';
 import { useConfigStore } from '@/stores/config';
 import BusinessHeading from '@/features/business/adapters/views/BusinessHeading.vue';
+import { getRoleColor } from '@/features/utils/utils';
 
 const configStore = useConfigStore();
 const modalState = useCreateEntryModalStore();
+const role = configStore.getRole();
 
 function showCreateEntryModal() {
   modalState.showModal();
@@ -13,7 +15,7 @@ function showCreateEntryModal() {
 </script>
 
 <template>
-  <header class="fixed top-0 left-0 flex w-full items-center bg-gray-800">
+  <header class="fixed top-0 left-0 flex w-full items-center" :class="[getRoleColor(role)]">
     <div class="flex w-1/2 items-center">
       <img alt="Vue logo" class="ml-5 object-cover" src="@/assets/logo.png" />
       <RouterLink class="text-lg" v-for="item in configStore.state.navigation" :key="item.name" :to="item.href" :class="['rounded-md p-2 font-normal text-white underline-offset-4 ' + (item.current ? 'underline' : 'hover:underline')]">{{ item.name }}</RouterLink>

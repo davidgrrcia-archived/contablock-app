@@ -80,3 +80,16 @@ export function dateToUnixTimestamp(date: Date): number {
 export function formatId(id: string): string {
   return id.substring(0, 8) + '...';
 }
+
+export function getRoleColor(role: string): string {
+  switch (role) {
+    case 'accountant':
+      return 'bg-gray-800';
+    case 'auditor':
+      return 'bg-blue-800';
+    case 'viewer':
+      return 'bg-green-800';
+    default:
+      return 'bg-black';
+  }
+}

@@ -17,7 +17,7 @@ interface ConfigState {
   isAuthenticated: Map<string, boolean>;
   userId: Map<string, string>;
   businessId: Map<string, string>;
-  rolePermission: Map<string, string>;
+  role: Map<string, string>;
 }
 
 const navigation: Navigation[] = [
@@ -33,7 +33,7 @@ const state: ConfigState = {
   isAuthenticated: new Map(),
   userId: new Map(),
   businessId: new Map(),
-  rolePermission: new Map(),
+  role: new Map(),
 };
 
 export const useConfigStore = defineStore('configStore', {
@@ -59,8 +59,17 @@ export const useConfigStore = defineStore('configStore', {
         }
       });
     },
-    getIsAuthenticated(project: string): boolean {
-      return this.state.isAuthenticated.get(project) || false;
+    getIsAuthenticated(): boolean {
+      return this.state.isAuthenticated.get(this.state.project) || false;
+    },
+    getUserId(): string {
+      return this.state.userId.get(this.state.project) || '';
+    },
+    getBusinessId(): string {
+      return this.state.businessId.get(this.state.project) || '';
+    },
+    getRole(): string {
+      return this.state.role.get(this.state.project) || '';
     },
     async loginUser(email: string, password: string) {
       try {
@@ -84,7 +93,7 @@ export const useConfigStore = defineStore('configStore', {
         this.state.isAuthenticated.set(response.project, true);
         this.state.userId.set(response.project, response.id);
         this.state.businessId.set(response.project, response.businessId);
-        this.state.rolePermission.set(response.project, response.role);
+        this.state.role.set(response.project, response.role);
       } catch (err) {
         this.state.stateMessage = 'error al iniciar sesión';
         const messagesStore = useMessagesStore();
