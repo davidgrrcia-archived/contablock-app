@@ -60,11 +60,16 @@ CREATE TABLE users(
     project VARCHAR(64) NOT NULL,
     id VARCHAR(64) NOT NULL,
     name VARCHAR(256) NOT NULL,
-    email VARCHAR(256) NOT NULL UNIQUE KEY,
+    email VARCHAR(256) NOT NULL,
     password VARCHAR(256) NOT NULL,
     role VARCHAR(64) NOT NULL,
     eth_address VARCHAR(42) NOT NULL,
+    default_password_changed BOOLEAN NOT NULL,
+    network VARCHAR(64) NOT NULL,
+    business_id VARCHAR(64) NOT NULL,
     creation_date VARCHAR(64) NOT NULL,
     last_update VARCHAR(64) NOT NULL,
-    PRIMARY KEY (id, project)
+    UNIQUE KEY (project, email),
+    PRIMARY KEY (id, project),
+    FOREIGN KEY (business_id) REFERENCES business(id)
 );

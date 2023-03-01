@@ -1,14 +1,17 @@
 package userInputHttpAdapter
 
 type User struct {
-	Project      string `json:"project"`
-	ID           string `json:"id"`
-	Name         string `json:"name"`
-	Email        string `json:"email"`
-	Role         string `json:"role"`
-	EthAddress   string `json:"ethAddress"`
-	CreationDate int64  `json:"creationDate"`
-	LastUpdate   int64  `json:"lastUpdate"`
+	Project                string `json:"project"`
+	ID                     string `json:"id"`
+	Name                   string `json:"name"`
+	Email                  string `json:"email"`
+	Role                   string `json:"role"`
+	EthAddress             string `json:"ethAddress"`
+	DefaultPasswordChanged bool   `json:"defaultPasswordChanged"`
+	Network                string `json:"network"`
+	BusinessID             string `json:"businessId"`
+	CreationDate           int64  `json:"creationDate"`
+	LastUpdate             int64  `json:"lastUpdate"`
 }
 
 type DescribeUserRequest struct {
@@ -41,6 +44,8 @@ type CreateUserRequest struct {
 	Password   string `json:"password"`
 	Role       string `json:"role"`
 	EthAddress string `json:"ethAddress"`
+	Network    string `json:"network"`
+	BusinessID string `json:"businessId"`
 }
 
 type CreateUserResponse struct {

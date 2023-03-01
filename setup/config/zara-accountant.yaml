@@ -1,6 +1,6 @@
 business:
-  - project: &zara-project zara-accountant
-    id: zara
+  - project: &zara-accountant-project zara-accountant
+    id: &zaraBusinessId zara-business-id
     name: Zara
     socialDenomination: Zara España, SA
     registeredOffice: Arteixo, La Coruña
@@ -9,4621 +9,4623 @@ business:
     ethAddress: 0xb794f5ea0ba39494ce839613fffba74279579268
 
 users:
-  - project: *zara-project
-    id: zara-admin
+  - project: *zara-accountant-project
     name: Zara Admin
     email: admin@zara.com
     password: admin
     role: admin
     ethAddress: 0x627306090abaB3A6e1400e9345bC60c78a8BEf57
-  - project: *zara-project
-    id: zara-accountant
+    network: &zaraNetwork zara-network
+    businessId: *zaraBusinessId
+  - project: *zara-accountant-project
     name: Zara Accountant
     email: accountant@zara.com
     password: accountant
     role: accountant
     ethAddress: 0xf17f52151EbEF6C7334FAD080c5704D77216b732
+    network: *zaraNetwork
+    businessId: *zaraBusinessId
 
 accounts:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1
     name: FINANCIACIÓN BÁSICA
     level: &group Grupo
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10
     name: CAPITAL
     level: &subgroup Subgrupo
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 100
     name: Capital social
     level: &account Cuenta
     balanceId: 10048
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 101
     name: Fondo social
     level: *account
     balanceId: 10048
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 102
     name: Capital
     level: *account
     balanceId: 10048
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 103
     name: Socios por desembolsos no exigidos
     level: *account
     balanceId: 10049
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1030
     name: Socios por desembolsos no exigidos, capital social
     level: &subaccount Subcuenta
     balanceId: 10049
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1034
     name: Socios por desembolsos no exigidos, capital pendiente de inscripción
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 104
     name: Socios por aportaciones no dinerarias pendientes
     level: *account
     balanceId: 10049
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1040
     name: Socios por aportaciones no dinerarias pendientes, capital social
     level: *subaccount
     balanceId: 10049
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1044
     name: Socios por aportaciones no dinerarias pendientes, capital pendiente de inscripción
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 108
     name: Acciones o participaciones propias en situaciones especiales
     level: *account
     balanceId: 10053
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 109
     name: Acciones o participaciones propias para reducción de capital
     level: *account
     balanceId: 10053
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 11
     name: RESERVAS Y OTROS INSTRUMENTOS DE PATRIMONIO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 110
     name: Prima de emisión o asunción
     level: *account
     balanceId: 10050
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 111
     name: Otros instrumentos de patrimonio neto
     level: *account
     balanceId: 10059
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1110
     name: Patrimonio neto por emisión de instrumentos financieros compuestos
     level: *subaccount
     balanceId: 10059
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1111
     name: Resto de instrumentos de patrimonio neto
     level: *subaccount
     balanceId: 10059
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 112
     name: Reserva legal
     level: *account
     balanceId: 10051
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 113
     name: Reservas voluntarias
     level: *account
     balanceId: 10052
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 114
     name: Reservas especiales
     level: *account
     balanceId: 10052
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1140
     name: Reservas para acciones o participaciones de la sociedad dominante
     level: *subaccount
     balanceId: 10052
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1141
     name: Reservas estatutarias
     level: *subaccount
     balanceId: 10051
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1142
     name: Reserva por capital amortizado
     level: *subaccount
     balanceId: 10052
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1143
     name: Reserva por fondo de comercio
     level: *subaccount
     balanceId: 10052
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1144
     name: Reservas por acciones propias aceptadas en garantía
     level: *subaccount
     balanceId: 10052
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 115
     name: Reservas por pérdidas y ganancias actuariales y otros ajustes
     level: *account
     balanceId: 10052
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 118
     name: Aportaciones de socios o propietarios
     level: *account
     balanceId: 10056
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 119
     name: Diferencias por ajuste del capital a euros
     level: *account
     balanceId: 10052
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 12
     name: RESULTADOS PENDIENTES DE APLICACIÓN
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 120
     name: Remanente
     level: *account
     balanceId: 10054
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 121
     name: Resultados negativos de ejercicios anteriores
     level: *account
     balanceId: 10055
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 129
     name: Resultado del ejercicio
     level: *account
     balanceId: 10057
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 13
     name: SUBVENCIONES, DONACIONES Y AJUSTES POR CAMBIOS DE VALOR
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 130
     name: Subvenciones oficiales de capital
     level: *account
     balanceId: 10065
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 131
     name: Donaciones y legados de capital
     level: *account
     balanceId: 10065
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 132
     name: Otras subvenciones, donaciones y legados
     level: *account
     balanceId: 10065
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 133
     name: Ajustes por valoración en activos financieros disponibles para la venta
     level: *account
     balanceId: 10060
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 134
     name: Operaciones de cobertura
     level: *account
     balanceId: 10061
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1340
     name: Cobertura de flujos de efectivo
     level: *subaccount
     balanceId: 10061
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1341
     name: Cobertura de una inversión neta en un negocio en el extranjero
     level: *subaccount
     balanceId: 10061
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 135
     name: Diferencias de conversión
     level: *account
     balanceId: 10063
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 136
     name: Ajustes por valoración en activos no corrientes y *groups enajenables de elementos, mantenidos para la venta
     level: *account
     balanceId: 10062
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 137
     name: Ingresos fiscales a distribuir en varios ejercicios
     level: *account
     balanceId: 10064
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1370
     name: Ingresos fiscales por diferencias permanentes a distribuir en varios ejercicios
     level: *subaccount
     balanceId: 10064
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1371
     name: Ingresos fiscales por deducciones y bonificaciones a distribuir en varios ejercicios
     level: *subaccount
     balanceId: 10064
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 14
     name: PROVISIONES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 140
     name: Provisión por retribuciones a largo plazo al personal
     level: *account
     balanceId: 10066
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 141
     name: Provisión para impuestos
     level: *account
     balanceId: 10069
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 142
     name: Provisión para otras responsabilidades
     level: *account
     balanceId: 10069
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 143
     name: Provisión por desmantelamiento, retiro o rehabilitación del inmovilizado
     level: *account
     balanceId: 10069
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 145
     name: Provisión para actuaciones medioambientales
     level: *account
     balanceId: 10067
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 146
     name: Provisión para reestructuraciones
     level: *account
     balanceId: 10068
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 147
     name: Provisión por transacciones con pagos basados en instrumentos de patrimonio
     level: *account
     balanceId: 10069
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 15
     name: DEUDAS A LARGO PLAZO CON CARACTERÍSTICAS ESPECIALES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 150
     name: Acciones o participaciones a largo plazo consideradas como pasivos financieros
     level: *account
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 153
     name: Desembolsos no exigidos por acciones o participaciones consideradas como pasivos financieros
     level: *account
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1533
     name: Desembolsos no exigidos, empresas del *group
     level: *subaccount
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1534
     name: Desembolsos no exigidos, empresas asociadas
     level: *subaccount
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1535
     name: Desembolsos no exigidos, otras partes vinculadas
     level: *subaccount
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1536
     name: Otros desembolsos no exigidos
     level: *subaccount
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 154
     name: Aportaciones no dinerarias pendientes por acciones o participaciones consideradas como pasivos financieros
     level: *account
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1543
     name: Aportaciones no dinerarias pendientes, empresas del *group
     level: *subaccount
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1544
     name: Aportaciones no dinerarias pendientes, empresas asociadas
     level: *subaccount
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1545
     name: Aportaciones no dinerarias pendientes, otras partes vinculadas
     level: *subaccount
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1546
     name: Otras aportaciones no dinerarias pendientes
     level: *subaccount
     balanceId: 10078
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 16
     name: DEUDAS A LARGO PLAZO CON PARTES VINCULADAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 160
     name: Deudas a largo plazo con entidades de crédito vinculadas
     level: *account
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1603
     name: Deudas a largo plazo con entidades de crédito, empresas del *group
     level: *subaccount
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1604
     name: Deudas a largo plazo con entidades de crédito, empresas asociadas
     level: *subaccount
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1605
     name: Deudas a largo plazo con otras entidades de crédito vinculadas
     level: *subaccount
     balanceId: 10071
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 161
     name: Proveedores de inmovilizado a largo plazo, partes vinculadas
     level: *account
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1613
     name: Proveedores de inmovilizado a largo plazo, empresas del *group
     level: *subaccount
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1614
     name: Proveedores de inmovilizado a largo plazo, empresas asociadas
     level: *subaccount
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1615
     name: Proveedores de inmovilizado a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId: 10074
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 162
     name: Acreedores por arrendamiento financiero a largo plazo, partes vinculadas
     level: *account
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1623
     name: Acreedores por arrendamiento financiero a largo plazo, empresas de *group
     level: *subaccount
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1624
     name: Acreedores por arrendamiento financiero a largo plazo, empresas asociadas
     level: *subaccount
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1625
     name: Acreedores por arrendamiento financiero a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId: 10072
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 163
     name: Otras deudas a largo plazo con partes vinculadas
     level: *account
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1633
     name: Otras deudas a largo plazo, empresas del *group
     level: *subaccount
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1634
     name: Otras deudas a largo plazo, empresas asociadas
     level: *subaccount
     balanceId: 10075
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1635
     name: Otras deudas a largo plazo, con otras partes vinculadas
     level: *subaccount
     balanceId: 10074
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 17
     name: DEUDAS A LARGO PLAZO POR PRÉSTAMOS RECIBIDOS, EMPRÉSTITOS Y OTROS CONCEPTOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 170
     name: Deudas a largo plazo con entidades de crédito
     level: *account
     balanceId: 10071
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 171
     name: Deudas a largo plazo
     level: *account
     balanceId: 10074
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 172
     name: Deudas a largo plazo transformables en subvenciones, donaciones y legados
     level: *account
     balanceId: 10074
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 173
     name: Proveedores de inmovilizado a largo plazo
     level: *account
     balanceId: 10074
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 174
     name: Acreedores por arrendamiento financiero a largo plazo
     level: *account
     balanceId: 10072
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 175
     name: Efectos a pagar a largo plazo
     level: *account
     balanceId: 10074
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 176
     name: Pasivos por derivados financieros a largo plazo
     level: *account
     balanceId: 10073
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1765
     name: Pasivos por derivados financieros a largo plazo, cartera de negociación
     level: *subaccount
     balanceId: 10073
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 1768
     name: Pasivos por derivados financieros a largo plazo, instrumentos de cobertura
     level: *subaccount
     balanceId: 10073
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 177
     name: Obligaciones y bonos
     level: *account
     balanceId: 10070
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 178
     name: Obligaciones y bonos convertibles
     level: *account
     balanceId: 10070
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 179
     name: Deudas representadas en otros valores negociables
     level: *account
     balanceId: 10070
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 18
     name: PASIVOS POR FIANZAS, GARANTÍAS Y OTROS CONCEPTOS A LARGO PLAZO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 180
     name: Fianzas recibidas a largo plazo
     level: *account
     balanceId: 10074
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 181
     name: Anticipos recibidos por ventas o prestaciones de servicios a largo plazo
     level: *account
     balanceId: 10077
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 185
     name: Depósitos recibidos a largo plazo
     level: *account
     balanceId: 10074
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 189
     name: Garantías financieras a largo plazo
     level: *account
     balanceId: 10074
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 19
     name: SITUACIONES TRANSITORIAS DE FINANCIACIÓN
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 190
     name: Acciones o participaciones emitidas
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 192
     name: Suscriptores de acciones
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 194
     name: Capital emitido pendiente de inscripción
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 195
     name: Acciones o participaciones emitidas consideradas como pasivos financieros
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 197
     name: Suscriptores de acciones consideradas como pasivos financieros
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 199
     name: Acciones o participaciones emitidas consideradas como pasivos financieros pendientes de inscripción
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2
     name: ACTIVO NO CORRIENTE
     level: *group
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 20
     name: INMOVILIZACIONES INTANGIBLES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 200
     name: Investigación
     level: *account
     balanceId: 10005
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 201
     name: Desarrollo
     level: *account
     balanceId: 10000
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 202
     name: Concesiones administrativas
     level: *account
     balanceId: 10001
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 203
     name: Propiedad industrial
     level: *account
     balanceId: 10002
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 204
     name: Fondo de comercio
     level: *account
     balanceId: 10003
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 205
     name: Derechos de traspaso
     level: *account
     balanceId: 10006
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 206
     name: Aplicaciones informáticas
     level: *account
     balanceId: 10004
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 209
     name: Anticipos para inmovilizaciones intangibles
     level: *account
     balanceId: 10006
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 21
     name: INMOVILIZACIONES MATERIALES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 210
     name: Terrenos y bienes naturales
     level: *account
     balanceId: 10007
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 211
     name: Construcciones
     level: *account
     balanceId: 10007
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 212
     name: Instalaciones técnicas
     level: *account
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 213
     name: Maquinaria
     level: *account
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 214
     name: Utillaje
     level: *account
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 215
     name: Otras instalaciones
     level: *account
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 216
     name: Mobiliario
     level: *account
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 217
     name: Equipos para procesos de información
     level: *account
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 218
     name: Elementos de transporte
     level: *account
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 219
     name: Otro inmovilizado material
     level: *account
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 22
     name: INVERSIONES INMOBILIARIAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 220
     name: Inversiones en terrenos y bienes naturales
     level: *account
     balanceId: 10010
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 221
     name: Inversiones en construcciones
     level: *account
     balanceId: 10011
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 23
     name: INMOVILIZACIONES MATERIALES EN CURSO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 230
     name: Adaptación de terrenos y bienes naturales
     level: *account
     balanceId: 10009
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 231
     name: Construcciones en curso
     level: *account
     balanceId: 10009
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 232
     name: Instalaciones técnicas en montaje
     level: *account
     balanceId: 10009
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 233
     name: Maquinaria en montaje
     level: *account
     balanceId: 10009
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 237
     name: Equipos para procesos de información en montaje
     level: *account
     balanceId: 10009
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 239
     name: Anticipos para inmovilizaciones materiales
     level: *account
     balanceId: 10009
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 24
     name: INVERSIONES FINANCIERAS A LARGO PLAZO EN PARTES VINCULADAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 240
     name: Participaciones a largo plazo en partes vinculadas
     level: *account
     balanceId: 10012
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2403
     name: Participaciones a largo plazo en empresas del *group
     level: *subaccount
     balanceId: 10012
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2404
     name: Participaciones a largo plazo en empresas asociadas
     level: *subaccount
     balanceId: 10012
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2405
     name: Participaciones a largo plazo en otras partes vinculadas
     level: *subaccount
     balanceId: 10015
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 241
     name: Valores representativos de deuda a largo plazo de partes vinculadas
     level: *account
     balanceId: 10014
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2413
     name: Valores representativos de deuda a largo plazo de empresas del *group
     level: *subaccount
     balanceId: 10014
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2414
     name: Valores representativos de deuda a largo plazo de empresas asociadas
     level: *subaccount
     balanceId: 10014
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2415
     name: Valores representativos de deuda a largo plazo de otras partes vinculadas
     level: *subaccount
     balanceId: 10017
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 242
     name: Créditos a largo plazo a partes vinculadas
     level: *account
     balanceId: 10013
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2423
     name: Créditos a largo plazo a empresas del *group
     level: *subaccount
     balanceId: 10013
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2424
     name: Créditos a largo plazo a empresas asociadas
     level: *subaccount
     balanceId: 10013
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2425
     name: Créditos a largo plazo a otras partes vinculadas
     level: *subaccount
     balanceId: 10016
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 249
     name: Desembolsos pendientes sobre participaciones a largo plazo en partes vinculadas
     level: *account
     balanceId: 10012
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2493
     name: Desembolsos pendientes sobre participaciones a largo plazo en empresas del *group
     level: *subaccount
     balanceId: 10012
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2494
     name: Desembolsos pendientes sobre participaciones a largo plazo en empresas asociadas
     level: *subaccount
     balanceId: 10012
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2495
     name: Desembolsos pendientes sobre participaciones a largo plazo en otras partes vinculadas
     level: *subaccount
     balanceId: 10015
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 25
     name: OTRAS INVERSIONES FINANCIERAS A LARGO PLAZO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 250
     name: Inversiones financieras a largo plazo en instrumentos de patrimonio
     level: *account
     balanceId: 10015
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 251
     name: Valores representativos de deuda a largo plazo
     level: *account
     balanceId: 10017
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 252
     name: Créditos a largo plazo
     level: *account
     balanceId: 10016
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 253
     name: Créditos a largo plazo por enajenación de in movilizado
     level: *account
     balanceId: 10016
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 254
     name: Créditos a largo plazo al personal
     level: *account
     balanceId: 10016
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 255
     name: Activos por derivados financieros a largo plazo
     level: *account
     balanceId: 10018
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2550
     name: Activos por derivados financieros a largo plazo, cartera de negociación
     level: *subaccount
     balanceId: 10018
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2553
     name: Activos por derivados financieros a largo plazo, instrumentos de cobertura
     level: *subaccount
     balanceId: 10018
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 257
     name: Derechos de reembolso derivados de contratos de seguro relativos a retribuciones a largo plazo al personal
     level: *account
     balanceId: 10020
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 258
     name: Imposiciones a largo plazo
     level: *account
     balanceId: 10019
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 259
     name: Desembolsos pendientes sobre participaciones en el patrimonio neto a largo plazo
     level: *account
     balanceId: 10015
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 26
     name: FIANZAS Y DEPÓSITOS CONSTITUIDOS A LARGO PLAZO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 260
     name: Fianzas constituidas a largo plazo
     level: *account
     balanceId: 10019
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 265
     name: Depósitos constituidos a largo plazo
     level: *account
     balanceId: 10019
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 28
     name: AMORTIZACIÓN ACUMULADA DEL INMOVILIZADO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 280
     name: Amortización acumulada del inmovilizado intangible
     level: *account
     balanceId: 10006
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2800
     name: Amortización acumulada de investigación
     level: *subaccount
     balanceId: 10005
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2801
     name: Amortización acumulada de desarrollo
     level: *subaccount
     balanceId: 10000
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2802
     name: Amortización acumulada de concesiones administrativas
     level: *subaccount
     balanceId: 10001
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2803
     name: Amortización acumulada de propiedad industrial
     level: *subaccount
     balanceId: 10002
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2805
     name: Amortización acumulada de derechos de traspaso
     level: *subaccount
     balanceId: 10006
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2806
     name: Amortización acumulada de aplicaciones informáticas
     level: *subaccount
     balanceId: 10004
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 281
     name: Amortización acumulada del inmovilizado material
     level: *account
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2811
     name: Amortización acumulada de construcciones
     level: *subaccount
     balanceId: 10007
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2812
     name: Amortización acumulada de instalaciones técnicas
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2813
     name: Amortización acumulada de maquinaria
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2814
     name: Amortización acumulada de utillaje
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2815
     name: Amortización acumulada de otras instalaciones
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2816
     name: Amortización acumulada de mobiliario
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2817
     name: Amortización acumulada de equipos para procesos de información
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2818
     name: Amortización acumulada de elementos de transporte
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2819
     name: Amortización acumulada de otro inmovilizado material
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 282
     name: Amortización acumulada de las inversiones inmobiliarias
     level: *account
     balanceId: 10011
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 29
     name: DETERIORO DE VALOR DE ACTIVOS NO CORRIENTES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 290
     name: Deterioro de valor del inmovilizado intangible
     level: *account
     balanceId: 10006
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2900
     name: Deterioro de valor de investigación
     level: *subaccount
     balanceId: 10005
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2901
     name: Deterioro del valor de desarrollo
     level: *subaccount
     balanceId: 10000
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2902
     name: Deterioro de valor de concesiones administrativas
     level: *subaccount
     balanceId: 10001
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2903
     name: Deterioro de valor de propiedad industrial
     level: *subaccount
     balanceId: 10002
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2905
     name: Deterioro de valor de derechos de traspaso
     level: *subaccount
     balanceId: 10006
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2906
     name: Deterioro de valor de aplicaciones informáticas
     level: *subaccount
     balanceId: 10004
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 291
     name: Deterioro de valor del inmovilizado materia l
     level: *account
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2910
     name: Deterioro de valor de terrenos y bienes naturales
     level: *subaccount
     balanceId: 10007
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2911
     name: Deterioro de valor de construcciones
     level: *subaccount
     balanceId: 10007
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2912
     name: Deterioro de valor de instalaciones técnicas
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2913
     name: Deterioro de valor de maquinaria
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2914
     name: Deterioro de valor de utillaje
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2915
     name: Deterioro de valor de otras instalaciones
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2916
     name: Deterioro de valor de mobiliario
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2917
     name: Deterioro de valor de equipos para procesos de información
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2918
     name: Deterioro de valor de elementos de transporte
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2919
     name: Deterioro de valor de otro inmovilizado material
     level: *subaccount
     balanceId: 10008
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 292
     name: Deterioro de valor de las inversiones inmobiliarias
     level: *account
     balanceId: 10010
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2920
     name: Deterioro de valor de los terrenos y bienes naturales
     level: *subaccount
     balanceId: 10010
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2921
     name: Deterioro de valor de construcciones
     level: *subaccount
     balanceId: 10011
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 293
     name: Deterioro de valor de participaciones a largo plazo en partes vinculadas
     level: *account
     balanceId: 10012
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2933
     name: Deterioro de valor de participaciones a largo plazo en empresas del *group
     level: *subaccount
     balanceId: 10012
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2934
     name: Deterioro de valor de participaciones a largo plazo en empresas asociadas
     level: *subaccount
     balanceId: 10012
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 294
     name: Deterioro de valor de valores representativos de deuda a largo plazo de partes vinculadas
     level: *account
     balanceId: 10014
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2943
     name: Deterioro de valor de valores representativos de deuda a largo plazo de empresas del *group
     level: *subaccount
     balanceId: 10014
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2944
     name: Deterioro de valor de valores representativos de deuda a largo plazo de empresas asociadas
     level: *subaccount
     balanceId: 10014
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2945
     name: Deterioro de valor de valores representativos de deuda a largo plazo de otras partes vinculadas
     level: *subaccount
     balanceId: 10017
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 295
     name: Deterioro de valor de créditos a largo plazo a partes vinculadas
     level: *account
     balanceId: 10013
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2953
     name: Deterioro de valor de créditos a largo plazo a empresas del *group
     level: *subaccount
     balanceId: 10013
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2954
     name: Deterioro de valor de créditos a largo plazo a empresas asociadas
     level: *subaccount
     balanceId: 10013
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 2955
     name: Deterioro de valor de créditos a largo plazo a otras partes vinculadas
     level: *subaccount
     balanceId: 10016
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 297
     name: Deterioro de valor de valores representativos de deuda a largo plazo
     level: *account
     balanceId: 10017
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 298
     name: Deterioro de valor de créditos a largo plazo
     level: *account
     balanceId: 10016
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 3
     name: EXISTENCIAS
     level: *group
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 30
     name: COMERCIALES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 300
     name: Mercaderías A
     level: *account
     balanceId: 10023
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 301
     name: Mercaderías B
     level: *account
     balanceId: 10023
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 31
     name: MATERIAS PRIMAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 310
     name: Materias primas A
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 311
     name: Materias primas B
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 32
     name: OTROS APROVISIONAMIENTOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 320
     name: Elementos y conjuntos incorporables
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 321
     name: Combustibles
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 322
     name: Repuestos
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 325
     name: Materiales diversos
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 326
     name: Embalajes
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 327
     name: Envases
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 328
     name: Material de oficina
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 33
     name: PRODUCTOS EN CURSO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 330
     name: Productos en curso A
     level: *account
     balanceId: 10025
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 331
     name: Productos en curso B
     level: *account
     balanceId: 10025
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 34
     name: PRODUCTOS SEMITERMINADOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 340
     name: Productos semiterminados A
     level: *account
     balanceId: 10025
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 341
     name: Productos semiterminados B
     level: *account
     balanceId: 10025
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 35
     name: PRODUCTOS TERMINADOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 350
     name: Productos terminados A
     level: *account
     balanceId: 10026
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 351
     name: Productos terminados B
     level: *account
     balanceId: 10026
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 36
     name: SUBPRODUCTOS, RESIDUOS Y MATERIALES RECUPERADOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 360
     name: Subproductos A
     level: *account
     balanceId: 10027
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 361
     name: Subproductos B
     level: *account
     balanceId: 10027
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 365
     name: Residuos A
     level: *account
     balanceId: 10027
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 366
     name: Residuos B
     level: *account
     balanceId: 10027
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 368
     name: Materiales recuperados A
     level: *account
     balanceId: 10027
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 369
     name: Materiales recuperados B
     level: *account
     balanceId: 10027
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 39
     name: DETERIORO DE VALOR DE LAS EXISTENCIAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 390
     name: Deterioro de valor de las mercaderías
     level: *account
     balanceId: 10023
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 391
     name: Deterioro de valor de las materias primas
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 392
     name: Deterioro de valor de otros aprovi sionamientos
     level: *account
     balanceId: 10024
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 393
     name: Deterioro de valor de los productos en curso
     level: *account
     balanceId: 10025
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 394
     name: Deterioro de valor de los productos semiterminados
     level: *account
     balanceId: 10025
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 395
     name: Deterioro de valor de los productos terminados
     level: *account
     balanceId: 10026
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 396
     name: Deterioro de valor de los subproductos, residuos y materiales recuperados
     level: *account
     balanceId: 10027
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4
     name: ACREEDORES Y DEUDORES POR OPERACIONES COMERCIALES
     level: *group
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 40
     name: PROVEEDORES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 400
     name: Proveedores
     level: *account
     balanceId: 10087
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4000
     name: Proveedores (euros)
     level: *subaccount
     balanceId: 10087
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4004
     name: Proveedores (moneda extranjera)
     level: *subaccount
     balanceId: 10087
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4009
     name: Proveedores, facturas pendientes de recibir o de formalizar
     level: *subaccount
     balanceId: 10087
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 401
     name: Proveedores, efectos comerciales a pagar
     level: *account
     balanceId: 10087
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 403
     name: Proveedores, empresas del *group
     level: *account
     balanceId: 10088
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4030
     name: Proveedores, empresas del *group (euros)
     level: *subaccount
     balanceId: 10088
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4031
     name: Efectos comerciales a pagar, empresas del *group
     level: *subaccount
     balanceId: 10088
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4034
     name: Proveedores, empresas del *group (moneda extranjera)
     level: *subaccount
     balanceId: 10088
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4036
     name: Envases y embalajes a devolver a proveedores, empresas del *group
     level: *subaccount
     balanceId: 10088
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4039
     name: Proveedores, empresas del *group, facturas pendientes de recibir o de formalizar
     level: *subaccount
     balanceId: 10088
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 404
     name: Proveedores, empresas asociadas
     level: *account
     balanceId: 10088
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 405
     name: Proveedores, otras partes vinculadas
     level: *account
     balanceId: 10087
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 406
     name: Envases y embalajes a devolver a proveedores
     level: *account
     balanceId: 10087
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 407
     name: Anticipos a proveedores
     level: *account
     balanceId: 10028
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 41
     name: ACREEDORES VARIOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 410
     name: Acreedores por prestaciones de servicios
     level: *account
     balanceId: 10089
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4100
     name: Acreedores por prestaciones de servicios (euros)
     level: *subaccount
     balanceId: 10089
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4104
     name: Acreedores por prestaciones de servicios, (moneda extranjera)
     level: *subaccount
     balanceId: 10089
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4109
     name: Acreedores por prestaciones de servicios, facturas pendientes de recibir o de formalizar
     level: *subaccount
     balanceId: 10089
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 411
     name: Acreedores, efectos comerciales a pagar
     level: *account
     balanceId: 10089
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 419
     name: Acreedores por operaciones en común
     level: *account
     balanceId: 10089
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 43
     name: CLIENTES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 430
     name: Clientes
     level: *account
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4300
     name: Clientes (euros)
     level: *subaccount
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4304
     name: Clientes (moneda extranjera)
     level: *subaccount
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4309
     name: Clientes, facturas pendientes de formalizar
     level: *subaccount
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 431
     name: Clientes, efectos comerciales a cobrar
     level: *account
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4310
     name: Efectos comerciales en cartera
     level: *subaccount
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4311
     name: Efectos comerciales descontados
     level: *subaccount
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4312
     name: Efectos comerciales en gestión de cobro
     level: *subaccount
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4315
     name: Efectos comerciales impagados
     level: *subaccount
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 432
     name: Clientes, operaciones de “factoring”
     level: *account
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 433
     name: Clientes, empresas del *group
     level: *account
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4330
     name: Clientes empresas del *group (euros)
     level: *subaccount
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4331
     name: Efectos comerciales a cobrar, empresas del *group
     level: *subaccount
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4332
     name: Clientes empresas del *group, operaciones de “factoring”
     level: *subaccount
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4334
     name: Clientes empresas del *group (moneda extranjera)
     level: *subaccount
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4336
     name: Clientes empresas del *group de dudoso cobro
     level: *subaccount
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4337
     name: Envases y embalajes a devolver a clientes, empresas del *group
     level: *subaccount
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4339
     name: Clientes empresas del *group, facturas pendientes de formalizar
     level: *subaccount
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 434
     name: Clientes, empresas asociadas
     level: *account
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 435
     name: Clientes, otras partes vinculadas
     level: *account
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 436
     name: Clientes de dudoso cobro
     level: *account
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 437
     name: Envases y embalajes a devolver por clientes
     level: *account
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 438
     name: Anticipos de clientes
     level: *account
     balanceId: 10093
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 44
     name: DEUDORES VARIOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 440
     name: Deudores
     level: *account
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4400
     name: Deudores (euros)
     level: *subaccount
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4404
     name: Deudores (moneda extranjera)
     level: *subaccount
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4409
     name: Deudores, facturas pendientes de formalizar
     level: *subaccount
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 441
     name: Deudores, efectos comerciales a cobrar
     level: *account
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4410
     name: Deudores, efectos comerciales en cartera
     level: *subaccount
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4411
     name: Deudores, efectos comerciales descontados
     level: *subaccount
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4412
     name: Deudores, efectos comerciales en gestión de cobro
     level: *subaccount
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4415
     name: Deudores, efectos comerciales impagados
     level: *subaccount
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 446
     name: Deudores de dudoso cobro
     level: *account
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 449
     name: Deudores por operaciones en común
     level: *account
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 46
     name: PERSONAL
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 460
     name: Anticipos de remuneraciones
     level: *account
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 465
     name: Remuneraciones pendientes de pago
     level: *account
     balanceId: 10090
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 466
     name: Remuneraciones mediante sistemas de aportación definida pendientes de pago
     level: *account
     balanceId: 10090
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 47
     name: ADMINISTRACIONES PÚBLICAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 470
     name: Hacienda Pública, deudora por diversos conceptos
     level: *account
     balanceId: 10034
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4700
     name: Hacienda Pública, deudora por IVA
     level: *subaccount
     balanceId: 10034
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4708
     name: Hacienda Pública, deudora por subvenciones concedidas
     level: *subaccount
     balanceId: 10034
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4709
     name: Hacienda Pública, deudora por devolución de impuestos
     level: *subaccount
     balanceId: 10033
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 471
     name: Organismos de la Seguridad Social, deudores
     level: *account
     balanceId: 10034
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 472
     name: Hacienda Pública, IVA soportado
     level: *account
     balanceId: 10034
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 473
     name: Hacienda Pública, retenciones y pagos a cuenta
     level: *account
     balanceId: N/A
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 474
     name: Activos por impuesto diferido
     level: *account
     balanceId: 10021
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4740
     name: Activos por diferencias temporarias deducibles
     level: *subaccount
     balanceId: 10021
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4742
     name: Derechos por deducciones y bonificaciones pendientes de aplicar
     level: *subaccount
     balanceId: 10021
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4745
     name: Crédito por pérdidas a compensar del ejercicio
     level: *subaccount
     balanceId: 10021
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 475
     name: Hacienda Pública, acreedora por conceptos fiscales
     level: *account
     balanceId: 10092
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4750
     name: Hacienda Pública, acreedora por IVA
     level: *subaccount
     balanceId: 10092
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4751
     name: Hacienda Pública, acreedora por retenciones practicadas
     level: *subaccount
     balanceId: 10092
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4752
     name: Hacienda Pública, acreedora por impuesto sobre sociedades
     level: *subaccount
     balanceId: 10091
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4758
     name: Hacienda Pública, acreedora por subvenciones a reintegrar
     level: *subaccount
     balanceId: 10092
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 476
     name: Organismos de la Seguridad Social, acreedores
     level: *account
     balanceId: 10092
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 477
     name: Hacienda Pública, IVA repercutido
     level: *account
     balanceId: 10092
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 479
     name: Pasivos por diferencias temporarias imponibles
     level: *account
     balanceId: 10076
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 48
     name: AJUSTES POR PERIODIFICACIÓN
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 480
     name: Gastos anticipados
     level: *account
     balanceId: 10045
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 485
     name: Ingresos anticipados
     level: *account
     balanceId: 10094
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 49
     name: DETERIORO DE VALOR DE CRÉDITOS COMERCIALES Y PROVISIONES A CORTO PLAZO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 490
     name: Deterioro de valor de créditos por operaciones comerciales
     level: *account
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 493
     name: Deterioro de valor de créditos por operaciones comerciales con partes vinculadas
     level: *account
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4933
     name: Deterioro de valor de créditos por operaciones comerciales con empresas del *group
     level: *subaccount
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4934
     name: Deterioro de valor de créditos por operaciones comerciales con empresas asociadas
     level: *subaccount
     balanceId: 10030
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4935
     name: Deterioro de valor de créditos por operaciones comerciales con otras partes vinculadas
     level: *subaccount
     balanceId: 10029
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 499
     name: Provisiones por operaciones comerciales
     level: *account
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4994
     name: Provisión por contratos onerosos
     level: *subaccount
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 4999
     name: Provisión para otras operaciones comerciales
     level: *subaccount
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5
     name: CUENTAS FINANCIERAS
     level: *group
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 50
     name: EMPRÉSTITOS, DEUDAS CON CARÁCTERÍSTICAS ESPECIALES Y OTRAS EMISIONES ANÁLOGAS A CORTO PLAZO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 500
     name: Obligaciones y bonos a corto plazo
     level: *account
     balanceId: 10081
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 501
     name: Obligaciones y bonos convertibles a corto plazo
     level: *account
     balanceId: 10081
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 502
     name: Acciones o participaciones a corto plazo consideradas como pasivos financieros
     level: *account
     balanceId: 10095
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 505
     name: Deudas representadas en otros valores negociables a corto plazo
     level: *account
     balanceId: 10081
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 506
     name: Intereses a corto plazo de empréstitos y otras emisiones análogas
     level: *account
     balanceId: 10081
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 507
     name: Dividendos de acciones o participaciones consideradas como pasivos financieros
     level: *account
     balanceId: 10095
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 509
     name: Valores negociables amortizados
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5090
     name: Obligaciones y bonos amortizados
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5091
     name: Obligaciones y bonos convertibles amortizados
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5095
     name: Otros valores negociables amortizados
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 51
     name: DEUDAS A CORTO PLAZO CON PARTES VINCULADAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 510
     name: Deudas a corto plazo con entidades de crédito vinculadas
     level: *account
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5103
     name: Deudas a corto plazo con entidades de crédito, empresas del *group
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5104
     name: Deudas a corto plazo con entidades de crédito, empresas asociadas
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5105
     name: Deudas a corto plazo con otras entidades de crédito vinculadas
     level: *subaccount
     balanceId: 10082
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 511
     name: Proveedores de inmovilizado a corto plazo, partes vinculadas
     level: *account
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5113
     name: Proveedores de inmovilizado a corto plazo, empresas del *group
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5114
     name: Proveedores de inmovilizado a corto plazo, empresas asociadas
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5115
     name: Proveedores de inmovilizado a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 512
     name: Acreedores por arrendamiento financiero a corto plazo, partes vinculadas
     level: *account
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5123
     name: Acreedores por arrendamiento financiero a corto plazo, empresas del *group
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5124
     name: Acreedores por arrendamiento financiero a corto plazo, empresas asociadas
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5125
     name: Acreedores por arrendamiento financiero a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId: 10083
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 513
     name: Otras deudas a corto plazo con partes vinculadas
     level: *account
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5133
     name: Otras deudas a corto plazo con empresas del *group
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5134
     name: Otras deudas a corto plazo con empresas asociadas
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5135
     name: Otras deudas a corto plazo con otras partes vinculadas
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 514
     name: Intereses a corto plazo de deudas con partes vinculadas
     level: *account
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5143
     name: Intereses a corto plazo de deudas, empresas del *group
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5144
     name: Intereses a corto plazo de deudas, empresas asociadas
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5145
     name: Intereses a corto plazo de deudas, otras partes vinculadas
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 52
     name: DEUDAS A CORTO PLAZO POR PRÉSTAMOS RECIBIDOS Y OTROS CONCEPTOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 520
     name: Deudas a corto plazo con entidades de crédito
     level: *account
     balanceId: 10082
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5200
     name: Préstamos a corto plazo de entidades de crédito
     level: *subaccount
     balanceId: 10082
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5201
     name: Deudas a corto plazo por crédito dispuesto
     level: *subaccount
     balanceId: 10082
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5208
     name: Deudas por efectos descontados
     level: *subaccount
     balanceId: 10082
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5209
     name: Deudas por operaciones de “factoring”
     level: *subaccount
     balanceId: 10082
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 521
     name: Deudas a corto plazo
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 522
     name: Deudas a corto plazo transformables en subvenciones, donaciones y legados
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 523
     name: Proveedores de inmovilizado a corto plazo
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 524
     name: Acreedores por arrendamiento financiero a corto plazo
     level: *account
     balanceId: 10083
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 525
     name: Efectos a pagar a corto plazo
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 526
     name: Dividendo activo a pagar
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 527
     name: Intereses a corto plazo de deudas con entidades de crédito
     level: *account
     balanceId: 10082
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 528
     name: Intereses a corto plazo de deudas
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 529
     name: Provisiones a corto plazo
     level: *account
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5290
     name: Provisión a corto plazo por retribuciones al personal
     level: *subaccount
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5291
     name: Provisión a corto plazo para impuestos
     level: *subaccount
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5292
     name: Provisión a corto plazo para otras responsabilidades
     level: *subaccount
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5293
     name: Provisión a corto plazo por desmantelamiento, retiro o rehabilitación del inmovilizado
     level: *subaccount
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5295
     name: Provisión a corto plazo para actuaciones Medioambientales
     level: *subaccount
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5296
     name: Provisión a corto plazo para reestructuraciones
     level: *subaccount
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5297
     name: Provisión a corto plazo por transacciones con pagos basados en instrumentos de patrimonio
     level: *subaccount
     balanceId: 10080
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 53
     name: INVERSIONES FINANCIERAS A CORTO PLAZO EN PARTES VINCULADAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 530
     name: Participaciones a corto plazo en partes vinculadas
     level: *account
     balanceId: 10036
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5303
     name: Participaciones a corto plazo, en empresas del *group
     level: *subaccount
     balanceId: 10036
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5304
     name: Participaciones a corto plazo, en empresas asociadas
     level: *subaccount
     balanceId: 10036
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5305
     name: Participaciones a corto plazo, en otras partes vinculadas
     level: *subaccount
     balanceId: 10040
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 531
     name: Valores representativos de deuda a corto plazo de partes vinculadas
     level: *account
     balanceId: 10038
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5313
     name: Valores representativos de deuda a corto plazo de empresas del *group
     level: *subaccount
     balanceId: 10038
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5314
     name: Valores representativos de deuda a corto plazo de empresas asociadas
     level: *subaccount
     balanceId: 10038
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5315
     name: Valores representativos de deuda a corto plazo de otras partes vinculadas
     level: *subaccount
     balanceId: 10042
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 532
     name: Créditos a corto plazo a partes vinculadas
     level: *account
     balanceId: 10037
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5323
     name: Créditos a corto plazo a empresas del *group
     level: *subaccount
     balanceId: 10037
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5324
     name: Créditos a corto plazo a empresas asociadas
     level: *subaccount
     balanceId: 10037
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5325
     name: Créditos a corto plazo a otras partes vinculadas
     level: *subaccount
     balanceId: 10041
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 533
     name: Intereses a corto plazo de valores representativos de deuda de partes vinculadas
     level: *account
     balanceId: 10038
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5333
     name: Intereses a corto plazo de valores representativos de deuda de empresas del *group
     level: *subaccount
     balanceId: 10038
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5334
     name: Intereses a corto plazo de valores representativos de deuda de empresas asociadas
     level: *subaccount
     balanceId: 10038
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5335
     name: Intereses a corto plazo de valores representativos de deuda de otras partes vinculadas
     level: *subaccount
     balanceId: 10042
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 534
     name: Intereses a corto plazo de créditos a partes vinculadas
     level: *account
     balanceId: 10037
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5343
     name: Intereses a corto plazo de créditos a empresas del *group
     level: *subaccount
     balanceId: 10037
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5344
     name: Intereses a corto plazo de créditos a empresas asociadas
     level: *subaccount
     balanceId: 10037
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5345
     name: Intereses a corto plazo de créditos a otras partes vinculadas
     level: *subaccount
     balanceId: 10041
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 535
     name: Dividendo a cobrar de inversiones financieras en partes vinculadas
     level: *account
     balanceId: 10039
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5353
     name: Dividendo a cobrar de empresas de *group
     level: *subaccount
     balanceId: 10039
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5354
     name: Dividendo a cobrar de empresas asociadas
     level: *subaccount
     balanceId: 10039
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5355
     name: Dividendo a cobrar de otras partes vinculadas
     level: *subaccount
     balanceId: 10044
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 539
     name: Desembolsos pendientes sobre participaciones a corto plazo en partes vinculadas
     level: *account
     balanceId: 10036
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5393
     name: Desembolsos pendientes sobre participaciones a corto plazo en empresas del *group
     level: *subaccount
     balanceId: 10036
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5394
     name: Desembolsos pendientes sobre participaciones a corto plazo en empresas asociadas
     level: *subaccount
     balanceId: 10036
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5395
     name: Desembolsos pendientes sobre participaciones a corto plazo en otras partes vinculadas
     level: *subaccount
     balanceId: 10040
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 54
     name: OTRAS INVERSIONES FINANCIERAS A CORTO PLAZO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 540
     name: Inversiones financieras a corto plazo en instrumentos de patrimonio
     level: *account
     balanceId: 10040
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 541
     name: Valores representativos de deuda a corto plazo
     level: *account
     balanceId: 10042
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 542
     name: Créditos a corto plazo
     level: *account
     balanceId: 10041
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 543
     name: Créditos a corto plazo por enajenación de in movilizado
     level: *account
     balanceId: 10041
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 544
     name: Créditos a corto plazo al personal
     level: *account
     balanceId: 10032
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 545
     name: Dividendo a cobrar
     level: *account
     balanceId: 10044
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 546
     name: Intereses a corto plazo de valores representativos de deudas
     level: *account
     balanceId: 10042
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 547
     name: Intereses a corto plazo de créditos
     level: *account
     balanceId: 10041
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 548
     name: Imposiciones a corto plazo
     level: *account
     balanceId: 10044
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 549
     name: Desembolsos pendientes sobre participaciones en el patrimonio neto a corto plazo
     level: *account
     balanceId: 10040
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 55
     name: OTRAS CUENTAS NO BANCARIAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 550
     name: Titular de la explotación
     level: *account
     balanceId: N/A
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 551
     name: Cuenta corriente con socios y administradores
     level: *account
     balanceId: 10044
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 552
     name: Cuenta corriente con otras personas y entidades vinculadas
     level: *account
     balanceId: 10039
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5523
     name: Cuenta corriente con empresas del *group
     level: *subaccount
     balanceId: 10039
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5524
     name: Cuenta corriente con empresas asociadas
     level: *subaccount
     balanceId: 10039
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5525
     name: Cuenta corriente con otras partes vinculadas
     level: *subaccount
     balanceId: 10044
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 553
     name: Cuentas corrientes en fusiones y escisiones
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5530
     name: Socios de sociedad disuelta
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5531
     name: Socios, cuenta de fusión
     level: *subaccount
     balanceId: 10031
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5532
     name: Socios de sociedad escindida
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5533
     name: Socios, cuenta de escisión
     level: *subaccount
     balanceId: 10031
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 554
     name: Cuenta corriente con uniones temporales de empresas y comunidades de bienes
     level: *account
     balanceId: N/A
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 555
     name: Partidas pendientes de aplicación
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 556
     name: Desembolsos exigidos sobre participaciones en el patrimonio neto
     level: *account
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5563
     name: Desembolsos exigidos sobre participaciones, empresas del *group
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5564
     name: Desembolsos exigidos sobre participaciones, empresas asociadas
     level: *subaccount
     balanceId: 10086
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5565
     name: Desembolsos exigidos sobre participaciones, otras partes vinculadas
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5566
     name: Desembolsos exigidos sobre participaciones de otras empresas
     level: *subaccount
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 557
     name: Dividendo activo a cuenta
     level: *account
     balanceId: 10058
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 558
     name: Socios por desembolsos exigidos
     level: *account
     balanceId: 10035
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5580
     name: Socios por desembolsos exigidos sobre acciones o participaciones ordinarias
     level: *subaccount
     balanceId: 10035
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5585
     name: Socios por desembolsos exigidos sobre acciones o participaciones consideradas como pasivos financieros
     level: *subaccount
     balanceId: 10035
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 559
     name: Derivados financieros a corto plazo
     level: *account
     balanceId: 10043
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5590
     name: Activos por derivados financieros a corto plazo, cartera de negociación
     level: *subaccount
     balanceId: 10043
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5593
     name: Activos por derivados financieros a corto plazo, instrumentos de cobertura
     level: *subaccount
     balanceId: 10043
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5595
     name: Pasivos por derivados financieros a corto plazo, cartera de negociación
     level: *subaccount
     balanceId: 10084
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5598
     name: Pasivos por derivados financieros a corto plazo, instrumentos de cobertura
     level: *subaccount
     balanceId: 10084
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 56
     name: FIANZAS Y DEPÓSITOS RECIBIDOS Y CONSTITUIDOS A COR TO PLAZO Y AJUSTES POR PERIODIFICACIÓN
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 560
     name: Fianzas recibidas a corto plazo
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 561
     name: Depósitos recibidos a corto plazo
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 565
     name: Fianzas constituidas a corto plazo
     level: *account
     balanceId: 10044
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 566
     name: Depósitos constituidos a corto plazo
     level: *account
     balanceId: 10044
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 567
     name: Intereses pagados por anticipado
     level: *account
     balanceId: 10045
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 568
     name: Intereses cobrados por anticipado
     level: *account
     balanceId: 10094
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 569
     name: Garantías financieras a corto plazo
     level: *account
     balanceId: 10085
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 57
     name: TESORERÍA
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 570
     name: Caja, euros
     level: *account
     balanceId: 10046
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 571
     name: Caja, moneda extranjera
     level: *account
     balanceId: 10046
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 572
     name: Bancos e instituciones de crédito c/c vista, euros
     level: *account
     balanceId: 10046
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 573
     name: Bancos e instituciones de crédito c/c vista, moneda extranjera
     level: *account
     balanceId: 10046
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 574
     name: Bancos e instituciones de crédito, cuentas de ahorro, euros
     level: *account
     balanceId: 10046
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 575
     name: Bancos e instituciones de crédito, cuentas de ahorro, moneda extranjera
     level: *account
     balanceId: 10046
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 576
     name: Inversiones a corto plazo de gran liquidez
     level: *account
     balanceId: 10047
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 58
     name: ACTIVOS NO CORRIENTES MANTENIDOS PARA LA VENTA Y ACTIVOS Y PASIVOS ASOCIADOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 580
     name: Inmovilizado
     level: *account
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 581
     name: Inversiones con personas y entidades vinculadas
     level: *account
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 582
     name: Inversiones financieras
     level: *account
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 583
     name: Existencias, deudores comerciales y otras cuentas a cobrar
     level: *account
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 584
     name: Otros activos
     level: *account
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 585
     name: Provisiones
     level: *account
     balanceId: 10079
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 586
     name: Deudas con características especiales
     level: *account
     balanceId: 10079
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 587
     name: Deudas con personas y entidades vinculadas
     level: *account
     balanceId: 10079
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 588
     name: Acreedores comerciales y otras cuentas a pagar
     level: *account
     balanceId: 10079
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 589
     name: Otros pasivos
     level: *account
     balanceId: 10079
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 59
     name: DETERIORO DEL VALOR DE INVERSIONES FINANCIERAS A CORTO PLAZO Y DE ACTIVOS NO CORRIENTES MANTENIDOS PARA LA VENTA
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 593
     name: Deterioro de valor de participaciones a corto plazo en partes vinculadas
     level: *account
     balanceId: 10036
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5933
     name: Deterioro de valor de participaciones a corto plazo en empresas del *group
     level: *subaccount
     balanceId: 10036
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5934
     name: Deterioro de valor de participaciones a corto plazo en empresas asociadas
     level: *subaccount
     balanceId: 10036
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 594
     name: Deterioro de valor de valores representativos de deuda a corto plazo de partes vinculadas
     level: *account
     balanceId: 10038
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5943
     name: Deterioro de valor de valores representativos de deuda a corto plazo de empresas del *group
     level: *subaccount
     balanceId: 10038
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5944
     name: Deterioro de valor de valores representativos de deuda a corto plazo de empresas asociadas
     level: *subaccount
     balanceId: 10038
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5945
     name: Deterioro de valor de valores representativos de deuda a corto plazo de otras partes vinculadas
     level: *subaccount
     balanceId: 10042
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 595
     name: Deterioro de valor de créditos a corto plazo a partes vinculadas
     level: *account
     balanceId: 10037
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5953
     name: Deterioro de valor de créditos a corto plazo a empresas del *group
     level: *subaccount
     balanceId: 10037
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5954
     name: Deterioro de valor de créditos a corto plazo a empresas asociadas
     level: *subaccount
     balanceId: 10037
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5955
     name: Deterioro de valor de créditos a corto plazo a otras partes vinculadas
     level: *subaccount
     balanceId: 10041
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 597
     name: Deterioro de valor de valores representativos de deuda a corto plazo
     level: *account
     balanceId: 10042
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 598
     name: Deterioro de valor de créditos a corto plazo
     level: *account
     balanceId: 10041
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 599
     name: Deterioro de valor de activos no corrientes mantenidos para la venta
     level: *account
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5990
     name: Deterioro de valor de inmovilizado no corriente mantenido para la venta
     level: *subaccount
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5991
     name: Deterioro de valor de inversiones con personas y entidades vinculadas no corrientes mantenidas para la venta
     level: *subaccount
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5992
     name: Deterioro de valor de inversiones financieras no corrientes mantenidas para la venta
     level: *subaccount
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5993
     name: Deterioro de valor de existencias, deudores comerciales y otras cuentas a cobrar integrados en un *group enajenable mantenido para la venta
     level: *subaccount
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 5994
     name: Deterioro de valor de otros activos mantenidos para la venta
     level: *subaccount
     balanceId: 10022
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6
     name: COMPRAS Y GASTOS
     level: *group
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 60
     name: COMPRAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 600
     name: Compras de mercaderías
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 601
     name: Compras de materias primas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 602
     name: Compras de otros aprovisionamientos
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 606
     name: Descuentos sobre compras por pronto pago
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6060
     name: Descuentos sobre compras por pronto pago de mercaderías
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6061
     name: Descuentos sobre compras por pronto pago de materias primas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6062
     name: Descuentos sobre compras por pronto pago de otros aprovisionamientos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 607
     name: Trabajos realizados por otras empresas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 608
     name: Devoluciones de compras y operaciones similares
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6080
     name: Devoluciones de compras de mercaderías
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6081
     name: Devoluciones de compras de materias primas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6082
     name: Devoluciones de compras de otros aprovisionamientos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 609
     name: “Rappels” por compras
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6090
     name: “Rappels” por compras de mercaderías
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6091
     name: “Rappels” por compras de materias primas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6092
     name: “Rappels” por compras de otros aprovisionamientos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 61
     name: VARIACIÓN DE EXISTENCIAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 610
     name: Variación de existencias de mercaderías
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 611
     name: Variación de existencias de materias primas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 612
     name: Variación de existencias de otros aprovisionamientos
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 62
     name: SERVICIOS EXTERIORES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 620
     name: Gastos en investigación y desarrollo del ejercicio
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 621
     name: Arrendamientos y cánones
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 622
     name: Reparaciones y conservación
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 623
     name: Servicios de profesionales independientes
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 624
     name: Transportes
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 625
     name: Primas de seguros
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 626
     name: Servicios bancarios y similares
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 627
     name: Publicidad, propaganda y relaciones públicas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 628
     name: Suministros
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 629
     name: Otros servicios
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 63
     name: TRIBUTOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 630
     name: Impuesto sobre beneficios
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6300
     name: Impuesto corriente
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6301
     name: Impuesto diferido
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 631
     name: Otros tributos
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 633
     name: Ajustes negativos en la imposición sobre beneficios
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 634
     name: Ajustes negativos en la imposición indirecta
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6341
     name: Ajustes negativos en IVA de activo corriente
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6342
     name: Ajustes negativos en IVA de inversiones
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 636
     name: Devolución de impuestos
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 638
     name: Ajustes positivos en la imposición sobre beneficios
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 639
     name: Ajustes positivos en la imposición indirecta
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6391
     name: Ajustes positivos en IVA de activo corriente
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6392
     name: Ajustes positivos en IVA de inversiones
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 64
     name: GASTOS DE PERSONAL
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 640
     name: Sueldos y salarios
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 641
     name: Indemnizaciones
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 642
     name: Seguridad Social a cargo de la empresa
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 643
     name: Retribuciones a largo plazo mediante sistemas de aportación definida
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 644
     name: Retribuciones a largo plazo mediante sistemas de prestación definida
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6440
     name: Contribuciones anuales
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6442
     name: Otros costes
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 645
     name: Retribuciones al personal mediante instrumentos de patrimonio
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6450
     name: Retribuciones al personal liquidados con instrumentos de patrimonio
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6457
     name: Retribuciones al personal liquidados en efectivo basado en instrumentos de patrimonio
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 649
     name: Otros gastos sociales
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 65
     name: OTROS GASTOS DE GESTIÓN
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 650
     name: Pérdidas de créditos comerciales incobrables
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 651
     name: Resultados de operaciones en común
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6510
     name: Beneficio transferido (gestor)
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6511
     name: Pérdida soportada (partícipe o asociado no gestor)
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 659
     name: Otras pérdidas en gestión corriente
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 66
     name: GASTOS FINANCIEROS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 660
     name: Gastos financieros por actualización de provisiones
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 661
     name: Intereses de obligaciones y bonos
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6610
     name: Intereses de obligaciones y bonos a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6611
     name: Intereses de obligaciones y bonos a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6612
     name: Intereses de obligaciones y bonos a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6613
     name: Intereses de obligaciones y bonos a largo plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6615
     name: Intereses de obligaciones y bonos a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6616
     name: Intereses de obligaciones y bonos a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6617
     name: Intereses de obligaciones y bonos a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6618
     name: Intereses de obligaciones y bonos a corto plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 662
     name: Intereses de deudas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6620
     name: Intereses de deudas, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6621
     name: Intereses de deudas, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6622
     name: Intereses de deudas, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6623
     name: Intereses de deudas con entidades de crédito
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6624
     name: Intereses de deudas, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 663
     name: Pérdidas por valoración de instrumentos financieros por su valor razonable
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6630
     name: Pérdidas de cartera de negociación
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6631
     name: Pérdidas de designados por la empresa
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6632
     name: Pérdidas de disponibles para la venta
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6633
     name: Pérdidas de instrumentos de cobertura
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 664
     name: Dividendos de acciones o participaciones consideradas como pasivos financieros
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6640
     name: Dividendos de pasivos, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6641
     name: Dividendos de pasivos, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6642
     name: Dividendos de pasivos, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6643
     name: Dividendos de pasivos, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 665
     name: Intereses por descuento de efectos y operaciones de “factoring”
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6650
     name: Intereses por descuento de efectos en entidades de crédito del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6651
     name: Intereses por descuento de efectos en entidades de crédito asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6652
     name: Intereses por descuento de efectos en otras entidades de crédito vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6653
     name: Intereses por descuento de efectos en otras entidades de crédito
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6654
     name: Intereses por operaciones de “factoring” con entidades de crédito del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6655
     name: Intereses por operaciones de “factoring” con entidades de crédito asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6656
     name: Intereses por operaciones de “factoring” con otras entidades de crédito vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6657
     name: Intereses por operaciones de “factoring” con otras entidades de crédito
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 666
     name: Pérdidas en participaciones y valores representativos de deuda
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6660
     name: Pérdidas en valores representativos de deuda a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6661
     name: Pérdidas en valores representativos de deuda a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6662
     name: Pérdidas en valores representativos de deuda a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6663
     name: Pérdidas en participaciones y valores representativos de deuda a largo plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6665
     name: Pérdidas en participaciones y valores representativos de deuda a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6666
     name: Pérdidas en participaciones y valores representativos de deuda a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6667
     name: Pérdidas en valores representativos de deuda a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6668
     name: Pérdidas en valores representativos de deuda a corto plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 667
     name: Pérdidas de créditos no comerciales
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6670
     name: Pérdidas de créditos a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6671
     name: Pérdidas de créditos a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6672
     name: Pérdidas de créditos a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6673
     name: Pérdidas de créditos a largo plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6675
     name: Pérdidas de créditos a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6676
     name: Pérdidas de créditos a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6677
     name: Pérdidas de créditos a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6678
     name: Pérdidas de créditos a corto plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 668
     name: Diferencias negativas de cambio
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 669
     name: Otros gastos financieros
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 67
     name: PÉRDIDAS PROCEDENTES DE ACTIVOS NO CORRIENTES Y GASTOS EXCEPCIONALES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 670
     name: Pérdidas procedentes del inmovilizado intangible
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 671
     name: Pérdidas procedentes del inmovilizado material
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 672
     name: Pérdidas procedentes de las inversiones inmobiliarias
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 673
     name: Pérdidas procedentes de participaciones a largo plazo en partes vinculadas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6733
     name: Pérdidas procedentes de participaciones a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6734
     name: Pérdidas procedentes de participaciones a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6735
     name: Pérdidas procedentes de participaciones a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 675
     name: Pérdidas por operaciones con obligaciones propias
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 678
     name: Gastos excepcionales
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 68
     name: DOTACIONES PARA AMORTIZACIONES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 680
     name: Amortización del inmovilizado intangible
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 681
     name: Amortización del inmovilizado material
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 682
     name: Amortización de las inversiones inmobiliarias
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 69
     name: PÉRDIDAS POR DETERIORO Y OTRAS DOTACIONES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 690
     name: Pérdidas por deterioro del inmovilizado intangible
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 691
     name: Pérdidas por deterioro del inmovilizado material
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 692
     name: Pérdidas por deterioro de las inversiones inmobiliarias
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 693
     name: Pérdidas por deterioro de existencias
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6930
     name: Pérdidas por deterioro de productos terminados y en curso de fabricación
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6931
     name: Pérdidas por deterioro de mercaderías
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6932
     name: Pérdidas por deterioro de materias primas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6933
     name: Pérdidas por deterioro de otros aprovisionamientos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 694
     name: Pérdidas por deterioro de créditos por operaciones comerciales
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 695
     name: Dotación a la provisión por operaciones comerciales
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6954
     name: Dotación a la provisión por contratos onerosos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6959
     name: Dotación a la provisión para otras operaciones comerciales
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 696
     name: Pérdidas por deterioro de participaciones y valores representativos de deuda a largo plazo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6960
     name: Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6961
     name: Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6962
     name: Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6963
     name: Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6965
     name: Pérdidas por deterioro en valores representativos de deuda a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6966
     name: Pérdidas por deterioro en valores representativos de deuda a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6967
     name: Pérdidas por deterioro en valores representativos de deuda a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6968
     name: Pérdidas por deterioro en valores representativos de deuda a largo plazo, de otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 697
     name: Pérdidas por deterioro de créditos a largo plazo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6970
     name: Pérdidas por deterioro de créditos a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6971
     name: Pérdidas por deterioro de créditos a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6972
     name: Pérdidas por deterioro de créditos a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6973
     name: Pérdidas por deterioro de créditos a largo plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 698
     name: Pérdidas por deterioro de participaciones y valores representativos de deuda a corto plazo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6980
     name: Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6981
     name: Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6985
     name: Pérdidas por deterioro en valores representativos de deuda a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6986
     name: Pérdidas por deterioro en valores representativos de deuda a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6987
     name: Pérdidas por deterioro en valores representativos de deuda a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6988
     name: Pérdidas por deterioro en valores representativos de deuda a corto plazo, de otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 699
     name: Pérdidas por deterioro de créditos a corto plazo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6990
     name: Pérdidas por deterioro de créditos a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6991
     name: Pérdidas por deterioro de créditos a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6992
     name: Pérdidas por deterioro de créditos a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 6993
     name: Pérdidas por deterioro de créditos a corto plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7
     name: VENTAS E INGRESOS
     level: *group
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 70
     name: VENTAS DE MERCADERÍAS, DE PRODUCCIÓN PROPIA, DE SERVICIOS, ETC
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 700
     name: Ventas de mercaderías
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 701
     name: Ventas de productos terminados
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 702
     name: Ventas de productos semiterminados
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 703
     name: Ventas de subproductos y residuos
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 704
     name: Ventas de envases y embalajes
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 705
     name: Prestaciones de servicios
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 706
     name: Descuentos sobre ventas por pronto pago
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7060
     name: Descuentos sobre ventas por pronto pago de mercaderías
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7061
     name: Descuentos sobre ventas por pronto pago de productos terminados
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7062
     name: Descuentos sobre ventas por pronto pago de productos semiterminados
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7063
     name: Descuentos sobre ventas por pronto pago de subproductos y residuos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 708
     name: Devoluciones de ventas y operaciones similares
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7080
     name: Devoluciones de ventas de mercaderías
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7081
     name: Devoluciones de ventas de productos terminados
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7082
     name: Devoluciones de ventas de productos semiterminados
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7083
     name: Devoluciones de ventas de subproductos y residuos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7084
     name: Devoluciones de ventas de envases y embalajes
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 709
     name: “Rappels” sobre ventas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7090
     name: «Rappels» sobre ventas de mercaderías
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7091
     name: “Rappels” sobre ventas de productos terminados
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7092
     name: “Rappels” sobre ventas de productos semiterminados
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7093
     name: “Rappels” sobre ventas de subproductos y residuos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7094
     name: “Rappels” sobre ventas de envases y embalajes
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 71
     name: VARIACIÓN DE EXISTENCIAS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 710
     name: Variación de existencias de productos en curso
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 711
     name: Variación de existencias de productos semiterminados
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 712
     name: Variación de existencias de productos terminados
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 713
     name: Variación de existencias de subproductos, residuos y materiales recuperados
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 73
     name: TRABAJOS REALIZADOS PARA LA EMPRESA
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 730
     name: Trabajos realizados para el inmovilizado intangible
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 731
     name: Trabajos realizados para el inmovilizado material
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 732
     name: Trabajos realizados en inversiones inmobiliarias
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 733
     name: Trabajos realizados para el inmovilizado material en curso
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 74
     name: SUBVENCIONES, DONACIONES Y LEGADOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 740
     name: Subvenciones, donaciones y legados a la explotación
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 746
     name: Subvenciones, donaciones y legados de capital transferidos al resultado del ejercicio
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 747
     name: Otras subvenciones, donaciones y legados transferidos al resultado del ejercicio
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 75
     name: OTROS INGRESOS DE GESTIÓN
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 751
     name: Resultados de operaciones en común
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7510
     name: Pérdida transferida (gestor)
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7511
     name: Beneficio atribuido (partícipe o asociado no gestor)
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 752
     name: Ingresos por arrendamientos
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 753
     name: Ingresos de propiedad industrial cedida en explotación
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 754
     name: Ingresos por comisiones
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 755
     name: Ingresos por servicios al personal
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 759
     name: Ingresos por servicios diversos
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 76
     name: INGRESOS FINANCIEROS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 760
     name: Ingresos de participaciones en instrumentos de patrimonio
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7600
     name: Ingresos de participaciones en instrumentos de patrimonio, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7601
     name: Ingresos de participaciones en instrumentos de patrimonio, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7602
     name: Ingresos de participaciones en instrumentos de patrimonio, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7603
     name: Ingresos de participaciones en instrumentos de patrimonio, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 761
     name: Ingresos de valores representativos de deuda
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7610
     name: Ingresos de valores representativos de deuda, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7611
     name: Ingresos de valores representativos de deuda, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7612
     name: Ingresos de valores representativos de deuda, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7613
     name: Ingresos de valores representativos de deuda, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 762
     name: Ingresos de créditos
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7620
     name: Ingresos de créditos a largo plazo
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 76200
     name: Ingresos de créditos a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 76201
     name: Ingresos de créditos a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 76202
     name: Ingresos de créditos a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 76203
     name: Ingresos de créditos a largo plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7621
     name: Ingresos de créditos a corto plazo
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 76210
     name: Ingresos de créditos a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 76211
     name: Ingresos de créditos a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 76212
     name: Ingresos de créditos a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 76213
     name: Ingresos de créditos a corto plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 763
     name: Beneficios por valoración de instrumentos financieros por su valor razonable
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7630
     name: Beneficios de cartera de negociación
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7631
     name: Beneficios de designados por la empresa
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7632
     name: Beneficios de disponibles para la venta
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7633
     name: Beneficios de instrumentos de cobertura
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 766
     name: Beneficios en participaciones y valores representativos de deuda
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7660
     name: Beneficios en valores representativos de deuda a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7661
     name: Beneficios en valores representativos de deuda a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7662
     name: Beneficios en valores representativos de deuda a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7663
     name: Beneficios en participaciones y valores representativos de deuda a largo plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7665
     name: Beneficios en participaciones y valores representativos de deuda a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7666
     name: Beneficios en participaciones y valores representativos de deuda a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7667
     name: Beneficios en valores representativos de deuda a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7668
     name: Beneficios en valores representativos de deuda a corto plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 767
     name: Ingresos de activos afectos y de derechos de reembolso relativos a retribuciones a largo plazo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 768
     name: Diferencias positivas de cambio
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 769
     name: Otros ingresos financieros
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 77
     name: BENEFICIOS PROCEDENTES DE ACTIVOS NO CORRIENTES E INGRESOS EXCEPCIONALES
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 770
     name: Beneficios procedentes del inmovilizado intangible
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 771
     name: Beneficios procedentes del inmovilizado material
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 772
     name: Beneficios procedentes de las inversiones inmobiliarias
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 773
     name: Beneficios procedentes de participaciones a largo plazo en partes vinculadas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7733
     name: Beneficios procedentes de participaciones a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7734
     name: Beneficios procedentes de participaciones a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7735
     name: Beneficios procedentes de participaciones a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 774
     name: Diferencia negativa en combinaciones de negocios
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 775
     name: Beneficios por operaciones con obligaciones propias
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 778
     name: Ingresos excepcionales
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 79
     name: EXCESOS Y APLICACIONES DE PROVISIONES Y DE PÉRDIDAS POR DETERIORO
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 790
     name: Reversión del deterioro del inmovilizado intangible
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 791
     name: Reversión del deterioro del inmovilizado material
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 792
     name: Reversión del deterioro de las inversiones inmobiliarias
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 793
     name: Reversión del deterioro de existencias
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7930
     name: Reversión del deterioro de productos terminados y en curso de fabricación
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7931
     name: Reversión del deterioro de mercaderías
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7932
     name: Reversión del deterioro de materias primas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7933
     name: Reversión del deterioro de otros aprovisionamientos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 794
     name: Reversión del deterioro de créditos por operaciones comerciales
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 795
     name: Exceso de provisiones
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7950
     name: Exceso de provisión por retribuciones al personal
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7951
     name: Exceso de provisión para impuestos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7952
     name: Exceso de provisión para otras responsabilidades
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7954
     name: Exceso de provisión por operaciones comerciales
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 79544
     name: Exceso de provisión por contratos onerosos
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 79549
     name: Exceso de provisión para otras operaciones comerciales
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7955
     name: Exceso de provisión para actuaciones medioambientales
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7956
     name: Exceso de provisión para reestructuraciones
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7957
     name: Exceso de provisión por transacciones con pagos basados en instrumentos de patrimonio
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 796
     name: Reversión del deterioro de participaciones y valores representativos de deuda a largo plazo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7960
     name: Reversión del deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7961
     name: Reversión del deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7965
     name: Reversión del deterioro de valores representativos de deuda a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7966
     name: Reversión del deterioro de valores representativos de deuda a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7967
     name: Reversión del deterioro de valores representativos de deuda a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7968
     name: Reversión del deterioro de valores representativos de deuda a largo plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 797
     name: Reversión del deterioro de créditos a largo plazo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7970
     name: Reversión del deterioro de créditos a largo plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7971
     name: Reversión del deterioro de créditos a largo plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7972
     name: Reversión del deterioro de créditos a largo plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7973
     name: Reversión del deterioro de créditos a largo plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 798
     name: Reversión del deterioro de participaciones y valores representativos de deuda a corto plazo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7980
     name: Reversión del deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7981
     name: Reversión del deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7985
     name: Reversión del deterioro en valores representativos de deuda a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7986
     name: Reversión del deterioro en valores representativos de deuda a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7987
     name: Reversión del deterioro en valores representativos de deuda a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7988
     name: Reversión del deterioro en valores representativos de deuda a corto plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 799
     name: Reversión del deterioro de créditos a corto plazo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7990
     name: Reversión del deterioro de créditos a corto plazo, empresas del *group
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7991
     name: Reversión del deterioro de créditos a corto plazo, empresas asociadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7992
     name: Reversión del deterioro de créditos a corto plazo, otras partes vinculadas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 7993
     name: Reversión del deterioro de créditos a corto plazo, otras empresas
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 8
     name: GASTOS IMPUTADOS AL PATRIMONIO NETO
     level: *group
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 80
     name: GASTOS FINANCIEROS POR VALORACIÓN DE ACTIVOS Y PASIVOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 800
     name: Pérdidas en activos financieros disponibles para la venta
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 802
     name: Transferencia de beneficios en activos financieros disponibles para la venta
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 81
     name: GASTOS EN OPERACIONES DE COBERTURA
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 810
     name: Pérdidas por coberturas de flujos de efectivo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 811
     name: Pérdidas por coberturas de inversiones netas en un negocio en el extranjero
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 812
     name: Transferencia de beneficios por coberturas de flujos de efectivo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 813
     name: Transferencia de beneficios por coberturas de inversiones netas en un negocio en el extranjero
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 82
     name: GASTOS POR DIFERENCIAS DE CONVERSIÓN
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 820
     name: Diferencias de conversión negativas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 821
     name: Transferencia de diferencias de conversión positivas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 83
     name: IMPUESTO SOBRE BENEFICIOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 830
     name: Impuesto sobre beneficios
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 8300
     name: Impuesto corriente
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 8301
     name: Impuesto diferido
     level: *subaccount
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 833
     name: Ajustes negativos en la imposición sobre Beneficios
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 834
     name: Ingresos fiscales por diferencias permanentes
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 835
     name: Ingresos fiscales por deducciones y bonificaciones
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 836
     name: Transferencia de diferencias permanentes
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 837
     name: Transferencia de deducciones y bonificaciones
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 838
     name: Ajustes positivos en la imposición sobre beneficios
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 84
     name: TRANSFERENCIAS DE SUBVENCIONES, DONACIONES Y LEGADOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 840
     name: Transferencia de subvenciones oficiales de capital
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 841
     name: Transferencia de donaciones y legados de capital
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 842
     name: Transferencia de otras subvenciones, donaciones y legados
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 85
     name: GASTOS POR PÉRDIDAS ACTUARIALES Y AJUSTES EN LOS ACTIVOS POR RETRIBUCIONES A LARGO PLAZO DE PRESTACIÓN DEFINIDA
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 850
     name: Pérdidas actuariales
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 851
     name: Ajustes negativos en activos por retribuciones a largo plazo de prestación definida
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 86
     name: GASTOS POR ACTIVOS NO CORRIENTES EN VENTA
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 860
     name: Pérdidas en activos no corrientes y *groups enajenables de elementos mantenidos para la venta
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 862
     name: Transferencia de beneficios en activos no corrientes y *groups enajenables de elementos mantenidos para la venta
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 89
     name: GASTOS DE PARTICIPACIONES EN EMPRESAS DEL *group O ASOCIADAS CON AJUSTES VALORATIVOS POSITIVOS PREVIOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 891
     name: Deterioro de participaciones en el patrimonio, empresas del *group
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 892
     name: Deterioro de participaciones en el patrimonio, empresas asociadas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 9
     name: INGRESOS IMPUTADOS AL PATRIMONIO NETO
     level: *group
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 90
     name: INGRESOS FINANCIEROS POR VALORACIÓN DE ACTIVOS Y PASIVOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 900
     name: Beneficios en activos financieros disponibles para la venta
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 902
     name: Transferencia de pérdidas de activos financieros disponibles para la venta
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 91
     name: INGRESOS EN OPERACIONES DE COBERTURA
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 910
     name: Beneficios por coberturas de flujos de efectivo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 911
     name: Beneficios por coberturas de una inversión neta en un negocio en el extranjero
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 912
     name: Transferencia de pérdidas por coberturas de flujos de efectivo
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 913
     name: Transferencia de pérdidas por coberturas de una inversión neta en un negocio en el extranjero
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 92
     name: INGRESOS POR DIFERENCIAS DE CONVERSIÓN
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 920
     name: Diferencias de conversión positivas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 921
     name: Transferencia de diferencias de conversión negativas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 94
     name: INGRESOS POR SUBVENCIONES, DONACIONES Y LEGADOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 940
     name: Ingresos de subvenciones oficiales de capital
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 941
     name: Ingresos de donaciones y legados de capital
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 942
     name: Ingresos de otras subvenciones, donaciones y legados
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 95
     name: INGRESOS POR GANANCIAS ACTUARIALES Y AJUSTES EN LOS ACTIVOS POR RETRIBUCIONES A LARGO PLAZO DE PRESTACIÓN DEFINIDA
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 950
     name: Ganancias actuariales
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 951
     name: Ajustes positivos en activos por retribuciones a largo plazo de prestación definida
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 96
     name: INGRESOS POR ACTIVOS NO CORRIENTES EN VENTA
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 960
     name: Beneficios en activos no corrientes y *groups enajenables de elementos mantenidos para la venta
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 962
     name: Transferencia de pérdidas en activos no corrientes y *groups enajenables de elementos mantenidos para la venta
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 99
     name: INGRESOS DE PARTICIPACIONES EN EMPRESAS DEL *group O ASOCIADAS CON AJUSTES VALORATIVOS NEGATIVOS PREVIOS
     level: *subgroup
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 991
     name: Recuperación de ajustes valorativos negativos previos, empresas del *group
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 992
     name: Recuperación de ajustes valorativos negativos previos, empresas asociadas
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 993
     name: Transferencia por deterioro de ajustes valorativos negativos previos, empresas del *group
     level: *account
     balanceId:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 994
     name: Transferencia por deterioro de ajustes valorativos negativos previos, empresas asociadas
     level: *account
     balanceId:
 
 balances:
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10000
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 1. Desarrollo
     accounts: [201, 2801, 2901]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10001
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 2. Concesiones
     accounts: [202, 2802, 2902]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10002
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 3. Patentes, licencias, marcas y similares
     accounts: [203, 2803, 2903]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10003
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 4. Fondo de comercio.
     accounts: [204]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10004
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 5. Aplicaciones informáticas
     accounts: [206, 2806, 2906]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10005
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 6. Investigación
     accounts: [200, 2800]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10006
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 7. Otro inmovilizado intangible
     accounts: [205, 209, 2805, 2905]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10007
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: II. Inmovilizado material
     child: 1. Terrenos y construcciones
     accounts: [210, 211, 2811, 2910, 2911]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10008
     type: A) ACTIVO NO CORRIENTE
     kind:
@@ -4656,539 +4658,539 @@ balances:
         2918,
         2919,
       ]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10009
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: II. Inmovilizado material
     child: 3. Inmovilizado en curso y anticipos
     accounts: [23]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10010
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: III. Inversiones inmobiliarias
     child: 1. Terrenos
     accounts: [220, 2920]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10011
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: III. Inversiones inmobiliarias
     child: 2. Construcciones
     accounts: [221, 282, 2921]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10012
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del *group y asociadas a largo plazo
     child: 1. Instrumentos de patrimonio
     accounts: [2403, 2404, 2493, 2494, 293]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10013
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del *group y asociadas a largo plazo
     child: 2. Créditos a empresas
     accounts: [2423, 2424, 2953, 2954]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10014
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del *group y asociadas a largo plazo
     child: 3. Valores representativos de deuda
     accounts: [2413, 2414, 2943, 2944]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10015
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: V. Inversiones financieras a largo plazo
     child: 1. Instrumentos de patrimonio
     accounts: [2405, 2495, 250, 259]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10016
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: V. Inversiones financieras a largo plazo
     child: 2. Créditos a terceros
     accounts: [2425, 252, 253, 254, 2955, 298]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10017
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: V. Inversiones financieras a largo plazo
     child: 3. Valores representativos de deuda
     accounts: [2415, 251, 2945, 297]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10018
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: V. Inversiones financieras a largo plazo
     child: 4. Derivados
     accounts: [255]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10019
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: V. Inversiones financieras a largo plazo
     child: 5. Otros activos financieros
     accounts: [258, 26]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10020
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: V. Inversiones financieras a largo plazo
     child: 6. Otras inversiones
     accounts: [257]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10021
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: VI. Activos por impuesto diferido.
     child:
     accounts: [474]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10022
     type: B) ACTIVO CORRIENTE
     kind:
     parent: I. Activos no corrientes mantenidos para la venta.
     child:
     accounts: [580, 581, 582, 583, 584, 599]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10023
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 1. Comerciales.
     accounts: [30, 390]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10024
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 2. Materias primas y otros aprovisionamientos
     accounts: [31, 32, 391, 392]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10025
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 3. Productos en curso
     accounts: [33, 34, 393, 394]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10026
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 4. Productos terminados
     accounts: [35, 395]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10027
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 5. Subproductos, residuos y materiales recuperados.
     accounts: [36, 396]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10028
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 6. Anticipos a proveedores
     accounts: [407]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10029
     type: B) ACTIVO CORRIENTE
     kind:
     parent: III. Deudores comerciales y otras cuentas a cobrar.
     child: 1. Clientes por ventas y prestaciones de servicios
     accounts: [430, 431, 432, 435, 436, 437, 490, 4935]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10030
     type: B) ACTIVO CORRIENTE
     kind:
     parent: III. Deudores comerciales y otras cuentas a cobrar.
     child: 2. Clientes, empresas del *group, y asociadas
     accounts: [433, 434, 4933, 4934]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10031
     type: B) ACTIVO CORRIENTE
     kind:
     parent: III. Deudores comerciales y otras cuentas a cobrar.
     child: 3. Deudores varios.
     accounts: [44, 5531, 5533]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10032
     type: B) ACTIVO CORRIENTE
     kind:
     parent: III. Deudores comerciales y otras cuentas a cobrar.
     child: 4. Personal
     accounts: [460, 544]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10033
     type: B) ACTIVO CORRIENTE
     kind:
     parent: III. Deudores comerciales y otras cuentas a cobrar.
     child: 5. Activos por impuesto corriente
     accounts: [4709]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10034
     type: B) ACTIVO CORRIENTE
     kind:
     parent: III. Deudores comerciales y otras cuentas a cobrar.
     child: 6. Otros créditos con las Administraciones Públicas.
     accounts: [4700, 4708, 471, 472]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10035
     type: B) ACTIVO CORRIENTE
     kind:
     parent: III. Deudores comerciales y otras cuentas a cobrar.
     child: 7. Accionistas (socios) por desembolsos exigidos.
     accounts: [5580]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10036
     type: B) ACTIVO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del *group y asociadas a corto plazo
     child: 1. Instrumentos de patrimonio
     accounts: [5303, 5304, 5393, 5394, 593]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10037
     type: B) ACTIVO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del *group y asociadas a corto plazo
     child: 2. Créditos a empresas
     accounts: [5323, 5324, 5343, 5344, 5953, 5954]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10038
     type: B) ACTIVO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del *group y asociadas a corto plazo
     child: 3. Valores representativos de deuda
     accounts: [5313, 5314, 5333, 5334, 5943, 5944]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10039
     type: B) ACTIVO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del *group y asociadas a corto plazo
     child: 5. Otros activos financieros
     accounts: [5353, 5354, 5523, 5524]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10040
     type: B) ACTIVO CORRIENTE
     kind:
     parent: V. Inversiones financieras a corto plazo
     child: 1. Instrumentos de patrimonio
     accounts: [5305, 540, 5395, 549]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10041
     type: B) ACTIVO CORRIENTE
     kind:
     parent: V. Inversiones financieras a corto plazo
     child: 2. Créditos a empresas
     accounts: [5325, 5345, 542, 543, 547, 5955, 598]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10042
     type: B) ACTIVO CORRIENTE
     kind:
     parent: V. Inversiones financieras a corto plazo
     child: 3. Valores representativos de deuda
     accounts: [5315, 5335, 541, 546, 5945, 597]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10043
     type: B) ACTIVO CORRIENTE
     kind:
     parent: V. Inversiones financieras a corto plazo
     child: 4. Derivados
     accounts: [5590, 5593]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10044
     type: B) ACTIVO CORRIENTE
     kind:
     parent: V. Inversiones financieras a corto plazo
     child: 5. Otros activos financieros
     accounts: [5355, 545, 548, 551, 5525, 565, 566]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10045
     type: B) ACTIVO CORRIENTE
     kind:
     parent: VI. Periodificaciones a corto plazo
     child:
     accounts: [480, 567]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10046
     type: B) ACTIVO CORRIENTE
     kind:
     parent: VII Efectivo y otros activos líquidos equivalentes
     child: 1. Tesorería
     accounts: [570, 571, 572, 573, 574, 575]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10047
     type: B) ACTIVO CORRIENTE
     kind:
     parent: VII Efectivo y otros activos líquidos equivalentes
     child: 2. Otros activos líquidos equivalentes.
     accounts: [576]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10048
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: I. Capital
     child: 1. Capital escriturado
     accounts: [100, 101, 102]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10049
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: I. Capital
     child: 2. (Capital no exigido)
     accounts: [1030, 1040]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10050
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: II. Prima de emisión
     child:
     accounts: [110]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10051
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: III. Reservas
     child: 1. Legal y estatutarias
     accounts: [112, 1141]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10052
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: III. Reservas
     child: 2. Otras reservas
     accounts: [113, 1140, 1142, 1143, 1144, 115, 119]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10053
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: IV. (Acciones y participaciones en patrimonio propias)
     child:
     accounts: [108, 109]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10054
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: V. Resultados de ejercicios anteriores
     child: 1. Remanente
     accounts: [120]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10055
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: V. Resultados de ejercicios anteriores
     child: 2. (Resultados negativos de ejercicios anteriores)
     accounts: [121]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10056
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: VI. Otras aportaciones de socios
     child:
     accounts: [118]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10057
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: VII. Resultado del ejercicio
     child:
     accounts: [129]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10058
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: VIII. (Dividendo a cuenta)
     child:
     accounts: [557]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10059
     type: A) PATRIMONIO NETO
     kind: A-1) Fondos propios
     parent: IX. Otros instrumentos de patrimonio
     child:
     accounts: [111]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10060
     type: A) PATRIMONIO NETO
     kind: A-2) Ajustes por cambios de valor
     parent: I. Activos financieros disponibles para la venta
     child:
     accounts: [133]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10061
     type: A) PATRIMONIO NETO
     kind: A-2) Ajustes por cambios de valor
     parent: II. Operaciones de cobertura
     child:
     accounts: [1340]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10062
     type: A) PATRIMONIO NETO
     kind: A-2) Ajustes por cambios de valor
     parent: III. Activos no corrientes y pasivos vinculados, mantenidos para la venta
     child:
     accounts: [136]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10063
     type: A) PATRIMONIO NETO
     kind: A-2) Ajustes por cambios de valor
     parent: IV. Diferencia de conversión
     child:
     accounts: [135]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10064
     type: A) PATRIMONIO NETO
     kind: A-2) Ajustes por cambios de valor
     parent: V. Otros
     child:
     accounts: [137]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10065
     type: A) PATRIMONIO NETO
     kind: A-3) Subvenciones, donaciones y legados recibidos
     parent:
     child:
     accounts: [130, 131, 132]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10066
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: I. Provisiones a largo plazo
     child: 1. Obligaciones por prestaciones a largo plazo al personal
     accounts: [140]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10067
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: I. Provisiones a largo plazo
     child: 2. Actuaciones medioambientales
     accounts: [145]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10068
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: I. Provisiones a largo plazo
     child: 3. Provisiones por reestructuración.
     accounts: [146]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10069
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: I. Provisiones a largo plazo
     child: 4. Otras provisiones.
     accounts: [141, 142, 143, 147]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10070
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: II. Deudas a largo plazo
     child: 1. Obligaciones y otros valores negociables.
     accounts: [177, 178, 179]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10071
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: II. Deudas a largo plazo
     child: 2. Deudas con entidades de crédito
     accounts: [1605, 170]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10072
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: II. Deudas a largo plazo
     child: 3. Acreedores por arrendamiento financiero
     accounts: [1625, 174]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10073
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: II. Deudas a largo plazo
     child: 4. Derivados
     accounts: [176]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10074
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: II. Deudas a largo plazo
     child: 5. Otros pasivos financieros
     accounts: [1615, 1635, 171, 172, 173, 175, 180, 185, 189]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10075
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: III. Deudas con empresas del *group y asociadas a largo plazo
     child:
     accounts: [1603, 1604, 1613, 1614, 1623, 1624, 1633, 1634]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10076
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: IV. Pasivos por impuesto diferido
     child:
     accounts: [479]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10077
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: V. Periodificaciones a largo plazo
     child:
     accounts: [181]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10078
     type: B) PASIVO NO CORRIENTE
     kind:
     parent: VII. Deuda con características especiales a largo plazo
     child:
     accounts: [15]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10079
     type: C) PASIVO CORRIENTE
     kind:
     parent: I. Pasivos vinculados con activos no corrientes mantenidos para la venta
     child:
     accounts: [585, 586, 587, 588, 589]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10080
     type: C) PASIVO CORRIENTE
     kind:
     parent: II. Provisiones a corto plazo
     child:
     accounts: [499, 529]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10081
     type: C) PASIVO CORRIENTE
     kind:
     parent: III. Deudas a corto plazo.
     child: 1. Obligaciones y otros valores negociables.
     accounts: [500, 501, 505, 506]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10082
     type: C) PASIVO CORRIENTE
     kind:
     parent: III. Deudas a corto plazo.
     child: 2. Deudas con entidades de crédito.
     accounts: [5105, 520, 527]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10083
     type: C) PASIVO CORRIENTE
     kind:
     parent: III. Deudas a corto plazo.
     child: 3. Acreedores por arrendamiento financiero
     accounts: [5125, 524]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10084
     type: C) PASIVO CORRIENTE
     kind:
     parent: III. Deudas a corto plazo.
     child: 4. Derivados
     accounts: [5595, 5598]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10085
     type: C) PASIVO CORRIENTE
     kind:
@@ -5222,7 +5224,7 @@ balances:
         561,
         569,
       ]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10086
     type: C) PASIVO CORRIENTE
     kind:
@@ -5245,63 +5247,63 @@ balances:
         5563,
         5564,
       ]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10087
     type: C) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 1. Proveedores
     accounts: [400, 401, 405, 406]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10088
     type: C) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 2. Proveedores, empresas del *group y asociadas.
     accounts: [403, 404]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10089
     type: C) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 3. Acreedores varios
     accounts: [41]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10090
     type: C) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 4. Personal (remuneraciones pendientes de pago)
     accounts: [465, 466]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10091
     type: C) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 5. Pasivos por impuesto corriente
     accounts: [4752]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10092
     type: C) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 6. Otras deudas con las Administraciones Públicas.
     accounts: [4750, 4751, 4758, 476, 477]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10093
     type: C) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 7. Anticipos de clientes
     accounts: [438]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10094
     type: C) PASIVO CORRIENTE
     kind:
     parent: VI. Periodificaciones a corto plazo
     child:
     accounts: [485, 568]
-  - project: *zara-project
+  - project: *zara-accountant-project
     id: 10095
     type: C) PASIVO CORRIENTE
     kind:

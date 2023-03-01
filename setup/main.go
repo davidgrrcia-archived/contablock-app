@@ -15,8 +15,12 @@ import (
 )
 
 const (
+	//zaraAdminYamlPath      = "./config/zara-admin.yaml"
 	zaraAccountantYamlPath = "./config/zara-accountant.yaml"
-	backendURL             = "http://localhost:4000/api/projects/"
+	zaraAuditorYamlPath    = "./config/zara-auditor.yaml"
+	zaraViewerYamlPath     = "./config/zara-viewer.yaml"
+
+	backendURL = "http://localhost:4000/api/projects/"
 )
 
 type YamlFile struct {
@@ -47,12 +51,13 @@ type Business struct {
 
 type User struct {
 	Project    string `yaml:"project"`
-	ID         string `yaml:"id"`
 	Name       string `yaml:"name"`
 	Email      string `yaml:"email"`
 	Password   string `yaml:"password"`
 	Role       string `yaml:"role"`
 	EthAddress string `yaml:"ethAddress"`
+	Network    string `yaml:"network"`
+	BusinessID string `yaml:"businessId"`
 }
 
 type Balances struct {
@@ -66,6 +71,21 @@ type Balances struct {
 }
 
 func main() {
+	//configureZaraAdmin()
+	configureZaraAccountant()
+	configureZaraAuditor()
+	configureZaraViewer()
+}
+
+/*func configureZaraAdmin() {
+	yamlFile := readYamlFile(zaraAdminYamlPath)
+	addAccounts(yamlFile)
+	addBusiness(yamlFile)
+	addBalances(yamlFile)
+	addUsers(yamlFile)
+}*/
+
+func configureZaraAccountant() {
 	yamlFile := readYamlFile(zaraAccountantYamlPath)
 	addAccounts(yamlFile)
 	addBusiness(yamlFile)
@@ -73,8 +93,24 @@ func main() {
 	addUsers(yamlFile)
 }
 
+func configureZaraAuditor() {
+	yamlFile := readYamlFile(zaraAuditorYamlPath)
+	addAccounts(yamlFile)
+	addBusiness(yamlFile)
+	addBalances(yamlFile)
+	addUsers(yamlFile)
+}
+
+func configureZaraViewer() {
+	yamlFile := readYamlFile(zaraViewerYamlPath)
+	addAccounts(yamlFile)
+	addBusiness(yamlFile)
+	addBalances(yamlFile)
+	addUsers(yamlFile)
+}
+
 func readYamlFile(path string) YamlFile {
-	data, err := ioutil.ReadFile(zaraAccountantYamlPath)
+	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		log.Fatal(err)
 	}

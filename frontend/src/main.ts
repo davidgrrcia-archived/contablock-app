@@ -10,6 +10,7 @@ import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 import Calendar from 'primevue/calendar';
 import TreeSelect from 'primevue/treeselect';
+import { useConfigStore } from './stores/config';
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -17,6 +18,16 @@ const app = createApp(App);
 app.use(pinia);
 app.use(router);
 app.use(PrimeVue);
+
+router.beforeEach((to, from, next) => {
+  const configStore = useConfigStore();
+
+  if (typeof to.params.project === 'string') {
+    configStore.activateCurrent(to.params.project, to.path);
+  }
+
+  next();
+});
 
 app.component('CalendarPrimeVue', Calendar);
 app.component('TreeSelectPrimeVue', TreeSelect);

@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"errors"
+	"github.com/google/uuid"
 	"time"
 
 	"github.com/asaskevich/govalidator"
@@ -56,6 +57,9 @@ func (useCase *DefaultUserUseCase) DescribeUser(ctx context.Context, input Descr
 	output.User.Password = storedUser.Password
 	output.User.Role = storedUser.Role
 	output.User.EthAddress = storedUser.EthAddress
+	output.User.DefaultPasswordChanged = storedUser.DefaultPasswordChanged
+	output.User.Network = storedUser.Network
+	output.User.BusinessID = storedUser.BusinessID
 	output.User.CreationDate = storedUser.CreationDate
 	output.User.LastUpdate = storedUser.LastUpdate
 
@@ -85,6 +89,9 @@ func (useCase *DefaultUserUseCase) ListUsers(ctx context.Context, input ListUser
 		user.Password = item.Password
 		user.Role = item.Role
 		user.EthAddress = item.EthAddress
+		user.DefaultPasswordChanged = item.DefaultPasswordChanged
+		user.Network = item.Network
+		user.BusinessID = item.BusinessID
 		user.CreationDate = item.CreationDate
 		user.LastUpdate = item.LastUpdate
 		users = append(users, user)
@@ -98,7 +105,7 @@ func (useCase *DefaultUserUseCase) ListUsers(ctx context.Context, input ListUser
 func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateUserInput) (*CreateUserOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	//TODO if the project in the path is the admin, then allow to add
@@ -112,6 +119,10 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 		return nil, errors.New("user [" + storedUser.ID + "] already exists")
 	}
 
+	if input.ID == "" {
+		input.ID = uuid.New().String()
+	}
+
 	var desiredUser UserStorageData
 	desiredUser.Project = input.Project
 	desiredUser.ID = input.ID
@@ -120,6 +131,9 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 	desiredUser.Password = hashPassword(input.Password)
 	desiredUser.Role = input.Role
 	desiredUser.EthAddress = input.EthAddress
+	desiredUser.DefaultPasswordChanged = false
+	desiredUser.Network = input.Network
+	desiredUser.BusinessID = input.BusinessID
 	desiredUser.CreationDate = time.Now()
 	desiredUser.LastUpdate = desiredUser.CreationDate
 
@@ -136,6 +150,9 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 	output.User.Password = addedUser.Password
 	output.User.Role = addedUser.Role
 	output.User.EthAddress = addedUser.EthAddress
+	output.User.DefaultPasswordChanged = addedUser.DefaultPasswordChanged
+	output.User.Network = addedUser.Network
+	output.User.BusinessID = addedUser.BusinessID
 	output.User.CreationDate = addedUser.CreationDate
 	output.User.LastUpdate = addedUser.LastUpdate
 
@@ -175,6 +192,9 @@ func (useCase *DefaultUserUseCase) LoginUser(ctx context.Context, input LoginUse
 	output.User.Password = storedUser.Password
 	output.User.Role = storedUser.Role
 	output.User.EthAddress = storedUser.EthAddress
+	output.User.DefaultPasswordChanged = storedUser.DefaultPasswordChanged
+	output.User.Network = storedUser.Network
+	output.User.BusinessID = storedUser.BusinessID
 	output.User.CreationDate = storedUser.CreationDate
 	output.User.LastUpdate = storedUser.LastUpdate
 

@@ -35,7 +35,7 @@ func (repository *UserRepository) Get(ctx context.Context, project string, id st
 	result := repository.db.QueryRow(query, project, id)
 
 	var storedUser UserDb
-	err := result.Scan(&storedUser.Project, &storedUser.ID, &storedUser.Name, &storedUser.Email, &storedUser.Password, &storedUser.Role, &storedUser.EthAddress, &storedUser.CreationDate, &storedUser.LastUpdate)
+	err := result.Scan(&storedUser.Project, &storedUser.ID, &storedUser.Name, &storedUser.Email, &storedUser.Password, &storedUser.Role, &storedUser.EthAddress, &storedUser.DefaultPasswordChanged, &storedUser.Network, &storedUser.BusinessID, &storedUser.CreationDate, &storedUser.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
@@ -51,6 +51,9 @@ func (repository *UserRepository) Get(ctx context.Context, project string, id st
 	output.Password = storedUser.Password
 	output.Role = storedUser.Role
 	output.EthAddress = storedUser.EthAddress
+	output.DefaultPasswordChanged = storedUser.DefaultPasswordChanged
+	output.Network = storedUser.Network
+	output.BusinessID = storedUser.BusinessID
 	creationDate, err := time.Parse(time.RFC3339, storedUser.CreationDate)
 	if err != nil {
 		return nil, err
@@ -76,7 +79,7 @@ func (repository *UserRepository) All(ctx context.Context, project string, filte
 	var storedUsers []UserDb
 	for rows.Next() {
 		var userDb UserDb
-		err = rows.Scan(&userDb.Project, &userDb.ID, &userDb.Name, &userDb.Email, &userDb.Password, &userDb.Role, &userDb.EthAddress, &userDb.CreationDate, &userDb.LastUpdate)
+		err = rows.Scan(&userDb.Project, &userDb.ID, &userDb.Name, &userDb.Email, &userDb.Password, &userDb.Role, &userDb.EthAddress, &userDb.DefaultPasswordChanged, &userDb.Network, &userDb.BusinessID, &userDb.CreationDate, &userDb.LastUpdate)
 		if err != nil {
 			return nil, err
 		}
@@ -94,6 +97,9 @@ func (repository *UserRepository) All(ctx context.Context, project string, filte
 		user.Password = storedUser.Password
 		user.Role = storedUser.Role
 		user.EthAddress = storedUser.EthAddress
+		user.DefaultPasswordChanged = storedUser.DefaultPasswordChanged
+		user.Network = storedUser.Network
+		user.BusinessID = storedUser.BusinessID
 		creationDate, err := time.Parse(time.RFC3339, storedUser.CreationDate)
 		if err != nil {
 			return nil, err
@@ -121,19 +127,22 @@ func (repository *UserRepository) Edit(ctx context.Context, input user.UserStora
 	userDb.Password = input.Password
 	userDb.Role = input.Role
 	userDb.EthAddress = input.EthAddress
+	userDb.DefaultPasswordChanged = input.DefaultPasswordChanged
+	userDb.Network = input.Network
+	userDb.BusinessID = input.BusinessID
 	userDb.CreationDate = input.CreationDate.Format(time.RFC3339)
 	userDb.LastUpdate = input.LastUpdate.Format(time.RFC3339)
 
-	updateQuery := "UPDATE users SET name = ?, email = ?, password = ?, role = ?, eth_address = ?, creation_date = ?, last_update = ? WHERE project = ? AND id = ?"
+	updateQuery := "UPDATE users SET name = ?, email = ?, password = ?, role = ?, eth_address = ?, default_password_changed = ?, network = ?, business_id = ?, creation_date = ?, last_update = ? WHERE project = ? AND id = ?"
 
-	repository.db.Exec(updateQuery, userDb.Name, userDb.Email, userDb.Password, userDb.Role, userDb.EthAddress, userDb.CreationDate, userDb.LastUpdate, userDb.Project, userDb.ID)
+	repository.db.Exec(updateQuery, userDb.Name, userDb.Email, userDb.Password, userDb.Role, userDb.EthAddress, userDb.DefaultPasswordChanged, userDb.Network, userDb.BusinessID, userDb.CreationDate, userDb.LastUpdate, userDb.Project, userDb.ID)
 
 	query := "SELECT * FROM users WHERE project = ? AND id = ?"
 
 	result := repository.db.QueryRow(query, userDb.Project, userDb.ID)
 
 	var storedUser UserDb
-	err := result.Scan(&storedUser.Project, &storedUser.ID, &storedUser.Name, &storedUser.Email, &storedUser.Password, &storedUser.Role, &storedUser.EthAddress, &storedUser.CreationDate, &storedUser.LastUpdate)
+	err := result.Scan(&storedUser.Project, &storedUser.ID, &storedUser.Name, &storedUser.Email, &storedUser.Password, &storedUser.Role, &storedUser.EthAddress, &storedUser.DefaultPasswordChanged, &storedUser.Network, &storedUser.BusinessID, &storedUser.CreationDate, &storedUser.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("user with project [" + userDb.Project + "] and id [" + userDb.ID + "] not found")
@@ -149,6 +158,9 @@ func (repository *UserRepository) Edit(ctx context.Context, input user.UserStora
 	output.Password = storedUser.Password
 	output.Role = storedUser.Role
 	output.EthAddress = storedUser.EthAddress
+	output.DefaultPasswordChanged = storedUser.DefaultPasswordChanged
+	output.Network = storedUser.Network
+	output.BusinessID = storedUser.BusinessID
 	creationDate, err := time.Parse(time.RFC3339, storedUser.CreationDate)
 	if err != nil {
 		return nil, err
@@ -172,12 +184,15 @@ func (repository *UserRepository) Add(ctx context.Context, input user.UserStorag
 	userDb.Password = input.Password
 	userDb.Role = input.Role
 	userDb.EthAddress = input.EthAddress
+	userDb.DefaultPasswordChanged = input.DefaultPasswordChanged
+	userDb.Network = input.Network
+	userDb.BusinessID = input.BusinessID
 	userDb.CreationDate = input.CreationDate.Format(time.RFC3339)
 	userDb.LastUpdate = input.LastUpdate.Format(time.RFC3339)
 
-	insertQuery := "INSERT INTO users (project, id, name, email, password, role, eth_address, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+	insertQuery := "INSERT INTO users (project, id, name, email, password, role, eth_address, default_password_changed, network, business_id, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-	_, err := repository.db.Exec(insertQuery, userDb.Project, userDb.ID, userDb.Name, userDb.Email, userDb.Password, userDb.Role, userDb.EthAddress, userDb.CreationDate, userDb.LastUpdate)
+	_, err := repository.db.Exec(insertQuery, userDb.Project, userDb.ID, userDb.Name, userDb.Email, userDb.Password, userDb.Role, userDb.EthAddress, userDb.DefaultPasswordChanged, userDb.Network, userDb.BusinessID, userDb.CreationDate, userDb.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
@@ -187,7 +202,7 @@ func (repository *UserRepository) Add(ctx context.Context, input user.UserStorag
 	result := repository.db.QueryRow(query, userDb.Project, userDb.ID)
 
 	var storedUser UserDb
-	err = result.Scan(&storedUser.Project, &storedUser.ID, &storedUser.Name, &storedUser.Email, &storedUser.Password, &storedUser.Role, &storedUser.EthAddress, &storedUser.CreationDate, &storedUser.LastUpdate)
+	err = result.Scan(&storedUser.Project, &storedUser.ID, &storedUser.Name, &storedUser.Email, &storedUser.Password, &storedUser.Role, &storedUser.EthAddress, &storedUser.DefaultPasswordChanged, &storedUser.Network, &storedUser.BusinessID, &storedUser.CreationDate, &storedUser.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("user with project [" + userDb.Project + "] and id [" + userDb.ID + "] not added")
@@ -203,6 +218,9 @@ func (repository *UserRepository) Add(ctx context.Context, input user.UserStorag
 	output.Password = storedUser.Password
 	output.Role = storedUser.Role
 	output.EthAddress = storedUser.EthAddress
+	output.DefaultPasswordChanged = storedUser.DefaultPasswordChanged
+	output.Network = storedUser.Network
+	output.BusinessID = storedUser.BusinessID
 	creationDate, err := time.Parse(time.RFC3339, storedUser.CreationDate)
 	if err != nil {
 		return nil, err

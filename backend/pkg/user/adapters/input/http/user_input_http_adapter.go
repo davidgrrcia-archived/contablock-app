@@ -51,6 +51,9 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeUser(ctx context.Context, d
 	response.Email = outputData.User.Email
 	response.Role = outputData.User.Role
 	response.EthAddress = outputData.User.EthAddress
+	response.DefaultPasswordChanged = outputData.User.DefaultPasswordChanged
+	response.Network = outputData.User.Network
+	response.BusinessID = outputData.User.BusinessID
 	response.CreationDate = outputData.User.CreationDate.Unix()
 	response.LastUpdate = outputData.User.LastUpdate.Unix()
 
@@ -80,6 +83,9 @@ func (adapter *DefaultHttpInputAdapter) AdaptListUsers(ctx context.Context, data
 		responseItem.Email = item.Email
 		responseItem.Role = item.Role
 		responseItem.EthAddress = item.EthAddress
+		responseItem.DefaultPasswordChanged = item.DefaultPasswordChanged
+		responseItem.Network = item.Network
+		responseItem.BusinessID = item.BusinessID
 		responseItem.CreationDate = item.CreationDate.Unix()
 		responseItem.LastUpdate = item.LastUpdate.Unix()
 
@@ -100,6 +106,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateUser(ctx context.Context, dat
 	inputData.Password = data.Password
 	inputData.Role = data.Role
 	inputData.EthAddress = data.EthAddress
+	inputData.Network = data.Network
+	inputData.BusinessID = data.BusinessID
 
 	outputData, err := adapter.userUseCase.CreateUser(ctx, inputData)
 	if err != nil {
@@ -113,6 +121,9 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateUser(ctx context.Context, dat
 	response.Email = outputData.User.Email
 	response.Role = outputData.User.Role
 	response.EthAddress = outputData.User.EthAddress
+	response.DefaultPasswordChanged = outputData.User.DefaultPasswordChanged
+	response.Network = outputData.User.Network
+	response.BusinessID = outputData.User.BusinessID
 	response.CreationDate = outputData.User.CreationDate.Unix()
 	response.LastUpdate = outputData.User.LastUpdate.Unix()
 
@@ -140,6 +151,9 @@ func (adapter *DefaultHttpInputAdapter) AdaptLoginUser(ctx context.Context, data
 	response.Email = outputData.User.Email
 	response.Role = outputData.User.Role
 	response.EthAddress = outputData.User.EthAddress
+	response.DefaultPasswordChanged = outputData.User.DefaultPasswordChanged
+	response.Network = outputData.User.Network
+	response.BusinessID = outputData.User.BusinessID
 	response.CreationDate = outputData.User.CreationDate.Unix()
 	response.LastUpdate = outputData.User.LastUpdate.Unix()
 	// TODO: response.Token = outputData.Token
