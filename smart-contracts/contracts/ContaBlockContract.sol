@@ -2,6 +2,9 @@
 pragma solidity ^0.8.6;
 
 contract ContaBlockContract {
+    address public owner;
+    mapping(address => bool) private userAccess;
+
     string public constant CREATED_STATE = 'CREATED';
     string public constant PUBLISHED_STATE = 'PUBLISHED';
 
@@ -17,12 +20,41 @@ contract ContaBlockContract {
         string state;
     }
 
-    mapping(string => Entry) public entries;
-    mapping(string => bool) public entryExist;
-    string[] multipleEntryIds;
-    mapping(string => bool) multipleEntryIdExist;
-    string[] accountIds;
-    mapping(string => bool) accountIdExist;
+    mapping(address => mapping(string => Entry)) entries;
+    mapping(address => mapping(string => bool)) entryExist;
+    mapping(address => string[]) multipleEntryIds;
+    mapping(address => mapping(string => bool)) multipleEntryIdExist;
+    mapping(address => string[]) accountIds;
+    mapping(address => mapping(string => bool)) accountIdExist;
+
+    modifier onlyOwner() {
+        require(
+            msg.sender == owner,
+            'Only the contract owner can perform this action'
+        );
+        _;
+    }
+
+    modifier hasAccess() {
+        require(
+            userAccess[msg.sender] == true,
+            'You do not have access to this information'
+        );
+        _;
+    }
+
+    constructor() {
+        owner = msg.sender;
+        userAccess[msg.sender] = true;
+    }
+
+    function grantAccess(address user) public onlyOwner {
+        userAccess[user] = true;
+    }
+
+    function revokeAccess(address user) public onlyOwner {
+        userAccess[user] = false;
+    }
 
     function createEntry(
         string memory _id,
@@ -33,8 +65,8 @@ contract ContaBlockContract {
         string memory _date,
         uint256 _debitBalance,
         uint256 _creditBalance
-    ) public {
-        require(!entryExist[_id], 'Entry already exists');
+    ) public hasAccess {
+        require(!entryExist[msg.sender][_id], 'Entry already exists');
 
         Entry memory _entry = Entry(
             _id,
@@ -48,17 +80,17 @@ contract ContaBlockContract {
             CREATED_STATE
         );
 
-        entryExist[_id] = true;
-        entries[_id] = _entry;
+        entryExist[msg.sender][_id] = true;
+        entries[msg.sender][_id] = _entry;
 
-        if (!multipleEntryIdExist[_multipleEntryId]) {
-            multipleEntryIds.push(_multipleEntryId);
-            multipleEntryIdExist[_multipleEntryId] = true;
+        if (!multipleEntryIdExist[msg.sender][_multipleEntryId]) {
+            multipleEntryIds[msg.sender].push(_multipleEntryId);
+            multipleEntryIdExist[msg.sender][_multipleEntryId] = true;
         }
 
-        if (!accountIdExist[_accountId]) {
-            accountIds.push(_accountId);
-            accountIdExist[_accountId] = true;
+        if (!accountIdExist[msg.sender][_accountId]) {
+            accountIds[msg.sender].push(_accountId);
+            accountIdExist[msg.sender][_accountId] = true;
         }
 
         emit EntryCreated(_entry);
@@ -66,24 +98,32 @@ contract ContaBlockContract {
 
     event EntryCreated(Entry entry);
 
-    function getEntryData(
-        string memory _id
-    ) public view returns (Entry memory) {
-        return entries[_id];
+    function getEntryData(string memory _id)
+        public
+        view
+        hasAccess
+        returns (Entry memory)
+    {
+        return entries[msg.sender][_id];
     }
 
-    function listMultipleEntryIds() public view returns (string[] memory) {
-        return multipleEntryIds;
+    function listMultipleEntryIds()
+        public
+        view
+        hasAccess
+        returns (string[] memory)
+    {
+        return multipleEntryIds[msg.sender];
     }
 
-    function listAccountIds() public view returns (string[] memory) {
-        return accountIds;
+    function listAccountIds() public view hasAccess returns (string[] memory) {
+        return accountIds[msg.sender];
     }
 
-    function publishEntry(string memory _id) public {
-        require(entryExist[_id], 'Entry does not exists');
+    function publishEntry(string memory _id) public hasAccess {
+        require(entryExist[msg.sender][_id], 'Entry does not exists');
 
-        Entry memory _entry = entries[_id];
+        Entry memory _entry = entries[msg.sender][_id];
 
         //compare state strings
         require(
@@ -94,26 +134,26 @@ contract ContaBlockContract {
 
         _entry.state = PUBLISHED_STATE;
 
-        entries[_id] = _entry;
+        entries[msg.sender][_id] = _entry;
 
         emit EntryPublished(_entry);
     }
 
     event EntryPublished(Entry entry);
 
-    function removeEntry(string memory _id) public {
-        require(entryExist[_id], 'Entry does not exists');
+    function removeEntry(string memory _id) public hasAccess {
+        require(entryExist[msg.sender][_id], 'Entry does not exists');
 
-        Entry memory _entry = entries[_id];
+        Entry memory _entry = entries[msg.sender][_id];
 
         //compare state strings
         require(
             keccak256(abi.encodePacked(_entry.state)) ==
-            keccak256(abi.encodePacked(CREATED_STATE)),
+                keccak256(abi.encodePacked(CREATED_STATE)),
             'Entry should be in created state'
         );
 
-        entryExist[_id] = false;
+        entryExist[msg.sender][_id] = false;
 
         emit EntryRemoved(_entry);
     }

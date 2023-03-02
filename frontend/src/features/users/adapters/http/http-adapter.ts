@@ -13,18 +13,18 @@ export class DefaultUsersHttpAdapter implements UsersAdapter {
     }
 
     const output: UserUseCase = {
-      project: userHttpResponse.user.project,
-      id: userHttpResponse.user.id,
-      name: userHttpResponse.user.name,
-      email: userHttpResponse.user.email,
-      password: userHttpResponse.user.password,
-      role: userHttpResponse.user.role,
-      ethAddress: userHttpResponse.user.ethAddress,
-      defaultPasswordChanged: userHttpResponse.user.defaultPasswordChanged,
-      network: userHttpResponse.user.network,
-      businessId: userHttpResponse.user.businessId,
-      creationDate: userHttpResponse.user.creationDate,
-      lastUpdate: userHttpResponse.user.lastUpdate,
+      project: userHttpResponse.project,
+      id: userHttpResponse.id,
+      name: userHttpResponse.name,
+      email: userHttpResponse.email,
+      password: userHttpResponse.password,
+      role: userHttpResponse.role,
+      ethAddress: userHttpResponse.ethAddress,
+      defaultPasswordChanged: userHttpResponse.defaultPasswordChanged,
+      network: userHttpResponse.network,
+      businessId: userHttpResponse.businessId,
+      creationDate: userHttpResponse.creationDate,
+      lastUpdate: userHttpResponse.lastUpdate,
     };
 
     return output;

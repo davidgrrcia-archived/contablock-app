@@ -5,22 +5,25 @@ import GeneralLedgerView from '@/features/general-ledger/adapters/views/GeneralL
 import BalancesView from '@/features/balances/adapters/views/BalancesView.vue';
 import NotFound from '@/components/NotFound.vue';
 import LoginView from '@/features/users/adapters/views/LoginView.vue';
-import { useConfigStore } from '@/stores/config';
 
 //TODO: apply clean architecture
 
 const requireAuth = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-  const configStore = useConfigStore();
+  if (typeof to.params.project !== 'string') {
+    return;
+  }
 
-  const isAuthenticated = configStore.getIsAuthenticated();
-  if (isAuthenticated) {
-    next();
-  } else {
+  // todo hydrate configStore
+  const isAuthenticated = localStorage.getItem(to.params.project + 'Authentication') === 'true';
+
+  if (!isAuthenticated && to.name !== 'Login') {
     next({
       name: 'login',
       params: { project: to.params.project },
       query: { redirect: to.path },
     });
+  } else {
+    next();
   }
 };
 

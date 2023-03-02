@@ -1,5 +1,5 @@
 import { usersUseCase } from '@/features/users';
-import type { LoginUserInput } from '@/features/users/application/users-model';
+import type { LoginUserInput, User } from '@/features/users/application/users-model';
 import { defineStore } from 'pinia';
 import { useMessagesStore } from './messages';
 
@@ -16,8 +16,7 @@ interface ConfigState {
   project: string;
   isAuthenticated: Map<string, boolean>;
   userId: Map<string, string>;
-  businessId: Map<string, string>;
-  role: Map<string, string>;
+  user: User | null;
 }
 
 const navigation: Navigation[] = [
@@ -30,10 +29,9 @@ const state: ConfigState = {
   stateMessage: null,
   navigation: navigation,
   project: '',
-  isAuthenticated: new Map(),
-  userId: new Map(),
-  businessId: new Map(),
-  role: new Map(),
+  isAuthenticated: new Map<string, boolean>(),
+  userId: new Map<string, string>(),
+  user: null,
 };
 
 export const useConfigStore = defineStore('configStore', {
@@ -42,7 +40,7 @@ export const useConfigStore = defineStore('configStore', {
   },
 
   actions: {
-    activateCurrent(project: string, url: string) {
+    async activateCurrent(project: string, url: string) {
       this.state.project = project;
 
       this.state.navigation = [
@@ -58,20 +56,14 @@ export const useConfigStore = defineStore('configStore', {
           item.current = false;
         }
       });
+
+      //Save project in local storage
+      localStorage.setItem('currentProject', project);
     },
     getIsAuthenticated(): boolean {
       return this.state.isAuthenticated.get(this.state.project) || false;
     },
-    getUserId(): string {
-      return this.state.userId.get(this.state.project) || '';
-    },
-    getBusinessId(): string {
-      return this.state.businessId.get(this.state.project) || '';
-    },
-    getRole(): string {
-      return this.state.role.get(this.state.project) || '';
-    },
-    async loginUser(email: string, password: string) {
+    async loginUser(email: string, password: string, redirect: string) {
       try {
         this.state.stateMessage = 'publishing entries';
 
@@ -88,12 +80,13 @@ export const useConfigStore = defineStore('configStore', {
           return;
         }
 
-        console.log('response', response);
+        //Save authentication status, user id and business id in local storage
+        localStorage.setItem(response.project + 'Authentication', JSON.stringify(response.id !== undefined));
+        localStorage.setItem(response.project + 'UserId', JSON.stringify(response.id));
+        localStorage.setItem(response.project + 'BusinessId', JSON.stringify(response.businessId));
 
-        this.state.isAuthenticated.set(response.project, true);
-        this.state.userId.set(response.project, response.id);
-        this.state.businessId.set(response.project, response.businessId);
-        this.state.role.set(response.project, response.role);
+        //Redirect to the page the user was trying to access
+        window.location.href = redirect;
       } catch (err) {
         this.state.stateMessage = 'error al iniciar sesión';
         const messagesStore = useMessagesStore();

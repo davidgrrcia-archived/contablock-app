@@ -7,10 +7,14 @@ import { getRoleColor } from '@/features/utils/utils';
 
 const configStore = useConfigStore();
 const modalState = useCreateEntryModalStore();
-const role = configStore.getRole();
+const role = configStore.state.user?.role;
 
 function showCreateEntryModal() {
   modalState.showModal();
+}
+function logOut() {
+  localStorage.setItem(configStore.state.project + 'Authentication', JSON.stringify(false));
+  window.location.reload();
 }
 </script>
 
@@ -22,6 +26,9 @@ function showCreateEntryModal() {
     </div>
     <div class="w-1/2 text-right">
       <button type="button" @click="showCreateEntryModal()" class="btn my-3 mr-24 bg-blue-500 hover:bg-white hover:text-blue-500">Nuevo asiento</button>
+    </div>
+    <div class="w-1/2 text-right">
+      <button type="button" @click="logOut()" class="btn my-3 mr-24 bg-blue-500 hover:bg-white hover:text-blue-500">logout</button>
     </div>
   </header>
   <CreateEntryModal></CreateEntryModal>
