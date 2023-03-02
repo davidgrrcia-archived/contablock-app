@@ -238,11 +238,9 @@ func (repository *UserRepository) Add(ctx context.Context, input user.UserStorag
 func BuildQueryWithFilters(query string, filters user.Filters) string {
 	if filters.Email != nil {
 		query = query + " AND email = \"" + *filters.Email + "\""
-		return query
 	}
 	if filters.Password != nil {
 		query = query + " AND password = \"" + *filters.Password + "\""
-		return query
 	}
 
 	return query

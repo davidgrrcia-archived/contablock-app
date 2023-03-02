@@ -88,7 +88,7 @@ export const useConfigStore = defineStore('configStore', {
 
         if (response instanceof Error) {
           const messagesStore = useMessagesStore();
-          messagesStore.addErrorMessage('Error al iniciar sesión', 'No se ha podido iniciar sesión');
+          messagesStore.addWarnMessage('No se pudo iniciar sesión', 'El correo electrónico o la contraseña son incorrectos');
           return;
         }
 
@@ -104,7 +104,7 @@ export const useConfigStore = defineStore('configStore', {
       } catch (err) {
         this.state.stateMessage = 'error al iniciar sesión';
         const messagesStore = useMessagesStore();
-        messagesStore.addMessage(this.state.stateMessage);
+        messagesStore.addErrorMessage(this.state.stateMessage);
       }
     },
   },
