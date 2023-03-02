@@ -81,7 +81,7 @@ export function formatId(id: string): string {
   return id.substring(0, 8) + '...';
 }
 
-export function getRoleColor(role: string | undefined): string {
+export function getRoleColor(role: string): string {
   switch (role) {
     case 'accountant':
       return 'bg-gray-800';

@@ -1,15 +1,19 @@
 <script setup lang="ts">
 import { BriefcaseIcon, LinkIcon, MapPinIcon } from '@heroicons/vue/20/solid';
 import { useBusinessStore } from '@/features/business/application/business-store.js';
+import { getRoleColor } from '@/features/utils/utils';
+import { useConfigStore } from '@/stores/config';
 
 const businessState = useBusinessStore();
+const configStore = useConfigStore();
+const themeColor = getRoleColor(configStore.state.role);
 
 const state = await businessState.loadBusiness();
 </script>
 
 <template>
   <div class="mt-18 mb-5 flex items-center justify-between">
-    <div class="min-w-0 flex-1 bg-gray-100 pt-24 pb-10 text-center">
+    <div class="min-w-0 flex-1 pt-24 pb-10 text-center" :class="[themeColor]">
       <img class="mb-3 inline-block h-20 w-40 rounded-lg" alt="" :src="state.business.logo" />
       <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
         {{ state.business.socialDenomination }}
