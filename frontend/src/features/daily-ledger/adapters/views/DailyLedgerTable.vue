@@ -3,12 +3,18 @@ import { useDailyLedgerStore } from '@/features/daily-ledger/application/daily-l
 import { getState, getQuarter, formatAmount, formatDate, formatId } from '../../../utils/utils';
 import { useEntriesStore } from '@/features/entries/application/entries-store';
 import { useMessagesStore } from '@/stores/messages';
+import { useCreateEntryModalStore } from '@/features/entries/application/create-entry-modal-store';
 
 const entriesStore = useEntriesStore();
 const dailyLedgerStore = useDailyLedgerStore();
 const messagesStore = useMessagesStore();
 await dailyLedgerStore.loadDailyLedger();
 const dailyLedger = dailyLedgerStore.state.storedDailyLedger.reverse();
+const modalState = useCreateEntryModalStore();
+
+function showCreateEntryModal() {
+  modalState.showModal();
+}
 
 function publishEntries(entries: any) {
   messagesStore.addConfirmMessage('¿Estás seguro de publicar los asientos seleccionados?', 'Esta es una acción que no se puede revertir, asegúrate de querer publicar este asiento', () => {
@@ -28,6 +34,9 @@ function removeEntries(entries: any) {
       <div class="flex-auto">
         <h1 class="text-3xl font-semibold text-gray-900">Libro Diario</h1>
         <p class="mt-2 text-sm text-gray-700">Registro de transacciones financieras diarias ordenadas cronológicamente.</p>
+      </div>
+      <div class="w-1/2 text-right">
+        <button type="button" @click="showCreateEntryModal()" class="btn my-3 mr-24 bg-blue-500 hover:bg-white hover:text-blue-500">Nuevo asiento</button>
       </div>
     </div>
     <div class="mt-8 flex flex-col">

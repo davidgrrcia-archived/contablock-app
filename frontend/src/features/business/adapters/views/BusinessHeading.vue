@@ -3,11 +3,8 @@ import { BriefcaseIcon, LinkIcon, MapPinIcon } from '@heroicons/vue/20/solid';
 import { useBusinessStore } from '@/features/business/application/business-store.js';
 
 const businessState = useBusinessStore();
-const project = localStorage.getItem('currentProject');
-const businessId = localStorage.getItem(project + 'BusinessId');
-console.log('businessId', businessId?.replace(/['"]+/g, ''));
 
-const state = await businessState.loadBusiness(businessId?.replace(/['"]+/g, '') as string);
+const state = await businessState.loadBusiness();
 </script>
 
 <template>

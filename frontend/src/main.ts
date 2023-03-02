@@ -19,6 +19,7 @@ app.use(pinia);
 app.use(router);
 app.use(PrimeVue);
 
+//Activate pinia store before each route
 router.beforeEach((to, from, next) => {
   const configStore = useConfigStore();
 

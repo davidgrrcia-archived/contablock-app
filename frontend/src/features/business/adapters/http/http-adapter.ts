@@ -4,14 +4,15 @@ import type { Business, BusinessAdapter } from '@/features/business/application/
 export class DefaultBusinessHttpAdapter implements BusinessAdapter {
   constructor(private readonly businessHttpInfra: DefaultBusinessHttpInfra) {}
 
-  async describeBusinessHttpResponse(id: string) {
-    const input = await this.businessHttpInfra.describeBusiness(id);
+  async describeBusinessHttpResponse(project: string, id: string) {
+    const input = await this.businessHttpInfra.describeBusiness(project, id);
 
     if (input instanceof Error) {
       return input;
     }
 
     const output: Business = {
+      project: input.project,
       id: input.id,
       name: input.name,
       socialDenomination: input.socialDenomination,

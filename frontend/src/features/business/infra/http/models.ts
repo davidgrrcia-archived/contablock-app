@@ -1,4 +1,5 @@
 export interface Business {
+  project: string;
   id: string;
   name: string;
   socialDenomination: string;
@@ -9,6 +10,7 @@ export interface Business {
 }
 
 export interface BusinessDescribeResponse {
+  project: string;
   id: string;
   name: string;
   socialDenomination: string;

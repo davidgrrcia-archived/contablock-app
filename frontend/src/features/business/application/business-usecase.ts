@@ -1,13 +1,13 @@
 import type { Business, BusinessAdapter } from '@/features/business/application/business-model';
 
 export interface BusinessUseCase {
-  describeBusiness(id: string): Promise<Business | Error>;
+  describeBusiness(project: string, id: string): Promise<Business | Error>;
 }
 
 export class DefaultBusinessUseCase implements BusinessUseCase {
   constructor(private readonly businessAdapter: BusinessAdapter) {}
 
-  async describeBusiness(id: string) {
-    return await this.businessAdapter.describeBusinessHttpResponse(id);
+  async describeBusiness(project: string, id: string) {
+    return await this.businessAdapter.describeBusinessHttpResponse(project, id);
   }
 }

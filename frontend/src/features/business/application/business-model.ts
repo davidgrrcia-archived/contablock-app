@@ -1,8 +1,9 @@
 export interface BusinessAdapter {
-  describeBusinessHttpResponse(id: string): Promise<Business | Error>;
+  describeBusinessHttpResponse(project: string, id: string): Promise<Business | Error>;
 }
 
 export interface Business {
+  project: string;
   id: string;
   name: string;
   socialDenomination: string;

@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { businessUseCase } from '@/features/business';
 import type { Business } from '@/features/business/application/business-model';
 import { useMessagesStore } from '@/stores/messages';
+import { useConfigStore } from '@/stores/config';
 
 //TODO: apply clean architecture
 interface BusinessState {
@@ -10,6 +11,7 @@ interface BusinessState {
 }
 
 const emptyBusiness: Business = {
+  project: '',
   id: '',
   name: '',
   socialDenomination: '',
@@ -30,11 +32,13 @@ export const useBusinessStore = defineStore('business', {
   },
 
   actions: {
-    async loadBusiness(id: string): Promise<BusinessState> {
+    async loadBusiness(): Promise<BusinessState> {
       try {
+        const configStore = useConfigStore();
+
         this.state.stateMessage = 'loading business';
 
-        const response = await businessUseCase.describeBusiness(id);
+        const response = await businessUseCase.describeBusiness(configStore.state.project, configStore.state.businessId);
 
         if (response instanceof Error) {
           const messagesStore = useMessagesStore();

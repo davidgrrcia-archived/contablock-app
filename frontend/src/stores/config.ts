@@ -1,5 +1,5 @@
 import { usersUseCase } from '@/features/users';
-import type { LoginUserInput, User } from '@/features/users/application/users-model';
+import type { LoginUserInput } from '@/features/users/application/users-model';
 import { defineStore } from 'pinia';
 import { useMessagesStore } from './messages';
 
@@ -14,9 +14,11 @@ interface ConfigState {
   stateMessage: string | null;
   navigation: Navigation[];
   project: string;
-  isAuthenticated: Map<string, boolean>;
-  userId: Map<string, string>;
-  user: User | null;
+  isAuthenticated: boolean;
+  userId: string;
+  businessId: string;
+  name: string;
+  role: string;
 }
 
 const navigation: Navigation[] = [
@@ -29,9 +31,11 @@ const state: ConfigState = {
   stateMessage: null,
   navigation: navigation,
   project: '',
-  isAuthenticated: new Map<string, boolean>(),
-  userId: new Map<string, string>(),
-  user: null,
+  isAuthenticated: false,
+  userId: '',
+  businessId: '',
+  name: '',
+  role: '',
 };
 
 export const useConfigStore = defineStore('configStore', {
@@ -41,8 +45,6 @@ export const useConfigStore = defineStore('configStore', {
 
   actions: {
     async activateCurrent(project: string, url: string) {
-      this.state.project = project;
-
       this.state.navigation = [
         { name: 'Libro Diario', href: '/projects/' + project, current: false },
         { name: 'Libro Mayor', href: '/projects/' + project + '/general-ledger', current: false },
@@ -59,9 +61,19 @@ export const useConfigStore = defineStore('configStore', {
 
       //Save project in local storage
       localStorage.setItem('currentProject', project);
-    },
-    getIsAuthenticated(): boolean {
-      return this.state.isAuthenticated.get(this.state.project) || false;
+
+      //Hydrate authentication status, user id and business id from local storage
+      const isAuthenticated = localStorage.getItem(project + 'Authentication') === 'true';
+      const userId = localStorage.getItem(project + 'UserId')?.replace(/['"]+/g, '') || '';
+      const businessId = localStorage.getItem(project + 'BusinessId')?.replace(/['"]+/g, '') || '';
+      const name = localStorage.getItem(project + 'Name')?.replace(/['"]+/g, '') || '';
+      const role = localStorage.getItem(project + 'Role')?.replace(/['"]+/g, '') || '';
+      this.state.project = project;
+      this.state.isAuthenticated = isAuthenticated;
+      this.state.userId = userId;
+      this.state.businessId = businessId;
+      this.state.name = name;
+      this.state.role = role;
     },
     async loginUser(email: string, password: string, redirect: string) {
       try {
@@ -84,6 +96,8 @@ export const useConfigStore = defineStore('configStore', {
         localStorage.setItem(response.project + 'Authentication', JSON.stringify(response.id !== undefined));
         localStorage.setItem(response.project + 'UserId', JSON.stringify(response.id));
         localStorage.setItem(response.project + 'BusinessId', JSON.stringify(response.businessId));
+        localStorage.setItem(response.project + 'Name', JSON.stringify(response.name));
+        localStorage.setItem(response.project + 'Role', JSON.stringify(response.role));
 
         //Redirect to the page the user was trying to access
         window.location.href = redirect;
