@@ -5,6 +5,8 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"errors"
+	contract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/usecases"
+	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	"github.com/google/uuid"
 	"time"
 
@@ -22,18 +24,30 @@ func NewDefaultUserUseCase(options DefaultUserUseCaseOptions) (*DefaultUserUseCa
 	if options.UserStorage == nil {
 		return nil, errors.New("cannot create an instance of UserUseCase because provided UserStorage is nil")
 	}
+	if options.ContaBlockUseCase == nil {
+		return nil, errors.New("cannot create an instance of UserUseCase because provided ContaBlockUseCase is nil")
+	}
+	if options.ContractUseCase == nil {
+		return nil, errors.New("cannot create an instance of UserUseCase because provided ContractUseCase is nil")
+	}
 
 	return &DefaultUserUseCase{
-		userStorage: options.UserStorage,
+		userStorage:       options.UserStorage,
+		contaBlockUseCase: options.ContaBlockUseCase,
+		contractUseCase:   options.ContractUseCase,
 	}, nil
 }
 
 type DefaultUserUseCase struct {
-	userStorage UserStorage
+	userStorage       UserStorage
+	contaBlockUseCase contablock.ContaBlockUseCase
+	contractUseCase   contract.ContractUseCase
 }
 
 type DefaultUserUseCaseOptions struct {
-	UserStorage UserStorage
+	UserStorage       UserStorage
+	ContaBlockUseCase contablock.ContaBlockUseCase
+	ContractUseCase   contract.ContractUseCase
 }
 
 var _ UserUseCase = (*DefaultUserUseCase)(nil)
@@ -49,9 +63,14 @@ func (useCase *DefaultUserUseCase) DescribeUser(ctx context.Context, input Descr
 		return nil, err
 	}
 
+	if storedUser == nil {
+		return nil, errors.New("user with project [" + input.Project + "] and id [" + input.ID + "] not found")
+	}
+
 	var output DescribeUserOutput
 	output.User.Project = storedUser.Project
 	output.User.ID = storedUser.ID
+	output.User.ContractID = storedUser.ContractID
 	output.User.Name = storedUser.Name
 	output.User.Email = storedUser.Email
 	output.User.Password = storedUser.Password
@@ -84,6 +103,7 @@ func (useCase *DefaultUserUseCase) ListUsers(ctx context.Context, input ListUser
 		var user User
 		user.Project = item.Project
 		user.ID = item.ID
+		user.ContractID = item.ContractID
 		user.Name = item.Name
 		user.Email = item.Email
 		user.Password = item.Password
@@ -108,8 +128,6 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 		return nil, errors.New("invalid input: " + err.Error())
 	}
 
-	//TODO if the project in the path is the admin, then allow to add
-
 	storedUser, err := useCase.userStorage.Get(ctx, input.Project, input.ID)
 	if err != nil {
 		return nil, err
@@ -123,14 +141,48 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 		input.ID = uuid.New().String()
 	}
 
+	var describeContractInput contract.DescribeContractInput
+	describeContractInput.Project = input.Project
+	describeContractInput.ID = input.ContractID
+	storedContract, err := useCase.contractUseCase.DescribeContract(ctx, describeContractInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var adminAddress string
+	if input.Role == "admin" {
+		adminAddress = input.EthAddress
+	} else {
+		var describeUserInput DescribeUserInput
+		describeUserInput.Project = input.Project
+		describeUserInput.ID = storedContract.Contract.AdminID
+		storedAdminUser, err := useCase.DescribeUser(ctx, describeUserInput)
+		if err != nil {
+			return nil, err
+		}
+		adminAddress = storedAdminUser.User.EthAddress
+	}
+
+	var grantAccessInput contablock.GrantAccessInput
+	grantAccessInput.ContractAddress = storedContract.Contract.EthAddress
+	grantAccessInput.UserAddress = input.EthAddress
+	grantAccessInput.UserPrivateKey = input.PrivateKey
+	grantAccessInput.AdminAddress = adminAddress
+	err = useCase.contaBlockUseCase.GrantAccess(grantAccessInput)
+	if err != nil {
+		return nil, err
+	}
+
 	var desiredUser UserStorageData
 	desiredUser.Project = input.Project
 	desiredUser.ID = input.ID
+	desiredUser.ContractID = input.ContractID
 	desiredUser.Name = input.Name
 	desiredUser.Email = input.Email
 	desiredUser.Password = hashPassword(input.Password)
 	desiredUser.Role = input.Role
 	desiredUser.EthAddress = input.EthAddress
+	desiredUser.PrivateKey = input.PrivateKey //TODO encrypt
 	desiredUser.DefaultPasswordChanged = false
 	desiredUser.Network = input.Network
 	desiredUser.BusinessID = input.BusinessID
@@ -145,6 +197,7 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 	var output CreateUserOutput
 	output.User.Project = addedUser.Project
 	output.User.ID = addedUser.ID
+	output.User.ContractID = addedUser.ContractID
 	output.User.Name = addedUser.Name
 	output.User.Email = addedUser.Email
 	output.User.Password = addedUser.Password
@@ -187,6 +240,7 @@ func (useCase *DefaultUserUseCase) LoginUser(ctx context.Context, input LoginUse
 	var output LoginUserOutput
 	output.User.Project = storedUser.Project
 	output.User.ID = storedUser.ID
+	output.User.ContractID = storedUser.ContractID
 	output.User.Name = storedUser.Name
 	output.User.Email = storedUser.Email
 	output.User.Password = storedUser.Password

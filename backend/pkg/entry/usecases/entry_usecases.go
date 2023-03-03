@@ -76,22 +76,6 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 
 	id := uuid.New().String()
 
-	var createEntryInput contablock.CreateEntryInput
-	createEntryInput.ID = id
-	createEntryInput.AccountID = input.AccountID
-	createEntryInput.MultipleEntryID = input.MultipleEntryID
-	createEntryInput.Currency = input.Currency
-	if input.Concept != nil {
-		createEntryInput.Concept = *input.Concept
-	}
-	createEntryInput.Date = input.Date.String()
-	createEntryInput.DebitBalance = input.DebitBalance
-	createEntryInput.CreditBalance = input.CreditBalance
-	err = useCase.contaBlockUseCase.CreateEntry(createEntryInput)
-	if err != nil {
-		return nil, err
-	}
-
 	var describeAccountInput account.DescribeAccountInput
 	describeAccountInput.Project = input.Project
 	describeAccountInput.ID = input.AccountID
@@ -144,6 +128,22 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	desiredEntry.LastUpdate = desiredEntry.CreationDate
 
 	storedEntry, err := useCase.entryStorage.Add(ctx, desiredEntry)
+	if err != nil {
+		return nil, err
+	}
+
+	var createEntryInput contablock.CreateEntryInput
+	createEntryInput.ID = id
+	createEntryInput.AccountID = input.AccountID
+	createEntryInput.MultipleEntryID = input.MultipleEntryID
+	createEntryInput.Currency = input.Currency
+	if input.Concept != nil {
+		createEntryInput.Concept = *input.Concept
+	}
+	createEntryInput.Date = input.Date.String()
+	createEntryInput.DebitBalance = input.DebitBalance
+	createEntryInput.CreditBalance = input.CreditBalance
+	err = useCase.contaBlockUseCase.CreateEntry(createEntryInput)
 	if err != nil {
 		return nil, err
 	}

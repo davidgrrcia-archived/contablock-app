@@ -5,7 +5,19 @@ const (
 	EntryStateCreated = "CREATED"
 )
 
+type ClientCommonInput struct {
+	ContractAddress string
+	UserAddress     string
+	UserPrivateKey  string
+}
+
+type GrantAccessInput struct {
+	ClientCommonInput
+	AdminAddress string
+}
+
 type CreateEntryInput struct {
+	ClientCommonInput
 	ID              string
 	AccountID       string
 	MultipleEntryID string
@@ -17,6 +29,7 @@ type CreateEntryInput struct {
 }
 
 type GetEntryDataInput struct {
+	ClientCommonInput
 	ID string
 }
 
@@ -32,8 +45,16 @@ type GetEntryDataOutput struct {
 	State           string
 }
 
+type ListMultipleEntriesIdsInput struct {
+	ClientCommonInput
+}
+
 type ListMultipleEntriesIdsOutput struct {
 	MultipleEntriesIds []string
+}
+
+type ListAccountIdsInput struct {
+	ClientCommonInput
 }
 
 type ListAccountIdsOutput struct {
@@ -41,9 +62,11 @@ type ListAccountIdsOutput struct {
 }
 
 type PublishEntryInput struct {
+	ClientCommonInput
 	ID string
 }
 
 type RemoveEntryInput struct {
+	ClientCommonInput
 	ID string
 }

@@ -1,15 +1,22 @@
 package contablock
 
 type ContaBlockContractAdapter interface {
+	GrantAccess(input GrantAccessAdapterInput) error
 	CreateEntry(input CreateEntryAdapterInput) error
 	GetEntryData(input GetEntryDataAdapterInput) (*GetEntryDataAdapterOutput, error)
-	ListMultipleEntriesIds() (*ListMultipleEntriesIdsAdapterOutput, error)
-	ListAccountIds() (*ListAccountIdsAdapterOutput, error)
+	ListMultipleEntriesIds(input ListMultipleEntriesIdsAdapterInput) (*ListMultipleEntriesIdsAdapterOutput, error)
+	ListAccountIds(input ListAccountIdsAdapterInput) (*ListAccountIdsAdapterOutput, error)
 	PublishEntry(input PublishEntryAdapterInput) error
 	RemoveEntry(input RemoveEntryAdapterInput) error
 }
 
+type GrantAccessAdapterInput struct {
+	ClientCommonInput
+	AdminAddress string
+}
+
 type CreateEntryAdapterInput struct {
+	ClientCommonInput
 	ID              string
 	AccountID       string
 	MultipleEntryID string
@@ -21,6 +28,7 @@ type CreateEntryAdapterInput struct {
 }
 
 type GetEntryDataAdapterInput struct {
+	ClientCommonInput
 	ID string
 }
 
@@ -37,7 +45,7 @@ type GetEntryDataAdapterOutput struct {
 }
 
 type ListMultipleEntriesIdsAdapterInput struct {
-	ID string
+	ClientCommonInput
 }
 
 type ListMultipleEntriesIdsAdapterOutput struct {
@@ -45,7 +53,7 @@ type ListMultipleEntriesIdsAdapterOutput struct {
 }
 
 type ListAccountIdsAdapterInput struct {
-	ID string
+	ClientCommonInput
 }
 
 type ListAccountIdsAdapterOutput struct {
@@ -53,9 +61,11 @@ type ListAccountIdsAdapterOutput struct {
 }
 
 type PublishEntryAdapterInput struct {
+	ClientCommonInput
 	ID string
 }
 
 type RemoveEntryAdapterInput struct {
+	ClientCommonInput
 	ID string
 }

@@ -3,6 +3,7 @@ package userInputHttpAdapter
 type User struct {
 	Project                string `json:"project"`
 	ID                     string `json:"id"`
+	ContractID             string `json:"contractId"`
 	Name                   string `json:"name"`
 	Email                  string `json:"email"`
 	Role                   string `json:"role"`
@@ -39,11 +40,13 @@ type ListUserResponseWrapper struct {
 type CreateUserRequest struct {
 	Project    string `json:"project"`
 	ID         string `json:"id"`
+	ContractID string `json:"contractId"`
 	Name       string `json:"name"`
 	Email      string `json:"email"`
 	Password   string `json:"password"`
 	Role       string `json:"role"`
 	EthAddress string `json:"ethAddress"`
+	PrivateKey string `json:"privateKey"`
 	Network    string `json:"network"`
 	BusinessID string `json:"businessId"`
 }

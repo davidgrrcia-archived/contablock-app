@@ -52,7 +52,6 @@ func (useCase *DefaultBusinessUseCase) DescribeBusiness(ctx context.Context, inp
 	output.Business.RegisteredOffice = storedBusiness.RegisteredOffice
 	output.Business.Cif = storedBusiness.Cif
 	output.Business.Logo = storedBusiness.Logo
-	output.Business.EthAddress = storedBusiness.EthAddress
 
 	return &output, err
 }
@@ -78,7 +77,6 @@ func (useCase *DefaultBusinessUseCase) ListBusiness(ctx context.Context, input L
 		business.RegisteredOffice = item.RegisteredOffice
 		business.Cif = item.Cif
 		business.Logo = item.Logo
-		business.EthAddress = item.EthAddress
 
 		items = append(items, business)
 	}
@@ -113,7 +111,6 @@ func (useCase *DefaultBusinessUseCase) CreateBusiness(ctx context.Context, input
 	desiredBusiness.RegisteredOffice = input.RegisteredOffice
 	desiredBusiness.Cif = input.Cif
 	desiredBusiness.Logo = input.Logo
-	desiredBusiness.EthAddress = input.EthAddress
 
 	addedBusiness, err := useCase.businessStorage.Add(ctx, desiredBusiness)
 	if err != nil {
@@ -128,7 +125,6 @@ func (useCase *DefaultBusinessUseCase) CreateBusiness(ctx context.Context, input
 	output.Business.RegisteredOffice = addedBusiness.RegisteredOffice
 	output.Business.Cif = addedBusiness.Cif
 	output.Business.Logo = addedBusiness.Logo
-	output.Business.EthAddress = addedBusiness.EthAddress
 
 	return &output, nil
 }

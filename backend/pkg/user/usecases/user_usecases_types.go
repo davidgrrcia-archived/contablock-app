@@ -8,6 +8,7 @@ import (
 type User struct {
 	Project                string
 	ID                     string
+	ContractID             string
 	Name                   string
 	Email                  string
 	Password               string
@@ -40,11 +41,13 @@ type ListUserOutput struct {
 type CreateUserInput struct {
 	Project    string `valid:"required,length(1|64)"`
 	ID         string `valid:"optional,length(1|64)"`
+	ContractID string `valid:"required,length(1|64)"`
 	Name       string `valid:"required,length(1|256)"`
 	Email      string `valid:"required,email,length(1|256)"`
 	Password   string `valid:"required,length(1|256)"`
 	Role       string `valid:"required,length(1|64)"`
 	EthAddress string `valid:"required,length(1|42)"`
+	PrivateKey string `valid:"required,length(1|256)"`
 	Network    string `valid:"required,length(1|64)"`
 	BusinessID string `valid:"required,length(1|64)"`
 }
@@ -78,11 +81,13 @@ type UserStorage interface {
 type UserStorageData struct {
 	Project                string
 	ID                     string
+	ContractID             string
 	Name                   string
 	Email                  string
 	Password               string
 	Role                   string
 	EthAddress             string
+	PrivateKey             string
 	DefaultPasswordChanged bool
 	Network                string
 	BusinessID             string

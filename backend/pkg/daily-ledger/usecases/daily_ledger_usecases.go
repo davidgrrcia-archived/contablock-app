@@ -52,7 +52,10 @@ func (useCase *DefaultDailyLedgerUseCase) ListDailyLedger(ctx context.Context, i
 		return nil, errors.New("invalid input")
 	}
 
-	listOutput, err := useCase.contaBlockUseCase.ListMultipleEntriesIds()
+	var listMultipleEntriesIdsInput contablock.ListMultipleEntriesIdsInput
+	// TODO: add fields
+
+	listOutput, err := useCase.contaBlockUseCase.ListMultipleEntriesIds(listMultipleEntriesIdsInput)
 	if err != nil {
 		return nil, err
 	}

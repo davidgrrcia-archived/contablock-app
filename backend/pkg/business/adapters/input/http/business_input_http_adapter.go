@@ -51,7 +51,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeBusiness(ctx context.Contex
 	response.RegisteredOffice = outputData.Business.RegisteredOffice
 	response.Cif = outputData.Business.Cif
 	response.Logo = outputData.Business.Logo
-	response.EthAddress = outputData.Business.EthAddress
 	responseWrapper := DescribeBusinessResponseWrapper{}
 	responseWrapper.DescribeBusinessResponse = response
 
@@ -79,7 +78,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBusiness(ctx context.Context, d
 		responseItem.RegisteredOffice = item.RegisteredOffice
 		responseItem.Cif = item.Cif
 		responseItem.Logo = item.Logo
-		responseItem.EthAddress = item.EthAddress
 		response.Items = append(response.Items, responseItem)
 	}
 
@@ -97,7 +95,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateBusiness(ctx context.Context,
 	inputData.RegisteredOffice = data.RegisteredOffice
 	inputData.Cif = data.Cif
 	inputData.Logo = data.Logo
-	inputData.EthAddress = data.EthAddress
 
 	outputData, err := adapter.businessUseCase.CreateBusiness(ctx, inputData)
 	if err != nil {
@@ -112,7 +109,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateBusiness(ctx context.Context,
 	response.RegisteredOffice = outputData.Business.RegisteredOffice
 	response.Cif = outputData.Business.Cif
 	response.Logo = outputData.Business.Logo
-	response.EthAddress = outputData.Business.EthAddress
 
 	responseWrapper := CreateBusinessResponseWrapper{}
 	responseWrapper.CreateBusinessResponse = response

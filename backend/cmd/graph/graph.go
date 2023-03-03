@@ -2,25 +2,24 @@ package graph
 
 import (
 	"database/sql"
-	"math/big"
-
 	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 	account "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 	inputBalance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/adapters/input/http"
 	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 	inputBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
 	business "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+	inputContract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/adapters/input/http"
+	contract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/usecases"
 	inputDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
 	dailyledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/usecases"
 	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	inputGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
-	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	inputUser "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/adapters/input/http"
 	user "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/usecases"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/gorilla/mux"
 )
 
@@ -28,11 +27,15 @@ type Graph struct {
 	*mux.Router
 
 	//contablock
-	ContablockClient contablockClient.Contablock
-	ContablockAuth   bind.TransactOpts
-	ContablockNonce  big.Int
+	ContablockClient *ethclient.Client
 	contablock.ContaBlockContractAdapter
 	contablock.ContaBlockUseCase
+
+	//contracts
+	ContractDb sql.DB
+	contract.ContractStorage
+	contract.ContractUseCase
+	inputContract.ContractInputAdapter
 
 	//users
 	UserDb sql.DB
@@ -80,6 +83,7 @@ func NewGraph() Graph {
 func (graph *Graph) Build() {
 	// output infra
 	graph.provideContablockClient()
+	graph.provideContractDB()
 	graph.provideUserDB()
 	graph.provideAccountDB()
 	graph.provideBusinessDB()
@@ -88,6 +92,7 @@ func (graph *Graph) Build() {
 
 	// output adapters
 	graph.provideContablockContractAdapter()
+	graph.provideContractStorage()
 	graph.provideUserStorage()
 	graph.provideAccountStorage()
 	graph.provideBusinessStorage()
@@ -96,6 +101,7 @@ func (graph *Graph) Build() {
 
 	// use cases
 	graph.provideContablockUseCase()
+	graph.provideContractUseCase()
 	graph.provideUserUseCase()
 	graph.provideBalanceUseCase()
 	graph.provideAccountUseCase()
@@ -106,6 +112,7 @@ func (graph *Graph) Build() {
 
 	// input adapters
 	graph.provideAccountInputAdapter()
+	graph.provideContractInputAdapter()
 	graph.provideUserInputAdapter()
 	graph.provideBusinessInputAdapter()
 	graph.provideEntryInputAdapter()
@@ -115,6 +122,7 @@ func (graph *Graph) Build() {
 
 	// input infra
 	graph.provideRouter()
+	graph.provideContractEndpoints()
 	graph.provideAccountEndpoints()
 	graph.provideUserEndpoints()
 	graph.provideBusinessEndpoints()

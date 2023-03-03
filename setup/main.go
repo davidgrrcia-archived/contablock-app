@@ -24,10 +24,21 @@ const (
 )
 
 type YamlFile struct {
-	Accounts []Account  `yaml:"accounts"`
-	Business []Business `yaml:"business"`
-	Balances []Balances `yaml:"balances"`
-	Users    []User     `yaml:"users"`
+	Accounts  []Account  `yaml:"accounts"`
+	Business  []Business `yaml:"business"`
+	Balances  []Balances `yaml:"balances"`
+	Users     []User     `yaml:"users"`
+	Contracts []Contract `yaml:"contracts"`
+}
+
+type Contract struct {
+	Project     string  `yaml:"project"`
+	ID          *string `yaml:"id"`
+	Name        string  `yaml:"name"`
+	Description string  `yaml:"description"`
+	EthAddress  string  `yaml:"ethAddress"`
+	Network     string  `yaml:"network"`
+	AdminID     string  `yaml:"adminId"`
 }
 
 type Account struct {
@@ -46,18 +57,20 @@ type Business struct {
 	RegisteredOffice   string `yaml:"registeredOffice"`
 	Cif                string `yaml:"cif"`
 	Logo               string `yaml:"logo"`
-	EthAddress         string `yaml:"ethAddress"`
 }
 
 type User struct {
-	Project    string `yaml:"project"`
-	Name       string `yaml:"name"`
-	Email      string `yaml:"email"`
-	Password   string `yaml:"password"`
-	Role       string `yaml:"role"`
-	EthAddress string `yaml:"ethAddress"`
-	Network    string `yaml:"network"`
-	BusinessID string `yaml:"businessId"`
+	Project    string  `yaml:"project"`
+	ContractID string  `yaml:"contractId"`
+	ID         *string `yaml:"id"`
+	Name       string  `yaml:"name"`
+	Email      string  `yaml:"email"`
+	Password   string  `yaml:"password"`
+	Role       string  `yaml:"role"`
+	EthAddress string  `yaml:"ethAddress"`
+	PrivateKey string  `yaml:"privateKey"`
+	Network    string  `yaml:"network"`
+	BusinessID string  `yaml:"businessId"`
 }
 
 type Balances struct {
@@ -71,22 +84,14 @@ type Balances struct {
 }
 
 func main() {
-	//configureZaraAdmin()
 	configureZaraAccountant()
 	configureZaraAuditor()
 	configureZaraViewer()
 }
 
-/*func configureZaraAdmin() {
-	yamlFile := readYamlFile(zaraAdminYamlPath)
-	addAccounts(yamlFile)
-	addBusiness(yamlFile)
-	addBalances(yamlFile)
-	addUsers(yamlFile)
-}*/
-
 func configureZaraAccountant() {
 	yamlFile := readYamlFile(zaraAccountantYamlPath)
+	addContracts(yamlFile)
 	addAccounts(yamlFile)
 	addBusiness(yamlFile)
 	addBalances(yamlFile)
@@ -95,6 +100,7 @@ func configureZaraAccountant() {
 
 func configureZaraAuditor() {
 	yamlFile := readYamlFile(zaraAuditorYamlPath)
+	addContracts(yamlFile)
 	addAccounts(yamlFile)
 	addBusiness(yamlFile)
 	addBalances(yamlFile)
@@ -103,6 +109,7 @@ func configureZaraAuditor() {
 
 func configureZaraViewer() {
 	yamlFile := readYamlFile(zaraViewerYamlPath)
+	addContracts(yamlFile)
 	addAccounts(yamlFile)
 	addBusiness(yamlFile)
 	addBalances(yamlFile)
@@ -222,6 +229,36 @@ func addUsers(yamlFile YamlFile) {
 		}
 
 		path := backendURL + user.Project + "/users"
+
+		response, err := http.Post(path, "application/json", bytes.NewBuffer(requestBody))
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer response.Body.Close()
+
+		body, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		err = checkErrorMessage(body)
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println(string(body))
+	}
+}
+
+func addContracts(yamlFile YamlFile) {
+	for _, contract := range yamlFile.Contracts {
+		requestBody, err := json.Marshal(contract)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		path := backendURL + contract.Project + "/contracts"
 
 		response, err := http.Post(path, "application/json", bytes.NewBuffer(requestBody))
 		if err != nil {

@@ -45,6 +45,10 @@ func (useCase *DefaultAccountUseCase) DescribeAccount(ctx context.Context, input
 		return nil, err
 	}
 
+	if storedAccount == nil {
+		return nil, errors.New("account not found")
+	}
+
 	var output DescribeAccountOutput
 	output.Account.Project = storedAccount.Project
 	output.Account.ID = storedAccount.ID

@@ -1,28 +1,48 @@
-business:
+addresses:
+  - address: &adminAddress 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+    privateKey: &adminPrivateKey 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+  - address: &auditorAddress 0x70997970C51812dc3A010C7d01b50e0d17dc79C8
+    privateKey: &auditorPrivateKey 0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
+  - address: &contaBlockContractAddress 0x5FbDB2315678afecb367f032d93F642f64180aa3
+
+contracts:
   - project: &zara-auditor-project zara-auditor
+    id: &contablockContractId contablock-contract-id
+    name: ContaBlock
+    description: ContaBlock es un contrato inteligente que permite la gestión de la contabilidad de una empresa.
+    ethAddress: *contaBlockContractAddress
+    network: &zaraNetwork zara-network
+    adminId: &zaraAdminId zara-admin-id
+
+business:
+  - project: *zara-auditor-project
     id: &zaraBusinessId zara-business-id
     name: Zara
     socialDenomination: Zara España, SA
     registeredOffice: Arteixo, La Coruña
     cif: A15022510
     logo: https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Zara_Logo.svg/1024px-Zara_Logo.svg.png
-    ethAddress: 0xb794f5ea0ba39494ce839613fffba74279579268
 
 users:
   - project: *zara-auditor-project
+    id: *zaraAdminId
+    contractId: *contablockContractId
     name: Zara Admin
     email: admin@zara.com
     password: admin
     role: admin
-    ethAddress: 0x627306090abaB3A6e1400e9345bC60c78a8BEf57
-    network: &zaraNetwork zara-network
+    ethAddress: *adminAddress
+    privateKey: *adminPrivateKey
+    network: *zaraNetwork
     businessId: *zaraBusinessId
   - project: *zara-auditor-project
+    contractId: *contablockContractId
     name: Zara Auditor
     email: auditor@zara.com
     password: auditor
     role: auditor
-    ethAddress: 0xf17f52151EbEF6C7334FAD080c5704D77216b732
+    ethAddress: *auditorAddress
+    privateKey: *auditorPrivateKey
     network: *zaraNetwork
     businessId: *zaraBusinessId
 

@@ -8,7 +8,6 @@ type Business struct {
 	RegisteredOffice   string `json:"registeredOffice"`
 	Cif                string `json:"cif"`
 	Logo               string `json:"logo"`
-	EthAddress         string `json:"ethAddress"`
 }
 
 type DescribeBusinessRequest struct {
@@ -41,7 +40,6 @@ type CreateBusinessRequest struct {
 	RegisteredOffice   string `json:"registeredOffice"`
 	Cif                string `json:"cif"`
 	Logo               string `json:"logo"`
-	EthAddress         string `json:"ethAddress"`
 }
 
 type CreateBusinessResponse struct {

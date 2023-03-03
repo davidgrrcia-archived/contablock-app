@@ -19,5 +19,16 @@ export interface UserLoginBody {
 }
 
 export interface UserDescribeResponse {
-  user: User;
+  project: string;
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  ethAddress: string;
+  defaultPasswordChanged: boolean;
+  network: string;
+  businessId: string;
+  creationDate: number;
+  lastUpdate: number;
 }

@@ -1,11 +1,8 @@
 package graph
 
 import (
-	"context"
-	"crypto/ecdsa"
 	"database/sql"
 	"log"
-	"math/big"
 	"os"
 
 	inputAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
@@ -20,6 +17,10 @@ import (
 	businessOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/output/database"
 	businessInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/infra/input"
 	business "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+	inputContract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/adapters/input/http"
+	contractOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/adapters/output/database"
+	contractInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/infra/input"
+	contract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/usecases"
 	inputDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
 	dailyLedgerInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/infra/input"
 	dailyledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/usecases"
@@ -31,16 +32,12 @@ import (
 	generalLedgerInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/infra/input"
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
 	contablockOutputHttpAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/adapters/outputhttp"
-	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	contablockUseCase "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	inputUser "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/adapters/input/http"
 	userOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/adapters/output/database"
 	userInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/infra/input"
 	user "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/usecases"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
@@ -262,55 +259,12 @@ func (graph *Graph) provideContablockClient() {
 		panic("could not connect to Ethereum gateway")
 	}
 
-	_, err = client.ChainID(context.Background())
-	if err != nil {
-		panic(err)
-	}
-
-	address := common.HexToAddress(os.Getenv("SC_CONTABLOCK_CONTRACT_ADDRESS"))
-	instance, err := contablockClient.NewContablock(address, client)
-	if err != nil {
-		panic(err)
-	}
-
-	privateKey, err := crypto.HexToECDSA(os.Getenv("SC_PRIVATE_KEY_AUTH"))
-	if err != nil {
-		panic(err)
-	}
-
-	publicKey := privateKey.Public()
-	publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey)
-	if !ok {
-		panic("error casting public key to ECDSA")
-	}
-
-	fromAddress := crypto.PubkeyToAddress(*publicKeyECDSA)
-	nonce, err := client.PendingNonceAt(context.Background(), fromAddress)
-	if err != nil {
-		panic(err)
-	}
-
-	gasPrice, err := client.SuggestGasPrice(context.Background())
-	if err != nil {
-		panic(err)
-	}
-
-	auth := bind.NewKeyedTransactor(privateKey)
-	auth.Nonce = big.NewInt(int64(nonce))
-	auth.Value = big.NewInt(0)       // in wei
-	auth.GasLimit = uint64(30000000) // in units
-	auth.GasPrice = gasPrice
-
-	graph.ContablockClient = *instance
-	graph.ContablockAuth = *auth
-	graph.ContablockNonce = *auth.Nonce
+	graph.ContablockClient = client
 }
 
 func (graph *Graph) provideContablockContractAdapter() contablock.ContaBlockContractAdapter {
 	contaBlockContractAdapterOpts := contablockOutputHttpAdapter.DefaultContaBlockContractOptions{
 		Client: graph.GetContablockClient(),
-		Auth:   graph.GetContablockAuth(),
-		Nonce:  graph.GetContablockNonce(),
 	}
 	contaBlockContractAdapter, err := contablockOutputHttpAdapter.NewDefaultContaBlockContract(contaBlockContractAdapterOpts)
 	if err != nil {
@@ -512,7 +466,9 @@ func (graph *Graph) provideUserStorage() user.UserStorage {
 
 func (graph *Graph) provideUserUseCase() {
 	userUseCaseOpts := user.DefaultUserUseCaseOptions{
-		UserStorage: graph.GetUserStorage(),
+		UserStorage:       graph.GetUserStorage(),
+		ContaBlockUseCase: graph.GetContaBlockUseCase(),
+		ContractUseCase:   graph.GetContractUseCase(),
 	}
 	userUseCase, err := user.NewDefaultUserUseCase(userUseCaseOpts)
 	if err != nil {
@@ -544,4 +500,71 @@ func (graph *Graph) provideUserEndpoints() {
 		log.Fatal(err)
 	}
 	handler.RegisterUserRoutes(graph.GetRouter())
+}
+
+/////// CONTRACTS ///////
+
+func (graph *Graph) provideContractDB() {
+	db, err := sql.Open("mysql", os.Getenv("DB_USER")+":"+os.Getenv("DB_PASS")+"@tcp("+os.Getenv("DB_HOST")+":"+os.Getenv("DB_PORT")+")/"+os.Getenv("DB_NAME"))
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+
+	graph.ContractDb = *db
+}
+
+func (graph *Graph) provideContractStorage() contract.ContractStorage {
+	contractStorageOpts := contractOutputDbAdapter.ContractRepositoryOptions{
+		DB: graph.GetContractDB(),
+	}
+	contractStorage, err := contractOutputDbAdapter.NewContractRepository(contractStorageOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.ContractStorage = contractStorage
+
+	return contractStorage
+}
+
+func (graph *Graph) provideContractUseCase() {
+	contractUseCaseOpts := contract.DefaultContractUseCaseOptions{
+		ContractStorage:   graph.GetContractStorage(),
+		ContaBlockUseCase: graph.GetContaBlockUseCase(),
+	}
+	contractUseCase, err := contract.NewDefaultContractUseCase(contractUseCaseOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.ContractUseCase = contractUseCase
+}
+
+func (graph *Graph) provideContractInputAdapter() *inputContract.DefaultHttpInputAdapter {
+	contractInputAdapterOpts := inputContract.DefaultHttpInputAdapterOptions{
+		ContractUseCase: graph.GetContractUseCase(),
+	}
+	contractInputAdapter, err := inputContract.NewDefaultHttpInputAdapter(contractInputAdapterOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.ContractInputAdapter = contractInputAdapter
+
+	return contractInputAdapter
+}
+
+func (graph *Graph) provideContractEndpoints() {
+	var options contractInputInfra.DefaultContractsHttpHandlerOptions
+	options.Adapter = graph.GetContractInputAdapter()
+	handler, err := contractInputInfra.NewDefaultContractsHttpHandler(options)
+	if err != nil {
+		log.Fatal(err)
+	}
+	handler.RegisterContractRoutes(graph.GetRouter())
 }

@@ -12,7 +12,6 @@ type Business struct {
 	RegisteredOffice   string
 	Cif                string
 	Logo               string
-	EthAddress         string
 }
 
 type DescribeBusinessInput struct {
@@ -40,7 +39,6 @@ type CreateBusinessInput struct {
 	RegisteredOffice   string `valid:"required,length(1|256)"`
 	Cif                string `valid:"required,length(1|9)"`
 	Logo               string `valid:"required"`
-	EthAddress         string `valid:"required,length(1|42)"`
 }
 
 type CreateBusinessOutput struct {
@@ -61,7 +59,6 @@ type BusinessStorageData struct {
 	RegisteredOffice   string
 	Cif                string
 	Logo               string
-	EthAddress         string
 }
 
 type BusinessStorageCollectionData struct {

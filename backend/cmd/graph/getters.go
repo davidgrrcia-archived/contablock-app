@@ -2,25 +2,24 @@ package graph
 
 import (
 	"database/sql"
-	"math/big"
-
 	inputAdapterAccount "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/adapters/input/http"
 	account "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 	inputAdapterBalance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/adapters/input/http"
 	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 	inputAdapterBusiness "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/adapters/input/http"
 	business "github.com/davidgrcia/tfg-informatica-nextjs/pkg/business/usecases"
+	inputAdapterContract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/adapters/input/http"
+	contract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/usecases"
 	inputAdapterDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
 	dailyledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/usecases"
 	inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	inputAdapterGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
-	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	inputAdapterUser "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/adapters/input/http"
 	user "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/usecases"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/gorilla/mux"
 )
 
@@ -33,16 +32,8 @@ func (graph *Graph) GetRouter() *mux.Router {
 
 /////// SMART CONTRACT CONTABLOCK ///////
 
-func (graph *Graph) GetContablockClient() *contablockClient.Contablock {
-	return &graph.ContablockClient
-}
-
-func (graph *Graph) GetContablockAuth() *bind.TransactOpts {
-	return &graph.ContablockAuth
-}
-
-func (graph *Graph) GetContablockNonce() *big.Int {
-	return &graph.ContablockNonce
+func (graph *Graph) GetContablockClient() *ethclient.Client {
+	return graph.ContablockClient
 }
 
 func (graph *Graph) GetContablockAdapter() contablock.ContaBlockContractAdapter {
@@ -197,4 +188,28 @@ func (graph *Graph) GetUserUseCase() user.UserUseCase {
 		panic("graph UserUseCase case is nil")
 	}
 	return graph.UserUseCase
+}
+
+/////// CONTRACTS ///////
+
+func (graph *Graph) GetContractInputAdapter() inputAdapterContract.ContractInputAdapter {
+	return graph.ContractInputAdapter
+}
+
+func (graph *Graph) GetContractDB() *sql.DB {
+	return &graph.ContractDb
+}
+
+func (graph *Graph) GetContractStorage() contract.ContractStorage {
+	if graph.ContractStorage == nil {
+		panic("graph ContractStorage is nil")
+	}
+	return graph.ContractStorage
+}
+
+func (graph *Graph) GetContractUseCase() contract.ContractUseCase {
+	if graph.ContractUseCase == nil {
+		panic("graph ContractUseCase case is nil")
+	}
+	return graph.ContractUseCase
 }

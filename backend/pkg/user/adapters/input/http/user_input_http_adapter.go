@@ -47,6 +47,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeUser(ctx context.Context, d
 	var response DescribeUserResponse
 	response.Project = outputData.User.Project
 	response.ID = outputData.User.ID
+	response.ContractID = outputData.User.ContractID
 	response.Name = outputData.User.Name
 	response.Email = outputData.User.Email
 	response.Role = outputData.User.Role
@@ -79,6 +80,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptListUsers(ctx context.Context, data
 		var responseItem User
 		responseItem.Project = item.Project
 		responseItem.ID = item.ID
+		responseItem.ContractID = item.ContractID
 		responseItem.Name = item.Name
 		responseItem.Email = item.Email
 		responseItem.Role = item.Role
@@ -101,11 +103,13 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateUser(ctx context.Context, dat
 	var inputData user.CreateUserInput
 	inputData.Project = data.Project
 	inputData.ID = data.ID
+	inputData.ContractID = data.ContractID
 	inputData.Name = data.Name
 	inputData.Email = data.Email
 	inputData.Password = data.Password
 	inputData.Role = data.Role
 	inputData.EthAddress = data.EthAddress
+	inputData.PrivateKey = data.PrivateKey
 	inputData.Network = data.Network
 	inputData.BusinessID = data.BusinessID
 
@@ -117,6 +121,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateUser(ctx context.Context, dat
 	var response CreateUserResponse
 	response.Project = outputData.User.Project
 	response.ID = outputData.User.ID
+	response.ContractID = outputData.User.ContractID
 	response.Name = outputData.User.Name
 	response.Email = outputData.User.Email
 	response.Role = outputData.User.Role
@@ -147,6 +152,7 @@ func (adapter *DefaultHttpInputAdapter) AdaptLoginUser(ctx context.Context, data
 	var response LoginUserResponse
 	response.Project = outputData.User.Project
 	response.ID = outputData.User.ID
+	response.ContractID = outputData.User.ContractID
 	response.Name = outputData.User.Name
 	response.Email = outputData.User.Email
 	response.Role = outputData.User.Role

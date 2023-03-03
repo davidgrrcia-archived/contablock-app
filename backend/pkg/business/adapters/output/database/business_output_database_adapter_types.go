@@ -8,5 +8,4 @@ type BusinessDb struct {
 	RegisteredOffice   string `storage:"registered_office"`
 	Cif                string `storage:"cif"`
 	Logo               string `storage:"logo"`
-	EthAddress         string `storage:"eth_address"`
 }

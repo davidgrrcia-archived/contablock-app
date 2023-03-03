@@ -34,7 +34,7 @@ func (repository *BusinessRepository) Get(ctx context.Context, project string, i
 	result := repository.db.QueryRow(query, project, id)
 
 	var outputDb BusinessDb
-	err := result.Scan(&outputDb.Project, &outputDb.ID, &outputDb.Name, &outputDb.SocialDenomination, &outputDb.RegisteredOffice, &outputDb.Cif, &outputDb.Logo, &outputDb.EthAddress)
+	err := result.Scan(&outputDb.Project, &outputDb.ID, &outputDb.Name, &outputDb.SocialDenomination, &outputDb.RegisteredOffice, &outputDb.Cif, &outputDb.Logo)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
@@ -50,7 +50,6 @@ func (repository *BusinessRepository) Get(ctx context.Context, project string, i
 	output.RegisteredOffice = outputDb.RegisteredOffice
 	output.Cif = outputDb.Cif
 	output.Logo = outputDb.Logo
-	output.EthAddress = outputDb.EthAddress
 
 	return &output, nil
 }
@@ -66,7 +65,7 @@ func (repository *BusinessRepository) All(ctx context.Context, project string) (
 	var storedBusiness []BusinessDb
 	for rows.Next() {
 		var businessDb BusinessDb
-		err = rows.Scan(&businessDb.Project, &businessDb.ID, &businessDb.Name, &businessDb.SocialDenomination, &businessDb.RegisteredOffice, &businessDb.Cif, &businessDb.Logo, &businessDb.EthAddress)
+		err = rows.Scan(&businessDb.Project, &businessDb.ID, &businessDb.Name, &businessDb.SocialDenomination, &businessDb.RegisteredOffice, &businessDb.Cif, &businessDb.Logo)
 		if err != nil {
 			return nil, err
 		}
@@ -83,7 +82,6 @@ func (repository *BusinessRepository) All(ctx context.Context, project string) (
 		business.RegisteredOffice = storedBusiness.RegisteredOffice
 		business.Cif = storedBusiness.Cif
 		business.Logo = storedBusiness.Logo
-		business.EthAddress = storedBusiness.EthAddress
 		items = append(items, business)
 	}
 
@@ -101,11 +99,10 @@ func (repository *BusinessRepository) Add(ctx context.Context, input business.Bu
 	businessDb.RegisteredOffice = input.RegisteredOffice
 	businessDb.Cif = input.Cif
 	businessDb.Logo = input.Logo
-	businessDb.EthAddress = input.EthAddress
 
-	insertQuery := "INSERT INTO business (project, id, name, social_denomination, registered_office, cif, logo, eth_address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+	insertQuery := "INSERT INTO business (project, id, name, social_denomination, registered_office, cif, logo) VALUES (?, ?, ?, ?, ?, ?, ?)"
 
-	_, err := repository.db.Exec(insertQuery, businessDb.Project, businessDb.ID, businessDb.Name, businessDb.SocialDenomination, businessDb.RegisteredOffice, businessDb.Cif, businessDb.Logo, businessDb.EthAddress)
+	_, err := repository.db.Exec(insertQuery, businessDb.Project, businessDb.ID, businessDb.Name, businessDb.SocialDenomination, businessDb.RegisteredOffice, businessDb.Cif, businessDb.Logo)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +112,7 @@ func (repository *BusinessRepository) Add(ctx context.Context, input business.Bu
 	result := repository.db.QueryRow(query, businessDb.Project, businessDb.ID)
 
 	var storedBusiness BusinessDb
-	err = result.Scan(&storedBusiness.Project, &storedBusiness.ID, &storedBusiness.Name, &storedBusiness.SocialDenomination, &storedBusiness.RegisteredOffice, &storedBusiness.Cif, &storedBusiness.Logo, &storedBusiness.EthAddress)
+	err = result.Scan(&storedBusiness.Project, &storedBusiness.ID, &storedBusiness.Name, &storedBusiness.SocialDenomination, &storedBusiness.RegisteredOffice, &storedBusiness.Cif, &storedBusiness.Logo)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("business with project " + businessDb.Project + " and id " + businessDb.ID + " not added")
@@ -131,7 +128,6 @@ func (repository *BusinessRepository) Add(ctx context.Context, input business.Bu
 	output.RegisteredOffice = storedBusiness.RegisteredOffice
 	output.Cif = storedBusiness.Cif
 	output.Logo = storedBusiness.Logo
-	output.EthAddress = storedBusiness.EthAddress
 
 	return &output, nil
 }

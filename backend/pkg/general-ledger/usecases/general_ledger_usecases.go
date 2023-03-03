@@ -52,7 +52,10 @@ func (useCase *DefaultGeneralLedgerUseCase) ListGeneralLedger(ctx context.Contex
 		return nil, errors.New("invalid input")
 	}
 
-	listOutput, err := useCase.contaBlockUseCase.ListAccountIds()
+	var listAccountIdsInput contablock.ListAccountIdsInput
+	// TODO: add fields
+
+	listOutput, err := useCase.contaBlockUseCase.ListAccountIds(listAccountIdsInput)
 	if err != nil {
 		return nil, err
 	}

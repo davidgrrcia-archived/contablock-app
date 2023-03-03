@@ -6,10 +6,11 @@ import (
 )
 
 type ContaBlockUseCase interface {
+	GrantAccess(input GrantAccessInput) error
 	CreateEntry(input CreateEntryInput) error
 	GetEntryData(input GetEntryDataInput) (*GetEntryDataOutput, error)
-	ListMultipleEntriesIds() (*ListMultipleEntriesIdsOutput, error)
-	ListAccountIds() (*ListAccountIdsOutput, error)
+	ListMultipleEntriesIds(input ListMultipleEntriesIdsInput) (*ListMultipleEntriesIdsOutput, error)
+	ListAccountIds(input ListAccountIdsInput) (*ListAccountIdsOutput, error)
 	PublishEntry(input PublishEntryInput) error
 	RemoveEntry(input RemoveEntryInput) error
 }
@@ -36,8 +37,28 @@ var mutex sync.Mutex
 
 var _ ContaBlockUseCase = (*DefaultContaBlockUseCase)(nil)
 
+func (useCase DefaultContaBlockUseCase) GrantAccess(input GrantAccessInput) error {
+	var grantAccessAdapterInput GrantAccessAdapterInput
+	grantAccessAdapterInput.ContractAddress = input.ContractAddress
+	grantAccessAdapterInput.UserPrivateKey = input.UserPrivateKey
+	grantAccessAdapterInput.UserAddress = input.UserAddress
+	grantAccessAdapterInput.AdminAddress = input.AdminAddress
+
+	mutex.Lock()
+	err := useCase.contaBlockContractAdapter.GrantAccess(grantAccessAdapterInput)
+	if err != nil {
+		return err
+	}
+	mutex.Unlock()
+
+	return nil
+}
+
 func (useCase DefaultContaBlockUseCase) CreateEntry(input CreateEntryInput) error {
 	var createEntryAdapterInput CreateEntryAdapterInput
+	createEntryAdapterInput.ContractAddress = input.ContractAddress
+	createEntryAdapterInput.UserPrivateKey = input.UserPrivateKey
+	createEntryAdapterInput.UserAddress = input.UserAddress
 	createEntryAdapterInput.ID = input.ID
 	createEntryAdapterInput.AccountID = input.AccountID
 	createEntryAdapterInput.MultipleEntryID = input.MultipleEntryID
@@ -59,6 +80,9 @@ func (useCase DefaultContaBlockUseCase) CreateEntry(input CreateEntryInput) erro
 
 func (useCase DefaultContaBlockUseCase) GetEntryData(input GetEntryDataInput) (*GetEntryDataOutput, error) {
 	var getEntryDataAdapterInput GetEntryDataAdapterInput
+	getEntryDataAdapterInput.ContractAddress = input.ContractAddress
+	getEntryDataAdapterInput.UserPrivateKey = input.UserPrivateKey
+	getEntryDataAdapterInput.UserAddress = input.UserAddress
 	getEntryDataAdapterInput.ID = input.ID
 	entryData, err := useCase.contaBlockContractAdapter.GetEntryData(getEntryDataAdapterInput)
 	if err != nil {
@@ -79,8 +103,12 @@ func (useCase DefaultContaBlockUseCase) GetEntryData(input GetEntryDataInput) (*
 	return &output, nil
 }
 
-func (useCase DefaultContaBlockUseCase) ListMultipleEntriesIds() (*ListMultipleEntriesIdsOutput, error) {
-	multipleEntriesIds, err := useCase.contaBlockContractAdapter.ListMultipleEntriesIds()
+func (useCase DefaultContaBlockUseCase) ListMultipleEntriesIds(input ListMultipleEntriesIdsInput) (*ListMultipleEntriesIdsOutput, error) {
+	var listMultipleEntriesIdsAdapterInput ListMultipleEntriesIdsAdapterInput
+	listMultipleEntriesIdsAdapterInput.ContractAddress = input.ContractAddress
+	listMultipleEntriesIdsAdapterInput.UserPrivateKey = input.UserPrivateKey
+	listMultipleEntriesIdsAdapterInput.UserAddress = input.UserAddress
+	multipleEntriesIds, err := useCase.contaBlockContractAdapter.ListMultipleEntriesIds(listMultipleEntriesIdsAdapterInput)
 	if err != nil {
 		return nil, err
 	}
@@ -91,8 +119,12 @@ func (useCase DefaultContaBlockUseCase) ListMultipleEntriesIds() (*ListMultipleE
 	return &output, nil
 }
 
-func (useCase DefaultContaBlockUseCase) ListAccountIds() (*ListAccountIdsOutput, error) {
-	accountIds, err := useCase.contaBlockContractAdapter.ListAccountIds()
+func (useCase DefaultContaBlockUseCase) ListAccountIds(input ListAccountIdsInput) (*ListAccountIdsOutput, error) {
+	var listAccountIdsAdapterInput ListAccountIdsAdapterInput
+	listAccountIdsAdapterInput.ContractAddress = input.ContractAddress
+	listAccountIdsAdapterInput.UserPrivateKey = input.UserPrivateKey
+	listAccountIdsAdapterInput.UserAddress = input.UserAddress
+	accountIds, err := useCase.contaBlockContractAdapter.ListAccountIds(listAccountIdsAdapterInput)
 	if err != nil {
 		return nil, err
 	}
@@ -105,6 +137,9 @@ func (useCase DefaultContaBlockUseCase) ListAccountIds() (*ListAccountIdsOutput,
 
 func (useCase DefaultContaBlockUseCase) PublishEntry(input PublishEntryInput) error {
 	var publishEntryAdapterInput PublishEntryAdapterInput
+	publishEntryAdapterInput.ContractAddress = input.ContractAddress
+	publishEntryAdapterInput.UserPrivateKey = input.UserPrivateKey
+	publishEntryAdapterInput.UserAddress = input.UserAddress
 	publishEntryAdapterInput.ID = input.ID
 
 	mutex.Lock()
@@ -119,6 +154,9 @@ func (useCase DefaultContaBlockUseCase) PublishEntry(input PublishEntryInput) er
 
 func (useCase DefaultContaBlockUseCase) RemoveEntry(input RemoveEntryInput) error {
 	var removeEntryAdapterInput RemoveEntryAdapterInput
+	removeEntryAdapterInput.ContractAddress = input.ContractAddress
+	removeEntryAdapterInput.UserPrivateKey = input.UserPrivateKey
+	removeEntryAdapterInput.UserAddress = input.UserAddress
 	removeEntryAdapterInput.ID = input.ID
 
 	mutex.Lock()

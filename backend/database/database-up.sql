@@ -33,12 +33,24 @@ CREATE TABLE business(
     registered_office VARCHAR(256) NOT NULL,
     cif VARCHAR(9) NOT NULL,
     logo TEXT NOT NULL,
+    PRIMARY KEY (id, project)
+);
+CREATE TABLE contracts(
+    project VARCHAR(64) NOT NULL,
+    id VARCHAR(64) NOT NULL,
+    name VARCHAR(256) NOT NULL,
+    description TEXT NOT NULL,
     eth_address VARCHAR(42) NOT NULL,
+    network VARCHAR(64) NOT NULL,
+    admin_id VARCHAR(64) NOT NULL,
+    creation_date VARCHAR(64) NOT NULL,
+    last_update VARCHAR(64) NOT NULL,
     PRIMARY KEY (id, project)
 );
 CREATE TABLE entries(
     project VARCHAR(64) NOT NULL,
     id VARCHAR(64) NOT NULL,
+    contract_id VARCHAR(64) NOT NULL,
     account_id VARCHAR(64) NOT NULL,
     multiple_entry_id VARCHAR(64) NOT NULL,
     balance_by_year_id VARCHAR(64) NULL,
@@ -54,16 +66,19 @@ CREATE TABLE entries(
     creation_date VARCHAR(64) NOT NULL,
     last_update VARCHAR(64) NOT NULL,
     PRIMARY KEY (id, project),
-    FOREIGN KEY (account_id) REFERENCES accounts(id)
+    FOREIGN KEY (account_id) REFERENCES accounts(id),
+    FOREIGN KEY (contract_id) REFERENCES contracts(id)
 );
 CREATE TABLE users(
     project VARCHAR(64) NOT NULL,
     id VARCHAR(64) NOT NULL,
+    contract_id VARCHAR(64) NOT NULL,
     name VARCHAR(256) NOT NULL,
     email VARCHAR(256) NOT NULL,
     password VARCHAR(256) NOT NULL,
     role VARCHAR(64) NOT NULL,
     eth_address VARCHAR(42) NOT NULL,
+    private_key VARCHAR(256) NOT NULL,
     default_password_changed BOOLEAN NOT NULL,
     network VARCHAR(64) NOT NULL,
     business_id VARCHAR(64) NOT NULL,
@@ -71,5 +86,6 @@ CREATE TABLE users(
     last_update VARCHAR(64) NOT NULL,
     UNIQUE KEY (project, email),
     PRIMARY KEY (id, project),
-    FOREIGN KEY (business_id) REFERENCES business(id)
+    FOREIGN KEY (business_id) REFERENCES business(id),
+    FOREIGN KEY (contract_id) REFERENCES contracts(id)
 );
