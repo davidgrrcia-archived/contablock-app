@@ -40,7 +40,7 @@ func (adapter DefaultContaBlockContract) GrantAccess(input contablockUseCase.Gra
 	//input
 	var clientInstanceInput getClientInstanceInput
 	clientInstanceInput.ContractAddress = input.ContractAddress
-	clientInstanceInput.FromAddress = input.UserAddress
+	clientInstanceInput.FromAddress = input.AdminAddress
 	clientInstanceInput.PrivateKey = input.UserPrivateKey
 	client, err := adapter.getClientInstance(clientInstanceInput)
 	if err != nil {

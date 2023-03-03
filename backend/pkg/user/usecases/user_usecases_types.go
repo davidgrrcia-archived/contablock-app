@@ -14,6 +14,7 @@ type User struct {
 	Password               string
 	Role                   string
 	EthAddress             string
+	PrivateKey             string
 	DefaultPasswordChanged bool
 	Network                string
 	BusinessID             string

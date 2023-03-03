@@ -76,6 +76,7 @@ func (useCase *DefaultUserUseCase) DescribeUser(ctx context.Context, input Descr
 	output.User.Password = storedUser.Password
 	output.User.Role = storedUser.Role
 	output.User.EthAddress = storedUser.EthAddress
+	output.User.PrivateKey = storedUser.PrivateKey
 	output.User.DefaultPasswordChanged = storedUser.DefaultPasswordChanged
 	output.User.Network = storedUser.Network
 	output.User.BusinessID = storedUser.BusinessID
@@ -109,6 +110,7 @@ func (useCase *DefaultUserUseCase) ListUsers(ctx context.Context, input ListUser
 		user.Password = item.Password
 		user.Role = item.Role
 		user.EthAddress = item.EthAddress
+		user.PrivateKey = item.PrivateKey
 		user.DefaultPasswordChanged = item.DefaultPasswordChanged
 		user.Network = item.Network
 		user.BusinessID = item.BusinessID
@@ -150,8 +152,10 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 	}
 
 	var adminAddress string
+	var adminPrivateKey string
 	if input.Role == "admin" {
 		adminAddress = input.EthAddress
+		adminPrivateKey = input.PrivateKey
 	} else {
 		var describeUserInput DescribeUserInput
 		describeUserInput.Project = input.Project
@@ -161,12 +165,13 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 			return nil, err
 		}
 		adminAddress = storedAdminUser.User.EthAddress
+		adminPrivateKey = storedAdminUser.User.PrivateKey
 	}
 
 	var grantAccessInput contablock.GrantAccessInput
 	grantAccessInput.ContractAddress = storedContract.Contract.EthAddress
 	grantAccessInput.UserAddress = input.EthAddress
-	grantAccessInput.UserPrivateKey = input.PrivateKey
+	grantAccessInput.UserPrivateKey = adminPrivateKey
 	grantAccessInput.AdminAddress = adminAddress
 	err = useCase.contaBlockUseCase.GrantAccess(grantAccessInput)
 	if err != nil {
