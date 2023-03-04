@@ -5,8 +5,10 @@ import type { CreateEntryInput } from '@/features/entries/application/entries-mo
 import { useEntriesStore } from '@/features/entries/application/entries-store.js';
 import { useAccountsStore } from '@/features/accounts/application/accounts-store.js';
 import { findCurrencyByCode, currencies, dateToUnixTimestamp, formatDate, formatAmount } from '@/features/utils/utils';
+import { useMessagesStore } from '@/stores/messages';
 
 //store
+const messagesStore = useMessagesStore();
 const entriesStore = useEntriesStore();
 const accountsStore = useAccountsStore();
 await accountsStore.loadAccounts();
@@ -34,7 +36,7 @@ function addDebitEntry() {
     creditAmount: null,
   };
 
-  entriesStore.addDebitEntryForModification(newEntry);
+  entriesStore.addDebitEntry(newEntry);
 }
 
 function addCreditEntry() {
@@ -49,7 +51,13 @@ function addCreditEntry() {
     creditAmount: creditAmount.value,
   };
 
-  entriesStore.addCreditEntryForModification(newEntry);
+  entriesStore.addCreditEntry(newEntry);
+}
+
+function removeEntry(id: string) {
+  messagesStore.addDangerousConfirmMessage('¿Estás seguro de eliminar el asiento seleccionado?', 'Esta es una acción que no se puede revertir, asegúrate de querer eliminar este asiento', () => {
+    entriesStore.removeModificationEntry(id);
+  });
 }
 </script>
 
@@ -153,16 +161,21 @@ function addCreditEntry() {
               <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Concepto</th>
               <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Debe</th>
               <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Haber</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Acciones</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200 bg-white">
-            <tr v-for="(entry, i) in entriesStore.state.entriesModification.reverse()" :key="entry.entry.id" :class="i % 2 === 0 ? undefined : 'bg-gray-50'">
+            <tr v-for="(entry, i) in entriesStore.state.storedEntries.reverse()" :key="entry.entry.id" :class="i % 2 === 0 ? undefined : 'bg-gray-50'">
               <td class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">{{ entry.account.displayName }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">{{ entry.entry.currency }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">{{ formatDate(entry.entry.date) }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ entry.entry.concept }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ formatAmount(entry.entry.debitAmount, entry.entry.currency) }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ formatAmount(entry.entry.creditAmount, entry.entry.currency) }}</td>
+              <td class="space-x-3 whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                <button @click="entriesStore.editEntry(entry.entry.id)" class="text-blue-500 hover:text-blue-900">Editar</button>
+                <button @click="removeEntry(entry.entry.id || '')" class="text-red-500 hover:text-red-900">Eliminar</button>
+              </td>
             </tr>
           </tbody>
         </table>

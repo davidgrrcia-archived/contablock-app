@@ -59,20 +59,20 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
     }
 
     const output: EntryUseCase = {
-      id: entryHttpResponse.entry.id, //todo: this returning undefined
-      accountId: entryHttpResponse.entry.accountId,
-      multipleEntryId: entryHttpResponse.entry.multipleEntryId,
-      currency: entryHttpResponse.entry.currency,
-      concept: entryHttpResponse.entry.concept,
-      date: entryHttpResponse.entry.date,
-      quarter: entryHttpResponse.entry.quarter,
-      debitAmount: entryHttpResponse.entry.debitBalance,
-      creditAmount: entryHttpResponse.entry.creditBalance,
-      totalAmount: entryHttpResponse.entry.totalBalance,
-      state: entryHttpResponse.entry.state,
-      stateReason: entryHttpResponse.entry.stateReason,
-      creationDate: entryHttpResponse.entry.creationDate,
-      lastUpdate: entryHttpResponse.entry.lastUpdate,
+      id: entryHttpResponse.id, //todo: this returning undefined
+      accountId: entryHttpResponse.accountId,
+      multipleEntryId: entryHttpResponse.multipleEntryId,
+      currency: entryHttpResponse.currency,
+      concept: entryHttpResponse.concept,
+      date: entryHttpResponse.date,
+      quarter: entryHttpResponse.quarter,
+      debitAmount: entryHttpResponse.debitBalance,
+      creditAmount: entryHttpResponse.creditBalance,
+      totalAmount: entryHttpResponse.totalBalance,
+      state: entryHttpResponse.state,
+      stateReason: entryHttpResponse.stateReason,
+      creationDate: entryHttpResponse.creationDate,
+      lastUpdate: entryHttpResponse.lastUpdate,
     };
 
     return output;
@@ -91,20 +91,20 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
     }
 
     const output: EntryUseCase = {
-      id: entryHttpResponse.entry.id,
-      accountId: entryHttpResponse.entry.accountId,
-      multipleEntryId: entryHttpResponse.entry.multipleEntryId,
-      currency: entryHttpResponse.entry.currency,
-      concept: entryHttpResponse.entry.concept,
-      date: entryHttpResponse.entry.date,
-      quarter: entryHttpResponse.entry.quarter,
-      debitAmount: entryHttpResponse.entry.debitBalance,
-      creditAmount: entryHttpResponse.entry.creditBalance,
-      totalAmount: entryHttpResponse.entry.totalBalance,
-      state: entryHttpResponse.entry.state,
-      stateReason: entryHttpResponse.entry.stateReason,
-      creationDate: entryHttpResponse.entry.creationDate,
-      lastUpdate: entryHttpResponse.entry.lastUpdate,
+      id: entryHttpResponse.id,
+      accountId: entryHttpResponse.accountId,
+      multipleEntryId: entryHttpResponse.multipleEntryId,
+      currency: entryHttpResponse.currency,
+      concept: entryHttpResponse.concept,
+      date: entryHttpResponse.date,
+      quarter: entryHttpResponse.quarter,
+      debitAmount: entryHttpResponse.debitBalance,
+      creditAmount: entryHttpResponse.creditBalance,
+      totalAmount: entryHttpResponse.totalBalance,
+      state: entryHttpResponse.state,
+      stateReason: entryHttpResponse.stateReason,
+      creationDate: entryHttpResponse.creationDate,
+      lastUpdate: entryHttpResponse.lastUpdate,
     };
 
     return output;

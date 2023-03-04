@@ -24,7 +24,7 @@ const entriesStore = useEntriesStore();
                     </div>
                     <div class="-mt-10 text-right">
                       <button type="button" class="mt-3 ml-3 inline-flex w-auto justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50" @click="entriesStore.clearEntriesAndHideModals()" ref="cancelButtonRef">Cancelar</button>
-                      <button type="button" class="ml-3 inline-flex w-auto justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-gray-700" @click="entriesStore.createEntries()">Modificar Asiento</button>
+                      <button type="button" class="ml-3 inline-flex w-auto justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-gray-700" @click="entriesStore.modifyEntries()">Modificar Asiento</button>
                     </div>
                   </div>
                   <div class="mt-2">

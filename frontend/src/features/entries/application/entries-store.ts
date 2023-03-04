@@ -16,6 +16,7 @@ interface EntriesState {
   modificationModalOpen: boolean;
   entriesCreation: EntryWithAccount[];
   entriesModification: EntryWithAccount[];
+  storedEntries: EntryWithAccount[];
   multipleEntryId: string;
   totalBalance: number;
   stateMessage: string | null;
@@ -27,6 +28,7 @@ const state: EntriesState = {
   modificationModalOpen: false,
   entriesCreation: [],
   entriesModification: [],
+  storedEntries: [],
   multipleEntryId: '',
   totalBalance: 0,
   stateMessage: null,
@@ -69,7 +71,8 @@ export const useEntriesStore = defineStore('entries', {
       };
 
       this.state.entriesCreation.push(entryWithAccount);
-      this.state.totalBalance = this.state.totalBalance + entry.debitAmount;
+      this.state.storedEntries.push(entryWithAccount);
+      this.state.totalBalance += entry.debitAmount;
     },
     async addCreditEntry(entry: CreateEntryInput) {
       const messagesStore = useMessagesStore();
@@ -101,87 +104,8 @@ export const useEntriesStore = defineStore('entries', {
       };
 
       this.state.entriesCreation.push(entryWithAccount);
-      this.state.totalBalance = this.state.totalBalance - entry.creditAmount;
-    },
-    async addDebitEntryForModification(entry: CreateEntryInput) {
-      const messagesStore = useMessagesStore();
-
-      if (entry.accountId == undefined) {
-        messagesStore.addWarnMessage('Selecciona una cuenta en el debe', 'Para poder crear un asiento debes seleccionar una cuenta en la partida del debe');
-        return;
-      }
-
-      if (entry.debitAmount == undefined) {
-        messagesStore.addWarnMessage('Introduce una cantidad en el debe', 'Para poder crear un asiento debes introducir una cantidad en la partida del debe');
-        return;
-      }
-
-      //match account id
-      const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
-      entry.accountId = match ? match[1] : '';
-
-      const account = await accountsUseCase.describeAccount(entry.accountId);
-
-      if (account instanceof Error) {
-        messagesStore.addWarnMessage('Fallo al cargar la cuenta', 'No se ha podido cargar la cuenta seleccionada');
-        return;
-      }
-
-      const response = await entriesUseCase.createEntry(entry);
-
-      if (response instanceof Error) {
-        const messagesStore = useMessagesStore();
-        messagesStore.addErrorMessage('Error creando asiento', 'Ha ocurrido un error creando el asiento');
-        return;
-      }
-
-      const entryWithAccount: EntryWithAccount = {
-        entry: entry,
-        account: account,
-      };
-
-      this.state.entriesModification.push(entryWithAccount);
-      this.state.totalBalance = this.state.totalBalance + entry.debitAmount;
-    },
-    async addCreditEntryForModification(entry: CreateEntryInput) {
-      const messagesStore = useMessagesStore();
-
-      if (entry.accountId == undefined) {
-        messagesStore.addWarnMessage('Selecciona una cuenta en el haber', 'Para poder crear un asiento debes seleccionar una cuenta en la partida del haber');
-        return;
-      }
-
-      if (entry.creditAmount == undefined) {
-        messagesStore.addWarnMessage('Introduce una cantidad en el haber', 'Para poder crear un asiento debes introducir una cantidad en la partida del haber');
-        return;
-      }
-
-      //match account id
-      const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
-      entry.accountId = match ? match[1] : '';
-
-      const account = await accountsUseCase.describeAccount(entry.accountId);
-
-      if (account instanceof Error) {
-        messagesStore.addWarnMessage('Fallo al cargar la cuenta', 'No se ha podido cargar la cuenta seleccionada');
-        return;
-      }
-
-      const response = await entriesUseCase.createEntry(entry);
-
-      if (response instanceof Error) {
-        const messagesStore = useMessagesStore();
-        messagesStore.addErrorMessage('Error creando asiento', 'Ha ocurrido un error creando el asiento');
-        return;
-      }
-
-      const entryWithAccount: EntryWithAccount = {
-        entry: entry,
-        account: account,
-      };
-
-      this.state.entriesModification.push(entryWithAccount);
-      this.state.totalBalance = this.state.totalBalance - entry.creditAmount;
+      this.state.storedEntries.push(entryWithAccount);
+      this.state.totalBalance -= entry.creditAmount;
     },
     async modifyDebitEntry(entry: ModifyEntryInput) {
       const messagesStore = useMessagesStore();
@@ -248,13 +172,7 @@ export const useEntriesStore = defineStore('entries', {
       this.state.totalBalance = this.state.totalBalance - entry.creditAmount;
     },
     async createEntries() {
-      const messagesStore = useMessagesStore();
-
       try {
-        if (this.state.entriesCreation.length === 0) {
-          messagesStore.addWarnMessage('No hay asientos creados', 'Para poder crear un asiento debes crear al menos una partida en el debe y otra en el haber');
-        }
-
         this.state.stateMessage = 'creating entries';
 
         this.state.entriesCreation.map(async entry => {
@@ -318,6 +236,27 @@ export const useEntriesStore = defineStore('entries', {
         });
         this.state.stateMessage = 'entries removed';
         const messagesStore = useMessagesStore();
+        messagesStore.addSuccessMessage('Asientos eliminados', 'Los asientos han sido eliminados correctamente');
+      } catch (err) {
+        this.state.stateMessage = 'error removing entries';
+        const messagesStore = useMessagesStore();
+        messagesStore.addErrorMessage('Error eliminando asientos', 'Ha ocurrido un error eliminando los asientos');
+      }
+    },
+    async removeModificationEntry(id: string) {
+      try {
+        this.state.stateMessage = 'removing entry';
+
+        const response = await entriesUseCase.removeEntry(id);
+
+        if (response instanceof Error) {
+          const messagesStore = useMessagesStore();
+          messagesStore.addErrorMessage('Error eliminando el asiento', 'Ha ocurrido un error eliminando el asiento');
+          return;
+        }
+
+        this.state.stateMessage = 'entries removed';
+        const messagesStore = useMessagesStore();
         messagesStore.addSuccessMessage('Asiento eliminado', 'El asiento ha sido eliminado correctamente');
       } catch (err) {
         this.state.stateMessage = 'error removing entries';
@@ -325,10 +264,43 @@ export const useEntriesStore = defineStore('entries', {
         messagesStore.addErrorMessage('Error eliminando asientos', 'Ha ocurrido un error eliminando los asientos');
       }
     },
-    modifyEntries(entries: any) {
+    removeCreationEntry(id: string) {
+      this.state.entriesCreation = this.state.entriesCreation.filter(entry => entry.entry.id !== id);
+    },
+    requestModification(entries: any) {
       this.state.modificationModalOpen = true;
-      this.state.entriesModification = entries;
+      this.state.storedEntries = entries;
       this.state.multipleEntryId = entries[0].entry.multipleEntryId;
+
+      entries.map((entry: any) => {
+        this.state.totalBalance = this.state.totalBalance + entry.entry.debitAmount - entry.entry.creditAmount;
+      });
+    },
+    async modifyEntries() {
+      try {
+        this.createEntries();
+
+        this.state.stateMessage = 'modifying entries';
+
+        // this.state.entriesModification.map(async entry => {
+        //   const response = await entriesUseCase.modifyEntry(entry.entry);
+
+        //   if (response instanceof Error) {
+        //     const messagesStore = useMessagesStore();
+        //     messagesStore.addErrorMessage('Error modificando asiento', 'Ha ocurrido un error modificando el asiento');
+        //     return;
+        //   }
+
+        //   return response;
+        // });
+
+        this.state.stateMessage = 'entries modified';
+        this.clearEntriesAndHideModals();
+      } catch (err) {
+        this.state.stateMessage = 'error modifying entries';
+        const messagesStore = useMessagesStore();
+        messagesStore.addErrorMessage('Error modificando asientos', 'Ha ocurrido un error modificando los asientos');
+      }
     },
     showCreationModal() {
       this.state.creationModalOpen = true;
@@ -338,6 +310,8 @@ export const useEntriesStore = defineStore('entries', {
     },
     clearEntriesAndHideModals() {
       this.state.entriesCreation = [];
+      this.state.entriesModification = [];
+      this.state.storedEntries = [];
       this.state.multipleEntryId = '';
       this.state.totalBalance = 0;
       this.state.creationModalOpen = false;
