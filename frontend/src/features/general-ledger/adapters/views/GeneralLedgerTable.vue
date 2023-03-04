@@ -34,7 +34,10 @@ const generalLedger = generalLedgerStore.state.storedGeneralLedger.reverse();
               <tbody class="bg-white">
                 <template v-for="(record, index) in generalLedger" :key="index">
                   <tr class="sticky top-24 z-10 bg-gray-600">
-                    <th colspan="7" scope="colgroup" class="px-6 py-5 text-left text-sm font-semibold text-white">{{ record.account.displayName }}</th>
+                    <th colspan="4" scope="colgroup" class="px-6 py-5 text-left text-sm font-semibold text-white">{{ record.account.displayName }}</th>
+                    <th scope="colgroup" class="px-6 py-5 text-left text-sm font-semibold text-white">{{ formatAmount(record.totalDebitAmount, 'EUR') }}</th>
+                    <th scope="colgroup" class="px-6 py-5 text-left text-sm font-semibold text-white">{{ formatAmount(record.totalCreditAmount, 'EUR') }}</th>
+                    <th colspan="2"></th>
                   </tr>
                   <tr v-for="(entryExpanded, j) in generalLedger[index].entries" :key="j" :class="j % 2 === 0 ? undefined : 'bg-gray-50'" class="border-t border-gray-200">
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">

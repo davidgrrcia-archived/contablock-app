@@ -6,6 +6,8 @@ export interface GeneralLedgerAdapter {
 }
 
 export interface GeneralLedger {
+  totalDebitAmount: number;
+  totalCreditAmount: number;
   entries: Entry[];
   account: Account;
 }

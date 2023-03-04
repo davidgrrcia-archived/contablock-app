@@ -339,6 +339,8 @@ func (graph *Graph) provideGeneralLedgerUseCase() {
 		EntryUseCase:      graph.GetEntryUseCase(),
 		AccountUseCase:    graph.GetAccountUseCase(),
 		ContaBlockUseCase: graph.GetContaBlockUseCase(),
+		ContractUseCase:   graph.GetContractUseCase(),
+		UserUseCase:       graph.GetUserUseCase(),
 	}
 	generalledgerUseCase, err := generalledger.NewDefaultGeneralLedgerUseCase(generalledgerUseCaseOpts)
 	if err != nil {

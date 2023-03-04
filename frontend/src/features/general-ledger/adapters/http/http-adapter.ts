@@ -12,6 +12,8 @@ export class DefaultGeneralLedgerHttpAdapter implements GeneralLedgerAdapter {
     }
 
     return generalLedgerHttpResponse.items.map(item => ({
+      totalDebitAmount: item.totalDebitAmount,
+      totalCreditAmount: item.totalCreditAmount,
       account: {
         id: item.account.id,
         name: item.account.name,

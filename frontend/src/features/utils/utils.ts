@@ -94,9 +94,11 @@ export function getRoleColor(role: string): string {
   }
 }
 
-export function getTotalBalanceColor(totalDebitAmount: number, totalCreditAmount: number): string {
-  if (totalDebitAmount !== totalCreditAmount) {
-    return 'text-red-500';
+export function getTotalBalanceColor(amount1: number, amount2: number): string {
+  if (amount1 < amount2) {
+    return 'text-red-300';
+  } else if (amount1 > amount2) {
+    return 'text-green-300';
   } else {
     return 'text-white';
   }

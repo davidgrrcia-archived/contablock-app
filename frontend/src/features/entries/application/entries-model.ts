@@ -31,3 +31,14 @@ export interface CreateEntryInput {
   debitAmount: number | null;
   creditAmount: number | null;
 }
+
+export interface ModifyEntryInput {
+  id: string;
+  accountId: string;
+  multipleEntryId: string;
+  currency: string;
+  concept: string;
+  date: number;
+  debitAmount: number | null;
+  creditAmount: number | null;
+}

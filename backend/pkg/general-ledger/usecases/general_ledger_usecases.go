@@ -3,6 +3,8 @@ package generalledger
 import (
 	"context"
 	"errors"
+	contract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/usecases"
+	user "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/usecases"
 
 	"github.com/asaskevich/govalidator"
 	account "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
@@ -24,11 +26,19 @@ func NewDefaultGeneralLedgerUseCase(options DefaultGeneralLedgerUseCaseOptions) 
 	if options.ContaBlockUseCase == nil {
 		return nil, errors.New("cannot create an instance of GeneralLedgerUseCase because provided ContaBlockUseCase is nil")
 	}
+	if options.ContractUseCase == nil {
+		return nil, errors.New("cannot create an instance of GeneralLedgerUseCase because provided ContractUseCase is nil")
+	}
+	if options.UserUseCase == nil {
+		return nil, errors.New("cannot create an instance of GeneralLedgerUseCase because provided UserUseCase is nil")
+	}
 
 	return &DefaultGeneralLedgerUseCase{
 		accountUseCase:    options.AccountUseCase,
 		entryUseCase:      options.EntryUseCase,
 		contaBlockUseCase: options.ContaBlockUseCase,
+		contractUseCase:   options.ContractUseCase,
+		userUseCase:       options.UserUseCase,
 	}, nil
 }
 
@@ -36,12 +46,16 @@ type DefaultGeneralLedgerUseCase struct {
 	accountUseCase    account.AccountUseCase
 	entryUseCase      entry.EntryUseCase
 	contaBlockUseCase contablock.ContaBlockUseCase
+	contractUseCase   contract.ContractUseCase
+	userUseCase       user.UserUseCase
 }
 
 type DefaultGeneralLedgerUseCaseOptions struct {
 	AccountUseCase    account.AccountUseCase
 	EntryUseCase      entry.EntryUseCase
 	ContaBlockUseCase contablock.ContaBlockUseCase
+	ContractUseCase   contract.ContractUseCase
+	UserUseCase       user.UserUseCase
 }
 
 var _ GeneralLedgerUseCase = (*DefaultGeneralLedgerUseCase)(nil)
@@ -52,9 +66,27 @@ func (useCase *DefaultGeneralLedgerUseCase) ListGeneralLedger(ctx context.Contex
 		return nil, errors.New("invalid input: " + err.Error())
 	}
 
-	var listAccountIdsInput contablock.ListAccountIdsInput
-	// TODO: add fields
+	// Call SC
+	var describeContractInput contract.DescribeContractInput
+	describeContractInput.Project = input.Project
+	describeContractInput.ID = input.ContractID
+	storedContract, err := useCase.contractUseCase.DescribeContract(ctx, describeContractInput)
+	if err != nil {
+		return nil, err
+	}
 
+	var describeUserInput user.DescribeUserInput
+	describeUserInput.Project = input.Project
+	describeUserInput.ID = input.UserID
+	storedUser, err := useCase.userUseCase.DescribeUser(ctx, describeUserInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var listAccountIdsInput contablock.ListAccountIdsInput
+	listAccountIdsInput.ContractAddress = storedContract.Contract.EthAddress
+	listAccountIdsInput.UserAddress = storedUser.User.EthAddress
+	listAccountIdsInput.UserPrivateKey = storedUser.User.PrivateKey
 	listOutput, err := useCase.contaBlockUseCase.ListAccountIds(listAccountIdsInput)
 	if err != nil {
 		return nil, err
@@ -92,6 +124,11 @@ func (useCase *DefaultGeneralLedgerUseCase) ListGeneralLedger(ctx context.Contex
 		record.Account.Level = account.Account.Level
 		record.Account.DisplayName = account.Account.DisplayName
 		record.Entries = listEntries.Items
+
+		for _, item := range listEntries.Items {
+			record.TotalDebitAmount += item.DebitBalance
+			record.TotalCreditAmount += item.CreditBalance
+		}
 
 		output.Items = append(output.Items, record)
 	}

@@ -11,7 +11,7 @@ export class DefaultGeneralLedgerHttpInfra implements GeneralLedgerHttpInfra {
   async listGeneralLedger() {
     const configStore = useConfigStore();
 
-    const response = await fetch(`/api/projects/${configStore.state.project}/general-ledger`);
+    const response = await fetch(`/api/projects/${configStore.state.project}/general-ledger?contractId=${configStore.state.contractId}&userId=${configStore.state.userId}`);
 
     const data = await response.json();
 

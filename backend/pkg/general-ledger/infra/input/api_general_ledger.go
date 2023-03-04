@@ -39,6 +39,8 @@ func (handler *DefaultGeneralLedgerHttpHandler) RegisterGeneralLedgerRoutes(r *m
 		vars := mux.Vars(r)
 		var inputPayload input.ListGeneralLedgerRequest
 		inputPayload.Project = vars["project"]
+		inputPayload.ContractID = r.URL.Query().Get("contractId")
+		inputPayload.UserID = r.URL.Query().Get("userId")
 
 		outputPayload, err := handler.adapter.AdaptListGeneralLedger(ctx, inputPayload)
 		if err != nil {

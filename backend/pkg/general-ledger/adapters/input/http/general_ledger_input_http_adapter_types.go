@@ -6,7 +6,9 @@ import (
 )
 
 type ListGeneralLedgerRequest struct {
-	Project string `json:"project"`
+	Project    string `json:"project"`
+	ContractID string `json:"contractId"`
+	UserID     string `json:"userId"`
 }
 
 type ListGeneralLedgerResponse struct {
@@ -17,6 +19,8 @@ type ListGeneralLedgerResponseWrapper struct {
 }
 
 type Record struct {
-	Entries []entry.Entry   `json:"entries"`
-	Account account.Account `json:"account"`
+	TotalDebitAmount  float64         `json:"totalDebitAmount"`
+	TotalCreditAmount float64         `json:"totalCreditAmount"`
+	Entries           []entry.Entry   `json:"entries"`
+	Account           account.Account `json:"account"`
 }

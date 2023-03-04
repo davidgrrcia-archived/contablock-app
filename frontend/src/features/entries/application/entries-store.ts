@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia';
-import type { CreateEntryInput } from '@/features/entries/application/entries-model';
+import type { CreateEntryInput, ModifyEntryInput } from '@/features/entries/application/entries-model';
 import { accountsUseCase } from '@/features/accounts';
 import { entriesUseCase } from '@/features/entries';
 import { useMessagesStore } from '@/stores/messages';
 import type { Account } from '@/features/accounts/application/accounts-model';
-import { findCurrencyByCode } from '@/features/utils/utils';
 
 interface EntryWithAccount {
   entry: CreateEntryInput;
@@ -13,7 +12,10 @@ interface EntryWithAccount {
 
 //TODO: apply clean architecture
 interface EntriesState {
+  creationModalOpen: boolean;
+  modificationModalOpen: boolean;
   entriesCreation: EntryWithAccount[];
+  entriesModification: EntryWithAccount[];
   multipleEntryId: string;
   totalBalance: number;
   stateMessage: string | null;
@@ -21,7 +23,10 @@ interface EntriesState {
 }
 
 const state: EntriesState = {
+  creationModalOpen: false,
+  modificationModalOpen: false,
   entriesCreation: [],
+  entriesModification: [],
   multipleEntryId: '',
   totalBalance: 0,
   stateMessage: null,
@@ -98,6 +103,150 @@ export const useEntriesStore = defineStore('entries', {
       this.state.entriesCreation.push(entryWithAccount);
       this.state.totalBalance = this.state.totalBalance - entry.creditAmount;
     },
+    async addDebitEntryForModification(entry: CreateEntryInput) {
+      const messagesStore = useMessagesStore();
+
+      if (entry.accountId == undefined) {
+        messagesStore.addWarnMessage('Selecciona una cuenta en el debe', 'Para poder crear un asiento debes seleccionar una cuenta en la partida del debe');
+        return;
+      }
+
+      if (entry.debitAmount == undefined) {
+        messagesStore.addWarnMessage('Introduce una cantidad en el debe', 'Para poder crear un asiento debes introducir una cantidad en la partida del debe');
+        return;
+      }
+
+      //match account id
+      const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
+      entry.accountId = match ? match[1] : '';
+
+      const account = await accountsUseCase.describeAccount(entry.accountId);
+
+      if (account instanceof Error) {
+        messagesStore.addWarnMessage('Fallo al cargar la cuenta', 'No se ha podido cargar la cuenta seleccionada');
+        return;
+      }
+
+      const response = await entriesUseCase.createEntry(entry);
+
+      if (response instanceof Error) {
+        const messagesStore = useMessagesStore();
+        messagesStore.addErrorMessage('Error creando asiento', 'Ha ocurrido un error creando el asiento');
+        return;
+      }
+
+      const entryWithAccount: EntryWithAccount = {
+        entry: entry,
+        account: account,
+      };
+
+      this.state.entriesModification.push(entryWithAccount);
+      this.state.totalBalance = this.state.totalBalance + entry.debitAmount;
+    },
+    async addCreditEntryForModification(entry: CreateEntryInput) {
+      const messagesStore = useMessagesStore();
+
+      if (entry.accountId == undefined) {
+        messagesStore.addWarnMessage('Selecciona una cuenta en el haber', 'Para poder crear un asiento debes seleccionar una cuenta en la partida del haber');
+        return;
+      }
+
+      if (entry.creditAmount == undefined) {
+        messagesStore.addWarnMessage('Introduce una cantidad en el haber', 'Para poder crear un asiento debes introducir una cantidad en la partida del haber');
+        return;
+      }
+
+      //match account id
+      const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
+      entry.accountId = match ? match[1] : '';
+
+      const account = await accountsUseCase.describeAccount(entry.accountId);
+
+      if (account instanceof Error) {
+        messagesStore.addWarnMessage('Fallo al cargar la cuenta', 'No se ha podido cargar la cuenta seleccionada');
+        return;
+      }
+
+      const response = await entriesUseCase.createEntry(entry);
+
+      if (response instanceof Error) {
+        const messagesStore = useMessagesStore();
+        messagesStore.addErrorMessage('Error creando asiento', 'Ha ocurrido un error creando el asiento');
+        return;
+      }
+
+      const entryWithAccount: EntryWithAccount = {
+        entry: entry,
+        account: account,
+      };
+
+      this.state.entriesModification.push(entryWithAccount);
+      this.state.totalBalance = this.state.totalBalance - entry.creditAmount;
+    },
+    async modifyDebitEntry(entry: ModifyEntryInput) {
+      const messagesStore = useMessagesStore();
+
+      if (entry.accountId == undefined) {
+        messagesStore.addWarnMessage('Selecciona una cuenta en el debe', 'Para poder modificar un asiento debes seleccionar una cuenta en la partida del debe');
+        return;
+      }
+
+      if (entry.debitAmount == undefined) {
+        messagesStore.addWarnMessage('Introduce una cantidad en el debe', 'Para poder modificar un asiento debes introducir una cantidad en la partida del debe');
+        return;
+      }
+
+      //match account id
+      const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
+      entry.accountId = match ? match[1] : '';
+
+      const account = await accountsUseCase.describeAccount(entry.accountId);
+
+      if (account instanceof Error) {
+        messagesStore.addWarnMessage('Fallo al cargar la cuenta', 'No se ha podido cargar la cuenta seleccionada');
+        return;
+      }
+
+      const entryWithAccount: EntryWithAccount = {
+        entry: entry,
+        account: account,
+      };
+
+      this.state.entriesModification.push(entryWithAccount);
+      this.state.totalBalance = this.state.totalBalance + entry.debitAmount;
+    },
+    async modifyCreditEntry(entry: ModifyEntryInput) {
+      const messagesStore = useMessagesStore();
+
+      if (entry.accountId == undefined) {
+        messagesStore.addWarnMessage('Selecciona una cuenta en el haber', 'Para poder crear un asiento debes seleccionar una cuenta en la partida del haber');
+        return;
+      }
+
+      if (entry.creditAmount == undefined) {
+        messagesStore.addWarnMessage('Introduce una cantidad en el haber', 'Para poder crear un asiento debes introducir una cantidad en la partida del haber');
+        return;
+      }
+
+      //match account id
+      const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
+      entry.accountId = match ? match[1] : '';
+
+      const account = await accountsUseCase.describeAccount(entry.accountId);
+
+      if (account instanceof Error) {
+        messagesStore.addWarnMessage('Fallo al cargar la cuenta', 'No se ha podido cargar la cuenta seleccionada');
+        return;
+      }
+
+      const entryWithAccount: EntryWithAccount = {
+        entry: entry,
+        account: account,
+      };
+
+      this.state.entriesCreation.push(entryWithAccount);
+      this.state.totalBalance = this.state.totalBalance - entry.creditAmount;
+    },
     async createEntries() {
       const messagesStore = useMessagesStore();
 
@@ -121,7 +270,7 @@ export const useEntriesStore = defineStore('entries', {
         });
 
         this.state.stateMessage = 'entries created';
-        this.clearEntries();
+        this.clearEntriesAndHideModals();
       } catch (err) {
         this.state.stateMessage = 'error creating entries';
         const messagesStore = useMessagesStore();
@@ -176,10 +325,23 @@ export const useEntriesStore = defineStore('entries', {
         messagesStore.addErrorMessage('Error eliminando asientos', 'Ha ocurrido un error eliminando los asientos');
       }
     },
-    clearEntries() {
+    modifyEntries(entries: any) {
+      this.state.modificationModalOpen = true;
+      this.state.entriesModification = entries;
+      this.state.multipleEntryId = entries[0].entry.multipleEntryId;
+    },
+    showCreationModal() {
+      this.state.creationModalOpen = true;
+    },
+    showModificationModal() {
+      this.state.modificationModalOpen = true;
+    },
+    clearEntriesAndHideModals() {
       this.state.entriesCreation = [];
       this.state.multipleEntryId = '';
       this.state.totalBalance = 0;
+      this.state.creationModalOpen = false;
+      this.state.modificationModalOpen = false;
     },
   },
 });
