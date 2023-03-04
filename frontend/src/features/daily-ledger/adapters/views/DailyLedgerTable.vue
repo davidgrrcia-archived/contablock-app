@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDailyLedgerStore } from '@/features/daily-ledger/application/daily-ledger-store';
-import { getState, getQuarter, formatAmount, formatDate, formatId } from '../../../utils/utils';
+import { getState, getQuarter, formatAmount, formatDate, formatId, getTotalBalanceColor } from '../../../utils/utils';
 import { useEntriesStore } from '@/features/entries/application/entries-store';
 import { useMessagesStore } from '@/stores/messages';
 import { useCreateEntryModalStore } from '@/features/entries/application/create-entry-modal-store';
@@ -61,7 +61,10 @@ function removeEntries(entries: any) {
               <tbody class="bg-white">
                 <template v-for="(record, index) in dailyLedger" :key="index">
                   <tr class="sticky top-24 z-10 bg-gray-600">
-                    <th colspan="9" scope="colgroup" class="px-6 text-left text-sm font-semibold text-white">Asiento: {{ formatId(record.id) }}</th>
+                    <th colspan="6" scope="colgroup" class="px-6 text-left text-sm font-semibold text-white">Asiento: {{ formatId(record.id) }}</th>
+                    <th scope="colgroup" class="px-6 text-left text-sm font-semibold" :class="[getTotalBalanceColor(record.totalDebitAmount, record.totalCreditAmount)]">{{ formatAmount(record.totalDebitAmount, 'EUR') }}</th>
+                    <th scope="colgroup" class="px-6 text-left text-sm font-semibold" :class="[getTotalBalanceColor(record.totalDebitAmount, record.totalCreditAmount)]">{{ formatAmount(record.totalCreditAmount, 'EUR') }}</th>
+                    <th></th>
                     <th>
                       <div v-if="record.entriesExpanded[0].entry.state == 'CREATED'" class="flex space-x-4 py-2 px-2">
                         <button type="button" class="btn bg-blue-500" v-on:click="publishEntries(record.entriesExpanded)">Publicar</button>

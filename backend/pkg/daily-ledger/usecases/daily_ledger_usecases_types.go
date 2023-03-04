@@ -6,9 +6,9 @@ import (
 )
 
 type ListDailyLedgerInput struct {
-	Project    string
-	ContractID string
-	UserID     string
+	Project    string `valid:"required,length(1|64)"`
+	ContractID string `valid:"required,length(1|64)"`
+	UserID     string `valid:"required,length(1|64)"`
 }
 
 type ListDailyLedgerOutput struct {

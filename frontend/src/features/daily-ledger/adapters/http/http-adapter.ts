@@ -13,6 +13,8 @@ export class DefaultDailyLedgerHttpAdapter implements DailyLedgerAdapter {
 
     return dailyLedgerHttpResponse.items.map(item => ({
       id: item.id,
+      totalDebitAmount: item.totalDebitAmount,
+      totalCreditAmount: item.totalCreditAmount,
       entriesExpanded: item.entriesExpanded.map(item2 => ({
         entry: {
           id: item2.entry.id,

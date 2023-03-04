@@ -44,7 +44,7 @@ var _ ContractUseCase = (*DefaultContractUseCase)(nil)
 func (useCase *DefaultContractUseCase) DescribeContract(ctx context.Context, input DescribeContractInput) (*DescribeContractOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	storedContract, err := useCase.contractStorage.Get(ctx, input.Project, input.ID)
@@ -69,7 +69,7 @@ func (useCase *DefaultContractUseCase) DescribeContract(ctx context.Context, inp
 func (useCase *DefaultContractUseCase) ListContracts(ctx context.Context, input ListContractInput) (*ListContractOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	var filters Filters

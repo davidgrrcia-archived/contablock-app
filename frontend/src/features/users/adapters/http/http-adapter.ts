@@ -15,6 +15,7 @@ export class DefaultUsersHttpAdapter implements UsersAdapter {
     const output: UserUseCase = {
       project: userHttpResponse.project,
       id: userHttpResponse.id,
+      contractId: userHttpResponse.contractId,
       name: userHttpResponse.name,
       email: userHttpResponse.email,
       password: userHttpResponse.password,

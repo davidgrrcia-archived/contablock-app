@@ -36,7 +36,7 @@ var _ BusinessUseCase = (*DefaultBusinessUseCase)(nil)
 func (useCase *DefaultBusinessUseCase) DescribeBusiness(ctx context.Context, input DescribeBusinessInput) (*DescribeBusinessOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	storedBusiness, err := useCase.businessStorage.Get(ctx, input.Project, input.ID)
@@ -59,7 +59,7 @@ func (useCase *DefaultBusinessUseCase) DescribeBusiness(ctx context.Context, inp
 func (useCase *DefaultBusinessUseCase) ListBusiness(ctx context.Context, input ListBusinessInput) (*ListBusinessOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	storedBusiness, err := useCase.businessStorage.All(ctx, input.Project)
@@ -89,7 +89,7 @@ func (useCase *DefaultBusinessUseCase) ListBusiness(ctx context.Context, input L
 func (useCase *DefaultBusinessUseCase) CreateBusiness(ctx context.Context, input CreateBusinessInput) (*CreateBusinessOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	//TODO if the project in the path is the admin, then allow to add

@@ -16,6 +16,8 @@ export interface Entry {
 }
 
 export interface EntryCreateBody {
+  contractId: string;
+  userId: string;
   accountId: string;
   multipleEntryId: string;
   currency: string;
@@ -23,6 +25,18 @@ export interface EntryCreateBody {
   date: number;
   debitBalance: number | null;
   creditBalance: number | null;
+}
+
+export interface EntryPublishBody {
+  id: string;
+  contractId: string;
+  userId: string;
+}
+
+export interface EntryRemoveBody {
+  id: string;
+  contractId: string;
+  userId: string;
 }
 
 export interface EntryDescribeResponse {

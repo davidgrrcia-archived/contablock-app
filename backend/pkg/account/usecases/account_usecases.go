@@ -37,7 +37,7 @@ var _ AccountUseCase = (*DefaultAccountUseCase)(nil)
 func (useCase *DefaultAccountUseCase) DescribeAccount(ctx context.Context, input DescribeAccountInput) (*DescribeAccountOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	storedAccount, err := useCase.accountStorage.Get(ctx, input.Project, input.ID)
@@ -63,7 +63,7 @@ func (useCase *DefaultAccountUseCase) DescribeAccount(ctx context.Context, input
 func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input ListAccountInput) (*ListAccountOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	storedAccounts, err := useCase.accountStorage.All(ctx, input.Project)
@@ -136,7 +136,7 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 func (useCase *DefaultAccountUseCase) CreateAccount(ctx context.Context, input CreateAccountInput) (*CreateAccountOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	//TODO if the project in the path is the admin, then allow to add

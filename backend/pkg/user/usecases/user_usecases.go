@@ -55,7 +55,7 @@ var _ UserUseCase = (*DefaultUserUseCase)(nil)
 func (useCase *DefaultUserUseCase) DescribeUser(ctx context.Context, input DescribeUserInput) (*DescribeUserOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	storedUser, err := useCase.userStorage.Get(ctx, input.Project, input.ID)
@@ -89,7 +89,7 @@ func (useCase *DefaultUserUseCase) DescribeUser(ctx context.Context, input Descr
 func (useCase *DefaultUserUseCase) ListUsers(ctx context.Context, input ListUserInput) (*ListUserOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	var filters Filters
@@ -220,7 +220,7 @@ func (useCase *DefaultUserUseCase) CreateUser(ctx context.Context, input CreateU
 func (useCase *DefaultUserUseCase) LoginUser(ctx context.Context, input LoginUserInput) (*LoginUserOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	var filters Filters

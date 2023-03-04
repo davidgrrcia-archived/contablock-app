@@ -5,6 +5,7 @@ export interface UsersAdapter {
 export interface User {
   project: string;
   id: string;
+  contractId: string;
   name: string;
   email: string;
   password: string;

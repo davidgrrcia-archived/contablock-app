@@ -15,6 +15,7 @@ interface ConfigState {
   navigation: Navigation[];
   project: string;
   isAuthenticated: boolean;
+  contractId: string;
   userId: string;
   businessId: string;
   name: string;
@@ -32,6 +33,7 @@ const state: ConfigState = {
   navigation: navigation,
   project: '',
   isAuthenticated: false,
+  contractId: '',
   userId: '',
   businessId: '',
   name: '',
@@ -64,12 +66,14 @@ export const useConfigStore = defineStore('configStore', {
 
       //Hydrate authentication status, user id and business id from local storage
       const isAuthenticated = localStorage.getItem(project + 'Authentication') === 'true';
+      const contractId = localStorage.getItem(project + 'ContractId')?.replace(/['"]+/g, '') || '';
       const userId = localStorage.getItem(project + 'UserId')?.replace(/['"]+/g, '') || '';
       const businessId = localStorage.getItem(project + 'BusinessId')?.replace(/['"]+/g, '') || '';
       const name = localStorage.getItem(project + 'Name')?.replace(/['"]+/g, '') || '';
       const role = localStorage.getItem(project + 'Role')?.replace(/['"]+/g, '') || '';
       this.state.project = project;
       this.state.isAuthenticated = isAuthenticated;
+      this.state.contractId = contractId;
       this.state.userId = userId;
       this.state.businessId = businessId;
       this.state.name = name;
@@ -94,6 +98,7 @@ export const useConfigStore = defineStore('configStore', {
 
         //Save authentication status, user id and business id in local storage
         localStorage.setItem(response.project + 'Authentication', JSON.stringify(response.id !== undefined));
+        localStorage.setItem(response.project + 'ContractId', JSON.stringify(response.contractId));
         localStorage.setItem(response.project + 'UserId', JSON.stringify(response.id));
         localStorage.setItem(response.project + 'BusinessId', JSON.stringify(response.businessId));
         localStorage.setItem(response.project + 'Name', JSON.stringify(response.name));

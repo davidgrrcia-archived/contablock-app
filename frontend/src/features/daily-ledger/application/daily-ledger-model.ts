@@ -7,6 +7,8 @@ export interface DailyLedgerAdapter {
 
 export interface DailyLedger {
   id: string;
+  totalDebitAmount: number;
+  totalCreditAmount: number;
   entriesExpanded: {
     entry: Entry;
     account: Account;

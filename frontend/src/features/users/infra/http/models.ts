@@ -1,6 +1,7 @@
 export interface User {
   project: string;
   id: string;
+  contractId: string;
   name: string;
   email: string;
   password: string;
@@ -21,6 +22,7 @@ export interface UserLoginBody {
 export interface UserDescribeResponse {
   project: string;
   id: string;
+  contractId: string;
   name: string;
   email: string;
   password: string;

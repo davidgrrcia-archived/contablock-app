@@ -38,7 +38,7 @@ var _ BalanceUseCase = (*DefaultBalanceUseCase)(nil)
 func (useCase *DefaultBalanceUseCase) CreateBalanceByYear(ctx context.Context, input CreateBalanceByYearInput) (*CreateBalanceByYearOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	id := uuid.New().String()
@@ -70,7 +70,7 @@ func (useCase *DefaultBalanceUseCase) CreateBalanceByYear(ctx context.Context, i
 func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input ListBalanceInput) (*ListBalanceOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	var filters Filters
@@ -137,7 +137,7 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 func (useCase *DefaultBalanceUseCase) RemoveBalance(ctx context.Context, input RemoveBalanceInput) (*RemoveBalanceOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	storedBalance, err := useCase.balanceStorage.Remove(ctx, input.Project, input.ID)
@@ -158,7 +158,7 @@ func (useCase *DefaultBalanceUseCase) RemoveBalance(ctx context.Context, input R
 func (useCase *DefaultBalanceUseCase) CreateBalance(ctx context.Context, input CreateBalanceInput) (*CreateBalanceOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	//TODO if the project in the path is the admin, then allow to add

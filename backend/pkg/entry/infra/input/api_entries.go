@@ -91,6 +91,13 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 
 		vars := mux.Vars(r)
 		var inputPayload input.DeleteEntryRequest
+
+		err := json.NewDecoder(r.Body).Decode(&inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+
 		inputPayload.ID = vars["id"]
 		inputPayload.Project = vars["project"]
 
@@ -108,7 +115,7 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		vars := mux.Vars(r)
 		var inputPayload input.PublishEntryRequest
 		inputPayload.Project = vars["project"]
-		
+
 		err := json.NewDecoder(r.Body).Decode(&inputPayload)
 		if err != nil {
 			utils.Failure(w, err)

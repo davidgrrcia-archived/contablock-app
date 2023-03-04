@@ -49,7 +49,7 @@ var _ GeneralLedgerUseCase = (*DefaultGeneralLedgerUseCase)(nil)
 func (useCase *DefaultGeneralLedgerUseCase) ListGeneralLedger(ctx context.Context, input ListGeneralLedgerInput) (*ListGeneralLedgerOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	var listAccountIdsInput contablock.ListAccountIdsInput

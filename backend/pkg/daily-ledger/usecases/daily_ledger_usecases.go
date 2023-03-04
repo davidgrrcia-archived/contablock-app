@@ -63,7 +63,7 @@ var _ DailyLedgerUseCase = (*DefaultDailyLedgerUseCase)(nil)
 func (useCase *DefaultDailyLedgerUseCase) ListDailyLedger(ctx context.Context, input ListDailyLedgerInput) (*ListDailyLedgerOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	// Call SC

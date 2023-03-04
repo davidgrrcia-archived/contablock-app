@@ -77,7 +77,7 @@ var _ EntryUseCase = (*DefaultEntryUseCase)(nil)
 func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input CreateEntryInput) (*CreateEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	if input.DebitBalance == nil && input.CreditBalance == nil {
@@ -210,7 +210,7 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 func (useCase *DefaultEntryUseCase) DescribeEntry(ctx context.Context, input DescribeEntryInput) (*DescribeEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	storedEntry, err := useCase.entryStorage.Get(ctx, input.Project, input.ID)
@@ -244,7 +244,7 @@ func (useCase *DefaultEntryUseCase) DescribeEntry(ctx context.Context, input Des
 func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListEntryInput) (*ListEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	var filters Filters
@@ -288,7 +288,7 @@ func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListE
 func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input UpdateEntryInput) (*UpdateEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	var describeEntryInput DescribeEntryInput
@@ -355,7 +355,7 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input RemoveEntryInput) (*RemoveEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	var describeEntryInput DescribeEntryInput
@@ -364,27 +364,6 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
 	if err != nil {
 		return nil, err
-	}
-
-	var getEntryInput contablock.GetEntryDataInput
-	getEntryInput.ID = input.ID
-	entryData, err := useCase.contaBlockUseCase.GetEntryData(getEntryInput)
-	if err != nil {
-		return nil, err
-	}
-
-	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
-		return nil, errors.New("failure publishing state not allowed")
-	}
-
-	if storedEntry.Entry.BalanceByYearID != nil && *storedEntry.Entry.BalanceByYearID != "" {
-		var removeBalanceInput balance.RemoveBalanceInput
-		removeBalanceInput.Project = input.Project
-		removeBalanceInput.ID = *storedEntry.Entry.BalanceByYearID
-		_, err = useCase.balanceUseCase.RemoveBalance(ctx, removeBalanceInput)
-		if err != nil {
-			return nil, err
-		}
 	}
 
 	// Call SC
@@ -402,6 +381,30 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 	storedUser, err := useCase.userUseCase.DescribeUser(ctx, describeUserInput)
 	if err != nil {
 		return nil, err
+	}
+
+	var getEntryInput contablock.GetEntryDataInput
+	getEntryInput.ID = input.ID
+	getEntryInput.ContractAddress = storedContract.Contract.EthAddress
+	getEntryInput.UserAddress = storedUser.User.EthAddress
+	getEntryInput.UserPrivateKey = storedUser.User.PrivateKey
+	entryData, err := useCase.contaBlockUseCase.GetEntryData(getEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
+		return nil, errors.New("failure publishing state not allowed")
+	}
+
+	if storedEntry.Entry.BalanceByYearID != nil && *storedEntry.Entry.BalanceByYearID != "" {
+		var removeBalanceInput balance.RemoveBalanceInput
+		removeBalanceInput.Project = input.Project
+		removeBalanceInput.ID = *storedEntry.Entry.BalanceByYearID
+		_, err = useCase.balanceUseCase.RemoveBalance(ctx, removeBalanceInput)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	var removeEntrySmartContractInput contablock.RemoveEntryInput
@@ -445,7 +448,7 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 func (useCase *DefaultEntryUseCase) PublishEntry(ctx context.Context, input PublishEntryInput) (*PublishEntryOutput, error) {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
-		return nil, errors.New("invalid input")
+		return nil, errors.New("invalid input: " + err.Error())
 	}
 
 	var describeEntryInput DescribeEntryInput
@@ -454,17 +457,6 @@ func (useCase *DefaultEntryUseCase) PublishEntry(ctx context.Context, input Publ
 	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
 	if err != nil {
 		return nil, err
-	}
-
-	var getEntryInput contablock.GetEntryDataInput
-	getEntryInput.ID = input.ID
-	entryData, err := useCase.contaBlockUseCase.GetEntryData(getEntryInput)
-	if err != nil {
-		return nil, err
-	}
-
-	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
-		return nil, errors.New("failure publishing state not allowed")
 	}
 
 	// Call SC
@@ -482,6 +474,20 @@ func (useCase *DefaultEntryUseCase) PublishEntry(ctx context.Context, input Publ
 	storedUser, err := useCase.userUseCase.DescribeUser(ctx, describeUserInput)
 	if err != nil {
 		return nil, err
+	}
+
+	var getEntryInput contablock.GetEntryDataInput
+	getEntryInput.ID = input.ID
+	getEntryInput.ContractAddress = storedContract.Contract.EthAddress
+	getEntryInput.UserAddress = storedUser.User.EthAddress
+	getEntryInput.UserPrivateKey = storedUser.User.PrivateKey
+	entryData, err := useCase.contaBlockUseCase.GetEntryData(getEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
+		return nil, errors.New("failure publishing state not allowed")
 	}
 
 	var publishEntryInput contablock.PublishEntryInput
