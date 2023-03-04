@@ -86,9 +86,9 @@ export function getRoleColor(role: string): string {
     case 'accountant':
       return 'bg-gray-800';
     case 'auditor':
-      return 'bg-blue-800';
+      return 'bg-cyan-900';
     case 'viewer':
-      return 'bg-green-800';
+      return 'bg-indigo-900';
     default:
       return 'bg-black';
   }

@@ -102,12 +102,6 @@ export const useEntriesStore = defineStore('entries', {
       const messagesStore = useMessagesStore();
 
       try {
-        if (this.state.totalBalance > 0) {
-          messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es mayor que el haber en ' + this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].entry.currency));
-        }
-        if (this.state.totalBalance < 0) {
-          messagesStore.addWarnMessage('El principio de partida doble es obligatorio', 'Para poder crear un asiento el debe y el haber deben estar balanceados, actualmente el debe es menor que el haber en ' + this.state.totalBalance + findCurrencyByCode(this.state.entriesCreation[0].entry.currency));
-        }
         if (this.state.entriesCreation.length === 0) {
           messagesStore.addWarnMessage('No hay asientos creados', 'Para poder crear un asiento debes crear al menos una partida en el debe y otra en el haber');
         }
