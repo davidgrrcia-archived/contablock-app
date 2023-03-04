@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.6;
 
+import "hardhat/console.sol";
+
 contract ContaBlockContract {
     address public owner;
     mapping(address => bool) private userAccess;
@@ -36,6 +38,8 @@ contract ContaBlockContract {
     }
 
     modifier hasAccess() {
+        console.log('aaaaa: ',msg.sender);
+        console.log('bbbbb: ',userAccess[msg.sender]);
         require(
             userAccess[msg.sender] == true,
             'You do not have access to this information'
@@ -49,7 +53,9 @@ contract ContaBlockContract {
     }
 
     function grantAccess(address user) public onlyOwner {
+        console.log('grantAccess: ',user);
         userAccess[user] = true;
+        console.log('grantAccess: ',userAccess[user]);
     }
 
     function revokeAccess(address user) public onlyOwner {

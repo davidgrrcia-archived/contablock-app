@@ -34,6 +34,8 @@ var _ DailyLedgerInputAdapter = (*DefaultHttpInputAdapter)(nil)
 func (adapter *DefaultHttpInputAdapter) AdaptListDailyLedger(ctx context.Context, data ListDailyLedgerRequest) (*ListDailyLedgerResponseWrapper, error) {
 	var inputData dailyledger.ListDailyLedgerInput
 	inputData.Project = data.Project
+	inputData.ContractID = data.ContractID
+	inputData.UserID = data.UserID
 	outputData, err := adapter.dailyLedgerUseCase.ListDailyLedger(ctx, inputData)
 	if err != nil {
 		return nil, err
@@ -46,11 +48,15 @@ func (adapter *DefaultHttpInputAdapter) AdaptListDailyLedger(ctx context.Context
 		var responseItem Record
 		responseItem.Project = item.Project
 		responseItem.ID = item.ID
+		responseItem.TotalDebitAmount = item.TotalDebitAmount
+		responseItem.TotalCreditAmount = item.TotalCreditAmount
 
 		for _, entry := range item.EntriesExpanded {
 			var entryExpanded EntryExpanded
 			entryExpanded.Entry.Project = entry.Entry.Project
 			entryExpanded.Entry.ID = entry.Entry.ID
+			entryExpanded.Entry.ContractID = entry.Entry.ContractID
+			entryExpanded.Entry.UserID = entry.Entry.UserID
 			entryExpanded.Entry.AccountID = entry.Entry.AccountID
 			entryExpanded.Entry.MultipleEntryID = entry.Entry.MultipleEntryID
 			entryExpanded.Entry.Currency = entry.Entry.Currency

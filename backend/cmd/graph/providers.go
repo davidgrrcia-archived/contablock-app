@@ -86,6 +86,8 @@ func (graph *Graph) provideEntryUseCase() {
 		ContaBlockUseCase: graph.GetContaBlockUseCase(),
 		BalanceUseCase:    graph.GetBalanceUseCase(),
 		AccountUseCase:    graph.GetAccountUseCase(),
+		ContractUseCase:   graph.GetContractUseCase(),
+		UserUseCase:       graph.GetUserUseCase(),
 	}
 	entryUseCase, err := entry.NewDefaultEntryUseCase(entryUseCaseOpts)
 	if err != nil {
@@ -295,6 +297,8 @@ func (graph *Graph) provideDailyLedgerUseCase() {
 		EntryUseCase:      graph.GetEntryUseCase(),
 		AccountUseCase:    graph.GetAccountUseCase(),
 		ContaBlockUseCase: graph.GetContaBlockUseCase(),
+		ContractUseCase:   graph.GetContractUseCase(),
+		UserUseCase:       graph.GetUserUseCase(),
 	}
 	dailyledgerUseCase, err := dailyledger.NewDefaultDailyLedgerUseCase(dailyledgerUseCaseOpts)
 	if err != nil {

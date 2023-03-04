@@ -3,6 +3,8 @@ package entry
 import (
 	"context"
 	"errors"
+	contract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/usecases"
+	user "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/usecases"
 	"time"
 
 	account "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
@@ -35,12 +37,20 @@ func NewDefaultEntryUseCase(options DefaultEntryUseCaseOptions) (*DefaultEntryUs
 	if options.AccountUseCase == nil {
 		return nil, errors.New("cannot create an instance of EntryUseCase because provided AccountUseCase is nil")
 	}
+	if options.ContractUseCase == nil {
+		return nil, errors.New("cannot create an instance of EntryUseCase because provided ContractUseCase is nil")
+	}
+	if options.UserUseCase == nil {
+		return nil, errors.New("cannot create an instance of EntryUseCase because provided UserUseCase is nil")
+	}
 
 	return &DefaultEntryUseCase{
 		entryStorage:      options.EntryStorage,
 		contaBlockUseCase: options.ContaBlockUseCase,
 		balanceUseCase:    options.BalanceUseCase,
 		accountUseCase:    options.AccountUseCase,
+		contractUseCase:   options.ContractUseCase,
+		userUseCase:       options.UserUseCase,
 	}, nil
 }
 
@@ -49,6 +59,8 @@ type DefaultEntryUseCase struct {
 	contaBlockUseCase contablock.ContaBlockUseCase
 	balanceUseCase    balance.BalanceUseCase
 	accountUseCase    account.AccountUseCase
+	contractUseCase   contract.ContractUseCase
+	userUseCase       user.UserUseCase
 }
 
 type DefaultEntryUseCaseOptions struct {
@@ -56,6 +68,8 @@ type DefaultEntryUseCaseOptions struct {
 	ContaBlockUseCase contablock.ContaBlockUseCase
 	BalanceUseCase    balance.BalanceUseCase
 	AccountUseCase    account.AccountUseCase
+	ContractUseCase   contract.ContractUseCase
+	UserUseCase       user.UserUseCase
 }
 
 var _ EntryUseCase = (*DefaultEntryUseCase)(nil)
@@ -104,6 +118,8 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	}
 	desiredEntry.Project = input.Project
 	desiredEntry.ID = *input.ID
+	desiredEntry.ContractID = input.ContractID
+	desiredEntry.UserID = input.UserID
 	desiredEntry.AccountID = input.AccountID
 	desiredEntry.MultipleEntryID = input.MultipleEntryID
 	desiredEntry.BalanceByYearID = balanceByYearID
@@ -132,7 +148,27 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 		return nil, err
 	}
 
+	// Call SC
+	var describeContractInput contract.DescribeContractInput
+	describeContractInput.Project = input.Project
+	describeContractInput.ID = input.ContractID
+	storedContract, err := useCase.contractUseCase.DescribeContract(ctx, describeContractInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var describeUserInput user.DescribeUserInput
+	describeUserInput.Project = input.Project
+	describeUserInput.ID = input.UserID
+	storedUser, err := useCase.userUseCase.DescribeUser(ctx, describeUserInput)
+	if err != nil {
+		return nil, err
+	}
+
 	var createEntryInput contablock.CreateEntryInput
+	createEntryInput.ContractAddress = storedContract.Contract.EthAddress
+	createEntryInput.UserAddress = storedUser.User.EthAddress
+	createEntryInput.UserPrivateKey = storedUser.User.PrivateKey
 	createEntryInput.ID = id
 	createEntryInput.AccountID = input.AccountID
 	createEntryInput.MultipleEntryID = input.MultipleEntryID
@@ -151,6 +187,8 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	var output CreateEntryOutput
 	output.Entry.Project = storedEntry.Project
 	output.Entry.ID = storedEntry.ID
+	output.Entry.ContractID = storedEntry.ContractID
+	output.Entry.UserID = storedEntry.UserID
 	output.Entry.AccountID = storedEntry.AccountID
 	output.Entry.MultipleEntryID = storedEntry.MultipleEntryID
 	output.Entry.BalanceByYearID = storedEntry.BalanceByYearID
@@ -183,6 +221,8 @@ func (useCase *DefaultEntryUseCase) DescribeEntry(ctx context.Context, input Des
 	var output DescribeEntryOutput
 	output.Entry.Project = storedEntry.Project
 	output.Entry.ID = storedEntry.ID
+	output.Entry.ContractID = storedEntry.ContractID
+	output.Entry.UserID = storedEntry.UserID
 	output.Entry.AccountID = storedEntry.AccountID
 	output.Entry.MultipleEntryID = storedEntry.MultipleEntryID
 	output.Entry.BalanceByYearID = storedEntry.BalanceByYearID
@@ -220,6 +260,8 @@ func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListE
 		var entry Entry
 		entry.Project = item.Project
 		entry.ID = item.ID
+		entry.ContractID = item.ContractID
+		entry.UserID = item.UserID
 		entry.AccountID = item.AccountID
 		entry.MultipleEntryID = item.MultipleEntryID
 		entry.BalanceByYearID = item.BalanceByYearID
@@ -261,6 +303,8 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	var desiredEntry EntryStorageData
 	desiredEntry.Project = input.Entry.Project
 	desiredEntry.ID = input.Entry.ID
+	desiredEntry.ContractID = input.Entry.ContractID
+	desiredEntry.UserID = input.Entry.UserID
 	desiredEntry.AccountID = input.Entry.AccountID
 	desiredEntry.MultipleEntryID = input.Entry.MultipleEntryID
 	desiredEntry.BalanceByYearID = input.Entry.BalanceByYearID
@@ -288,6 +332,8 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	var output UpdateEntryOutput
 	output.Entry.Project = updatedEntry.Project
 	output.Entry.ID = updatedEntry.ID
+	output.Entry.ContractID = updatedEntry.ContractID
+	output.Entry.UserID = updatedEntry.UserID
 	output.Entry.AccountID = updatedEntry.AccountID
 	output.Entry.MultipleEntryID = updatedEntry.MultipleEntryID
 	output.Entry.BalanceByYearID = updatedEntry.BalanceByYearID
@@ -341,8 +387,28 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 		}
 	}
 
+	// Call SC
+	var describeContractInput contract.DescribeContractInput
+	describeContractInput.Project = input.Project
+	describeContractInput.ID = input.ContractID
+	storedContract, err := useCase.contractUseCase.DescribeContract(ctx, describeContractInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var describeUserInput user.DescribeUserInput
+	describeUserInput.Project = input.Project
+	describeUserInput.ID = input.UserID
+	storedUser, err := useCase.userUseCase.DescribeUser(ctx, describeUserInput)
+	if err != nil {
+		return nil, err
+	}
+
 	var removeEntrySmartContractInput contablock.RemoveEntryInput
 	removeEntrySmartContractInput.ID = input.ID
+	removeEntrySmartContractInput.ContractAddress = storedContract.Contract.EthAddress
+	removeEntrySmartContractInput.UserAddress = storedUser.User.EthAddress
+	removeEntrySmartContractInput.UserPrivateKey = storedUser.User.PrivateKey
 	err = useCase.contaBlockUseCase.RemoveEntry(removeEntrySmartContractInput)
 	if err != nil {
 		return nil, err
@@ -356,6 +422,8 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 	var output RemoveEntryOutput
 	output.Entry.Project = removedEntry.Project
 	output.Entry.ID = removedEntry.ID
+	output.Entry.ContractID = removedEntry.ContractID
+	output.Entry.UserID = removedEntry.UserID
 	output.Entry.AccountID = removedEntry.AccountID
 	output.Entry.MultipleEntryID = removedEntry.MultipleEntryID
 	output.Entry.BalanceByYearID = removedEntry.BalanceByYearID
@@ -399,8 +467,28 @@ func (useCase *DefaultEntryUseCase) PublishEntry(ctx context.Context, input Publ
 		return nil, errors.New("failure publishing state not allowed")
 	}
 
+	// Call SC
+	var describeContractInput contract.DescribeContractInput
+	describeContractInput.Project = input.Project
+	describeContractInput.ID = input.ContractID
+	storedContract, err := useCase.contractUseCase.DescribeContract(ctx, describeContractInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var describeUserInput user.DescribeUserInput
+	describeUserInput.Project = input.Project
+	describeUserInput.ID = input.UserID
+	storedUser, err := useCase.userUseCase.DescribeUser(ctx, describeUserInput)
+	if err != nil {
+		return nil, err
+	}
+
 	var publishEntryInput contablock.PublishEntryInput
 	publishEntryInput.ID = input.ID
+	publishEntryInput.ContractAddress = storedContract.Contract.EthAddress
+	publishEntryInput.UserAddress = storedUser.User.EthAddress
+	publishEntryInput.UserPrivateKey = storedUser.User.PrivateKey
 	err = useCase.contaBlockUseCase.PublishEntry(publishEntryInput)
 	if err != nil {
 		return nil, err

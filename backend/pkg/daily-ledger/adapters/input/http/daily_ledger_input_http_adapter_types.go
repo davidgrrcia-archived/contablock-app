@@ -6,7 +6,9 @@ import (
 )
 
 type ListDailyLedgerRequest struct {
-	Project string `json:"project"`
+	Project    string `json:"project"`
+	ContractID string `json:"contractId"`
+	UserID     string `json:"userId"`
 }
 
 type ListDailyLedgerResponse struct {
@@ -17,9 +19,11 @@ type ListDailyLedgerResponseWrapper struct {
 }
 
 type Record struct {
-	Project         string          `json:"project"`
-	ID              string          `json:"id"`
-	EntriesExpanded []EntryExpanded `json:"entriesExpanded"`
+	Project           string          `json:"project"`
+	ID                string          `json:"id"`
+	TotalDebitAmount  float64         `json:"totalDebitAmount"`
+	TotalCreditAmount float64         `json:"totalCreditAmount"`
+	EntriesExpanded   []EntryExpanded `json:"entriesExpanded"`
 }
 
 type EntryExpanded struct {

@@ -3,6 +3,8 @@ package entrydb
 type EntryDb struct {
 	Project         string  `storage:"project"`
 	ID              string  `storage:"id"`
+	ContractID      string  `storage:"contract_id"`
+	UserID          string  `storage:"user_id"`
 	AccountID       string  `storage:"account_id"`
 	MultipleEntryID string  `storage:"multiple_entry_id"`
 	BalanceByYearID *string `storage:"balance_by_year_id"`

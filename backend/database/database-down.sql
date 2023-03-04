@@ -1,7 +1,7 @@
-
-DROP TABLE entries CASCADE;
-DROP TABLE business;
-DROP TABLE accounts;
-DROP TABLE balances_by_year;
-DROP TABLE balances;
-DROP TABLE users;
+DROP TABLE IF EXISTS entries;
+DROP TABLE IF EXISTS business;
+DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS balances_by_year;
+DROP TABLE IF EXISTS balances;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS contracts;

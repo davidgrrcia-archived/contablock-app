@@ -14,8 +14,7 @@ CREATE TABLE balances_by_year(
     balance_id VARCHAR(64) NOT NULL,
     amount VARCHAR(64) NOT NULL,
     year VARCHAR(4) NOT NULL,
-    PRIMARY KEY (id, project),
-    FOREIGN KEY (balance_id) REFERENCES balances(id)
+    PRIMARY KEY (id, project)
 );
 CREATE TABLE accounts(
     project VARCHAR(64) NOT NULL,
@@ -51,6 +50,7 @@ CREATE TABLE entries(
     project VARCHAR(64) NOT NULL,
     id VARCHAR(64) NOT NULL,
     contract_id VARCHAR(64) NOT NULL,
+    user_id VARCHAR(64) NOT NULL,
     account_id VARCHAR(64) NOT NULL,
     multiple_entry_id VARCHAR(64) NOT NULL,
     balance_by_year_id VARCHAR(64) NULL,
@@ -65,9 +65,7 @@ CREATE TABLE entries(
     state_reason VARCHAR(256),
     creation_date VARCHAR(64) NOT NULL,
     last_update VARCHAR(64) NOT NULL,
-    PRIMARY KEY (id, project),
-    FOREIGN KEY (account_id) REFERENCES accounts(id),
-    FOREIGN KEY (contract_id) REFERENCES contracts(id)
+    PRIMARY KEY (id, project)
 );
 CREATE TABLE users(
     project VARCHAR(64) NOT NULL,
@@ -85,7 +83,5 @@ CREATE TABLE users(
     creation_date VARCHAR(64) NOT NULL,
     last_update VARCHAR(64) NOT NULL,
     UNIQUE KEY (project, email),
-    PRIMARY KEY (id, project),
-    FOREIGN KEY (business_id) REFERENCES business(id),
-    FOREIGN KEY (contract_id) REFERENCES contracts(id)
+    PRIMARY KEY (id, project)
 );

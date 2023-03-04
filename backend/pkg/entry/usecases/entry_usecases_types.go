@@ -14,6 +14,8 @@ const (
 type Entry struct {
 	Project         string
 	ID              string
+	ContractID      string
+	UserID          string
 	AccountID       string
 	MultipleEntryID string
 	BalanceByYearID *string
@@ -33,6 +35,8 @@ type Entry struct {
 type CreateEntryInput struct {
 	Project         string    `valid:"required,length(1|64)"`
 	ID              *string   `valid:"optional,length(1|64)"`
+	ContractID      string    `valid:"required,length(1|64)"`
+	UserID          string    `valid:"required,length(1|64)"`
 	AccountID       string    `valid:"required,length(1|64)"`
 	MultipleEntryID string    `valid:"required,length(1|64)"`
 	Currency        string    `valid:"required,length(3|3)"`
@@ -74,8 +78,10 @@ type UpdateEntryOutput struct {
 }
 
 type RemoveEntryInput struct {
-	Project string `valid:"required,length(1|64)"`
-	ID      string `valid:"required,length(1|64)"`
+	Project    string `valid:"required,length(1|64)"`
+	ID         string `valid:"required,length(1|64)"`
+	ContractID string `valid:"required,length(1|64)"`
+	UserID     string `valid:"required,length(1|64)"`
 }
 
 type RemoveEntryOutput struct {
@@ -83,8 +89,10 @@ type RemoveEntryOutput struct {
 }
 
 type PublishEntryInput struct {
-	Project string `valid:"required,length(1|64)"`
-	ID      string `valid:"required,length(1|64)"`
+	Project    string `valid:"required,length(1|64)"`
+	ID         string `valid:"required,length(1|64)"`
+	ContractID string `valid:"required,length(1|64)"`
+	UserID     string `valid:"required,length(1|64)"`
 }
 
 type PublishEntryOutput struct {
@@ -107,6 +115,8 @@ type EntryStorage interface {
 type EntryStorageData struct {
 	Project         string
 	ID              string
+	ContractID      string
+	UserID          string
 	AccountID       string
 	MultipleEntryID string
 	BalanceByYearID *string

@@ -39,6 +39,8 @@ func (handler *DefaultDailyLedgerHttpHandler) RegisterDailyLedgerRoutes(r *mux.R
 		vars := mux.Vars(r)
 		var inputPayload input.ListDailyLedgerRequest
 		inputPayload.Project = vars["project"]
+		inputPayload.ContractID = r.URL.Query().Get("contractId")
+		inputPayload.UserID = r.URL.Query().Get("userId")
 
 		outputPayload, err := handler.adapter.AdaptListDailyLedger(ctx, inputPayload)
 		if err != nil {

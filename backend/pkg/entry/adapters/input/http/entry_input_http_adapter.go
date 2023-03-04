@@ -40,6 +40,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 	var inputData entry.CreateEntryInput
 	inputData.Project = data.Project
 	inputData.ID = data.ID
+	inputData.ContractID = data.ContractID
+	inputData.UserID = data.UserID
 	inputData.AccountID = data.AccountID
 	inputData.MultipleEntryID = data.MultipleEntryID
 	inputData.Currency = data.Currency
@@ -56,6 +58,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 	var response CreateEntryResponse
 	response.Project = outputData.Entry.Project
 	response.ID = outputData.Entry.ID
+	response.ContractID = outputData.Entry.ContractID
+	response.UserID = outputData.Entry.UserID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
 	response.BalanceByYearID = outputData.Entry.BalanceByYearID
@@ -90,6 +94,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 	var response DescribeEntryResponse
 	response.Project = outputData.Entry.Project
 	response.ID = outputData.Entry.ID
+	response.ContractID = outputData.Entry.ContractID
+	response.UserID = outputData.Entry.UserID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
 	response.BalanceByYearID = outputData.Entry.BalanceByYearID
@@ -127,6 +133,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 		var responseItem DescribeEntryResponse
 		responseItem.Project = item.Project
 		responseItem.ID = item.ID
+		responseItem.ContractID = item.ContractID
+		responseItem.UserID = item.UserID
 		responseItem.AccountID = item.AccountID
 		responseItem.MultipleEntryID = item.MultipleEntryID
 		responseItem.BalanceByYearID = item.BalanceByYearID
@@ -153,6 +161,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, da
 	var inputData entry.RemoveEntryInput
 	inputData.Project = data.Project
 	inputData.ID = data.ID
+	inputData.ContractID = data.ContractID
+	inputData.UserID = data.UserID
 
 	outputData, err := adapter.entryUseCase.RemoveEntry(ctx, inputData)
 	if err != nil {
@@ -162,6 +172,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, da
 	var response DeleteEntryResponse
 	response.Project = outputData.Entry.Project
 	response.ID = outputData.Entry.ID
+	response.ContractID = outputData.Entry.ContractID
+	response.UserID = outputData.Entry.UserID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
 	response.BalanceByYearID = outputData.Entry.BalanceByYearID
@@ -187,6 +199,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptPublishEntry(ctx context.Context, d
 	var inputData entry.PublishEntryInput
 	inputData.Project = data.Project
 	inputData.ID = data.ID
+	inputData.ContractID = data.ContractID
+	inputData.UserID = data.UserID
 
 	outputData, err := adapter.entryUseCase.PublishEntry(ctx, inputData)
 	if err != nil {
@@ -196,6 +210,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptPublishEntry(ctx context.Context, d
 	var response PublishEntryResponse
 	response.Project = outputData.Entry.Project
 	response.ID = outputData.Entry.ID
+	response.ContractID = outputData.Entry.ContractID
+	response.UserID = outputData.Entry.UserID
 	response.AccountID = outputData.Entry.AccountID
 	response.MultipleEntryID = outputData.Entry.MultipleEntryID
 	response.BalanceByYearID = outputData.Entry.BalanceByYearID

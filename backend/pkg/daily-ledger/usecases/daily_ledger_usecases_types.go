@@ -6,7 +6,9 @@ import (
 )
 
 type ListDailyLedgerInput struct {
-	Project string
+	Project    string
+	ContractID string
+	UserID     string
 }
 
 type ListDailyLedgerOutput struct {
@@ -14,9 +16,11 @@ type ListDailyLedgerOutput struct {
 }
 
 type Record struct {
-	Project         string
-	ID              string
-	EntriesExpanded []EntryExpanded
+	Project           string
+	ID                string
+	TotalDebitAmount  float64
+	TotalCreditAmount float64
+	EntriesExpanded   []EntryExpanded
 }
 
 type EntryExpanded struct {
