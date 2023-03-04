@@ -6,25 +6,20 @@ import { useEntriesStore } from '@/features/entries/application/entries-store.js
 import { useAccountsStore } from '@/features/accounts/application/accounts-store.js';
 import { findCurrencyByCode, currencies, dateToUnixTimestamp, formatDate, formatAmount } from '@/features/utils/utils';
 
-import { useMessagesStore } from '@/stores/messages';
-
 //store
-const messagesStore = useMessagesStore();
 const entriesStore = useEntriesStore();
 const accountsStore = useAccountsStore();
 await accountsStore.loadAccounts();
 
-const selectedCurrency = ref('EUR');
-const currentDate = new Date();
-const date = ref(currentDate);
+let selectedCurrency = ref('EUR');
+let selectedDate = ref(new Date());
 const currenciesArray = ref(currencies);
-const concept = ref();
-const debitAmount = ref();
-const creditAmount = ref();
-const id = uuid();
+let selectedConcept = ref();
+let selectedDebitAmount = ref();
+let selectedCreditAmount = ref();
 const multipleEntryId = uuid();
-const debitAccount = ref();
-const creditAccount = ref();
+let selectedDebitAccount = ref();
+let selectedCreditAccount = ref();
 const accounts = accountsStore.state.accounts;
 
 if (entriesStore.state.multipleEntryId === '') {
@@ -33,36 +28,64 @@ if (entriesStore.state.multipleEntryId === '') {
 
 function addDebitEntry() {
   const newEntry: CreateEntryInput = {
-    id: id,
-    accountId: debitAccount.value,
+    accountId: selectedDebitAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: selectedCurrency.value,
-    date: dateToUnixTimestamp(date.value),
-    concept: concept.value,
-    debitAmount: debitAmount.value,
+    date: dateToUnixTimestamp(selectedDate.value),
+    concept: selectedConcept.value,
+    debitAmount: selectedDebitAmount.value,
     creditAmount: null,
   };
 
   entriesStore.addDebitEntry(newEntry);
+
+  cleanForm();
 }
 
 function addCreditEntry() {
   const newEntry: CreateEntryInput = {
-    id: id,
-    accountId: creditAccount.value,
+    accountId: selectedCreditAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: selectedCurrency.value,
-    date: dateToUnixTimestamp(date.value),
-    concept: concept.value,
+    date: dateToUnixTimestamp(selectedDate.value),
+    concept: selectedConcept.value,
     debitAmount: null,
-    creditAmount: creditAmount.value,
+    creditAmount: selectedCreditAmount.value,
   };
 
   entriesStore.addCreditEntry(newEntry);
+
+  cleanForm();
 }
 
 function removeEntry(id: string) {
   entriesStore.removeCreationEntry(id);
+}
+function editEntry(id: string) {
+  const storedEntry = entriesStore.state.entriesCreation.find(entry => entry.entry.id === id);
+
+  if (!storedEntry) {
+    return;
+  }
+
+  selectedCurrency = ref(storedEntry.entry.currency);
+  selectedDate = ref(new Date(storedEntry.entry.date * 1000));
+  selectedConcept = ref(storedEntry.entry.concept);
+  selectedDebitAmount = ref(storedEntry.entry.debitAmount);
+  selectedCreditAmount = ref(storedEntry.entry.creditAmount);
+  selectedDebitAccount = ref(storedEntry.account.id);
+  selectedCreditAccount = ref(storedEntry.account.id);
+
+  entriesStore.state.id = id;
+}
+function cleanForm() {
+  selectedCurrency = ref('EUR');
+  selectedDate = ref(new Date());
+  selectedConcept = ref();
+  selectedDebitAmount = ref();
+  selectedCreditAmount = ref();
+  selectedDebitAccount = ref();
+  selectedCreditAccount = ref();
 }
 </script>
 
@@ -76,11 +99,11 @@ function removeEntry(id: string) {
     </div>
     <div class="w-44 flex-auto">
       <label for="concept" class="block text-sm font-medium text-gray-700">Concepto</label>
-      <input type="text" v-model="concept" maxlength="64" name="concept" id="concept" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm" />
+      <input type="text" v-model="selectedConcept" maxlength="64" name="concept" id="concept" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm" />
     </div>
     <div class="flex-none">
       <label for="calendar" class="block text-sm font-medium text-gray-700">Fecha del asiento</label>
-      <CalendarPrimeVue v-model="date" :showTime="true" :showSeconds="true" :showIcon="true" dateFormat="dd/mm/yy" name="calendar" id="calendar" />
+      <CalendarPrimeVue v-model="selectedDate" :showTime="true" :showSeconds="true" :showIcon="true" dateFormat="dd/mm/yy" name="calendar" id="calendar" />
     </div>
     <div class="flex-1">
       <label for="balance" class="block text-sm font-medium text-gray-700">Balance del asiento</label>
@@ -97,7 +120,7 @@ function removeEntry(id: string) {
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-700">Cuenta</label>
-            <TreeSelectPrimeVue v-model="debitAccount" :options="accounts" placeholder="Selecciona una cuenta para añadirla al debe" id="account" name="account"></TreeSelectPrimeVue>
+            <TreeSelectPrimeVue v-model="selectedDebitAccount" :options="accounts" placeholder="Selecciona una cuenta para añadirla al debe" id="account" name="account"></TreeSelectPrimeVue>
           </div>
           <div>
             <label for="debit-amount" class="block text-sm font-medium text-gray-700">Importe</label>
@@ -105,7 +128,7 @@ function removeEntry(id: string) {
               <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <span class="text-gray-500 sm:text-sm">{{ findCurrencyByCode(selectedCurrency) }}</span>
               </div>
-              <input v-model="debitAmount" type="number" oninput="validity.valid||(value='');" name="debit-amount" id="debit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm" placeholder="0.00" min="0" max="999999999999999" />
+              <input v-model="selectedDebitAmount" type="number" oninput="validity.valid||(value='');" name="debit-amount" id="debit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm" placeholder="0.00" min="0" max="999999999999999" />
               <div class="absolute inset-y-0 right-0 flex items-center">
                 <label for="currency" class="sr-only">Divisa</label>
                 <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 sm:text-sm">
@@ -129,7 +152,7 @@ function removeEntry(id: string) {
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-700">Cuenta</label>
-            <TreeSelectPrimeVue v-model="creditAccount" :options="accounts" placeholder="Selecciona una cuenta para añadirla al haber" id="account" name="account"></TreeSelectPrimeVue>
+            <TreeSelectPrimeVue v-model="selectedCreditAccount" :options="accounts" placeholder="Selecciona una cuenta para añadirla al haber" id="account" name="account"></TreeSelectPrimeVue>
           </div>
           <div>
             <label for="credit-amount" class="block text-sm font-medium text-gray-700">Importe</label>
@@ -137,7 +160,7 @@ function removeEntry(id: string) {
               <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <span class="text-gray-500 sm:text-sm">{{ findCurrencyByCode(selectedCurrency) }}</span>
               </div>
-              <input v-model="creditAmount" type="number" oninput="validity.valid||(value='');" name="credit-amount" id="credit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm" placeholder="0.00" min="0" max="999999999999999" />
+              <input v-model="selectedCreditAmount" type="number" oninput="validity.valid||(value='');" name="credit-amount" id="credit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm" placeholder="0.00" min="0" max="999999999999999" />
               <div class="absolute inset-y-0 right-0 flex items-center">
                 <label for="currency" class="sr-only">Divisa</label>
                 <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 sm:text-sm">
@@ -178,7 +201,7 @@ function removeEntry(id: string) {
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ formatAmount(entry.entry.debitAmount, entry.entry.currency) }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ formatAmount(entry.entry.creditAmount, entry.entry.currency) }}</td>
               <td class="space-x-3 whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                <button @click="entriesStore.editEntry(entry.entry.id)" class="text-blue-500 hover:text-blue-900">Editar</button>
+                <button @click="editEntry(entry.entry.id || '')" class="text-blue-500 hover:text-blue-900">Editar</button>
                 <button @click="removeEntry(entry.entry.id || '')" class="text-red-500 hover:text-red-900">Eliminar</button>
               </td>
             </tr>

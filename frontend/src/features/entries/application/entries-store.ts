@@ -4,6 +4,7 @@ import { accountsUseCase } from '@/features/accounts';
 import { entriesUseCase } from '@/features/entries';
 import { useMessagesStore } from '@/stores/messages';
 import type { Account } from '@/features/accounts/application/accounts-model';
+import { v4 as uuid } from 'uuid';
 
 interface EntryWithAccount {
   entry: CreateEntryInput;
@@ -17,6 +18,7 @@ interface EntriesState {
   entriesCreation: EntryWithAccount[];
   entriesModification: EntryWithAccount[];
   storedEntries: EntryWithAccount[];
+  id: string;
   multipleEntryId: string;
   totalBalance: number;
   stateMessage: string | null;
@@ -29,6 +31,7 @@ const state: EntriesState = {
   entriesCreation: [],
   entriesModification: [],
   storedEntries: [],
+  id: '',
   multipleEntryId: '',
   totalBalance: 0,
   stateMessage: null,
@@ -54,6 +57,13 @@ export const useEntriesStore = defineStore('entries', {
         return;
       }
 
+      if (this.state.id == '') {
+        entry.id = uuid();
+      } else {
+        entry.id = this.state.id;
+        this.removeCreationEntry(this.state.id);
+      }
+
       //match account id
       const match = JSON.stringify(entry.accountId).match(/"(\d+)"/);
       entry.accountId = match ? match[1] : '';
@@ -73,6 +83,7 @@ export const useEntriesStore = defineStore('entries', {
       this.state.entriesCreation.push(entryWithAccount);
       this.state.storedEntries.push(entryWithAccount);
       this.state.totalBalance += entry.debitAmount;
+      this.state.id = '';
     },
     async addCreditEntry(entry: CreateEntryInput) {
       const messagesStore = useMessagesStore();
@@ -98,6 +109,13 @@ export const useEntriesStore = defineStore('entries', {
         return;
       }
 
+      if (this.state.id == '') {
+        entry.id = uuid();
+      } else {
+        entry.id = this.state.id;
+        this.removeCreationEntry(this.state.id);
+      }
+
       const entryWithAccount: EntryWithAccount = {
         entry: entry,
         account: account,
@@ -106,6 +124,7 @@ export const useEntriesStore = defineStore('entries', {
       this.state.entriesCreation.push(entryWithAccount);
       this.state.storedEntries.push(entryWithAccount);
       this.state.totalBalance -= entry.creditAmount;
+      this.state.id = '';
     },
     async modifyDebitEntry(entry: ModifyEntryInput) {
       const messagesStore = useMessagesStore();
