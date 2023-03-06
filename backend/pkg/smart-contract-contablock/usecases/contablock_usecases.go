@@ -60,6 +60,8 @@ func (useCase DefaultContaBlockUseCase) CreateEntry(input CreateEntryInput) erro
 	createEntryAdapterInput.UserPrivateKey = input.UserPrivateKey
 	createEntryAdapterInput.UserAddress = input.UserAddress
 	createEntryAdapterInput.ID = input.ID
+	createEntryAdapterInput.ContractID = input.ContractID
+	createEntryAdapterInput.UserID = input.UserID
 	createEntryAdapterInput.AccountID = input.AccountID
 	createEntryAdapterInput.MultipleEntryID = input.MultipleEntryID
 	createEntryAdapterInput.Currency = input.Currency

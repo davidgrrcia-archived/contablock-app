@@ -531,65 +531,60 @@ func (useCase *DefaultEntryUseCase) EntryCreatedEvent(ctx context.Context, input
 		return errors.New("invalid input: " + err.Error())
 	}
 
-	//list event subscriptions with filter by event name.
-	//for each subscription, store with the proper project
+	var describeAccountInput account.DescribeAccountInput
+	describeAccountInput.Project = input.Project
+	describeAccountInput.ID = input.AccountID
+	storedAccount, err := useCase.accountUseCase.DescribeAccount(ctx, describeAccountInput)
+	if err != nil {
+		return err
+	}
 
-	/*
-		var describeAccountInput account.DescribeAccountInput
-		describeAccountInput.Project = input.Project
-		describeAccountInput.ID = input.AccountID
-		storedAccount, err := useCase.accountUseCase.DescribeAccount(ctx, describeAccountInput)
+	var balanceByYearID *string
+	if storedAccount.Account.BalanceID != nil && *storedAccount.Account.BalanceID != "" {
+		var createBalanceInput balance.CreateBalanceByYearInput
+		createBalanceInput.Project = input.Project
+		createBalanceInput.BalanceID = *storedAccount.Account.BalanceID
+		createBalanceInput.Amount = *getAmountForBalance(input.DebitBalance, input.CreditBalance)
+		createBalanceInput.Year = input.Date.Year()
+		storedBalance, err := useCase.balanceUseCase.CreateBalanceByYear(ctx, createBalanceInput)
 		if err != nil {
 			return err
 		}
+		balanceByYearID = &storedBalance.ID
+	}
 
-		var balanceByYearID *string
-		if storedAccount.Account.BalanceID != nil && *storedAccount.Account.BalanceID != "" {
-			var createBalanceInput balance.CreateBalanceByYearInput
-			createBalanceInput.Project = input.Project
-			createBalanceInput.BalanceID = *storedAccount.Account.BalanceID
-			createBalanceInput.Amount = *getAmountForBalance(input.DebitBalance, input.CreditBalance)
-			createBalanceInput.Year = input.Date.Year()
-			storedBalance, err := useCase.balanceUseCase.CreateBalanceByYear(ctx, createBalanceInput)
-			if err != nil {
-				return err
-			}
-			balanceByYearID = &storedBalance.ID
-		}
+	var desiredEntry EntryStorageData
+	desiredEntry.Project = input.Project
+	desiredEntry.ID = input.ID
+	desiredEntry.ContractID = input.ContractID
+	desiredEntry.UserID = input.UserID
+	desiredEntry.AccountID = input.AccountID
+	desiredEntry.MultipleEntryID = input.MultipleEntryID
+	desiredEntry.BalanceByYearID = balanceByYearID
+	desiredEntry.Currency = input.Currency
+	desiredEntry.Concept = &input.Concept
+	desiredEntry.Date = input.Date
+	quarter := useCase.calculateQuarter(input.Date)
+	desiredEntry.Quarter = quarter
+	if input.DebitBalance == nil {
+		debitBalance := 0.00
+		input.DebitBalance = &debitBalance
+	}
+	desiredEntry.DebitBalance = *input.DebitBalance
+	if input.CreditBalance == nil {
+		creditBalance := 0.00
+		input.CreditBalance = &creditBalance
+	}
+	desiredEntry.CreditBalance = *input.CreditBalance
+	desiredEntry.TotalBalance = desiredEntry.DebitBalance - desiredEntry.CreditBalance
+	desiredEntry.State = EntryStateCreated
+	desiredEntry.CreationDate = time.Now()
+	desiredEntry.LastUpdate = desiredEntry.CreationDate
 
-		var desiredEntry EntryStorageData
-		desiredEntry.Project = input.Project
-		desiredEntry.ID = *input.ID
-		desiredEntry.ContractID = input.ContractID
-		desiredEntry.UserID = input.UserID
-		desiredEntry.AccountID = input.AccountID
-		desiredEntry.MultipleEntryID = input.MultipleEntryID
-		desiredEntry.BalanceByYearID = balanceByYearID
-		desiredEntry.Currency = input.Currency
-		desiredEntry.Concept = input.Concept
-		desiredEntry.Date = input.Date
-		quarter := useCase.calculateQuarter(input.Date)
-		desiredEntry.Quarter = quarter
-		if input.DebitBalance == nil {
-			debitBalance := 0.00
-			input.DebitBalance = &debitBalance
-		}
-		desiredEntry.DebitBalance = *input.DebitBalance
-		if input.CreditBalance == nil {
-			creditBalance := 0.00
-			input.CreditBalance = &creditBalance
-		}
-		desiredEntry.CreditBalance = *input.CreditBalance
-		desiredEntry.TotalBalance = desiredEntry.DebitBalance - desiredEntry.CreditBalance
-		desiredEntry.State = EntryStateCreated
-		desiredEntry.CreationDate = time.Now()
-		desiredEntry.LastUpdate = desiredEntry.CreationDate
-
-		_, err = useCase.entryStorage.Add(ctx, desiredEntry)
-		if err != nil {
-			return err
-		}
-	*/
+	_, err = useCase.entryStorage.Add(ctx, desiredEntry)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

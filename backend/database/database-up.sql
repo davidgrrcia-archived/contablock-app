@@ -65,7 +65,7 @@ CREATE TABLE entries(
     state_reason VARCHAR(256),
     creation_date VARCHAR(64) NOT NULL,
     last_update VARCHAR(64) NOT NULL,
-    UNIQUE KEY (project, multiple_entry_id),
+    UNIQUE KEY (project, id, multiple_entry_id),
     PRIMARY KEY (id, project)
 );
 CREATE TABLE users(
