@@ -10,11 +10,13 @@ contract ContaBlockContract {
 
     struct Entry {
         string id;
+        string contractId;
+        string userId;
         string accountId;
         string multipleEntryId;
         string currency;
         string concept;
-        string date;
+        uint256 date;
         uint256 debitBalance;
         uint256 creditBalance;
         string state;
@@ -58,11 +60,13 @@ contract ContaBlockContract {
 
     function createEntry(
         string memory _id,
+        string memory _contractId,
+        string memory _userId,
         string memory _accountId,
         string memory _multipleEntryId,
         string memory _currency,
         string memory _concept,
-        string memory _date,
+        uint256 _date,
         uint256 _debitBalance,
         uint256 _creditBalance
     ) public hasAccess {
@@ -70,6 +74,8 @@ contract ContaBlockContract {
 
         Entry memory _entry = Entry(
             _id,
+            _contractId,
+            _userId,
             _accountId,
             _multipleEntryId,
             _currency,

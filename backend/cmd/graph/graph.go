@@ -15,8 +15,6 @@ import (
 	inputAsyncEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/async"
 	inputHttpEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
-	inputEventSubscription "github.com/davidgrcia/tfg-informatica-nextjs/pkg/event-subscription/adapters/input/http"
-	eventSubscription "github.com/davidgrcia/tfg-informatica-nextjs/pkg/event-subscription/usecases"
 	inputGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
@@ -33,12 +31,6 @@ type Graph struct {
 	ContablockClient *ethclient.Client
 	contablock.ContaBlockContractAdapter
 	contablock.ContaBlockUseCase
-
-	//event subscriptions
-	EventSubscriptionDb sql.DB
-	eventSubscription.EventSubscriptionStorage
-	eventSubscription.EventSubscriptionUseCase
-	inputEventSubscription.EventSubscriptionInputAdapter
 
 	//contracts
 	ContractDb sql.DB
@@ -94,7 +86,6 @@ func (graph *Graph) Build() {
 	// output infra
 	graph.provideContablockClient()
 	graph.provideContractDB()
-	graph.provideEventSubscriptionDB()
 	graph.provideUserDB()
 	graph.provideAccountDB()
 	graph.provideBusinessDB()
@@ -104,7 +95,6 @@ func (graph *Graph) Build() {
 	// output adapters
 	graph.provideContablockContractAdapter()
 	graph.provideContractStorage()
-	graph.provideEventSubscriptionStorage()
 	graph.provideUserStorage()
 	graph.provideAccountStorage()
 	graph.provideBusinessStorage()
@@ -114,7 +104,6 @@ func (graph *Graph) Build() {
 	// use cases
 	graph.provideContablockUseCase()
 	graph.provideContractUseCase()
-	graph.provideEventSubscriptionUseCase()
 	graph.provideUserUseCase()
 	graph.provideBalanceUseCase()
 	graph.provideAccountUseCase()
@@ -126,7 +115,6 @@ func (graph *Graph) Build() {
 	// input adapters
 	graph.provideAccountInputAdapter()
 	graph.provideContractInputAdapter()
-	graph.provideEventSubscriptionInputAdapter()
 	graph.provideUserInputAdapter()
 	graph.provideBusinessInputAdapter()
 	graph.provideEntryInputHttpAdapter()
@@ -138,7 +126,6 @@ func (graph *Graph) Build() {
 	// input infra
 	graph.provideRouter()
 	graph.provideContractEndpoints()
-	graph.provideEventSubscriptionEndpoints()
 	graph.provideAccountEndpoints()
 	graph.provideUserEndpoints()
 	graph.provideBusinessEndpoints()

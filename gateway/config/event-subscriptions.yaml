@@ -1,0 +1,14 @@
+projects:
+  - project: &zara-accountant-project zara-accountant
+  - project: &zara-auditor-project zara-auditor
+  - project: &zara-viewer-project zara-viewer
+
+eventSubscriptions:
+  - name: "EntryCreated"
+    projectsSubscribed:
+      - *zara-auditor-project
+      - *zara-viewer-project
+  - name: "EntryRemoved"
+    projectsSubscribed:
+      - *zara-auditor-project
+      - *zara-viewer-project

@@ -7,6 +7,7 @@ require (
 	github.com/ethereum/go-ethereum v1.11.2
 	github.com/joho/godotenv v1.5.1
 	golang.org/x/sync v0.1.0
+	gopkg.in/yaml.v2 v2.4.0
 )
 
 require (

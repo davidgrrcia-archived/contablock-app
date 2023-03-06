@@ -15,7 +15,6 @@ import (
 )
 
 const (
-	//zaraAdminYamlPath      = "./config/zara-admin.yaml"
 	zaraAccountantYamlPath = "./config/zara-accountant.yaml"
 	zaraAuditorYamlPath    = "./config/zara-auditor.yaml"
 	zaraViewerYamlPath     = "./config/zara-viewer.yaml"
@@ -29,7 +28,6 @@ type YamlFile struct {
 	Balances           []Balances          `yaml:"balances"`
 	Users              []User              `yaml:"users"`
 	Contracts          []Contract          `yaml:"contracts"`
-	EventSubscriptions []EventSubscription `yaml:"eventSubscriptions"`
 }
 
 type Contract struct {
@@ -40,13 +38,6 @@ type Contract struct {
 	EthAddress  string  `yaml:"ethAddress"`
 	Network     string  `yaml:"network"`
 	AdminID     string  `yaml:"adminId"`
-}
-
-type EventSubscription struct {
-	Project    string  `yaml:"project"`
-	ContractID string  `yaml:"contractId"`
-	ID         *string `yaml:"id"`
-	Network    string  `yaml:"network"`
 }
 
 type Account struct {
@@ -104,7 +95,6 @@ func configureZaraAccountant() {
 	addBusiness(yamlFile)
 	addBalances(yamlFile)
 	addUsers(yamlFile)
-	addEventSubscriptions(yamlFile)
 }
 
 func configureZaraAuditor() {
@@ -114,7 +104,6 @@ func configureZaraAuditor() {
 	addBusiness(yamlFile)
 	addBalances(yamlFile)
 	addUsers(yamlFile)
-	addEventSubscriptions(yamlFile)
 }
 
 func configureZaraViewer() {
@@ -124,7 +113,6 @@ func configureZaraViewer() {
 	addBusiness(yamlFile)
 	addBalances(yamlFile)
 	addUsers(yamlFile)
-	addEventSubscriptions(yamlFile)
 }
 
 func readYamlFile(path string) YamlFile {
@@ -270,36 +258,6 @@ func addContracts(yamlFile YamlFile) {
 		}
 
 		path := backendURL + contract.Project + "/contracts"
-
-		response, err := http.Post(path, "application/json", bytes.NewBuffer(requestBody))
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		defer response.Body.Close()
-
-		body, err := ioutil.ReadAll(response.Body)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		err = checkErrorMessage(body)
-		if err != nil {
-			panic(err)
-		}
-
-		fmt.Println(string(body))
-	}
-}
-
-func addEventSubscriptions(yamlFile YamlFile) {
-	for _, eventSubscription := range yamlFile.EventSubscriptions {
-		requestBody, err := json.Marshal(eventSubscription)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		path := backendURL + eventSubscription.Project + "/event-subscriptions"
 
 		response, err := http.Post(path, "application/json", bytes.NewBuffer(requestBody))
 		if err != nil {

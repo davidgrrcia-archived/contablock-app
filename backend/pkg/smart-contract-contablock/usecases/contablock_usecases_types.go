@@ -1,5 +1,7 @@
 package contablock
 
+import "time"
+
 const (
 	// States
 	EntryStateCreated = "CREATED"
@@ -19,11 +21,13 @@ type GrantAccessInput struct {
 type CreateEntryInput struct {
 	ClientCommonInput
 	ID              string
+	ContractID      string
+	UserID          string
 	AccountID       string
 	MultipleEntryID string
 	Currency        string
 	Concept         string
-	Date            string
+	Date            time.Time
 	DebitBalance    *float64
 	CreditBalance   *float64
 }
@@ -35,11 +39,13 @@ type GetEntryDataInput struct {
 
 type GetEntryDataOutput struct {
 	ID              string
+	ContractID      string
+	UserID          string
 	AccountID       string
 	MultipleEntryID string
 	Currency        string
 	Concept         string
-	Date            string
+	Date            time.Time
 	DebitBalance    *float64
 	CreditBalance   *float64
 	State           string

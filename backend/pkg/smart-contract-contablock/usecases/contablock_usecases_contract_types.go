@@ -1,5 +1,7 @@
 package contablock
 
+import "time"
+
 type ContaBlockContractAdapter interface {
 	GrantAccess(input GrantAccessAdapterInput) error
 	CreateEntry(input CreateEntryAdapterInput) error
@@ -18,11 +20,13 @@ type GrantAccessAdapterInput struct {
 type CreateEntryAdapterInput struct {
 	ClientCommonInput
 	ID              string
+	ContractID      string
+	UserID          string
 	AccountID       string
 	MultipleEntryID string
 	Currency        string
 	Concept         string
-	Date            string
+	Date            time.Time
 	DebitBalance    *float64
 	CreditBalance   *float64
 }
@@ -34,11 +38,13 @@ type GetEntryDataAdapterInput struct {
 
 type GetEntryDataAdapterOutput struct {
 	ID              string
+	ContractID      string
+	UserID          string
 	AccountID       string
 	MultipleEntryID string
 	Currency        string
 	Concept         string
-	Date            string
+	Date            time.Time
 	DebitBalance    *float64
 	CreditBalance   *float64
 	State           string
