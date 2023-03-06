@@ -12,7 +12,8 @@ import (
 	contract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/usecases"
 	inputDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
 	dailyledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/usecases"
-	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
+	inputAsyncEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/async"
+	inputHttpEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	inputGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
@@ -47,7 +48,8 @@ type Graph struct {
 	EntryDb sql.DB
 	entry.EntryStorage
 	entry.EntryUseCase
-	inputEntry.EntryInputAdapter
+	inputHttpEntry.EntryInputHttpAdapter
+	inputAsyncEntry.EntryInputAsyncAdapter
 
 	//accounts
 	AccountDb sql.DB
@@ -115,7 +117,8 @@ func (graph *Graph) Build() {
 	graph.provideContractInputAdapter()
 	graph.provideUserInputAdapter()
 	graph.provideBusinessInputAdapter()
-	graph.provideEntryInputAdapter()
+	graph.provideEntryInputHttpAdapter()
+	graph.provideEntryInputAsyncAdapter()
 	graph.provideDailyLedgerInputAdapter()
 	graph.provideGeneralLedgerInputAdapter()
 	graph.provideBalanceInputAdapter()

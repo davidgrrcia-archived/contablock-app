@@ -8,7 +8,7 @@ import (
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 )
 
-type EntryInputAdapter interface {
+type EntryInputHttpAdapter interface {
 	AdaptCreateEntry(ctx context.Context, data CreateEntryRequest) (*CreateEntryResponseWrapper, error)
 	AdaptDescribeEntry(ctx context.Context, data DescribeEntryRequest) (*DescribeEntryResponseWrapper, error)
 	AdaptListEntries(ctx context.Context, data ListEntryRequest) (*ListEntryResponseWrapper, error)
@@ -34,7 +34,7 @@ type DefaultHttpInputAdapterOptions struct {
 	EntryUseCase entry.EntryUseCase
 }
 
-var _ EntryInputAdapter = (*DefaultHttpInputAdapter)(nil)
+var _ EntryInputHttpAdapter = (*DefaultHttpInputAdapter)(nil)
 
 func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, data CreateEntryRequest) (*CreateEntryResponseWrapper, error) {
 	var inputData entry.CreateEntryInput

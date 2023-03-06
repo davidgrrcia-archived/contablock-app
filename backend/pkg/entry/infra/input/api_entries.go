@@ -25,11 +25,11 @@ func NewDefaultEntriesHttpHandler(options DefaultEntriesHttpHandlerOptions) (*De
 }
 
 type DefaultEntriesHttpHandler struct {
-	adapter input.EntryInputAdapter
+	adapter input.EntryInputHttpAdapter
 }
 
 type DefaultEntriesHttpHandlerOptions struct {
-	Adapter input.EntryInputAdapter
+	Adapter input.EntryInputHttpAdapter
 }
 
 func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {

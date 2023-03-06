@@ -85,3 +85,13 @@ CREATE TABLE users(
     UNIQUE KEY (project, email),
     PRIMARY KEY (id, project)
 );
+-- CREATE TABLE event_subscriptions(
+--     project VARCHAR(64) NOT NULL,
+--     id VARCHAR(64) NOT NULL,
+--     contract_id VARCHAR(64) NOT NULL,
+--     user_id VARCHAR(64) NOT NULL,
+--     event VARCHAR(64) NOT NULL,
+--     creation_date VARCHAR(64) NOT NULL,
+--     last_update VARCHAR(64) NOT NULL,
+--     PRIMARY KEY (id, project)
+-- );

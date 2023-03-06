@@ -12,7 +12,8 @@ import (
 	contract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/usecases"
 	inputAdapterDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
 	dailyledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/usecases"
-	inputAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
+	inputAsyncAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/async"
+	inputHttpAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	inputAdapterGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
@@ -46,8 +47,12 @@ func (graph *Graph) GetContaBlockUseCase() contablock.ContaBlockUseCase {
 
 /////// ENTRIES ///////
 
-func (graph *Graph) GetEntryInputAdapter() inputAdapterEntry.EntryInputAdapter {
-	return graph.EntryInputAdapter
+func (graph *Graph) GetEntryInputHttpAdapter() inputHttpAdapterEntry.EntryInputHttpAdapter {
+	return graph.EntryInputHttpAdapter
+}
+
+func (graph *Graph) GetEntryInputAsyncAdapter() inputAsyncAdapterEntry.EntryInputAsyncAdapter {
+	return graph.EntryInputAsyncAdapter
 }
 
 func (graph *Graph) GetEntryDB() *sql.DB {

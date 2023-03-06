@@ -1,4 +1,4 @@
-package outputhttp
+package http
 
 import (
 	"context"
@@ -251,12 +251,12 @@ type getClientSessionInput struct {
 
 func (adapter DefaultContaBlockContract) getClientSession(input getClientSessionInput) (*contablockClient.ContablockSession, error) {
 	var (
-		client     = adapter.client
-		privateKey = crypto.ToECDSAUnsafe(common.FromHex(input.PrivateKey))
-		address    = common.HexToAddress(input.ContractAddress)
-		value      = new(big.Int).Mul(big.NewInt(0), big.NewInt(params.Ether)) // in wei (0 eth)
-		sender     = common.HexToAddress(input.FromAddress)
-		gasLimit   = uint64(30000000) // in units
+		client          = adapter.client
+		privateKey      = crypto.ToECDSAUnsafe(common.FromHex(input.PrivateKey))
+		contractAddress = common.HexToAddress(input.ContractAddress)
+		value           = new(big.Int).Mul(big.NewInt(0), big.NewInt(params.Ether)) // in wei (0 eth)
+		sender          = common.HexToAddress(input.FromAddress)
+		gasLimit        = uint64(30000000) // in units
 	)
 
 	// Retrieve the chainid (needed for signer)
@@ -271,7 +271,7 @@ func (adapter DefaultContaBlockContract) getClientSession(input getClientSession
 		return nil, err
 	}
 
-	instance, err := contablockClient.NewContablock(address, client)
+	instance, err := contablockClient.NewContablock(contractAddress, client)
 	if err != nil {
 		return nil, err
 	}

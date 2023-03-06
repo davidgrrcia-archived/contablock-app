@@ -2,6 +2,7 @@ package graph
 
 import (
 	"database/sql"
+	contablockOutputHttpAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/adapters/output/http"
 	"log"
 	"os"
 
@@ -24,14 +25,14 @@ import (
 	inputDailyLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/adapters/input/http"
 	dailyLedgerInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/infra/input"
 	dailyledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/daily-ledger/usecases"
-	inputEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
+	inputAsyncEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/async"
+	inputHttpEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 	entryOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/output/database"
 	entryInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/infra/input"
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	inputGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
 	generalLedgerInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/infra/input"
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
-	contablockOutputHttpAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/adapters/outputhttp"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	contablockUseCase "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
 	inputUser "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/adapters/input/http"
@@ -97,23 +98,37 @@ func (graph *Graph) provideEntryUseCase() {
 	graph.EntryUseCase = entryUseCase
 }
 
-func (graph *Graph) provideEntryInputAdapter() *inputEntry.DefaultHttpInputAdapter {
-	entryInputAdapterOpts := inputEntry.DefaultHttpInputAdapterOptions{
+func (graph *Graph) provideEntryInputHttpAdapter() *inputHttpEntry.DefaultHttpInputAdapter {
+	entryInputHttpAdapterOpts := inputHttpEntry.DefaultHttpInputAdapterOptions{
 		EntryUseCase: graph.GetEntryUseCase(),
 	}
-	entryInputAdapter, err := inputEntry.NewDefaultHttpInputAdapter(entryInputAdapterOpts)
+	entryInputHttpAdapter, err := inputHttpEntry.NewDefaultHttpInputAdapter(entryInputHttpAdapterOpts)
 	if err != nil {
 		panic(err)
 	}
 
-	graph.EntryInputAdapter = entryInputAdapter
+	graph.EntryInputHttpAdapter = entryInputHttpAdapter
 
-	return entryInputAdapter
+	return entryInputHttpAdapter
+}
+
+func (graph *Graph) provideEntryInputAsyncAdapter() *inputAsyncEntry.DefaultAsyncInputAdapter {
+	entryInputAsyncAdapterOpts := inputAsyncEntry.DefaultAsyncInputAdapterOptions{
+		EntryUseCase: graph.GetEntryUseCase(),
+	}
+	entryInputAsyncAdapter, err := inputAsyncEntry.NewDefaultAsyncInputAdapter(entryInputAsyncAdapterOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.EntryInputAsyncAdapter = entryInputAsyncAdapter
+
+	return entryInputAsyncAdapter
 }
 
 func (graph *Graph) provideEntryEndpoints() {
 	var options entryInputInfra.DefaultEntriesHttpHandlerOptions
-	options.Adapter = graph.GetEntryInputAdapter()
+	options.Adapter = graph.GetEntryInputHttpAdapter()
 	handler, err := entryInputInfra.NewDefaultEntriesHttpHandler(options)
 	if err != nil {
 		log.Fatal(err)
