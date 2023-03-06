@@ -14,6 +14,16 @@ contracts:
     network: &zaraNetwork zara-network
     adminId: &zaraAdminId zara-admin-id
 
+eventSubscriptions:
+  - project: *zara-auditor-project
+    id: "EntryCreated"
+    contractId: *contablockContractId
+    network: *zaraNetwork
+  - project: *zara-auditor-project
+    id: "EntryRemoved"
+    contractId: *contablockContractId
+    network: *zaraNetwork
+
 business:
   - project: *zara-auditor-project
     id: &zaraBusinessId zara-business-id
@@ -36,6 +46,7 @@ users:
     network: *zaraNetwork
     businessId: *zaraBusinessId
   - project: *zara-auditor-project
+    id: zara-user-auditor-id
     contractId: *contablockContractId
     name: Zara Auditor
     email: auditor@zara.com

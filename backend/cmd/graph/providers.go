@@ -30,6 +30,10 @@ import (
 	entryOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/output/database"
 	entryInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/infra/input"
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	inputEventSubscription "github.com/davidgrcia/tfg-informatica-nextjs/pkg/event-subscription/adapters/input/http"
+	eventSubscriptionOutputDbAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/event-subscription/adapters/output/database"
+	eventSubscriptionInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/event-subscription/infra/input"
+	eventSubscription "github.com/davidgrcia/tfg-informatica-nextjs/pkg/event-subscription/usecases"
 	inputGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
 	generalLedgerInputInfra "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/infra/input"
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
@@ -588,4 +592,70 @@ func (graph *Graph) provideContractEndpoints() {
 		log.Fatal(err)
 	}
 	handler.RegisterContractRoutes(graph.GetRouter())
+}
+
+/////// EVENT SUBSCRIPTIONS ///////
+
+func (graph *Graph) provideEventSubscriptionDB() {
+	db, err := sql.Open("mysql", os.Getenv("DB_USER")+":"+os.Getenv("DB_PASS")+"@tcp("+os.Getenv("DB_HOST")+":"+os.Getenv("DB_PORT")+")/"+os.Getenv("DB_NAME"))
+	if err != nil {
+		panic(err)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+
+	graph.EventSubscriptionDb = *db
+}
+
+func (graph *Graph) provideEventSubscriptionStorage() eventSubscription.EventSubscriptionStorage {
+	eventSubscriptionStorageOpts := eventSubscriptionOutputDbAdapter.EventSubscriptionRepositoryOptions{
+		DB: graph.GetEventSubscriptionDB(),
+	}
+	eventSubscriptionStorage, err := eventSubscriptionOutputDbAdapter.NewEventSubscriptionRepository(eventSubscriptionStorageOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.EventSubscriptionStorage = eventSubscriptionStorage
+
+	return eventSubscriptionStorage
+}
+
+func (graph *Graph) provideEventSubscriptionUseCase() {
+	eventSubscriptionUseCaseOpts := eventSubscription.DefaultEventSubscriptionUseCaseOptions{
+		EventSubscriptionStorage: graph.GetEventSubscriptionStorage(),
+	}
+	eventSubscriptionUseCase, err := eventSubscription.NewDefaultEventSubscriptionUseCase(eventSubscriptionUseCaseOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.EventSubscriptionUseCase = eventSubscriptionUseCase
+}
+
+func (graph *Graph) provideEventSubscriptionInputAdapter() *inputEventSubscription.DefaultHttpInputAdapter {
+	eventSubscriptionInputAdapterOpts := inputEventSubscription.DefaultHttpInputAdapterOptions{
+		EventSubscriptionUseCase: graph.GetEventSubscriptionUseCase(),
+	}
+	eventSubscriptionInputAdapter, err := inputEventSubscription.NewDefaultHttpInputAdapter(eventSubscriptionInputAdapterOpts)
+	if err != nil {
+		panic(err)
+	}
+
+	graph.EventSubscriptionInputAdapter = eventSubscriptionInputAdapter
+
+	return eventSubscriptionInputAdapter
+}
+
+func (graph *Graph) provideEventSubscriptionEndpoints() {
+	var options eventSubscriptionInputInfra.DefaultEventSubscriptionsHttpHandlerOptions
+	options.Adapter = graph.GetEventSubscriptionInputAdapter()
+	handler, err := eventSubscriptionInputInfra.NewDefaultEventSubscriptionsHttpHandler(options)
+	if err != nil {
+		log.Fatal(err)
+	}
+	handler.RegisterEventSubscriptionRoutes(graph.GetRouter())
 }

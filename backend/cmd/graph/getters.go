@@ -15,6 +15,8 @@ import (
 	inputAsyncAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/async"
 	inputHttpAdapterEntry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/http"
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
+	inputEventSubscription "github.com/davidgrcia/tfg-informatica-nextjs/pkg/event-subscription/adapters/input/http"
+	eventSubscription "github.com/davidgrcia/tfg-informatica-nextjs/pkg/event-subscription/usecases"
 	inputAdapterGeneralLedger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/adapters/input/http"
 	generalledger "github.com/davidgrcia/tfg-informatica-nextjs/pkg/general-ledger/usecases"
 	contablock "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/usecases"
@@ -217,4 +219,28 @@ func (graph *Graph) GetContractUseCase() contract.ContractUseCase {
 		panic("graph ContractUseCase case is nil")
 	}
 	return graph.ContractUseCase
+}
+
+/////// EVENT SUBSCRIPTIONS ///////
+
+func (graph *Graph) GetEventSubscriptionInputAdapter() inputEventSubscription.EventSubscriptionInputAdapter {
+	return graph.EventSubscriptionInputAdapter
+}
+
+func (graph *Graph) GetEventSubscriptionDB() *sql.DB {
+	return &graph.EventSubscriptionDb
+}
+
+func (graph *Graph) GetEventSubscriptionStorage() eventSubscription.EventSubscriptionStorage {
+	if graph.EventSubscriptionStorage == nil {
+		panic("graph EventSubscriptionStorage is nil")
+	}
+	return graph.EventSubscriptionStorage
+}
+
+func (graph *Graph) GetEventSubscriptionUseCase() eventSubscription.EventSubscriptionUseCase {
+	if graph.EventSubscriptionUseCase == nil {
+		panic("graph EventSubscriptionUseCase case is nil")
+	}
+	return graph.EventSubscriptionUseCase
 }

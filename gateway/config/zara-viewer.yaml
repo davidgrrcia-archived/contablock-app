@@ -1,7 +1,0 @@
-project: zara-viewer
-
-eventSubscription:
-  - name: "EntryCreated"
-  - name: "EntryRemoved"
-
-

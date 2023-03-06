@@ -1,7 +1,0 @@
-project: zara-auditor
-
-eventSubscription:
-  - name: "EntryCreated"
-  - name: "EntryRemoved"
-
-

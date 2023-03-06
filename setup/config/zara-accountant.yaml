@@ -36,6 +36,7 @@ users:
     network: *zaraNetwork
     businessId: *zaraBusinessId
   - project: *zara-accountant-project
+    id: zara-user-accountant-id
     contractId: *contablockContractId
     name: Zara Accountant
     email: accountant@zara.com

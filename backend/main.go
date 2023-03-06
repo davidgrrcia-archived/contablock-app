@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 
 	"github.com/davidgrcia/tfg-informatica-nextjs/cmd/graph"
@@ -11,7 +12,7 @@ import (
 func main() {
 	err := godotenv.Load("../.env.local")
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	port := os.Getenv("BACKEND_PORT")
