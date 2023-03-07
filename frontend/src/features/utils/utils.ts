@@ -103,3 +103,46 @@ export function getTotalBalanceColor(amount1: number, amount2: number): string {
     return 'text-white';
   }
 }
+
+export function isActionAllowed(role: string, action: string): boolean {
+  const accountantActions = ['create', 'modify', 'publish', 'remove', 'review'];
+  const auditorActions = ['approve', 'reject'];
+
+  if (role === 'admin') {
+    return true;
+  }
+
+  if (role === 'viewer') {
+    return false;
+  }
+
+  if (role === 'accountant') {
+    return accountantActions.includes(action);
+  }
+
+  if (role === 'auditor') {
+    return auditorActions.includes(action);
+  }
+
+  return false;
+}
+
+export function showEntryActions(role: string, state: string): boolean {
+  if (role === 'admin') {
+    return true;
+  }
+
+  if (role === 'viewer') {
+    return false;
+  }
+
+  if (role === 'accountant') {
+    return state === 'CREATED' || state === 'UPDATED';
+  }
+
+  if (role === 'auditor') {
+    return state === 'PENDING_REVIEW';
+  }
+
+  return false;
+}

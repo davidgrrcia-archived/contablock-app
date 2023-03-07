@@ -18,6 +18,9 @@ start-backend:
 start-frontend:
 	cd frontend && make start-local
 
+start-gateway:
+	cd gateway && go run main.go
+
 render-api-docs:
 	cd docs/openapi && http-server
 

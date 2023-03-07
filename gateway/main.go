@@ -2,6 +2,10 @@ package main
 
 import (
 	"context"
+	"io/ioutil"
+	"log"
+	"os"
+
 	"github.com/davidgrcia/tfg-informatica-nextjs/cmd/graph"
 	entryInputAsyncAdapter "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/adapters/input/async"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
@@ -11,9 +15,6 @@ import (
 	"github.com/joho/godotenv"
 	"golang.org/x/sync/errgroup"
 	"gopkg.in/yaml.v2"
-	"io/ioutil"
-	"log"
-	"os"
 )
 
 const (
@@ -32,7 +33,7 @@ type EventSubscription struct {
 func main() {
 	err := godotenv.Load("../.env.local")
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	websocketClient, err := ethclient.Dial(os.Getenv("SC_CLIENT_NETWORK_WEBSOCKET"))
@@ -93,6 +94,7 @@ func watchEntryCreated(ctx context.Context, input watchEntryCreatedInput) error 
 			return errChan
 		case event := <-eventsChannel:
 
+			log.Println("EntryCreated event received:", event.Entry)
 			projects := getProjectsSubscribedToEvent("EntryCreated", input.yaml)
 			for _, project := range projects {
 				err = input.handler.AdaptEntryCreatedEvent(ctx, project, *event)
