@@ -3,9 +3,10 @@ package entry
 import (
 	"context"
 	"errors"
+	"time"
+
 	contract "github.com/davidgrcia/tfg-informatica-nextjs/pkg/contract/usecases"
 	user "github.com/davidgrcia/tfg-informatica-nextjs/pkg/user/usecases"
-	"time"
 
 	account "github.com/davidgrcia/tfg-informatica-nextjs/pkg/account/usecases"
 	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
@@ -27,10 +28,18 @@ type http interface {
 	UpdateEntry(ctx context.Context, input UpdateEntryInput) (*UpdateEntryOutput, error)
 	RemoveEntry(ctx context.Context, input RemoveEntryInput) (*RemoveEntryOutput, error)
 	PublishEntry(ctx context.Context, input PublishEntryInput) (*PublishEntryOutput, error)
+	ReviewEntry(ctx context.Context, input ReviewEntryInput) (*ReviewEntryOutput, error)
+	ApproveEntry(ctx context.Context, input ApproveEntryInput) (*ApproveEntryOutput, error)
+	RejectEntry(ctx context.Context, input RejectEntryInput) (*RejectEntryOutput, error)
 }
 
 type async interface {
 	EntryCreatedEvent(ctx context.Context, input EntryCreatedEventInput) error
+	EntryRemovedEvent(ctx context.Context, input EntryRemovedEventInput) error
+	EntryPublishedEvent(ctx context.Context, input EntryPublishedEventInput) error
+	EntryReviewRequestedEvent(ctx context.Context, input EntryReviewRequestedEventInput) error
+	EntryApprovedEvent(ctx context.Context, input EntryApprovedEventInput) error
+	EntryRejectedEvent(ctx context.Context, input EntryRejectedEventInput) error
 }
 
 func NewDefaultEntryUseCase(options DefaultEntryUseCaseOptions) (*DefaultEntryUseCase, error) {
@@ -525,6 +534,213 @@ func (useCase *DefaultEntryUseCase) PublishEntry(ctx context.Context, input Publ
 	return &output, err
 }
 
+func (useCase *DefaultEntryUseCase) ReviewEntry(ctx context.Context, input ReviewEntryInput) (*ReviewEntryOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input: " + err.Error())
+	}
+
+	var describeEntryInput DescribeEntryInput
+	describeEntryInput.Project = input.Project
+	describeEntryInput.ID = input.ID
+	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	// Call SC
+	var describeContractInput contract.DescribeContractInput
+	describeContractInput.Project = input.Project
+	describeContractInput.ID = input.ContractID
+	storedContract, err := useCase.contractUseCase.DescribeContract(ctx, describeContractInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var describeUserInput user.DescribeUserInput
+	describeUserInput.Project = input.Project
+	describeUserInput.ID = input.UserID
+	storedUser, err := useCase.userUseCase.DescribeUser(ctx, describeUserInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var getEntryInput contablock.GetEntryDataInput
+	getEntryInput.ID = input.ID
+	getEntryInput.ContractAddress = storedContract.Contract.EthAddress
+	getEntryInput.UserAddress = storedUser.User.EthAddress
+	getEntryInput.UserPrivateKey = storedUser.User.PrivateKey
+	entryData, err := useCase.contaBlockUseCase.GetEntryData(getEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
+		return nil, errors.New("failure publishing state not allowed")
+	}
+
+	var publishEntryInput contablock.ReviewEntryInput
+	publishEntryInput.ID = input.ID
+	publishEntryInput.ContractAddress = storedContract.Contract.EthAddress
+	publishEntryInput.UserAddress = storedUser.User.EthAddress
+	publishEntryInput.UserPrivateKey = storedUser.User.PrivateKey
+	err = useCase.contaBlockUseCase.ReviewEntry(publishEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var updateEntryInput UpdateEntryInput
+	updateEntryInput.Entry = storedEntry.Entry
+	updateEntryInput.Entry.State = EntryStatePendingReview
+	updatedEntry, err := useCase.UpdateEntry(ctx, updateEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var output ReviewEntryOutput
+	output.Entry = updatedEntry.Entry
+
+	return &output, err
+}
+
+func (useCase *DefaultEntryUseCase) ApproveEntry(ctx context.Context, input ApproveEntryInput) (*ApproveEntryOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input: " + err.Error())
+	}
+
+	var describeEntryInput DescribeEntryInput
+	describeEntryInput.Project = input.Project
+	describeEntryInput.ID = input.ID
+	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	// Call SC
+	var describeContractInput contract.DescribeContractInput
+	describeContractInput.Project = input.Project
+	describeContractInput.ID = input.ContractID
+	storedContract, err := useCase.contractUseCase.DescribeContract(ctx, describeContractInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var describeUserInput user.DescribeUserInput
+	describeUserInput.Project = input.Project
+	describeUserInput.ID = input.UserID
+	storedUser, err := useCase.userUseCase.DescribeUser(ctx, describeUserInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var getEntryInput contablock.GetEntryDataInput
+	getEntryInput.ID = input.ID
+	getEntryInput.ContractAddress = storedContract.Contract.EthAddress
+	getEntryInput.UserAddress = storedUser.User.EthAddress
+	getEntryInput.UserPrivateKey = storedUser.User.PrivateKey
+	entryData, err := useCase.contaBlockUseCase.GetEntryData(getEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
+		return nil, errors.New("failure publishing state not allowed")
+	}
+
+	var publishEntryInput contablock.ApproveEntryInput
+	publishEntryInput.ID = input.ID
+	publishEntryInput.ContractAddress = storedContract.Contract.EthAddress
+	publishEntryInput.UserAddress = storedUser.User.EthAddress
+	publishEntryInput.UserPrivateKey = storedUser.User.PrivateKey
+	err = useCase.contaBlockUseCase.ApproveEntry(publishEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var updateEntryInput UpdateEntryInput
+	updateEntryInput.Entry = storedEntry.Entry
+	updateEntryInput.Entry.State = EntryStateApproved
+	updatedEntry, err := useCase.UpdateEntry(ctx, updateEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var output ApproveEntryOutput
+	output.Entry = updatedEntry.Entry
+
+	return &output, err
+}
+
+func (useCase *DefaultEntryUseCase) RejectEntry(ctx context.Context, input RejectEntryInput) (*RejectEntryOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input: " + err.Error())
+	}
+
+	var describeEntryInput DescribeEntryInput
+	describeEntryInput.Project = input.Project
+	describeEntryInput.ID = input.ID
+	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	// Call SC
+	var describeContractInput contract.DescribeContractInput
+	describeContractInput.Project = input.Project
+	describeContractInput.ID = input.ContractID
+	storedContract, err := useCase.contractUseCase.DescribeContract(ctx, describeContractInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var describeUserInput user.DescribeUserInput
+	describeUserInput.Project = input.Project
+	describeUserInput.ID = input.UserID
+	storedUser, err := useCase.userUseCase.DescribeUser(ctx, describeUserInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var getEntryInput contablock.GetEntryDataInput
+	getEntryInput.ID = input.ID
+	getEntryInput.ContractAddress = storedContract.Contract.EthAddress
+	getEntryInput.UserAddress = storedUser.User.EthAddress
+	getEntryInput.UserPrivateKey = storedUser.User.PrivateKey
+	entryData, err := useCase.contaBlockUseCase.GetEntryData(getEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
+		return nil, errors.New("failure publishing state not allowed")
+	}
+
+	var publishEntryInput contablock.RejectEntryInput
+	publishEntryInput.ID = input.ID
+	publishEntryInput.ContractAddress = storedContract.Contract.EthAddress
+	publishEntryInput.UserAddress = storedUser.User.EthAddress
+	publishEntryInput.UserPrivateKey = storedUser.User.PrivateKey
+	err = useCase.contaBlockUseCase.RejectEntry(publishEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var updateEntryInput UpdateEntryInput
+	updateEntryInput.Entry = storedEntry.Entry
+	updateEntryInput.Entry.State = EntryStateRejected
+	updatedEntry, err := useCase.UpdateEntry(ctx, updateEntryInput)
+	if err != nil {
+		return nil, err
+	}
+
+	var output RejectEntryOutput
+	output.Entry = updatedEntry.Entry
+
+	return &output, err
+}
+
 func (useCase *DefaultEntryUseCase) EntryCreatedEvent(ctx context.Context, input EntryCreatedEventInput) error {
 	_, err := govalidator.ValidateStruct(input)
 	if err != nil {
@@ -588,6 +804,134 @@ func (useCase *DefaultEntryUseCase) EntryCreatedEvent(ctx context.Context, input
 
 	return nil
 }
+
+func (useCase *DefaultEntryUseCase) EntryRemovedEvent(ctx context.Context, input EntryRemovedEventInput) error {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return errors.New("invalid input: " + err.Error())
+	}
+
+	var describeEntryInput DescribeEntryInput
+	describeEntryInput.Project = input.Project
+	describeEntryInput.ID = input.ID
+	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
+	if err != nil {
+		return err
+	}
+
+	var removeEntryInput RemoveEntryInput
+	removeEntryInput.ID = storedEntry.Entry.ID
+	removeEntryInput.Project = storedEntry.Entry.Project
+	removeEntryInput.ContractID = storedEntry.Entry.ContractID
+	removeEntryInput.UserID = storedEntry.Entry.UserID
+	_, err = useCase.RemoveEntry(ctx, removeEntryInput)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (useCase *DefaultEntryUseCase) EntryReviewRequestedEvent(ctx context.Context, input EntryReviewRequestedEventInput) error {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return errors.New("invalid input: " + err.Error())
+	}
+
+	var describeEntryInput DescribeEntryInput
+	describeEntryInput.Project = input.Project
+	describeEntryInput.ID = input.ID
+	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
+	if err != nil {
+		return err
+	}
+
+	var updateEntryInput UpdateEntryInput
+	updateEntryInput.Entry = storedEntry.Entry
+	updateEntryInput.Entry.State = EntryStatePendingReview
+	_, err = useCase.UpdateEntry(ctx, updateEntryInput)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (useCase *DefaultEntryUseCase) EntryApprovedEvent(ctx context.Context, input EntryApprovedEventInput) error {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return errors.New("invalid input: " + err.Error())
+	}
+
+	var describeEntryInput DescribeEntryInput
+	describeEntryInput.Project = input.Project
+	describeEntryInput.ID = input.ID
+	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
+	if err != nil {
+		return err
+	}
+
+	var updateEntryInput UpdateEntryInput
+	updateEntryInput.Entry = storedEntry.Entry
+	updateEntryInput.Entry.State = EntryStateApproved
+	_, err = useCase.UpdateEntry(ctx, updateEntryInput)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (useCase *DefaultEntryUseCase) EntryRejectedEvent(ctx context.Context, input EntryRejectedEventInput) error {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return errors.New("invalid input: " + err.Error())
+	}
+
+	var describeEntryInput DescribeEntryInput
+	describeEntryInput.Project = input.Project
+	describeEntryInput.ID = input.ID
+	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
+	if err != nil {
+		return err
+	}
+
+	var updateEntryInput UpdateEntryInput
+	updateEntryInput.Entry = storedEntry.Entry
+	updateEntryInput.Entry.State = EntryStateRejected
+	_, err = useCase.UpdateEntry(ctx, updateEntryInput)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (useCase *DefaultEntryUseCase) EntryPublishedEvent(ctx context.Context, input EntryPublishedEventInput) error {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return errors.New("invalid input: " + err.Error())
+	}
+
+	var describeEntryInput DescribeEntryInput
+	describeEntryInput.Project = input.Project
+	describeEntryInput.ID = input.ID
+	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
+	if err != nil {
+		return err
+	}
+
+	var updateEntryInput UpdateEntryInput
+	updateEntryInput.Entry = storedEntry.Entry
+	updateEntryInput.Entry.State = EntryStatePublished
+	_, err = useCase.UpdateEntry(ctx, updateEntryInput)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 
 func (useCase *DefaultEntryUseCase) calculateQuarter(date time.Time) int {
 	month := date.Month()

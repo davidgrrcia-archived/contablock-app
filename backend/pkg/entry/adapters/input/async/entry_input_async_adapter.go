@@ -3,6 +3,7 @@ package entryInputAsyncAdapter
 import (
 	"context"
 	"errors"
+
 	entry "github.com/davidgrcia/tfg-informatica-nextjs/pkg/entry/usecases"
 	contablockClient "github.com/davidgrcia/tfg-informatica-nextjs/pkg/smart-contract-contablock/infra/outputhttp/generated"
 	"github.com/davidgrcia/tfg-informatica-nextjs/pkg/utils"
@@ -10,6 +11,11 @@ import (
 
 type EntryInputAsyncAdapter interface {
 	AdaptEntryCreatedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryCreated) error
+	AdaptEntryRemovedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryRemoved) error
+	AdaptEntryReviewRequestedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryReviewRequested) error
+	AdaptEntryApprovedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryApproved) error
+	AdaptEntryRejectedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryRejected) error
+	AdaptEntryPublishedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryPublished) error
 }
 
 func NewDefaultAsyncInputAdapter(options DefaultAsyncInputAdapterOptions) (*DefaultAsyncInputAdapter, error) {
@@ -56,6 +62,71 @@ func (adapter DefaultAsyncInputAdapter) AdaptEntryCreatedEvent(ctx context.Conte
 	entryCreatedEvent.CreditBalance = creditBalance
 
 	err = adapter.entryUseCase.EntryCreatedEvent(ctx, entryCreatedEvent)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (adapter DefaultAsyncInputAdapter) AdaptEntryRemovedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryRemoved) error {
+	var entryRemovedEvent entry.EntryRemovedEventInput
+	entryRemovedEvent.Project = project
+	entryRemovedEvent.ID = event.Id
+
+	err := adapter.entryUseCase.EntryRemovedEvent(ctx, entryRemovedEvent)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (adapter DefaultAsyncInputAdapter) AdaptEntryReviewRequestedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryReviewRequested) error {
+	var entryReviewRequestedEvent entry.EntryReviewRequestedEventInput
+	entryReviewRequestedEvent.Project = project
+	entryReviewRequestedEvent.ID = event.Id
+
+	err := adapter.entryUseCase.EntryReviewRequestedEvent(ctx, entryReviewRequestedEvent)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (adapter DefaultAsyncInputAdapter) AdaptEntryApprovedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryApproved) error {
+	var entryApprovedEvent entry.EntryApprovedEventInput
+	entryApprovedEvent.Project = project
+	entryApprovedEvent.ID = event.Id
+
+	err := adapter.entryUseCase.EntryApprovedEvent(ctx, entryApprovedEvent)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (adapter DefaultAsyncInputAdapter) AdaptEntryRejectedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryRejected) error {
+	var entryRejectedEvent entry.EntryRejectedEventInput
+	entryRejectedEvent.Project = project
+	entryRejectedEvent.ID = event.Id
+
+	err := adapter.entryUseCase.EntryRejectedEvent(ctx, entryRejectedEvent)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (adapter DefaultAsyncInputAdapter) AdaptEntryPublishedEvent(ctx context.Context, project string, event contablockClient.ContablockEntryPublished) error {
+	var entryPublishedEvent entry.EntryPublishedEventInput
+	entryPublishedEvent.Project = project
+	entryPublishedEvent.ID = event.Id
+
+	err := adapter.entryUseCase.EntryPublishedEvent(ctx, entryPublishedEvent)
 	if err != nil {
 		return err
 	}

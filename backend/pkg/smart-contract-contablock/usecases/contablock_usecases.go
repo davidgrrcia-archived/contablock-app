@@ -13,6 +13,9 @@ type ContaBlockUseCase interface {
 	ListAccountIds(input ListAccountIdsInput) (*ListAccountIdsOutput, error)
 	PublishEntry(input PublishEntryInput) error
 	RemoveEntry(input RemoveEntryInput) error
+	ReviewEntry(input ReviewEntryInput) error
+	ApproveEntry(input ApproveEntryInput) error
+	RejectEntry(input RejectEntryInput) error
 }
 
 func NewDefaultContaBlockUseCase(options DefaultContaBlockUseCaseOptions) (*DefaultContaBlockUseCase, error) {
@@ -163,6 +166,57 @@ func (useCase DefaultContaBlockUseCase) RemoveEntry(input RemoveEntryInput) erro
 
 	mutex.Lock()
 	err := useCase.contaBlockContractAdapter.RemoveEntry(removeEntryAdapterInput)
+	if err != nil {
+		return err
+	}
+	mutex.Unlock()
+
+	return nil
+}
+
+func (useCase DefaultContaBlockUseCase) ReviewEntry(input ReviewEntryInput) error {
+	var reviewEntryAdapterInput ReviewEntryAdapterInput
+	reviewEntryAdapterInput.ContractAddress = input.ContractAddress
+	reviewEntryAdapterInput.UserPrivateKey = input.UserPrivateKey
+	reviewEntryAdapterInput.UserAddress = input.UserAddress
+	reviewEntryAdapterInput.ID = input.ID
+
+	mutex.Lock()
+	err := useCase.contaBlockContractAdapter.ReviewEntry(reviewEntryAdapterInput)
+	if err != nil {
+		return err
+	}
+	mutex.Unlock()
+
+	return nil
+}
+
+func (useCase DefaultContaBlockUseCase) ApproveEntry(input ApproveEntryInput) error {
+	var approveEntryAdapterInput ApproveEntryAdapterInput
+	approveEntryAdapterInput.ContractAddress = input.ContractAddress
+	approveEntryAdapterInput.UserPrivateKey = input.UserPrivateKey
+	approveEntryAdapterInput.UserAddress = input.UserAddress
+	approveEntryAdapterInput.ID = input.ID
+
+	mutex.Lock()
+	err := useCase.contaBlockContractAdapter.ApproveEntry(approveEntryAdapterInput)
+	if err != nil {
+		return err
+	}
+	mutex.Unlock()
+
+	return nil
+}
+
+func (useCase DefaultContaBlockUseCase) RejectEntry(input RejectEntryInput) error {
+	var rejectEntryAdapterInput RejectEntryAdapterInput
+	rejectEntryAdapterInput.ContractAddress = input.ContractAddress
+	rejectEntryAdapterInput.UserPrivateKey = input.UserPrivateKey
+	rejectEntryAdapterInput.UserAddress = input.UserAddress
+	rejectEntryAdapterInput.ID = input.ID
+
+	mutex.Lock()
+	err := useCase.contaBlockContractAdapter.RejectEntry(rejectEntryAdapterInput)
 	if err != nil {
 		return err
 	}

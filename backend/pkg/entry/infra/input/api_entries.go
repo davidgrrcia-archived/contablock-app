@@ -129,4 +129,67 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		}
 		utils.Success(w, outputPayload.PublishEntryResponse)
 	}).Methods("POST")
+
+	r.HandleFunc("/api/projects/{project}/entries:review", func(w http.ResponseWriter, r *http.Request) {
+		var ctx = context.Background()
+
+		vars := mux.Vars(r)
+		var inputPayload input.ReviewEntryRequest
+		inputPayload.Project = vars["project"]
+
+		err := json.NewDecoder(r.Body).Decode(&inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+
+		outputPayload, err := handler.adapter.AdaptReviewEntry(ctx, inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+		utils.Success(w, outputPayload.ReviewEntryResponse)
+	}).Methods("POST")
+
+	r.HandleFunc("/api/projects/{project}/entries:approve", func(w http.ResponseWriter, r *http.Request) {
+		var ctx = context.Background()
+
+		vars := mux.Vars(r)
+		var inputPayload input.ApproveEntryRequest
+		inputPayload.Project = vars["project"]
+
+		err := json.NewDecoder(r.Body).Decode(&inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+
+		outputPayload, err := handler.adapter.AdaptApproveEntry(ctx, inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+		utils.Success(w, outputPayload.ApproveEntryResponse)
+	}).Methods("POST")
+
+	r.HandleFunc("/api/projects/{project}/entries:reject", func(w http.ResponseWriter, r *http.Request) {
+		var ctx = context.Background()
+
+		vars := mux.Vars(r)
+		var inputPayload input.RejectEntryRequest
+		inputPayload.Project = vars["project"]
+
+		err := json.NewDecoder(r.Body).Decode(&inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+
+		outputPayload, err := handler.adapter.AdaptRejectEntry(ctx, inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+		utils.Success(w, outputPayload.RejectEntryResponse)
+	}).Methods("POST")
 }

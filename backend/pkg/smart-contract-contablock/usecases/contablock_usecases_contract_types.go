@@ -10,6 +10,9 @@ type ContaBlockContractAdapter interface {
 	ListAccountIds(input ListAccountIdsAdapterInput) (*ListAccountIdsAdapterOutput, error)
 	PublishEntry(input PublishEntryAdapterInput) error
 	RemoveEntry(input RemoveEntryAdapterInput) error
+	ReviewEntry(input ReviewEntryAdapterInput) error
+	ApproveEntry(input ApproveEntryAdapterInput) error
+	RejectEntry(input RejectEntryAdapterInput) error
 }
 
 type GrantAccessAdapterInput struct {
@@ -75,3 +78,19 @@ type RemoveEntryAdapterInput struct {
 	ClientCommonInput
 	ID string
 }
+
+type ReviewEntryAdapterInput struct {
+	ClientCommonInput
+	ID string
+}
+
+type ApproveEntryAdapterInput struct {
+	ClientCommonInput
+	ID string
+}
+
+type RejectEntryAdapterInput struct {
+	ClientCommonInput
+	ID string
+}
+

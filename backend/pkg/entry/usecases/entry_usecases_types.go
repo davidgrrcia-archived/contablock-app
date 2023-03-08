@@ -7,8 +7,16 @@ import (
 
 const (
 	// States
-	EntryStateCreated   = "CREATED"
-	EntryStatePublished = "PUBLISHED"
+	EntryStateCreated       = "CREATED"
+	EntryStatePendingReview = "PENDING_REVIEW"
+	EntryStateApproved      = "APPROVED"
+	EntryStateRejected      = "REJECTED"
+	EntryStatePublished     = "PUBLISHED"
+
+	// Roles
+	AccountantRole = "ACCOUNTANT"
+	AuditorRole    = "AUDITOR"
+	ViewerRole     = "VIEWER"
 )
 
 type Entry struct {
@@ -99,6 +107,39 @@ type PublishEntryOutput struct {
 	Entry Entry
 }
 
+type ReviewEntryInput struct {
+	Project    string `valid:"required,length(1|64)"`
+	ID         string `valid:"required,length(1|64)"`
+	ContractID string `valid:"required,length(1|64)"`
+	UserID     string `valid:"required,length(1|64)"`
+}
+
+type ReviewEntryOutput struct {
+	Entry Entry
+}
+
+type ApproveEntryInput struct {
+	Project    string `valid:"required,length(1|64)"`
+	ID         string `valid:"required,length(1|64)"`
+	ContractID string `valid:"required,length(1|64)"`
+	UserID     string `valid:"required,length(1|64)"`
+}
+
+type ApproveEntryOutput struct {
+	Entry Entry
+}
+
+type RejectEntryInput struct {
+	Project    string `valid:"required,length(1|64)"`
+	ID         string `valid:"required,length(1|64)"`
+	ContractID string `valid:"required,length(1|64)"`
+	UserID     string `valid:"required,length(1|64)"`
+}
+
+type RejectEntryOutput struct {
+	Entry Entry
+}
+
 type Filters struct {
 	MultipleEntryID *string
 	AccountID       *string
@@ -150,4 +191,29 @@ type EntryCreatedEventInput struct {
 	Date            time.Time `valid:"required"`
 	DebitBalance    *float64  `valid:"optional"`
 	CreditBalance   *float64  `valid:"optional"`
+}
+
+type EntryReviewRequestedEventInput struct {
+	Project    string `valid:"required,length(1|64)"`
+	ID         string `valid:"required,length(1|64)"`
+}
+
+type EntryRemovedEventInput struct {
+	Project    string `valid:"required,length(1|64)"`
+	ID         string `valid:"required,length(1|64)"`
+}
+
+type EntryPublishedEventInput struct {
+	Project    string `valid:"required,length(1|64)"`
+	ID         string `valid:"required,length(1|64)"`
+}
+
+type EntryApprovedEventInput struct {
+	Project    string `valid:"required,length(1|64)"`
+	ID         string `valid:"required,length(1|64)"`
+}
+
+type EntryRejectedEventInput struct {
+	Project    string `valid:"required,length(1|64)"`
+	ID         string `valid:"required,length(1|64)"`
 }

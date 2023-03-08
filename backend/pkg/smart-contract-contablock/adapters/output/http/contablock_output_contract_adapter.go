@@ -217,6 +217,69 @@ func (adapter DefaultContaBlockContract) RemoveEntry(input contablockUseCase.Rem
 	return nil
 }
 
+func (adapter DefaultContaBlockContract) ReviewEntry(input contablockUseCase.ReviewEntryAdapterInput) error {
+	//input
+	var clientSessionInput getClientSessionInput
+	clientSessionInput.ContractAddress = input.ContractAddress
+	clientSessionInput.FromAddress = input.UserAddress
+	clientSessionInput.PrivateKey = input.UserPrivateKey
+	session, err := adapter.getClientSession(clientSessionInput)
+	if err != nil {
+		return err
+	}
+
+	//client
+	_, err = session.Contract.ReviewEntry(&session.TransactOpts, input.ID)
+	if err != nil {
+		return err
+	}
+
+	//output
+	return nil
+}
+
+func (adapter DefaultContaBlockContract) ApproveEntry(input contablockUseCase.ApproveEntryAdapterInput) error {
+	//input
+	var clientSessionInput getClientSessionInput
+	clientSessionInput.ContractAddress = input.ContractAddress
+	clientSessionInput.FromAddress = input.UserAddress
+	clientSessionInput.PrivateKey = input.UserPrivateKey
+	session, err := adapter.getClientSession(clientSessionInput)
+	if err != nil {
+		return err
+	}
+
+	//client
+	_, err = session.Contract.ApproveEntry(&session.TransactOpts, input.ID)
+	if err != nil {
+		return err
+	}
+
+	//output
+	return nil
+}
+
+func (adapter DefaultContaBlockContract) RejectEntry(input contablockUseCase.RejectEntryAdapterInput) error {
+	//input
+	var clientSessionInput getClientSessionInput
+	clientSessionInput.ContractAddress = input.ContractAddress
+	clientSessionInput.FromAddress = input.UserAddress
+	clientSessionInput.PrivateKey = input.UserPrivateKey
+	session, err := adapter.getClientSession(clientSessionInput)
+	if err != nil {
+		return err
+	}
+
+	//client
+	_, err = session.Contract.RejectEntry(&session.TransactOpts, input.ID)
+	if err != nil {
+		return err
+	}
+
+	//output
+	return nil
+}
+
 type getClientSessionInput struct {
 	ContractAddress string
 	PrivateKey      string

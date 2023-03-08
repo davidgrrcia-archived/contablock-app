@@ -76,3 +76,18 @@ type RemoveEntryInput struct {
 	ClientCommonInput
 	ID string
 }
+
+type ReviewEntryInput struct {
+	ClientCommonInput
+	ID string
+}
+
+type ApproveEntryInput struct {
+	ClientCommonInput
+	ID string
+}
+
+type RejectEntryInput struct {
+	ClientCommonInput
+	ID string
+}

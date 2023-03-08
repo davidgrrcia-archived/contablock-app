@@ -14,6 +14,9 @@ type EntryInputHttpAdapter interface {
 	AdaptListEntries(ctx context.Context, data ListEntryRequest) (*ListEntryResponseWrapper, error)
 	AdaptDeleteEntry(ctx context.Context, data DeleteEntryRequest) (*DeleteEntryResponseWrapper, error)
 	AdaptPublishEntry(ctx context.Context, data PublishEntryRequest) (*PublishEntryResponseWrapper, error)
+	AdaptReviewEntry(ctx context.Context, data ReviewEntryRequest) (*ReviewEntryResponseWrapper, error)
+	AdaptApproveEntry(ctx context.Context, data ApproveEntryRequest) (*ApproveEntryResponseWrapper, error)
+	AdaptRejectEntry(ctx context.Context, data RejectEntryRequest) (*RejectEntryResponseWrapper, error)
 }
 
 func NewDefaultHttpInputAdapter(options DefaultHttpInputAdapterOptions) (*DefaultHttpInputAdapter, error) {
@@ -229,6 +232,120 @@ func (adapter *DefaultHttpInputAdapter) AdaptPublishEntry(ctx context.Context, d
 
 	responseWrapper := PublishEntryResponseWrapper{}
 	responseWrapper.PublishEntryResponse = response
+
+	return &responseWrapper, nil
+}
+
+func (adapter *DefaultHttpInputAdapter) AdaptReviewEntry(ctx context.Context, data ReviewEntryRequest) (*ReviewEntryResponseWrapper, error) {
+	var inputData entry.ReviewEntryInput
+	inputData.Project = data.Project
+	inputData.ID = data.ID
+	inputData.ContractID = data.ContractID
+	inputData.UserID = data.UserID
+
+	outputData, err := adapter.entryUseCase.ReviewEntry(ctx, inputData)
+	if err != nil {
+		return nil, err
+	}
+
+	var response ReviewEntryResponse
+	response.Project = outputData.Entry.Project
+	response.ID = outputData.Entry.ID
+	response.ContractID = outputData.Entry.ContractID
+	response.UserID = outputData.Entry.UserID
+	response.AccountID = outputData.Entry.AccountID
+	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.BalanceByYearID = outputData.Entry.BalanceByYearID
+	response.Currency = outputData.Entry.Currency
+	response.Concept = outputData.Entry.Concept
+	response.Date = outputData.Entry.Date.Unix()
+	response.Quarter = outputData.Entry.Quarter
+	response.DebitBalance = outputData.Entry.DebitBalance
+	response.CreditBalance = outputData.Entry.CreditBalance
+	response.TotalBalance = outputData.Entry.TotalBalance
+	response.State = outputData.Entry.State
+	response.StateReason = outputData.Entry.StateReason
+	response.CreationDate = outputData.Entry.CreationDate.Unix()
+	response.LastUpdate = outputData.Entry.LastUpdate.Unix()
+
+	responseWrapper := ReviewEntryResponseWrapper{}
+	responseWrapper.ReviewEntryResponse = response
+
+	return &responseWrapper, nil
+}
+
+func (adapter *DefaultHttpInputAdapter) AdaptApproveEntry(ctx context.Context, data ApproveEntryRequest) (*ApproveEntryResponseWrapper, error) {
+	var inputData entry.ApproveEntryInput
+	inputData.Project = data.Project
+	inputData.ID = data.ID
+	inputData.ContractID = data.ContractID
+	inputData.UserID = data.UserID
+
+	outputData, err := adapter.entryUseCase.ApproveEntry(ctx, inputData)
+	if err != nil {
+		return nil, err
+	}
+
+	var response ApproveEntryResponse
+	response.Project = outputData.Entry.Project
+	response.ID = outputData.Entry.ID
+	response.ContractID = outputData.Entry.ContractID
+	response.UserID = outputData.Entry.UserID
+	response.AccountID = outputData.Entry.AccountID
+	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.BalanceByYearID = outputData.Entry.BalanceByYearID
+	response.Currency = outputData.Entry.Currency
+	response.Concept = outputData.Entry.Concept
+	response.Date = outputData.Entry.Date.Unix()
+	response.Quarter = outputData.Entry.Quarter
+	response.DebitBalance = outputData.Entry.DebitBalance
+	response.CreditBalance = outputData.Entry.CreditBalance
+	response.TotalBalance = outputData.Entry.TotalBalance
+	response.State = outputData.Entry.State
+	response.StateReason = outputData.Entry.StateReason
+	response.CreationDate = outputData.Entry.CreationDate.Unix()
+	response.LastUpdate = outputData.Entry.LastUpdate.Unix()
+
+	responseWrapper := ApproveEntryResponseWrapper{}
+	responseWrapper.ApproveEntryResponse = response
+
+	return &responseWrapper, nil
+}
+
+func (adapter *DefaultHttpInputAdapter) AdaptRejectEntry(ctx context.Context, data RejectEntryRequest) (*RejectEntryResponseWrapper, error) {
+	var inputData entry.RejectEntryInput
+	inputData.Project = data.Project
+	inputData.ID = data.ID
+	inputData.ContractID = data.ContractID
+	inputData.UserID = data.UserID
+
+	outputData, err := adapter.entryUseCase.RejectEntry(ctx, inputData)
+	if err != nil {
+		return nil, err
+	}
+
+	var response RejectEntryResponse
+	response.Project = outputData.Entry.Project
+	response.ID = outputData.Entry.ID
+	response.ContractID = outputData.Entry.ContractID
+	response.UserID = outputData.Entry.UserID
+	response.AccountID = outputData.Entry.AccountID
+	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.BalanceByYearID = outputData.Entry.BalanceByYearID
+	response.Currency = outputData.Entry.Currency
+	response.Concept = outputData.Entry.Concept
+	response.Date = outputData.Entry.Date.Unix()
+	response.Quarter = outputData.Entry.Quarter
+	response.DebitBalance = outputData.Entry.DebitBalance
+	response.CreditBalance = outputData.Entry.CreditBalance
+	response.TotalBalance = outputData.Entry.TotalBalance
+	response.State = outputData.Entry.State
+	response.StateReason = outputData.Entry.StateReason
+	response.CreationDate = outputData.Entry.CreationDate.Unix()
+	response.LastUpdate = outputData.Entry.LastUpdate.Unix()
+
+	responseWrapper := RejectEntryResponseWrapper{}
+	responseWrapper.RejectEntryResponse = response
 
 	return &responseWrapper, nil
 }

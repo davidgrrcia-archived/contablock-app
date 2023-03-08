@@ -89,3 +89,42 @@ type PublishEntryResponse struct {
 type PublishEntryResponseWrapper struct {
 	PublishEntryResponse PublishEntryResponse
 }
+
+type ReviewEntryRequest struct {
+	Project    string `json:"project"`
+	ID         string `json:"id"`
+	ContractID string `json:"contractId"`
+	UserID     string `json:"userId"`
+}
+type ReviewEntryResponse struct {
+	Entry
+}
+type ReviewEntryResponseWrapper struct {
+	ReviewEntryResponse ReviewEntryResponse
+}
+
+type ApproveEntryRequest struct {
+	Project    string `json:"project"`
+	ID         string `json:"id"`
+	ContractID string `json:"contractId"`
+	UserID     string `json:"userId"`
+}
+type ApproveEntryResponse struct {
+	Entry
+}
+type ApproveEntryResponseWrapper struct {
+	ApproveEntryResponse ApproveEntryResponse
+}
+
+type RejectEntryRequest struct {
+	Project    string `json:"project"`
+	ID         string `json:"id"`
+	ContractID string `json:"contractId"`
+	UserID     string `json:"userId"`
+}
+type RejectEntryResponse struct {
+	Entry
+}
+type RejectEntryResponseWrapper struct {
+	RejectEntryResponse RejectEntryResponse
+}

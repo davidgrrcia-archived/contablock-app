@@ -3,12 +3,36 @@ projects:
   - project: &zara-auditor-project zara-auditor
   - project: &zara-viewer-project zara-viewer
 
+events:
+  - name: &EntryCreatedEvent EntryCreated
+  - name: &EntryRemovedEvent EntryRemoved
+  - name: &EntryReviewRequestedEvent EntryReviewRequested
+  - name: &EntryApprovedEvent EntryApproved
+  - name: &EntryRejectedEvent EntryRejected
+  - name: &EntryPublishedEvent EntryPublished
+
 eventSubscriptions:
-  - name: "EntryCreated"
+  - name: *EntryCreatedEvent
     projectsSubscribed:
       - *zara-auditor-project
       - *zara-viewer-project
-  - name: "EntryRemoved"
+  - name: *EntryRemovedEvent
+    projectsSubscribed:
+      - *zara-auditor-project
+      - *zara-viewer-project
+  - name: *EntryReviewRequestedEvent
+    projectsSubscribed:
+      - *zara-auditor-project
+      - *zara-viewer-project
+  - name: *EntryApprovedEvent
+    projectsSubscribed:
+      - *zara-accountant-project
+      - *zara-viewer-project
+  - name: *EntryRejectedEvent
+    projectsSubscribed:
+      - *zara-accountant-project
+      - *zara-viewer-project
+  - name: *EntryPublishedEvent
     projectsSubscribed:
       - *zara-auditor-project
       - *zara-viewer-project

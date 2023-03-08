@@ -6,6 +6,9 @@ contract ContaBlockContract {
     mapping(address => bool) private userAccess;
 
     string public constant CREATED_STATE = 'CREATED';
+    string public constant PENDING_REVIEW_STATE = 'PENDING_REVIEW';
+    string public constant APPROVED_STATE = 'APPROVED';
+    string public constant REJECTED_STATE = 'REJECTED';
     string public constant PUBLISHED_STATE = 'PUBLISHED';
 
     struct Entry {
@@ -123,27 +126,6 @@ contract ContaBlockContract {
         return accountIds;
     }
 
-    function publishEntry(string memory _id) public hasAccess {
-        require(entryExist[_id], 'Entry does not exists');
-
-        Entry memory _entry = entries[_id];
-
-        //compare state strings
-        require(
-            keccak256(abi.encodePacked(_entry.state)) ==
-                keccak256(abi.encodePacked(CREATED_STATE)),
-            'Entry should be in created state'
-        );
-
-        _entry.state = PUBLISHED_STATE;
-
-        entries[_id] = _entry;
-
-        emit EntryPublished(_entry);
-    }
-
-    event EntryPublished(Entry entry);
-
     function removeEntry(string memory _id) public hasAccess {
         require(entryExist[_id], 'Entry does not exists');
 
@@ -158,8 +140,92 @@ contract ContaBlockContract {
 
         entryExist[_id] = false;
 
-        emit EntryRemoved(_entry);
+        emit EntryRemoved(_entry.id);
     }
 
-    event EntryRemoved(Entry entry);
+    event EntryRemoved(string id);
+
+    function reviewEntry(string memory _id) public hasAccess {
+        require(entryExist[_id], 'Entry does not exists');
+
+        Entry memory _entry = entries[_id];
+
+        //compare state strings
+        require(
+            keccak256(abi.encodePacked(_entry.state)) ==
+                keccak256(abi.encodePacked(CREATED_STATE)),
+            'Entry should be in created state'
+        );
+
+        _entry.state = PENDING_REVIEW_STATE;
+
+        entries[_id] = _entry;
+
+        emit EntryReviewRequested(_entry.id);
+    }
+
+    event EntryReviewRequested(string id);
+
+    function approveEntry(string memory _id) public hasAccess {
+        require(entryExist[_id], 'Entry does not exists');
+
+        Entry memory _entry = entries[_id];
+
+        //compare state strings
+        require(
+            keccak256(abi.encodePacked(_entry.state)) ==
+                keccak256(abi.encodePacked(PENDING_REVIEW_STATE)),
+            'Entry should be in pending review state'
+        );
+
+        _entry.state = APPROVED_STATE;
+
+        entries[_id] = _entry;
+
+        emit EntryApproved(_entry.id);
+    }
+
+    event EntryApproved(string id);
+
+    function rejectEntry(string memory _id) public hasAccess {
+        require(entryExist[_id], 'Entry does not exists');
+
+        Entry memory _entry = entries[_id];
+
+        //compare state strings
+        require(
+            keccak256(abi.encodePacked(_entry.state)) ==
+                keccak256(abi.encodePacked(PENDING_REVIEW_STATE)),
+            'Entry should be in pending review state'
+        );
+
+        _entry.state = REJECTED_STATE;
+
+        entries[_id] = _entry;
+
+        emit EntryRejected(_entry.id);
+    }
+
+    event EntryRejected(string id);
+
+    function publishEntry(string memory _id) public hasAccess {
+        require(entryExist[_id], 'Entry does not exists');
+
+        Entry memory _entry = entries[_id];
+
+        //compare state strings
+        require(
+            keccak256(abi.encodePacked(_entry.state)) ==
+                keccak256(abi.encodePacked(APPROVED_STATE)),
+            'Entry should be in created state'
+        );
+
+        _entry.state = PUBLISHED_STATE;
+
+        entries[_id] = _entry;
+
+        emit EntryPublished(_entry.id);
+    }
+
+    event EntryPublished(string id);
 }
