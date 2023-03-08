@@ -6,6 +6,7 @@ import { getState, getQuarter, formatAmount, formatDate, formatId, getTotalBalan
 import { useEntriesStore } from '@/features/entries/application/entries-store';
 import { useMessagesStore } from '@/stores/messages';
 import { useConfigStore } from '@/stores/config';
+import { ref } from 'vue';
 
 const entriesStore = useEntriesStore();
 const configStore = useConfigStore();
@@ -13,6 +14,13 @@ const dailyLedgerStore = useDailyLedgerStore();
 const messagesStore = useMessagesStore();
 await dailyLedgerStore.loadDailyLedger();
 const dailyLedger = dailyLedgerStore.state.storedDailyLedger.reverse();
+let hover = ref(false);
+function onMouseOver() {
+  hover.value = true;
+}
+function onMouseLeave() {
+  hover.value = false;
+}
 
 function publishEntries(entries: any) {
   messagesStore.addConfirmMessage('¿Estás seguro de publicar los asientos seleccionados?', 'Esta es una acción que no se puede revertir, asegúrate de querer publicar este asiento', () => {
@@ -65,12 +73,16 @@ function modifyEntries(entries: any) {
             </thead>
             <tbody class="bg-white">
               <template v-for="(record, index) in dailyLedger" :key="index">
-                <tr class="sticky top-24 z-10 bg-gray-700">
-                  <th colspan="6" scope="colgroup" class="px-3 py-4 text-left text-sm font-semibold text-white">Asiento: {{ formatId(record.id) }}</th>
+                <tr class="top-24 bg-gray-700">
+                  <th colspan="6" scope="colgroup" class="px-3 py-4 text-left text-sm font-semibold text-white">
+                    Asiento:
+                    <span v-if="hover" @mouseover="onMouseOver()" @mouseleave="onMouseLeave">{{ record.id }}</span>
+                    <span v-else @mouseover="onMouseOver()" @mouseleave="onMouseLeave">{{ formatId(record.id) }}</span>
+                  </th>
                   <th scope="colgroup" class="px-3 py-4 text-left text-sm font-bold" :class="[getTotalBalanceColor(record.totalDebitAmount, record.totalCreditAmount)]">{{ formatAmount(record.totalDebitAmount, 'EUR') }}</th>
                   <th scope="colgroup" class="px-3 py-4 text-left text-sm font-bold" :class="[getTotalBalanceColor(record.totalCreditAmount, record.totalDebitAmount)]">{{ formatAmount(record.totalCreditAmount, 'EUR') }}</th>
                   <th>
-                    <Menu v-if="showEntryActions(configStore.state.role, record.entriesExpanded[0].entry.state)" as="div" class="relative inline-block p-2 text-left">
+                    <Menu v-if="showEntryActions(configStore.state.role, record.entriesExpanded[0].entry.state)" as="div" class="inline-block p-2 text-left">
                       <div>
                         <MenuButton class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white">
                           Acciones
@@ -79,7 +91,7 @@ function modifyEntries(entries: any) {
                       </div>
 
                       <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                        <MenuItems class="absolute right-0 z-20 mt-2 w-56 origin-top-right rounded-md border-2 border-gray-700 bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <MenuItems class="absolute right-0 z-10 mt-2 mr-8 w-56 origin-top-right rounded-md border-2 border-gray-700 bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <div class="py-1">
                             <MenuItem v-if="isActionAllowed(configStore.state.role, record.entriesExpanded[0].entry.state, 'review')" v-slot="{ active }" class="flex">
                               <a v-on:click="reviewEntries(record.entriesExpanded)" :class="[active ? 'bg-gray-700 text-blue-500' : 'text-white', 'block px-4 py-2 text-sm']"
@@ -125,7 +137,8 @@ function modifyEntries(entries: any) {
                 </tr>
                 <tr v-for="(entryExpanded, j) in dailyLedger[index].entriesExpanded" :key="j" :class="j % 2 === 0 ? undefined : 'bg-gray-50'" class="border-t border-gray-200">
                   <td class="whitespace-nowrap px-3 py-4 text-xs text-gray-800">
-                    {{ formatId(entryExpanded.entry.id) }}
+                    <span v-if="hover" @mouseover="onMouseOver()" @mouseleave="onMouseLeave">{{ entryExpanded.entry.id }}</span>
+                    <span v-else @mouseover="onMouseOver()" @mouseleave="onMouseLeave">{{ formatId(entryExpanded.entry.id) }}</span>
                   </td>
                   <td class="px-3 py-4 text-sm text-gray-800">
                     {{ entryExpanded.account.displayName }}
