@@ -4,7 +4,12 @@ import "time"
 
 const (
 	// States
-	EntryStateCreated = "CREATED"
+	EntryStateCreated       = "CREATED"
+	EntryStateRemoved       = "REMOVED"
+	EntryStatePendingReview = "PENDING_REVIEW"
+	EntryStateApproved      = "APPROVED"
+	EntryStateRejected      = "REJECTED"
+	EntryStatePublished     = "PUBLISHED"
 )
 
 type ClientCommonInput struct {

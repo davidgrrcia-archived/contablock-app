@@ -506,7 +506,7 @@ func (useCase *DefaultEntryUseCase) PublishEntry(ctx context.Context, input Publ
 		return nil, err
 	}
 
-	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
+	if !(storedEntry.Entry.State == EntryStateApproved && entryData.State == contablock.EntryStateApproved) {
 		return nil, errors.New("failure publishing state not allowed")
 	}
 
@@ -644,7 +644,7 @@ func (useCase *DefaultEntryUseCase) ApproveEntry(ctx context.Context, input Appr
 		return nil, err
 	}
 
-	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
+	if !(storedEntry.Entry.State == EntryStatePendingReview && entryData.State == contablock.EntryStatePendingReview) {
 		return nil, errors.New("failure publishing state not allowed")
 	}
 
@@ -713,7 +713,7 @@ func (useCase *DefaultEntryUseCase) RejectEntry(ctx context.Context, input Rejec
 		return nil, err
 	}
 
-	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
+	if !(storedEntry.Entry.State == EntryStatePendingReview && entryData.State == contablock.EntryStatePendingReview) {
 		return nil, errors.New("failure publishing state not allowed")
 	}
 
