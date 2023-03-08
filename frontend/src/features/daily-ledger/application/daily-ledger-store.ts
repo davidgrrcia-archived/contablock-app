@@ -37,7 +37,6 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
         this.state.stateMessage = 'daily ledger loaded';
 
         setInterval(async () => {
-          this.state.storedDailyLedger = [];
           this.state.stateMessage = 'loading daily ledger';
 
           const dailyLedger = await dailyLedgerUseCase.listDailyLedger();
@@ -48,7 +47,10 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
             return;
           }
 
-          this.state.storedDailyLedger = dailyLedger;
+          if (dailyLedger.length !== this.state.storedDailyLedger.length) {
+            this.state.storedDailyLedger = dailyLedger;
+          }
+
           this.state.stateMessage = 'daily ledger loaded';
         }, 3000);
       } catch (err) {
@@ -56,6 +58,12 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
         const messagesStore = useMessagesStore();
         messagesStore.addMessage(this.state.stateMessage);
       }
+    },
+  },
+
+  getters: {
+    getDailyLedger(): DailyLedger[] {
+      return this.state.storedDailyLedger;
     },
   },
 });

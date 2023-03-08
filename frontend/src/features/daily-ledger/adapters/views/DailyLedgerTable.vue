@@ -6,14 +6,28 @@ import { getState, getQuarter, formatAmount, formatDate, formatId, getTotalBalan
 import { useEntriesStore } from '@/features/entries/application/entries-store';
 import { useMessagesStore } from '@/stores/messages';
 import { useConfigStore } from '@/stores/config';
-import { ref } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 
 const entriesStore = useEntriesStore();
 const configStore = useConfigStore();
 const dailyLedgerStore = useDailyLedgerStore();
 const messagesStore = useMessagesStore();
 await dailyLedgerStore.loadDailyLedger();
-const dailyLedger = dailyLedgerStore.state.storedDailyLedger.reverse();
+
+const dailyLedger = ref(dailyLedgerStore.state.storedDailyLedger.reverse());
+
+watch(
+  () => dailyLedgerStore.state.storedDailyLedger,
+  newStoredDailyLedger => {
+    dailyLedger.value = newStoredDailyLedger.reverse();
+  },
+);
+
+onMounted(async () => {
+  await dailyLedgerStore.loadDailyLedger();
+  dailyLedger.value = dailyLedgerStore.state.storedDailyLedger.reverse();
+});
+
 let hover = ref(false);
 function onMouseOver() {
   hover.value = true;

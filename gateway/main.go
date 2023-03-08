@@ -33,19 +33,19 @@ type EventSubscription struct {
 func main() {
 	err := godotenv.Load("../.env.local")
 	if err != nil {
-		log.Println(err)
+		log.Println("Error: ", err)
 	}
 
 	websocketClient, err := ethclient.Dial(os.Getenv("SC_CLIENT_NETWORK_WEBSOCKET"))
 	if err != nil {
-		panic(err)
+		log.Println("Error: ", err)
 	}
 
 	contractAddress := common.HexToAddress(os.Getenv("CONTRACT_ADDRESS"))
 
 	instance, err := contablockClient.NewContablock(contractAddress, websocketClient)
 	if err != nil {
-		panic(err)
+		log.Println("Error: ", err)
 	}
 
 	var backendAppGraph = graph.NewGraph()
@@ -98,7 +98,7 @@ func main() {
 		return watchEntryPublished(context.Background(), input)
 	})
 	if err = eg.Wait(); err != nil {
-		panic(err)
+		log.Println("Error: ", err)
 	}
 
 }
@@ -134,7 +134,7 @@ func watchEntryCreated(ctx context.Context, input watchEntryCreatedInput) error 
 			for _, project := range projects {
 				err = input.handler.AdaptEntryCreatedEvent(ctx, project, *event)
 				if err != nil {
-					log.Fatal(err)
+					log.Println("Error: ", err)
 				}
 			}
 
@@ -173,7 +173,7 @@ func watchEntryRemoved(ctx context.Context, input watchEntryRemovedInput) error 
 			for _, project := range projects {
 				err = input.handler.AdaptEntryRemovedEvent(ctx, project, *event)
 				if err != nil {
-					log.Fatal(err)
+					log.Println("Error: ", err)
 				}
 			}
 
@@ -212,7 +212,7 @@ func watchEntryReviewRequested(ctx context.Context, input watchEntryReviewReques
 			for _, project := range projects {
 				err = input.handler.AdaptEntryReviewRequestedEvent(ctx, project, *event)
 				if err != nil {
-					log.Fatal(err)
+					log.Println("Error: ", err)
 				}
 			}
 
@@ -251,7 +251,7 @@ func watchEntryApproved(ctx context.Context, input watchEntryApprovedInput) erro
 			for _, project := range projects {
 				err = input.handler.AdaptEntryApprovedEvent(ctx, project, *event)
 				if err != nil {
-					log.Fatal(err)
+					log.Println("Error: ", err)
 				}
 			}
 
@@ -290,7 +290,7 @@ func watchEntryRejected(ctx context.Context, input watchEntryRejectedInput) erro
 			for _, project := range projects {
 				err = input.handler.AdaptEntryRejectedEvent(ctx, project, *event)
 				if err != nil {
-					log.Fatal(err)
+					log.Println("Error: ", err)
 				}
 			}
 
@@ -329,7 +329,7 @@ func watchEntryPublished(ctx context.Context, input watchEntryPublishedInput) er
 			for _, project := range projects {
 				err = input.handler.AdaptEntryPublishedEvent(ctx, project, *event)
 				if err != nil {
-					log.Fatal(err)
+					log.Println("Error: ", err)
 				}
 			}
 
@@ -349,13 +349,13 @@ func getProjectsSubscribedToEvent(event string, yaml YamlFile) []string {
 func readYamlFile(path string) YamlFile {
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
-		log.Fatal(err)
+		log.Println("Error: ", err)
 	}
 
 	var yamlFile YamlFile
 	err = yaml.Unmarshal(data, &yamlFile)
 	if err != nil {
-		log.Fatal(err)
+		log.Println("Error: ", err)
 	}
 
 	return yamlFile
