@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
-import { ChevronDownIcon, PaperAirplaneIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/20/solid';
+import { ChevronDownIcon, PaperAirplaneIcon, PencilSquareIcon, TrashIcon, CheckCircleIcon, DocumentMagnifyingGlassIcon, NoSymbolIcon } from '@heroicons/vue/20/solid';
 import { useDailyLedgerStore } from '@/features/daily-ledger/application/daily-ledger-store';
-import { getState, getQuarter, formatAmount, formatDate, formatId, getTotalBalanceColor, showEntryActions } from '../../../utils/utils';
+import { getState, getQuarter, formatAmount, formatDate, formatId, getTotalBalanceColor, isActionAllowed, showEntryActions } from '../../../utils/utils';
 import { useEntriesStore } from '@/features/entries/application/entries-store';
 import { useMessagesStore } from '@/stores/messages';
 import { useConfigStore } from '@/stores/config';
@@ -22,6 +22,21 @@ function publishEntries(entries: any) {
 function removeEntries(entries: any) {
   messagesStore.addDangerousConfirmMessage('¿Estás seguro de eliminar los asientos seleccionados?', 'Esta es una acción que no se puede revertir, asegúrate de querer eliminar estos asientos', () => {
     entriesStore.removeEntries(entries);
+  });
+}
+function reviewEntries(entries: any) {
+  messagesStore.addConfirmMessage('¿Estás seguro de enviar los asientos seleccionados a revisión?', 'Esta es una acción que no se puede revertir, asegúrate de querer enviar estos asientos a revisión', () => {
+    entriesStore.reviewEntries(entries);
+  });
+}
+function approveEntries(entries: any) {
+  messagesStore.addConfirmMessage('¿Estás seguro de aprobar los asientos seleccionados?', 'Esta es una acción que no se puede revertir, asegúrate de querer aprobar estos asientos', () => {
+    entriesStore.approveEntries(entries);
+  });
+}
+function rejectEntries(entries: any) {
+  messagesStore.addConfirmMessage('¿Estás seguro de rechazar los asientos seleccionados?', 'Esta es una acción que no se puede revertir, asegúrate de querer rechazar estos asientos', () => {
+    entriesStore.rejectEntries(entries);
   });
 }
 function modifyEntries(entries: any) {
@@ -66,22 +81,40 @@ function modifyEntries(entries: any) {
                       <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                         <MenuItems class="absolute right-0 z-20 mt-2 w-56 origin-top-right rounded-md border-2 border-gray-700 bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <div class="py-1">
-                            <MenuItem v-slot="{ active }" class="flex">
+                            <MenuItem v-if="isActionAllowed(configStore.state.role, record.entriesExpanded[0].entry.state, 'review')" v-slot="{ active }" class="flex">
+                              <a v-on:click="reviewEntries(record.entriesExpanded)" :class="[active ? 'bg-gray-700 text-blue-500' : 'text-white', 'block px-4 py-2 text-sm']"
+                                >Revisar
+                                <DocumentMagnifyingGlassIcon class="ml-2 h-5 w-auto"></DocumentMagnifyingGlassIcon>
+                              </a>
+                            </MenuItem>
+                            <MenuItem v-if="isActionAllowed(configStore.state.role, record.entriesExpanded[0].entry.state, 'publish')" v-slot="{ active }" class="flex">
                               <a v-on:click="publishEntries(record.entriesExpanded)" :class="[active ? 'bg-gray-700 text-blue-500' : 'text-white', 'block px-4 py-2 text-sm']"
                                 >Publicar
                                 <PaperAirplaneIcon class="ml-2 h-5 w-auto"></PaperAirplaneIcon>
                               </a>
                             </MenuItem>
-                            <MenuItem v-slot="{ active }" class="flex">
+                            <MenuItem v-if="isActionAllowed(configStore.state.role, record.entriesExpanded[0].entry.state, 'modify')" v-slot="{ active }" class="flex">
                               <a v-on:click="modifyEntries(record.entriesExpanded)" :class="[active ? 'bg-gray-700 text-blue-500' : 'text-white', 'block px-4 py-2 text-sm']"
                                 >Modificar
                                 <PencilSquareIcon class="ml-2 h-5 w-auto"></PencilSquareIcon>
                               </a>
                             </MenuItem>
-                            <MenuItem v-slot="{ active }" class="flex">
+                            <MenuItem v-if="isActionAllowed(configStore.state.role, record.entriesExpanded[0].entry.state, 'remove')" v-slot="{ active }" class="flex">
                               <a v-on:click="removeEntries(record.entriesExpanded)" :class="[active ? 'bg-gray-700' : '', 'block px-4 py-2 text-sm text-red-500']"
                                 >Eliminar
                                 <TrashIcon class="ml-2 h-5 w-auto"></TrashIcon>
+                              </a>
+                            </MenuItem>
+                            <MenuItem v-if="isActionAllowed(configStore.state.role, record.entriesExpanded[0].entry.state, 'approve')" v-slot="{ active }" class="flex">
+                              <a v-on:click="approveEntries(record.entriesExpanded)" :class="[active ? 'bg-gray-700 text-blue-500' : 'text-white', 'block px-4 py-2 text-sm']"
+                                >Aprobar
+                                <CheckCircleIcon class="ml-2 h-5 w-auto"></CheckCircleIcon>
+                              </a>
+                            </MenuItem>
+                            <MenuItem v-if="isActionAllowed(configStore.state.role, record.entriesExpanded[0].entry.state, 'reject')" v-slot="{ active }" class="flex">
+                              <a v-on:click="rejectEntries(record.entriesExpanded)" :class="[active ? 'bg-gray-700' : '', 'block px-4 py-2 text-sm text-red-500']"
+                                >Rechazar
+                                <NoSymbolIcon class="ml-2 h-5 w-auto"></NoSymbolIcon>
                               </a>
                             </MenuItem>
                           </div>

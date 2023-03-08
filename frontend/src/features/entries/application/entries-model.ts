@@ -2,6 +2,9 @@ export interface EntriesAdapter {
   createEntryHttpResponse(entry: CreateEntryInput): Promise<Entry | Error>;
   publishEntryHttpResponse(id: string): Promise<Entry | Error>;
   removeEntryHttpResponse(id: string): Promise<Entry | Error>;
+  reviewEntryHttpResponse(id: string): Promise<Entry | Error>;
+  approveEntryHttpResponse(id: string): Promise<Entry | Error>;
+  rejectEntryHttpResponse(id: string): Promise<Entry | Error>;
 }
 
 export interface Entry {

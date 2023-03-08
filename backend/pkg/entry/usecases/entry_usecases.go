@@ -819,12 +819,17 @@ func (useCase *DefaultEntryUseCase) EntryRemovedEvent(ctx context.Context, input
 		return err
 	}
 
-	var removeEntryInput RemoveEntryInput
-	removeEntryInput.ID = storedEntry.Entry.ID
-	removeEntryInput.Project = storedEntry.Entry.Project
-	removeEntryInput.ContractID = storedEntry.Entry.ContractID
-	removeEntryInput.UserID = storedEntry.Entry.UserID
-	_, err = useCase.RemoveEntry(ctx, removeEntryInput)
+	if storedEntry.Entry.BalanceByYearID != nil && *storedEntry.Entry.BalanceByYearID != "" {
+		var removeBalanceInput balance.RemoveBalanceInput
+		removeBalanceInput.Project = input.Project
+		removeBalanceInput.ID = *storedEntry.Entry.BalanceByYearID
+		_, err = useCase.balanceUseCase.RemoveBalance(ctx, removeBalanceInput)
+		if err != nil {
+			return err
+		}
+	}
+
+	_, err = useCase.entryStorage.Remove(ctx, input.Project, input.ID)
 	if err != nil {
 		return err
 	}

@@ -39,6 +39,24 @@ export interface EntryRemoveBody {
   userId: string;
 }
 
+export interface EntryReviewBody {
+  id: string;
+  contractId: string;
+  userId: string;
+}
+
+export interface EntryApproveBody {
+  id: string;
+  contractId: string;
+  userId: string;
+}
+
+export interface EntryRejectBody {
+  id: string;
+  contractId: string;
+  userId: string;
+}
+
 export interface EntryDescribeResponse {
   id: string;
   accountId: string;

@@ -238,6 +238,81 @@ export const useEntriesStore = defineStore('entries', {
         messagesStore.addMessage(this.state.stateMessage);
       }
     },
+    async reviewEntries(entriesExpanded: any) {
+      try {
+        this.state.stateMessage = 'reviewing entries';
+
+        entriesExpanded.map(async (entry: any) => {
+          const response = await entriesUseCase.reviewEntry(entry.entry.id);
+
+          if (response instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addErrorMessage('Error al solicitar revisión del asiento', 'Ha ocurrido un error al solicitar la revisión del asiento');
+            return;
+          }
+
+          return response;
+        });
+
+        this.state.stateMessage = 'entries reviewed';
+        const messagesStore = useMessagesStore();
+        messagesStore.addSuccessMessage('Asiento pendiente de revisión', 'El asiento ha sido enviado para su revisión');
+      } catch (err) {
+        this.state.stateMessage = 'error reviewing entries';
+        const messagesStore = useMessagesStore();
+        messagesStore.addErrorMessage('Error revisando asientos', 'Ha ocurrido un error revisando los asientos');
+      }
+    },
+    async approveEntries(entriesExpanded: any) {
+      try {
+        this.state.stateMessage = 'approving entries';
+
+        entriesExpanded.map(async (entry: any) => {
+          const response = await entriesUseCase.approveEntry(entry.entry.id);
+
+          if (response instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addErrorMessage('Error aprobando asiento', 'Ha ocurrido un error aprobando el asiento');
+            return;
+          }
+
+          return response;
+        });
+
+        this.state.stateMessage = 'entries approved';
+        const messagesStore = useMessagesStore();
+        messagesStore.addSuccessMessage('Asiento aprobado', 'El asiento ha sido aprobado correctamente');
+      } catch (err) {
+        this.state.stateMessage = 'error approving entries';
+        const messagesStore = useMessagesStore();
+        messagesStore.addErrorMessage('Error aprobando asientos', 'Ha ocurrido un error aprobando los asientos');
+      }
+    },
+    async rejectEntries(entriesExpanded: any) {
+      try {
+        this.state.stateMessage = 'rejecting entries';
+
+        entriesExpanded.map(async (entry: any) => {
+          const response = await entriesUseCase.rejectEntry(entry.entry.id);
+
+          if (response instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addErrorMessage('Error rechazando asiento', 'Ha ocurrido un error rechazando el asiento');
+            return;
+          }
+
+          return response;
+        });
+
+        this.state.stateMessage = 'entries rejected';
+        const messagesStore = useMessagesStore();
+        messagesStore.addSuccessMessage('Asiento rechazado', 'El asiento ha sido rechazado correctamente');
+      } catch (err) {
+        this.state.stateMessage = 'error rejecting entries';
+        const messagesStore = useMessagesStore();
+        messagesStore.addErrorMessage('Error rechazando asientos', 'Ha ocurrido un error rechazando los asientos');
+      }
+    },
     async removeEntries(entriesExpanded: any) {
       try {
         this.state.stateMessage = 'removing entries';

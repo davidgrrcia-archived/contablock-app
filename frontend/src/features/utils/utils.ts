@@ -25,6 +25,16 @@ export function getState(state: string): string {
       return 'Creado';
     case 'PUBLISHED':
       return 'Publicado';
+    case 'UPDATED':
+      return 'Actualizado';
+    case 'REMOVED':
+      return 'Eliminado';
+    case 'PENDING_REVIEW':
+      return 'Pendiente de revisión';
+    case 'APPROVED':
+      return 'Aprobado';
+    case 'REJECTED':
+      return 'Rechazado';
     default:
       return 'N/A';
   }
@@ -104,10 +114,7 @@ export function getTotalBalanceColor(amount1: number, amount2: number): string {
   }
 }
 
-export function isActionAllowed(role: string, action: string): boolean {
-  const accountantActions = ['create', 'modify', 'publish', 'remove', 'review'];
-  const auditorActions = ['approve', 'reject'];
-
+export function isActionAllowed(role: string, state: string, action: string): boolean {
   if (role === 'admin') {
     return true;
   }
@@ -117,11 +124,35 @@ export function isActionAllowed(role: string, action: string): boolean {
   }
 
   if (role === 'accountant') {
-    return accountantActions.includes(action);
+    if (action === 'create') {
+      return true;
+    }
+
+    if (action === 'modify') {
+      return state === 'CREATED' || state === 'UPDATED' || state === 'REJECTED';
+    }
+
+    if (action === 'publish') {
+      return state === 'APPROVED';
+    }
+
+    if (action === 'remove') {
+      return state === 'CREATED' || state === 'UPDATED' || state === 'REJECTED';
+    }
+
+    if (action === 'review') {
+      return state === 'CREATED' || state === 'UPDATED';
+    }
   }
 
   if (role === 'auditor') {
-    return auditorActions.includes(action);
+    if (action === 'approve') {
+      return state === 'PENDING_REVIEW';
+    }
+
+    if (action === 'reject') {
+      return state === 'PENDING_REVIEW';
+    }
   }
 
   return false;
@@ -137,7 +168,7 @@ export function showEntryActions(role: string, state: string): boolean {
   }
 
   if (role === 'accountant') {
-    return state === 'CREATED' || state === 'UPDATED';
+    return state === 'CREATED' || state === 'UPDATED' || state === 'REJECTED' || state === 'APPROVED';
   }
 
   if (role === 'auditor') {

@@ -26,7 +26,7 @@ const cta = defineProps<{
       <h1 class="text-3xl font-semibold text-gray-900">{{ cta.props.title }}</h1>
       <p class="mt-2 text-sm text-gray-700">{{ cta.props.description }}</p>
     </div>
-    <div v-if="isActionAllowed(configStore.state.role, 'create')" class="w-1/2 text-right">
+    <div v-if="isActionAllowed(configStore.state.role, '', 'create')" class="w-1/2 text-right">
       <button type="button" @click="entriesStore.showCreationModal()" class="btn bg-blue-500 hover:bg-white hover:text-blue-500">Nuevo asiento</button>
     </div>
   </div>
