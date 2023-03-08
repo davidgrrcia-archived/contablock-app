@@ -28,6 +28,7 @@ if (entriesStore.state.multipleEntryId === '') {
 
 function addDebitEntry() {
   const newEntry: CreateEntryInput = {
+    id: uuid(),
     accountId: selectedDebitAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: selectedCurrency.value,
@@ -38,12 +39,11 @@ function addDebitEntry() {
   };
 
   entriesStore.addDebitEntry(newEntry);
-
-  cleanForm();
 }
 
 function addCreditEntry() {
   const newEntry: CreateEntryInput = {
+    id: uuid(),
     accountId: selectedCreditAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: selectedCurrency.value,
@@ -54,38 +54,10 @@ function addCreditEntry() {
   };
 
   entriesStore.addCreditEntry(newEntry);
-
-  cleanForm();
 }
 
-function removeEntry(id: string) {
-  entriesStore.removeCreationEntry(id);
-}
-function editEntry(id: string) {
-  const storedEntry = entriesStore.state.entriesCreation.find(entry => entry.entry.id === id);
-
-  if (!storedEntry) {
-    return;
-  }
-
-  selectedCurrency = ref(storedEntry.entry.currency);
-  selectedDate = ref(new Date(storedEntry.entry.date * 1000));
-  selectedConcept = ref(storedEntry.entry.concept);
-  selectedDebitAmount = ref(storedEntry.entry.debitAmount);
-  selectedCreditAmount = ref(storedEntry.entry.creditAmount);
-  selectedDebitAccount = ref(storedEntry.account.id);
-  selectedCreditAccount = ref(storedEntry.account.id);
-
-  entriesStore.state.id = id;
-}
-function cleanForm() {
-  selectedCurrency = ref('EUR');
-  selectedDate = ref(new Date());
-  selectedConcept = ref();
-  selectedDebitAmount = ref();
-  selectedCreditAmount = ref();
-  selectedDebitAccount = ref();
-  selectedCreditAccount = ref();
+function removeEntry(id: string, debitAmount: number, creditAmount: number) {
+  entriesStore.removeCreationEntry(id, debitAmount, creditAmount);
 }
 </script>
 
@@ -201,8 +173,7 @@ function cleanForm() {
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ formatAmount(entry.entry.debitAmount, entry.entry.currency) }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ formatAmount(entry.entry.creditAmount, entry.entry.currency) }}</td>
               <td class="space-x-3 whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                <button @click="editEntry(entry.entry.id || '')" class="text-blue-500 hover:text-blue-900">Editar</button>
-                <button @click="removeEntry(entry.entry.id || '')" class="text-red-500 hover:text-red-900">Eliminar</button>
+                <button @click="removeEntry(entry.entry.id || '', entry.entry.debitAmount || 0, entry.entry.creditAmount || 0)" class="text-red-500 hover:text-red-900">Eliminar</button>
               </td>
             </tr>
           </tbody>

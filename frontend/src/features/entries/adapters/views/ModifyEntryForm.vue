@@ -173,7 +173,6 @@ function removeEntry(id: string) {
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ formatAmount(entry.entry.debitAmount, entry.entry.currency) }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ formatAmount(entry.entry.creditAmount, entry.entry.currency) }}</td>
               <td class="space-x-3 whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                <!-- <button @click="entriesStore.editEntry(entry.entry.id)" class="text-blue-500 hover:text-blue-900">Editar</button> -->
                 <button @click="removeEntry(entry.entry.id || '')" class="text-red-500 hover:text-red-900">Eliminar</button>
               </td>
             </tr>

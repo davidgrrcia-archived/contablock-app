@@ -2,7 +2,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { ChevronDownIcon, PaperAirplaneIcon, PencilSquareIcon, TrashIcon, CheckCircleIcon, DocumentMagnifyingGlassIcon, NoSymbolIcon } from '@heroicons/vue/20/solid';
 import { useDailyLedgerStore } from '@/features/daily-ledger/application/daily-ledger-store';
-import { getState, getQuarter, formatAmount, formatDate, formatId, getTotalBalanceColor, isActionAllowed, showEntryActions } from '../../../utils/utils';
+import { getState, getQuarter, formatAmount, formatDate, formatId, getTotalBalanceColor, isActionAllowed, showEntryActions, getEntryStateColor } from '../../../utils/utils';
 import { useEntriesStore } from '@/features/entries/application/entries-store';
 import { useMessagesStore } from '@/stores/messages';
 import { useConfigStore } from '@/stores/config';
@@ -66,9 +66,9 @@ function modifyEntries(entries: any) {
             <tbody class="bg-white">
               <template v-for="(record, index) in dailyLedger" :key="index">
                 <tr class="sticky top-24 z-10 bg-gray-700">
-                  <th colspan="6" scope="colgroup" class="px-6 text-left text-sm font-semibold text-white">Asiento: {{ formatId(record.id) }}</th>
-                  <th scope="colgroup" class="px-6 text-left text-sm font-bold" :class="[getTotalBalanceColor(record.totalDebitAmount, record.totalCreditAmount)]">{{ formatAmount(record.totalDebitAmount, 'EUR') }}</th>
-                  <th scope="colgroup" class="px-6 text-left text-sm font-bold" :class="[getTotalBalanceColor(record.totalCreditAmount, record.totalDebitAmount)]">{{ formatAmount(record.totalCreditAmount, 'EUR') }}</th>
+                  <th colspan="6" scope="colgroup" class="px-3 py-4 text-left text-sm font-semibold text-white">Asiento: {{ formatId(record.id) }}</th>
+                  <th scope="colgroup" class="px-3 py-4 text-left text-sm font-bold" :class="[getTotalBalanceColor(record.totalDebitAmount, record.totalCreditAmount)]">{{ formatAmount(record.totalDebitAmount, 'EUR') }}</th>
+                  <th scope="colgroup" class="px-3 py-4 text-left text-sm font-bold" :class="[getTotalBalanceColor(record.totalCreditAmount, record.totalDebitAmount)]">{{ formatAmount(record.totalCreditAmount, 'EUR') }}</th>
                   <th>
                     <Menu v-if="showEntryActions(configStore.state.role, record.entriesExpanded[0].entry.state)" as="div" class="relative inline-block p-2 text-left">
                       <div>
@@ -83,7 +83,7 @@ function modifyEntries(entries: any) {
                           <div class="py-1">
                             <MenuItem v-if="isActionAllowed(configStore.state.role, record.entriesExpanded[0].entry.state, 'review')" v-slot="{ active }" class="flex">
                               <a v-on:click="reviewEntries(record.entriesExpanded)" :class="[active ? 'bg-gray-700 text-blue-500' : 'text-white', 'block px-4 py-2 text-sm']"
-                                >Revisar
+                                >Solicitar revisión
                                 <DocumentMagnifyingGlassIcon class="ml-2 h-5 w-auto"></DocumentMagnifyingGlassIcon>
                               </a>
                             </MenuItem>
@@ -149,7 +149,7 @@ function modifyEntries(entries: any) {
                     {{ formatAmount(entryExpanded.entry.creditAmount, entryExpanded.entry.currency) }}
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                    <span :class="[getState(entryExpanded.entry.state) === 'Creado' ? 'bg-yellow-100 text-yellow-800' : getState(entryExpanded.entry.state) === 'Publicado' ? 'bg-green-100 text-green-800' : 'bg-blue-500']" class="inline-flex rounded-full px-2 text-xs font-semibold leading-5">{{ getState(entryExpanded.entry.state) }}</span>
+                    <span :class="[getEntryStateColor(entryExpanded.entry.state)]" class="inline-flex rounded-full px-2 text-xs font-semibold leading-5">{{ getState(entryExpanded.entry.state) }}</span>
                   </td>
                   <td></td>
                 </tr>
