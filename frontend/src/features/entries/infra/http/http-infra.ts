@@ -8,6 +8,7 @@ export interface EntriesHttpInfra {
   reviewEntry(input: infraModel.EntryPublishBody): Promise<infraModel.EntryDescribeResponse | Error>;
   approveEntry(input: infraModel.EntryPublishBody): Promise<infraModel.EntryDescribeResponse | Error>;
   rejectEntry(input: infraModel.EntryPublishBody): Promise<infraModel.EntryDescribeResponse | Error>;
+  updateEntry(input: infraModel.EntryUpdateBody): Promise<infraModel.EntryDescribeResponse | Error>;
 }
 
 export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
@@ -139,6 +140,27 @@ export class DefaultEntriesHttpInfra implements EntriesHttpInfra {
 
     const response = await fetch(`/api/projects/${configStore.state.project}/entries:reject`, {
       method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(input),
+    });
+
+    const data = await response.json();
+
+    if (data.statusCode === 500) {
+      return new Error(data.error);
+    }
+
+    return data as infraModel.EntryDescribeResponse;
+  }
+
+  async updateEntry(input: infraModel.EntryUpdateBody): Promise<infraModel.EntryDescribeResponse | Error> {
+    const configStore = useConfigStore();
+
+    const response = await fetch(`/api/projects/${configStore.state.project}/entries/${input.id}`, {
+      method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',

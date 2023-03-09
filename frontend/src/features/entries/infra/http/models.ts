@@ -39,6 +39,11 @@ export interface EntryRemoveBody {
   userId: string;
 }
 
+export interface EntryUpdateBody {
+  id: string;
+  state: string;
+}
+
 export interface EntryReviewBody {
   id: string;
   contractId: string;

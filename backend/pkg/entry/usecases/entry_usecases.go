@@ -312,35 +312,38 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	}
 
 	var describeEntryInput DescribeEntryInput
-	describeEntryInput.Project = input.Entry.Project
-	describeEntryInput.ID = input.Entry.ID
-
+	describeEntryInput.Project = input.Project
+	describeEntryInput.ID = input.ID
 	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
 	if err != nil {
 		return nil, err
 	}
 
 	var desiredEntry EntryStorageData
-	desiredEntry.Project = input.Entry.Project
-	desiredEntry.ID = input.Entry.ID
-	desiredEntry.ContractID = input.Entry.ContractID
-	desiredEntry.UserID = input.Entry.UserID
-	desiredEntry.AccountID = input.Entry.AccountID
-	desiredEntry.MultipleEntryID = input.Entry.MultipleEntryID
-	desiredEntry.BalanceByYearID = input.Entry.BalanceByYearID
-	desiredEntry.Currency = input.Entry.Currency
-	if input.Entry.Concept == nil {
+	desiredEntry.Project = storedEntry.Entry.Project
+	desiredEntry.ID = storedEntry.Entry.ID
+	desiredEntry.ContractID = storedEntry.Entry.ContractID
+	desiredEntry.UserID = storedEntry.Entry.UserID
+	desiredEntry.AccountID = storedEntry.Entry.AccountID
+	desiredEntry.MultipleEntryID = storedEntry.Entry.MultipleEntryID
+	desiredEntry.BalanceByYearID = storedEntry.Entry.BalanceByYearID
+	desiredEntry.Currency = storedEntry.Entry.Currency
+	if storedEntry.Entry.Concept == nil {
 		desiredEntry.Concept = storedEntry.Entry.Concept
 	} else {
-		desiredEntry.Concept = input.Entry.Concept
+		desiredEntry.Concept = storedEntry.Entry.Concept
 	}
-	desiredEntry.Date = input.Entry.Date
-	quarter := useCase.calculateQuarter(input.Entry.Date)
+	desiredEntry.Date = storedEntry.Entry.Date
+	quarter := useCase.calculateQuarter(storedEntry.Entry.Date)
 	desiredEntry.Quarter = quarter
-	desiredEntry.DebitBalance = input.Entry.DebitBalance
-	desiredEntry.CreditBalance = input.Entry.CreditBalance
+	desiredEntry.DebitBalance = storedEntry.Entry.DebitBalance
+	desiredEntry.CreditBalance = storedEntry.Entry.CreditBalance
 	desiredEntry.TotalBalance = desiredEntry.DebitBalance - desiredEntry.CreditBalance
-	desiredEntry.State = input.Entry.State
+	if input.State != nil {
+		desiredEntry.State = *input.State
+	} else {
+		desiredEntry.State = storedEntry.Entry.State
+	}
 	desiredEntry.CreationDate = storedEntry.Entry.CreationDate
 	desiredEntry.LastUpdate = time.Now()
 
@@ -403,18 +406,8 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 		return nil, err
 	}
 
-	var getEntryInput contablock.GetEntryDataInput
-	getEntryInput.ID = input.ID
-	getEntryInput.ContractAddress = storedContract.Contract.EthAddress
-	getEntryInput.UserAddress = storedUser.User.EthAddress
-	getEntryInput.UserPrivateKey = storedUser.User.PrivateKey
-	entryData, err := useCase.contaBlockUseCase.GetEntryData(getEntryInput)
-	if err != nil {
-		return nil, err
-	}
-
-	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
-		return nil, errors.New("failure publishing state not allowed")
+	if (storedEntry.Entry.State != EntryStateCreated) && (storedEntry.Entry.State != EntryStateUpdated) {
+		return nil, errors.New("failure removing state not allowed")
 	}
 
 	if storedEntry.Entry.BalanceByYearID != nil && *storedEntry.Entry.BalanceByYearID != "" {
@@ -521,8 +514,10 @@ func (useCase *DefaultEntryUseCase) PublishEntry(ctx context.Context, input Publ
 	}
 
 	var updateEntryInput UpdateEntryInput
-	updateEntryInput.Entry = storedEntry.Entry
-	updateEntryInput.Entry.State = EntryStatePublished
+	updateEntryInput.Project = input.Project
+	updateEntryInput.ID = input.ID
+	state := EntryStatePublished
+	updateEntryInput.State = &state
 	updatedEntry, err := useCase.UpdateEntry(ctx, updateEntryInput)
 	if err != nil {
 		return nil, err
@@ -565,18 +560,8 @@ func (useCase *DefaultEntryUseCase) ReviewEntry(ctx context.Context, input Revie
 		return nil, err
 	}
 
-	var getEntryInput contablock.GetEntryDataInput
-	getEntryInput.ID = input.ID
-	getEntryInput.ContractAddress = storedContract.Contract.EthAddress
-	getEntryInput.UserAddress = storedUser.User.EthAddress
-	getEntryInput.UserPrivateKey = storedUser.User.PrivateKey
-	entryData, err := useCase.contaBlockUseCase.GetEntryData(getEntryInput)
-	if err != nil {
-		return nil, err
-	}
-
-	if !(storedEntry.Entry.State == EntryStateCreated && entryData.State == contablock.EntryStateCreated) {
-		return nil, errors.New("failure publishing state not allowed")
+	if (storedEntry.Entry.State != EntryStateCreated) && (storedEntry.Entry.State != EntryStateUpdated) {
+		return nil, errors.New("failure removing state not allowed")
 	}
 
 	var publishEntryInput contablock.ReviewEntryInput
@@ -590,8 +575,10 @@ func (useCase *DefaultEntryUseCase) ReviewEntry(ctx context.Context, input Revie
 	}
 
 	var updateEntryInput UpdateEntryInput
-	updateEntryInput.Entry = storedEntry.Entry
-	updateEntryInput.Entry.State = EntryStatePendingReview
+	updateEntryInput.Project = input.Project
+	updateEntryInput.ID = input.ID
+	state := EntryStatePendingReview
+	updateEntryInput.State = &state
 	updatedEntry, err := useCase.UpdateEntry(ctx, updateEntryInput)
 	if err != nil {
 		return nil, err
@@ -645,7 +632,7 @@ func (useCase *DefaultEntryUseCase) ApproveEntry(ctx context.Context, input Appr
 	}
 
 	if !(storedEntry.Entry.State == EntryStatePendingReview && entryData.State == contablock.EntryStatePendingReview) {
-		return nil, errors.New("failure publishing state not allowed")
+		return nil, errors.New("failure approving state not allowed")
 	}
 
 	var publishEntryInput contablock.ApproveEntryInput
@@ -659,8 +646,10 @@ func (useCase *DefaultEntryUseCase) ApproveEntry(ctx context.Context, input Appr
 	}
 
 	var updateEntryInput UpdateEntryInput
-	updateEntryInput.Entry = storedEntry.Entry
-	updateEntryInput.Entry.State = EntryStateApproved
+	updateEntryInput.Project = input.Project
+	updateEntryInput.ID = input.ID
+	state := EntryStateApproved
+	updateEntryInput.State = &state
 	updatedEntry, err := useCase.UpdateEntry(ctx, updateEntryInput)
 	if err != nil {
 		return nil, err
@@ -714,7 +703,7 @@ func (useCase *DefaultEntryUseCase) RejectEntry(ctx context.Context, input Rejec
 	}
 
 	if !(storedEntry.Entry.State == EntryStatePendingReview && entryData.State == contablock.EntryStatePendingReview) {
-		return nil, errors.New("failure publishing state not allowed")
+		return nil, errors.New("failure rejecting state not allowed")
 	}
 
 	var publishEntryInput contablock.RejectEntryInput
@@ -728,8 +717,10 @@ func (useCase *DefaultEntryUseCase) RejectEntry(ctx context.Context, input Rejec
 	}
 
 	var updateEntryInput UpdateEntryInput
-	updateEntryInput.Entry = storedEntry.Entry
-	updateEntryInput.Entry.State = EntryStateRejected
+	updateEntryInput.Project = input.Project
+	updateEntryInput.ID = input.ID
+	state := EntryStateRejected
+	updateEntryInput.State = &state
 	updatedEntry, err := useCase.UpdateEntry(ctx, updateEntryInput)
 	if err != nil {
 		return nil, err
@@ -843,17 +834,11 @@ func (useCase *DefaultEntryUseCase) EntryReviewRequestedEvent(ctx context.Contex
 		return errors.New("invalid input: " + err.Error())
 	}
 
-	var describeEntryInput DescribeEntryInput
-	describeEntryInput.Project = input.Project
-	describeEntryInput.ID = input.ID
-	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
-	if err != nil {
-		return err
-	}
-
 	var updateEntryInput UpdateEntryInput
-	updateEntryInput.Entry = storedEntry.Entry
-	updateEntryInput.Entry.State = EntryStatePendingReview
+	updateEntryInput.Project = input.Project
+	updateEntryInput.ID = input.ID
+	state := EntryStatePendingReview
+	updateEntryInput.State = &state
 	_, err = useCase.UpdateEntry(ctx, updateEntryInput)
 	if err != nil {
 		return err
@@ -868,17 +853,11 @@ func (useCase *DefaultEntryUseCase) EntryApprovedEvent(ctx context.Context, inpu
 		return errors.New("invalid input: " + err.Error())
 	}
 
-	var describeEntryInput DescribeEntryInput
-	describeEntryInput.Project = input.Project
-	describeEntryInput.ID = input.ID
-	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
-	if err != nil {
-		return err
-	}
-
 	var updateEntryInput UpdateEntryInput
-	updateEntryInput.Entry = storedEntry.Entry
-	updateEntryInput.Entry.State = EntryStateApproved
+	updateEntryInput.Project = input.Project
+	updateEntryInput.ID = input.ID
+	state := EntryStateApproved
+	updateEntryInput.State = &state
 	_, err = useCase.UpdateEntry(ctx, updateEntryInput)
 	if err != nil {
 		return err
@@ -893,17 +872,11 @@ func (useCase *DefaultEntryUseCase) EntryRejectedEvent(ctx context.Context, inpu
 		return errors.New("invalid input: " + err.Error())
 	}
 
-	var describeEntryInput DescribeEntryInput
-	describeEntryInput.Project = input.Project
-	describeEntryInput.ID = input.ID
-	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
-	if err != nil {
-		return err
-	}
-
 	var updateEntryInput UpdateEntryInput
-	updateEntryInput.Entry = storedEntry.Entry
-	updateEntryInput.Entry.State = EntryStateRejected
+	updateEntryInput.Project = input.Project
+	updateEntryInput.ID = input.ID
+	state := EntryStateRejected
+	updateEntryInput.State = &state
 	_, err = useCase.UpdateEntry(ctx, updateEntryInput)
 	if err != nil {
 		return err
@@ -918,17 +891,11 @@ func (useCase *DefaultEntryUseCase) EntryPublishedEvent(ctx context.Context, inp
 		return errors.New("invalid input: " + err.Error())
 	}
 
-	var describeEntryInput DescribeEntryInput
-	describeEntryInput.Project = input.Project
-	describeEntryInput.ID = input.ID
-	storedEntry, err := useCase.DescribeEntry(ctx, describeEntryInput)
-	if err != nil {
-		return err
-	}
-
 	var updateEntryInput UpdateEntryInput
-	updateEntryInput.Entry = storedEntry.Entry
-	updateEntryInput.Entry.State = EntryStatePublished
+	updateEntryInput.Project = input.Project
+	updateEntryInput.ID = input.ID
+	state := EntryStatePublished
+	updateEntryInput.State = &state
 	_, err = useCase.UpdateEntry(ctx, updateEntryInput)
 	if err != nil {
 		return err
@@ -936,7 +903,6 @@ func (useCase *DefaultEntryUseCase) EntryPublishedEvent(ctx context.Context, inp
 
 	return nil
 }
-
 
 func (useCase *DefaultEntryUseCase) calculateQuarter(date time.Time) int {
 	month := date.Month()

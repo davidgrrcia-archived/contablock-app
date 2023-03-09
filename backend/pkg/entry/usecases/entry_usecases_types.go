@@ -8,6 +8,7 @@ import (
 const (
 	// States
 	EntryStateCreated       = "CREATED"
+	EntryStateUpdated       = "UPDATED"
 	EntryStatePendingReview = "PENDING_REVIEW"
 	EntryStateApproved      = "APPROVED"
 	EntryStateRejected      = "REJECTED"
@@ -78,7 +79,9 @@ type ListEntryOutput struct {
 }
 
 type UpdateEntryInput struct {
-	Entry Entry
+	Project string  `valid:"required,length(1|64)"`
+	ID      string  `valid:"required,length(1|64)"`
+	State   *string `valid:"optional"`
 }
 
 type UpdateEntryOutput struct {
@@ -194,26 +197,26 @@ type EntryCreatedEventInput struct {
 }
 
 type EntryReviewRequestedEventInput struct {
-	Project    string `valid:"required,length(1|64)"`
-	ID         string `valid:"required,length(1|64)"`
+	Project string `valid:"required,length(1|64)"`
+	ID      string `valid:"required,length(1|64)"`
 }
 
 type EntryRemovedEventInput struct {
-	Project    string `valid:"required,length(1|64)"`
-	ID         string `valid:"required,length(1|64)"`
+	Project string `valid:"required,length(1|64)"`
+	ID      string `valid:"required,length(1|64)"`
 }
 
 type EntryPublishedEventInput struct {
-	Project    string `valid:"required,length(1|64)"`
-	ID         string `valid:"required,length(1|64)"`
+	Project string `valid:"required,length(1|64)"`
+	ID      string `valid:"required,length(1|64)"`
 }
 
 type EntryApprovedEventInput struct {
-	Project    string `valid:"required,length(1|64)"`
-	ID         string `valid:"required,length(1|64)"`
+	Project string `valid:"required,length(1|64)"`
+	ID      string `valid:"required,length(1|64)"`
 }
 
 type EntryRejectedEventInput struct {
-	Project    string `valid:"required,length(1|64)"`
-	ID         string `valid:"required,length(1|64)"`
+	Project string `valid:"required,length(1|64)"`
+	ID      string `valid:"required,length(1|64)"`
 }

@@ -192,4 +192,27 @@ func (handler *DefaultEntriesHttpHandler) RegisterEntryRoutes(r *mux.Router) {
 		}
 		utils.Success(w, outputPayload.RejectEntryResponse)
 	}).Methods("POST")
+
+	r.HandleFunc("/api/projects/{project}/entries/{id}", func(w http.ResponseWriter, r *http.Request) {
+		var ctx = context.Background()
+
+		vars := mux.Vars(r)
+		var inputPayload input.UpdateEntryRequest
+		err := json.NewDecoder(r.Body).Decode(&inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+
+		inputPayload.Project = vars["project"]
+		inputPayload.ID = vars["id"]
+
+		outputPayload, err := handler.adapter.AdaptUpdateEntry(ctx, inputPayload)
+		if err != nil {
+			utils.Failure(w, err)
+			return
+		}
+		utils.Success(w, outputPayload.UpdateEntryResponse)
+	}).Methods("PUT")
+
 }

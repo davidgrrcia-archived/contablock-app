@@ -15,7 +15,6 @@ interface EntriesState {
   creationModalOpen: boolean;
   modificationModalOpen: boolean;
   entriesCreation: EntryWithAccount[];
-  entriesModification: EntryWithAccount[];
   storedEntries: EntryWithAccount[];
   id: string;
   multipleEntryId: string;
@@ -28,7 +27,6 @@ const state: EntriesState = {
   creationModalOpen: false,
   modificationModalOpen: false,
   entriesCreation: [],
-  entriesModification: [],
   storedEntries: [],
   id: '',
   multipleEntryId: '',
@@ -263,8 +261,40 @@ export const useEntriesStore = defineStore('entries', {
       }
     },
     async modifyEntries() {
-      //todo: create new creationEntries
-      //todo: update existing and new entries to UPDATED state
+      try {
+        this.state.entriesCreation.map(async entry => {
+          const response = await entriesUseCase.createEntry(entry.entry);
+
+          if (response instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addErrorMessage('Error modificando asientos', 'Ha ocurrido un error modificando los asientos');
+            return;
+          }
+
+          await entriesUseCase.updateEntry(response.id, 'UPDATED');
+          this.state.storedEntries = this.state.storedEntries.filter(entry => entry.entry.id !== response.id);
+
+          return response;
+        });
+
+        this.state.storedEntries.map(async entry => {
+          const response = await entriesUseCase.updateEntry(entry.entry.id || '', 'UPDATED');
+
+          if (response instanceof Error) {
+            // todo there is a call failing, bc the id does not exist
+            // const messagesStore = useMessagesStore();
+            // messagesStore.addErrorMessage('Error modificando asientos', 'Ha ocurrido un error modificando los asientos');
+            return;
+          }
+
+          return response;
+        });
+
+        this.clearEntriesAndHideModals();
+      } catch (err) {
+        const messagesStore = useMessagesStore();
+        messagesStore.addErrorMessage('Error modificando asientos', 'Ha ocurrido un error modificando los asientos');
+      }
     },
     async removeModificationEntry(id: string) {
       try {
@@ -312,7 +342,6 @@ export const useEntriesStore = defineStore('entries', {
     },
     clearEntriesAndHideModals() {
       this.state.entriesCreation = [];
-      this.state.entriesModification = [];
       this.state.storedEntries = [];
       this.state.multipleEntryId = '';
       this.state.totalBalance = 0;

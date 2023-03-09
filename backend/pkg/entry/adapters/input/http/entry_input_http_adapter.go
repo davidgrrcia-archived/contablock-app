@@ -17,6 +17,7 @@ type EntryInputHttpAdapter interface {
 	AdaptReviewEntry(ctx context.Context, data ReviewEntryRequest) (*ReviewEntryResponseWrapper, error)
 	AdaptApproveEntry(ctx context.Context, data ApproveEntryRequest) (*ApproveEntryResponseWrapper, error)
 	AdaptRejectEntry(ctx context.Context, data RejectEntryRequest) (*RejectEntryResponseWrapper, error)
+	AdaptUpdateEntry(ctx context.Context, data UpdateEntryRequest) (*UpdateEntryResponseWrapper, error)
 }
 
 func NewDefaultHttpInputAdapter(options DefaultHttpInputAdapterOptions) (*DefaultHttpInputAdapter, error) {
@@ -346,6 +347,42 @@ func (adapter *DefaultHttpInputAdapter) AdaptRejectEntry(ctx context.Context, da
 
 	responseWrapper := RejectEntryResponseWrapper{}
 	responseWrapper.RejectEntryResponse = response
+
+	return &responseWrapper, nil
+}
+
+func (adapter *DefaultHttpInputAdapter) AdaptUpdateEntry(ctx context.Context, data UpdateEntryRequest) (*UpdateEntryResponseWrapper, error) {
+	var inputData entry.UpdateEntryInput
+	inputData.Project = data.Project
+	inputData.ID = data.ID
+	inputData.State = data.State
+	outputData, err := adapter.entryUseCase.UpdateEntry(ctx, inputData)
+	if err != nil {
+		return nil, err
+	}
+
+	var response UpdateEntryResponse
+	response.Project = outputData.Entry.Project
+	response.ID = outputData.Entry.ID
+	response.ContractID = outputData.Entry.ContractID
+	response.UserID = outputData.Entry.UserID
+	response.AccountID = outputData.Entry.AccountID
+	response.MultipleEntryID = outputData.Entry.MultipleEntryID
+	response.BalanceByYearID = outputData.Entry.BalanceByYearID
+	response.Currency = outputData.Entry.Currency
+	response.Concept = outputData.Entry.Concept
+	response.Date = outputData.Entry.Date.Unix()
+	response.Quarter = outputData.Entry.Quarter
+	response.DebitBalance = outputData.Entry.DebitBalance
+	response.CreditBalance = outputData.Entry.CreditBalance
+	response.TotalBalance = outputData.Entry.TotalBalance
+	response.State = outputData.Entry.State
+	response.StateReason = outputData.Entry.StateReason
+	response.CreationDate = outputData.Entry.CreationDate.Unix()
+	response.LastUpdate = outputData.Entry.LastUpdate.Unix()
+
+	responseWrapper := UpdateEntryResponseWrapper{}
+	responseWrapper.UpdateEntryResponse = response
 
 	return &responseWrapper, nil
 }

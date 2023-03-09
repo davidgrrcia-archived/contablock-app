@@ -5,6 +5,7 @@ export interface EntriesAdapter {
   reviewEntryHttpResponse(id: string): Promise<Entry | Error>;
   approveEntryHttpResponse(id: string): Promise<Entry | Error>;
   rejectEntryHttpResponse(id: string): Promise<Entry | Error>;
+  updateEntryHttpResponse(id: string, state: string): Promise<Entry | Error>;
 }
 
 export interface Entry {
@@ -26,17 +27,6 @@ export interface Entry {
 
 export interface CreateEntryInput {
   id?: string;
-  accountId: string;
-  multipleEntryId: string;
-  currency: string;
-  concept: string;
-  date: number;
-  debitAmount: number | null;
-  creditAmount: number | null;
-}
-
-export interface ModifyEntryInput {
-  id: string;
   accountId: string;
   multipleEntryId: string;
   currency: string;

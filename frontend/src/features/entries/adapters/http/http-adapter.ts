@@ -209,4 +209,36 @@ export class DefaultEntriesHttpAdapter implements EntriesAdapter {
 
     return output;
   }
+
+  async updateEntryHttpResponse(id: string, state: string): Promise<EntryUseCase | Error> {
+    const input: infraModel.EntryUpdateBody = {
+      id: id,
+      state: state,
+    };
+
+    const entryHttpResponse = await this.entriesHttpInfra.updateEntry(input);
+
+    if (entryHttpResponse instanceof Error) {
+      return entryHttpResponse;
+    }
+
+    const output: EntryUseCase = {
+      id: entryHttpResponse.id,
+      accountId: entryHttpResponse.accountId,
+      multipleEntryId: entryHttpResponse.multipleEntryId,
+      currency: entryHttpResponse.currency,
+      concept: entryHttpResponse.concept,
+      date: entryHttpResponse.date,
+      quarter: entryHttpResponse.quarter,
+      debitAmount: entryHttpResponse.debitBalance,
+      creditAmount: entryHttpResponse.creditBalance,
+      totalAmount: entryHttpResponse.totalBalance,
+      state: entryHttpResponse.state,
+      stateReason: entryHttpResponse.stateReason,
+      creationDate: entryHttpResponse.creationDate,
+      lastUpdate: entryHttpResponse.lastUpdate,
+    };
+
+    return output;
+  }
 }

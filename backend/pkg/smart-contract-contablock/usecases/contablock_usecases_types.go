@@ -5,6 +5,7 @@ import "time"
 const (
 	// States
 	EntryStateCreated       = "CREATED"
+	EntryStateUpdated       = "UPDATED"
 	EntryStateRemoved       = "REMOVED"
 	EntryStatePendingReview = "PENDING_REVIEW"
 	EntryStateApproved      = "APPROVED"

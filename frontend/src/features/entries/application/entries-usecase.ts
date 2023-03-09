@@ -7,6 +7,7 @@ export interface EntriesUseCase {
   reviewEntry(id: string): Promise<Entry | Error>;
   approveEntry(id: string): Promise<Entry | Error>;
   rejectEntry(id: string): Promise<Entry | Error>;
+  updateEntry(id: string, state: string): Promise<Entry | Error>;
 }
 
 export class DefaultEntriesUseCase implements EntriesUseCase {
@@ -34,5 +35,9 @@ export class DefaultEntriesUseCase implements EntriesUseCase {
 
   async rejectEntry(id: string): Promise<Entry | Error> {
     return await this.entriesAdapter.rejectEntryHttpResponse(id);
+  }
+
+  async updateEntry(id: string, state: string): Promise<Entry | Error> {
+    return await this.entriesAdapter.updateEntryHttpResponse(id, state);
   }
 }

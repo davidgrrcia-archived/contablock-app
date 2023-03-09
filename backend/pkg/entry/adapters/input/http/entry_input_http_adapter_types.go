@@ -128,3 +128,17 @@ type RejectEntryResponse struct {
 type RejectEntryResponseWrapper struct {
 	RejectEntryResponse RejectEntryResponse
 }
+
+type UpdateEntryRequest struct {
+	Project string  `json:"project"`
+	ID      string  `json:"id"`
+	State   *string `json:"state"`
+}
+
+type UpdateEntryResponse struct {
+	Entry
+}
+
+type UpdateEntryResponseWrapper struct {
+	UpdateEntryResponse UpdateEntryResponse
+}
