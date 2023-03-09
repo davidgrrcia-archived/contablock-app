@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useGeneralLedgerStore } from '@/features/general-ledger/application/general-ledger-store';
-import { getState, getQuarter, formatAmount, formatDate } from '../../../utils/utils';
+import { getState, getQuarter, formatAmount, formatDate, getEntryStateColor } from '../../../utils/utils';
 import { ref, watch, onMounted } from 'vue';
 
 const generalLedgerStore = useGeneralLedgerStore();
@@ -66,7 +66,7 @@ onMounted(async () => {
                     {{ formatAmount(entryExpanded.creditAmount, entryExpanded.currency) }}
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
-                    <span :class="[getState(entryExpanded.state) === 'Creado' ? 'bg-yellow-100 text-yellow-800' : getState(entryExpanded.state) === 'Publicado' ? 'bg-green-100 text-green-800' : 'bg-blue-500']" class="inline-flex rounded-full px-2 text-xs font-semibold leading-5">{{ getState(entryExpanded.state) }}</span>
+                    <span :class="[getEntryStateColor(entryExpanded.state)]" class="inline-flex rounded-full px-2 text-xs font-semibold leading-5">{{ getState(entryExpanded.state) }}</span>
                   </td>
                   <td></td>
                 </tr>

@@ -32,7 +32,8 @@ export const useBalanceStore = defineStore('balance', {
           return;
         }
 
-        this.state.storedBalance = balance;
+        this.state.storedBalance = orderAllChildsByName(balance);
+
         this.state.stateMessage = 'balances loaded';
 
         setInterval(async () => {
@@ -46,10 +47,7 @@ export const useBalanceStore = defineStore('balance', {
             return;
           }
 
-          if (balance.length !== this.state.storedBalance.length) {
-            this.state.storedBalance = balance;
-            console.log('balance changed', this.state.storedBalance);
-          }
+          this.state.storedBalance = orderAllChildsByName(balance);
 
           this.state.stateMessage = 'balances loaded';
         }, 3000);
@@ -66,6 +64,36 @@ export const useBalanceStore = defineStore('balance', {
     },
     getPreviousYear(): number {
       return this.state.storedBalance[0].previousYear;
-    }
+    },
   },
 });
+
+function orderByName(balance: Balance[] | null): Balance[] {
+  if (!balance) {
+    return [];
+  }
+
+  return balance.sort((a, b) => {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  });
+}
+
+function orderAllChildsByName(balance: Balance[]): Balance[] {
+  balance = orderByName(balance);
+  balance.forEach(balance => {
+    balance.child = orderByName(balance.child);
+    balance.child.forEach(child => {
+      child.child = orderByName(child.child);
+      child.child.forEach(child => {
+        child.child = orderByName(child.child);
+      });
+    });
+  });
+  return balance;
+}

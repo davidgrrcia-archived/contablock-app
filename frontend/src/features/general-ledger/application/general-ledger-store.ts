@@ -46,9 +46,7 @@ export const useGeneralLedgerStore = defineStore('generalLedger', {
             return;
           }
 
-          if (generalLedger.length !== this.state.storedGeneralLedger.length) {
-            this.state.storedGeneralLedger = generalLedger.reverse();
-          }
+          this.state.storedGeneralLedger = generalLedger.reverse();
 
           this.state.stateMessage = 'general ledger loaded';
         }, 3000);

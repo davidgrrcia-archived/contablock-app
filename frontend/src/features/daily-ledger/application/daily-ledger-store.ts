@@ -45,9 +45,7 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
             return;
           }
 
-          if (dailyLedger.length !== this.state.storedDailyLedger.length) {
-            this.state.storedDailyLedger = dailyLedger.reverse();
-          }
+          this.state.storedDailyLedger = dailyLedger.reverse();
 
           this.state.stateMessage = 'daily ledger loaded';
         }, 3000);
