@@ -20,11 +20,11 @@ const entriesStore = useEntriesStore();
                 <div class="mt-3 ml-4 text-left">
                   <div class="grid">
                     <div>
-                      <DialogTitle as="h3" class="text-2xl font-medium leading-6 text-gray-700">Registrar nuevo asiento contable</DialogTitle>
+                      <DialogTitle as="h3" class="text-2xl font-medium leading-6 text-gray-800">Registrar nuevo asiento contable</DialogTitle>
                     </div>
                     <div class="-mt-10 text-right">
-                      <button type="button" class="mt-3 ml-3 inline-flex w-auto justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50" @click="entriesStore.clearEntriesAndHideModals()" ref="cancelButtonRef">Cancelar</button>
-                      <button type="button" class="ml-3 inline-flex w-auto justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-gray-700" @click="entriesStore.createEntries()">Crear Asiento</button>
+                      <button type="button" class="mt-3 ml-3 inline-flex w-auto justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-800 shadow-sm hover:bg-gray-50" @click="entriesStore.clearEntriesAndHideModals()" ref="cancelButtonRef">Cancelar</button>
+                      <button type="button" class="ml-3 inline-flex w-auto justify-center rounded-md border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-gray-800" @click="entriesStore.createEntries()">Crear Asiento</button>
                     </div>
                   </div>
                   <div class="mt-2">

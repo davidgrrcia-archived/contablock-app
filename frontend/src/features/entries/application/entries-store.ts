@@ -262,6 +262,10 @@ export const useEntriesStore = defineStore('entries', {
         messagesStore.addErrorMessage('Error eliminando asientos', 'Ha ocurrido un error eliminando los asientos');
       }
     },
+    async modifyEntries() {
+      //todo: create new creationEntries
+      //todo: update existing and new entries to UPDATED state
+    },
     async removeModificationEntry(id: string) {
       try {
         this.state.stateMessage = 'removing entry';

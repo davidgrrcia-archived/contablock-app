@@ -2,16 +2,20 @@
 import { useConfigStore } from '@/stores/config';
 import BusinessHeading from '@/features/business/adapters/views/BusinessHeading.vue';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
-import { UserCircleIcon } from '@heroicons/vue/24/outline';
+import { UserCircleIcon, ChevronDownIcon, ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
 import { getRoleColor } from '@/features/utils/utils';
+import { useMessagesStore } from '@/stores/messages';
 
 const configStore = useConfigStore();
+const messagesStore = useMessagesStore();
 const themeColor = getRoleColor(configStore.state.role);
 const businessName = configStore.state.name;
 
 function logOut() {
-  localStorage.setItem(configStore.state.project + 'Authentication', JSON.stringify(false));
-  window.location.reload();
+  messagesStore.addConfirmMessage('¿Estás seguro de cerrar sesión?', 'Si cierras sesión serás redirigido automáticamente a la pantalla de login', () => {
+    localStorage.setItem(configStore.state.project + 'Authentication', JSON.stringify(false));
+    window.location.reload();
+  });
 }
 </script>
 
@@ -24,15 +28,19 @@ function logOut() {
     <!-- Profile dropdown -->
     <Menu as="div" class="w-1/2 text-right">
       <div>
-        <MenuButton class="btn mr-8 text-white hover:bg-gray-700">
+        <MenuButton class="btn mr-8 text-white underline-offset-4 hover:underline">
           {{ businessName }}
           <UserCircleIcon class="ml-2 h-6 w-6" />
+          <ChevronDownIcon class="ml-2 h-6 w-6" />
         </MenuButton>
       </div>
       <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-        <MenuItems class="absolute right-8 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <MenuItem v-slot="{ active }">
-            <a @click="logOut()" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Cerrar sesión</a>
+        <MenuItems class="absolute right-8 z-10 mt-2 w-48 origin-top-right rounded-md border-gray-700 bg-gray-700 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <MenuItem v-slot="{ active }" class="flex">
+            <a @click="logOut()" :class="[active ? 'bg-gray-700 text-blue-500' : 'text-white', 'block px-4 py-2 text-sm']">
+              Cerrar sesión
+              <ArrowRightOnRectangleIcon class="ml-2 h-5 w-auto"></ArrowRightOnRectangleIcon>
+            </a>
           </MenuItem>
         </MenuItems>
       </transition>
