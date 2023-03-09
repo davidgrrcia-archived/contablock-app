@@ -1,10 +1,24 @@
 <script setup lang="ts">
 import { useBalanceStore } from '@/features/balances/application/balances-store';
 import { formatAmount } from '../../../utils/utils';
+import { onMounted, ref, watch } from 'vue';
 
 const balanceStore = useBalanceStore();
 await balanceStore.loadBalance();
-const balance = balanceStore.state.storedBalance;
+
+const balance = ref();
+
+watch(
+  () => balanceStore.state.storedBalance,
+  newStoredGeneralLedger => {
+    balance.value = newStoredGeneralLedger;
+  },
+);
+
+onMounted(async () => {
+  await balanceStore.loadBalance();
+  balance.value = balanceStore.state.storedBalance;
+});
 </script>
 
 <template>
@@ -16,8 +30,8 @@ const balance = balanceStore.state.storedBalance;
             <thead class="bg-white">
               <tr>
                 <th scope="col" class="sticky top-14 z-10 rounded-tl-lg bg-gray-800 py-3.5 pr-3 pl-6 text-left text-sm font-semibold text-white">Naturaleza</th>
-                <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ balance.length != 0 ? balance[0].currentYear : '' }}</th>
-                <th scope="col" class="sticky top-14 z-10 rounded-tr-lg bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ balance.length != 0 ? balance[0].previousYear : '' }}</th>
+                <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ balanceStore.getCurrentYear }}</th>
+                <th scope="col" class="sticky top-14 z-10 rounded-tr-lg bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ balanceStore.getPreviousYear }}</th>
               </tr>
             </thead>
             <tbody v-for="(record, i) in balance" :key="i" class="bg-white">

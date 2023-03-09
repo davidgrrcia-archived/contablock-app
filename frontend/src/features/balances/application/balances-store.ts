@@ -22,7 +22,6 @@ export const useBalanceStore = defineStore('balance', {
   actions: {
     async loadBalance() {
       try {
-        this.state.storedBalance = [];
         this.state.stateMessage = 'loading balances';
 
         const balance = await balancesUseCase.listBalances();
@@ -37,7 +36,6 @@ export const useBalanceStore = defineStore('balance', {
         this.state.stateMessage = 'balances loaded';
 
         setInterval(async () => {
-          this.state.storedBalance = [];
           this.state.stateMessage = 'loading balances';
 
           const balance = await balancesUseCase.listBalances();
@@ -48,7 +46,11 @@ export const useBalanceStore = defineStore('balance', {
             return;
           }
 
-          this.state.storedBalance = balance;
+          if (balance.length !== this.state.storedBalance.length) {
+            this.state.storedBalance = balance;
+            console.log('balance changed', this.state.storedBalance);
+          }
+
           this.state.stateMessage = 'balances loaded';
         }, 3000);
       } catch (err) {
@@ -57,5 +59,13 @@ export const useBalanceStore = defineStore('balance', {
         messagesStore.addMessage(this.state.stateMessage);
       }
     },
+  },
+  getters: {
+    getCurrentYear(): number {
+      return this.state.storedBalance[0].currentYear;
+    },
+    getPreviousYear(): number {
+      return this.state.storedBalance[0].previousYear;
+    }
   },
 });

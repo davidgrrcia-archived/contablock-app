@@ -22,7 +22,6 @@ export const useGeneralLedgerStore = defineStore('generalLedger', {
   actions: {
     async loadGeneralLedger() {
       try {
-        this.state.storedGeneralLedger = [];
         this.state.stateMessage = 'loading general ledger';
 
         const generalLedger = await generalLedgerUseCase.listGeneralLedger();
@@ -33,11 +32,10 @@ export const useGeneralLedgerStore = defineStore('generalLedger', {
           return;
         }
 
-        this.state.storedGeneralLedger = generalLedger;
+        this.state.storedGeneralLedger = generalLedger.reverse();
         this.state.stateMessage = 'general ledger loaded';
 
         setInterval(async () => {
-          this.state.storedGeneralLedger = [];
           this.state.stateMessage = 'loading general ledger';
 
           const generalLedger = await generalLedgerUseCase.listGeneralLedger();
@@ -48,7 +46,10 @@ export const useGeneralLedgerStore = defineStore('generalLedger', {
             return;
           }
 
-          this.state.storedGeneralLedger = generalLedger;
+          if (generalLedger.length !== this.state.storedGeneralLedger.length) {
+            this.state.storedGeneralLedger = generalLedger.reverse();
+          }
+
           this.state.stateMessage = 'general ledger loaded';
         }, 3000);
       } catch (err) {

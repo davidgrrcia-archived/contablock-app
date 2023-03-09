@@ -1,10 +1,24 @@
 <script setup lang="ts">
 import { useGeneralLedgerStore } from '@/features/general-ledger/application/general-ledger-store';
 import { getState, getQuarter, formatAmount, formatDate } from '../../../utils/utils';
+import { ref, watch, onMounted } from 'vue';
 
 const generalLedgerStore = useGeneralLedgerStore();
 await generalLedgerStore.loadGeneralLedger();
-const generalLedger = generalLedgerStore.state.storedGeneralLedger.reverse();
+
+const generalLedger = ref();
+
+watch(
+  () => generalLedgerStore.state.storedGeneralLedger,
+  newStoredGeneralLedger => {
+    generalLedger.value = newStoredGeneralLedger;
+  },
+);
+
+onMounted(async () => {
+  await generalLedgerStore.loadGeneralLedger();
+  generalLedger.value = generalLedgerStore.state.storedGeneralLedger;
+});
 </script>
 
 <template>

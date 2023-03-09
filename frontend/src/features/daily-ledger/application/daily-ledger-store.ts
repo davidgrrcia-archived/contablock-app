@@ -22,7 +22,6 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
   actions: {
     async loadDailyLedger() {
       try {
-        this.state.storedDailyLedger = [];
         this.state.stateMessage = 'loading daily ledger';
 
         const dailyLedger = await dailyLedgerUseCase.listDailyLedger();
@@ -33,8 +32,7 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
           return;
         }
 
-        this.state.storedDailyLedger = dailyLedger;
-        this.state.stateMessage = 'daily ledger loaded';
+        this.state.storedDailyLedger = dailyLedger.reverse();
 
         setInterval(async () => {
           this.state.stateMessage = 'loading daily ledger';
@@ -48,7 +46,7 @@ export const useDailyLedgerStore = defineStore('dailyLedger', {
           }
 
           if (dailyLedger.length !== this.state.storedDailyLedger.length) {
-            this.state.storedDailyLedger = dailyLedger;
+            this.state.storedDailyLedger = dailyLedger.reverse();
           }
 
           this.state.stateMessage = 'daily ledger loaded';

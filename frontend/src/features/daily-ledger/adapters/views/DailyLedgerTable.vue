@@ -12,20 +12,19 @@ const entriesStore = useEntriesStore();
 const configStore = useConfigStore();
 const dailyLedgerStore = useDailyLedgerStore();
 const messagesStore = useMessagesStore();
-await dailyLedgerStore.loadDailyLedger();
 
-const dailyLedger = ref(dailyLedgerStore.state.storedDailyLedger.reverse());
+const dailyLedger = ref();
 
 watch(
   () => dailyLedgerStore.state.storedDailyLedger,
   newStoredDailyLedger => {
-    dailyLedger.value = newStoredDailyLedger.reverse();
+    dailyLedger.value = newStoredDailyLedger;
   },
 );
 
 onMounted(async () => {
   await dailyLedgerStore.loadDailyLedger();
-  dailyLedger.value = dailyLedgerStore.state.storedDailyLedger.reverse();
+  dailyLedger.value = dailyLedgerStore.state.storedDailyLedger;
 });
 
 let hover = ref(false);
