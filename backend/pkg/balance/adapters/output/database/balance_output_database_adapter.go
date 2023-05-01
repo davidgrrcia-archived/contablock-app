@@ -172,10 +172,10 @@ func (repository *BalanceRepository) Add(ctx context.Context, input balance.AddB
 	output.Kind = storedBalance.Kind
 	output.Parent = storedBalance.Parent
 	output.Child = storedBalance.Child
-    err = json.Unmarshal([]byte(storedBalance.Accounts), &output.Accounts)
-    if err != nil {
+	err = json.Unmarshal([]byte(storedBalance.Accounts), &output.Accounts)
+	if err != nil {
 		return nil, err
-    }
+	}
 
 	return &output, nil
 }
@@ -202,9 +202,9 @@ func (repository *BalanceRepository) Get(ctx context.Context, project string, id
 	output.Parent = storedBalance.Parent
 	output.Child = storedBalance.Child
 	err = json.Unmarshal([]byte(storedBalance.Accounts), &output.Accounts)
-    if err != nil {
+	if err != nil {
 		return nil, err
-    }
+	}
 
 	return &output, nil
 }
@@ -212,7 +212,7 @@ func (repository *BalanceRepository) Get(ctx context.Context, project string, id
 func BuildQueryWithFilters(filters balance.Filters) string {
 	if filters.Year != nil {
 		year := strconv.Itoa(*filters.Year)
-		query := "SELECT balances.project, balances.id, type, kind, parent, child, year, SUM(amount) FROM balances INNER JOIN balances_by_year ON balances_by_year.balance_id = balances.id WHERE balances.project = ? AND year = \"" + year + "\" GROUP BY balances.project, balances.id, type, kind, parent, child, year;"
+		query := "SELECT balances.project, balances.id, type, kind, parent, child, year, SUM(amount) FROM balances INNER JOIN balances_by_year ON (balances_by_year.balance_id = balances.id AND balances_by_year.project = balances.project) WHERE balances.project = ? AND year = \"" + year + "\" GROUP BY balances.project, balances.id, type, kind, parent, child, year;"
 		return query
 	}
 

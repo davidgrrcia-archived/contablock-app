@@ -921,9 +921,9 @@ func (useCase *DefaultEntryUseCase) calculateQuarter(date time.Time) int {
 }
 
 func getAmountForBalance(debitBalance *float64, creditBalance *float64) *float64 {
-	if debitBalance == nil {
-		return creditBalance
+	if debitBalance != nil && *debitBalance != 0 {
+		return debitBalance
 	}
 
-	return debitBalance
+	return creditBalance
 }

@@ -80,7 +80,11 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		return nil, err
 	}
 
+	if input.Year == nil {
+		return nil, errors.New("year must not be nil")
+	}
 	previousYear := *input.Year - 1
+	
 	filters.Year = &previousYear
 	storedBalancesPreviousYear, err := useCase.balanceStorage.All(ctx, input.Project, filters)
 	if err != nil {
