@@ -78,17 +78,17 @@ const searchDebit = event => {
 };
 
 const searchCredit = event => {
-    let query = event.query;
-    let newFilteredCities = [];
+  let query = event.query;
+  let newFilteredCities = [];
 
-    for (let country of accounts) {
-        let filteredItems = FilterService.filter(country.children, ['label'], query, FilterMatchMode.CONTAINS);
-        if (filteredItems && filteredItems.length) {
-            newFilteredCities.push({ ...country, ...{ children: filteredItems } });
-        }
+  for (let country of accounts) {
+    let filteredItems = FilterService.filter(country.children, ['label'], query, FilterMatchMode.CONTAINS);
+    if (filteredItems && filteredItems.length) {
+      newFilteredCities.push({ ...country, ...{ children: filteredItems } });
     }
+  }
 
-    filteredCreditAccounts.value = newFilteredCities;
+  filteredCreditAccounts.value = newFilteredCities;
 };
 </script>
 
@@ -110,7 +110,9 @@ const searchCredit = event => {
     </div>
     <div class="flex-1">
       <label for="balance" class="block text-sm font-medium text-gray-800">Balance del asiento</label>
-      <p id="balance" name="balance" :class="[entriesStore.state.totalBalance > 0 ? 'bg-green-200 text-green-800' : entriesStore.state.totalBalance < 0 ? 'bg-red-200 text-red-800' : '']" class="inline-block rounded-lg p-2 text-xl">{{ formatAmount(entriesStore.state.totalBalance, selectedCurrency) }}</p>
+      <p v-if="entriesStore.state.entriesCreation.length == 0" class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento vacío ❌</p>
+      <p v-else-if="entriesStore.state.totalBalance == 0" class="inline-block rounded-lg bg-green-200 p-2 text-xl text-green-800">Asiento correcto ✅</p>
+      <p v-else class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento descuadrado ❌</p>
     </div>
   </div>
 
