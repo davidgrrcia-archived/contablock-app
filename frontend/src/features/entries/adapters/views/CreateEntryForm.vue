@@ -5,6 +5,7 @@ import type { CreateEntryInput } from '@/features/entries/application/entries-mo
 import { useEntriesStore } from '@/features/entries/application/entries-store.js';
 import { useAccountsStore } from '@/features/accounts/application/accounts-store.js';
 import { findCurrencyByCode, currencies, dateToUnixTimestamp, formatDate, formatAmount } from '@/features/utils/utils';
+import { FilterMatchMode, FilterService } from 'primevue/api';
 
 //store
 const entriesStore = useEntriesStore();
@@ -19,7 +20,9 @@ let selectedDebitAmount = ref();
 let selectedCreditAmount = ref();
 const multipleEntryId = uuid();
 let selectedDebitAccount = ref();
+let filteredDebitAccounts = ref();
 let selectedCreditAccount = ref();
+let filteredCreditAccounts = ref();
 const accounts = accountsStore.state.accounts;
 
 if (entriesStore.state.multipleEntryId === '') {
@@ -59,6 +62,34 @@ function addCreditEntry() {
 function removeEntry(id: string, debitAmount: number, creditAmount: number) {
   entriesStore.removeCreationEntry(id, debitAmount, creditAmount);
 }
+
+const searchDebit = event => {
+  let query = event.query;
+  let newFilteredCities = [];
+
+  for (let country of accounts) {
+    let filteredItems = FilterService.filter(country.children, ['label'], query, FilterMatchMode.CONTAINS);
+    if (filteredItems && filteredItems.length) {
+      newFilteredCities.push({ ...country, ...{ children: filteredItems } });
+    }
+  }
+
+  filteredDebitAccounts.value = newFilteredCities;
+};
+
+const searchCredit = event => {
+    let query = event.query;
+    let newFilteredCities = [];
+
+    for (let country of accounts) {
+        let filteredItems = FilterService.filter(country.children, ['label'], query, FilterMatchMode.CONTAINS);
+        if (filteredItems && filteredItems.length) {
+            newFilteredCities.push({ ...country, ...{ children: filteredItems } });
+        }
+    }
+
+    filteredCreditAccounts.value = newFilteredCities;
+};
 </script>
 
 <template>
@@ -92,7 +123,13 @@ function removeEntry(id: string, debitAmount: number, creditAmount: number) {
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-800">Cuenta</label>
-            <TreeSelectPrimeVue v-model="selectedDebitAccount" :options="accounts" placeholder="Selecciona una cuenta para añadirla al debe" id="account" name="account"></TreeSelectPrimeVue>
+            <AutoCompletePrimeVue v-model="selectedDebitAccount" dropdown :suggestions="filteredDebitAccounts" @complete="searchDebit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Selecciona una cuenta para añadirla al debe" class="">
+              <template #optiongroup="slotProps">
+                <div class="align-items-center country-item flex">
+                  <div>{{ slotProps.item.label }}</div>
+                </div>
+              </template>
+            </AutoCompletePrimeVue>
           </div>
           <div>
             <label for="debit-amount" class="block text-sm font-medium text-gray-800">Importe</label>
@@ -122,7 +159,13 @@ function removeEntry(id: string, debitAmount: number, creditAmount: number) {
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-800">Cuenta</label>
-            <TreeSelectPrimeVue v-model="selectedCreditAccount" :options="accounts" placeholder="Selecciona una cuenta para añadirla al haber" id="account" name="account"></TreeSelectPrimeVue>
+            <AutoCompletePrimeVue v-model="selectedCreditAccount" dropdown :suggestions="filteredCreditAccounts" @complete="searchCredit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Selecciona una cuenta para añadirla al haber" class="">
+              <template #optiongroup="slotProps">
+                <div class="align-items-center country-item flex">
+                  <div>{{ slotProps.item.label }}</div>
+                </div>
+              </template>
+            </AutoCompletePrimeVue>
           </div>
           <div>
             <label for="credit-amount" class="block text-sm font-medium text-gray-800">Importe</label>
@@ -180,11 +223,11 @@ function removeEntry(id: string, debitAmount: number, creditAmount: number) {
 </template>
 
 <style>
-.p-treeselect {
+.p-autocomplete {
   @apply w-full rounded-md border-gray-300 pl-7 pr-12 text-sm;
 }
 
-.p-treenode-content {
+.p-autocomplete-panel {
   @apply bg-gray-100 text-sm text-gray-800;
 }
 

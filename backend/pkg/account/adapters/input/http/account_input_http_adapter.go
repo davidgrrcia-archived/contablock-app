@@ -78,25 +78,15 @@ func (adapter *DefaultHttpInputAdapter) AdaptListAccounts(ctx context.Context, d
 		responseItem.BalanceID = item.BalanceID
 		responseItem.DisplayName = item.DisplayName
 
-		for i, subgroup := range item.Subgroups {
-			var subgroupItem Subgroup
-			subgroupItem.Project = subgroup.Project
-			subgroupItem.ID = subgroup.ID
-			subgroupItem.Name = subgroup.Name
-			subgroupItem.Level = subgroup.Level
-			subgroupItem.BalanceID = subgroup.BalanceID
-			subgroupItem.DisplayName = subgroup.DisplayName
-			responseItem.Subgroups = append(responseItem.Subgroups, subgroupItem)
-			for _, account := range subgroup.Accounts {
-				var accountItem Account
-				accountItem.Project = account.Project
-				accountItem.ID = account.ID
-				accountItem.Name = account.Name
-				accountItem.Level = account.Level
-				accountItem.BalanceID = account.BalanceID
-				accountItem.DisplayName = account.DisplayName
-				responseItem.Subgroups[i].Accounts = append(responseItem.Subgroups[i].Accounts, accountItem)
-			}
+		for _, account := range item.Accounts {
+			var accountItem Account
+			accountItem.Project = account.Project
+			accountItem.ID = account.ID
+			accountItem.Name = account.Name
+			accountItem.Level = account.Level
+			accountItem.BalanceID = account.BalanceID
+			accountItem.DisplayName = account.DisplayName
+			responseItem.Accounts = append(responseItem.Accounts, accountItem)
 		}
 
 		response.Items = append(response.Items, responseItem)

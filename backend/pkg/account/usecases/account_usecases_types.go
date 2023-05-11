@@ -20,16 +20,6 @@ type Account struct {
 	DisplayName string
 }
 
-type Subgroup struct {
-	Project     string
-	ID          string
-	Name        string
-	Level       string
-	BalanceID   *string
-	DisplayName string
-	Accounts    []Account
-}
-
 type Group struct {
 	Project     string
 	ID          string
@@ -37,7 +27,7 @@ type Group struct {
 	Level       string
 	BalanceID   *string
 	DisplayName string
-	Subgroups   []Subgroup
+	Accounts    []Account
 }
 
 type DescribeAccountInput struct {
