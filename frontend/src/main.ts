@@ -11,6 +11,8 @@ import 'primeicons/primeicons.css';
 import Calendar from 'primevue/calendar';
 import Dropdown from 'primevue/dropdown';
 import AutoComplete from 'primevue/autocomplete';
+import InputNumber from 'primevue/inputnumber';
+import Button from 'primevue/button';
 import { useConfigStore } from './stores/config';
 
 const pinia = createPinia();
@@ -34,5 +36,7 @@ router.beforeEach((to, from, next) => {
 app.component('CalendarPrimeVue', Calendar);
 app.component('DropdownPrimeVue', Dropdown);
 app.component('AutoCompletePrimeVue', AutoComplete);
+app.component('InputNumberPrimeVue', InputNumber);
+app.component('ButtonPrimeVue', Button);
 
 app.mount('#app');

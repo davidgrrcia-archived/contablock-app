@@ -112,7 +112,7 @@ const searchCredit = (event: any) => {
       <label for="balance" class="block text-sm font-medium text-gray-800">Balance del asiento</label>
       <p v-if="entriesStore.state.entriesCreation.length == 0" class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento vacío ❌</p>
       <p v-else-if="entriesStore.state.totalBalance == 0" class="inline-block rounded-lg bg-green-200 p-2 text-xl text-green-800">Asiento correcto ✅</p>
-      <p v-else class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento descuadrado ❌</p>
+      <p v-else class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento descuadrado ({{ formatAmount(entriesStore.state.totalBalance, selectedCurrency) }}) ❌</p>
     </div>
   </div>
 
@@ -125,7 +125,7 @@ const searchCredit = (event: any) => {
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-800">Cuenta</label>
-            <AutoCompletePrimeVue v-model="selectedDebitAccount" dropdown :suggestions="filteredDebitAccounts" @complete="searchDebit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Selecciona una cuenta para añadirla al debe" class="">
+            <AutoCompletePrimeVue v-model="selectedDebitAccount" dropdown scrollHeight="500px" :suggestions="filteredDebitAccounts" @complete="searchDebit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Selecciona una cuenta para añadirla al debe" class="">
               <template #optiongroup="slotProps">
                 <div class="align-items-center country-item flex">
                   <div>{{ slotProps.item.label }}</div>
@@ -135,18 +135,13 @@ const searchCredit = (event: any) => {
           </div>
           <div>
             <label for="debit-amount" class="block text-sm font-medium text-gray-800">Importe</label>
-            <div class="relative mt-1 rounded-md shadow-sm">
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span class="text-gray-500 sm:text-sm">{{ findCurrencyByCode(selectedCurrency) }}</span>
-              </div>
-              <input v-model="selectedDebitAmount" type="number" oninput="validity.valid||(value='');" name="debit-amount" id="debit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm" placeholder="0.00" min="0" max="999999999999999" />
-              <div class="absolute inset-y-0 right-0 flex items-center">
-                <label for="currency" class="sr-only">Divisa</label>
-                <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 sm:text-sm">
-                  <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
-                </select>
-                <button type="submit" id="credit-amount" name="credit-amount" @click="addDebitEntry" class="inline-flex w-full justify-center rounded-tr-md rounded-br-md bg-blue-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-800">Añadir al debe</button>
-              </div>
+            <div class="p-inputgroup flex-1">
+              <span class="p-inputgroup-addon">{{ findCurrencyByCode(selectedCurrency) }}</span>
+              <InputNumberPrimeVue v-model="selectedDebitAmount" inputId="locale-user" :minFractionDigits="2" :maxFractionDigits="2" placeholder="Importe del debe" />
+              <select v-model="selectedCurrency" id="currency" name="currency" class="p-inputgroup-addon">
+                <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
+              </select>
+              <button type="submit" id="debit-amount" name="debit-amount" @click="addDebitEntry" class="bg-blue-500 py-2 px-4 text-white shadow-sm hover:bg-gray-800">Añadir al debe</button>
             </div>
           </div>
         </div>
@@ -171,19 +166,14 @@ const searchCredit = (event: any) => {
           </div>
           <div>
             <label for="credit-amount" class="block text-sm font-medium text-gray-800">Importe</label>
-            <div class="relative mt-1 rounded-md shadow-sm">
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span class="text-gray-500 sm:text-sm">{{ findCurrencyByCode(selectedCurrency) }}</span>
+              <div class="p-inputgroup flex-1">
+                  <span class="p-inputgroup-addon">{{ findCurrencyByCode(selectedCurrency) }}</span>
+                  <InputNumberPrimeVue v-model="selectedCreditAmount" inputId="locale-user" :minFractionDigits="2" :maxFractionDigits="2" placeholder="Importe del haber" />
+                  <select v-model="selectedCurrency" id="currency" name="currency" class="p-inputgroup-addon">
+                      <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
+                  </select>
+                  <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="bg-blue-500 py-2 px-4 text-white shadow-sm hover:bg-gray-800">Añadir al haber</button>
               </div>
-              <input v-model="selectedCreditAmount" type="number" oninput="validity.valid||(value='');" name="credit-amount" id="credit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm" placeholder="0.00" min="0" max="999999999999999" />
-              <div class="absolute inset-y-0 right-0 flex items-center">
-                <label for="currency" class="sr-only">Divisa</label>
-                <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 sm:text-sm">
-                  <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
-                </select>
-                <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="inline-flex w-full justify-center rounded-tr-md rounded-br-md bg-blue-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-800">Añadir al haber</button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -226,7 +216,7 @@ const searchCredit = (event: any) => {
 
 <style>
 .p-autocomplete {
-  @apply w-full rounded-md border-gray-300 pl-7 pr-12 text-sm;
+  @apply w-full rounded-md border-gray-300 text-sm;
 }
 
 .p-autocomplete-panel {
