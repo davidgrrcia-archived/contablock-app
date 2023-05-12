@@ -18,7 +18,6 @@ export interface Entry {
   quarter: number;
   debitAmount: number | null;
   creditAmount: number | null;
-  totalAmount: number;
   state: string;
   stateReason: string;
   creationDate: number;

@@ -14,7 +14,6 @@ type Entry struct {
 	Quarter         int     `json:"quarter"`
 	DebitBalance    float64 `json:"debitBalance"`
 	CreditBalance   float64 `json:"creditBalance"`
-	TotalBalance    float64 `json:"totalBalance"`
 	State           string  `json:"state"`
 	StateReason     *string `json:"stateReason"`
 	CreationDate    int64   `json:"creationDate"`

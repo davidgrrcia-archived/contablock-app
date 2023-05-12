@@ -39,6 +39,21 @@ type CreateBalanceByYearOutput struct {
 	Year      int
 }
 
+type DescribeBalanceInput struct {
+	Project string
+	ID      string
+}
+
+type DescribeBalanceOutput struct {
+	Project  string
+	ID       string
+	Type     string
+	Kind     *string
+	Parent   *string
+	Child    *string
+	Accounts []string
+}
+
 type ListBalanceInput struct {
 	Project string
 	Year    *int

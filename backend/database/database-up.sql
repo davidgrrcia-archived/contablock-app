@@ -60,7 +60,6 @@ CREATE TABLE entries(
     quarter VARCHAR(1) NOT NULL,
     debit_balance VARCHAR(64) NOT NULL,
     credit_balance VARCHAR(64) NOT NULL,
-    total_balance VARCHAR(64) NOT NULL,
     state VARCHAR(64) NOT NULL,
     state_reason VARCHAR(256),
     creation_date VARCHAR(64) NOT NULL,

@@ -4596,21 +4596,21 @@ balances:
     kind:
     parent: I. Inmovilizado intangible
     child: 1. Desarrollo
-    accounts: [201, 2801, 2901]
+    accounts: [201, (2801), (2901)]
   - project: *zara-accountant-project
     id: 10001
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 2. Concesiones
-    accounts: [202, 2802, 2902]
+    accounts: [202, (2802), (2902)]
   - project: *zara-accountant-project
     id: 10002
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 3. Patentes, licencias, marcas y similares
-    accounts: [203, 2803, 2903]
+    accounts: [203, (2803), (2903)]
   - project: *zara-accountant-project
     id: 10003
     type: A) ACTIVO NO CORRIENTE
@@ -4624,28 +4624,28 @@ balances:
     kind:
     parent: I. Inmovilizado intangible
     child: 5. Aplicaciones informáticas
-    accounts: [206, 2806, 2906]
+    accounts: [206, (2806), (2906)]
   - project: *zara-accountant-project
     id: 10005
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 6. Investigación
-    accounts: [200, 2800]
+    accounts: [200, (2800)]
   - project: *zara-accountant-project
     id: 10006
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: I. Inmovilizado intangible
     child: 7. Otro inmovilizado intangible
-    accounts: [205, 209, 2805, 2905]
+    accounts: [205, 209, (2805), (2905)]
   - project: *zara-accountant-project
     id: 10007
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: II. Inmovilizado material
     child: 1. Terrenos y construcciones
-    accounts: [210, 211, 2811, 2910, 2911]
+    accounts: [210, 211, (2811), (2910), (2911)]
   - project: *zara-accountant-project
     id: 10008
     type: A) ACTIVO NO CORRIENTE
@@ -4662,22 +4662,22 @@ balances:
         217,
         218,
         219,
-        2812,
-        2813,
-        2814,
-        2815,
-        2816,
-        2817,
-        2818,
-        2819,
-        2912,
-        2913,
-        2914,
-        2915,
-        2916,
-        2917,
-        2918,
-        2919,
+        (2812),
+        (2813),
+        (2814),
+        (2815),
+        (2816),
+        (2817),
+        (2818),
+        (2819),
+        (2912),
+        (2913),
+        (2914),
+        (2915),
+        (2916),
+        (2917),
+        (2918),
+        (2919),
       ]
   - project: *zara-accountant-project
     id: 10009
@@ -4692,56 +4692,56 @@ balances:
     kind:
     parent: III. Inversiones inmobiliarias
     child: 1. Terrenos
-    accounts: [220, 2920]
+    accounts: [220, (2920)]
   - project: *zara-accountant-project
     id: 10011
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: III. Inversiones inmobiliarias
     child: 2. Construcciones
-    accounts: [221, 282, 2921]
+    accounts: [221, (282), (2921)]
   - project: *zara-accountant-project
     id: 10012
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del grupo y asociadas a largo plazo
     child: 1. Instrumentos de patrimonio
-    accounts: [2403, 2404, 2493, 2494, 293]
+    accounts: [2403, 2404, (2493), (2494), (293)]
   - project: *zara-accountant-project
     id: 10013
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del grupo y asociadas a largo plazo
     child: 2. Créditos a empresas
-    accounts: [2423, 2424, 2953, 2954]
+    accounts: [2423, 2424, (2953), (2954)]
   - project: *zara-accountant-project
     id: 10014
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del grupo y asociadas a largo plazo
     child: 3. Valores representativos de deuda
-    accounts: [2413, 2414, 2943, 2944]
+    accounts: [2413, 2414, (2943), (2944)]
   - project: *zara-accountant-project
     id: 10015
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: V. Inversiones financieras a largo plazo
     child: 1. Instrumentos de patrimonio
-    accounts: [2405, 2495, 250, 259]
+    accounts: [2405, (2495), 250, (259)]
   - project: *zara-accountant-project
     id: 10016
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: V. Inversiones financieras a largo plazo
     child: 2. Créditos a terceros
-    accounts: [2425, 252, 253, 254, 2955, 298]
+    accounts: [2425, 252, 253, 254, (2955), (298)]
   - project: *zara-accountant-project
     id: 10017
     type: A) ACTIVO NO CORRIENTE
     kind:
     parent: V. Inversiones financieras a largo plazo
     child: 3. Valores representativos de deuda
-    accounts: [2415, 251, 2945, 297]
+    accounts: [2415, 251, (2945), (297)]
   - project: *zara-accountant-project
     id: 10018
     type: A) ACTIVO NO CORRIENTE
@@ -4776,42 +4776,42 @@ balances:
     kind:
     parent: I. Activos no corrientes mantenidos para la venta.
     child:
-    accounts: [580, 581, 582, 583, 584, 599]
+    accounts: [580, 581, 582, 583, 584, (599)]
   - project: *zara-accountant-project
     id: 10023
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 1. Comerciales.
-    accounts: [30, 390]
+    accounts: [30, (390)]
   - project: *zara-accountant-project
     id: 10024
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 2. Materias primas y otros aprovisionamientos
-    accounts: [31, 32, 391, 392]
+    accounts: [31, 32, (391), (392)]
   - project: *zara-accountant-project
     id: 10025
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 3. Productos en curso
-    accounts: [33, 34, 393, 394]
+    accounts: [33, 34, (393), (394)]
   - project: *zara-accountant-project
     id: 10026
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 4. Productos terminados
-    accounts: [35, 395]
+    accounts: [35, (395)]
   - project: *zara-accountant-project
     id: 10027
     type: B) ACTIVO CORRIENTE
     kind:
     parent: II. Existencias.
     child: 5. Subproductos, residuos y materiales recuperados.
-    accounts: [36, 396]
+    accounts: [36, (396)]
   - project: *zara-accountant-project
     id: 10028
     type: B) ACTIVO CORRIENTE
@@ -4825,14 +4825,14 @@ balances:
     kind:
     parent: III. Deudores comerciales y otras cuentas a cobrar.
     child: 1. Clientes por ventas y prestaciones de servicios
-    accounts: [430, 431, 432, 435, 436, 437, 490, 4935]
+    accounts: [430, 431, 432, 435, 436, (437), (490), (4935)]
   - project: *zara-accountant-project
     id: 10030
     type: B) ACTIVO CORRIENTE
     kind:
     parent: III. Deudores comerciales y otras cuentas a cobrar.
     child: 2. Clientes, empresas del grupo, y asociadas
-    accounts: [433, 434, 4933, 4934]
+    accounts: [433, 434, (4933), (4934)]
   - project: *zara-accountant-project
     id: 10031
     type: B) ACTIVO CORRIENTE
@@ -4874,21 +4874,21 @@ balances:
     kind:
     parent: IV. Inversiones en empresas del grupo y asociadas a corto plazo
     child: 1. Instrumentos de patrimonio
-    accounts: [5303, 5304, 5393, 5394, 593]
+    accounts: [5303, 5304, (5393), (5394), (593)]
   - project: *zara-accountant-project
     id: 10037
     type: B) ACTIVO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del grupo y asociadas a corto plazo
     child: 2. Créditos a empresas
-    accounts: [5323, 5324, 5343, 5344, 5953, 5954]
+    accounts: [5323, 5324, 5343, 5344, (5953), (5954)]
   - project: *zara-accountant-project
     id: 10038
     type: B) ACTIVO CORRIENTE
     kind:
     parent: IV. Inversiones en empresas del grupo y asociadas a corto plazo
     child: 3. Valores representativos de deuda
-    accounts: [5313, 5314, 5333, 5334, 5943, 5944]
+    accounts: [5313, 5314, 5333, 5334, (5943), (5944)]
   - project: *zara-accountant-project
     id: 10039
     type: B) ACTIVO CORRIENTE
@@ -4902,21 +4902,21 @@ balances:
     kind:
     parent: V. Inversiones financieras a corto plazo
     child: 1. Instrumentos de patrimonio
-    accounts: [5305, 540, 5395, 549]
+    accounts: [5305, 540, (5395), (549)]
   - project: *zara-accountant-project
     id: 10041
     type: B) ACTIVO CORRIENTE
     kind:
     parent: V. Inversiones financieras a corto plazo
     child: 2. Créditos a empresas
-    accounts: [5325, 5345, 542, 543, 547, 5955, 598]
+    accounts: [5325, 5345, 542, 543, 547, (5955), (598)]
   - project: *zara-accountant-project
     id: 10042
     type: B) ACTIVO CORRIENTE
     kind:
     parent: V. Inversiones financieras a corto plazo
     child: 3. Valores representativos de deuda
-    accounts: [5315, 5335, 541, 546, 5945, 597]
+    accounts: [5315, 5335, 541, 546, (5945), (597)]
   - project: *zara-accountant-project
     id: 10043
     type: B) ACTIVO CORRIENTE
@@ -4965,7 +4965,7 @@ balances:
     kind: A-1) Fondos propios
     parent: I. Capital
     child: 2. (Capital no exigido)
-    accounts: [1030, 1040]
+    accounts: [(1030), (1040)]
   - project: *zara-accountant-project
     id: 10050
     type: A) PATRIMONIO NETO
@@ -4993,7 +4993,7 @@ balances:
     kind: A-1) Fondos propios
     parent: IV. (Acciones y participaciones en patrimonio propias)
     child:
-    accounts: [108, 109]
+    accounts: [(108), (109)]
   - project: *zara-accountant-project
     id: 10054
     type: A) PATRIMONIO NETO
@@ -5007,7 +5007,7 @@ balances:
     kind: A-1) Fondos propios
     parent: V. Resultados de ejercicios anteriores
     child: 2. (Resultados negativos de ejercicios anteriores)
-    accounts: [121]
+    accounts: [(121)]
   - project: *zara-accountant-project
     id: 10056
     type: A) PATRIMONIO NETO
@@ -5028,7 +5028,7 @@ balances:
     kind: A-1) Fondos propios
     parent: VIII. (Dividendo a cuenta)
     child:
-    accounts: [557]
+    accounts: [(557)]
   - project: *zara-accountant-project
     id: 10059
     type: A) PATRIMONIO NETO
@@ -5219,10 +5219,10 @@ balances:
     child: 5. Otros pasivos financieros
     accounts:
       [
-        1034,
-        1044,
-        190,
-        192,
+        (1034),
+        (1044),
+        (190),
+        (192),
         194,
         509,
         5115,
@@ -5274,7 +5274,7 @@ balances:
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 1. Proveedores
-    accounts: [400, 401, 405, 406]
+    accounts: [400, 401, 405, (406)]
   - project: *zara-accountant-project
     id: 10088
     type: C) PASIVO CORRIENTE

@@ -31,7 +31,6 @@ export class DefaultGeneralLedgerHttpAdapter implements GeneralLedgerAdapter {
         quarter: item2.quarter,
         debitAmount: item2.debitBalance,
         creditAmount: item2.creditBalance,
-        totalAmount: item2.totalBalance,
         state: item2.state,
         stateReason: item2.stateReason,
         creationDate: item2.creationDate,

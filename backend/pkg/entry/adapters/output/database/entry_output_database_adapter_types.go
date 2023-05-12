@@ -14,7 +14,6 @@ type EntryDb struct {
 	Quarter         int     `storage:"quarter"`
 	DebitBalance    float64 `storage:"debit_balance"`
 	CreditBalance   float64 `storage:"credit_balance"`
-	TotalBalance    float64 `storage:"total_balance"`
 	State           string  `storage:"state"`
 	StateReason     *string `storage:"state_reason"`
 	CreationDate    string  `storage:"creation_date"`

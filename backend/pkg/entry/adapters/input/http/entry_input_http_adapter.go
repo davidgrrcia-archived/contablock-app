@@ -73,7 +73,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptCreateEntry(ctx context.Context, da
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
-	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
 	response.CreationDate = outputData.Entry.CreationDate.Unix()
@@ -109,7 +108,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptDescribeEntry(ctx context.Context, 
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
-	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
 	response.CreationDate = outputData.Entry.CreationDate.Unix()
@@ -148,7 +146,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptListEntries(ctx context.Context, da
 		responseItem.Quarter = item.Quarter
 		responseItem.DebitBalance = item.DebitBalance
 		responseItem.CreditBalance = item.CreditBalance
-		responseItem.TotalBalance = item.TotalBalance
 		responseItem.State = item.State
 		responseItem.StateReason = item.StateReason
 		responseItem.CreationDate = item.CreationDate.Unix()
@@ -187,7 +184,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptDeleteEntry(ctx context.Context, da
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
-	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
 	response.CreationDate = outputData.Entry.CreationDate.Unix()
@@ -225,7 +221,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptPublishEntry(ctx context.Context, d
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
-	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
 	response.CreationDate = outputData.Entry.CreationDate.Unix()
@@ -263,7 +258,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptReviewEntry(ctx context.Context, da
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
-	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
 	response.CreationDate = outputData.Entry.CreationDate.Unix()
@@ -301,7 +295,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptApproveEntry(ctx context.Context, d
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
-	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
 	response.CreationDate = outputData.Entry.CreationDate.Unix()
@@ -339,7 +332,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptRejectEntry(ctx context.Context, da
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
-	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
 	response.CreationDate = outputData.Entry.CreationDate.Unix()
@@ -375,7 +367,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptUpdateEntry(ctx context.Context, da
 	response.Quarter = outputData.Entry.Quarter
 	response.DebitBalance = outputData.Entry.DebitBalance
 	response.CreditBalance = outputData.Entry.CreditBalance
-	response.TotalBalance = outputData.Entry.TotalBalance
 	response.State = outputData.Entry.State
 	response.StateReason = outputData.Entry.StateReason
 	response.CreationDate = outputData.Entry.CreationDate.Unix()

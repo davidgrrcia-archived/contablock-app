@@ -8,7 +8,6 @@ export interface Entry {
   quarter: number;
   debitBalance: number | null;
   creditBalance: number | null;
-  totalBalance: number;
   state: string;
   stateReason: string;
   creationDate: number;
@@ -72,7 +71,6 @@ export interface EntryDescribeResponse {
   quarter: number;
   debitBalance: number | null;
   creditBalance: number | null;
-  totalBalance: number;
   state: string;
   stateReason: string;
   creationDate: number;

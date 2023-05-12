@@ -68,7 +68,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptListGeneralLedger(ctx context.Conte
 			entry.Quarter = item2.Quarter
 			entry.DebitBalance = item2.DebitBalance
 			entry.CreditBalance = item2.CreditBalance
-			entry.TotalBalance = item2.TotalBalance
 			entry.State = item2.State
 			entry.StateReason = item2.StateReason
 			entry.CreationDate = item2.CreationDate.Unix()

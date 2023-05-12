@@ -10,6 +10,7 @@ import (
 
 type BalanceUseCase interface {
 	CreateBalanceByYear(ctx context.Context, input CreateBalanceByYearInput) (*CreateBalanceByYearOutput, error)
+	DescribeBalance(ctx context.Context, input DescribeBalanceInput) (*DescribeBalanceOutput, error)
 	ListBalances(ctx context.Context, input ListBalanceInput) (*ListBalanceOutput, error)
 	RemoveBalance(ctx context.Context, input RemoveBalanceInput) (*RemoveBalanceOutput, error)
 	CreateBalance(ctx context.Context, input CreateBalanceInput) (*CreateBalanceOutput, error)
@@ -63,6 +64,29 @@ func (useCase *DefaultBalanceUseCase) CreateBalanceByYear(ctx context.Context, i
 	output.BalanceID = storedBalance.BalanceID
 	output.Amount = storedBalance.Amount
 	output.Year = storedBalance.Year
+
+	return &output, nil
+}
+
+func (useCase *DefaultBalanceUseCase) DescribeBalance(ctx context.Context, input DescribeBalanceInput) (*DescribeBalanceOutput, error) {
+	_, err := govalidator.ValidateStruct(input)
+	if err != nil {
+		return nil, errors.New("invalid input: " + err.Error())
+	}
+
+	storedBalance, err := useCase.balanceStorage.Get(ctx, input.Project, input.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	var output DescribeBalanceOutput
+	output.Project = storedBalance.Project
+	output.ID = storedBalance.ID
+	output.Type = storedBalance.Type
+	output.Kind = storedBalance.Kind
+	output.Parent = storedBalance.Parent
+	output.Child = storedBalance.Child
+	output.Accounts = storedBalance.Accounts
 
 	return &output, nil
 }

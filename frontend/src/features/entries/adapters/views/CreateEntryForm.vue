@@ -6,6 +6,7 @@ import { useEntriesStore } from '@/features/entries/application/entries-store.js
 import { useAccountsStore } from '@/features/accounts/application/accounts-store.js';
 import { findCurrencyByCode, currencies, dateToUnixTimestamp, formatDate, formatAmount } from '@/features/utils/utils';
 import { FilterMatchMode, FilterService } from 'primevue/api';
+import { TrashIcon } from '@heroicons/vue/20/solid';
 
 //store
 const entriesStore = useEntriesStore();
@@ -29,7 +30,7 @@ if (entriesStore.state.multipleEntryId === '') {
   entriesStore.state.multipleEntryId = multipleEntryId;
 }
 
-function addDebitEntry() {
+async function addDebitEntry() {
   const newEntry: CreateEntryInput = {
     id: uuid(),
     accountId: selectedDebitAccount.value,
@@ -41,10 +42,12 @@ function addDebitEntry() {
     creditAmount: null,
   };
 
-  entriesStore.addDebitEntry(newEntry);
+  await entriesStore.addDebitEntry(newEntry);
+
+  clearDebitForm();
 }
 
-function addCreditEntry() {
+async function addCreditEntry() {
   const newEntry: CreateEntryInput = {
     id: uuid(),
     accountId: selectedCreditAccount.value,
@@ -56,11 +59,21 @@ function addCreditEntry() {
     creditAmount: selectedCreditAmount.value,
   };
 
-  entriesStore.addCreditEntry(newEntry);
+  await entriesStore.addCreditEntry(newEntry);
+
+  clearCreditForm();
 }
 
 function removeEntry(id: string, debitAmount: number, creditAmount: number) {
   entriesStore.removeCreationEntry(id, debitAmount, creditAmount);
+
+  if (entriesStore.state.totalBalance >= 0) {
+    selectedCreditAmount.value = entriesStore.state.totalBalance;
+    selectedDebitAmount = ref();
+  } else {
+    selectedDebitAmount.value = entriesStore.state.totalBalance * -1;
+    selectedCreditAmount = ref();
+  }
 }
 
 const searchDebit = (event: any) => {
@@ -90,6 +103,42 @@ const searchCredit = (event: any) => {
 
   filteredCreditAccounts.value = newFilteredCities;
 };
+
+function clearDebitForm() {
+  selectedCreditAmount.value = entriesStore.state.totalBalance >= 0 ? entriesStore.state.totalBalance : entriesStore.state.totalBalance * -1;
+  selectedDebitAmount = ref();
+  selectedDebitAccount = ref();
+}
+
+function clearCreditForm() {
+  selectedDebitAmount.value = entriesStore.state.totalBalance >= 0 ? entriesStore.state.totalBalance : entriesStore.state.totalBalance * -1;
+  selectedCreditAmount = ref();
+  selectedCreditAccount = ref();
+}
+
+function getTotalDebitBalance() {
+  let total = 0;
+
+  for (let entry of entriesStore.state.entriesCreation) {
+    if (entry.entry.debitAmount) {
+      total += entry.entry.debitAmount;
+    }
+  }
+
+  return total;
+}
+
+function getTotalCreditBalance() {
+  let total = 0;
+
+  for (let entry of entriesStore.state.entriesCreation) {
+    if (entry.entry.creditAmount) {
+      total += entry.entry.creditAmount;
+    }
+  }
+
+  return total;
+}
 </script>
 
 <template>
@@ -110,9 +159,9 @@ const searchCredit = (event: any) => {
     </div>
     <div class="flex-1">
       <label for="balance" class="block text-sm font-medium text-gray-800">Balance del asiento</label>
-      <p v-if="entriesStore.state.entriesCreation.length == 0" class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento vacío ❌</p>
+      <p v-if="entriesStore.state.entriesCreation.length == 0" class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento vacío</p>
       <p v-else-if="entriesStore.state.totalBalance == 0" class="inline-block rounded-lg bg-green-200 p-2 text-xl text-green-800">Asiento correcto ✅</p>
-      <p v-else class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento descuadrado ({{ formatAmount(entriesStore.state.totalBalance, selectedCurrency) }}) ❌</p>
+      <p v-else class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento descuadrado ({{ formatAmount(entriesStore.state.totalBalance > 0 ? entriesStore.state.totalBalance : entriesStore.state.totalBalance * -1, selectedCurrency) }})</p>
     </div>
   </div>
 
@@ -156,7 +205,7 @@ const searchCredit = (event: any) => {
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-800">Cuenta</label>
-            <AutoCompletePrimeVue v-model="selectedCreditAccount" dropdown :suggestions="filteredCreditAccounts" @complete="searchCredit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Cuenta del haber" class="">
+            <AutoCompletePrimeVue v-model="selectedCreditAccount" dropdown scrollHeight="500px" :suggestions="filteredCreditAccounts" @complete="searchCredit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Cuenta del haber" class="">
               <template #optiongroup="slotProps">
                 <div class="align-items-center country-item flex">
                   <div>{{ slotProps.item.label }}</div>
@@ -190,8 +239,8 @@ const searchCredit = (event: any) => {
               <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Divisa</th>
               <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Fecha</th>
               <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Concepto</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Debe</th>
-              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Haber</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Debe: {{ formatAmount(getTotalDebitBalance(), 'EUR') }}</th>
+              <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Haber: {{ formatAmount(getTotalCreditBalance(), 'EUR') }}</th>
               <th scope="col" class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-white">Acciones</th>
             </tr>
           </thead>
@@ -204,7 +253,7 @@ const searchCredit = (event: any) => {
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ formatAmount(entry.entry.debitAmount, entry.entry.currency) }}</td>
               <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">{{ formatAmount(entry.entry.creditAmount, entry.entry.currency) }}</td>
               <td class="space-x-3 whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                <button @click="removeEntry(entry.entry.id || '', entry.entry.debitAmount || 0, entry.entry.creditAmount || 0)" class="text-red-500 hover:text-red-900">Eliminar</button>
+                <button @click="removeEntry(entry.entry.id || '', entry.entry.debitAmount || 0, entry.entry.creditAmount || 0)" class="block flex rounded-lg bg-red-200 p-2 text-red-800">Eliminar <TrashIcon class="ml-2 h-5 w-auto"></TrashIcon></button>
               </td>
             </tr>
           </tbody>

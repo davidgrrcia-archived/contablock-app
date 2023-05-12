@@ -26,7 +26,6 @@ export class DefaultDailyLedgerHttpAdapter implements DailyLedgerAdapter {
           quarter: item2.entry.quarter,
           debitAmount: item2.entry.debitBalance,
           creditAmount: item2.entry.creditBalance,
-          totalAmount: item2.entry.totalBalance,
           state: item2.entry.state,
           stateReason: item2.entry.stateReason,
           creationDate: item2.entry.creationDate,

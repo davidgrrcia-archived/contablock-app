@@ -63,18 +63,6 @@ services:
     ports:
       - 3306:3306
 
-  phpmyadmin:
-    image: phpmyadmin
-    container_name: phpmyadmin
-    restart: always
-    links:
-      - db
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-    ports:
-      - 8080:80
-
   blockchain:
     container_name: contablock-blockchain
     build: ./smart-contracts

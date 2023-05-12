@@ -34,7 +34,6 @@ type Entry struct {
 	Quarter         int
 	DebitBalance    float64
 	CreditBalance   float64
-	TotalBalance    float64
 	State           string
 	StateReason     *string
 	CreationDate    time.Time
@@ -170,7 +169,6 @@ type EntryStorageData struct {
 	Quarter         int
 	DebitBalance    float64
 	CreditBalance   float64
-	TotalBalance    float64
 	State           string
 	StateReason     *string
 	CreationDate    time.Time

@@ -121,7 +121,11 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 		var createBalanceInput balance.CreateBalanceByYearInput
 		createBalanceInput.Project = input.Project
 		createBalanceInput.BalanceID = *storedAccount.Account.BalanceID
-		createBalanceInput.Amount = *getAmountForBalance(input.DebitBalance, input.CreditBalance)
+		amount, err := useCase.getAmountForBalance(input.DebitBalance, input.CreditBalance, input.Project, createBalanceInput.BalanceID, storedAccount.Account.ID)
+		if err != nil {
+			return nil, err
+		}
+		createBalanceInput.Amount = *amount
 		createBalanceInput.Year = input.Date.Year()
 		storedBalance, err := useCase.balanceUseCase.CreateBalanceByYear(ctx, createBalanceInput)
 		if err != nil {
@@ -156,7 +160,6 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 		input.CreditBalance = &creditBalance
 	}
 	desiredEntry.CreditBalance = *input.CreditBalance
-	desiredEntry.TotalBalance = desiredEntry.DebitBalance - desiredEntry.CreditBalance
 	desiredEntry.State = EntryStateCreated
 	desiredEntry.CreationDate = time.Now()
 	desiredEntry.LastUpdate = desiredEntry.CreationDate
@@ -218,7 +221,6 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 	output.Entry.Quarter = storedEntry.Quarter
 	output.Entry.DebitBalance = storedEntry.DebitBalance
 	output.Entry.CreditBalance = storedEntry.CreditBalance
-	output.Entry.TotalBalance = storedEntry.TotalBalance
 	output.Entry.State = storedEntry.State
 	output.Entry.StateReason = storedEntry.StateReason
 	output.Entry.CreationDate = storedEntry.CreationDate
@@ -252,7 +254,6 @@ func (useCase *DefaultEntryUseCase) DescribeEntry(ctx context.Context, input Des
 	output.Entry.Quarter = storedEntry.Quarter
 	output.Entry.DebitBalance = storedEntry.DebitBalance
 	output.Entry.CreditBalance = storedEntry.CreditBalance
-	output.Entry.TotalBalance = storedEntry.TotalBalance
 	output.Entry.State = storedEntry.State
 	output.Entry.StateReason = storedEntry.StateReason
 	output.Entry.CreationDate = storedEntry.CreationDate
@@ -291,7 +292,6 @@ func (useCase *DefaultEntryUseCase) ListEntries(ctx context.Context, input ListE
 		entry.Quarter = item.Quarter
 		entry.DebitBalance = item.DebitBalance
 		entry.CreditBalance = item.CreditBalance
-		entry.TotalBalance = item.TotalBalance
 		entry.State = item.State
 		entry.StateReason = item.StateReason
 		entry.CreationDate = item.CreationDate
@@ -338,7 +338,6 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	desiredEntry.Quarter = quarter
 	desiredEntry.DebitBalance = storedEntry.Entry.DebitBalance
 	desiredEntry.CreditBalance = storedEntry.Entry.CreditBalance
-	desiredEntry.TotalBalance = desiredEntry.DebitBalance - desiredEntry.CreditBalance
 	if input.State != nil {
 		desiredEntry.State = *input.State
 	} else {
@@ -366,7 +365,6 @@ func (useCase *DefaultEntryUseCase) UpdateEntry(ctx context.Context, input Updat
 	output.Entry.Quarter = updatedEntry.Quarter
 	output.Entry.DebitBalance = updatedEntry.DebitBalance
 	output.Entry.CreditBalance = updatedEntry.CreditBalance
-	output.Entry.TotalBalance = updatedEntry.TotalBalance
 	output.Entry.State = updatedEntry.State
 	output.Entry.StateReason = updatedEntry.StateReason
 	output.Entry.CreationDate = updatedEntry.CreationDate
@@ -449,7 +447,6 @@ func (useCase *DefaultEntryUseCase) RemoveEntry(ctx context.Context, input Remov
 	output.Entry.Quarter = removedEntry.Quarter
 	output.Entry.DebitBalance = removedEntry.DebitBalance
 	output.Entry.CreditBalance = removedEntry.CreditBalance
-	output.Entry.TotalBalance = removedEntry.TotalBalance
 	output.Entry.State = removedEntry.State
 	output.Entry.StateReason = removedEntry.StateReason
 	output.Entry.CreationDate = removedEntry.CreationDate
@@ -751,7 +748,11 @@ func (useCase *DefaultEntryUseCase) EntryCreatedEvent(ctx context.Context, input
 		var createBalanceInput balance.CreateBalanceByYearInput
 		createBalanceInput.Project = input.Project
 		createBalanceInput.BalanceID = *storedAccount.Account.BalanceID
-		createBalanceInput.Amount = *getAmountForBalance(input.DebitBalance, input.CreditBalance)
+		amount, err := useCase.getAmountForBalance(input.DebitBalance, input.CreditBalance, input.Project, createBalanceInput.BalanceID, storedAccount.Account.ID)
+		if err != nil {
+			return err
+		}
+		createBalanceInput.Amount = *amount
 		createBalanceInput.Year = input.Date.Year()
 		storedBalance, err := useCase.balanceUseCase.CreateBalanceByYear(ctx, createBalanceInput)
 		if err != nil {
@@ -783,7 +784,6 @@ func (useCase *DefaultEntryUseCase) EntryCreatedEvent(ctx context.Context, input
 		input.CreditBalance = &creditBalance
 	}
 	desiredEntry.CreditBalance = *input.CreditBalance
-	desiredEntry.TotalBalance = desiredEntry.DebitBalance - desiredEntry.CreditBalance
 	desiredEntry.State = EntryStateCreated
 	desiredEntry.CreationDate = time.Now()
 	desiredEntry.LastUpdate = desiredEntry.CreationDate
@@ -920,10 +920,32 @@ func (useCase *DefaultEntryUseCase) calculateQuarter(date time.Time) int {
 	}
 }
 
-func getAmountForBalance(debitBalance *float64, creditBalance *float64) *float64 {
+func (useCase *DefaultEntryUseCase) getAmountForBalance(debitBalance *float64, creditBalance *float64, project string, balanceID string, accountID string) (*float64, error) {
+	var balanceAmount float64
+
 	if debitBalance != nil && *debitBalance != 0 {
-		return debitBalance
+		balanceAmount = *debitBalance
+	} else if creditBalance != nil && *creditBalance != 0 {
+		balanceAmount = -1 * *creditBalance
 	}
 
-	return creditBalance
+	var describeBalanceInput balance.DescribeBalanceInput
+	describeBalanceInput.Project = project
+	describeBalanceInput.ID = balanceID
+	storedBalance, err := useCase.balanceUseCase.DescribeBalance(context.Background(), describeBalanceInput)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, balanceAccount := range storedBalance.Accounts {
+		if len(accountID) < len(balanceAccount) && balanceAccount[0:len(accountID)+1] == "("+accountID {
+			balanceAmount = -1 * balanceAmount
+			continue
+		} else if len(accountID) == len(balanceAccount) && balanceAccount == "("+accountID+")" {
+			balanceAmount = -1 * balanceAmount
+			continue
+		}
+	}
+
+	return &balanceAmount, nil
 }

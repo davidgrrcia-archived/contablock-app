@@ -44,15 +44,14 @@ func (repository *EntryRepository) Add(ctx context.Context, input entry.EntrySto
 	entryDb.Quarter = input.Quarter
 	entryDb.DebitBalance = input.DebitBalance
 	entryDb.CreditBalance = input.CreditBalance
-	entryDb.TotalBalance = input.TotalBalance
 	entryDb.State = input.State
 	entryDb.StateReason = input.StateReason
 	entryDb.CreationDate = input.CreationDate.Format(time.RFC3339)
 	entryDb.LastUpdate = input.LastUpdate.Format(time.RFC3339)
 
-	insertQuery := "INSERT INTO entries (project, id, contract_id, user_id, account_id, multiple_entry_id, balance_by_year_id, currency, concept, date, quarter, debit_balance, credit_balance, total_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+	insertQuery := "INSERT INTO entries (project, id, contract_id, user_id, account_id, multiple_entry_id, balance_by_year_id, currency, concept, date, quarter, debit_balance, credit_balance, state, state_reason, creation_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
-	_, err := repository.db.Exec(insertQuery, entryDb.Project, entryDb.ID, entryDb.ContractID, entryDb.UserID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
+	_, err := repository.db.Exec(insertQuery, entryDb.Project, entryDb.ID, entryDb.ContractID, entryDb.UserID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +70,7 @@ func (repository *EntryRepository) Get(ctx context.Context, project string, id s
 	result := repository.db.QueryRow(query, project, id)
 
 	var storedEntry EntryDb
-	err := result.Scan(&storedEntry.Project, &storedEntry.ID, &storedEntry.ContractID, &storedEntry.UserID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.TotalBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
+	err := result.Scan(&storedEntry.Project, &storedEntry.ID, &storedEntry.ContractID, &storedEntry.UserID, &storedEntry.AccountID, &storedEntry.MultipleEntryID, &storedEntry.BalanceByYearID, &storedEntry.Currency, &storedEntry.Concept, &storedEntry.Date, &storedEntry.Quarter, &storedEntry.DebitBalance, &storedEntry.CreditBalance, &storedEntry.State, &storedEntry.StateReason, &storedEntry.CreationDate, &storedEntry.LastUpdate)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.New("entry with project [" + project + "] and id [" + id + "] not found")
@@ -97,7 +96,6 @@ func (repository *EntryRepository) Get(ctx context.Context, project string, id s
 	output.Quarter = storedEntry.Quarter
 	output.DebitBalance = storedEntry.DebitBalance
 	output.CreditBalance = storedEntry.CreditBalance
-	output.TotalBalance = storedEntry.TotalBalance
 	output.State = storedEntry.State
 	output.StateReason = storedEntry.StateReason
 	creationDate, err := time.Parse(time.RFC3339, storedEntry.CreationDate)
@@ -125,7 +123,7 @@ func (repository *EntryRepository) All(ctx context.Context, project string, filt
 	var storedEntries []EntryDb
 	for rows.Next() {
 		var entryDb EntryDb
-		err = rows.Scan(&entryDb.Project, &entryDb.ID, &entryDb.ContractID, &entryDb.UserID, &entryDb.AccountID, &entryDb.MultipleEntryID, &entryDb.BalanceByYearID, &entryDb.Currency, &entryDb.Concept, &entryDb.Date, &entryDb.Quarter, &entryDb.DebitBalance, &entryDb.CreditBalance, &entryDb.TotalBalance, &entryDb.State, &entryDb.StateReason, &entryDb.CreationDate, &entryDb.LastUpdate)
+		err = rows.Scan(&entryDb.Project, &entryDb.ID, &entryDb.ContractID, &entryDb.UserID, &entryDb.AccountID, &entryDb.MultipleEntryID, &entryDb.BalanceByYearID, &entryDb.Currency, &entryDb.Concept, &entryDb.Date, &entryDb.Quarter, &entryDb.DebitBalance, &entryDb.CreditBalance, &entryDb.State, &entryDb.StateReason, &entryDb.CreationDate, &entryDb.LastUpdate)
 		if err != nil {
 			return nil, err
 		}
@@ -153,7 +151,6 @@ func (repository *EntryRepository) All(ctx context.Context, project string, filt
 		entry.Quarter = storedEntry.Quarter
 		entry.DebitBalance = storedEntry.DebitBalance
 		entry.CreditBalance = storedEntry.CreditBalance
-		entry.TotalBalance = storedEntry.TotalBalance
 		entry.State = storedEntry.State
 		entry.StateReason = storedEntry.StateReason
 		creationDate, err := time.Parse(time.RFC3339, storedEntry.CreationDate)
@@ -189,15 +186,14 @@ func (repository *EntryRepository) Edit(ctx context.Context, input entry.EntrySt
 	entryDb.Quarter = input.Quarter
 	entryDb.DebitBalance = input.DebitBalance
 	entryDb.CreditBalance = input.CreditBalance
-	entryDb.TotalBalance = input.TotalBalance
 	entryDb.State = input.State
 	entryDb.StateReason = input.StateReason
 	entryDb.CreationDate = input.CreationDate.Format(time.RFC3339)
 	entryDb.LastUpdate = input.LastUpdate.Format(time.RFC3339)
 
-	updateQuery := "UPDATE entries SET contract_id = ?, user_id = ?, account_id = ?, multiple_entry_id = ?, balance_by_year_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, total_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE project = ? AND id = ?"
+	updateQuery := "UPDATE entries SET contract_id = ?, user_id = ?, account_id = ?, multiple_entry_id = ?, balance_by_year_id = ?, currency = ?, concept = ?, date = ?, quarter = ?, debit_balance = ?, credit_balance = ?, state = ?, state_reason = ?, creation_date = ?, last_update = ? WHERE project = ? AND id = ?"
 
-	_, err := repository.db.Exec(updateQuery, entryDb.ContractID, entryDb.UserID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.TotalBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.Project, entryDb.ID)
+	_, err := repository.db.Exec(updateQuery, entryDb.ContractID, entryDb.UserID, entryDb.AccountID, entryDb.MultipleEntryID, entryDb.BalanceByYearID, entryDb.Currency, entryDb.Concept, entryDb.Date, entryDb.Quarter, entryDb.DebitBalance, entryDb.CreditBalance, entryDb.State, entryDb.StateReason, entryDb.CreationDate, entryDb.LastUpdate, entryDb.Project, entryDb.ID)
 	if err != nil {
 		return nil, err
 	}
