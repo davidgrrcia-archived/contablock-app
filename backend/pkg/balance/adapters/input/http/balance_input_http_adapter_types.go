@@ -9,6 +9,7 @@ type Balance struct {
 	CurrentAmount  float64            `json:"currentAmount"`
 	PreviousAmount float64            `json:"previousAmount"`
 	Map            map[string]Balance `json:"child"`
+	Accounts       []string           `json:"accounts"`
 }
 
 type BalanceItem struct {
@@ -20,6 +21,7 @@ type BalanceItem struct {
 	CurrentAmount  float64       `json:"currentAmount"`
 	PreviousAmount float64       `json:"previousAmount"`
 	Child          []BalanceItem `json:"child"`
+	Accounts       []string      `json:"accounts"`
 }
 
 type ListBalanceRequest struct {

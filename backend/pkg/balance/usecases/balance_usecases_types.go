@@ -5,12 +5,13 @@ import (
 )
 
 type Balance struct {
-	Project string
-	ID      string
-	Type    string
-	Kind    *string
-	Parent  *string
-	Child   *string
+	Project  string
+	ID       string
+	Type     string
+	Kind     *string
+	Parent   *string
+	Child    *string
+	Accounts []string
 }
 
 type BalanceByYear struct {
@@ -118,12 +119,13 @@ type BalanceByYearStorageData struct {
 }
 
 type BalanceStorageData struct {
-	Project string
-	ID      string
-	Type    string
-	Kind    *string
-	Parent  *string
-	Child   *string
+	Project  string
+	ID       string
+	Type     string
+	Kind     *string
+	Parent   *string
+	Child    *string
+	Accounts []string
 }
 
 type AddBalanceStorageData struct {

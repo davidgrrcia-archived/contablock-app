@@ -91,6 +91,11 @@ func (repository *BalanceRepository) All(ctx context.Context, project string, fi
 		balance.Kind = storedBalance.Kind
 		balance.Parent = storedBalance.Parent
 		balance.Child = storedBalance.Child
+		err = json.Unmarshal([]byte(storedBalance.Accounts), &balance.Accounts)
+		if err != nil {
+			return nil, err
+		}
+
 		items = append(items, balance)
 	}
 

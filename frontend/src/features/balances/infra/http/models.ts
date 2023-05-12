@@ -6,6 +6,7 @@ export interface Balance {
   currentAmount: number;
   previousAmount: number;
   child: Balance[] | null;
+  accounts: string[];
 }
 
 export interface BalanceListResponse {

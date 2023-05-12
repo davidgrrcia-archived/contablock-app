@@ -124,6 +124,7 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		balance.Kind = item.Kind
 		balance.Parent = item.Parent
 		balance.Child = item.Child
+		balance.Accounts = item.Accounts
 		//balance.CurrentYear = item.Year
 		//balance.PreviousYear = previousYear
 		//balance.CurrentAmount = item.Amount

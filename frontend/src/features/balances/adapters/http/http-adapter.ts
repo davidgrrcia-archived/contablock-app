@@ -18,6 +18,7 @@ export class DefaultBalancesHttpAdapter implements BalancesAdapter {
       previousYear: item.previousYear,
       currentAmount: item.currentAmount,
       previousAmount: item.previousAmount,
+      accounts: item.accounts,
       child: item.child
         ? item.child.map(item2 => ({
             id: item2.id,
@@ -26,6 +27,7 @@ export class DefaultBalancesHttpAdapter implements BalancesAdapter {
             previousYear: item2.previousYear,
             currentAmount: item2.currentAmount,
             previousAmount: item2.previousAmount,
+            accounts: item2.accounts,
             child: item2.child
               ? item2.child.map(item3 => ({
                   id: item3.id,
@@ -34,6 +36,7 @@ export class DefaultBalancesHttpAdapter implements BalancesAdapter {
                   previousYear: item3.previousYear,
                   currentAmount: item3.currentAmount,
                   previousAmount: item3.previousAmount,
+                  accounts: item3.accounts,
                   child: item3.child
                     ? item3.child.map(item4 => ({
                         id: item4.id,
@@ -42,6 +45,7 @@ export class DefaultBalancesHttpAdapter implements BalancesAdapter {
                         previousYear: item4.previousYear,
                         currentAmount: item4.currentAmount,
                         previousAmount: item4.previousAmount,
+                        accounts: item4.accounts,
                         child: null,
                       }))
                     : null,
