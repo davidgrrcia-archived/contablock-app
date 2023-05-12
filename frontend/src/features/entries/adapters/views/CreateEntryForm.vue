@@ -125,7 +125,7 @@ const searchCredit = (event: any) => {
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-800">Cuenta</label>
-            <AutoCompletePrimeVue v-model="selectedDebitAccount" dropdown scrollHeight="500px" :suggestions="filteredDebitAccounts" @complete="searchDebit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Selecciona una cuenta para añadirla al debe" class="">
+            <AutoCompletePrimeVue v-model="selectedDebitAccount" dropdown scrollHeight="500px" :suggestions="filteredDebitAccounts" @complete="searchDebit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Cuenta del debe" class="">
               <template #optiongroup="slotProps">
                 <div class="align-items-center country-item flex">
                   <div>{{ slotProps.item.label }}</div>
@@ -156,7 +156,7 @@ const searchCredit = (event: any) => {
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-800">Cuenta</label>
-            <AutoCompletePrimeVue v-model="selectedCreditAccount" dropdown :suggestions="filteredCreditAccounts" @complete="searchCredit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Selecciona una cuenta para añadirla al haber" class="">
+            <AutoCompletePrimeVue v-model="selectedCreditAccount" dropdown :suggestions="filteredCreditAccounts" @complete="searchCredit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Cuenta del haber" class="">
               <template #optiongroup="slotProps">
                 <div class="align-items-center country-item flex">
                   <div>{{ slotProps.item.label }}</div>
@@ -166,14 +166,14 @@ const searchCredit = (event: any) => {
           </div>
           <div>
             <label for="credit-amount" class="block text-sm font-medium text-gray-800">Importe</label>
-              <div class="p-inputgroup flex-1">
-                  <span class="p-inputgroup-addon">{{ findCurrencyByCode(selectedCurrency) }}</span>
-                  <InputNumberPrimeVue v-model="selectedCreditAmount" inputId="locale-user" :minFractionDigits="2" :maxFractionDigits="2" placeholder="Importe del haber" />
-                  <select v-model="selectedCurrency" id="currency" name="currency" class="p-inputgroup-addon">
-                      <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
-                  </select>
-                  <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="bg-blue-500 py-2 px-4 text-white shadow-sm hover:bg-gray-800">Añadir al haber</button>
-              </div>
+            <div class="p-inputgroup flex-1">
+              <span class="p-inputgroup-addon">{{ findCurrencyByCode(selectedCurrency) }}</span>
+              <InputNumberPrimeVue v-model="selectedCreditAmount" inputId="locale-user" :minFractionDigits="2" :maxFractionDigits="2" placeholder="Importe del haber" />
+              <select v-model="selectedCurrency" id="currency" name="currency" class="p-inputgroup-addon">
+                <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
+              </select>
+              <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="bg-blue-500 py-2 px-4 text-white shadow-sm hover:bg-gray-800">Añadir al haber</button>
+            </div>
           </div>
         </div>
       </div>

@@ -94,7 +94,7 @@ function modifyEntries(entries: any) {
                   </th>
                   <th scope="colgroup" class="px-3 py-4 text-left text-sm font-bold" :class="[getTotalBalanceColor(record.totalDebitAmount, record.totalCreditAmount)]">{{ formatAmount(record.totalDebitAmount, 'EUR') }}</th>
                   <th scope="colgroup" class="px-3 py-4 text-left text-sm font-bold" :class="[getTotalBalanceColor(record.totalCreditAmount, record.totalDebitAmount)]">{{ formatAmount(record.totalCreditAmount, 'EUR') }}</th>
-                  <th>
+                  <th class="text-left">
                     <Menu v-if="showEntryActions(configStore.state.role, record.entriesExpanded[0].entry.state)" as="div" class="inline-block p-2 text-left">
                       <div>
                         <MenuButton class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white">

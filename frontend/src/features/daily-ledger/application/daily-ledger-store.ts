@@ -6,6 +6,7 @@ import { useMessagesStore } from '@/stores/messages';
 //TODO: apply clean architecture
 interface DailyLedgerState {
   storedDailyLedger: DailyLedger[];
+
   stateMessage: string | null;
 }
 

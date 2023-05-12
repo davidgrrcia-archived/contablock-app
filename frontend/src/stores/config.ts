@@ -25,7 +25,7 @@ interface ConfigState {
 const navigation: Navigation[] = [
   { name: 'Libro Diario', href: '/projects/', current: false },
   { name: 'Libro Mayor', href: '/general-ledger', current: false },
-  { name: 'Balance General', href: '/balances', current: false },
+  { name: 'Balance', href: '/balances', current: false },
 ];
 
 const state: ConfigState = {
@@ -50,7 +50,7 @@ export const useConfigStore = defineStore('configStore', {
       this.state.navigation = [
         { name: 'Libro Diario', href: '/projects/' + project, current: false },
         { name: 'Libro Mayor', href: '/projects/' + project + '/general-ledger', current: false },
-        { name: 'Balance General', href: '/projects/' + project + '/balances', current: false },
+        { name: 'Balance', href: '/projects/' + project + '/balances', current: false },
       ];
 
       this.state.navigation.map(async item => {

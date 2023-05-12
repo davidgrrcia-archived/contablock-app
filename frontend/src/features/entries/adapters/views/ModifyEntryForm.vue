@@ -5,34 +5,34 @@ import type { CreateEntryInput } from '@/features/entries/application/entries-mo
 import { useEntriesStore } from '@/features/entries/application/entries-store.js';
 import { useAccountsStore } from '@/features/accounts/application/accounts-store.js';
 import { findCurrencyByCode, currencies, dateToUnixTimestamp, formatDate, formatAmount } from '@/features/utils/utils';
-import { useMessagesStore } from '@/stores/messages';
+import { FilterMatchMode, FilterService } from 'primevue/api';
 
 //store
-const messagesStore = useMessagesStore();
 const entriesStore = useEntriesStore();
 const accountsStore = useAccountsStore();
 await accountsStore.loadAccounts();
 
-const selectedCurrency = ref('EUR');
-const currentDate = new Date();
-const date = ref(currentDate);
+let selectedCurrency = ref('EUR');
+let selectedDate = ref(new Date());
 const currenciesArray = ref(currencies);
-const concept = ref();
-const debitAmount = ref();
-const creditAmount = ref();
-const debitAccount = ref();
-const creditAccount = ref();
+let selectedConcept = ref();
+let selectedDebitAmount = ref();
+let selectedCreditAmount = ref();
+let selectedDebitAccount = ref();
+let filteredDebitAccounts = ref();
+let selectedCreditAccount = ref();
+let filteredCreditAccounts = ref();
 const accounts = accountsStore.state.accounts;
 
 function addDebitEntry() {
   const newEntry: CreateEntryInput = {
     id: uuid(),
-    accountId: debitAccount.value,
+    accountId: selectedDebitAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: selectedCurrency.value,
-    date: dateToUnixTimestamp(date.value),
-    concept: concept.value,
-    debitAmount: debitAmount.value,
+    date: dateToUnixTimestamp(selectedDate.value),
+    concept: selectedConcept.value,
+    debitAmount: selectedDebitAmount.value,
     creditAmount: null,
   };
 
@@ -42,23 +42,49 @@ function addDebitEntry() {
 function addCreditEntry() {
   const newEntry: CreateEntryInput = {
     id: uuid(),
-    accountId: creditAccount.value,
+    accountId: selectedCreditAccount.value,
     multipleEntryId: entriesStore.state.multipleEntryId,
     currency: selectedCurrency.value,
-    date: dateToUnixTimestamp(date.value),
-    concept: concept.value,
+    date: dateToUnixTimestamp(selectedDate.value),
+    concept: selectedConcept.value,
     debitAmount: null,
-    creditAmount: creditAmount.value,
+    creditAmount: selectedCreditAmount.value,
   };
 
   entriesStore.addCreditEntry(newEntry);
 }
 
 function removeEntry(id: string) {
-  messagesStore.addDangerousConfirmMessage('¿Estás seguro de eliminar el asiento seleccionado?', 'Esta es una acción que no se puede revertir, asegúrate de querer eliminar este asiento', () => {
-    entriesStore.removeModificationEntry(id);
-  });
+  entriesStore.removeModificationEntry(id);
 }
+
+const searchDebit = (event: any) => {
+  let query = event.query;
+  let newFilteredCities = [];
+
+  for (let country of accounts) {
+    let filteredItems = FilterService.filter(country.children, ['label'], query, FilterMatchMode.CONTAINS);
+    if (filteredItems && filteredItems.length) {
+      newFilteredCities.push({ ...country, ...{ children: filteredItems } });
+    }
+  }
+
+  filteredDebitAccounts.value = newFilteredCities;
+};
+
+const searchCredit = (event: any) => {
+  let query = event.query;
+  let newFilteredCities = [];
+
+  for (let country of accounts) {
+    let filteredItems = FilterService.filter(country.children, ['label'], query, FilterMatchMode.CONTAINS);
+    if (filteredItems && filteredItems.length) {
+      newFilteredCities.push({ ...country, ...{ children: filteredItems } });
+    }
+  }
+
+  filteredCreditAccounts.value = newFilteredCities;
+};
 </script>
 
 <template>
@@ -71,15 +97,17 @@ function removeEntry(id: string) {
     </div>
     <div class="w-44 flex-auto">
       <label for="concept" class="block text-sm font-medium text-gray-800">Concepto</label>
-      <input type="text" v-model="concept" maxlength="64" name="concept" id="concept" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm" />
+      <input type="text" v-model="selectedConcept" maxlength="64" name="concept" id="concept" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm" />
     </div>
     <div class="flex-none">
       <label for="calendar" class="block text-sm font-medium text-gray-800">Fecha del asiento</label>
-      <CalendarPrimeVue v-model="date" :showTime="true" :showSeconds="true" :showIcon="true" dateFormat="dd/mm/yy" name="calendar" id="calendar" />
+      <CalendarPrimeVue v-model="selectedDate" :showTime="true" :showSeconds="true" :showIcon="true" dateFormat="dd/mm/yy" name="calendar" id="calendar" />
     </div>
     <div class="flex-1">
       <label for="balance" class="block text-sm font-medium text-gray-800">Balance del asiento</label>
-      <p id="balance" name="balance" :class="[entriesStore.state.totalBalance > 0 ? 'bg-green-200 text-green-800' : entriesStore.state.totalBalance < 0 ? 'bg-red-200 text-red-800' : '']" class="inline-block rounded-lg p-2 text-xl">{{ formatAmount(entriesStore.state.totalBalance, selectedCurrency) }}</p>
+      <p v-if="entriesStore.state.entriesCreation.length == 0" class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento vacío ❌</p>
+      <p v-else-if="entriesStore.state.totalBalance == 0" class="inline-block rounded-lg bg-green-200 p-2 text-xl text-green-800">Asiento correcto ✅</p>
+      <p v-else class="inline-block rounded-lg bg-red-200 p-2 text-xl text-red-800">Asiento descuadrado ({{ formatAmount(entriesStore.state.totalBalance, selectedCurrency) }}) ❌</p>
     </div>
   </div>
 
@@ -92,22 +120,23 @@ function removeEntry(id: string) {
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-800">Cuenta</label>
-            <TreeSelectPrimeVue v-model="debitAccount" :options="accounts" placeholder="Selecciona una cuenta para añadirla al debe" id="account" name="account"></TreeSelectPrimeVue>
+            <AutoCompletePrimeVue v-model="selectedDebitAccount" dropdown scrollHeight="500px" :suggestions="filteredDebitAccounts" @complete="searchDebit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Cuenta del debe" class="">
+              <template #optiongroup="slotProps">
+                <div class="align-items-center country-item flex">
+                  <div>{{ slotProps.item.label }}</div>
+                </div>
+              </template>
+            </AutoCompletePrimeVue>
           </div>
           <div>
             <label for="debit-amount" class="block text-sm font-medium text-gray-800">Importe</label>
-            <div class="relative mt-1 rounded-md shadow-sm">
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span class="text-gray-500 sm:text-sm">{{ findCurrencyByCode(selectedCurrency) }}</span>
-              </div>
-              <input v-model="debitAmount" type="number" oninput="validity.valid||(value='');" name="debit-amount" id="debit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm" placeholder="0.00" min="0" max="999999999999999" />
-              <div class="absolute inset-y-0 right-0 flex items-center">
-                <label for="currency" class="sr-only">Divisa</label>
-                <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 sm:text-sm">
-                  <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
-                </select>
-                <button type="submit" id="credit-amount" name="credit-amount" @click="addDebitEntry" class="inline-flex w-full justify-center rounded-tr-md rounded-br-md bg-blue-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-800">Añadir al debe</button>
-              </div>
+            <div class="p-inputgroup flex-1">
+              <span class="p-inputgroup-addon">{{ findCurrencyByCode(selectedCurrency) }}</span>
+              <InputNumberPrimeVue v-model="selectedDebitAmount" inputId="locale-user" :minFractionDigits="2" :maxFractionDigits="2" placeholder="Importe del debe" />
+              <select v-model="selectedCurrency" id="currency" name="currency" class="p-inputgroup-addon">
+                <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
+              </select>
+              <button type="submit" id="debit-amount" name="debit-amount" @click="addDebitEntry" class="bg-blue-500 py-2 px-4 text-white shadow-sm hover:bg-gray-800">Añadir al debe</button>
             </div>
           </div>
         </div>
@@ -122,22 +151,23 @@ function removeEntry(id: string) {
         <div class="space-y-4 bg-white p-6">
           <div>
             <label for="debit-account" class="block text-sm font-medium text-gray-800">Cuenta</label>
-            <TreeSelectPrimeVue v-model="creditAccount" :options="accounts" placeholder="Selecciona una cuenta para añadirla al haber" id="account" name="account"></TreeSelectPrimeVue>
+            <AutoCompletePrimeVue v-model="selectedCreditAccount" dropdown :suggestions="filteredCreditAccounts" @complete="searchCredit" forceSelection optionLabel="label" optionGroupLabel="label" optionGroupChildren="children" placeholder="Cuenta del haber" class="">
+              <template #optiongroup="slotProps">
+                <div class="align-items-center country-item flex">
+                  <div>{{ slotProps.item.label }}</div>
+                </div>
+              </template>
+            </AutoCompletePrimeVue>
           </div>
           <div>
             <label for="credit-amount" class="block text-sm font-medium text-gray-800">Importe</label>
-            <div class="relative mt-1 rounded-md shadow-sm">
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span class="text-gray-500 sm:text-sm">{{ findCurrencyByCode(selectedCurrency) }}</span>
-              </div>
-              <input v-model="creditAmount" type="number" oninput="validity.valid||(value='');" name="credit-amount" id="credit-amount" class="block w-full rounded-md border-gray-300 pl-7 pr-12 sm:text-sm" placeholder="0.00" min="0" max="999999999999999" />
-              <div class="absolute inset-y-0 right-0 flex items-center">
-                <label for="currency" class="sr-only">Divisa</label>
-                <select v-model="selectedCurrency" id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 sm:text-sm">
-                  <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
-                </select>
-                <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="inline-flex w-full justify-center rounded-tr-md rounded-br-md bg-blue-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-800">Añadir al haber</button>
-              </div>
+            <div class="p-inputgroup flex-1">
+              <span class="p-inputgroup-addon">{{ findCurrencyByCode(selectedCurrency) }}</span>
+              <InputNumberPrimeVue v-model="selectedCreditAmount" inputId="locale-user" :minFractionDigits="2" :maxFractionDigits="2" placeholder="Importe del haber" />
+              <select v-model="selectedCurrency" id="currency" name="currency" class="p-inputgroup-addon">
+                <option v-for="(currency, i) in currenciesArray" :key="i">{{ currency.code }}</option>
+              </select>
+              <button type="submit" id="credit-amount" name="credit-amount" @click="addCreditEntry" class="bg-blue-500 py-2 px-4 text-white shadow-sm hover:bg-gray-800">Añadir al haber</button>
             </div>
           </div>
         </div>
@@ -180,11 +210,11 @@ function removeEntry(id: string) {
 </template>
 
 <style>
-.p-treeselect {
-  @apply w-full rounded-md border-gray-300 pl-7 pr-12 text-sm;
+.p-autocomplete {
+  @apply w-full rounded-md border-gray-300 text-sm;
 }
 
-.p-treenode-content {
+.p-autocomplete-panel {
   @apply bg-gray-100 text-sm text-gray-800;
 }
 
