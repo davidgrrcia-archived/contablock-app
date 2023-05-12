@@ -97,26 +97,31 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		return nil, errors.New("invalid input: " + err.Error())
 	}
 
-	var filters Filters
-	filters.Year = input.Year
-	storedBalancesCurrentYear, err := useCase.balanceStorage.All(ctx, input.Project, filters)
-	if err != nil {
-		return nil, err
-	}
-
 	if input.Year == nil {
 		return nil, errors.New("year must not be nil")
 	}
 	previousYear := *input.Year - 1
 
+	storedBalances, err := useCase.balanceStorage.All(ctx, input.Project)
+	if err != nil {
+		return nil, err
+	}
+
+	var filters Filters
+	filters.Year = input.Year
+	storedBalancesCurrentYear, err := useCase.balanceStorage.AllByYear(ctx, input.Project, filters)
+	if err != nil {
+		return nil, err
+	}
+
 	filters.Year = &previousYear
-	storedBalancesPreviousYear, err := useCase.balanceStorage.All(ctx, input.Project, filters)
+	storedBalancesPreviousYear, err := useCase.balanceStorage.AllByYear(ctx, input.Project, filters)
 	if err != nil {
 		return nil, err
 	}
 
 	var balances []Balance
-	for _, item := range storedBalancesCurrentYear.Items {
+	for _, item := range storedBalances.Items {
 		var balance Balance
 		balance.Project = item.Project
 		balance.ID = item.ID
@@ -125,38 +130,49 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		balance.Parent = item.Parent
 		balance.Child = item.Child
 		balance.Accounts = item.Accounts
-		//balance.CurrentYear = item.Year
-		//balance.PreviousYear = previousYear
-		//balance.CurrentAmount = item.Amount
+		balance.CurrentYear = *input.Year
+		balance.PreviousYear = previousYear
+
+		for _, itemCurrentYear := range storedBalancesCurrentYear.Items {
+			if item.ID == itemCurrentYear.BalanceID {
+				balance.CurrentAmount += itemCurrentYear.Amount
+			}
+		}
+
+		for _, itemPreviousYear := range storedBalancesPreviousYear.Items {
+			if item.ID == itemPreviousYear.BalanceID {
+				balance.PreviousAmount += itemPreviousYear.Amount
+			}
+		}
 
 		balances = append(balances, balance)
 	}
 
-	for _, item := range storedBalancesPreviousYear.Items {
-		alreadyAdded := false
-
-		for _, balance := range balances {
-			if item.ID == balance.ID {
-				//balances[j].PreviousAmount = item.Amount
-				alreadyAdded = true
-			}
-		}
-
-		if !alreadyAdded {
-			var balance Balance
-			balance.Project = item.Project
-			balance.ID = item.ID
-			balance.Type = item.Type
-			balance.Kind = item.Kind
-			balance.Parent = item.Parent
-			balance.Child = item.Child
-			//balance.CurrentYear = previousYear + 1
-			//balance.PreviousYear = previousYear
-			//balance.PreviousAmount = item.Amount
-
-			balances = append(balances, balance)
-		}
-	}
+	//for _, item := range storedBalancesPreviousYear.Items {
+	//	alreadyAdded := false
+	//
+	//	for _, balance := range balances {
+	//		if item.ID == balance.ID {
+	//			//balances[j].PreviousAmount = item.Amount
+	//			alreadyAdded = true
+	//		}
+	//	}
+	//
+	//	if !alreadyAdded {
+	//		var balance Balance
+	//		balance.Project = item.Project
+	//		balance.ID = item.ID
+	//		balance.Type = item.Type
+	//		balance.Kind = item.Kind
+	//		balance.Parent = item.Parent
+	//		balance.Child = item.Child
+	//		//balance.CurrentYear = previousYear + 1
+	//		//balance.PreviousYear = previousYear
+	//		//balance.PreviousAmount = item.Amount
+	//
+	//		balances = append(balances, balance)
+	//	}
+	//}
 
 	return &ListBalanceOutput{
 		Items: balances,

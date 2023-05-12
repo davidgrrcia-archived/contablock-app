@@ -63,7 +63,7 @@ func (repository *BalanceRepository) AddByYear(ctx context.Context, input balanc
 	return &output, nil
 }
 
-func (repository *BalanceRepository) All(ctx context.Context, project string, filters balance.Filters) (*balance.BalanceStorageCollectionData, error) {
+func (repository *BalanceRepository) All(ctx context.Context, project string) (*balance.BalanceStorageCollectionData, error) {
 	query := "SELECT * FROM balances WHERE project = ?"
 
 	rows, err := repository.db.Query(query, project)
@@ -115,7 +115,7 @@ func (repository *BalanceRepository) AllByYear(ctx context.Context, project stri
 	var storedBalances []BalanceByYearDb
 	for rows.Next() {
 		var balanceDb BalanceByYearDb
-		err = rows.Scan(&balanceDb.Project, &balanceDb.ID, &balanceDb.BalanceID, &balanceDb.Year, &balanceDb.Amount)
+		err = rows.Scan(&balanceDb.Project, &balanceDb.ID, &balanceDb.BalanceID, &balanceDb.Amount, &balanceDb.Year)
 		if err != nil {
 			return nil, err
 		}

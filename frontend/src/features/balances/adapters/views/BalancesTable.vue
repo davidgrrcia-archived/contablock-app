@@ -53,8 +53,8 @@ function arrayToString(arr: string[]): string {
                 </td>
               </tr>
               <template v-for="(child, j) in record.child" :key="j">
-                <tr :class="i % 2 === 0 ? undefined : 'bg-gray-50'" class="border-t border-gray-200">
-                  <td class="px-3 py-4 text-sm font-semibold text-gray-800">
+                <tr :class="i % 2 === 0 ? undefined : 'bg-gray-50'" class="border-t border-gray-200 bg-gray-100">
+                  <td class="px-3 py-4 text-sm text-gray-800">
                     {{ arrayToString(child.accounts) }}
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-gray-800">
