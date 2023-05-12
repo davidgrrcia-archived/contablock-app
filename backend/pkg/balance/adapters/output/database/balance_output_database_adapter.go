@@ -5,8 +5,6 @@ import (
 	"database/sql"
 	"encoding/json"
 	"errors"
-	"strconv"
-
 	balance "github.com/davidgrcia/tfg-informatica-nextjs/pkg/balance/usecases"
 )
 
@@ -66,7 +64,7 @@ func (repository *BalanceRepository) AddByYear(ctx context.Context, input balanc
 }
 
 func (repository *BalanceRepository) All(ctx context.Context, project string, filters balance.Filters) (*balance.BalanceStorageCollectionData, error) {
-	query := BuildQueryWithFilters(filters)
+	query := "SELECT * FROM balances WHERE project = ?"
 
 	rows, err := repository.db.Query(query, project)
 	if err != nil {
@@ -76,7 +74,7 @@ func (repository *BalanceRepository) All(ctx context.Context, project string, fi
 	var storedBalances []BalanceDb
 	for rows.Next() {
 		var balanceDb BalanceDb
-		err = rows.Scan(&balanceDb.Project, &balanceDb.ID, &balanceDb.Type, &balanceDb.Kind, &balanceDb.Parent, &balanceDb.Child, &balanceDb.Year, &balanceDb.Amount)
+		err = rows.Scan(&balanceDb.Project, &balanceDb.ID, &balanceDb.Type, &balanceDb.Kind, &balanceDb.Parent, &balanceDb.Child, &balanceDb.Accounts)
 		if err != nil {
 			return nil, err
 		}
@@ -93,12 +91,45 @@ func (repository *BalanceRepository) All(ctx context.Context, project string, fi
 		balance.Kind = storedBalance.Kind
 		balance.Parent = storedBalance.Parent
 		balance.Child = storedBalance.Child
+		items = append(items, balance)
+	}
+
+	return &balance.BalanceStorageCollectionData{
+		Items: items,
+	}, nil
+}
+
+func (repository *BalanceRepository) AllByYear(ctx context.Context, project string, filters balance.Filters) (*balance.BalanceByYearStorageCollectionData, error) {
+	query := "SELECT * FROM balances_by_year WHERE project = ? AND year = ?"
+
+	rows, err := repository.db.Query(query, project, filters.Year)
+	if err != nil {
+		return nil, err
+	}
+
+	var storedBalances []BalanceByYearDb
+	for rows.Next() {
+		var balanceDb BalanceByYearDb
+		err = rows.Scan(&balanceDb.Project, &balanceDb.ID, &balanceDb.BalanceID, &balanceDb.Year, &balanceDb.Amount)
+		if err != nil {
+			return nil, err
+		}
+
+		storedBalances = append(storedBalances, balanceDb)
+	}
+
+	var items []balance.BalanceByYearStorageData
+	for _, storedBalance := range storedBalances {
+		var balance balance.BalanceByYearStorageData
+		balance.Project = storedBalance.Project
+		balance.ID = storedBalance.ID
+		balance.BalanceID = storedBalance.BalanceID
 		balance.Year = storedBalance.Year
 		balance.Amount = storedBalance.Amount
 		items = append(items, balance)
 	}
 
-	return &balance.BalanceStorageCollectionData{
+	return &balance.BalanceByYearStorageCollectionData{
 		Items: items,
 	}, nil
 }
@@ -207,14 +238,4 @@ func (repository *BalanceRepository) Get(ctx context.Context, project string, id
 	}
 
 	return &output, nil
-}
-
-func BuildQueryWithFilters(filters balance.Filters) string {
-	if filters.Year != nil {
-		year := strconv.Itoa(*filters.Year)
-		query := "SELECT balances.project, balances.id, type, kind, parent, child, year, SUM(amount) FROM balances INNER JOIN balances_by_year ON (balances_by_year.balance_id = balances.id AND balances_by_year.project = balances.project) WHERE balances.project = ? AND year = \"" + year + "\" GROUP BY balances.project, balances.id, type, kind, parent, child, year;"
-		return query
-	}
-
-	return ""
 }

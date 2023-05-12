@@ -84,7 +84,7 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		return nil, errors.New("year must not be nil")
 	}
 	previousYear := *input.Year - 1
-	
+
 	filters.Year = &previousYear
 	storedBalancesPreviousYear, err := useCase.balanceStorage.All(ctx, input.Project, filters)
 	if err != nil {
@@ -100,9 +100,9 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 		balance.Kind = item.Kind
 		balance.Parent = item.Parent
 		balance.Child = item.Child
-		balance.CurrentYear = item.Year
-		balance.PreviousYear = previousYear
-		balance.CurrentAmount = item.Amount
+		//balance.CurrentYear = item.Year
+		//balance.PreviousYear = previousYear
+		//balance.CurrentAmount = item.Amount
 
 		balances = append(balances, balance)
 	}
@@ -110,9 +110,9 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 	for _, item := range storedBalancesPreviousYear.Items {
 		alreadyAdded := false
 
-		for j, balance := range balances {
+		for _, balance := range balances {
 			if item.ID == balance.ID {
-				balances[j].PreviousAmount = item.Amount
+				//balances[j].PreviousAmount = item.Amount
 				alreadyAdded = true
 			}
 		}
@@ -125,9 +125,9 @@ func (useCase *DefaultBalanceUseCase) ListBalances(ctx context.Context, input Li
 			balance.Kind = item.Kind
 			balance.Parent = item.Parent
 			balance.Child = item.Child
-			balance.CurrentYear = previousYear + 1
-			balance.PreviousYear = previousYear
-			balance.PreviousAmount = item.Amount
+			//balance.CurrentYear = previousYear + 1
+			//balance.PreviousYear = previousYear
+			//balance.PreviousAmount = item.Amount
 
 			balances = append(balances, balance)
 		}

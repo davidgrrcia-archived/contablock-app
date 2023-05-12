@@ -5,12 +5,18 @@ import (
 )
 
 type Balance struct {
+	Project string
+	ID      string
+	Type    string
+	Kind    *string
+	Parent  *string
+	Child   *string
+}
+
+type BalanceByYear struct {
 	Project        string
 	ID             string
-	Type           string
-	Kind           *string
-	Parent         *string
-	Child          *string
+	BalanceID      string
 	CurrentYear    int
 	PreviousYear   int
 	CurrentAmount  float64
@@ -82,6 +88,7 @@ type Filters struct {
 type BalanceStorage interface {
 	AddByYear(ctx context.Context, input BalanceByYearStorageData) (*BalanceByYearStorageData, error)
 	All(ctx context.Context, project string, filters Filters) (*BalanceStorageCollectionData, error)
+	AllByYear(ctx context.Context, project string, filters Filters) (*BalanceByYearStorageCollectionData, error)
 	Remove(ctx context.Context, project string, id string) (*BalanceByYearStorageData, error)
 	Add(ctx context.Context, input AddBalanceStorageData) (*AddBalanceStorageData, error)
 	Get(ctx context.Context, project string, id string) (*AddBalanceStorageData, error)
@@ -102,8 +109,6 @@ type BalanceStorageData struct {
 	Kind    *string
 	Parent  *string
 	Child   *string
-	Year    int
-	Amount  float64
 }
 
 type AddBalanceStorageData struct {
@@ -118,4 +123,8 @@ type AddBalanceStorageData struct {
 
 type BalanceStorageCollectionData struct {
 	Items []BalanceStorageData
+}
+
+type BalanceByYearStorageCollectionData struct {
+	Items []BalanceByYearStorageData
 }

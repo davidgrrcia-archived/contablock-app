@@ -52,17 +52,17 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 	for _, item := range outputData.Items {
 		var typeBalance Balance
 		typeBalance.Name = item.Type
-		typeBalance.CurrentYear = item.CurrentYear
-		typeBalance.PreviousYear = item.PreviousYear
+		//typeBalance.CurrentYear = item.CurrentYear
+		//typeBalance.PreviousYear = item.PreviousYear
 		if mapping[item.Type].Map == nil {
 			typeBalance.Map = make(map[string]Balance)
-			typeBalance.CurrentAmount = item.CurrentAmount
-			typeBalance.PreviousAmount = item.PreviousAmount
+			//typeBalance.CurrentAmount = item.CurrentAmount
+			//typeBalance.PreviousAmount = item.PreviousAmount
 			mapping[item.Type] = typeBalance
 		} else {
 			typeBalance.Map = mapping[item.Type].Map
-			typeBalance.CurrentAmount = mapping[item.Type].CurrentAmount + item.CurrentAmount
-			typeBalance.PreviousAmount = mapping[item.Type].PreviousAmount + item.PreviousAmount
+			//typeBalance.CurrentAmount = mapping[item.Type].CurrentAmount + item.CurrentAmount
+			//typeBalance.PreviousAmount = mapping[item.Type].PreviousAmount + item.PreviousAmount
 			mapping[item.Type] = typeBalance
 		}
 
@@ -71,13 +71,13 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 			kindBalance.Name = *item.Kind
 			if mapping[item.Type].Map[*item.Kind].Map == nil {
 				kindBalance.Map = make(map[string]Balance)
-				kindBalance.CurrentAmount = item.CurrentAmount
-				kindBalance.PreviousAmount = item.PreviousAmount
+				//kindBalance.CurrentAmount = item.CurrentAmount
+				//kindBalance.PreviousAmount = item.PreviousAmount
 				mapping[item.Type].Map[*item.Kind] = kindBalance
 			} else {
 				kindBalance.Map = mapping[item.Type].Map[*item.Kind].Map
-				kindBalance.CurrentAmount = mapping[item.Type].Map[*item.Kind].CurrentAmount + item.CurrentAmount
-				kindBalance.PreviousAmount = mapping[item.Type].Map[*item.Kind].PreviousAmount + item.PreviousAmount
+				//kindBalance.CurrentAmount = mapping[item.Type].Map[*item.Kind].CurrentAmount + item.CurrentAmount
+				//kindBalance.PreviousAmount = mapping[item.Type].Map[*item.Kind].PreviousAmount + item.PreviousAmount
 				mapping[item.Type].Map[*item.Kind] = kindBalance
 			}
 
@@ -86,13 +86,13 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 				parentBalance.Name = *item.Parent
 				if mapping[item.Type].Map[*item.Kind].Map[*item.Parent].Map == nil {
 					parentBalance.Map = make(map[string]Balance)
-					parentBalance.CurrentAmount = item.CurrentAmount
-					parentBalance.PreviousAmount = item.PreviousAmount
+					//parentBalance.CurrentAmount = item.CurrentAmount
+					//parentBalance.PreviousAmount = item.PreviousAmount
 					mapping[item.Type].Map[*item.Kind].Map[*item.Parent] = parentBalance
 				} else {
 					parentBalance.Map = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].Map
-					parentBalance.CurrentAmount = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].CurrentAmount + item.CurrentAmount
-					parentBalance.PreviousAmount = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].PreviousAmount + item.PreviousAmount
+					//parentBalance.CurrentAmount = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].CurrentAmount + item.CurrentAmount
+					//parentBalance.PreviousAmount = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].PreviousAmount + item.PreviousAmount
 					mapping[item.Type].Map[*item.Kind].Map[*item.Parent] = parentBalance
 				}
 			}
@@ -100,8 +100,8 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 			if item.Child != nil && *item.Child != "" {
 				var childBalance Balance
 				childBalance.Name = *item.Child
-				childBalance.CurrentAmount = item.CurrentAmount
-				childBalance.PreviousAmount = item.PreviousAmount
+				//childBalance.CurrentAmount = item.CurrentAmount
+				//childBalance.PreviousAmount = item.PreviousAmount
 				mapping[item.Type].Map[*item.Kind].Map[*item.Parent].Map[*item.Child] = childBalance
 			}
 			continue
@@ -111,21 +111,21 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 			parentBalance.Name = *item.Parent
 			if mapping[item.Type].Map[*item.Parent].Map == nil {
 				parentBalance.Map = make(map[string]Balance)
-				parentBalance.CurrentAmount = item.CurrentAmount
-				parentBalance.PreviousAmount = item.PreviousAmount
+				//parentBalance.CurrentAmount = item.CurrentAmount
+				//parentBalance.PreviousAmount = item.PreviousAmount
 				mapping[item.Type].Map[*item.Parent] = parentBalance
 			} else {
 				parentBalance.Map = mapping[item.Type].Map[*item.Parent].Map
-				parentBalance.CurrentAmount = mapping[item.Type].Map[*item.Parent].CurrentAmount + item.CurrentAmount
-				parentBalance.PreviousAmount = mapping[item.Type].Map[*item.Parent].PreviousAmount + item.PreviousAmount
+				//parentBalance.CurrentAmount = mapping[item.Type].Map[*item.Parent].CurrentAmount + item.CurrentAmount
+				//parentBalance.PreviousAmount = mapping[item.Type].Map[*item.Parent].PreviousAmount + item.PreviousAmount
 				mapping[item.Type].Map[*item.Parent] = parentBalance
 			}
 
 			if item.Child != nil && *item.Child != "" {
 				var childBalance Balance
 				childBalance.Name = *item.Child
-				childBalance.CurrentAmount = item.CurrentAmount
-				childBalance.PreviousAmount = item.PreviousAmount
+				//childBalance.CurrentAmount = item.CurrentAmount
+				//childBalance.PreviousAmount = item.PreviousAmount
 				mapping[item.Type].Map[*item.Parent].Map[*item.Child] = childBalance
 			}
 			continue
