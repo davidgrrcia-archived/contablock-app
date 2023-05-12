@@ -260,7 +260,7 @@ accounts:
     balanceId: 10063
   - project: *zara-viewer-project
     id: 136
-    name: Ajustes por valoración en activos no corrientes y *groups enajenables de elementos, mantenidos para la venta
+    name: Ajustes por valoración en activos no corrientes y grupos enajenables de elementos, mantenidos para la venta
     level: *account
     balanceId: 10062
   - project: *zara-viewer-project
@@ -335,7 +335,7 @@ accounts:
     balanceId: 10078
   - project: *zara-viewer-project
     id: 1533
-    name: Desembolsos no exigidos, empresas del *group
+    name: Desembolsos no exigidos, empresas del grupo
     level: *subaccount
     balanceId: 10078
   - project: *zara-viewer-project
@@ -360,7 +360,7 @@ accounts:
     balanceId: 10078
   - project: *zara-viewer-project
     id: 1543
-    name: Aportaciones no dinerarias pendientes, empresas del *group
+    name: Aportaciones no dinerarias pendientes, empresas del grupo
     level: *subaccount
     balanceId: 10078
   - project: *zara-viewer-project
@@ -390,7 +390,7 @@ accounts:
     balanceId: 10075
   - project: *zara-viewer-project
     id: 1603
-    name: Deudas a largo plazo con entidades de crédito, empresas del *group
+    name: Deudas a largo plazo con entidades de crédito, empresas del grupo
     level: *subaccount
     balanceId: 10075
   - project: *zara-viewer-project
@@ -410,7 +410,7 @@ accounts:
     balanceId: 10075
   - project: *zara-viewer-project
     id: 1613
-    name: Proveedores de inmovilizado a largo plazo, empresas del *group
+    name: Proveedores de inmovilizado a largo plazo, empresas del grupo
     level: *subaccount
     balanceId: 10075
   - project: *zara-viewer-project
@@ -430,7 +430,7 @@ accounts:
     balanceId: 10075
   - project: *zara-viewer-project
     id: 1623
-    name: Acreedores por arrendamiento financiero a largo plazo, empresas de *group
+    name: Acreedores por arrendamiento financiero a largo plazo, empresas de grupo
     level: *subaccount
     balanceId: 10075
   - project: *zara-viewer-project
@@ -450,7 +450,7 @@ accounts:
     balanceId: 10075
   - project: *zara-viewer-project
     id: 1633
-    name: Otras deudas a largo plazo, empresas del *group
+    name: Otras deudas a largo plazo, empresas del grupo
     level: *subaccount
     balanceId: 10075
   - project: *zara-viewer-project
@@ -755,7 +755,7 @@ accounts:
     balanceId: 10012
   - project: *zara-viewer-project
     id: 2403
-    name: Participaciones a largo plazo en empresas del *group
+    name: Participaciones a largo plazo en empresas del grupo
     level: *subaccount
     balanceId: 10012
   - project: *zara-viewer-project
@@ -775,7 +775,7 @@ accounts:
     balanceId: 10014
   - project: *zara-viewer-project
     id: 2413
-    name: Valores representativos de deuda a largo plazo de empresas del *group
+    name: Valores representativos de deuda a largo plazo de empresas del grupo
     level: *subaccount
     balanceId: 10014
   - project: *zara-viewer-project
@@ -795,7 +795,7 @@ accounts:
     balanceId: 10013
   - project: *zara-viewer-project
     id: 2423
-    name: Créditos a largo plazo a empresas del *group
+    name: Créditos a largo plazo a empresas del grupo
     level: *subaccount
     balanceId: 10013
   - project: *zara-viewer-project
@@ -815,7 +815,7 @@ accounts:
     balanceId: 10012
   - project: *zara-viewer-project
     id: 2493
-    name: Desembolsos pendientes sobre participaciones a largo plazo en empresas del *group
+    name: Desembolsos pendientes sobre participaciones a largo plazo en empresas del grupo
     level: *subaccount
     balanceId: 10012
   - project: *zara-viewer-project
@@ -1115,7 +1115,7 @@ accounts:
     balanceId: 10012
   - project: *zara-viewer-project
     id: 2933
-    name: Deterioro de valor de participaciones a largo plazo en empresas del *group
+    name: Deterioro de valor de participaciones a largo plazo en empresas del grupo
     level: *subaccount
     balanceId: 10012
   - project: *zara-viewer-project
@@ -1130,7 +1130,7 @@ accounts:
     balanceId: 10014
   - project: *zara-viewer-project
     id: 2943
-    name: Deterioro de valor de valores representativos de deuda a largo plazo de empresas del *group
+    name: Deterioro de valor de valores representativos de deuda a largo plazo de empresas del grupo
     level: *subaccount
     balanceId: 10014
   - project: *zara-viewer-project
@@ -1150,7 +1150,7 @@ accounts:
     balanceId: 10013
   - project: *zara-viewer-project
     id: 2953
-    name: Deterioro de valor de créditos a largo plazo a empresas del *group
+    name: Deterioro de valor de créditos a largo plazo a empresas del grupo
     level: *subaccount
     balanceId: 10013
   - project: *zara-viewer-project
@@ -1405,32 +1405,32 @@ accounts:
     balanceId: 10087
   - project: *zara-viewer-project
     id: 403
-    name: Proveedores, empresas del *group
+    name: Proveedores, empresas del grupo
     level: *account
     balanceId: 10088
   - project: *zara-viewer-project
     id: 4030
-    name: Proveedores, empresas del *group (euros)
+    name: Proveedores, empresas del grupo (euros)
     level: *subaccount
     balanceId: 10088
   - project: *zara-viewer-project
     id: 4031
-    name: Efectos comerciales a pagar, empresas del *group
+    name: Efectos comerciales a pagar, empresas del grupo
     level: *subaccount
     balanceId: 10088
   - project: *zara-viewer-project
     id: 4034
-    name: Proveedores, empresas del *group (moneda extranjera)
+    name: Proveedores, empresas del grupo (moneda extranjera)
     level: *subaccount
     balanceId: 10088
   - project: *zara-viewer-project
     id: 4036
-    name: Envases y embalajes a devolver a proveedores, empresas del *group
+    name: Envases y embalajes a devolver a proveedores, empresas del grupo
     level: *subaccount
     balanceId: 10088
   - project: *zara-viewer-project
     id: 4039
-    name: Proveedores, empresas del *group, facturas pendientes de recibir o de formalizar
+    name: Proveedores, empresas del grupo, facturas pendientes de recibir o de formalizar
     level: *subaccount
     balanceId: 10088
   - project: *zara-viewer-project
@@ -1545,42 +1545,42 @@ accounts:
     balanceId: 10029
   - project: *zara-viewer-project
     id: 433
-    name: Clientes, empresas del *group
+    name: Clientes, empresas del grupo
     level: *account
     balanceId: 10030
   - project: *zara-viewer-project
     id: 4330
-    name: Clientes empresas del *group (euros)
+    name: Clientes empresas del grupo (euros)
     level: *subaccount
     balanceId: 10030
   - project: *zara-viewer-project
     id: 4331
-    name: Efectos comerciales a cobrar, empresas del *group
+    name: Efectos comerciales a cobrar, empresas del grupo
     level: *subaccount
     balanceId: 10030
   - project: *zara-viewer-project
     id: 4332
-    name: Clientes empresas del *group, operaciones de “factoring”
+    name: Clientes empresas del grupo, operaciones de “factoring”
     level: *subaccount
     balanceId: 10030
   - project: *zara-viewer-project
     id: 4334
-    name: Clientes empresas del *group (moneda extranjera)
+    name: Clientes empresas del grupo (moneda extranjera)
     level: *subaccount
     balanceId: 10030
   - project: *zara-viewer-project
     id: 4336
-    name: Clientes empresas del *group de dudoso cobro
+    name: Clientes empresas del grupo de dudoso cobro
     level: *subaccount
     balanceId: 10030
   - project: *zara-viewer-project
     id: 4337
-    name: Envases y embalajes a devolver a clientes, empresas del *group
+    name: Envases y embalajes a devolver a clientes, empresas del grupo
     level: *subaccount
     balanceId: 10030
   - project: *zara-viewer-project
     id: 4339
-    name: Clientes empresas del *group, facturas pendientes de formalizar
+    name: Clientes empresas del grupo, facturas pendientes de formalizar
     level: *subaccount
     balanceId: 10030
   - project: *zara-viewer-project
@@ -1820,7 +1820,7 @@ accounts:
     balanceId: 10030
   - project: *zara-viewer-project
     id: 4933
-    name: Deterioro de valor de créditos por operaciones comerciales con empresas del *group
+    name: Deterioro de valor de créditos por operaciones comerciales con empresas del grupo
     level: *subaccount
     balanceId: 10030
   - project: *zara-viewer-project
@@ -1920,7 +1920,7 @@ accounts:
     balanceId: 10086
   - project: *zara-viewer-project
     id: 5103
-    name: Deudas a corto plazo con entidades de crédito, empresas del *group
+    name: Deudas a corto plazo con entidades de crédito, empresas del grupo
     level: *subaccount
     balanceId: 10086
   - project: *zara-viewer-project
@@ -1940,7 +1940,7 @@ accounts:
     balanceId: 10086
   - project: *zara-viewer-project
     id: 5113
-    name: Proveedores de inmovilizado a corto plazo, empresas del *group
+    name: Proveedores de inmovilizado a corto plazo, empresas del grupo
     level: *subaccount
     balanceId: 10086
   - project: *zara-viewer-project
@@ -1960,7 +1960,7 @@ accounts:
     balanceId: 10086
   - project: *zara-viewer-project
     id: 5123
-    name: Acreedores por arrendamiento financiero a corto plazo, empresas del *group
+    name: Acreedores por arrendamiento financiero a corto plazo, empresas del grupo
     level: *subaccount
     balanceId: 10086
   - project: *zara-viewer-project
@@ -1980,7 +1980,7 @@ accounts:
     balanceId: 10086
   - project: *zara-viewer-project
     id: 5133
-    name: Otras deudas a corto plazo con empresas del *group
+    name: Otras deudas a corto plazo con empresas del grupo
     level: *subaccount
     balanceId: 10086
   - project: *zara-viewer-project
@@ -2000,7 +2000,7 @@ accounts:
     balanceId: 10086
   - project: *zara-viewer-project
     id: 5143
-    name: Intereses a corto plazo de deudas, empresas del *group
+    name: Intereses a corto plazo de deudas, empresas del grupo
     level: *subaccount
     balanceId: 10086
   - project: *zara-viewer-project
@@ -2135,7 +2135,7 @@ accounts:
     balanceId: 10036
   - project: *zara-viewer-project
     id: 5303
-    name: Participaciones a corto plazo, en empresas del *group
+    name: Participaciones a corto plazo, en empresas del grupo
     level: *subaccount
     balanceId: 10036
   - project: *zara-viewer-project
@@ -2155,7 +2155,7 @@ accounts:
     balanceId: 10038
   - project: *zara-viewer-project
     id: 5313
-    name: Valores representativos de deuda a corto plazo de empresas del *group
+    name: Valores representativos de deuda a corto plazo de empresas del grupo
     level: *subaccount
     balanceId: 10038
   - project: *zara-viewer-project
@@ -2175,7 +2175,7 @@ accounts:
     balanceId: 10037
   - project: *zara-viewer-project
     id: 5323
-    name: Créditos a corto plazo a empresas del *group
+    name: Créditos a corto plazo a empresas del grupo
     level: *subaccount
     balanceId: 10037
   - project: *zara-viewer-project
@@ -2195,7 +2195,7 @@ accounts:
     balanceId: 10038
   - project: *zara-viewer-project
     id: 5333
-    name: Intereses a corto plazo de valores representativos de deuda de empresas del *group
+    name: Intereses a corto plazo de valores representativos de deuda de empresas del grupo
     level: *subaccount
     balanceId: 10038
   - project: *zara-viewer-project
@@ -2215,7 +2215,7 @@ accounts:
     balanceId: 10037
   - project: *zara-viewer-project
     id: 5343
-    name: Intereses a corto plazo de créditos a empresas del *group
+    name: Intereses a corto plazo de créditos a empresas del grupo
     level: *subaccount
     balanceId: 10037
   - project: *zara-viewer-project
@@ -2235,7 +2235,7 @@ accounts:
     balanceId: 10039
   - project: *zara-viewer-project
     id: 5353
-    name: Dividendo a cobrar de empresas de *group
+    name: Dividendo a cobrar de empresas de grupo
     level: *subaccount
     balanceId: 10039
   - project: *zara-viewer-project
@@ -2255,7 +2255,7 @@ accounts:
     balanceId: 10036
   - project: *zara-viewer-project
     id: 5393
-    name: Desembolsos pendientes sobre participaciones a corto plazo en empresas del *group
+    name: Desembolsos pendientes sobre participaciones a corto plazo en empresas del grupo
     level: *subaccount
     balanceId: 10036
   - project: *zara-viewer-project
@@ -2345,7 +2345,7 @@ accounts:
     balanceId: 10039
   - project: *zara-viewer-project
     id: 5523
-    name: Cuenta corriente con empresas del *group
+    name: Cuenta corriente con empresas del grupo
     level: *subaccount
     balanceId: 10039
   - project: *zara-viewer-project
@@ -2400,7 +2400,7 @@ accounts:
     balanceId: 10086
   - project: *zara-viewer-project
     id: 5563
-    name: Desembolsos exigidos sobre participaciones, empresas del *group
+    name: Desembolsos exigidos sobre participaciones, empresas del grupo
     level: *subaccount
     balanceId: 10086
   - project: *zara-viewer-project
@@ -2610,7 +2610,7 @@ accounts:
     balanceId: 10036
   - project: *zara-viewer-project
     id: 5933
-    name: Deterioro de valor de participaciones a corto plazo en empresas del *group
+    name: Deterioro de valor de participaciones a corto plazo en empresas del grupo
     level: *subaccount
     balanceId: 10036
   - project: *zara-viewer-project
@@ -2625,7 +2625,7 @@ accounts:
     balanceId: 10038
   - project: *zara-viewer-project
     id: 5943
-    name: Deterioro de valor de valores representativos de deuda a corto plazo de empresas del *group
+    name: Deterioro de valor de valores representativos de deuda a corto plazo de empresas del grupo
     level: *subaccount
     balanceId: 10038
   - project: *zara-viewer-project
@@ -2645,7 +2645,7 @@ accounts:
     balanceId: 10037
   - project: *zara-viewer-project
     id: 5953
-    name: Deterioro de valor de créditos a corto plazo a empresas del *group
+    name: Deterioro de valor de créditos a corto plazo a empresas del grupo
     level: *subaccount
     balanceId: 10037
   - project: *zara-viewer-project
@@ -2690,7 +2690,7 @@ accounts:
     balanceId: 10022
   - project: *zara-viewer-project
     id: 5993
-    name: Deterioro de valor de existencias, deudores comerciales y otras cuentas a cobrar integrados en un *group enajenable mantenido para la venta
+    name: Deterioro de valor de existencias, deudores comerciales y otras cuentas a cobrar integrados en un grupo enajenable mantenido para la venta
     level: *subaccount
     balanceId: 10022
   - project: *zara-viewer-project
@@ -3040,7 +3040,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6610
-    name: Intereses de obligaciones y bonos a largo plazo, empresas del *group
+    name: Intereses de obligaciones y bonos a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3060,7 +3060,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6615
-    name: Intereses de obligaciones y bonos a corto plazo, empresas del *group
+    name: Intereses de obligaciones y bonos a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3085,7 +3085,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6620
-    name: Intereses de deudas, empresas del *group
+    name: Intereses de deudas, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3140,7 +3140,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6640
-    name: Dividendos de pasivos, empresas del *group
+    name: Dividendos de pasivos, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3165,7 +3165,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6650
-    name: Intereses por descuento de efectos en entidades de crédito del *group
+    name: Intereses por descuento de efectos en entidades de crédito del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3185,7 +3185,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6654
-    name: Intereses por operaciones de “factoring” con entidades de crédito del *group
+    name: Intereses por operaciones de “factoring” con entidades de crédito del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3210,7 +3210,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6660
-    name: Pérdidas en valores representativos de deuda a largo plazo, empresas del *group
+    name: Pérdidas en valores representativos de deuda a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3230,7 +3230,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6665
-    name: Pérdidas en participaciones y valores representativos de deuda a corto plazo, empresas del *group
+    name: Pérdidas en participaciones y valores representativos de deuda a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3255,7 +3255,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6670
-    name: Pérdidas de créditos a largo plazo, empresas del *group
+    name: Pérdidas de créditos a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3275,7 +3275,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6675
-    name: Pérdidas de créditos a corto plazo, empresas del *group
+    name: Pérdidas de créditos a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3330,7 +3330,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6733
-    name: Pérdidas procedentes de participaciones a largo plazo, empresas del *group
+    name: Pérdidas procedentes de participaciones a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3445,7 +3445,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6960
-    name: Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del *group
+    name: Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3465,7 +3465,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6965
-    name: Pérdidas por deterioro en valores representativos de deuda a largo plazo, empresas del *group
+    name: Pérdidas por deterioro en valores representativos de deuda a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3490,7 +3490,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6970
-    name: Pérdidas por deterioro de créditos a largo plazo, empresas del *group
+    name: Pérdidas por deterioro de créditos a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3515,7 +3515,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6980
-    name: Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del *group
+    name: Pérdidas por deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3525,7 +3525,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6985
-    name: Pérdidas por deterioro en valores representativos de deuda a corto plazo, empresas del *group
+    name: Pérdidas por deterioro en valores representativos de deuda a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3550,7 +3550,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 6990
-    name: Pérdidas por deterioro de créditos a corto plazo, empresas del *group
+    name: Pérdidas por deterioro de créditos a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3820,7 +3820,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7600
-    name: Ingresos de participaciones en instrumentos de patrimonio, empresas del *group
+    name: Ingresos de participaciones en instrumentos de patrimonio, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3845,7 +3845,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7610
-    name: Ingresos de valores representativos de deuda, empresas del *group
+    name: Ingresos de valores representativos de deuda, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3875,7 +3875,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 76200
-    name: Ingresos de créditos a largo plazo, empresas del *group
+    name: Ingresos de créditos a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3900,7 +3900,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 76210
-    name: Ingresos de créditos a corto plazo, empresas del *group
+    name: Ingresos de créditos a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3950,7 +3950,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7660
-    name: Beneficios en valores representativos de deuda a largo plazo, empresas del *group
+    name: Beneficios en valores representativos de deuda a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -3970,7 +3970,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7665
-    name: Beneficios en participaciones y valores representativos de deuda a corto plazo, empresas del *group
+    name: Beneficios en participaciones y valores representativos de deuda a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -4030,7 +4030,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7733
-    name: Beneficios procedentes de participaciones a largo plazo, empresas del *group
+    name: Beneficios procedentes de participaciones a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -4165,7 +4165,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7960
-    name: Reversión del deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del *group
+    name: Reversión del deterioro de participaciones en instrumentos de patrimonio neto a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -4175,7 +4175,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7965
-    name: Reversión del deterioro de valores representativos de deuda a largo plazo, empresas del *group
+    name: Reversión del deterioro de valores representativos de deuda a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -4200,7 +4200,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7970
-    name: Reversión del deterioro de créditos a largo plazo, empresas del *group
+    name: Reversión del deterioro de créditos a largo plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -4225,7 +4225,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7980
-    name: Reversión del deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del *group
+    name: Reversión del deterioro de participaciones en instrumentos de patrimonio neto a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -4235,7 +4235,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7985
-    name: Reversión del deterioro en valores representativos de deuda a corto plazo, empresas del *group
+    name: Reversión del deterioro en valores representativos de deuda a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -4260,7 +4260,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 7990
-    name: Reversión del deterioro de créditos a corto plazo, empresas del *group
+    name: Reversión del deterioro de créditos a corto plazo, empresas del grupo
     level: *subaccount
     balanceId:
   - project: *zara-viewer-project
@@ -4430,22 +4430,22 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 860
-    name: Pérdidas en activos no corrientes y *groups enajenables de elementos mantenidos para la venta
+    name: Pérdidas en activos no corrientes y grupos enajenables de elementos mantenidos para la venta
     level: *account
     balanceId:
   - project: *zara-viewer-project
     id: 862
-    name: Transferencia de beneficios en activos no corrientes y *groups enajenables de elementos mantenidos para la venta
+    name: Transferencia de beneficios en activos no corrientes y grupos enajenables de elementos mantenidos para la venta
     level: *account
     balanceId:
   - project: *zara-viewer-project
     id: 89
-    name: GASTOS DE PARTICIPACIONES EN EMPRESAS DEL *group O ASOCIADAS CON AJUSTES VALORATIVOS POSITIVOS PREVIOS
+    name: GASTOS DE PARTICIPACIONES EN EMPRESAS DEL grupo O ASOCIADAS CON AJUSTES VALORATIVOS POSITIVOS PREVIOS
     level: *subgroup
     balanceId:
   - project: *zara-viewer-project
     id: 891
-    name: Deterioro de participaciones en el patrimonio, empresas del *group
+    name: Deterioro de participaciones en el patrimonio, empresas del grupo
     level: *account
     balanceId:
   - project: *zara-viewer-project
@@ -4555,22 +4555,22 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 960
-    name: Beneficios en activos no corrientes y *groups enajenables de elementos mantenidos para la venta
+    name: Beneficios en activos no corrientes y grupos enajenables de elementos mantenidos para la venta
     level: *account
     balanceId:
   - project: *zara-viewer-project
     id: 962
-    name: Transferencia de pérdidas en activos no corrientes y *groups enajenables de elementos mantenidos para la venta
+    name: Transferencia de pérdidas en activos no corrientes y grupos enajenables de elementos mantenidos para la venta
     level: *account
     balanceId:
   - project: *zara-viewer-project
     id: 99
-    name: INGRESOS DE PARTICIPACIONES EN EMPRESAS DEL *group O ASOCIADAS CON AJUSTES VALORATIVOS NEGATIVOS PREVIOS
+    name: INGRESOS DE PARTICIPACIONES EN EMPRESAS DEL grupo O ASOCIADAS CON AJUSTES VALORATIVOS NEGATIVOS PREVIOS
     level: *subgroup
     balanceId:
   - project: *zara-viewer-project
     id: 991
-    name: Recuperación de ajustes valorativos negativos previos, empresas del *group
+    name: Recuperación de ajustes valorativos negativos previos, empresas del grupo
     level: *account
     balanceId:
   - project: *zara-viewer-project
@@ -4580,7 +4580,7 @@ accounts:
     balanceId:
   - project: *zara-viewer-project
     id: 993
-    name: Transferencia por deterioro de ajustes valorativos negativos previos, empresas del *group
+    name: Transferencia por deterioro de ajustes valorativos negativos previos, empresas del grupo
     level: *account
     balanceId:
   - project: *zara-viewer-project
@@ -4704,21 +4704,21 @@ balances:
     id: 10012
     type: A) ACTIVO NO CORRIENTE
     kind:
-    parent: IV. Inversiones en empresas del *group y asociadas a largo plazo
+    parent: IV. Inversiones en empresas del grupo y asociadas a largo plazo
     child: 1. Instrumentos de patrimonio
     accounts: [2403, 2404, 2493, 2494, 293]
   - project: *zara-viewer-project
     id: 10013
     type: A) ACTIVO NO CORRIENTE
     kind:
-    parent: IV. Inversiones en empresas del *group y asociadas a largo plazo
+    parent: IV. Inversiones en empresas del grupo y asociadas a largo plazo
     child: 2. Créditos a empresas
     accounts: [2423, 2424, 2953, 2954]
   - project: *zara-viewer-project
     id: 10014
     type: A) ACTIVO NO CORRIENTE
     kind:
-    parent: IV. Inversiones en empresas del *group y asociadas a largo plazo
+    parent: IV. Inversiones en empresas del grupo y asociadas a largo plazo
     child: 3. Valores representativos de deuda
     accounts: [2413, 2414, 2943, 2944]
   - project: *zara-viewer-project
@@ -4831,7 +4831,7 @@ balances:
     type: B) ACTIVO CORRIENTE
     kind:
     parent: III. Deudores comerciales y otras cuentas a cobrar.
-    child: 2. Clientes, empresas del *group, y asociadas
+    child: 2. Clientes, empresas del grupo, y asociadas
     accounts: [433, 434, 4933, 4934]
   - project: *zara-viewer-project
     id: 10031
@@ -4872,28 +4872,28 @@ balances:
     id: 10036
     type: B) ACTIVO CORRIENTE
     kind:
-    parent: IV. Inversiones en empresas del *group y asociadas a corto plazo
+    parent: IV. Inversiones en empresas del grupo y asociadas a corto plazo
     child: 1. Instrumentos de patrimonio
     accounts: [5303, 5304, 5393, 5394, 593]
   - project: *zara-viewer-project
     id: 10037
     type: B) ACTIVO CORRIENTE
     kind:
-    parent: IV. Inversiones en empresas del *group y asociadas a corto plazo
+    parent: IV. Inversiones en empresas del grupo y asociadas a corto plazo
     child: 2. Créditos a empresas
     accounts: [5323, 5324, 5343, 5344, 5953, 5954]
   - project: *zara-viewer-project
     id: 10038
     type: B) ACTIVO CORRIENTE
     kind:
-    parent: IV. Inversiones en empresas del *group y asociadas a corto plazo
+    parent: IV. Inversiones en empresas del grupo y asociadas a corto plazo
     child: 3. Valores representativos de deuda
     accounts: [5313, 5314, 5333, 5334, 5943, 5944]
   - project: *zara-viewer-project
     id: 10039
     type: B) ACTIVO CORRIENTE
     kind:
-    parent: IV. Inversiones en empresas del *group y asociadas a corto plazo
+    parent: IV. Inversiones en empresas del grupo y asociadas a corto plazo
     child: 5. Otros activos financieros
     accounts: [5353, 5354, 5523, 5524]
   - project: *zara-viewer-project
@@ -5145,7 +5145,7 @@ balances:
     id: 10075
     type: B) PASIVO NO CORRIENTE
     kind:
-    parent: III. Deudas con empresas del *group y asociadas a largo plazo
+    parent: III. Deudas con empresas del grupo y asociadas a largo plazo
     child:
     accounts: [1603, 1604, 1613, 1614, 1623, 1624, 1633, 1634]
   - project: *zara-viewer-project
@@ -5249,7 +5249,7 @@ balances:
     id: 10086
     type: C) PASIVO CORRIENTE
     kind:
-    parent: IV. Deudas con empresas del *group y asociadas a corto plazo
+    parent: IV. Deudas con empresas del grupo y asociadas a corto plazo
     child:
     accounts:
       [
@@ -5280,7 +5280,7 @@ balances:
     type: C) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
-    child: 2. Proveedores, empresas del *group y asociadas.
+    child: 2. Proveedores, empresas del grupo y asociadas.
     accounts: [403, 404]
   - project: *zara-viewer-project
     id: 10089

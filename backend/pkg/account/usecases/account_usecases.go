@@ -104,7 +104,6 @@ func (useCase *DefaultAccountUseCase) ListAccounts(ctx context.Context, input Li
 			if group.ID == account.ID[0:2] {
 				groups[i].Accounts = append(groups[i].Accounts, account)
 			}
-
 		}
 	}
 

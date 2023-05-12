@@ -63,7 +63,7 @@ function removeEntry(id: string, debitAmount: number, creditAmount: number) {
   entriesStore.removeCreationEntry(id, debitAmount, creditAmount);
 }
 
-const searchDebit = event => {
+const searchDebit = (event: any) => {
   let query = event.query;
   let newFilteredCities = [];
 
@@ -77,7 +77,7 @@ const searchDebit = event => {
   filteredDebitAccounts.value = newFilteredCities;
 };
 
-const searchCredit = event => {
+const searchCredit = (event: any) => {
   let query = event.query;
   let newFilteredCities = [];
 
