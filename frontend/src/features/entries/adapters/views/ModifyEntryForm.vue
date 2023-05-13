@@ -19,6 +19,13 @@ const currenciesArray = ref(currencies);
 let selectedConcept = ref();
 let selectedDebitAmount = ref();
 let selectedCreditAmount = ref();
+if (entriesStore.state.totalBalance !== 0) {
+  if (entriesStore.state.totalBalance > 0) {
+    selectedCreditAmount.value = entriesStore.state.totalBalance;
+  } else {
+    selectedDebitAmount.value = entriesStore.state.totalBalance;
+  }
+}
 let selectedDebitAccount = ref();
 let filteredDebitAccounts = ref();
 let selectedCreditAccount = ref();
@@ -59,8 +66,8 @@ async function addCreditEntry() {
   clearCreditForm();
 }
 
-function removeEntry(id: string) {
-  entriesStore.removeModificationEntry(id);
+async function removeEntry(id: string) {
+  await entriesStore.removeModificationEntry(id);
 
   if (entriesStore.state.totalBalance >= 0) {
     selectedCreditAmount.value = entriesStore.state.totalBalance;

@@ -53,9 +53,9 @@ function arrayToString(arr: string[]): string {
                 </td>
               </tr>
               <template v-for="(child, j) in record.child" :key="j">
-                <tr  class="border-t border-gray-200 bg-gray-100">
+                <tr class="border-t border-gray-200 bg-gray-100">
                   <td class="px-3 py-4 text-sm text-gray-800">
-                    {{ child.accounts ? arrayToString(child.accounts) : ''}}
+                    {{ child.accounts ? arrayToString(child.accounts) : '' }}
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-gray-800">
                     {{ child.name }}
@@ -70,7 +70,7 @@ function arrayToString(arr: string[]): string {
                 <template v-for="(child2, k) in child.child" :key="k">
                   <tr class="border-t border-gray-200">
                     <td class="px-3 py-4 text-sm text-gray-800">
-                      {{ child2.accounts ? arrayToString(child2.accounts): '' }}
+                      {{ child2.accounts ? arrayToString(child2.accounts) : '' }}
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ child2.name }}
@@ -83,9 +83,9 @@ function arrayToString(arr: string[]): string {
                     </td>
                   </tr>
                   <template v-for="(child3, l) in child2.child" :key="l">
-                    <tr  class="border-t border-gray-200">
+                    <tr class="border-t border-gray-200">
                       <td class="px-3 py-4 text-sm text-gray-800">
-                        {{ child3.accounts ? arrayToString(child3.accounts): '' }}
+                        {{ child3.accounts ? arrayToString(child3.accounts) : '' }}
                       </td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                         {{ child3.name }}

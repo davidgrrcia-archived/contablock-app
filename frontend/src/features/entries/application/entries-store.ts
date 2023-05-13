@@ -300,17 +300,30 @@ export const useEntriesStore = defineStore('entries', {
       try {
         this.state.stateMessage = 'removing entry';
 
-        const response = await entriesUseCase.removeEntry(id);
+        if (this.state.entriesCreation.length > 0) {
+          console.log('aaaaaaaaaaaa')
+          this.state.entriesCreation = this.state.entriesCreation.filter(entry => entry.entry.id !== id);
+          this.state.storedEntries = this.state.storedEntries.filter(entry => entry.entry.id !== id);
+        } else {
+          console.log('bbbbbbbbbbb')
+          const response = await entriesUseCase.removeEntry(id);
 
-        if (response instanceof Error) {
-          const messagesStore = useMessagesStore();
-          messagesStore.addErrorMessage('Error eliminando el asiento', 'Ha ocurrido un error eliminando el asiento');
-          return;
+          if (response instanceof Error) {
+            const messagesStore = useMessagesStore();
+            messagesStore.addErrorMessage('Error eliminando el asiento', 'Ha ocurrido un error eliminando el asiento');
+            return;
+          }
+
+          this.state.storedEntries = this.state.storedEntries.filter(entry => entry.entry.id !== id);
+
+          if (response.debitAmount) {
+            this.state.totalBalance -= response.debitAmount;
+          } else if (response.creditAmount) {
+            this.state.totalBalance += response.creditAmount;
+          }
         }
 
         this.state.stateMessage = 'entries removed';
-        const messagesStore = useMessagesStore();
-        messagesStore.addSuccessMessage('Asiento eliminado', 'El asiento ha sido eliminado correctamente');
       } catch (err) {
         this.state.stateMessage = 'error removing entries';
         const messagesStore = useMessagesStore();
