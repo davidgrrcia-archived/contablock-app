@@ -64,7 +64,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 			typeBalance.Map = mapping[item.Type].Map
 			typeBalance.CurrentAmount = mapping[item.Type].CurrentAmount + item.CurrentAmount
 			typeBalance.PreviousAmount = mapping[item.Type].PreviousAmount + item.PreviousAmount
-			typeBalance.Accounts = mapping[item.Type].Accounts
 			mapping[item.Type] = typeBalance
 		}
 
@@ -81,7 +80,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 				kindBalance.Map = mapping[item.Type].Map[*item.Kind].Map
 				kindBalance.CurrentAmount = mapping[item.Type].Map[*item.Kind].CurrentAmount + item.CurrentAmount
 				kindBalance.PreviousAmount = mapping[item.Type].Map[*item.Kind].PreviousAmount + item.PreviousAmount
-				kindBalance.Accounts = mapping[item.Type].Map[*item.Kind].Accounts
 				mapping[item.Type].Map[*item.Kind] = kindBalance
 			}
 
@@ -98,7 +96,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 					parentBalance.Map = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].Map
 					parentBalance.CurrentAmount = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].CurrentAmount + item.CurrentAmount
 					parentBalance.PreviousAmount = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].PreviousAmount + item.PreviousAmount
-					parentBalance.Accounts = mapping[item.Type].Map[*item.Kind].Map[*item.Parent].Accounts
 					mapping[item.Type].Map[*item.Kind].Map[*item.Parent] = parentBalance
 				}
 			}
@@ -126,7 +123,6 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 				parentBalance.Map = mapping[item.Type].Map[*item.Parent].Map
 				parentBalance.CurrentAmount = mapping[item.Type].Map[*item.Parent].CurrentAmount + item.CurrentAmount
 				parentBalance.PreviousAmount = mapping[item.Type].Map[*item.Parent].PreviousAmount + item.PreviousAmount
-				parentBalance.Accounts = mapping[item.Type].Map[*item.Parent].Accounts
 				mapping[item.Type].Map[*item.Parent] = parentBalance
 			}
 

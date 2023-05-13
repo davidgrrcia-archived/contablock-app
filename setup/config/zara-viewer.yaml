@@ -4954,266 +4954,266 @@ balances:
     accounts: [576]
   - project: *zara-viewer-project
     id: 10048
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: I. Capital
     child: 1. Capital escriturado
     accounts: [100, 101, 102]
   - project: *zara-viewer-project
     id: 10049
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: I. Capital
     child: 2. (Capital no exigido)
     accounts: [(1030), (1040)]
   - project: *zara-viewer-project
     id: 10050
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: II. Prima de emisión
     child:
     accounts: [110]
   - project: *zara-viewer-project
     id: 10051
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: III. Reservas
     child: 1. Legal y estatutarias
     accounts: [112, 1141]
   - project: *zara-viewer-project
     id: 10052
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: III. Reservas
     child: 2. Otras reservas
     accounts: [113, 1140, 1142, 1143, 1144, 115, 119]
   - project: *zara-viewer-project
     id: 10053
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: IV. (Acciones y participaciones en patrimonio propias)
     child:
     accounts: [(108), (109)]
   - project: *zara-viewer-project
     id: 10054
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: V. Resultados de ejercicios anteriores
     child: 1. Remanente
     accounts: [120]
   - project: *zara-viewer-project
     id: 10055
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: V. Resultados de ejercicios anteriores
     child: 2. (Resultados negativos de ejercicios anteriores)
     accounts: [(121)]
   - project: *zara-viewer-project
     id: 10056
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: VI. Otras aportaciones de socios
     child:
     accounts: [118]
   - project: *zara-viewer-project
     id: 10057
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: VII. Resultado del ejercicio
     child:
     accounts: [129]
   - project: *zara-viewer-project
     id: 10058
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: VIII. (Dividendo a cuenta)
     child:
     accounts: [(557)]
   - project: *zara-viewer-project
     id: 10059
-    type: A) PATRIMONIO NETO
-    kind: A-1) Fondos propios
+    type: C) PATRIMONIO NETO
+    kind: C-1) Fondos propios
     parent: IX. Otros instrumentos de patrimonio
     child:
     accounts: [111]
   - project: *zara-viewer-project
     id: 10060
-    type: A) PATRIMONIO NETO
-    kind: A-2) Ajustes por cambios de valor
+    type: C) PATRIMONIO NETO
+    kind: C-2) Ajustes por cambios de valor
     parent: I. Activos financieros disponibles para la venta
     child:
     accounts: [133]
   - project: *zara-viewer-project
     id: 10061
-    type: A) PATRIMONIO NETO
-    kind: A-2) Ajustes por cambios de valor
+    type: C) PATRIMONIO NETO
+    kind: C-2) Ajustes por cambios de valor
     parent: II. Operaciones de cobertura
     child:
     accounts: [1340]
   - project: *zara-viewer-project
     id: 10062
-    type: A) PATRIMONIO NETO
-    kind: A-2) Ajustes por cambios de valor
+    type: C) PATRIMONIO NETO
+    kind: C-2) Ajustes por cambios de valor
     parent: III. Activos no corrientes y pasivos vinculados, mantenidos para la venta
     child:
     accounts: [136]
   - project: *zara-viewer-project
     id: 10063
-    type: A) PATRIMONIO NETO
-    kind: A-2) Ajustes por cambios de valor
+    type: C) PATRIMONIO NETO
+    kind: C-2) Ajustes por cambios de valor
     parent: IV. Diferencia de conversión
     child:
     accounts: [135]
   - project: *zara-viewer-project
     id: 10064
-    type: A) PATRIMONIO NETO
-    kind: A-2) Ajustes por cambios de valor
+    type: C) PATRIMONIO NETO
+    kind: C-2) Ajustes por cambios de valor
     parent: V. Otros
     child:
     accounts: [137]
   - project: *zara-viewer-project
     id: 10065
-    type: A) PATRIMONIO NETO
-    kind: A-3) Subvenciones, donaciones y legados recibidos
+    type: C) PATRIMONIO NETO
+    kind: C-3) Subvenciones, donaciones y legados recibidos
     parent:
     child:
     accounts: [130, 131, 132]
   - project: *zara-viewer-project
     id: 10066
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: I. Provisiones a largo plazo
     child: 1. Obligaciones por prestaciones a largo plazo al personal
     accounts: [140]
   - project: *zara-viewer-project
     id: 10067
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: I. Provisiones a largo plazo
     child: 2. Actuaciones medioambientales
     accounts: [145]
   - project: *zara-viewer-project
     id: 10068
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: I. Provisiones a largo plazo
     child: 3. Provisiones por reestructuración.
     accounts: [146]
   - project: *zara-viewer-project
     id: 10069
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: I. Provisiones a largo plazo
     child: 4. Otras provisiones.
     accounts: [141, 142, 143, 147]
   - project: *zara-viewer-project
     id: 10070
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: II. Deudas a largo plazo
     child: 1. Obligaciones y otros valores negociables.
     accounts: [177, 178, 179]
   - project: *zara-viewer-project
     id: 10071
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: II. Deudas a largo plazo
     child: 2. Deudas con entidades de crédito
     accounts: [1605, 170]
   - project: *zara-viewer-project
     id: 10072
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: II. Deudas a largo plazo
     child: 3. Acreedores por arrendamiento financiero
     accounts: [1625, 174]
   - project: *zara-viewer-project
     id: 10073
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: II. Deudas a largo plazo
     child: 4. Derivados
     accounts: [176]
   - project: *zara-viewer-project
     id: 10074
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: II. Deudas a largo plazo
     child: 5. Otros pasivos financieros
     accounts: [1615, 1635, 171, 172, 173, 175, 180, 185, 189]
   - project: *zara-viewer-project
     id: 10075
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: III. Deudas con empresas del grupo y asociadas a largo plazo
     child:
     accounts: [1603, 1604, 1613, 1614, 1623, 1624, 1633, 1634]
   - project: *zara-viewer-project
     id: 10076
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: IV. Pasivos por impuesto diferido
     child:
     accounts: [479]
   - project: *zara-viewer-project
     id: 10077
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: V. Periodificaciones a largo plazo
     child:
     accounts: [181]
   - project: *zara-viewer-project
     id: 10078
-    type: B) PASIVO NO CORRIENTE
+    type: D) PASIVO NO CORRIENTE
     kind:
     parent: VII. Deuda con características especiales a largo plazo
     child:
     accounts: [15]
   - project: *zara-viewer-project
     id: 10079
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: I. Pasivos vinculados con activos no corrientes mantenidos para la venta
     child:
     accounts: [585, 586, 587, 588, 589]
   - project: *zara-viewer-project
     id: 10080
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: II. Provisiones a corto plazo
     child:
     accounts: [499, 529]
   - project: *zara-viewer-project
     id: 10081
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: III. Deudas a corto plazo.
     child: 1. Obligaciones y otros valores negociables.
     accounts: [500, 501, 505, 506]
   - project: *zara-viewer-project
     id: 10082
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: III. Deudas a corto plazo.
     child: 2. Deudas con entidades de crédito.
     accounts: [5105, 520, 527]
   - project: *zara-viewer-project
     id: 10083
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: III. Deudas a corto plazo.
     child: 3. Acreedores por arrendamiento financiero
     accounts: [5125, 524]
   - project: *zara-viewer-project
     id: 10084
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: III. Deudas a corto plazo.
     child: 4. Derivados
     accounts: [5595, 5598]
   - project: *zara-viewer-project
     id: 10085
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: III. Deudas a corto plazo.
     child: 5. Otros pasivos financieros
@@ -5247,7 +5247,7 @@ balances:
       ]
   - project: *zara-viewer-project
     id: 10086
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: IV. Deudas con empresas del grupo y asociadas a corto plazo
     child:
@@ -5270,63 +5270,63 @@ balances:
       ]
   - project: *zara-viewer-project
     id: 10087
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 1. Proveedores
     accounts: [400, 401, 405, (406)]
   - project: *zara-viewer-project
     id: 10088
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 2. Proveedores, empresas del grupo y asociadas.
     accounts: [403, 404]
   - project: *zara-viewer-project
     id: 10089
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 3. Acreedores varios
     accounts: [41]
   - project: *zara-viewer-project
     id: 10090
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 4. Personal (remuneraciones pendientes de pago)
     accounts: [465, 466]
   - project: *zara-viewer-project
     id: 10091
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 5. Pasivos por impuesto corriente
     accounts: [4752]
   - project: *zara-viewer-project
     id: 10092
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 6. Otras deudas con las Administraciones Públicas.
     accounts: [4750, 4751, 4758, 476, 477]
   - project: *zara-viewer-project
     id: 10093
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: V. Acreedores comerciales y otras cuentas a pagar
     child: 7. Anticipos de clientes
     accounts: [438]
   - project: *zara-viewer-project
     id: 10094
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: VI. Periodificaciones a corto plazo
     child:
     accounts: [485, 568]
   - project: *zara-viewer-project
     id: 10095
-    type: C) PASIVO CORRIENTE
+    type: E) PASIVO CORRIENTE
     kind:
     parent: VII. Deuda con características especiales a corto plazo
     child:
