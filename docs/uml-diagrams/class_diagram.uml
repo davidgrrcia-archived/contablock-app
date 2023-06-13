@@ -1,0 +1,88 @@
+@startuml
+class Balances {
+  - project: varchar
+  - id: varchar
+  - type: varchar
+  - kind: varchar
+  - parent: varchar
+  - child: varchar
+  - accounts: varchar
+}
+class BalancesByYear {
+  - project: varchar
+  - id: varchar
+  - balance_id: varchar
+  - amount: varchar
+  - year: varchar
+}
+class Accounts {
+  - project: varchar
+  - id: varchar
+  - name: varchar
+  - level: varchar
+  - balance_id: varchar
+}
+class Business {
+  - project: varchar
+  - id: varchar
+  - name: varchar
+  - social_denomination: varchar
+  - registered_office: varchar
+  - cif: varchar
+  - logo: text
+}
+class Contracts {
+  - project: varchar
+  - id: varchar
+  - name: varchar
+  - description: text
+  - eth_address: varchar
+  - network: varchar
+  - admin_id: varchar
+  - creation_date: varchar
+  - last_update: varchar
+}
+class Entries {
+  - project: varchar
+  - id: varchar
+  - contract_id: varchar
+  - user_id: varchar
+  - account_id: varchar
+  - multiple_entry_id: varchar
+  - balance_by_year_id: varchar
+  - currency: varchar
+  - concept: varchar
+  - date: varchar
+  - quarter: varchar
+  - debit_balance: varchar
+  - credit_balance: varchar
+  - state: varchar
+  - state_reason: varchar
+  - creation_date: varchar
+  - last_update: varchar
+}
+class Users {
+  - project: varchar
+  - id: varchar
+  - contract_id: varchar
+  - name: varchar
+  - email: varchar
+  - password: varchar
+  - role: varchar
+  - eth_address: varchar
+  - private_key: varchar
+  - default_password_changed: boolean
+  - network: varchar
+  - business_id: varchar
+  - creation_date: varchar
+  - last_update: varchar
+}
+Balances "1" -- "0..*" BalancesByYear : contains
+Balances "1" -- "0..*" Accounts : contains
+Users "1" -- "0..*" Entries : creates
+Users "1" -- "1" Contracts : administers
+Users "1" -- "1" Business : belongs_to
+Accounts "1" -- "0..*" Entries : referenced_in
+BalancesByYear "1" -- "0..*" Entries : referenced_in
+Contracts "1" -- "0..*" Entries : contains
+@enduml
