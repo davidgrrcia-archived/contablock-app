@@ -132,6 +132,36 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 			return nil, err
 		}
 		balanceByYearID = &storedBalance.ID
+	} else if input.AccountID[0:1] == "6" {
+		var createBalanceInput balance.CreateBalanceByYearInput
+		createBalanceInput.Project = input.Project
+		createBalanceInput.BalanceID = "10057"
+		amount, err := useCase.getAmountForBalance(input.DebitBalance, input.CreditBalance, input.Project, createBalanceInput.BalanceID, storedAccount.Account.ID)
+		if err != nil {
+			return nil, err
+		}
+		createBalanceInput.Amount = *amount
+		createBalanceInput.Year = input.Date.Year()
+		storedBalance, err := useCase.balanceUseCase.CreateBalanceByYear(ctx, createBalanceInput)
+		if err != nil {
+			return nil, err
+		}
+		balanceByYearID = &storedBalance.ID
+	} else if input.AccountID[0:1] == "7" {
+		var createBalanceInput balance.CreateBalanceByYearInput
+		createBalanceInput.Project = input.Project
+		createBalanceInput.BalanceID = "10057"
+		amount, err := useCase.getAmountForBalance(input.DebitBalance, input.CreditBalance, input.Project, createBalanceInput.BalanceID, storedAccount.Account.ID)
+		if err != nil {
+			return nil, err
+		}
+		createBalanceInput.Amount = -1 * *amount
+		createBalanceInput.Year = input.Date.Year()
+		storedBalance, err := useCase.balanceUseCase.CreateBalanceByYear(ctx, createBalanceInput)
+		if err != nil {
+			return nil, err
+		}
+		balanceByYearID = &storedBalance.ID
 	}
 
 	var desiredEntry EntryStorageData
@@ -926,7 +956,7 @@ func (useCase *DefaultEntryUseCase) getAmountForBalance(debitBalance *float64, c
 	if debitBalance != nil && *debitBalance != 0 {
 		balanceAmount = *debitBalance
 	} else if creditBalance != nil && *creditBalance != 0 {
-		balanceAmount = -1 * *creditBalance
+		balanceAmount = *creditBalance
 	}
 
 	var describeBalanceInput balance.DescribeBalanceInput

@@ -105,15 +105,23 @@ const searchCredit = (event: any) => {
 };
 
 function clearDebitForm() {
-  selectedCreditAmount.value = entriesStore.state.totalBalance >= 0 ? entriesStore.state.totalBalance : entriesStore.state.totalBalance * -1;
-  selectedDebitAmount = ref();
+  populateRemainingAmount();
   selectedDebitAccount = ref();
 }
 
 function clearCreditForm() {
-  selectedDebitAmount.value = entriesStore.state.totalBalance >= 0 ? entriesStore.state.totalBalance : entriesStore.state.totalBalance * -1;
-  selectedCreditAmount = ref();
+  populateRemainingAmount();
   selectedCreditAccount = ref();
+}
+
+function populateRemainingAmount() {
+  if (entriesStore.state.totalBalance >= 0) {
+    selectedCreditAmount.value = entriesStore.state.totalBalance;
+    selectedDebitAmount = ref();
+  } else {
+    selectedDebitAmount.value = entriesStore.state.totalBalance * -1;
+    selectedCreditAmount = ref();
+  }
 }
 
 function getTotalDebitBalance() {

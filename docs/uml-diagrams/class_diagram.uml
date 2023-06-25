@@ -1,88 +1,102 @@
 @startuml
-class Balances {
-  - project: varchar
-  - id: varchar
-  - type: varchar
-  - kind: varchar
-  - parent: varchar
-  - child: varchar
-  - accounts: varchar
+
+class Account {
+  +Project: string
+  +ID: string
+  +Name: string
+  +Level: string
+  +BalanceID: *string
+  +DisplayName: string
 }
-class BalancesByYear {
-  - project: varchar
-  - id: varchar
-  - balance_id: varchar
-  - amount: varchar
-  - year: varchar
+
+class Balance {
+  +Project: string
+  +ID: string
+  +Type: string
+  +Kind: *string
+  +Parent: *string
+  +Child: *string
+  +Accounts: []string
+  +CurrentYear: int
+  +PreviousYear: int
+  +CurrentAmount: float64
+  +PreviousAmount: float64
 }
-class Accounts {
-  - project: varchar
-  - id: varchar
-  - name: varchar
-  - level: varchar
-  - balance_id: varchar
-}
+
 class Business {
-  - project: varchar
-  - id: varchar
-  - name: varchar
-  - social_denomination: varchar
-  - registered_office: varchar
-  - cif: varchar
-  - logo: text
+  +Project: string
+  +ID: string
+  +Name: string
+  +SocialDenomination: string
+  +RegisteredOffice: string
+  +Cif: string
+  +Logo: string
 }
-class Contracts {
-  - project: varchar
-  - id: varchar
-  - name: varchar
-  - description: text
-  - eth_address: varchar
-  - network: varchar
-  - admin_id: varchar
-  - creation_date: varchar
-  - last_update: varchar
+
+class Contract {
+  +Project: string
+  +ID: string
+  +Name: string
+  +Description: string
+  +EthAddress: string
+  +Network: string
+  +AdminID: string
+  +CreationDate: time.Time
+  +LastUpdate: time.Time
 }
-class Entries {
-  - project: varchar
-  - id: varchar
-  - contract_id: varchar
-  - user_id: varchar
-  - account_id: varchar
-  - multiple_entry_id: varchar
-  - balance_by_year_id: varchar
-  - currency: varchar
-  - concept: varchar
-  - date: varchar
-  - quarter: varchar
-  - debit_balance: varchar
-  - credit_balance: varchar
-  - state: varchar
-  - state_reason: varchar
-  - creation_date: varchar
-  - last_update: varchar
+
+class Entry {
+  +Project: string
+  +ID: string
+  +ContractID: string
+  +UserID: string
+  +AccountID: string
+  +MultipleEntryID: string
+  +BalanceByYearID: *string
+  +Currency: string
+  +Concept: *string
+  +Date: time.Time
+  +Quarter: int
+  +DebitBalance: float64
+  +CreditBalance: float64
+  +State: string
+  +StateReason: *string
+  +CreationDate: time.Time
+  +LastUpdate: time.Time
 }
-class Users {
-  - project: varchar
-  - id: varchar
-  - contract_id: varchar
-  - name: varchar
-  - email: varchar
-  - password: varchar
-  - role: varchar
-  - eth_address: varchar
-  - private_key: varchar
-  - default_password_changed: boolean
-  - network: varchar
-  - business_id: varchar
-  - creation_date: varchar
-  - last_update: varchar
+
+class User {
+  +Project: string
+  +ID: string
+  +ContractID: string
+  +Name: string
+  +Email: string
+  +Password: string
+  +Role: string
+  +EthAddress: string
+  +PrivateKey: string
+  +DefaultPasswordChanged: bool
+  +Network: string
+  +BusinessID: string
+  +CreationDate: time.Time
+  +LastUpdate: time.Time
 }
-Balances "1" -- "0..*" BalancesByYear : contains
-Balances "1" -- "0..*" Accounts : contains
-Users "1" -- "0..*" Entries : creates
-Users "1" -- "1" Contracts : administers
-Users "1" -- "1" Business : belongs_to
-Accounts "1" -- "0..*" Entries : referenced_in
-BalancesByYear "1" -- "0..*" Entries : referenced_in
-Contracts "1" -- "0..*" Entries : contains
+
+class BalanceByYear {
+  +Project: string
+  +ID: string
+  +BalanceID: string
+  +Amount: float64
+  +Year: int
+}
+
+Balance "1" -- "0..N" BalanceByYear
+Balance "1" o-- "0..N" Account
+User "1" -- "0..N" Entry 
+User "0..N" --> "1" Contract 
+User "0..N" --* "1" Business 
+Account "1" -- "0..N" Entry 
+BalanceByYear "1" -- "0..N" Entry 
+Contract "1" -- "0..N" Entry
+
 @enduml

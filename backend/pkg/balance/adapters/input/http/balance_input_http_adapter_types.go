@@ -30,7 +30,11 @@ type ListBalanceRequest struct {
 }
 
 type ListBalanceResponse struct {
-	Items []BalanceItem `json:"items"`
+	Items                     []BalanceItem `json:"items"`
+	CurrentDebitTotalAmount   float64       `json:"currentDebitTotalAmount"`
+	PreviousDebitTotalAmount  float64       `json:"previousDebitTotalAmount"`
+	CurrentCreditTotalAmount  float64       `json:"currentCreditTotalAmount"`
+	PreviousCreditTotalAmount float64       `json:"previousCreditTotalAmount"`
 }
 type ListBalanceResponseWrapper struct {
 	ListBalanceResponse ListBalanceResponse

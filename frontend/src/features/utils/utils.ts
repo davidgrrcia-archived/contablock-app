@@ -105,14 +105,18 @@ export function getRoleColor(role: string): string {
 }
 
 export function getTotalBalanceColor(amount1: number, amount2: number): string {
-  if (amount1 < amount2) {
+  const roundedAmount1 = Math.round(amount1);
+  const roundedAmount2 = Math.round(amount2);
+
+  if (roundedAmount1 < roundedAmount2) {
     return 'text-red-300';
-  } else if (amount1 > amount2) {
+  } else if (roundedAmount1 > roundedAmount2) {
     return 'text-green-300';
   } else {
     return 'text-white';
   }
 }
+
 
 export function isActionAllowed(role: string, state: string, action: string): boolean {
   if (role === 'admin') {

@@ -147,6 +147,10 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 
 	var response ListBalanceResponse
 	response.Items = mapToList(mapping)
+	response.CurrentDebitTotalAmount = response.Items[0].CurrentAmount + response.Items[1].CurrentAmount
+	response.PreviousDebitTotalAmount = response.Items[0].PreviousAmount + response.Items[1].PreviousAmount
+	response.CurrentCreditTotalAmount = response.Items[2].CurrentAmount + response.Items[3].CurrentAmount + response.Items[4].CurrentAmount
+	response.PreviousCreditTotalAmount = response.Items[2].PreviousAmount + response.Items[3].PreviousAmount + response.Items[4].PreviousAmount
 
 	responseWrapper := ListBalanceResponseWrapper{}
 	responseWrapper.ListBalanceResponse = response
