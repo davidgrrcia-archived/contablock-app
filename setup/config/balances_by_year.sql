@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db:3306
--- Generation Time: Jun 28, 2023 at 05:10 PM
+-- Generation Time: Jun 28, 2023 at 10:29 PM
 -- Server version: 8.0.32
 -- PHP Version: 8.1.16
 
@@ -40,31 +40,39 @@ CREATE TABLE `balances_by_year` (
 --
 
 INSERT INTO `balances_by_year` (`project`, `id`, `balance_id`, `amount`, `year`) VALUES
-('zara-viewer', '004783f1-aac5-42a4-9f4c-889fcea967f3', '10092', '8291', '2023'),
-('zara-accountant', '07ce8512-4640-442a-abb2-66c5ac4b3586', '10057', '-20246.96', '2023'),
-('zara-accountant', '11ccba9e-9aa0-4297-8675-04451cbb4423', '10092', '2530.85', '2023'),
-('zara-auditor', '11d38987-9ced-4dc8-bd16-391b1a33a12f', '10034', '420', '2023'),
-('zara-accountant', '13040bb9-cf3a-41f4-b234-b7fb712d893d', '10057', '-2000', '2023'),
-('zara-auditor', '16cde015-e980-49d6-b65b-069ca6c85075', '10092', '210', '2023'),
-('zara-auditor', '20d76b28-9fc9-4911-a750-700a83c42692', '10090', '16435', '2023'),
-('zara-accountant', '290b8fc5-61c4-482a-9db0-c42d11c68519', '10057', '1000', '2023'),
-('zara-auditor', '422e33fb-df66-48c9-aae7-aea675c0c8e0', '10087', '2420', '2023'),
-('zara-auditor', '47219339-caf4-4b4e-bd70-8c923a2e6bde', '10092', '2530', '2023'),
-('zara-viewer', '59f85f53-d9c0-4fbf-ae8e-8b2f9117fc01', '10029', '1210', '2023'),
-('zara-accountant', '73111663-c9e6-4c4e-ba06-22e378790248', '10092', '210', '2023'),
-('zara-accountant', '813c48a5-3cd3-49e2-9ae0-91e424aa92bf', '10029', '1210', '2023'),
-('zara-accountant', '81c68e37-b87c-48d1-9d6b-5ce28ab189ee', '10034', '420', '2023'),
-('zara-accountant', '82b50b07-c163-4118-8762-cb6f925f1a8f', '10090', '16435.75', '2023'),
-('zara-viewer', '85c42cd6-72e4-4931-8adb-a5b48a68865d', '10090', '16435', '2023'),
-('zara-accountant', '8eedae94-db28-4dae-9de2-0758c29e77ca', '10087', '2420', '2023'),
-('zara-viewer', '908c9522-4d7b-4384-99ac-bad7791d1015', '10092', '2530', '2023'),
-('zara-viewer', 'a3f7832f-080f-424b-8f65-767b80d994e0', '10092', '210', '2023'),
-('zara-viewer', 'a7cc48da-00fb-48b1-b612-7c56a8815fa7', '10034', '420', '2023'),
-('zara-accountant', 'c546e0fb-3bc6-457b-8520-58a04a0c9caa', '10092', '8291.84', '2023'),
-('zara-auditor', 'd6a272ea-36bb-4f8e-9814-2e588cd8e816', '10029', '1210', '2023'),
-('zara-accountant', 'e2bf72ea-0b06-46c9-b87d-54f9119883c3', '10057', '-7011.48', '2023'),
-('zara-viewer', 'e6851a77-c984-4566-931b-cacf0d2e1b03', '10087', '2420', '2023'),
-('zara-auditor', 'e8150354-b367-486b-b804-b757f158d87c', '10092', '8291', '2023');
+('zara-auditor', '05841c70-7ef3-46fa-8b57-dfff5b08171a', '10057', '-7011.47999', '2023'),
+('zara-accountant', '05d044b2-cc22-4922-8c8d-abf98c59497d', '10057', '-20246.96', '2023'),
+('zara-auditor', '0616c1ab-a3cb-42f4-b7fc-67cdbebc9fcb', '10034', '420', '2023'),
+('zara-viewer', '0fe46140-2468-45e0-95aa-9938366d4a80', '10034', '420', '2023'),
+('zara-accountant', '1561e0a7-746f-45f9-ac69-62509f459353', '10057', '1000', '2023'),
+('zara-accountant', '2731be97-9ce7-4cd2-ae7e-992a153bd967', '10092', '8291.84', '2023'),
+('zara-accountant', '286a008a-18f1-4a8e-99f0-2053aee78154', '10057', '-7011.48', '2023'),
+('zara-auditor', '32dfa568-704f-4fb2-9a03-a1d3e45bbfcf', '10090', '16435.75', '2023'),
+('zara-viewer', '35011ad0-9a36-4745-990c-29133cecbe5c', '10057', '1000', '2023'),
+('zara-viewer', '48d4a8f8-0c54-4b00-b1e7-1dbd6fcf17e8', '10090', '16435.75', '2023'),
+('zara-auditor', '4aefa7fe-eefe-4058-928a-99dadd3c000c', '10092', '2530.84999', '2023'),
+('zara-accountant', '50d3d507-b4b6-4d9f-b669-54acb75d150b', '10092', '2530.85', '2023'),
+('zara-accountant', '5d8e08f2-5cec-4e72-9b33-8c4e6158f3df', '10034', '420', '2023'),
+('zara-auditor', '75436dc9-f1be-4964-87e4-042a47d8e46d', '10057', '-20246.95999', '2023'),
+('zara-accountant', '7aa974ff-0165-48ff-9e4a-b7bc3be40db5', '10090', '16435.75', '2023'),
+('zara-viewer', '7b4c3794-341e-4ac2-baf2-cd51ba055b55', '10057', '-7011.47999', '2023'),
+('zara-viewer', '7ce594d3-e1e7-488f-8367-d583d4ad7b0c', '10029', '1210', '2023'),
+('zara-auditor', '85b75373-4cca-4a7b-93e4-1c6ce0ad3c84', '10087', '2420', '2023'),
+('zara-viewer', '881a9ae4-c6ae-4100-9c45-9c33b3c03b58', '10092', '8291.84', '2023'),
+('zara-auditor', '88376854-9fa7-4219-b97f-5e23c4da3ac6', '10057', '1000', '2023'),
+('zara-accountant', '938d54e6-f4e6-4e50-a5d9-cd3105ea2e0a', '10029', '1210', '2023'),
+('zara-auditor', '94802184-9cdd-4983-a569-48a5b453d072', '10092', '8291.84', '2023'),
+('zara-accountant', '96ad57e0-aaad-4eab-8252-376657d4d498', '10092', '210', '2023'),
+('zara-accountant', 'a74156db-af75-42a1-9c0d-d4270665bc2a', '10057', '-2000', '2023'),
+('zara-accountant', 'ab4ca960-d1de-4f05-b835-fb9d47f87d66', '10087', '2420', '2023'),
+('zara-viewer', 'b2cbc384-402e-4197-8d94-a97313d63048', '10092', '210', '2023'),
+('zara-viewer', 'b7f264b8-8f6e-47d3-8fe5-ff4d855acd76', '10087', '2420', '2023'),
+('zara-viewer', 'b953c464-615c-4882-9ecc-8567e168e34f', '10057', '-20246.95999', '2023'),
+('zara-auditor', 'e150989d-84e0-4c3a-958b-a827a4181098', '10057', '-2000', '2023'),
+('zara-auditor', 'e1d68abd-9e7b-4131-9fbe-55005aa75994', '10029', '1210', '2023'),
+('zara-auditor', 'eba2b551-a580-44be-be6d-1e7105675259', '10092', '210', '2023'),
+('zara-viewer', 'fccb91ab-da86-4c8a-80dd-c68959260da2', '10092', '2530.84999', '2023'),
+('zara-viewer', 'fd052e6e-d4c8-4053-a80f-35058b7c3e6c', '10057', '-2000', '2023');
 
 --
 -- Indexes for dumped tables
