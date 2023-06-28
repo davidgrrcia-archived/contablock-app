@@ -140,7 +140,7 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 		if err != nil {
 			return nil, err
 		}
-		createBalanceInput.Amount = *amount
+		createBalanceInput.Amount = -1 * *amount
 		createBalanceInput.Year = input.Date.Year()
 		storedBalance, err := useCase.balanceUseCase.CreateBalanceByYear(ctx, createBalanceInput)
 		if err != nil {
@@ -155,7 +155,7 @@ func (useCase *DefaultEntryUseCase) CreateEntry(ctx context.Context, input Creat
 		if err != nil {
 			return nil, err
 		}
-		createBalanceInput.Amount = -1 * *amount
+		createBalanceInput.Amount = *amount
 		createBalanceInput.Year = input.Date.Year()
 		storedBalance, err := useCase.balanceUseCase.CreateBalanceByYear(ctx, createBalanceInput)
 		if err != nil {
