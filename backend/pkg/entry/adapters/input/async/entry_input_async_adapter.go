@@ -43,9 +43,27 @@ func (adapter DefaultAsyncInputAdapter) AdaptEntryCreatedEvent(ctx context.Conte
 	if err != nil {
 		return err
 	}
+	debitBalanceDecimals, err := utils.TransformBigIntToFloat64(event.Entry.DebitBalanceDecimals)
+	if err != nil {
+		return err
+	}
 	creditBalance, err := utils.TransformBigIntToFloat64(event.Entry.CreditBalance)
 	if err != nil {
 		return err
+	}
+	creditBalanceDecimals, err := utils.TransformBigIntToFloat64(event.Entry.CreditBalanceDecimals)
+	if err != nil {
+		return err
+	}
+
+	var debit float64
+	if debitBalance != nil {
+		debit = *debitBalance + *debitBalanceDecimals/100000
+	}
+
+	var credit float64
+	if creditBalance != nil {
+		credit = *creditBalance + *creditBalanceDecimals/100000
 	}
 
 	var entryCreatedEvent entry.EntryCreatedEventInput
@@ -58,8 +76,8 @@ func (adapter DefaultAsyncInputAdapter) AdaptEntryCreatedEvent(ctx context.Conte
 	entryCreatedEvent.Currency = event.Entry.Currency
 	entryCreatedEvent.Concept = event.Entry.Concept
 	entryCreatedEvent.Date = utils.TransformBigIntToDate(event.Entry.Date)
-	entryCreatedEvent.DebitBalance = debitBalance
-	entryCreatedEvent.CreditBalance = creditBalance
+	entryCreatedEvent.DebitBalance = &debit
+	entryCreatedEvent.CreditBalance = &credit
 
 	err = adapter.entryUseCase.EntryCreatedEvent(ctx, entryCreatedEvent)
 	if err != nil {

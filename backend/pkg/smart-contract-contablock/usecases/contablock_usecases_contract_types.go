@@ -93,4 +93,3 @@ type RejectEntryAdapterInput struct {
 	ClientCommonInput
 	ID string
 }
-

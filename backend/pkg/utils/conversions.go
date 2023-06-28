@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"math"
 	"math/big"
 	"strconv"
 	"time"
@@ -33,6 +34,14 @@ func TransformFloat64ToBigInt(num *float64) *big.Int {
 	bigInt, _ := bigFloat.Int(nil)
 
 	return bigInt
+}
+
+func GetDecimalPart(number float64) float64 {
+	wholePart := math.Floor(number)
+	decimalPart := number - wholePart
+	decimalInt := decimalPart * math.Pow(10, 5)
+
+	return decimalInt
 }
 
 func TransformDateToBigInt(date time.Time) *big.Int {

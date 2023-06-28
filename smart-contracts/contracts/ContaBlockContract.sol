@@ -21,7 +21,9 @@ contract ContaBlockContract {
         string concept;
         uint256 date;
         uint256 debitBalance;
+        uint256 debitBalanceDecimals;
         uint256 creditBalance;
+        uint256 creditBalanceDecimals;
         string state;
     }
 
@@ -71,7 +73,9 @@ contract ContaBlockContract {
         string memory _concept,
         uint256 _date,
         uint256 _debitBalance,
-        uint256 _creditBalance
+        uint256 _debitBalanceDecimals,
+        uint256 _creditBalance,
+        uint256 _creditBalanceDecimals
     ) public hasAccess {
         require(!entryExist[_id], 'Entry already exists');
 
@@ -85,7 +89,9 @@ contract ContaBlockContract {
             _concept,
             _date,
             _debitBalance,
+            _debitBalanceDecimals,
             _creditBalance,
+            _creditBalanceDecimals,
             CREATED_STATE
         );
 

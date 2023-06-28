@@ -61,7 +61,11 @@ func (adapter DefaultContaBlockContract) CreateEntry(input contablockUseCase.Cre
 	//input
 	date := utils.TransformDateToBigInt(input.Date)
 	debitBalance := utils.TransformFloat64ToBigInt(input.DebitBalance)
+	debitDecimals := utils.GetDecimalPart(*input.DebitBalance)
+	debitBalanceDecimals := utils.TransformFloat64ToBigInt(&debitDecimals)
 	creditBalance := utils.TransformFloat64ToBigInt(input.CreditBalance)
+	creditDecimals := utils.GetDecimalPart(*input.CreditBalance)
+	creditBalanceDecimals := utils.TransformFloat64ToBigInt(&creditDecimals)
 	var clientSessionInput getClientSessionInput
 	clientSessionInput.ContractAddress = input.ContractAddress
 	clientSessionInput.FromAddress = input.UserAddress
@@ -72,7 +76,7 @@ func (adapter DefaultContaBlockContract) CreateEntry(input contablockUseCase.Cre
 	}
 
 	//client
-	_, err = session.Contract.CreateEntry(&session.TransactOpts, input.ID, input.ContractID, input.UserID, input.AccountID, input.MultipleEntryID, input.Currency, input.Concept, date, debitBalance, creditBalance)
+	_, err = session.Contract.CreateEntry(&session.TransactOpts, input.ID, input.ContractID, input.UserID, input.AccountID, input.MultipleEntryID, input.Currency, input.Concept, date, debitBalance, debitBalanceDecimals, creditBalance, creditBalanceDecimals)
 	if err != nil {
 		return err
 	}
