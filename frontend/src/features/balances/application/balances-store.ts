@@ -6,11 +6,19 @@ import { useMessagesStore } from '@/stores/messages';
 //TODO: apply clean architecture
 interface BalanceState {
   storedBalance: Balance[];
+  currentDebitTotalAmount: number;
+  previousDebitTotalAmount: number;
+  currentCreditTotalAmount: number;
+  previousCreditTotalAmount: number;
   stateMessage: string | null;
 }
 
 const state: BalanceState = {
   storedBalance: [],
+  currentDebitTotalAmount: 0,
+  previousDebitTotalAmount: 0,
+  currentCreditTotalAmount: 0,
+  previousCreditTotalAmount: 0,
   stateMessage: null,
 };
 
@@ -32,7 +40,11 @@ export const useBalanceStore = defineStore('balance', {
           return;
         }
 
-        this.state.storedBalance = orderAllChildsByName(balance);
+        this.state.storedBalance = orderAllChildsByName(balance.items);
+        this.state.currentDebitTotalAmount = balance.currentDebitTotalAmount;
+        this.state.previousDebitTotalAmount = balance.previousDebitTotalAmount;
+        this.state.currentCreditTotalAmount = balance.currentCreditTotalAmount;
+        this.state.previousCreditTotalAmount = balance.previousCreditTotalAmount;
 
         this.state.stateMessage = 'balances loaded';
 
@@ -47,7 +59,11 @@ export const useBalanceStore = defineStore('balance', {
             return;
           }
 
-          this.state.storedBalance = orderAllChildsByName(balance);
+          this.state.storedBalance = orderAllChildsByName(balance.items);
+          this.state.currentDebitTotalAmount = balance.currentDebitTotalAmount;
+          this.state.previousDebitTotalAmount = balance.previousDebitTotalAmount;
+          this.state.currentCreditTotalAmount = balance.currentCreditTotalAmount;
+          this.state.previousCreditTotalAmount = balance.previousCreditTotalAmount;
 
           this.state.stateMessage = 'balances loaded';
         }, 3000);
@@ -64,6 +80,18 @@ export const useBalanceStore = defineStore('balance', {
     },
     getPreviousYear(): number {
       return this.state.storedBalance[0].previousYear;
+    },
+    getCurrentDebitTotalAmount(): number {
+      return this.state.currentDebitTotalAmount;
+    },
+    getPreviousDebitTotalAmount(): number {
+      return this.state.previousDebitTotalAmount;
+    },
+    getCurrentCreditTotalAmount(): number {
+      return this.state.currentCreditTotalAmount;
+    },
+    getPreviousCreditTotalAmount(): number {
+      return this.state.previousCreditTotalAmount;
     },
   },
 });

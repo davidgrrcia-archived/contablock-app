@@ -147,10 +147,10 @@ func (adapter *DefaultHttpInputAdapter) AdaptListBalances(ctx context.Context, d
 
 	var response ListBalanceResponse
 	response.Items = mapToList(mapping)
-	response.CurrentDebitTotalAmount = response.Items[0].CurrentAmount + response.Items[1].CurrentAmount
-	response.PreviousDebitTotalAmount = response.Items[0].PreviousAmount + response.Items[1].PreviousAmount
-	response.CurrentCreditTotalAmount = response.Items[2].CurrentAmount + response.Items[3].CurrentAmount + response.Items[4].CurrentAmount
-	response.PreviousCreditTotalAmount = response.Items[2].PreviousAmount + response.Items[3].PreviousAmount + response.Items[4].PreviousAmount
+	response.CurrentDebitTotalAmount = getCurrentDebitAmount(response.Items)
+	response.PreviousDebitTotalAmount = getPreviousDebitAmount(response.Items)
+	response.CurrentCreditTotalAmount = getCurrentCreditAmount(response.Items)
+	response.PreviousCreditTotalAmount = getPreviousCreditAmount(response.Items)
 
 	responseWrapper := ListBalanceResponseWrapper{}
 	responseWrapper.ListBalanceResponse = response
@@ -177,6 +177,54 @@ func mapToList(mapa map[string]Balance) []BalanceItem {
 		lista = append(lista, item)
 	}
 	return lista
+}
+
+func getCurrentDebitAmount(balance []BalanceItem) float64 {
+	var amount float64
+
+	for _, item := range balance {
+		if item.Name[0:2] == "A)" || item.Name[0:2] == "B)" {
+			amount += item.CurrentAmount
+		}
+	}
+
+	return amount
+}
+
+func getPreviousDebitAmount(balance []BalanceItem) float64 {
+	var amount float64
+
+	for _, item := range balance {
+		if item.Name[0:2] == "A)" || item.Name[0:2] == "B)" {
+			amount += item.PreviousAmount
+		}
+	}
+
+	return amount
+}
+
+func getCurrentCreditAmount(balance []BalanceItem) float64 {
+	var amount float64
+
+	for _, item := range balance {
+		if item.Name[0:2] == "C)" || item.Name[0:2] == "D)" || item.Name[0:2] == "E)" {
+			amount += item.CurrentAmount
+		}
+	}
+
+	return amount
+}
+
+func getPreviousCreditAmount(balance []BalanceItem) float64 {
+	var amount float64
+
+	for _, item := range balance {
+		if item.Name[0:2] == "C)" || item.Name[0:2] == "D)" || item.Name[0:2] == "E)" {
+			amount += item.PreviousAmount
+		}
+	}
+
+	return amount
 }
 
 func (adapter *DefaultHttpInputAdapter) AdaptCreateBalance(ctx context.Context, data CreateBalanceRequest) (*CreateBalanceResponseWrapper, error) {

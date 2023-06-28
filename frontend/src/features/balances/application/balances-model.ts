@@ -1,5 +1,5 @@
 export interface BalancesAdapter {
-  listBalancesHttpResponse(): Promise<Balance[] | Error>;
+  listBalancesHttpResponse(): Promise<BalanceListResponse | Error>;
 }
 
 export interface Balance {
@@ -11,4 +11,12 @@ export interface Balance {
   previousAmount: number;
   child: Balance[] | null;
   accounts: string[];
+}
+
+export interface BalanceListResponse {
+  items: Balance[];
+  currentDebitTotalAmount: number;
+  previousDebitTotalAmount: number;
+  currentCreditTotalAmount: number;
+  previousCreditTotalAmount: number;
 }

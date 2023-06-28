@@ -1,5 +1,6 @@
 import type { DefaultBalancesHttpInfra } from '@/features/balances/infra/http/http-infra';
 import type { BalancesAdapter } from '@/features/balances/application/balances-model';
+import type { BalanceListResponse } from '@/features/balances/application/balances-model';
 
 export class DefaultBalancesHttpAdapter implements BalancesAdapter {
   constructor(private readonly balanceHttpInfra: DefaultBalancesHttpInfra) {}
@@ -11,7 +12,20 @@ export class DefaultBalancesHttpAdapter implements BalancesAdapter {
       return balanceHttpResponse;
     }
 
-    return balanceHttpResponse.items.map(item => ({
+    const balanceListResponse: BalanceListResponse = {
+      items: [],
+      currentDebitTotalAmount: 0,
+      previousDebitTotalAmount: 0,
+      currentCreditTotalAmount: 0,
+      previousCreditTotalAmount: 0,
+    };
+
+    balanceListResponse.currentDebitTotalAmount = balanceHttpResponse.currentDebitTotalAmount;
+    balanceListResponse.previousDebitTotalAmount = balanceHttpResponse.previousDebitTotalAmount;
+    balanceListResponse.currentCreditTotalAmount = balanceHttpResponse.currentCreditTotalAmount;
+    balanceListResponse.previousCreditTotalAmount = balanceHttpResponse.previousCreditTotalAmount;
+
+    balanceListResponse.items = balanceHttpResponse.items.map(item => ({
       id: item.id,
       name: item.name,
       currentYear: item.currentYear,
@@ -54,5 +68,7 @@ export class DefaultBalancesHttpAdapter implements BalancesAdapter {
           }))
         : null,
     }));
+
+    return balanceListResponse;
   }
 }

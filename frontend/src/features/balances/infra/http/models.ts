@@ -11,4 +11,8 @@ export interface Balance {
 
 export interface BalanceListResponse {
   items: Balance[];
+  currentDebitTotalAmount: number;
+  previousDebitTotalAmount: number;
+  currentCreditTotalAmount: number;
+  previousCreditTotalAmount: number;
 }

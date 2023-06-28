@@ -117,7 +117,6 @@ export function getTotalBalanceColor(amount1: number, amount2: number): string {
   }
 }
 
-
 export function isActionAllowed(role: string, state: string, action: string): boolean {
   if (role === 'admin') {
     return true;

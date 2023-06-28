@@ -301,11 +301,11 @@ export const useEntriesStore = defineStore('entries', {
         this.state.stateMessage = 'removing entry';
 
         if (this.state.entriesCreation.length > 0) {
-          console.log('aaaaaaaaaaaa')
+          console.log('aaaaaaaaaaaa');
           this.state.entriesCreation = this.state.entriesCreation.filter(entry => entry.entry.id !== id);
           this.state.storedEntries = this.state.storedEntries.filter(entry => entry.entry.id !== id);
         } else {
-          console.log('bbbbbbbbbbb')
+          console.log('bbbbbbbbbbb');
           const response = await entriesUseCase.removeEntry(id);
 
           if (response instanceof Error) {

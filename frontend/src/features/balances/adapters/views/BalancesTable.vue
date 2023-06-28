@@ -33,18 +33,34 @@ function arrayToString(arr: string[]): string {
           <table class="min-w-full">
             <thead class="bg-white">
               <tr>
-                <th scope="col" class="sticky top-14 z-10 w-72 rounded-tl-lg bg-gray-800 py-3.5 pr-3 pl-6 text-left text-sm font-semibold text-white">Cuentas</th>
-                <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Naturaleza</th>
-                <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ balanceStore.getCurrentYear }}</th>
-                <th scope="col" class="sticky top-14 z-10 rounded-tr-lg bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ balanceStore.getPreviousYear }}</th>
+                <th scope="col" class="sticky top-14 z-10 w-72 rounded-tl-lg bg-gray-800 py-3.5 pr-3 pl-6 text-left text-sm font-semibold text-white"></th>
+                <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white"></th>
+                <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white"></th>
+                <th scope="col" class="sticky top-14 z-10 bg-gray-800 px-3 py-3.5 text-left text-lg font-semibold text-white">{{ balanceStore.getCurrentYear }}</th>
+                <th scope="col" class="sticky top-14 z-10 rounded-tr-lg bg-gray-800 px-3 py-3.5 text-left text-lg font-semibold text-white">{{ balanceStore.getPreviousYear }}</th>
+              </tr>
+              <tr>
+                <th scope="col" class="sticky top-24 z-10 w-72 bg-gray-800 py-3.5 pr-3 pl-6 text-left text-sm font-semibold text-white"></th>
+                <th scope="col" class="sticky top-24 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white"></th>
+                <th scope="col" class="sticky top-24 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Total Activo</th>
+                <th scope="col" class="sticky top-24 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ formatAmount(balanceStore.getCurrentDebitTotalAmount, 'EUR') }}</th>
+                <th scope="col" class="sticky top-24 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ formatAmount(balanceStore.getPreviousDebitTotalAmount, 'EUR') }}</th>
+              </tr>
+              <tr>
+                <th scope="col" class="sticky top-32 z-10 w-72 bg-gray-800 py-3.5 pr-3 pl-6 text-left text-sm font-semibold text-white">Cuentas</th>
+                <th scope="col" class="sticky top-32 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Naturaleza</th>
+                <th scope="col" class="sticky top-32 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">Total Pasivo + Patrimonio Neto</th>
+                <th scope="col" class="sticky top-32 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ formatAmount(balanceStore.getCurrentCreditTotalAmount, 'EUR') }}</th>
+                <th scope="col" class="sticky top-32 z-10 bg-gray-800 px-3 py-3.5 text-left text-sm font-semibold text-white">{{ formatAmount(balanceStore.getPreviousCreditTotalAmount, 'EUR') }}</th>
               </tr>
             </thead>
             <tbody v-for="(record, i) in balance" :key="i" class="bg-white">
-              <tr class="sticky top-24 z-10 bg-gray-700">
+              <tr class="sticky top-44 z-10 bg-gray-700">
                 <td class="px-3 py-4 text-sm font-semibold text-white"></td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-white">
                   {{ record.name }}
                 </td>
+                <td></td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-white">
                   {{ formatAmount(record.currentAmount, 'EUR') }}
                 </td>
@@ -60,6 +76,7 @@ function arrayToString(arr: string[]): string {
                   <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-gray-800">
                     {{ child.name }}
                   </td>
+                  <td></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm font-semibold text-gray-800">
                     {{ formatAmount(child.currentAmount, 'EUR') }}
                   </td>
@@ -75,6 +92,7 @@ function arrayToString(arr: string[]): string {
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ child2.name }}
                     </td>
+                    <td></td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                       {{ formatAmount(child2.currentAmount, 'EUR') }}
                     </td>
@@ -90,6 +108,7 @@ function arrayToString(arr: string[]): string {
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                         {{ child3.name }}
                       </td>
+                      <td></td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-800">
                         {{ formatAmount(child3.currentAmount, 'EUR') }}
                       </td>
