@@ -2,32 +2,28 @@
 left to right direction
 skinparam packageStyle rectangle
 
-actor contable
-actor supervisor
-actor empresario
+actor contable #FFA500
+actor auditor #008000
+actor usuario #0000FF
 
-rectangle sistema_de_registro_contable {
+rectangle ContaBlock {
+  contable --> (crear, modificar y eliminar asientos contables) #FFA500
+  contable --> (solicitar revisión de asientos contables) #FFA500
+  contable -> (publicar asientos contables) #FFA500
+  contable --> (consultar libro diario, libro mayor y balance de situación) #FFA500
+  auditor --> (consultar libro diario, libro mayor y balance de situación) #008000
+  auditor --> (aprobar asientos contables) #008000
+  auditor --> (rechazar asientos contables) #008000
+  usuario --> (consultar libro diario, libro mayor y balance de situación) #0000FF
 
-  contable --> (registrar asientos contables)
-  contable --> (modificación valor de asiento)
-  contable --> (eliminar asiento)
-  contable --> (presentar cuentas anuales)
-  contable --> (consultar informes y movimientos)
-  supervisor --> (consultar informes y movimientos)
-  supervisor --> (validar cuentas anuales)
-  empresario --> (consultar informes y movimientos)
-   
-
-  (registrar asientos contables) ..> (iniciar sesión) : include
-  (modificación valor de asiento) ..> (iniciar sesión) : include
-  (eliminar asiento) ..> (iniciar sesión) : include
-
-  (presentar cuentas anuales) ..> (iniciar sesión) : include
-
-  (validar cuentas anuales) ..> (iniciar sesión) : include
-  (validar cuentas anuales) ..> (presentar cuentas anuales) : include
-
-  (consultar informes y movimientos) ..> (iniciar sesión) : include
-  
+  (crear, modificar y eliminar asientos contables) --> (iniciar sesión) : include
+  (solicitar revisión de asientos contables) --> (iniciar sesión) : include
+  (aprobar asientos contables) --> (iniciar sesión) : include
+  (aprobar asientos contables) --> (solicitar revisión de asientos contables) : include
+  (rechazar asientos contables) --> (iniciar sesión) : include
+  (rechazar asientos contables) --> (solicitar revisión de asientos contables) : include
+  (publicar asientos contables) --> (iniciar sesión) : include
+  (publicar asientos contables) --> (aprobar asientos contables) : include
+  (consultar libro diario, libro mayor y balance de situación) --> (iniciar sesión) : include
 }
 @enduml
